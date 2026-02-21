@@ -1,0 +1,13 @@
+# OS
+Thumbs.db
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log

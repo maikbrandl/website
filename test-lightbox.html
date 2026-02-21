@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Lightbox Test</title>
+    <style>
+        body { background: #111; color: #fff; font-family: sans-serif; padding: 40px; }
+        .test-img { width: 300px; cursor: pointer; border: 2px solid #333; border-radius: 8px; }
+        #log { margin-top: 20px; padding: 20px; background: #222; border-radius: 8px; font-family: monospace; font-size: 13px; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Lightbox Debug Test</h1>
+    <p>Klicke auf das Bild unten. Die Lightbox sollte sich mit dem Bild öffnen.</p>
+    
+    <h3>Test 1: Direkter Image-Test (ohne Gallery)</h3>
+    <img id="directTest" class="test-img" 
+         src="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" 
+         alt="Direct Test">
+
+    <h3>Test 2: Gallery Struktur (wie auf Produktseite)</h3>
+    <div class="product-gallery">
+        <div class="gallery-main" style="width:300px;">
+            <img class="gallery-main-img" src="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" alt="Gallery Main">
+        </div>
+        <div class="gallery-thumbs" style="margin-top:10px;">
+            <div class="gallery-thumb active" data-src="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" data-alt="Bild 1">
+                <img src="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" alt="Thumb 1" style="width:60px;">
+            </div>
+            <div class="gallery-thumb" data-src="images/Studentenplaner/Mockup/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(2).png" data-alt="Bild 2">
+                <img src="images/Studentenplaner/Mockup/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(2).png" alt="Thumb 2" style="width:60px;">
+            </div>
+        </div>
+    </div>
+
+    <div id="log">--- Debug Log ---</div>
+
+    <script>
+        const log = document.getElementById('log');
+        function dbg(msg) {
+            log.textContent += '\n' + msg;
+            console.log(msg);
+        }
+
+        // ===== Test 1: Direct click =====
+        document.getElementById('directTest').addEventListener('click', () => {
+            dbg('Direct click! Creating lightbox manually...');
+            const ov = document.createElement('div');
+            ov.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:999999;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+            const img = document.createElement('img');
+            img.src = 'images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png';
+            img.style.cssText = 'max-width:90vw;max-height:90vh;object-fit:contain;';
+            img.onload = () => dbg('✅ Direct img loaded OK! Natural size: ' + img.naturalWidth + 'x' + img.naturalHeight);
+            img.onerror = () => dbg('❌ Direct img FAILED to load! src=' + img.src);
+            ov.appendChild(img);
+            ov.addEventListener('click', () => { ov.remove(); dbg('Direct lightbox closed'); });
+            document.body.appendChild(ov);
+            dbg('Direct lightbox appended. img.src = ' + img.src);
+        });
+
+        // ===== Test 2: Gallery with main.js logic =====
+        const thumbs = document.querySelectorAll('.gallery-thumb');
+        const mainImg = document.querySelector('.gallery-main-img');
+        const mainWrap = document.querySelector('.gallery-main');
+
+        const sources = [];
+        thumbs.forEach(t => sources.push({ src: t.dataset.src, alt: t.dataset.alt || '' }));
+        dbg('Gallery sources found: ' + sources.length);
+        sources.forEach((s, i) => dbg('  [' + i + '] src=' + s.src));
+
+        let idx = 0;
+
+        // Thumb click
+        thumbs.forEach((thumb, i) => {
+            thumb.addEventListener('click', () => {
+                thumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                mainImg.src = thumb.dataset.src;
+                idx = i;
+                dbg('Thumb ' + i + ' clicked → main img swapped');
+            });
+        });
+
+        // Main click -> lightbox
+        if (mainWrap) {
+            mainWrap.addEventListener('click', () => {
+                dbg('Main image clicked! idx=' + idx);
+                dbg('Source: ' + JSON.stringify(sources[idx]));
+                
+                const ov = document.createElement('div');
+                ov.className = 'lightbox-overlay is-open';
+                
+                const img = document.createElement('img');
+                img.className = 'lightbox-image';
+                img.src = sources[idx].src;
+                img.alt = sources[idx].alt;
+                
+                img.onload = () => dbg('✅ Gallery lightbox img loaded! ' + img.naturalWidth + 'x' + img.naturalHeight);
+                img.onerror = () => dbg('❌ Gallery lightbox img FAILED! src=' + img.src);
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = '✕ Close';
+                closeBtn.style.cssText = 'position:absolute;top:20px;right:20px;background:#fff;color:#000;border:none;padding:10px 20px;cursor:pointer;z-index:10;font-size:16px;border-radius:8px;';
+                closeBtn.addEventListener('click', (e) => { e.stopPropagation(); ov.remove(); dbg('Gallery lightbox closed'); });
+
+                ov.appendChild(img);
+                ov.appendChild(closeBtn);
+                ov.addEventListener('click', () => { ov.remove(); dbg('Gallery lightbox closed (bg click)'); });
+                img.addEventListener('click', (e) => e.stopPropagation());
+                
+                document.body.appendChild(ov);
+                dbg('Gallery lightbox appended to body');
+                dbg('Overlay classes: ' + ov.className);
+                dbg('Overlay display computed: ' + getComputedStyle(ov).display);
+                dbg('Img src set to: ' + img.src);
+                dbg('Img computed display: ' + getComputedStyle(img).display);
+                dbg('Img computed width: ' + getComputedStyle(img).width);
+                dbg('Img computed maxWidth: ' + getComputedStyle(img).maxWidth);
+                dbg('Img computed visibility: ' + getComputedStyle(img).visibility);
+                dbg('Img computed opacity: ' + getComputedStyle(img).opacity);
+            });
+        }
+    </script>
+</body>
+</html>

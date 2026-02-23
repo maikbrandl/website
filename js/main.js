@@ -57,41 +57,6 @@ document.addEventListener('components:ready', () => {
         }
     });
 
-    // ===== Cookie Banner =====
-    const cookieBanner = document.getElementById('cookieBanner');
-    const cookieAccept = document.getElementById('cookieAccept');
-    const cookieReject = document.getElementById('cookieReject');
-
-    if (cookieBanner && !localStorage.getItem('hl_cookie_consent')) {
-        setTimeout(() => cookieBanner.classList.add('visible'), 1200);
-    }
-
-    function dismissCookie(value) {
-        localStorage.setItem('hl_cookie_consent', value);
-        if (cookieBanner) cookieBanner.classList.remove('visible');
-    }
-
-    if (cookieAccept) cookieAccept.addEventListener('click', () => dismissCookie('accepted'));
-    if (cookieReject) cookieReject.addEventListener('click', () => dismissCookie('rejected'));
-
-    // ===== Scroll Animations =====
-    const animatedElements = document.querySelectorAll('[data-animate]');
-
-    if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
-        const animObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    animObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            rootMargin: '0px 0px -80px 0px',
-            threshold: 0.05
-        });
-
-        animatedElements.forEach(el => animObserver.observe(el));
-    }
 
     // ===== Stagger children animation =====
     const staggerContainers = document.querySelectorAll('[data-stagger]');

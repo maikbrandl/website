@@ -57,6 +57,24 @@ document.addEventListener('components:ready', () => {
         }
     });
 
+    // ===== Scroll Animations =====
+    const animatedElements = document.querySelectorAll('[data-animate]');
+
+    if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
+        const animObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    animObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.05
+        });
+
+        animatedElements.forEach(el => animObserver.observe(el));
+    }
 
     // ===== Stagger children animation =====
     const staggerContainers = document.querySelectorAll('[data-stagger]');
@@ -384,3 +402,5 @@ document.addEventListener('components:ready', () => {
         stickyObserver.observe(productHeroCta);
     }
 });
+
+

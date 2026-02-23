@@ -155,22 +155,6 @@ const HybridlogsComponents = (() => {
         </footer>`;
     }
 
-    // ——— Cookie Banner ———
-    function renderCookieBanner() {
-        return `
-        <div class="cookie-banner" id="cookieBanner">
-            <div class="cookie-inner container">
-                <div class="cookie-text">
-                    ${icon('cookie')}
-                    <p>Diese Seite nutzt Cookies für eine bessere Nutzererfahrung. Mehr dazu in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-                </div>
-                <div class="cookie-actions">
-                    <button class="btn btn-ghost btn-sm" id="cookieReject">Ablehnen</button>
-                    <button class="btn btn-primary btn-sm" id="cookieAccept">Akzeptieren</button>
-                </div>
-            </div>
-        </div>`;
-    }
 
     // ——— Stars (for ratings) ———
     function renderStars(count = 5) {

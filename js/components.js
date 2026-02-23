@@ -1,7 +1,7 @@
 /**
  * Hybridlogs – Component System
  * Shared UI components rendered via JS to eliminate duplication.
- * Each page only defines its own content; header, footer, cookie banner
+ * Each page only defines its own content; header and footer
  * are injected once from here.
  */
 
@@ -76,7 +76,10 @@ const HybridlogsComponents = (() => {
         const isProductPage = ['studienplaner', 'notizbuch', 'lernjournal'].includes(pageId);
 
         const navLinksHTML = NAV_ITEMS.map(item => {
-            const isActive = item.id === pageId || (item.id === 'home' && pageId === 'index');
+            const isActive =
+                item.id === pageId ||
+                (item.id === 'home' && pageId === 'index') ||
+                (item.id === 'blog' && pageId === 'blog-artikel');
             const isProductDropdown = item.children && isProductPage;
 
             if (item.children) {
@@ -155,6 +158,7 @@ const HybridlogsComponents = (() => {
         </footer>`;
     }
 
+    // ——— Cookie Banner ———
 
     // ——— Stars (for ratings) ———
     function renderStars(count = 5) {
@@ -171,9 +175,9 @@ const HybridlogsComponents = (() => {
         const footerSlot = document.getElementById('footer-slot');
         if (footerSlot) footerSlot.outerHTML = renderFooter();
 
-        // Inject cookie banner
+        // Remove legacy cookie slot if present (custom cookie banner is external)
         const cookieSlot = document.getElementById('cookie-slot');
-        if (cookieSlot) cookieSlot.outerHTML = renderCookieBanner();
+        if (cookieSlot) cookieSlot.remove();
     }
 
     return { init, icon, renderStars, ICONS };
@@ -186,3 +190,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dispatch custom event so main.js knows components are ready
     document.dispatchEvent(new CustomEvent('components:ready'));
 });
+
+

@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: DEIN_GITHUB_USER/DEIN_REPO
-  branch: main
-  base_url: https://decap-proxy.DEINEDOMAIN.de
+  repo: maikbrandl/website
+  branch: master
+  base_url: https://winter-darkness-b5cf.mbdigitalbusinessmail.workers.dev
   auth_endpoint: auth
 
 publish_mode: simple
@@ -21,4 +21,4 @@ collections:
       - { label: "Datum", name: "date", widget: "datetime" }
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Inhalt", name: "body", widget: "markdown" }

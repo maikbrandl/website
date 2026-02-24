@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: DEIN_GITHUB_USER/DEIN_REPO
+  branch: main
+  base_url: https://decap-proxy.DEINEDOMAIN.de
+  auth_endpoint: auth
+
+publish_mode: simple
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Blogposts"
+    folder: "content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Datum", name: "date", widget: "datetime" }
+      - { label: "Teaser", name: "excerpt", widget: "text", required: false }
+      - { label: "Cover", name: "cover", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

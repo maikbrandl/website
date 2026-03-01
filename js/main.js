@@ -5,6 +5,15 @@
  */
 
 document.addEventListener('components:ready', () => {
+    // Temporarily hide public blog entry points until content launch.
+    document.querySelectorAll('a[href="blog.html"]').forEach((link) => {
+        const listItem = link.closest('li');
+        if (listItem) {
+            listItem.remove();
+            return;
+        }
+        link.style.display = 'none';
+    });
 
     // ===== Mobile Navigation =====
     const navToggle = document.getElementById('navToggle');

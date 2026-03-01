@@ -9,6 +9,11 @@ export default {
 
     // Start OAuth
     if (url.pathname === "/auth") {
+      const provider = url.searchParams.get("provider");
+      if (provider && provider !== "github") {
+        return new Response("Invalid provider", { status: 400 });
+      }
+
       const redirect = new URL("https://github.com/login/oauth/authorize");
       redirect.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
       redirect.searchParams.set("redirect_uri", env.OAUTH_CALLBACK_URL);
@@ -17,10 +22,41 @@ export default {
       return Response.redirect(redirect.toString(), 302);
     }
 
+    function callbackScriptResponse(status, token) {
+      return new Response(
+        `
+<html>
+  <head>
+    <script>
+      const receiveMessage = (message) => {
+        window.opener.postMessage(
+          'authorization:github:${status}:${JSON.stringify({ token: token || "" })}',
+          '*'
+        );
+        window.removeEventListener("message", receiveMessage, false);
+      };
+      window.addEventListener("message", receiveMessage, false);
+      window.opener.postMessage("authorizing:github", "*");
+    </script>
+  </head>
+  <body>
+    <p>Authorizing Decap...</p>
+  </body>
+</html>
+`,
+        { headers: { "Content-Type": "text/html" } }
+      );
+    }
+
     // OAuth callback -> token exchange
     if (url.pathname === "/callback") {
+      const provider = url.searchParams.get("provider");
+      if (provider && provider !== "github") {
+        return new Response("Invalid provider", { status: 400 });
+      }
+
       const code = url.searchParams.get("code");
-      if (!code) return new Response("Missing code", { status: 400 });
+      if (!code) return callbackScriptResponse("error", "");
 
       const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
         method: "POST",
@@ -37,11 +73,9 @@ export default {
       });
 
       const tokenJson = await tokenRes.json();
-      if (!tokenJson.access_token) return new Response("No access token", { status: 400 });
+      if (!tokenJson.access_token) return callbackScriptResponse("error", "");
 
-      return new Response(JSON.stringify({ token: tokenJson.access_token, provider: "github" }), {
-        headers: { "Content-Type": "application/json" }
-      });
+      return callbackScriptResponse("success", tokenJson.access_token);
     }
 
     return new Response("Not found", { status: 404 });

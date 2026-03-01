@@ -44,7 +44,14 @@ export default {
   </body>
 </html>
 `,
-        { headers: { "Content-Type": "text/html" } }
+        {
+          headers: {
+            "Content-Type": "text/html",
+            // Keep opener relation for Decap popup callback handoff.
+            "Cross-Origin-Opener-Policy": "unsafe-none",
+            "Cross-Origin-Embedder-Policy": "unsafe-none"
+          }
+        }
       );
     }
 

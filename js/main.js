@@ -150,6 +150,9 @@ document.addEventListener('components:ready', () => {
     const galleryThumbs = document.querySelectorAll('.gallery-thumb');
     const galleryMain = document.querySelector('.gallery-main-img');
     const galleryMainWrap = document.querySelector('.gallery-main');
+    let galleryMainSource = galleryMain
+        ? galleryMain.closest('picture')?.querySelector('source')
+        : null;
 
     // Collect all image sources for lightbox navigation
     const gallerySources = [];
@@ -159,14 +162,26 @@ document.addEventListener('components:ready', () => {
 
     let currentIndex = 0;
 
+    function setMainGalleryImage(src, alt) {
+        if (!galleryMain || !src) return;
+
+        // <picture><source> can lock the initial image even when img.src changes.
+        if (galleryMainSource) {
+            galleryMainSource.remove();
+            galleryMainSource = null;
+        }
+
+        galleryMain.src = src;
+        galleryMain.alt = alt || '';
+    }
+
     // Thumbnail click → only swap main image (no lightbox)
     if (galleryThumbs.length > 0 && galleryMain) {
         galleryThumbs.forEach((thumb, index) => {
             thumb.addEventListener('click', () => {
                 galleryThumbs.forEach(t => t.classList.remove('active'));
                 thumb.classList.add('active');
-                galleryMain.src = thumb.dataset.src;
-                galleryMain.alt = thumb.dataset.alt || '';
+                setMainGalleryImage(thumb.dataset.src, thumb.dataset.alt || '');
                 currentIndex = index;
             });
         });
@@ -320,10 +335,7 @@ document.addEventListener('components:ready', () => {
         // Sync thumbnail + main image
         galleryThumbs.forEach(t => t.classList.remove('active'));
         if (galleryThumbs[currentIndex]) galleryThumbs[currentIndex].classList.add('active');
-        if (galleryMain) {
-            galleryMain.src = gallerySources[currentIndex].src;
-            galleryMain.alt = gallerySources[currentIndex].alt;
-        }
+        setMainGalleryImage(gallerySources[currentIndex].src, gallerySources[currentIndex].alt);
     }
 
     // Click on main image → open lightbox

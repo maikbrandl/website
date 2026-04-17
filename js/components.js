@@ -22,6 +22,7 @@ const HybridlogsComponents = (() => {
                 { label: 'Studienplaner', href: 'studienplaner.html', id: 'studienplaner' },
                 { label: 'Schul-Notizbuch', href: 'notizbuch.html', id: 'notizbuch' },
                 { label: 'Lernjournal', href: 'lernjournal.html', id: 'lernjournal' },
+                { label: 'Workout Logbuch', href: 'workoutlogbuch.html', id: 'workoutlogbuch' },
             ]
         },
         { label: 'Blog', href: 'blog.html', id: 'blog' },
@@ -32,6 +33,7 @@ const HybridlogsComponents = (() => {
         { label: 'Studienplaner', href: 'studienplaner.html' },
         { label: 'Schul-Notizbuch', href: 'notizbuch.html' },
         { label: 'Lernjournal', href: 'lernjournal.html' },
+        { label: 'Workout Logbuch', href: 'workoutlogbuch.html' },
     ];
 
     const FOOTER_LEGAL = [
@@ -73,7 +75,7 @@ const HybridlogsComponents = (() => {
     // ——— Header ———
     function renderHeader() {
         const pageId = getPageId();
-        const isProductPage = ['studienplaner', 'notizbuch', 'lernjournal'].includes(pageId);
+        const isProductPage = ['studienplaner', 'notizbuch', 'lernjournal', 'workoutlogbuch'].includes(pageId);
 
         const navLinksHTML = NAV_ITEMS.map(item => {
             const isActive =

@@ -2174,12 +2174,13 @@ h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     color: var(--white);
     line-height: 1.25;
-    margin-top: var(--space-14);
-    margin-bottom: var(--space-6);
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
     letter-spacing: -0.01em;
     text-align: left;
     hyphens: none;
-    padding-top: var(--space-6);
+    padding-top: 1.5rem;
+    border-top: none;
 }
 
 .prose h1 { font-size: var(--text-3xl); }
@@ -2208,7 +2209,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .prose p {
-    margin-bottom: var(--space-8);
+    margin-bottom: 1.75rem;
 }
 
 .prose p:last-child {
@@ -2224,7 +2225,7 @@ h1, h2, h3, h4, h5 {
 
 .prose ul,
 .prose ol {
-    margin-bottom: var(--space-8);
+    margin-bottom: 1.75rem;
     padding-left: 0;
     list-style: none;
 }
@@ -2232,8 +2233,8 @@ h1, h2, h3, h4, h5 {
 .prose ul li,
 .prose ol li {
     position: relative;
-    padding-left: var(--space-7);
-    margin-bottom: var(--space-3);
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
     line-height: 1.7;
 }
 

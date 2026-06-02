@@ -2163,6 +2163,9 @@ h1, h2, h3, h4, h5 {
     font-size: 1.0625rem; /* 17px – optimal für Langtext */
     line-height: 1.85;
     color: var(--gray-300);
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 .prose h1,
@@ -2174,6 +2177,8 @@ h1, h2, h3, h4, h5 {
     margin-top: var(--space-12);
     margin-bottom: var(--space-5);
     letter-spacing: -0.01em;
+    text-align: left;
+    hyphens: none;
 }
 
 .prose h1 { font-size: var(--text-3xl); }

@@ -1,14 +1,16 @@
 # Cloudflare Pages – Cache Headers
 
-# Statische Assets: 1 Jahr cachen (immutable)
-/css/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/js/*
-  Cache-Control: public, max-age=31536000, immutable
-
+# Bilder: 1 Jahr cachen (ändern sich kaum)
 /images/*
   Cache-Control: public, max-age=31536000, immutable
+
+# CSS/JS: 1 Stunde, dann im Hintergrund revalidieren
+# (kein immutable, da keine Hash-Fingerprints in den Dateinamen)
+/css/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/js/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 # HTML-Seiten: 1 Stunde cachen, dann im Hintergrund revalidieren
 /*.html

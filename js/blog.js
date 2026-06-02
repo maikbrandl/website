@@ -109,14 +109,20 @@
         const raw = text.slice(4, end);
         const body = text.slice(end + 5).trim();
         const data = {};
+        let lastKey = null;
 
         raw.split('\n').forEach(function (line) {
+            // Continuation line (indented) – append to last key
+            if (lastKey && /^\s+/.test(line)) {
+                data[lastKey] = (data[lastKey] + ' ' + line.trim()).trim();
+                return;
+            }
             const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-            if (!match) return;
-            const key = match[1].trim();
+            if (!match) { lastKey = null; return; }
+            lastKey = match[1].trim();
             let value = match[2].trim();
             value = value.replace(/^['"]|['"]$/g, '');
-            data[key] = value;
+            data[lastKey] = value;
         });
 
         return { data: data, body: body };

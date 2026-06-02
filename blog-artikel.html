@@ -35,39 +35,50 @@
 </nav>
 
 <!-- ===== Artikel ===== -->
-<main class="section section-article">
-    <div class="container container-narrow">
+<main>
+    <div id="blogPostNotFound" class="blog-empty" hidden>
+        <p>Dieser Artikel wurde nicht gefunden.</p>
+        <a href="blog.html" class="btn btn-primary" style="margin-top: 1.5rem;">Zum Blog</a>
+    </div>
 
-        <!-- Artikel gefunden -->
-        <article id="blogPost">
-            <header class="article-header" data-animate>
-                <span id="blogPostCategory" class="section-label"></span>
-                <h1 id="blogPostTitle"></h1>
-                <p id="blogPostExcerpt" class="article-excerpt"></p>
-                <div id="blogPostMeta" class="article-meta"></div>
-            </header>
+    <article id="blogPost">
 
-            <div id="blogPostImageWrap" class="article-cover" hidden>
-                <img id="blogPostImage" src="" alt="" loading="eager" decoding="async">
+        <!-- Hero -->
+        <div class="article-hero grain">
+            <div class="container">
+                <div class="article-hero-inner">
+                    <span id="blogPostCategory" class="article-category-pill"></span>
+                    <h1 id="blogPostTitle"></h1>
+                    <p id="blogPostExcerpt" class="article-lead"></p>
+                    <div id="blogPostMeta" class="article-meta"></div>
+                </div>
             </div>
-
-            <div id="blogPostContent" class="article-content prose"></div>
-
-            <footer class="article-footer">
-                <a href="blog.html" class="btn btn-outline">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                    Zurück zum Blog
-                </a>
-            </footer>
-        </article>
-
-        <!-- Artikel nicht gefunden -->
-        <div id="blogPostNotFound" class="blog-empty" hidden>
-            <p>Dieser Artikel wurde nicht gefunden.</p>
-            <a href="blog.html" class="btn btn-primary" style="margin-top: 1.5rem;">Zum Blog</a>
         </div>
 
-    </div>
+        <!-- Cover-Bild -->
+        <div id="blogPostImageWrap" class="article-cover-wrap" hidden>
+            <div class="container container-article">
+                <div class="article-cover">
+                    <img id="blogPostImage" src="" alt="" loading="eager" decoding="async">
+                </div>
+            </div>
+        </div>
+
+        <!-- Inhalt -->
+        <div class="section section-article">
+            <div class="container container-article">
+                <div id="blogPostContent" class="prose"></div>
+
+                <footer class="article-footer">
+                    <a href="blog.html" class="btn btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        Alle Artikel
+                    </a>
+                </footer>
+            </div>
+        </div>
+
+    </article>
 </main>
 
 <!-- ===== CTA ===== -->

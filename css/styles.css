@@ -2174,11 +2174,12 @@ h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     color: var(--white);
     line-height: 1.25;
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-5);
+    margin-top: var(--space-14);
+    margin-bottom: var(--space-6);
     letter-spacing: -0.01em;
     text-align: left;
     hyphens: none;
+    padding-top: var(--space-6);
 }
 
 .prose h1 { font-size: var(--text-3xl); }
@@ -2207,16 +2208,23 @@ h1, h2, h3, h4, h5 {
 }
 
 .prose p {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
 }
 
 .prose p:last-child {
     margin-bottom: 0;
 }
 
+/* Kein extra padding-top beim ersten Heading */
+.prose > h2:first-child,
+.prose > h3:first-child {
+    padding-top: 0;
+    margin-top: 0;
+}
+
 .prose ul,
 .prose ol {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
     padding-left: 0;
     list-style: none;
 }

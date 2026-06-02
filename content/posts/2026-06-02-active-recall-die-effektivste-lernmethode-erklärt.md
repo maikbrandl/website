@@ -55,4 +55,4 @@ Du startest am einfachsten, indem du deine nächste Lerneinheit umdrehst: Lies e
 
 Der entscheidende Schritt ist, das Ganze sichtbar zu machen. Wer notiert, welche Fragen er bereits sicher beantworten kann und wo es noch hakt, lernt gezielter und bleibt motivierter, weil der Fortschritt greifbar wird. Genau deshalb lohnt sich ein fester Ort, an dem du deine Fragen, deine Abrufe und deinen Wissensstand festhältst.
 
-Das Hybridlogs Lernjournal ist genau dafür gemacht: Es hilft dir, deinen Stoff in abrufbare Fragen zu zerlegen, deine Wiederholungen zu planen und deinen Lernfortschritt über Wochen hinweg zu verfolgen. So wird aus dem Prinzip Active Recall eine feste Routine statt eines guten Vorsatzes. [Jetzt bei Amazon ansehen](https://www.amazon.de/Hybridlogs-Lernjournal/dp/B0DJZ9GGYS).
+Das Hybridlogs Lernjournal ist genau dafür gemacht: Es hilft dir, deinen Stoff in abrufbare Fragen zu zerlegen, deine Wiederholungen zu planen und deinen Lernfortschritt über Wochen hinweg zu verfolgen. So wird aus dem Prinzip Active Recall eine feste Routine statt eines guten Vorsatzes. [Jetzt das Lernjournal entdecken](/lernjournal.html).

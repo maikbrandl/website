@@ -48,7 +48,10 @@
         let html = escapeHtml(text);
         html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-        html = html.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        html = html.replace(/\[(.+?)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g, function(m, text, href) {
+            const isExternal = /^https?:\/\//.test(href);
+            return '<a href="' + href + '"' + (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + text + '</a>';
+        });
         return html;
     }
 

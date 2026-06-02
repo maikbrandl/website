@@ -2365,3 +2365,35 @@ h1, h2, h3, h4, h5 {
 
 /* ====================== Utility ====================== */
 .text-center { text-align: center; }
+
+/* ====================== Trust Bar ====================== */
+.trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding: var(--space-4) var(--space-5);
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: var(--radius);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    flex: 1 1 auto;
+    min-width: 160px;
+}
+
+.trust-item svg {
+    color: var(--gold);
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .trust-bar { flex-direction: column; gap: var(--space-3); }
+    .trust-item { min-width: auto; }
+}

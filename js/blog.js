@@ -311,6 +311,7 @@
             return;
         }
 
+        postNode.hidden = false;
         titleNode.textContent = post.title;
         if (breadcrumbNode) breadcrumbNode.textContent = post.title;
         if (categoryNode) categoryNode.textContent = post.category || 'Blog';

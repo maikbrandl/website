@@ -661,37 +661,27 @@ const Results = (() => {
 
         var vw = window.innerWidth, vh = window.innerHeight;
 
-        // Validate the click coordinates. clientX/clientY are VIEWPORT coordinates
+        // Validate the click coordinates. clientY is a VIEWPORT coordinate
         // (relative to the visible window), which is exactly what position:fixed uses.
-        var hasX = (typeof clientX === 'number' && isFinite(clientX));
         var hasY = (typeof clientY === 'number' && isFinite(clientY));
-        var x = hasX ? clientX : vw / 2;
         var y = hasY ? clientY : vh / 2;
 
         // Make the popup measurable: it is visibility:hidden (not display:none),
         // so it already has layout dimensions. Reset any previous placement first.
-        _popup.style.right = 'auto';
-        _popup.style.left = '0px';
+        _popup.style.left = 'auto';
         _popup.style.top = '0px';
-        var pw = _popup.offsetWidth || 340;
         var ph = _popup.offsetHeight || 320;   // capped by max-height in CSS
 
-        var gap = 18;
         var margin = 10;
 
-        // ── Horizontal: place BESIDE the click point ──
-        // Prefer right of the node; flip to the left if there's no room.
-        var left;
-        if (x + gap + pw <= vw - margin)      left = x + gap;          // right side
-        else if (x - gap - pw >= margin)      left = x - gap - pw;     // left side
-        else                                   left = vw - pw - margin; // clamp on screen
-        left = Math.max(margin, Math.min(left, vw - pw - margin));
+        // ── Horizontal: FIXED to the right edge (constant distance from right border) ──
+        var rightOffset = 20;
 
         // ── Vertical: center on the click point, clamped fully into the viewport ──
         var top = y - ph / 2;
         top = Math.max(margin, Math.min(top, vh - ph - margin));
 
-        _popup.style.left = Math.round(left) + 'px';
+        _popup.style.right = rightOffset + 'px';
         _popup.style.top  = Math.round(top) + 'px';
         _popup.classList.add('is-open');
     }

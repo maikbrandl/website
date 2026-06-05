@@ -24,9 +24,12 @@ body {
     animation: hmFadeIn 0.5s var(--hm-ease) 0.05s forwards;
 }
 
+/* IMPORTANT: do NOT animate `transform` here. A transform on <body>
+   (even an identity matrix from a filled animation) turns <body> into the
+   containing block for every position:fixed element, breaking popup placement. */
 @keyframes hmFadeIn {
-    from { opacity:0; transform:translateY(6px); }
-    to   { opacity:1; transform:none; }
+    from { opacity:0; }
+    to   { opacity:1; }
 }
 
 a { text-decoration:none; color:inherit; transition:color var(--hm-dur) var(--hm-ease); }

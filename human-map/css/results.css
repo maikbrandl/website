@@ -1,8 +1,8 @@
 ﻿/* ===================================================================
    HUMAN MAP – Results Styles
    === */
-@import 'variables.css';
-@import 'main.css';
+@import 'variables.css?v=20260605b';
+@import 'main.css?v=20260605b';
 
 /* ── Archetype reveal ── */
 .hm-reveal-section {
@@ -840,7 +840,9 @@ html { scroll-behavior: smooth; }
     animation: hmFadeIn 0.35s ease;
 }
 .hm-mode-panel.is-active { display: block; }
-@keyframes hmFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* NOTE: opacity-only — must not animate `transform`, otherwise any element
+   using this animation becomes a containing block for position:fixed popups. */
+@keyframes hmFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ── Desktop / Mobile visibility helpers ── */
 .hm-desktop-only { display: block; }

@@ -610,7 +610,7 @@ const Results = (() => {
                 var ckm = MODEL.CATEGORY_KEY_MAP;
                 if (ckm && ckm[formatted]) panelKey = ckm[formatted];
             }
-            openDimPanel(panelKey, d.score, d.categorical, d.catValue, d.color);
+            openDimPanel(panelKey, d.score, d.categorical, d.catValue, d.color, d.clientY);
         });
 
         document.addEventListener('hm:synergyclick', function(e) {

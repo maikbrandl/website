@@ -96,8 +96,9 @@ const SkillTree = (() => {
         return 'M '+sx+' '+sy+' Q '+ax.toFixed(1)+' '+ay.toFixed(1)+' '+dx+' '+dy;
     }
 
-    function getLabelPos(nx, ny) {
-        var dx=nx-CX, dy=ny-CY, dist=Math.sqrt(dx*dx+dy*dy)||1, off=R_DIM+14;
+    // Labels use hub-relative direction so they fan outward from the cluster, never toward it.
+    function getLabelPos(nx, ny, hx, hy) {
+        var dx=nx-hx, dy=ny-hy, dist=Math.sqrt(dx*dx+dy*dy)||1, off=R_DIM+18;
         var lx=Math.round(nx+(dx/dist)*off), ly=Math.round(ny+(dy/dist)*off);
         var ang=Math.atan2(dy,dx)*180/Math.PI;
         var anchor=(ang>-60&&ang<60)?'start':(ang>120||ang<-120)?'end':'middle';
@@ -333,14 +334,16 @@ const SkillTree = (() => {
             g.appendChild(el('circle',{cx:hub.x,cy:hub.y,r:R_CLUSTER,fill:cluster.color,'fill-opacity':'0.10',
                 stroke:cluster.color,'stroke-width':'1.5','stroke-opacity':'0.45'}));
 
-            // Place label radially outward from hub (away from center)
-            var ldx=hub.x-CX, ldy=hub.y-CY;
-            var ldist=Math.sqrt(ldx*ldx+ldy*ldy)||1;
-            var lx=Math.round(hub.x+(ldx/ldist)*(R_CLUSTER+14));
-            var ly=Math.round(hub.y+(ldy/ldist)*(R_CLUSTER+14));
-            var lang=Math.atan2(ldy,ldx)*180/Math.PI;
-            var lanchor=(lang>-60&&lang<60)?'start':(lang>120||lang<-120)?'end':'middle';
-            var lbaseline=(ldy<-0.1)?'auto':(ldy>0.1)?'hanging':'middle';
+            // Tangential label — placed 90° CCW from arm direction.
+            // This keeps the label clear of every arm line and fan-node connection.
+            var lArmRad=(cluster.angle-90)*Math.PI/180;
+            var lArmDx=Math.cos(lArmRad), lArmDy=Math.sin(lArmRad); // unit arm vector
+            var lTanDx=lArmDy, lTanDy=-lArmDx;   // CCW tangent: rotate arm by -90°
+            var lOff=R_CLUSTER+12;
+            var lx=Math.round(hub.x+lTanDx*lOff);
+            var ly=Math.round(hub.y+lTanDy*lOff);
+            var lanchor=(Math.abs(lTanDx)>0.5)?(lTanDx<0?'end':'start'):'middle';
+            var lbaseline=(Math.abs(lTanDy)>0.5)?(lTanDy<0?'auto':'hanging'):'middle';
 
             var t=el('text',{x:lx,y:ly,'text-anchor':lanchor,'dominant-baseline':lbaseline,
                 'font-size':'9','font-family':'Inter, sans-serif','font-weight':'700','letter-spacing':'0.08em',
@@ -386,7 +389,7 @@ const SkillTree = (() => {
             setTimeout(function(){nodeG.style.opacity='1';},60);
 
             // Label
-            var lp=getLabelPos(n.x,n.y);
+            var lp=getLabelPos(n.x,n.y,n.hx,n.hy);
             var lbl=el('text',{x:lp.lx,y:lp.ly,'text-anchor':lp.anchor,'dominant-baseline':'middle',
                 'font-size':'11.5','font-family':'Inter, sans-serif','font-weight':'500',
                 fill:'#cac0b8',opacity:'0.85','data-cluster':n.cluster});

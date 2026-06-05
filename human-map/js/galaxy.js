@@ -303,7 +303,23 @@ const Galaxy = (() => {
 
         panelEl.classList.add('is-open');
         panelEl.setAttribute('aria-hidden','false');
-        // Do NOT set body overflow — panel has its own scroll
+
+        // Position panel vertically at the center of the galaxy SVG
+        // so it always appears next to the galaxy regardless of page scroll or zoom
+        var galaxySvg = document.getElementById('hm-galaxy-svg');
+        var centY = window.innerHeight / 2; // fallback
+        if (galaxySvg) {
+            var gRect = galaxySvg.getBoundingClientRect();
+            if (gRect.height > 0) {
+                centY = gRect.top + gRect.height / 2;
+                // Clamp so panel stays fully within viewport
+                // (panel max-height is 82vh, so half-height is ~41vh)
+                var halfPanel = Math.min(window.innerHeight * 0.41, 380);
+                centY = Math.max(halfPanel + 10, Math.min(window.innerHeight - halfPanel - 10, centY));
+            }
+        }
+        panelEl.style.top = centY + 'px';
+        panelEl.style.transform = 'translateY(-50%)';
     }
 
     function closeDetailPanel() {

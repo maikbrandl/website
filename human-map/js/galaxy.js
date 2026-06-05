@@ -48,11 +48,15 @@ const Galaxy = (() => {
 
     // ── Similarity calculation ─────────────────────────────────────
 
+    // Use scoreArchetype (same logic as detection) so the primary always shows
+    // its real score, and rare archetypes (not in GALAXY_POSITIONS) score correctly.
     function calcAllSimilarities(userScores) {
         var result = {};
         var positions = MODEL.GALAXY_POSITIONS || {};
         Object.keys(positions).forEach(function(archId) {
-            result[archId] = Archetypes.calculateSimilarity(userScores, archId);
+            var arch = MODEL.ARCHETYPES.find(function(a){ return a.id === archId; });
+            if (!arch) { result[archId] = 0; return; }
+            result[archId] = Math.round(Archetypes.scoreArchetype(arch, userScores));
         });
         return result;
     }
@@ -156,12 +160,17 @@ const Galaxy = (() => {
         });
 
         // Archetype nodes
+        // If user's primary is a rare archetype (not in GALAXY_POSITIONS), highlight
+        // the highest-scoring galaxy archetype instead as the visual stand-in.
+        var galaxyPrimaryId = MODEL.GALAXY_POSITIONS[primary.id]
+            ? primary.id
+            : (sorted[0] ? sorted[0][0] : null);
         Object.keys(MODEL.GALAXY_POSITIONS).forEach(function(archId) {
             var pos   = MODEL.GALAXY_POSITIONS[archId];
             var py    = pos.y * (520/600);
             var sim   = similarities[archId] || 0;
             var color = pos.color;
-            var isPrimary = archId === primary.id;
+            var isPrimary = archId === galaxyPrimaryId;
 
             // Node radius correlates with similarity
             var r = isPrimary ? 26 : Math.round(12 + (sim/100)*10);
@@ -235,8 +244,10 @@ const Galaxy = (() => {
     function buildGalaxyCards(containerEl, results, sorted) {
         var primary    = results.archetype.primary;
         var allScores  = Object.assign({}, results.scores, results.categorical || {});
+        // Real detection score for the primary (works for both normal and rare archetypes)
+        var primaryScore = Math.round(Archetypes.scoreArchetype(primary, allScores));
         var top3       = [
-            { id: primary.id, sim: 100, label: 'Dein Archetyp' },
+            { id: primary.id, sim: primaryScore, label: 'Dein Archetyp' },
         ];
         // Add next 2 non-primary by similarity
         sorted.filter(function(e){ return e[0] !== primary.id; }).slice(0,2).forEach(function(e,i){
@@ -261,9 +272,9 @@ const Galaxy = (() => {
         containerEl.querySelectorAll('.hm-galaxy-card').forEach(function(card) {
             card.addEventListener('click', function() {
                 var archId = card.getAttribute('data-arch');
-                var sims   = {};
+                var sims = {};
                 sorted.forEach(function(e){ sims[e[0]]=e[1]; });
-                sims[primary.id] = 100;
+                sims[primary.id] = primaryScore;
                 openDetailPanel(allScores, primary, sims, archId);
             });
         });

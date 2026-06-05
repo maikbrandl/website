@@ -801,8 +801,59 @@ const MODEL = (() => {
             label: 'Antriebstyp: Einfluss', color: '#a070e0', layer: 'Antrieb',
             what: 'Einfluss haben, Führung übernehmen und Wirkung erzeugen ist dein primärer Antrieb.',
             interpretation: 'Du brauchst ein Spielfeld auf dem deine Entscheidungen zählen. Ohnmacht ist für dich toxisch.',
-            growth: 'Nutze deinen Power-Antrieb für echten Impact, nicht nur für Status. Die Frage: "Wofür setze ich meinen Einfluss ein?"',
+            growth: 'Nutze deinen Power-Antrieb für echten Impact, nicht nur für Status. Die Frage: „Wofür setze ich meinen Einfluss ein?“',
             related: ['energie', 'struktur', 'loc_internal'],
+        },
+        // ── Intelligenztyp (kategorisch) ─────────────────────────────────────────
+        intel_analytisch: {
+            label: 'Intelligenztyp: Analytisch', color: '#d0a8f0', layer: 'Potenzial',
+            what: 'Dein primärer Intelligenzmodus ist logisch-analytisch. Du löst Probleme durch systematisches Denken, Mustererkennung und Präzision.',
+            interpretation: 'Du denkst in Systemen und Strukturen. Komplexe Probleme zerlegst du intuitiv in Teilprobleme — das macht dich zu einem wertvollen Problemlöser in anspruchsvollen Situationen.',
+            growth: 'Deine analytische Stärke wird noch wertvoller in Kombination mit kreativem oder sozialem Denken. Suche Kollaboration mit anderen Intelligenztypen und übe, Ergebnisse einfach und bildlich zu kommunizieren.',
+            related: ['mindset_growth', 'tiefe', 'offenheit'],
+        },
+        intel_sozial: {
+            label: 'Intelligenztyp: Sozial', color: '#d0a8f0', layer: 'Potenzial',
+            what: 'Dein primärer Intelligenzmodus ist sozial. Du verstehst Menschen intuitiv — ihre Motive, Emotionen und Dynamiken.',
+            interpretation: 'Du navigierst soziale Systeme mit natürlicher Leichtigkeit. Andere Menschen sind dein primärer Denk- und Lernraum. Du liest Situationen über zwischenmenschliche Signale, nicht über Daten.',
+            growth: 'Kombiniere deine soziale Intelligenz mit analytischer Tiefe. Versuche die „Warum“-Fragen hinter menschlichem Verhalten noch tiefer zu verstehen, z. B. durch Psychologie oder systemisches Denken.',
+            related: ['verbindung', 'energie', 'tiefe'],
+        },
+        intel_kreativ: {
+            label: 'Intelligenztyp: Kreativ', color: '#d0a8f0', layer: 'Potenzial',
+            what: 'Dein primärer Intelligenzmodus ist kreativ. Du verbindest Unerwartetes, denkst quer und erzeugst originelle Lösungen.',
+            interpretation: 'Dein Gehirn sucht aktiv nach ungewöhnlichen Verbindungen. Langeweile und Routine sind deine größten Feinde. Du siehst Möglichkeiten, die andere übersehen.',
+            growth: 'Kreative Intelligenz entfaltet sich am stärksten mit Struktur als Rahmen. Setze dir absichtlich Constraints, um tiefer zu gehen statt breiter zu springen.',
+            related: ['offenheit', 'werte_innovation', 'grit_passion'],
+        },
+        // ── Wachstumsfeld (kategorisch) ───────────────────────────────────────────
+        wachstum_selbstkenntnis: {
+            label: 'Wachstumsfeld: Selbsterkenntnis', color: '#f0d878', layer: 'Potenzial',
+            what: 'Dein wichtigstes Wachstumsfeld ist das Innere: besser verstehen, wer du bist, was dich antreibt und was dich blockiert.',
+            interpretation: 'Du erkennst, dass nachhaltiges Wachstum von innen kommt. Selbsterkenntnis ist die Grundlage aller anderen Entwicklung — und dein Kompass in einem Meer von Möglichkeiten.',
+            growth: 'Journaling, Therapie, Meditation oder tiefe Einzelgespräche mit vertrauenswürdigen Menschen sind deine Wachstumsbeschleuniger. Plane mindestens 15 Minuten Reflexion pro Tag ein.',
+            related: ['mindset_growth', 'tiefe', 'loc_internal'],
+        },
+        wachstum_fuehrung: {
+            label: 'Wachstumsfeld: Führung', color: '#f0d878', layer: 'Potenzial',
+            what: 'Dein Wachstumsfeld ist Führung: andere befähigen, Verantwortung übernehmen und Richtung geben.',
+            interpretation: 'Du erkennst, dass dein Impact vervielfacht wird, wenn du andere entwickelst statt alles selbst zu tun. Führung ist dein nächster Entwicklungsschritt.',
+            growth: 'Führung ist eine Praxis, keine Eigenschaft. Suche gezielt Situationen, in denen du Verantwortung für andere übernehmen kannst — auch im Kleinen. Mentoring, Projektleitung oder Community-Aufbau.',
+            related: ['energie', 'verbindung', 'loc_internal'],
+        },
+        wachstum_aufbau: {
+            label: 'Wachstumsfeld: Aufbau & Systeme', color: '#f0d878', layer: 'Potenzial',
+            what: 'Dein Wachstumsfeld ist der Aufbau: Strukturen, Systeme und etwas Bleibendes schaffen.',
+            interpretation: 'Du möchtest nicht nur im System arbeiten, sondern Systeme erschaffen. Das setzt Klarheit über Ziele und Geduld für den langen Aufbau voraus.',
+            growth: 'Beginne mit einem kleinen, konkreten System, das du komplett baust und iterierst. Lerne aus dem Prozess, nicht nur aus dem Ergebnis. Wachstum durch Bauen.',
+            related: ['struktur', 'grit_ausdauer', 'werte_leistung'],
+        },
+        wachstum_verbindung: {
+            label: 'Wachstumsfeld: Verbindung', color: '#f0d878', layer: 'Potenzial',
+            what: 'Dein Wachstumsfeld ist tiefere, bedeutungsvollere Verbindung: zu dir selbst, zu anderen und zu etwas Größerem.',
+            interpretation: 'Du erkennst, dass Erfolg ohne echte Verbindung hohl bleibt. Beziehungsqualität ist für dich ein Kernthema — und ein Bereich, in dem noch viel Wachstumspotenzial liegt.',
+            growth: 'Investiere gezielt in 3–5 wirklich wichtige Beziehungen. Tiefe vor Breite. Übe Verletzlichkeit als Verbindungsstrategie.',
+            related: ['verbindung', 'bindungsstil', 'energie'],
         },
     };
 
@@ -819,6 +870,15 @@ const MODEL = (() => {
         'Leistung':         'antrieb_achievement',
         'Zugehörigkeit':    'antrieb_affiliation',
         'Macht & Einfluss': 'antrieb_power',
+        // Intelligenztyp
+        'Analytisch':       'intel_analytisch',
+        'Sozial':           'intel_sozial',
+        'Kreativ':          'intel_kreativ',
+        // Wachstumsfeld
+        'Selbsterkenntnis': 'wachstum_selbstkenntnis',
+        'Führung':          'wachstum_fuehrung',
+        'Aufbau & Systeme': 'wachstum_aufbau',
+        'Verbindung':       'wachstum_verbindung',
     };
 
     // ── Archetype similarity profiles (galaxy view) ─────────────────

@@ -590,7 +590,7 @@ html { scroll-behavior: smooth; }
     z-index: 9999;
     width: 340px;
     max-width: calc(100vw - 40px);
-    max-height: calc(100vh - 100px);
+    max-height: min(72vh, 560px);
     overflow-y: auto;
     background: #141414;
     border: 1px solid #2a2a2a;

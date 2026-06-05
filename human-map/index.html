@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Map – Verstehe dich selbst | Hybridlogs</title>
+    <meta name="description" content="33 Fragen. Dein persönlicher Archetyp. Ein einzigartiger Skill Tree, der zeigt wer du wirklich bist – und wer du werden kannst.">
+    <link rel="canonical" href="https://hybridlogs.com/human-map/">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Human Map – Verstehe dich selbst">
+    <meta property="og:description" content="33 Fragen. Dein persönlicher Archetyp. Ein Skill Tree für deine Persönlichkeit.">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* ── Landing page specific ── */
+        .lp-hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--hm-space-16) var(--hm-space-6);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .lp-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,168,76,0.07), transparent),
+                radial-gradient(ellipse 40% 30% at 30% 20%, rgba(139,124,248,0.05), transparent),
+                radial-gradient(ellipse 40% 30% at 70% 20%, rgba(96,160,232,0.04), transparent);
+            pointer-events: none;
+        }
+
+        .lp-hero__content {
+            position: relative;
+            max-width: 760px;
+        }
+
+        .lp-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--hm-gold);
+            margin-bottom: var(--hm-space-6);
+            padding: 0.3rem 0.9rem;
+            border: 1px solid rgba(201,168,76,0.25);
+            border-radius: var(--hm-radius-full);
+            background: rgba(201,168,76,0.06);
+        }
+
+        .lp-hero__title {
+            font-family: var(--hm-font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--hm-white);
+            letter-spacing: -0.025em;
+            margin-bottom: var(--hm-space-6);
+        }
+        .lp-hero__title em {
+            font-style: italic;
+            color: var(--hm-gold-light);
+        }
+
+        .lp-hero__sub {
+            font-size: clamp(1rem, 2vw, 1.1875rem);
+            color: var(--hm-text-dim);
+            line-height: 1.75;
+            max-width: 580px;
+            margin: 0 auto var(--hm-space-10);
+        }
+
+        .lp-cta-group {
+            display: flex;
+            gap: var(--hm-space-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--hm-space-8);
+        }
+
+        .lp-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            background: var(--hm-gold);
+            color: #050505;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--hm-radius-full);
+            transition: all 0.3s var(--hm-ease);
+        }
+        .lp-btn-primary:hover {
+            background: var(--hm-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+        }
+        .lp-btn-primary svg { transition: transform 0.2s; }
+        .lp-btn-primary:hover svg { transform: translateX(3px); }
+
+        .lp-meta {
+            display: flex;
+            gap: var(--hm-space-6);
+            justify-content: center;
+            font-size: 0.8125rem;
+            color: var(--hm-text-muted);
+        }
+        .lp-meta span::before { content: '✓ '; color: var(--hm-gold); }
+
+        /* ── Preview tree ── */
+        .lp-preview {
+            max-width: 500px;
+            margin: var(--hm-space-12) auto 0;
+            position: relative;
+        }
+        .lp-preview svg {
+            width: 100%;
+            height: auto;
+            opacity: 0.5;
+            filter: blur(1px);
+        }
+        .lp-preview__label {
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--hm-text-muted);
+            white-space: nowrap;
+        }
+
+        /* ── How it works ── */
+        .lp-steps {
+            padding: var(--hm-space-24) 0;
+            background: var(--hm-bg-elevated);
+            border-top: 1px solid var(--hm-border);
+        }
+
+        .lp-steps__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--hm-space-6);
+            margin-top: var(--hm-space-12);
+        }
+
+        .lp-step {
+            text-align: center;
+            padding: var(--hm-space-6);
+        }
+        .lp-step__num {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,168,76,0.3);
+            background: rgba(201,168,76,0.07);
+            color: var(--hm-gold);
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--hm-space-4);
+        }
+        .lp-step__title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--hm-white);
+            margin-bottom: var(--hm-space-2);
+        }
+        .lp-step__desc {
+            font-size: 0.875rem;
+            color: var(--hm-text-dim);
+            line-height: 1.65;
+        }
+
+        /* ── What you get ── */
+        .lp-features {
+            padding: var(--hm-space-24) 0;
+        }
+
+        .lp-features__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--hm-space-4);
+            margin-top: var(--hm-space-12);
+        }
+
+        .lp-feature-card {
+            background: var(--hm-bg-card);
+            border: 1px solid var(--hm-border);
+            border-radius: var(--hm-radius-lg);
+            padding: var(--hm-space-6);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .lp-feature-card:hover {
+            border-color: var(--hm-border-hover);
+            background: var(--hm-bg-hover);
+        }
+        .lp-feature-card__icon {
+            font-size: 1.75rem;
+            margin-bottom: var(--hm-space-4);
+            line-height: 1;
+        }
+        .lp-feature-card__title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--hm-white);
+            margin-bottom: var(--hm-space-2);
+        }
+        .lp-feature-card__desc {
+            font-size: 0.875rem;
+            color: var(--hm-text-dim);
+            line-height: 1.65;
+        }
+
+        /* ── CTA section ── */
+        .lp-cta-section {
+            padding: var(--hm-space-24) 0;
+            text-align: center;
+            background: var(--hm-bg-elevated);
+            border-top: 1px solid var(--hm-border);
+        }
+
+        /* ── Return banner (if results exist) ── */
+        .lp-return-banner {
+            background: linear-gradient(135deg, var(--hm-bg-card), rgba(201,168,76,0.05));
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: var(--hm-radius-xl);
+            padding: var(--hm-space-5) var(--hm-space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--hm-space-4);
+            max-width: 680px;
+            margin: 0 auto var(--hm-space-8);
+            flex-wrap: wrap;
+        }
+        .lp-return-banner__text {
+            font-size: 0.9375rem;
+            color: var(--hm-text);
+        }
+        .lp-return-banner__arch {
+            font-weight: 600;
+            color: var(--hm-gold-light);
+        }
+        .lp-return-banner__cta {
+            font-size: 0.875rem;
+            color: var(--hm-gold);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .lp-return-banner__cta:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .lp-hero { padding: var(--hm-space-12) var(--hm-space-4); }
+            .lp-meta { flex-direction: column; gap: var(--hm-space-2); align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="hm-header">
+        <a href="../index.html" class="hm-header__logo">
+            Hybridlogs <span>Human Map</span>
+        </a>
+        <nav class="hm-header__nav">
+            <a href="../index.html" class="hm-header__back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                hybridlogs.com
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="lp-hero">
+        <div class="lp-hero__content">
+
+            <!-- Return banner (shown if results exist) -->
+            <div class="lp-return-banner" id="lp-return" style="display:none">
+                <div class="lp-return-banner__text">
+                    Willkommen zurück, <span class="lp-return-banner__arch" id="lp-return-arch">Pionier</span>.
+                </div>
+                <a href="results.html" class="lp-return-banner__cta">Ergebnisse ansehen →</a>
+            </div>
+
+            <div class="lp-kicker">
+                <span>◈</span> Persönlichkeitsprofil
+            </div>
+
+            <h1 class="lp-hero__title">
+                Verstehe dich<br>
+                <em>wirklich selbst.</em>
+            </h1>
+
+            <p class="lp-hero__sub">
+                33 präzise Fragen. Dein persönlicher Archetyp. Ein einzigartiger Skill Tree, der zeigt,
+                wer du bist – und welche Stärken du noch nicht ausgeschöpft hast.
+            </p>
+
+            <div class="lp-cta-group">
+                <a href="assessment.html" class="lp-btn-primary" id="lp-start-btn">
+                    Assessment starten
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="results.html" class="hm-btn hm-btn--ghost" id="lp-results-btn" style="display:none">
+                    Mein Profil ansehen
+                </a>
+            </div>
+
+            <div class="lp-meta">
+                <span>33 Fragen, ~7 Minuten</span>
+                <span>Kostenlos</span>
+                <span>Keine Anmeldung nötig</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="lp-steps">
+        <div class="hm-container">
+            <div class="hm-text-center">
+                <div class="hm-label">So funktioniert es</div>
+                <h2 class="hm-heading" style="margin-top:0.75rem">In 3 Schritten zu deinem Profil</h2>
+            </div>
+            <div class="lp-steps__grid">
+                <div class="lp-step hm-reveal">
+                    <div class="lp-step__num">1</div>
+                    <div class="lp-step__title">Fragen beantworten</div>
+                    <div class="lp-step__desc">33 Fragen in 4 Phasen: Kern, Antrieb, Muster und Potenzial. Tiefgründig, aber nicht endlos.</div>
+                </div>
+                <div class="lp-step hm-reveal">
+                    <div class="lp-step__num">2</div>
+                    <div class="lp-step__title">Archetyp entdecken</div>
+                    <div class="lp-step__desc">Unser Algorithmus erkennt deinen primären Archetyp aus 7 Persönlichkeitstypen und möglichen seltenen Kombinationen.</div>
+                </div>
+                <div class="lp-step hm-reveal">
+                    <div class="lp-step__num">3</div>
+                    <div class="lp-step__title">Skill Tree erkunden</div>
+                    <div class="lp-step__desc">Dein persönliches Stärken-Profil als visueller Baum – 17 Dimensionen, Synergien, Wachstumspotenziale.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What you get -->
+    <section class="lp-features hm-reveal">
+        <div class="hm-container">
+            <div class="hm-text-center">
+                <div class="hm-label">Was du bekommst</div>
+                <h2 class="hm-heading" style="margin-top:0.75rem">Mehr als ein <em>Persönlichkeitstest</em></h2>
+                <p class="hm-body--sm" style="max-width:500px;margin:0.75rem auto 0">Kein generisches Ergebnis. Ein Profil das dich wirklich beschreibt – mit konkreten Handlungsansätzen.</p>
+            </div>
+            <div class="lp-features__grid" style="margin-top:var(--hm-space-12)">
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">🔥</div>
+                    <div class="lp-feature-card__title">Dein Primärarchetyp</div>
+                    <div class="lp-feature-card__desc">Pionier, Macher, Connector, Analyst – präzise bestimmt durch 17 Dimensionen, nicht nur 4.</div>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">◆</div>
+                    <div class="lp-feature-card__title">Persönlicher Skill Tree</div>
+                    <div class="lp-feature-card__desc">Eine interaktive SVG-Visualisierung aller deiner Stärken, Muster und Wachstumsbereiche.</div>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">✦</div>
+                    <div class="lp-feature-card__title">Synergie-Erkennung</div>
+                    <div class="lp-feature-card__desc">Wenn zwei Stärken zusammentreffen, entsteht etwas Größeres. Deine aktiven Synergien werden erkannt.</div>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">💎</div>
+                    <div class="lp-feature-card__title">Seltene Archetypen</div>
+                    <div class="lp-feature-card__desc">Tiefenverbinder, Resilienter Vollender, Ruhiger Stratege – nur für besondere Kombinationen freigeschaltet.</div>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">🛡️</div>
+                    <div class="lp-feature-card__title">Blinder Fleck & Stärken</div>
+                    <div class="lp-feature-card__desc">Was dich ausmacht – und wo dein Wachstumspotenzial liegt. Ehrlich, nicht beschönigt.</div>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-card__icon">📊</div>
+                    <div class="lp-feature-card__title">Detail-Dashboard</div>
+                    <div class="lp-feature-card__desc">Alle 17 Dimensionen als individuelle Scores – von Offenheit bis Growth Mindset.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="lp-cta-section hm-reveal">
+        <div class="hm-container">
+            <div class="hm-label" style="margin-bottom:0.75rem">Bereit?</div>
+            <h2 class="hm-heading" style="margin-bottom:1rem">Fang an. Es dauert <em>7 Minuten.</em></h2>
+            <p class="hm-body--sm" style="max-width:460px;margin:0 auto 2.5rem">Kostenlos. Keine Anmeldung. Ergebnis direkt im Browser – sicher gespeichert nur auf deinem Gerät.</p>
+            <a href="assessment.html" class="lp-btn-primary" style="font-size:1.0625rem;padding:1rem 2.25rem">
+                Assessment starten
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <footer class="hm-footer">
+        <p>
+            &copy; <span id="lp-year"></span> Hybridlogs &nbsp;·&nbsp;
+            <a href="../impressum.html">Impressum</a> &nbsp;·&nbsp;
+            <a href="../datenschutz.html">Datenschutz</a>
+        </p>
+    </footer>
+
+    <script>
+        // Year
+        document.getElementById('lp-year').textContent = new Date().getFullYear();
+
+        // Check for existing results
+        try {
+            const raw = localStorage.getItem('humanmap_results');
+            if (raw) {
+                const data = JSON.parse(raw);
+                if (data && data.archetype && data.archetype.primary) {
+                    const returnBanner = document.getElementById('lp-return');
+                    const returnArch   = document.getElementById('lp-return-arch');
+                    const resultsBtn   = document.getElementById('lp-results-btn');
+
+                    if (returnBanner) returnBanner.style.display = 'flex';
+                    if (returnArch)   returnArch.textContent = data.archetype.primary.name;
+                    if (resultsBtn)   resultsBtn.style.display = 'inline-flex';
+                }
+            }
+        } catch (e) {}
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.hm-reveal');
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObs.observe(el));
+    </script>
+</body>
+</html>

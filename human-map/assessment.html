@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment – Human Map | Hybridlogs</title>
+    <meta name="description" content="Beantworte 33 Fragen und entdecke dein persönliches Profil.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/assessment.css">
+</head>
+<body class="hm-assessment">
+
+    <!-- Header -->
+    <header class="hm-header">
+        <a href="index.html" class="hm-header__logo">
+            Hybridlogs <span>Human Map</span>
+        </a>
+        <nav class="hm-header__nav">
+            <a href="index.html" class="hm-header__back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Zurück
+            </a>
+        </nav>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="hm-progress" role="progressbar" aria-label="Fortschritt">
+        <div class="hm-progress__inner">
+            <span class="hm-progress__phase" id="hm-progress-phase">Deine Grundstruktur</span>
+            <div class="hm-progress__track">
+                <div class="hm-progress__fill" id="hm-progress-fill" style="width:0%"></div>
+            </div>
+            <span class="hm-progress__label" id="hm-progress-label">0/33</span>
+        </div>
+    </div>
+
+    <!-- Main assessment area -->
+    <main class="hm-assessment__main">
+        <div class="hm-question-wrap" id="hm-question-wrap"></div>
+    </main>
+
+    <!-- Phase interstitial overlay -->
+    <div class="hm-interstitial" id="hm-interstitial" aria-hidden="true">
+        <div class="hm-interstitial__icon" id="hm-int-icon">◉</div>
+        <div class="hm-interstitial__phase" id="hm-int-phase">Nächstes Kapitel</div>
+        <div class="hm-interstitial__title" id="hm-int-title">Was dich antreibt</div>
+        <div class="hm-interstitial__sub" id="hm-int-sub">Werte, Triebkräfte, innerer Kompass.</div>
+        <div class="hm-interstitial__progress">
+            <div class="hm-interstitial__progress-fill" id="hm-int-progress-fill"></div>
+        </div>
+    </div>
+
+    <footer class="hm-footer">
+        <p>Hybridlogs Human Map &nbsp;·&nbsp; <a href="../datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="../impressum.html">Impressum</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/model.js"></script>
+    <script src="js/scoring.js"></script>
+    <script src="js/archetypes.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+</html>

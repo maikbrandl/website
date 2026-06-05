@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Profil – Human Map | Hybridlogs</title>
+    <meta name="description" content="Dein persönliches Human Map Ergebnis – Archetyp, Skill Tree und Wachstumsprofil.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/results.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="hm-header">
+        <a href="index.html" class="hm-header__logo">
+            Hybridlogs <span>Human Map</span>
+        </a>
+        <nav class="hm-header__nav">
+            <a href="assessment.html" class="hm-btn hm-btn--ghost" style="padding:0.4rem 1rem;font-size:0.8125rem">
+                Neu starten
+            </a>
+        </nav>
+    </header>
+
+    <!-- No results fallback (hidden by default) -->
+    <div class="hm-no-results" id="hm-no-results" style="display:none">
+        <div style="font-size:3rem">◎</div>
+        <div class="hm-heading">Noch kein Profil vorhanden</div>
+        <div class="hm-body--sm">Beantworte zuerst die 33 Fragen, um dein persönliches Human Map zu erhalten.</div>
+        <a href="assessment.html" class="hm-btn hm-btn--primary">Assessment starten</a>
+    </div>
+
+    <!-- Results content (hidden until loaded) -->
+    <div id="hm-results-content" style="display:none">
+
+        <!-- ── 1. Archetype Reveal ── -->
+        <section class="hm-reveal-section" id="hm-archetype-section">
+            <div class="hm-result-reveal" id="hm-arch-reveal">
+                <div style="display:flex;flex-direction:column;align-items:center">
+                    <div class="hm-label" style="margin-bottom:1.5rem">Dein Archetyp</div>
+                    <div class="hm-archetype-badge" id="hm-arch-badge">
+                        <span class="hm-archetype-badge__emoji" id="hm-arch-emoji"></span>
+                        <span class="hm-archetype-badge__label" id="hm-arch-badge-label">Primärtyp</span>
+                    </div>
+                    <h1 class="hm-archetype-name" id="hm-arch-name"></h1>
+                    <p class="hm-archetype-tagline" id="hm-arch-tagline"></p>
+                    <div class="hm-divider hm-divider--center"></div>
+                    <p class="hm-archetype-desc" id="hm-arch-desc"></p>
+                    <div class="hm-arch-pills" id="hm-arch-strengths"></div>
+                    <div class="hm-blindspot" id="hm-arch-blindspot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Rare unlock (if applicable) ── -->
+        <div class="hm-container--narrow" id="hm-rare-section" style="display:none;padding-bottom:3rem">
+            <div class="hm-rare-unlock">
+                <div class="hm-rare-unlock__label">✦ Seltene Eigenschaft freigeschaltet</div>
+                <div class="hm-rare-unlock__name" id="hm-rare-name"></div>
+                <div style="font-size:0.875rem;color:#777;margin-top:0.5rem" id="hm-rare-tagline"></div>
+            </div>
+        </div>
+
+        <!-- ── Synergy banners ── -->
+        <div class="hm-container--narrow" id="hm-synergy-banners" style="padding-bottom:3rem"></div>
+
+        <!-- ── 2. Skill Tree ── -->
+        <section class="hm-skilltree-section hm-result-reveal" id="hm-skilltree-section">
+            <div class="hm-container">
+                <div class="hm-section-header">
+                    <div class="hm-label">Dein Skill Tree</div>
+                    <h2 class="hm-heading" style="margin-top:0.75rem">Dein persönlicher <em>Entwicklungsbaum</em></h2>
+                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto">Jeder Knoten zeigt ein Dimension deines Profils. Goldene Knoten zeigen aktive Synergien.</p>
+                </div>
+                <!-- Synergy counter -->
+                <div class="hm-synergy-count" id="hm-synergy-count"></div>
+                <div class="hm-skilltree-wrap">
+                    <button id="hm-tree-back-btn" class="hm-tree-back-btn" onclick="SkillTree.resetZoom()">&#8592; Übersicht</button>
+                    <svg id="hm-skilltree-svg" viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" aria-label="Skill Tree Visualisierung"></svg>
+                </div>
+                <!-- Legend -->
+                <div class="hm-legend" id="hm-legend"></div>
+            </div>
+        </section>
+
+        <!-- ── 3. Radar Charts ── -->
+        <section class="hm-charts-section hm-result-reveal" id="hm-charts-section">
+            <div class="hm-container">
+                <div class="hm-section-header">
+                    <div class="hm-label">Dimensionsprofil</div>
+                    <h2 class="hm-heading" style="margin-top:0.75rem">Deine zwei <em>Kernprofile</em></h2>
+                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto">Big Five Persönlichkeit und dein individuelles Intelligenzprofil.</p>
+                </div>
+                <div class="hm-charts-row">
+                    <div class="hm-chart-card">
+                        <div class="hm-chart-card__title">Persönlichkeit</div>
+                        <div class="hm-chart-card__wrap">
+                            <canvas id="hm-chart-personality"></canvas>
+                        </div>
+                    </div>
+                    <div class="hm-chart-card">
+                        <div class="hm-chart-card__title">Intelligenzprofil</div>
+                        <div class="hm-chart-card__wrap">
+                            <canvas id="hm-chart-intel"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── 4. Detail Dashboard ── -->
+        <section class="hm-dashboard hm-result-reveal" id="hm-dashboard-section">
+            <div class="hm-container">
+                <div class="hm-section-header">
+                    <div class="hm-label">Dimensionsprofil</div>
+                    <h2 class="hm-heading" style="margin-top:0.75rem">Deine <em>Detailwerte</em></h2>
+                </div>
+                <!-- Cluster filter tabs -->
+                <div class="hm-cluster-tabs" id="hm-cluster-tabs"></div>
+                <!-- Cards grid -->
+                <div class="hm-dashboard__grid" id="hm-dim-cards"></div>
+            </div>
+        </section>
+
+        <!-- ── 4. Email Capture ── -->
+        <section class="hm-email-section hm-result-reveal" id="hm-email-section">
+            <div class="hm-container">
+                <div class="hm-email-card">
+                    <div class="hm-label" style="margin-bottom:0.75rem">Nächste Schritte</div>
+                    <h2 class="hm-heading" style="font-size:1.5rem;margin-bottom:0.5rem">Dein Profil in die Praxis bringen</h2>
+                    <p class="hm-body--sm" style="margin-bottom:1rem">
+                        Erhalte deine persönliche Wachstumsstrategie – konkrete Schritte für deinen Archetyp, passende Ressourcen und Updates.
+                    </p>
+
+                    <form class="hm-email-form" id="hm-email-form" action="https://formspree.io/f/PLACEHOLDER" method="POST" novalidate>
+                        <!-- Hidden segmentation fields (populated by JS) -->
+                        <input type="hidden" name="archetype_id" id="hf-archetype-id">
+                        <input type="hidden" name="archetype_name" id="hf-archetype-name">
+                        <input type="hidden" name="synergies" id="hf-synergies">
+                        <input type="hidden" name="rare_archetype" id="hf-rare-archetype">
+                        <input type="hidden" name="_subject" value="Human Map – neues Profil">
+                        <input type="hidden" name="_next" value="">
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="hf-email"
+                            class="hm-email-input"
+                            placeholder="deine@email.de"
+                            required
+                            autocomplete="email"
+                        >
+                        <button type="submit" class="hm-btn hm-btn--primary" id="hm-email-submit">
+                            Profil sichern &amp; Tipps erhalten
+                        </button>
+                        <p class="hm-email-note">Kein Spam. Jederzeit abmeldbar. Deine Daten bleiben sicher.</p>
+                    </form>
+                    <div class="hm-email-success" id="hm-email-success">
+                        ✓ Vielen Dank! Dein Profil wurde gesichert.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CTA footer ── -->
+        <section class="hm-section--sm hm-result-reveal">
+            <div class="hm-container hm-text-center">
+                <div class="hm-label" style="margin-bottom:0.75rem">Hybridlogs Produkte</div>
+                <p class="hm-body" style="max-width:480px;margin:0 auto 2rem">Die richtigen Journals und Planer für deinen Archetyp – designed für echte Entwicklung.</p>
+                <div class="hm-cta-row">
+                    <a href="../index.html#produkte" class="hm-btn hm-btn--outline">Produkte entdecken</a>
+                    <a href="assessment.html" class="hm-btn hm-btn--ghost">Assessment wiederholen</a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /hm-results-content -->
+
+    <!-- Info popup — appears near the clicked node/card -->
+    <div id="hm-popup" role="dialog" aria-modal="true"></div>
+
+    <footer class="hm-footer">
+        <p>Hybridlogs Human Map &nbsp;·&nbsp; <a href="../datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="../impressum.html">Impressum</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/scoring.js"></script>
+    <script src="js/archetypes.js"></script>
+    <script src="js/skilltree.js"></script>
+    <script src="js/results.js"></script>
+</body>
+</html>

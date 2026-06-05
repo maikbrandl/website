@@ -1,0 +1,507 @@
+/**
+ * HUMAN MAP – SVG Skill Tree Renderer
+ * Programmatic radial layout: center archetype node + 4 dimension clusters.
+ * viewBox="0 0 800 800", center at (400, 400).
+ */
+
+const SkillTree = (() => {
+
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const CX = 400, CY = 400;
+
+    // ── Cluster definitions ───────────────────────────────────────
+    // angle: degrees from right (0=right, 90=bottom, 180=left, 270=top)
+    const CLUSTERS = [
+        {
+            id: 'kern', label: 'KERN', angle: 0, clusterR: 195,
+            color: '#8b7cf8',
+            dims: ['offenheit', 'struktur', 'energie', 'verbindung', 'tiefe'],
+        },
+        {
+            id: 'antrieb', label: 'ANTRIEB', angle: 90, clusterR: 195,
+            color: '#f0a855',
+            dims: ['werte_freiheit', 'werte_leistung', 'werte_innovation', 'antrieb_type'],
+        },
+        {
+            id: 'muster', label: 'MUSTER', angle: 180, clusterR: 195,
+            color: '#f07090',
+            dims: ['bindungsstil', 'loc_internal', 'stress_typ', 'rumination'],
+        },
+        {
+            id: 'potenzial', label: 'POTENZIAL', angle: 270, clusterR: 195,
+            color: '#60a0e8',
+            dims: ['mindset_growth', 'grit_passion', 'grit_ausdauer', 'intel_primary', 'wachstumsfeld'],
+        },
+    ];
+
+    // ── Compute node positions ────────────────────────────────────
+    function polarToXY(cx, cy, r, angleDeg) {
+        const rad = angleDeg * Math.PI / 180;
+        return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    }
+
+    function buildNodeMap() {
+        const nodeMap = {};
+        CLUSTERS.forEach(cluster => {
+            const clusterPos = polarToXY(CX, CY, cluster.clusterR, cluster.angle);
+            const n = cluster.dims.length;
+            const spreadDeg = Math.min(70, n * 16); // arc in degrees
+
+            cluster.dims.forEach((dim, i) => {
+                const fraction = n > 1 ? i / (n - 1) : 0.5;
+                const nodeAngle = cluster.angle + (fraction - 0.5) * spreadDeg;
+                const nodePos = polarToXY(clusterPos.x, clusterPos.y, 85, nodeAngle);
+                const dimMeta = MODEL.DIMS[dim];
+                nodeMap[dim] = {
+                    x: Math.round(nodePos.x),
+                    y: Math.round(nodePos.y),
+                    clusterX: Math.round(clusterPos.x),
+                    clusterY: Math.round(clusterPos.y),
+                    cluster: cluster.id,
+                    clusterColor: cluster.color,
+                    color: dimMeta ? dimMeta.color : cluster.color,
+                    label: dimMeta ? dimMeta.label : dim,
+                    categorical: dimMeta ? !!dimMeta.categorical : false,
+                };
+            });
+        });
+        return nodeMap;
+    }
+
+    // ── Level helpers ─────────────────────────────────────────────
+    function levelToRadius(level) {
+        // level 1-5 → radius 10-22
+        return 10 + (level - 1) * 3;
+    }
+
+    function levelToOpacity(level) {
+        return 0.35 + level * 0.13;
+    }
+
+    function catToLevel(cat, value) {
+        // Categorical nodes always show at level 3
+        return 3;
+    }
+
+    // ── SVG element helpers ───────────────────────────────────────
+    function el(tag, attrs = {}, children = []) {
+        const elem = document.createElementNS(SVG_NS, tag);
+        Object.entries(attrs).forEach(([k, v]) => elem.setAttribute(k, v));
+        children.forEach(c => {
+            if (typeof c === 'string') {
+                elem.appendChild(document.createTextNode(c));
+            } else if (c) {
+                elem.appendChild(c);
+            }
+        });
+        return elem;
+    }
+
+    // ── Gradient defs ─────────────────────────────────────────────
+    function buildDefs(svg, archColor) {
+        const defs = el('defs');
+
+        // Radial gradient for center node
+        const cGrad = el('radialGradient', { id: 'centerGrad', cx: '50%', cy: '40%', r: '60%' });
+        cGrad.appendChild(el('stop', { offset: '0%',   'stop-color': archColor, 'stop-opacity': '0.9' }));
+        cGrad.appendChild(el('stop', { offset: '100%', 'stop-color': archColor, 'stop-opacity': '0.55' }));
+        defs.appendChild(cGrad);
+
+        // Gold gradient for synergy lines
+        const sGrad = el('linearGradient', { id: 'synergyGrad', x1: '0%', y1: '0%', x2: '100%', y2: '100%' });
+        sGrad.appendChild(el('stop', { offset: '0%',   'stop-color': '#c9a84c', 'stop-opacity': '0.9' }));
+        sGrad.appendChild(el('stop', { offset: '100%', 'stop-color': '#f0dfa3', 'stop-opacity': '0.9' }));
+        defs.appendChild(sGrad);
+
+        // Filter: glow
+        const filt = el('filter', { id: 'glowFilter', x: '-50%', y: '-50%', width: '200%', height: '200%' });
+        const feGBlur = el('feGaussianBlur', { stdDeviation: '3', result: 'coloredBlur' });
+        const feMerge = el('feMerge');
+        feMerge.appendChild(el('feMergeNode', { in: 'coloredBlur' }));
+        feMerge.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+        filt.appendChild(feGBlur);
+        filt.appendChild(feMerge);
+        defs.appendChild(filt);
+
+        // Filter: synergy glow
+        const sfilt = el('filter', { id: 'synergyGlow', x: '-30%', y: '-30%', width: '160%', height: '160%' });
+        sfilt.appendChild(el('feGaussianBlur', { stdDeviation: '2.5', result: 'coloredBlur' }));
+        const sfeMerge = el('feMerge');
+        sfeMerge.appendChild(el('feMergeNode', { in: 'coloredBlur' }));
+        sfeMerge.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+        sfilt.appendChild(sfeMerge);
+        defs.appendChild(sfilt);
+
+        svg.appendChild(defs);
+    }
+
+    // ── Build tree ────────────────────────────────────────────────
+    function buildTree(svgEl, results) {
+        const archetype  = results.archetype.primary;
+        const scores     = results.scores;
+        const categorical= results.categorical;
+        const activeSynIds = new Set(results.synergies || []);
+        const nodeMap    = buildNodeMap();
+
+        // Clear
+        while (svgEl.firstChild) svgEl.removeChild(svgEl.firstChild);
+
+        buildDefs(svgEl, archetype.color);
+
+        // ── Layer groups (back to front) ──
+        const gLines     = el('g', { class: 'hm-st-lines' });
+        const gSynergy   = el('g', { class: 'hm-st-synergy' });
+        const gNodes     = el('g', { class: 'hm-st-nodes' });
+        const gLabels    = el('g', { class: 'hm-st-labels' });
+        const gCenter    = el('g', { class: 'hm-st-center' });
+        svgEl.appendChild(gLines);
+        svgEl.appendChild(gSynergy);
+        svgEl.appendChild(gNodes);
+        svgEl.appendChild(gLabels);
+        svgEl.appendChild(gCenter);
+
+        // ── Background subtle circle ──
+        gLines.appendChild(el('circle', {
+            cx: CX, cy: CY, r: 290,
+            fill: 'none',
+            stroke: '#222222',
+            'stroke-width': '0.5',
+            'stroke-dasharray': '3 6',
+            opacity: '0.4',
+        }));
+        gLines.appendChild(el('circle', {
+            cx: CX, cy: CY, r: 195,
+            fill: 'none',
+            stroke: '#222222',
+            'stroke-width': '0.5',
+            opacity: '0.3',
+        }));
+
+        // ── Cluster hub connections (center → cluster hub) ──
+        CLUSTERS.forEach(cluster => {
+            const hub = polarToXY(CX, CY, cluster.clusterR, cluster.angle);
+            gLines.appendChild(el('line', {
+                x1: CX, y1: CY,
+                x2: Math.round(hub.x), y2: Math.round(hub.y),
+                stroke: cluster.color,
+                'stroke-width': '1',
+                opacity: '0.15',
+            }));
+        });
+
+        // ── Cluster hub → node connections ──
+        Object.entries(nodeMap).forEach(([dim, node]) => {
+            gLines.appendChild(el('line', {
+                x1: node.clusterX, y1: node.clusterY,
+                x2: node.x, y2: node.y,
+                stroke: node.color,
+                'stroke-width': '0.8',
+                opacity: '0.2',
+            }));
+        });
+
+        // ── Synergy connections ──
+        MODEL.SYNERGIES.forEach(syn => {
+            if (!activeSynIds.has(syn.id)) return;
+            const [dimA, dimB] = syn.connects;
+            const nodeA = nodeMap[dimA];
+            const nodeB = nodeMap[dimB];
+            if (!nodeA || !nodeB) return;
+
+            // Animated dashed gold line
+            const pathData = `M ${nodeA.x} ${nodeA.y} Q ${CX} ${CY} ${nodeB.x} ${nodeB.y}`;
+            const path = el('path', {
+                d: pathData,
+                fill: 'none',
+                stroke: 'url(#synergyGrad)',
+                'stroke-width': '1.5',
+                'stroke-dasharray': '6 4',
+                filter: 'url(#synergyGlow)',
+                opacity: '0.85',
+            });
+            // Animate dash offset
+            const anim = el('animateTransform', {
+                attributeName: 'transform', type: 'translate',
+                values: '0,0;0,0', dur: '1s', repeatCount: 'indefinite',
+            });
+            const dashAnim = document.createElementNS(SVG_NS, 'animate');
+            dashAnim.setAttribute('attributeName', 'stroke-dashoffset');
+            dashAnim.setAttribute('values', '0;-20');
+            dashAnim.setAttribute('dur', '1.2s');
+            dashAnim.setAttribute('repeatCount', 'indefinite');
+            path.appendChild(dashAnim);
+            gSynergy.appendChild(path);
+
+            // Synergy label at midpoint
+            const mx = Math.round((nodeA.x + nodeB.x) / 2 * 0.7 + CX * 0.3);
+            const my = Math.round((nodeA.y + nodeB.y) / 2 * 0.7 + CY * 0.3);
+            const synLabel = el('text', {
+                x: mx, y: my,
+                'text-anchor': 'middle',
+                'font-size': '8',
+                'font-family': 'Inter, sans-serif',
+                fill: '#c9a84c',
+                opacity: '0.7',
+            });
+            synLabel.textContent = syn.name;
+            gSynergy.appendChild(synLabel);
+        });
+
+        // ── Cluster labels ──
+        CLUSTERS.forEach(cluster => {
+            const hub = polarToXY(CX, CY, cluster.clusterR, cluster.angle);
+            // Offset label slightly further from center
+            const labelPos = polarToXY(CX, CY, cluster.clusterR - 18, cluster.angle);
+            const labelEl = el('text', {
+                x: Math.round(labelPos.x),
+                y: Math.round(labelPos.y),
+                'text-anchor': 'middle',
+                'dominant-baseline': 'middle',
+                'font-size': '9.5',
+                'font-family': 'Inter, sans-serif',
+                'font-weight': '600',
+                'letter-spacing': '1.5',
+                fill: cluster.color,
+                opacity: '0.55',
+            });
+            labelEl.textContent = cluster.label;
+            gLabels.appendChild(labelEl);
+        });
+
+        // ── Dimension nodes ──
+        const tooltip = buildTooltip();
+        document.body.appendChild(tooltip);
+
+        Object.entries(nodeMap).forEach(([dim, node], idx) => {
+            let score, level;
+
+            if (node.categorical) {
+                score = null;
+                level = 3;
+                const catValue = categorical[dim] || '—';
+
+                // Node circle
+                const circle = el('circle', {
+                    cx: node.x, cy: node.y,
+                    r: 16,
+                    fill: node.color,
+                    'fill-opacity': '0.18',
+                    stroke: node.color,
+                    'stroke-width': '1.5',
+                    'stroke-opacity': '0.7',
+                    style: 'cursor:pointer',
+                    class: 'hm-st-node',
+                    'data-dim': dim,
+                });
+                attachNodeTooltip(circle, tooltip, {
+                    label: node.label,
+                    score: null,
+                    level: null,
+                    levelLabel: catValue,
+                    categorical: true,
+                    color: node.color,
+                });
+                gNodes.appendChild(circle);
+
+                // Label
+                const tEl = el('text', {
+                    x: node.x, y: node.y + 26,
+                    'text-anchor': 'middle',
+                    'font-size': '8.5',
+                    'font-family': 'Inter, sans-serif',
+                    fill: node.color,
+                    opacity: '0.75',
+                    'pointer-events': 'none',
+                });
+                tEl.textContent = node.label;
+                gLabels.appendChild(tEl);
+
+            } else {
+                score = scores[dim] !== undefined ? scores[dim] : 50;
+                level = Scoring.scoreToLevel(score);
+                const r = levelToRadius(level);
+                const isMaster = level >= 5;
+
+                // Outer ring (aura)
+                if (level >= 4) {
+                    gNodes.appendChild(el('circle', {
+                        cx: node.x, cy: node.y,
+                        r: r + 7,
+                        fill: node.color,
+                        'fill-opacity': '0.06',
+                        stroke: node.color,
+                        'stroke-width': '0.5',
+                        'stroke-opacity': '0.3',
+                        filter: isMaster ? 'url(#glowFilter)' : '',
+                    }));
+                }
+
+                // Main node
+                const circle = el('circle', {
+                    cx: node.x, cy: node.y,
+                    r: r,
+                    fill: node.color,
+                    'fill-opacity': levelToOpacity(level).toFixed(2),
+                    stroke: node.color,
+                    'stroke-width': isMaster ? '2' : '1.5',
+                    'stroke-opacity': '0.85',
+                    filter: isMaster ? 'url(#glowFilter)' : '',
+                    style: 'cursor:pointer',
+                    class: 'hm-st-node',
+                    'data-dim': dim,
+                });
+
+                // Entrance animation
+                const delay = idx * 60;
+                circle.style.opacity = '0';
+                circle.style.transition = `opacity 0.4s ${delay}ms`;
+                setTimeout(() => { circle.style.opacity = '1'; }, 50);
+
+                attachNodeTooltip(circle, tooltip, {
+                    label: node.label,
+                    score,
+                    level,
+                    levelLabel: Scoring.levelLabel(level),
+                    categorical: false,
+                    color: node.color,
+                });
+                gNodes.appendChild(circle);
+
+                // Level indicator text inside node
+                if (r >= 14) {
+                    const levelText = el('text', {
+                        x: node.x, y: node.y + 1,
+                        'text-anchor': 'middle',
+                        'dominant-baseline': 'middle',
+                        'font-size': '9',
+                        'font-family': 'Inter, sans-serif',
+                        'font-weight': '600',
+                        fill: '#ffffff',
+                        opacity: '0.9',
+                        'pointer-events': 'none',
+                    });
+                    levelText.textContent = level;
+                    gLabels.appendChild(levelText);
+                }
+
+                // Dim label below node
+                const tEl = el('text', {
+                    x: node.x, y: node.y + r + 12,
+                    'text-anchor': 'middle',
+                    'font-size': '8.5',
+                    'font-family': 'Inter, sans-serif',
+                    fill: node.color,
+                    opacity: '0.7',
+                    'pointer-events': 'none',
+                });
+                // Shorten label
+                tEl.textContent = node.label.length > 10 ? node.label.slice(0, 9) + '…' : node.label;
+                gLabels.appendChild(tEl);
+            }
+        });
+
+        // ── Center node (archetype) ──
+        const centerR = 48;
+
+        // Outer glow ring
+        gCenter.appendChild(el('circle', {
+            cx: CX, cy: CY, r: centerR + 14,
+            fill: archetype.color,
+            'fill-opacity': '0.06',
+            stroke: archetype.color,
+            'stroke-width': '0.8',
+            'stroke-opacity': '0.25',
+            filter: 'url(#glowFilter)',
+        }));
+
+        // Main center circle
+        gCenter.appendChild(el('circle', {
+            cx: CX, cy: CY, r: centerR,
+            fill: 'url(#centerGrad)',
+            'fill-opacity': '0.75',
+            stroke: archetype.color,
+            'stroke-width': '2',
+            'stroke-opacity': '0.9',
+            filter: 'url(#glowFilter)',
+        }));
+
+        // Archetype emoji
+        const emojiText = el('text', {
+            x: CX, y: CY - 8,
+            'text-anchor': 'middle',
+            'dominant-baseline': 'middle',
+            'font-size': '22',
+            'pointer-events': 'none',
+        });
+        emojiText.textContent = archetype.emoji || '●';
+        gCenter.appendChild(emojiText);
+
+        // Archetype name (split into 2 lines max)
+        const nameParts = archetype.name.replace('Der ', '').replace('Die ', '').split(' ');
+        nameParts.forEach((part, i) => {
+            const t = el('text', {
+                x: CX, y: CY + 14 + i * 11,
+                'text-anchor': 'middle',
+                'dominant-baseline': 'hanging',
+                'font-size': '9',
+                'font-family': 'Inter, sans-serif',
+                'font-weight': '600',
+                fill: '#ffffff',
+                opacity: '0.9',
+                'pointer-events': 'none',
+            });
+            t.textContent = part;
+            gCenter.appendChild(t);
+        });
+    }
+
+    // ── Tooltip ───────────────────────────────────────────────────
+    function buildTooltip() {
+        const tt = document.createElement('div');
+        tt.className = 'hm-tooltip';
+        tt.id = 'hm-st-tooltip';
+        tt.setAttribute('role', 'tooltip');
+        return tt;
+    }
+
+    function attachNodeTooltip(nodeEl, tooltip, data) {
+        nodeEl.addEventListener('mouseenter', (e) => showTooltip(e, tooltip, data));
+        nodeEl.addEventListener('mousemove',  (e) => positionTooltip(e, tooltip));
+        nodeEl.addEventListener('mouseleave', ()  => hideTooltip(tooltip));
+        nodeEl.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            showTooltip(e.touches[0], tooltip, data);
+        });
+        nodeEl.addEventListener('touchend', () => setTimeout(() => hideTooltip(tooltip), 1500));
+    }
+
+    function showTooltip(e, tooltip, data) {
+        let content = `<div class="hm-tooltip__title">${data.label}</div>`;
+        if (data.categorical) {
+            content += `<div class="hm-tooltip__level">${data.levelLabel}</div>`;
+            content += `<div class="hm-tooltip__desc">Kategorie-Dimension</div>`;
+        } else {
+            content += `<div class="hm-tooltip__level">Level ${data.level} · ${data.levelLabel}</div>`;
+            content += `<div class="hm-tooltip__desc">Score: ${data.score}/100</div>`;
+        }
+        tooltip.innerHTML = content;
+        tooltip.style.borderColor = data.color;
+        positionTooltip(e, tooltip);
+        tooltip.classList.add('is-visible');
+    }
+
+    function positionTooltip(e, tooltip) {
+        const x = (e.clientX || e.pageX) + 14;
+        const y = (e.clientY || e.pageY) - 10;
+        const vpW = window.innerWidth;
+        const ttW = 220;
+        tooltip.style.left = (x + ttW > vpW ? x - ttW - 24 : x) + 'px';
+        tooltip.style.top  = y + 'px';
+    }
+
+    function hideTooltip(tooltip) {
+        tooltip.classList.remove('is-visible');
+    }
+
+    return { buildTree };
+})();

@@ -1,0 +1,109 @@
+/* ===================================================================
+   HUMAN MAP – Design Tokens
+   Adapted from Hybridlogs website design system.
+   Fonts: Playfair Display (display) + Inter (body) – already loaded site-wide.
+   === */
+
+:root {
+    /* ── Backgrounds (match site) ── */
+    --hm-bg:          #0a0a0a;
+    --hm-bg-elevated: #111111;
+    --hm-bg-card:     #141414;
+    --hm-bg-hover:    #191919;
+    --hm-surface:     #1a1a1a;
+
+    /* ── Borders (match site) ── */
+    --hm-border:       #222222;
+    --hm-border-light: #2a2a2a;
+    --hm-border-hover: #3a3a3a;
+
+    /* ── Text ── */
+    --hm-text:        #bbbbbb;  /* --gray-300 */
+    --hm-text-dim:    #777777;  /* --gray-500 */
+    --hm-text-muted:  #555555;  /* --gray-600 */
+    --hm-white:       #ffffff;
+
+    /* ── Brand Gold (matches site --gold) ── */
+    --hm-gold:            #c9a84c;
+    --hm-gold-light:      #dfc47a;
+    --hm-gold-lighter:    #f0dfa3;
+    --hm-gold-dark:       #a68935;
+    --hm-gold-glow:       rgba(201, 168, 76, 0.15);
+    --hm-gold-glow-strong:rgba(201, 168, 76, 0.30);
+
+    /* ── Dimension Colors (RPG node palette) ── */
+    --c-offenheit:    #8b7cf8;   /* violet  – KERN */
+    --c-struktur:     #58d4a0;   /* teal    – KERN */
+    --c-energie:      #f0a855;   /* amber   – KERN */
+    --c-verbindung:   #f07090;   /* coral   – KERN */
+    --c-tiefe:        #60a0e8;   /* sky     – KERN */
+
+    --c-werte:        #e8b860;   /* gold    – ANTRIEB */
+    --c-antrieb:      #d878c8;   /* pink    – ANTRIEB */
+
+    --c-muster:       #78b8e8;   /* blue    – MUSTER */
+    --c-loc:          #88d878;   /* green   – MUSTER */
+
+    --c-potenzial:    #a078f0;   /* purple  – POTENZIAL */
+    --c-grit:         #60d8b8;   /* mint    – POTENZIAL */
+
+    /* Synergy – aligned with brand gold */
+    --c-synergy:      #c9a84c;
+    --c-synergy-glow: rgba(201, 168, 76, 0.4);
+
+    /* ── Archetype Colors ── */
+    --arch-pioneer:    #f0a855;
+    --arch-maker:      #58d4a0;
+    --arch-connector:  #f07090;
+    --arch-analyst:    #60a0e8;
+    --arch-guardian:   #88d878;
+    --arch-endurer:    #d878c8;
+    --arch-free:       #8b7cf8;
+    --arch-synergy:    #c9a84c;
+
+    /* ── Typography (match site) ── */
+    --hm-font-sans:    'Inter', system-ui, sans-serif;
+    --hm-font-display: 'Playfair Display', Georgia, serif;
+
+    /* ── Spacing ── */
+    --hm-space-1:  0.25rem;
+    --hm-space-2:  0.5rem;
+    --hm-space-3:  0.75rem;
+    --hm-space-4:  1rem;
+    --hm-space-6:  1.5rem;
+    --hm-space-8:  2rem;
+    --hm-space-12: 3rem;
+    --hm-space-16: 4rem;
+    --hm-space-24: 6rem;
+
+    /* ── Layout ── */
+    --hm-max-width: 1200px;
+    --hm-max-narrow: 760px;
+
+    /* ── Borders ── */
+    --hm-radius-sm:   0.375rem;
+    --hm-radius-md:   0.625rem;
+    --hm-radius-lg:   1rem;
+    --hm-radius-xl:   1.5rem;
+    --hm-radius-full: 9999px;
+
+    /* ── Shadows ── */
+    --hm-shadow-md:   0 4px 12px rgba(0,0,0,0.4);
+    --hm-shadow-lg:   0 8px 30px rgba(0,0,0,0.5);
+    --hm-shadow-gold: 0 4px 25px rgba(201,168,76,0.2);
+    --hm-shadow-glow: 0 0 40px rgba(201,168,76,0.12);
+
+    /* ── Transitions ── */
+    --hm-ease:    cubic-bezier(0.16, 1, 0.3, 1);
+    --hm-ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+    --hm-dur:     300ms;
+    --hm-dur-slow:500ms;
+
+    /* ── Node sizes (skill tree SVG) ── */
+    --node-r-center: 52;
+    --node-r-main:   26;
+    --node-r-sub:    18;
+
+    /* ── Progress ── */
+    --hm-progress-color: var(--hm-gold);
+}

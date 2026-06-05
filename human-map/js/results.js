@@ -610,7 +610,7 @@ const Results = (() => {
                 var ckm = MODEL.CATEGORY_KEY_MAP;
                 if (ckm && ckm[formatted]) panelKey = ckm[formatted];
             }
-            openDimPanel(panelKey, d.score, d.categorical, d.catValue, d.color, d.clientY);
+            openDimPanel(panelKey, d.score, d.categorical, d.catValue, d.color, d.clientX, d.clientY);
         });
 
         document.addEventListener('hm:synergyclick', function(e) {
@@ -634,7 +634,7 @@ const Results = (() => {
                 html += '<div class="hm-bs-desc">Diese Synergie wird aktiviert, wenn bestimmte Dimensionen ein bestimmtes Level erreichen.</div>';
             }
             _popupLastDimId = null;
-            showPopup(html, d.clientY);
+            showPopup(html, d.clientX, d.clientY);
         });
     }
 
@@ -645,25 +645,48 @@ const Results = (() => {
         }
     }
 
-    function showPopup(html, clientY) {
+    function showPopup(html, clientX, clientY) {
         if (!_popup) return;
         _popup.innerHTML = html;
         _popupJustOpened = true;  // suppress the outside-click listener this tick
 
-        // Set top based on where user clicked, clamped so panel stays on screen
-        var margin = 12;
-        var topY = (clientY != null ? clientY : window.innerHeight / 2) - margin;
-        // After render, clamp so it doesn't overflow the bottom
-        _popup.style.top = Math.max(8, topY) + 'px';
+        // Mobile (<=640px): CSS renders a bottom-sheet — clear desktop inline coords.
+        if (window.innerWidth <= 640) {
+            _popup.style.left = '';
+            _popup.style.right = '';
+            _popup.style.top = '';
+            _popup.classList.add('is-open');
+            return;
+        }
+
+        // Desktop: place the popup directly NEXT TO the clicked node.
+        // visibility:hidden keeps layout dimensions, so we can measure before showing.
+        _popup.style.left = '0px';
+        _popup.style.right = 'auto';
+        _popup.style.top = '0px';
+        var pw = _popup.offsetWidth || 340;
+        var ph = _popup.offsetHeight || 300;
+        var vw = window.innerWidth, vh = window.innerHeight;
+        var gap = 18;
+        var x = (clientX != null) ? clientX : vw / 2;
+        var y = (clientY != null) ? clientY : vh / 2;
+
+        // Horizontal: prefer to the right of the node, flip to the left if no room.
+        var left;
+        if (x + gap + pw <= vw - 8) left = x + gap;
+        else if (x - gap - pw >= 8)  left = x - gap - pw;
+        else                          left = Math.max(8, vw - pw - 8);
+
+        // Vertical: centered on the node, clamped to the viewport.
+        var top = y - ph / 2;
+        top = Math.max(8, Math.min(top, vh - ph - 8));
+
+        _popup.style.left = Math.round(left) + 'px';
+        _popup.style.top  = Math.round(top) + 'px';
         _popup.classList.add('is-open');
-        requestAnimationFrame(function() {
-            var ph = _popup.offsetHeight;
-            var maxTop = window.innerHeight - ph - 8;
-            if (topY > maxTop) _popup.style.top = Math.max(8, maxTop) + 'px';
-        });
     }
 
-    function openDimPanel(dimId, score, isCategorical, catValue, color, clientY) {
+    function openDimPanel(dimId, score, isCategorical, catValue, color, clientX, clientY) {
         if (!_popup) return;
 
         // Toggle: click same dim again → close
@@ -739,7 +762,7 @@ const Results = (() => {
             }
         }
 
-        showPopup(html, clientY);
+        showPopup(html, clientX, clientY);
     }
 
     // ── Debug mode (?debug=1) ─────────────────────────────────────

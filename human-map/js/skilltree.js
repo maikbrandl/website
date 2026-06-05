@@ -380,7 +380,7 @@ const SkillTree = (() => {
                 if(_resDimId===dim) hideResonanceLines(); else showResonanceLines(svgEl,dim,nodeMap);
                 svgEl.dispatchEvent(new CustomEvent('hm:nodeclick',{bubbles:true,detail:{
                     dim:dim,label:n.label,score:score,level:level,levelLabel:Scoring.levelLabel(level),
-                    categorical:n.categorical,catValue:catValue,color:n.color,clientY:e.clientY}}));
+                    categorical:n.categorical,catValue:catValue,color:n.color,clientX:e.clientX,clientY:e.clientY}}));
             });
             gDims.appendChild(nodeG);
 
@@ -434,7 +434,7 @@ const SkillTree = (() => {
             }
             g.addEventListener('click',function(e){
                 e.stopPropagation(); hideResonanceLines();
-                svgEl.dispatchEvent(new CustomEvent('hm:synergyclick',{bubbles:true,detail:{syn:syn,isActive:isActive,scores:scores,categorical:categorical,clientY:e.clientY}}));
+                svgEl.dispatchEvent(new CustomEvent('hm:synergyclick',{bubbles:true,detail:{syn:syn,isActive:isActive,scores:scores,categorical:categorical,clientX:e.clientX,clientY:e.clientY}}));
             });
             gSynNodes.appendChild(g);
         });

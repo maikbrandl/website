@@ -582,12 +582,11 @@ html { scroll-behavior: smooth; }
     aspect-ratio: 1;
 }
 
-/* ── Info Popup — right: 20px fixed, top set dynamically by JS ── */
+/* ── Info Popup — left/top set dynamically by JS (next to the clicked node) ── */
 #hm-popup {
     visibility: hidden;
     position: fixed;
-    right: 20px;
-    /* top is set via JS based on clientY of the click */
+    /* left & top are set via JS based on the clicked node's position */
     z-index: 9999;
     width: 340px;
     max-width: calc(100vw - 40px);
@@ -598,18 +597,19 @@ html { scroll-behavior: smooth; }
     border-radius: 16px;
     padding: 22px 22px 26px;
     box-shadow: 0 12px 48px rgba(0,0,0,0.75);
-    /* slide in from right */
-    transform: translateX(calc(100% + 28px));
+    /* side-agnostic fade/scale-in */
+    transform: translateY(8px) scale(0.98);
+    transform-origin: center;
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), opacity 0.22s ease, visibility 0s 0.28s;
+    transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease, visibility 0s 0.22s;
 }
 #hm-popup.is-open {
     visibility: visible;
-    transform: translateX(0);
+    transform: none;
     opacity: 1;
     pointer-events: auto;
-    transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), opacity 0.22s ease, visibility 0s 0s;
+    transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease, visibility 0s 0s;
 }
 .hm-popup__close {
     position: absolute;
@@ -779,7 +779,7 @@ html { scroll-behavior: smooth; }
 
 /* popup wider on desktop */
 @media (min-width: 769px) {
-    #hm-popup { width: 380px; right: 24px; }
+    #hm-popup { width: 380px; }
 }
 @media (max-width: 640px) {
     #hm-popup { top: auto; bottom: 0; right: 0; left: 0; width: 100%;

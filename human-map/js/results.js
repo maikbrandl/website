@@ -36,6 +36,8 @@ const Results = (() => {
         renderRare(results);
         renderSynergies(results);
         renderSkillTree(results);
+        renderMobileTiles(results);
+        setupModeSwitcher(results);
         renderCharts(results);
         renderDashboard(results);
         setupEmailForm(results);
@@ -142,6 +144,106 @@ const Results = (() => {
 
         // Legend
         renderLegend(results);
+    }
+
+    // ── Mobile cluster tiles ──────────────────────────────────────
+    function renderMobileTiles(results) {
+        var tilesEl = document.getElementById('hm-cluster-tiles');
+        if (!tilesEl) return;
+
+        var scores      = results.scores;
+        var categorical = results.categorical || {};
+        var arch        = results.archetype.primary;
+
+        const CLUSTER_META = [
+            { id:'potenzial', label:'Potenzial', color:'#60a0e8', icon:'✦',
+              dims:['mindset_growth','grit_passion','grit_ausdauer','intel_primary','wachstumsfeld'] },
+            { id:'kern',      label:'Kern',      color:'#8b7cf8', icon:'◆',
+              dims:['offenheit','struktur','energie','verbindung','tiefe'] },
+            { id:'antrieb',   label:'Antrieb',   color:'#f0a855', icon:'◉',
+              dims:['werte_freiheit','werte_leistung','werte_innovation','antrieb_type'] },
+            { id:'muster',    label:'Muster',    color:'#f07090', icon:'◈',
+              dims:['bindungsstil','loc_internal','stress_typ','rumination'] },
+        ];
+
+        tilesEl.innerHTML = CLUSTER_META.map(function(cluster) {
+            var dimScores = cluster.dims.map(function(dimId) {
+                var meta = MODEL.DIMS[dimId];
+                if (meta && meta.categorical) return null;
+                return scores[dimId] !== undefined ? scores[dimId] : 50;
+            }).filter(function(v){ return v !== null; });
+            var avg = dimScores.length ? Math.round(dimScores.reduce(function(a,b){return a+b;},0)/dimScores.length) : 0;
+            var avgLevel = Scoring.scoreToLevel(avg);
+
+            var dimRows = cluster.dims.map(function(dimId) {
+                var meta  = MODEL.DIMS[dimId];
+                var label = (meta ? meta.label : dimId);
+                var lc    = meta ? meta.color : cluster.color;
+                if (meta && meta.categorical) {
+                    var cv = categorical[dimId] || '—';
+                    return '<div class="hm-tile__dim-row">' +
+                        '<span class="hm-tile__dim-name">' + label + '</span>' +
+                        '<span class="hm-tile__dim-cat" style="color:' + lc + '">' + cv + '</span>' +
+                        '</div>';
+                }
+                var sc  = scores[dimId] !== undefined ? scores[dimId] : 50;
+                var lv  = Scoring.scoreToLevel(sc);
+                return '<div class="hm-tile__dim-row">' +
+                    '<span class="hm-tile__dim-name">' + label + '</span>' +
+                    '<span class="hm-tile__dim-lv" style="color:' + lc + '">Lv ' + lv + '</span>' +
+                    '</div>';
+            }).join('');
+
+            return '<details class="hm-cluster-tile" style="--tile-color:' + cluster.color + '">' +
+                '<summary class="hm-tile__summary">' +
+                  '<span class="hm-tile__icon" style="color:' + cluster.color + '">' + cluster.icon + '</span>' +
+                  '<span class="hm-tile__label">' + cluster.label + '</span>' +
+                  '<span class="hm-tile__avg" style="color:' + cluster.color + '">Ø Lv ' + avgLevel + '</span>' +
+                  '<span class="hm-tile__arrow">›</span>' +
+                '</summary>' +
+                '<div class="hm-tile__body">' + dimRows + '</div>' +
+                '</details>';
+        }).join('');
+    }
+
+    // ── Mode switcher ──────────────────────────────────────────────
+    function setupModeSwitcher(results) {
+        var btns       = document.querySelectorAll('.hm-mode-btn');
+        var treePanelEl   = document.getElementById('hm-mode-tree');
+        var galaxyPanelEl = document.getElementById('hm-mode-galaxy');
+        var labelEl    = document.getElementById('hm-tree-section-label');
+        var titleEl    = document.getElementById('hm-tree-section-title');
+        var descEl     = document.getElementById('hm-tree-section-desc');
+        var galaxyInited = false;
+
+        if (!btns.length) return;
+
+        btns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var mode = btn.getAttribute('data-mode');
+                btns.forEach(function(b){ b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+
+                if (mode === 'tree') {
+                    treePanelEl   && treePanelEl.classList.add('is-active');
+                    galaxyPanelEl && galaxyPanelEl.classList.remove('is-active');
+                    if (labelEl)  labelEl.textContent = 'Dein Skill Tree';
+                    if (titleEl)  titleEl.innerHTML   = 'Dein persönlicher <em>Entwicklungsbaum</em>';
+                    if (descEl)   descEl.textContent  = 'Jeder Knoten zeigt eine Dimension deines Profils. Goldene Knoten zeigen aktive Synergien.';
+                } else if (mode === 'galaxy') {
+                    treePanelEl   && treePanelEl.classList.remove('is-active');
+                    galaxyPanelEl && galaxyPanelEl.classList.add('is-active');
+                    if (labelEl)  labelEl.textContent = 'Profil-Vergleich';
+                    if (titleEl)  titleEl.innerHTML   = 'Dein Platz im <em>Persönlichkeits-Universum</em>';
+                    if (descEl)   descEl.textContent  = 'Wo stehst du im Vergleich zu allen Archetypen?';
+                    // Lazy-init galaxy on first switch
+                    if (!galaxyInited && typeof Galaxy !== 'undefined') {
+                        Galaxy.init(results);
+                        galaxyInited = true;
+                    }
+                }
+            });
+        });
     }
 
     function renderLegend(results) {

@@ -797,9 +797,258 @@ html { scroll-behavior: smooth; }
     .hm-email-card { padding: var(--hm-space-6) var(--hm-space-4); }
     .hm-synergy-banner { padding: var(--hm-space-4); }
     .hm-dashboard__grid { grid-template-columns: 1fr 1fr; }
-    /* skilltree stays naturally square at all widths */
 }
 @media (max-width: 400px) {
     .hm-dashboard__grid { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MODE SWITCHER
+   ══════════════════════════════════════════════════════════════ */
+.hm-mode-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.hm-mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 99px;
+    background: transparent;
+    color: #888;
+    font-size: 0.8125rem;
+    font-family: var(--hm-font-body, Inter, sans-serif);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.hm-mode-btn:hover { border-color: #444; color: #ccc; }
+.hm-mode-btn.is-active {
+    border-color: var(--arch-color, #c9a84c);
+    color: var(--arch-color, #c9a84c);
+    background: color-mix(in srgb, var(--arch-color, #c9a84c) 10%, transparent);
+}
+.hm-mode-btn svg { flex-shrink: 0; }
+
+/* ── Mode panels ── */
+.hm-mode-panel {
+    display: none;
+    animation: hmFadeIn 0.35s ease;
+}
+.hm-mode-panel.is-active { display: block; }
+@keyframes hmFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ── Desktop / Mobile visibility helpers ── */
+.hm-desktop-only { display: block; }
+.hm-mobile-only  { display: none; }
+@media (max-width: 768px) {
+    .hm-desktop-only { display: none; }
+    .hm-mobile-only  { display: block; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE CLUSTER TILES
+   ══════════════════════════════════════════════════════════════ */
+.hm-cluster-tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px 0 16px;
+}
+.hm-cluster-tile {
+    border: 1px solid #232323;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    transition: border-color 0.2s;
+}
+.hm-cluster-tile[open] { border-color: var(--tile-color, #555); }
+.hm-tile__summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+.hm-tile__summary::-webkit-details-marker { display: none; }
+.hm-tile__icon { font-size: 1rem; flex-shrink: 0; }
+.hm-tile__label { flex: 1; font-size: 0.9rem; font-weight: 600; color: #ccc; }
+.hm-tile__avg { font-size: 0.8rem; font-weight: 600; }
+.hm-tile__arrow {
+    font-size: 1rem; color: #555;
+    transition: transform 0.2s;
+}
+details.hm-cluster-tile[open] .hm-tile__arrow { transform: rotate(90deg); }
+.hm-tile__body { padding: 0 16px 14px; border-top: 1px solid #1e1e1e; }
+.hm-tile__dim-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 0.8125rem;
+}
+.hm-tile__dim-row:last-child { border-bottom: none; }
+.hm-tile__dim-name { color: #aaa; }
+.hm-tile__dim-lv, .hm-tile__dim-cat { font-weight: 600; font-size: 0.8125rem; }
+
+/* ══════════════════════════════════════════════════════════════
+   GALAXY VIEW
+   ══════════════════════════════════════════════════════════════ */
+.hm-galaxy-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.hm-galaxy-intro { text-align: center; }
+#hm-galaxy-svg {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 12px;
+    background: #0a0a12;
+}
+.hm-galaxy-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 720px;
+}
+@media (max-width: 600px) {
+    .hm-galaxy-cards { grid-template-columns: 1fr; }
+}
+.hm-galaxy-card {
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #111;
+    transition: border-color 0.2s;
+}
+.hm-galaxy-card:hover { border-color: var(--gc-color, #555); }
+.hm-gc__label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 6px; }
+.hm-gc__row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.hm-gc__emoji { font-size: 1.25rem; }
+.hm-gc__name { font-size: 0.875rem; font-weight: 700; }
+.hm-gc__sim { font-size: 1.25rem; font-weight: 800; }
+.hm-gc__sim span { font-size: 0.75rem; font-weight: 400; color: #888; }
+.hm-galaxy-detail-btn { margin-top: 4px; }
+
+/* ══════════════════════════════════════════════════════════════
+   ARCHETYPE DETAIL SLIDE-OVER PANEL
+   ══════════════════════════════════════════════════════════════ */
+.hm-archdetail-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 8000;
+    pointer-events: none;
+    visibility: hidden;
+}
+.hm-archdetail-panel.is-open {
+    pointer-events: auto;
+    visibility: visible;
+}
+.hm-archdetail-panel__inner {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: min(520px, 100vw);
+    background: #141414;
+    border-left: 1px solid #2a2a2a;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
+}
+.hm-archdetail-panel.is-open .hm-archdetail-panel__inner { transform: translateX(0); }
+.hm-archdetail-panel__header {
+    position: sticky;
+    top: 0;
+    background: #141414;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 16px 20px;
+    z-index: 2;
+}
+.hm-archdetail-panel__back {
+    background: none; border: none;
+    color: #888; font-size: 0.875rem; cursor: pointer;
+    padding: 4px 0;
+}
+.hm-archdetail-panel__back:hover { color: #ccc; }
+.hm-archdetail-panel__content { padding: 20px 20px 60px; }
+
+/* ── Archetype detail card ── */
+.hm-arch-detail-card {
+    border: 1px solid #232323;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+    background: #111;
+    transition: border-color 0.2s;
+}
+.hm-arch-detail-card.is-primary { border-color: var(--adc-color, #555); }
+.hm-arch-detail-card.is-focused { box-shadow: 0 0 0 2px color-mix(in srgb, var(--adc-color,#555) 25%, transparent); }
+.hm-adc__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.hm-adc__emoji-name { display: flex; align-items: center; gap: 12px; }
+.hm-adc__emoji { font-size: 1.75rem; }
+.hm-adc__name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.hm-adc__tagline { font-size: 0.8125rem; color: #777; }
+.hm-adc__sim-badge {
+    font-size: 1.1rem; font-weight: 800;
+    padding: 4px 10px; border-radius: 99px;
+    border: 1px solid; flex-shrink: 0;
+}
+/* Dim range bars */
+.hm-adc__dims { margin-bottom: 14px; }
+.hm-adc__dim-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0; font-size: 0.8125rem;
+}
+.hm-adc__dim-label { width: 96px; flex-shrink: 0; color: #999; }
+.hm-adc__bar-wrap { flex: 1; }
+.hm-adc__bar-track {
+    position: relative;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+}
+.hm-adc__bar-range {
+    position: absolute; height: 100%;
+    background: currentColor; opacity: 0.22; border-radius: 2px;
+}
+.hm-adc__bar-dot {
+    position: absolute;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+    top: -2.5px;
+    transform: translateX(-50%);
+}
+.hm-adc__dim-val { width: 28px; text-align: right; color: #777; flex-shrink: 0; }
+/* Extras (hidden until expanded) */
+.hm-adc__extras { display: none; }
+.hm-arch-detail-card.is-expanded .hm-adc__extras { display: block; }
+.hm-adc__strengths { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; margin-top: 10px; }
+.hm-adc__tag {
+    font-size: 0.75rem; padding: 3px 10px;
+    border: 1px solid; border-radius: 99px;
+}
+.hm-adc__blindspot { font-size: 0.8125rem; color: #888; padding: 10px 0; }
+.hm-adc__expand-btn {
+    background: none; border: none;
+    font-size: 0.8rem; color: #666; cursor: pointer;
+    padding: 6px 0 0;
+}
+.hm-adc__expand-btn:hover { color: #aaa; }
+
 

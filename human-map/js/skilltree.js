@@ -309,7 +309,14 @@ const SkillTree = (() => {
         // 6. Synergy connection lines (active only, gold animated)
         MODEL.SYNERGIES.forEach(function(syn,idx){
             if(!activeSynIds[syn.id]||!syn.connects) return;
-            var sp=polar((idx/synCount)*360,SYNERGY_R);
+            var gapCentres=[45,135,225,315];
+            var base=Math.floor(synCount/4), extras=synCount%4, counted=0, angle=45;
+            for(var g=0;g<4;g++){
+                var cnt=base+(g<extras?1:0);
+                if(idx<counted+cnt){ var pos=idx-counted; angle=gapCentres[g]+(cnt>1?(pos/(cnt-1)-0.5)*28:0); break; }
+                counted+=cnt;
+            }
+            var sp=polar(angle,SYNERGY_R);
             syn.connects.forEach(function(dimId){
                 var dn=nodeMap[dimId]; if(!dn) return;
                 gSynLines.appendChild(el('path',{d:sPath(sp.x,sp.y,dn.x,dn.y),fill:'none',
@@ -318,16 +325,26 @@ const SkillTree = (() => {
             });
         });
 
-        // 7. Cluster hubs
+        // 7. Cluster hubs — label placed OUTSIDE the circle along the arm direction
         CLUSTERS.forEach(function(cluster){
             var hub=polar(cluster.angle,CLUSTER_R);
             var g=el('g',{class:'st-cluster-hub',style:'cursor:pointer','data-cluster':cluster.id});
             g.appendChild(el('circle',{cx:hub.x,cy:hub.y,r:R_CLUSTER+20,fill:'transparent',stroke:'none'}));
             g.appendChild(el('circle',{cx:hub.x,cy:hub.y,r:R_CLUSTER,fill:cluster.color,'fill-opacity':'0.10',
                 stroke:cluster.color,'stroke-width':'1.5','stroke-opacity':'0.45'}));
-            var t=el('text',{x:hub.x,y:hub.y,'text-anchor':'middle','dominant-baseline':'middle',
-                'font-size':'8.5','font-family':'Inter, sans-serif','font-weight':'700','letter-spacing':'0.08em',
-                fill:cluster.color,opacity:'0.90','pointer-events':'none'});
+
+            // Place label radially outward from hub (away from center)
+            var ldx=hub.x-CX, ldy=hub.y-CY;
+            var ldist=Math.sqrt(ldx*ldx+ldy*ldy)||1;
+            var lx=Math.round(hub.x+(ldx/ldist)*(R_CLUSTER+14));
+            var ly=Math.round(hub.y+(ldy/ldist)*(R_CLUSTER+14));
+            var lang=Math.atan2(ldy,ldx)*180/Math.PI;
+            var lanchor=(lang>-60&&lang<60)?'start':(lang>120||lang<-120)?'end':'middle';
+            var lbaseline=(ldy<-0.1)?'auto':(ldy>0.1)?'hanging':'middle';
+
+            var t=el('text',{x:lx,y:ly,'text-anchor':lanchor,'dominant-baseline':lbaseline,
+                'font-size':'9','font-family':'Inter, sans-serif','font-weight':'700','letter-spacing':'0.08em',
+                fill:cluster.color,opacity:'0.85','pointer-events':'none'});
             t.textContent=cluster.label; g.appendChild(t);
             g.addEventListener('click',function(e){e.stopPropagation();hideResonanceLines();zoomToCluster(svgEl,cluster.id);});
             gClusters.appendChild(g);
@@ -376,9 +393,24 @@ const SkillTree = (() => {
             lbl.textContent=n.label; gLabels.appendChild(lbl);
         });
 
-        // 9. Synergy nodes
+        // 9. Synergy nodes — placed in 4 diagonal gaps between cluster arms
+        // Cluster arms at 0°,90°,180°,270° → gap centres at 45°,135°,225°,315°
+        function synergyAngle(i, total){
+            var gapCentres=[45,135,225,315];
+            var base=Math.floor(total/4), extras=total%4, counted=0;
+            for(var g=0;g<4;g++){
+                var cnt=base+(g<extras?1:0);
+                if(i<counted+cnt){
+                    var pos=i-counted;
+                    var spread=cnt>1?(pos/(cnt-1)-0.5)*28:0;
+                    return gapCentres[g]+spread;
+                }
+                counted+=cnt;
+            }
+            return 45;
+        }
         MODEL.SYNERGIES.forEach(function(syn,idx){
-            var sp=polar((idx/synCount)*360,SYNERGY_R), isActive=!!activeSynIds[syn.id];
+            var sp=polar(synergyAngle(idx,synCount),SYNERGY_R), isActive=!!activeSynIds[syn.id];
             var g=el('g',{class:isActive?'st-syn-node st-syn-node--active':'st-syn-node st-syn-node--locked',style:'cursor:pointer'});
             if(isActive){
                 g.appendChild(el('circle',{cx:sp.x,cy:sp.y,r:R_SYN+10,fill:'none',stroke:'#c9a84c','stroke-width':'1.5','stroke-opacity':'0.35',class:'st-syn-pulse'}));

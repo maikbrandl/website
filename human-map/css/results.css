@@ -942,35 +942,42 @@ details.hm-cluster-tile[open] .hm-tile__arrow { transform: rotate(90deg); }
 
 /* ══════════════════════════════════════════════════════════════
    ARCHETYPE DETAIL SLIDE-OVER PANEL
+   Fixed at viewport center-right; scrollable inner only
    ══════════════════════════════════════════════════════════════ */
 .hm-archdetail-panel {
     position: fixed;
-    inset: 0;
+    /* Vertically centered in viewport, right edge */
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
     z-index: 8000;
     pointer-events: none;
-    visibility: hidden;
+    /* Panel starts off-screen to the right */
 }
 .hm-archdetail-panel.is-open {
     pointer-events: auto;
-    visibility: visible;
 }
 .hm-archdetail-panel__inner {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: min(520px, 100vw);
-    background: #141414;
-    border-left: 1px solid #2a2a2a;
+    width: min(460px, 92vw);
+    max-height: 82vh;
     overflow-y: auto;
+    overflow-x: hidden;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-right: none;
+    border-radius: 16px 0 0 16px;
     transform: translateX(100%);
     transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
 }
-.hm-archdetail-panel.is-open .hm-archdetail-panel__inner { transform: translateX(0); }
+.hm-archdetail-panel.is-open .hm-archdetail-panel__inner {
+    transform: translateX(0);
+}
 .hm-archdetail-panel__header {
     position: sticky;
     top: 0;
     background: #141414;
     border-bottom: 1px solid #1e1e1e;
-    padding: 16px 20px;
+    padding: 14px 18px;
     z-index: 2;
 }
 .hm-archdetail-panel__back {
@@ -979,7 +986,7 @@ details.hm-cluster-tile[open] .hm-tile__arrow { transform: rotate(90deg); }
     padding: 4px 0;
 }
 .hm-archdetail-panel__back:hover { color: #ccc; }
-.hm-archdetail-panel__content { padding: 20px 20px 60px; }
+.hm-archdetail-panel__content { padding: 16px 18px 40px; }
 
 /* ── Archetype detail card ── */
 .hm-arch-detail-card {

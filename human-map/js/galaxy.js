@@ -99,21 +99,38 @@ const Galaxy = (() => {
         defs.appendChild(ug);
         // Background gradient
         var bg = el('radialGradient', {id:'gxBg', cx:'50%', cy:'50%', r:'70%'});
-        bg.appendChild(el('stop', {offset:'0%', 'stop-color':'#12121e', 'stop-opacity':'1'}));
-        bg.appendChild(el('stop', {offset:'100%', 'stop-color':'#0a0a12', 'stop-opacity':'1'}));
+        bg.appendChild(el('stop', {offset:'0%', 'stop-color':'#0e0e1a', 'stop-opacity':'1'}));
+        bg.appendChild(el('stop', {offset:'100%', 'stop-color':'#080810', 'stop-opacity':'1'}));
         defs.appendChild(bg);
+        // Twinkling animation
+        var style = document.createElementNS(SVG_NS, 'style');
+        style.textContent = '@media (prefers-reduced-motion:no-preference){' +
+            '.gx-twinkle-a{animation:gxTwA 2.8s ease-in-out infinite;}' +
+            '.gx-twinkle-b{animation:gxTwB 3.6s ease-in-out infinite;}' +
+            '.gx-twinkle-c{animation:gxTwC 4.4s ease-in-out infinite;}' +
+            '@keyframes gxTwA{0%,100%{opacity:0.06}50%{opacity:0.22}}' +
+            '@keyframes gxTwB{0%,100%{opacity:0.10}50%{opacity:0.28}}' +
+            '@keyframes gxTwC{0%,100%{opacity:0.04}55%{opacity:0.18}}' +
+            '}';
+        defs.appendChild(style);
         svgEl.appendChild(defs);
 
         // Background
         svgEl.appendChild(el('rect', {x:0, y:0, width:W, height:H, fill:'url(#gxBg)', rx:'12'}));
 
-        // Starfield
+        // Twinkling starfield (3 animation classes, seeded positions)
         var rng = seededRandom(99887);
         var gStars = el('g');
-        for (var i=0; i<60; i++) {
+        var twClasses = ['gx-twinkle-a','gx-twinkle-b','gx-twinkle-c'];
+        for (var i=0; i<90; i++) {
             var sx=Math.round(rng()*W), sy=Math.round(rng()*H);
-            var sr=rng()>0.8?0.7:0.35, sop=(0.08+rng()*0.10).toFixed(2);
-            gStars.appendChild(el('circle', {cx:sx, cy:sy, r:sr, fill:'#fff', opacity:sop}));
+            var sr=rng()>0.85?0.9:rng()>0.6?0.55:0.35;
+            var twClass=twClasses[i%3];
+            // Stagger animation with a style offset
+            var delay=(rng()*4).toFixed(1)+'s';
+            var sEl=el('circle', {cx:sx, cy:sy, r:sr, fill:'#fff', class:twClass});
+            sEl.style.animationDelay=delay;
+            gStars.appendChild(sEl);
         }
         svgEl.appendChild(gStars);
 
@@ -286,7 +303,7 @@ const Galaxy = (() => {
 
         panelEl.classList.add('is-open');
         panelEl.setAttribute('aria-hidden','false');
-        document.body.style.overflow = 'hidden';
+        // Do NOT set body overflow — panel has its own scroll
     }
 
     function closeDetailPanel() {
@@ -294,7 +311,6 @@ const Galaxy = (() => {
         if (!panelEl) return;
         panelEl.classList.remove('is-open');
         panelEl.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
     }
 
     function buildDetailCard(archId, sim, userScores, primaryArch, isFocused) {

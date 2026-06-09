@@ -22,4 +22,12 @@ collections:
       - { label: "Kategorie", name: "category", widget: "string", default: "Lernstrategien" }
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
+      - { label: "Lesezeit (z.B. 5 Min.)", name: "readingTime", widget: "string", required: false, hint: "Leer lassen für automatische Berechnung" }
       - { label: "Inhalt", name: "body", widget: "markdown" }
+      - label: "Weiterer Artikel (Call to Action)"
+        name: "related_post_slug"
+        widget: "string"
+        required: false
+        hint: "Slug des verwandten Artikels (z.B. 2026-06-02-active-recall-...) – erscheint am Ende des Beitrags als Vorschau"
+      - { label: "Weiterer Artikel – Titel (optional überschreiben)", name: "related_post_title", widget: "string", required: false }
+      - { label: "Weiterer Artikel – Teaser (optional überschreiben)", name: "related_post_excerpt", widget: "text", required: false }

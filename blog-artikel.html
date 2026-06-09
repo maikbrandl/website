@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog � Hybridlogs</title>
-    <meta name="description" content="Hybridlogs Blog � Lernstrategien, Studientipps und Methoden f�r mehr Produktivit�t.">
+    <title>Blog – Hybridlogs</title>
+    <meta name="description" content="Hybridlogs Blog – Lernstrategien, Studientipps und Methoden für mehr Produktivität.">
     <meta name="robots" content="index, follow">
 
     <meta property="og:type" content="article">
@@ -27,9 +27,9 @@
 <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
         <a href="index.html">Home</a>
-        <span class="breadcrumb-sep" aria-hidden="true">�</span>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
         <a href="blog.html">Blog</a>
-        <span class="breadcrumb-sep" aria-hidden="true">�</span>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
         <span id="blogBreadcrumbTitle" aria-current="page">Artikel</span>
     </div>
 </nav>
@@ -75,6 +75,9 @@
                         Alle Artikel
                     </a>
                 </footer>
+
+                <!-- Related post CTA (set via admin) -->
+                <div id="relatedPostWrap" hidden></div>
             </div>
         </div>
 
@@ -83,11 +86,52 @@
 
 <!-- ===== CTA ===== -->
 <section class="section section-elevated">
-    <div class="container container-narrow text-center" data-animate>
+    <div class="container text-center" data-animate>
         <span class="section-label">Passend zum Artikel</span>
         <h2 class="section-title">Methoden in die Praxis bringen.</h2>
-        <p class="section-subtitle">Unsere Journals sind gemacht f�r genau das, was du hier gerade gelesen hast.</p>
-        <a href="index.html#produkte" class="btn btn-primary btn-lg">Produkte ansehen</a>
+        <p class="section-subtitle">Unsere Journals sind gemacht für genau das, was du hier gerade gelesen hast.</p>
+
+        <div class="product-mini-grid">
+            <a href="studienplaner.html" class="product-mini-card">
+                <div class="product-mini-img">
+                    <picture>
+                        <source srcset="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).webp" type="image/webp">
+                        <img src="images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" alt="Hybridlogs Studienplaner" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <span class="product-mini-name">Studienplaner</span>
+                <span class="product-mini-detail">311 Seiten · A5 · Hardcover</span>
+            </a>
+            <a href="notizbuch.html" class="product-mini-card">
+                <div class="product-mini-img">
+                    <picture>
+                        <source srcset="images/Schul-Notizbuch/Mockups fertig/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646.webp" type="image/webp">
+                        <img src="images/Schul-Notizbuch/Mockups fertig/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646.png" alt="Hybridlogs Schul-Notizbuch" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <span class="product-mini-name">Schul-Notizbuch</span>
+                <span class="product-mini-detail">125 Seiten · A4 · Hardcover</span>
+            </a>
+            <a href="lernjournal.html" class="product-mini-card">
+                <div class="product-mini-img">
+                    <picture>
+                        <source srcset="images/Lernjournal Produktbilder/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).webp" type="image/webp">
+                        <img src="images/Lernjournal Produktbilder/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png" alt="Hybridlogs Lernjournal" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <span class="product-mini-name">Lernjournal</span>
+                <span class="product-mini-detail">190 Seiten · A5 · Hardcover</span>
+            </a>
+            <a href="workoutlogbuch.html" class="product-mini-card">
+                <div class="product-mini-img">
+                    <img src="images/Workoutlogbuch/1.png" alt="Hybridlogs Workout Logbuch" loading="lazy" decoding="async">
+                </div>
+                <span class="product-mini-name">Workout Logbuch</span>
+                <span class="product-mini-detail">206 Seiten · A5 · Ringbuch</span>
+            </a>
+        </div>
+
+        <a href="index.html#produkte" class="btn btn-primary btn-lg">Alle Produkte ansehen</a>
     </div>
 </section>
 

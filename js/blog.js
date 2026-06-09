@@ -45,12 +45,25 @@
     }
 
     function inlineMarkdownToHtml(text) {
-        let html = escapeHtml(text);
+        // Extract links before HTML escaping to preserve URL integrity
+        const links = [];
+        const withPlaceholders = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, linkText, href) {
+            const i = links.length;
+            links.push({ text: linkText, href: href });
+            return '\x02LINK' + i + '\x03';
+        });
+
+        let html = escapeHtml(withPlaceholders);
         html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-        html = html.replace(/\[(.+?)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g, function(m, text, href) {
-            const isExternal = /^https?:\/\//.test(href);
-            return '<a href="' + href + '"' + (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + text + '</a>';
+
+        // Re-insert links (placeholders are not affected by escapeHtml)
+        html = html.replace(/\x02LINK(\d+)\x03/g, function(m, idx) {
+            const link = links[parseInt(idx, 10)];
+            if (!link) return '';
+            const isExternal = /^https?:\/\//.test(link.href);
+            const safeHref = link.href.replace(/"/g, '%22');
+            return '<a href="' + safeHref + '"' + (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(link.text) + '</a>';
         });
         return html;
     }
@@ -154,7 +167,10 @@
             imageAlt: meta.imageAlt || meta.title || slug,
             excerpt: meta.excerpt || plainBody.slice(0, 180),
             content: plainBody ? [plainBody] : [],
-            htmlContent: markdownToHtml(body)
+            htmlContent: markdownToHtml(body),
+            relatedPostSlug: meta.related_post_slug || '',
+            relatedPostTitle: meta.related_post_title || '',
+            relatedPostExcerpt: meta.related_post_excerpt || ''
         };
     }
 
@@ -339,6 +355,33 @@
         const description = document.querySelector('meta[name="description"]');
         if (description && post.excerpt) {
             description.setAttribute('content', post.excerpt);
+        }
+
+        // Related post CTA
+        if (post.relatedPostSlug) {
+            const related = findPostBySlug(posts, post.relatedPostSlug);
+            const relatedWrap = document.getElementById('relatedPostWrap');
+            if (related && relatedWrap) {
+                const title = post.relatedPostTitle || related.title;
+                const excerpt = post.relatedPostExcerpt || related.excerpt || '';
+                const category = related.category || 'Blog';
+                const imgHtml = related.image
+                    ? '<img src="' + escapeHtml(related.image) + '" alt="' + escapeHtml(title) + '" loading="lazy" decoding="async">'
+                    : '<div class="related-post-img-placeholder"></div>';
+
+                relatedWrap.innerHTML =
+                    '<a href="' + postUrl(related.slug) + '" class="related-post-card">' +
+                    '<div class="related-post-img">' + imgHtml + '</div>' +
+                    '<div class="related-post-body">' +
+                    '<span class="related-post-label">Weiterlesen</span>' +
+                    '<span class="related-post-category">' + escapeHtml(category) + '</span>' +
+                    '<h3>' + escapeHtml(title) + '</h3>' +
+                    (excerpt ? '<p>' + escapeHtml(excerpt.slice(0, 140)) + (excerpt.length > 140 ? '…' : '') + '</p>' : '') +
+                    '<span class="read-more">Artikel lesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>' +
+                    '</div>' +
+                    '</a>';
+                relatedWrap.hidden = false;
+            }
         }
     }
 

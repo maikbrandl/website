@@ -2461,78 +2461,19 @@ h1, h2, h3, h4, h5 {
 /* ====================== Utility ====================== */
 .text-center { text-align: center; }
 
-/* ====================== Product Mini Grid (Blog CTA) ====================== */
-.product-mini-grid {
-    display: grid;
+/* ====================== Product Grid – 4-col variant (Blog CTA) ====================== */
+.product-grid--four {
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-6);
     margin: var(--space-10) 0 var(--space-10);
+    text-align: left;
 }
 
-.product-mini-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    transition: all var(--duration-slow) var(--ease-out);
-    padding-bottom: var(--space-5);
-}
-
-.product-mini-card:hover {
-    border-color: rgba(201, 168, 76, 0.35);
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
-}
-
-.product-mini-img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    background: var(--surface);
-}
-
-.product-mini-img img,
-.product-mini-img picture {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.product-mini-img img {
-    object-fit: cover;
-    transition: transform var(--duration-slow) var(--ease-out);
-}
-
-.product-mini-card:hover .product-mini-img img {
-    transform: scale(1.05);
-}
-
-.product-mini-name {
-    margin-top: var(--space-4);
-    font-family: var(--font-display);
-    font-size: var(--text-md);
-    color: var(--white);
-    font-weight: 700;
-    letter-spacing: 0.01em;
-}
-
-.product-mini-detail {
-    margin-top: var(--space-1);
-    font-size: var(--text-xs);
-    color: var(--gray-500);
-    letter-spacing: 0.02em;
-}
-
-@media (max-width: 900px) {
-    .product-mini-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 960px) {
+    .product-grid--four { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
-    .product-mini-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .product-grid--four { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
 }
 
 /* ====================== Trust Bar ====================== */

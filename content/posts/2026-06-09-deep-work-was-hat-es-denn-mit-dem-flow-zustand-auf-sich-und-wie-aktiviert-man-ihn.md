@@ -116,12 +116,22 @@ Der Flow-Zustand wartet nicht auf besonders motivierte Tage. Er wartet auf die r
 
 ## Häufige Fragen
 
-**Was ist der Unterschied zwischen Deep Work und Flow?**Deep Work ist ein bewusst herbeigeführter Zustand tiefer Konzentration auf eine kognitiv anspruchsvolle Aufgabe. Flow ist ein psychologischer Zustand vollständiger Absorption, der entstehen kann wenn Aufgabenschwierigkeit und eigene Fähigkeit übereinstimmen. Deep Work ist die Praxis, Flow ist das mögliche Ergebnis davon.
+**Was ist der Unterschied zwischen Deep Work und Flow?**
 
-**Wie lange dauert eine sinnvolle Deep-Work-Session?**Mindestens 60 Minuten, besser 90 bis 120 Minuten. Die ersten 15 bis 20 Minuten sind Anlaufzeit. Kürzere Sessions reichen meist nicht aus um in echte Tiefe zu kommen. Anfänger können mit 45 Minuten starten und die Dauer schrittweise erhöhen.
+Deep Work ist ein bewusst herbeigeführter Zustand tiefer Konzentration auf eine kognitiv anspruchsvolle Aufgabe. Flow ist ein psychologischer Zustand vollständiger Absorption, der entstehen kann wenn Aufgabenschwierigkeit und eigene Fähigkeit übereinstimmen. Deep Work ist die Praxis, Flow ist das mögliche Ergebnis davon.
 
-**Was tue ich wenn ich mich einfach nicht konzentrieren kann?**Zuerst die Umgebung prüfen: Handy weg, Benachrichtigungen aus, ruhiger Ort. Dann die Aufgabe prüfen: Ist sie zu abstrakt oder zu groß? In kleinere Einheiten zerlegen. Dann den Körperzustand prüfen: Schlafmangel und Hunger sind die häufigsten biologischen Konzentrationskiller.
+**Wie lange dauert eine sinnvolle Deep-Work-Session?**
 
-**Kann man Deep Work täglich machen?**Newport empfiehlt für die meisten Menschen vier Stunden Deep Work pro Tag als realistisches Maximum. Nicht weil mehr unmöglich ist, sondern weil echte kognitive Tiefe eine begrenzte Ressource ist. Qualität vor Quantität.
+Mindestens 60 Minuten, besser 90 bis 120 Minuten. Die ersten 15 bis 20 Minuten sind Anlaufzeit. Kürzere Sessions reichen meist nicht aus um in echte Tiefe zu kommen. Anfänger können mit 45 Minuten starten und die Dauer schrittweise erhöhen.
 
-**Was ist der schnellste Weg in den Flow-Zustand zu kommen?**Es gibt keinen garantierten schnellen Weg. Aber die verlässlichste Kombination ist: eine Aufgabe mit der richtigen Schwierigkeit, eine ablenkungsfreie Umgebung, ein Eingangsritual und die Geduld die Anlaufzeit zu überstehen. Flow ist das Ergebnis, keine Abkürzung.
+**Was tue ich wenn ich mich einfach nicht konzentrieren kann?**
+
+Zuerst die Umgebung prüfen: Handy weg, Benachrichtigungen aus, ruhiger Ort. Dann die Aufgabe prüfen: Ist sie zu abstrakt oder zu groß? In kleinere Einheiten zerlegen. Dann den Körperzustand prüfen: Schlafmangel und Hunger sind die häufigsten biologischen Konzentrationskiller.
+
+**Kann man Deep Work täglich machen?**
+
+Newport empfiehlt für die meisten Menschen vier Stunden Deep Work pro Tag als realistisches Maximum. Nicht weil mehr unmöglich ist, sondern weil echte kognitive Tiefe eine begrenzte Ressource ist. Qualität vor Quantität.
+
+**Was ist der schnellste Weg in den Flow-Zustand zu kommen?**
+
+Es gibt keinen garantierten schnellen Weg. Aber die verlässlichste Kombination ist: eine Aufgabe mit der richtigen Schwierigkeit, eine ablenkungsfreie Umgebung, ein Eingangsritual und die Geduld die Anlaufzeit zu überstehen. Flow ist das Ergebnis, keine Abkürzung.

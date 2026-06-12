@@ -2312,6 +2312,24 @@ h1, h2, h3, h4, h5 {
     margin: var(--space-10) 0;
 }
 
+/* Bilder im Artikel */
+.prose-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+}
+
+.prose-figure {
+    margin: var(--space-10) 0;
+}
+
+.prose-figure .prose-img {
+    margin: 0;
+}
+
 /* Blockquote */
 .prose blockquote {
     border-left: 3px solid var(--gold);

@@ -23,7 +23,11 @@ collections:
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
       - { label: "Lesezeit (z.B. 5 Min.)", name: "readingTime", widget: "string", required: false, hint: "Leer lassen für automatische Berechnung" }
-      - { label: "Inhalt", name: "body", widget: "markdown" }
+      - label: "Inhalt"
+        name: "body"
+        widget: "markdown"
+        media_folder: "/images/uploads"
+        public_folder: "/images/uploads"
       - label: "Weiterer Artikel (Call to Action)"
         name: "related_post_slug"
         widget: "relation"

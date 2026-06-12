@@ -45,25 +45,36 @@
     }
 
     function inlineMarkdownToHtml(text) {
-        // Extract links before HTML escaping to preserve URL integrity
-        const links = [];
-        const withPlaceholders = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, linkText, href) {
-            const i = links.length;
-            links.push({ text: linkText, href: href });
-            return '\x02LINK' + i + '\x03';
-        });
+        // Extract images and links before HTML escaping to preserve URL integrity
+        const tokens = [];
+        // Images first (must come before links since syntax overlaps)
+        const withPlaceholders = text
+            .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(m, alt, src) {
+                const i = tokens.length;
+                tokens.push({ type: 'img', alt: alt, src: src });
+                return '\x02TOKEN' + i + '\x03';
+            })
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, linkText, href) {
+                const i = tokens.length;
+                tokens.push({ type: 'a', text: linkText, href: href });
+                return '\x02TOKEN' + i + '\x03';
+            });
 
         let html = escapeHtml(withPlaceholders);
         html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-        // Re-insert links (placeholders are not affected by escapeHtml)
-        html = html.replace(/\x02LINK(\d+)\x03/g, function(m, idx) {
-            const link = links[parseInt(idx, 10)];
-            if (!link) return '';
-            const isExternal = /^https?:\/\//.test(link.href);
-            const safeHref = link.href.replace(/"/g, '%22');
-            return '<a href="' + safeHref + '"' + (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(link.text) + '</a>';
+        // Re-insert tokens
+        html = html.replace(/\x02TOKEN(\d+)\x03/g, function(m, idx) {
+            const token = tokens[parseInt(idx, 10)];
+            if (!token) return '';
+            if (token.type === 'img') {
+                const safeSrc = token.src.replace(/"/g, '%22');
+                return '<img src="' + safeSrc + '" alt="' + escapeHtml(token.alt) + '" loading="lazy" decoding="async" class="prose-img">';
+            }
+            const isExternal = /^https?:\/\//.test(token.href);
+            const safeHref = token.href.replace(/"/g, '%22');
+            return '<a href="' + safeHref + '"' + (isExternal ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + escapeHtml(token.text) + '</a>';
         });
         return html;
     }
@@ -89,6 +100,11 @@
             if (/^###\s+/.test(first)) return '<h3>' + inlineMarkdownToHtml(first.replace(/^###\s+/, '')) + '</h3>';
             if (/^##\s+/.test(first)) return '<h2>' + inlineMarkdownToHtml(first.replace(/^##\s+/, '')) + '</h2>';
             if (/^#\s+/.test(first)) return '<h1>' + inlineMarkdownToHtml(first.replace(/^#\s+/, '')) + '</h1>';
+
+            // Standalone image block
+            if (lines.length === 1 && /^!\[/.test(first)) {
+                return '<figure class="prose-figure">' + inlineMarkdownToHtml(first) + '</figure>';
+            }
 
             return '<p>' + lines.map(inlineMarkdownToHtml).join('<br>') + '</p>';
         }).join('');

@@ -5,19 +5,19 @@
 var DPR = window.devicePixelRatio || 1;
 
 var LEVELS = [
-    { value: 20,  name: 'Scham',      color: '#E24B4A', lines: 1,  quote: 'Scham ist der dichteste Zustand. Das Nervensystem ist vollständig im Überlebensmodus — nahezu keine Bandbreite für neue Möglichkeiten.' },
-    { value: 100, name: 'Angst',      color: '#D85A30', lines: 3,  quote: 'Angst erzeugt nachweislich chaotische neuronale Muster. Das Nervensystem im Stressmodus sieht buchstäblich weniger Möglichkeiten — nicht metaphorisch.' },
+    { value: 20,  name: 'Scham',      color: '#E24B4A', lines: 1,  quote: 'Scham ist der dichteste Zustand. Das Nervensystem ist vollständig im Überlebensmodus, nahezu keine Bandbreite für neue Möglichkeiten.' },
+    { value: 100, name: 'Angst',      color: '#D85A30', lines: 3,  quote: 'Angst erzeugt nachweislich chaotische neuronale Muster. Das Nervensystem im Stressmodus sieht buchstäblich weniger Möglichkeiten, nicht metaphorisch.' },
     { value: 175, name: 'Stolz',      color: '#BA7517', lines: 5,  quote: 'Stolz gibt Stabilität, begrenzt aber durch das Bedürfnis, im Recht zu bleiben. Der Korridor ist schmaler als er wirkt.' },
-    { value: 200, name: 'Mut',        color: '#3B9B1A', lines: 9,  quote: 'Ab Ebene 200 wird das System expansiv. Neue Menschen, Chancen und Ideen tauchen im Radar auf — nicht weil sie neu entstanden sind, sondern weil das System sie jetzt sehen kann.' },
-    { value: 350, name: 'Akzeptanz',  color: '#1A9E7E', lines: 15, quote: 'Akzeptanz öffnet den Korridor weit. Nicht Resignation — sondern die Fähigkeit, die Realität klar zu sehen und von dort aus zu handeln.' },
+    { value: 200, name: 'Mut',        color: '#3B9B1A', lines: 9,  quote: 'Ab Ebene 200 wird das System expansiv. Neue Menschen, Chancen und Ideen tauchen im Radar auf, nicht weil sie neu entstanden sind, sondern weil das System sie jetzt sehen kann.' },
+    { value: 350, name: 'Akzeptanz',  color: '#1A9E7E', lines: 15, quote: 'Akzeptanz öffnet den Korridor weit. Nicht Resignation, sondern die Fähigkeit, die Realität klar zu sehen und von dort aus zu handeln.' },
     { value: 500, name: 'Liebe',      color: '#3A8FD0', lines: 21, quote: 'Kohärente Herzratenvariabilität, synchronisierte Gamma-Wellen im EEG: Liebe und Dankbarkeit öffnen das System für weitaus mehr Weltlinien.' },
-    { value: 540, name: 'Freude',     color: '#7A6FD8', lines: 27, quote: 'Freude als Grundzustand — nicht als Reaktion — entspricht einem Zustand maximaler neuronaler Synchronisation. Intuition wird verlässlich.' },
-    { value: 600, name: 'Frieden',    color: '#5855B8', lines: 33, quote: 'Stille Gewissheit. Frieden ist kein Gefühlszustand, sondern ein Bewusstseinszustand. 33 Weltlinien — nahezu alle Möglichkeiten im Block sind erreichbar.' },
+    { value: 540, name: 'Freude',     color: '#7A6FD8', lines: 27, quote: 'Freude als Grundzustand, nicht als Reaktion, entspricht einem Zustand maximaler neuronaler Synchronisation. Intuition wird verlässlich.' },
+    { value: 600, name: 'Frieden',    color: '#5855B8', lines: 33, quote: 'Stille Gewissheit. Frieden ist kein Gefühlszustand, sondern ein Bewusstseinszustand. 33 Weltlinien, nahezu alle Möglichkeiten im Block sind erreichbar.' },
 ];
 
 var STATE_QUOTES = {
     fear:    'Niedrige Frequenz = enger Korridor. Das Nervensystem im Überlebensmodus filtert aktiv Möglichkeiten heraus, die nicht zur aktuellen Bedrohungslage passen. Radikale Veränderung fühlt sich buchstäblich unmöglich an.',
-    courage: 'Ab Ebene 200 (Mut) wird das System expansiv. Moderate Spurwechsel werden möglich. Neue Menschen, Chancen und Ideen tauchen im Radar auf — nicht weil sie neu entstanden sind, sondern weil das System sie jetzt sehen kann.',
+    courage: 'Ab Ebene 200 (Mut) wird das System expansiv. Moderate Spurwechsel werden möglich. Neue Menschen, Chancen und Ideen tauchen im Radar auf, nicht weil sie neu entstanden sind, sondern weil das System sie jetzt sehen kann.',
     love:    'Maximale Kohärenz. Das, was andere als Glück, Zufall oder Synchronizität bezeichnen, ist aus dieser Perspektive etwas anderes: stochastische Resonanz mit einer weit entfernten Weltlinie.',
 };
 

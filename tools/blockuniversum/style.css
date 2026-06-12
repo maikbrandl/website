@@ -286,13 +286,22 @@
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     background: transparent;
     opacity: 1;
+    cursor: pointer;
     transition: border-color 250ms,
                 background 250ms;
     position: relative;
 }
+.protocol-step:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-left-color: rgba(201, 168, 76, 0.35);
+}
 .protocol-step--active {
     border-left-color: var(--gold);
     background: var(--bg-card);
+}
+.protocol-step--active:hover {
+    background: var(--bg-card);
+    border-left-color: var(--gold);
 }
 
 .protocol-step__content {

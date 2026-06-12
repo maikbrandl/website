@@ -560,6 +560,7 @@ function initTrackSwitcher() {
 // ─── 6. PROTOCOL STEPPER ──────────────────────────────────────────────
 
 function initProtocol() {
+    var wrap       = document.getElementById('protocolSteps');
     var steps      = Array.from(document.querySelectorAll('.protocol-step'));
     var prevBtn    = document.getElementById('protocolPrev');
     var nextBtn    = document.getElementById('protocolNext');
@@ -573,20 +574,26 @@ function initProtocol() {
         steps[active].classList.remove('protocol-step--active');
         active = Math.max(0, Math.min(steps.length - 1, idx));
         steps[active].classList.add('protocol-step--active');
-        prevBtn.disabled   = (active === 0);
-        nextBtn.textContent = (active === steps.length - 1) ? 'Abgeschlossen ✓' : 'Weiter ►';
-        counter.textContent = (active + 1) + ' / ' + steps.length;
+        if (prevBtn) prevBtn.disabled = (active === 0);
+        if (nextBtn) nextBtn.textContent = (active === steps.length - 1) ? 'Abgeschlossen \u2713' : 'Weiter \u25ba';
+        if (counter) counter.textContent = (active + 1) + ' / ' + steps.length;
         if (conclusion) conclusion.hidden = (active !== steps.length - 1);
     }
 
-    // Click directly on a step to activate it
-    steps.forEach(function (step, idx) {
-        step.style.cursor = 'pointer';
-        step.addEventListener('click', function () { goTo(idx); });
-    });
+    // Event delegation on parent container — more reliable than per-step listeners
+    if (wrap) {
+        wrap.addEventListener('click', function (e) {
+            // Don't activate if user clicked inside the breath timer buttons
+            if (e.target.closest('.breath-timer')) return;
+            var step = e.target.closest('.protocol-step');
+            if (!step) return;
+            var idx = steps.indexOf(step);
+            if (idx !== -1) goTo(idx);
+        });
+    }
 
-    prevBtn.addEventListener('click', function () { goTo(active - 1); });
-    nextBtn.addEventListener('click', function () { if (active < steps.length - 1) goTo(active + 1); });
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(active - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { if (active < steps.length - 1) goTo(active + 1); });
     goTo(0);
 }
 

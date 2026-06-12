@@ -26,6 +26,7 @@ const HybridlogsComponents = (() => {
             ]
         },
         { label: 'Blog', href: 'blog.html', id: 'blog' },
+        { label: 'Tools', href: 'tools/', id: 'tools' },
         { label: 'Über uns', href: 'index.html#story', id: 'about' },
     ];
 

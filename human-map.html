@@ -1,18 +1,18 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human Map â€“ Erforsche deine PersÃ¶nlichkeit | Hybridlogs</title>
+    <title>Human Map – Erforsche deine Persönlichkeit | Hybridlogs</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap">
     <link rel="stylesheet" href="css/styles.css?v=4">
     <style>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   HUMAN MAP  â€“  Design Tokens & Base
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ------------------------------------------
+   HUMAN MAP  –  Design Tokens & Base
+------------------------------------------ */
 :root {
     --c-personality: #c9a84c;
     --c-intelligence: #4f8ef7;
@@ -23,7 +23,7 @@
 .hm-section { display: none; }
 .hm-section.active { display: block; }
 
-/* â•â•â•â•â•â• HERO â•â•â•â•â•â• */
+/* ------ HERO ------ */
 .hm-hero {
     text-align: center;
     padding: 120px 24px 80px;
@@ -73,7 +73,7 @@
 .hm-tile-label { font-size: 13px; font-weight: 600; color: var(--gray-300); }
 .hm-tile-sub { font-size: 11px; color: var(--gray-600); margin-left: 2px; }
 
-/* â•â•â•â•â•â• EXPLORER â•â•â•â•â•â• */
+/* ------ EXPLORER ------ */
 .hm-explorer { max-width: 1300px; margin: 0 auto; padding: 40px 24px 80px; }
 .hm-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--gray-500); background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 28px; transition: color 0.2s; }
 .hm-back:hover { color: #fff; }
@@ -129,7 +129,7 @@
 .hm-pill.c { border-color: rgba(247,95,95,0.4); color: #f75f5f; background: rgba(247,95,95,0.07); }
 .hm-pill.g { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.07); }
 
-/* â•â•â•â•â•â• QUIZ â•â•â•â•â•â• */
+/* ------ QUIZ ------ */
 .hm-quiz-wrap { max-width: 680px; margin: 0 auto; padding: 60px 24px 100px; }
 .hm-prog-bar { height: 4px; background: var(--surface); border-radius: 999px; margin-bottom: 52px; overflow: hidden; }
 .hm-prog-fill { height: 100%; background: var(--gold); border-radius: 999px; transition: width 0.5s cubic-bezier(.16,1,.3,1); }
@@ -152,7 +152,7 @@
 .hm-q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
 .hm-q-counter { font-size: 12px; color: var(--gray-600); font-weight: 600; }
 
-/* â•â•â•â•â•â• RESULT â•â•â•â•â•â• */
+/* ------ RESULT ------ */
 .hm-result-wrap { max-width: 1200px; margin: 0 auto; padding: 60px 24px 100px; }
 .hm-result-head { text-align: center; margin-bottom: 56px; }
 .hm-result-head h2 { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; color: #fff; margin-bottom: 12px; }
@@ -216,15 +216,15 @@
 
 <div id="header-slot"></div>
 
-<!-- â•â•â•â•â•â• SECTION: HERO â•â•â•â•â•â• -->
+<!-- ------ SECTION: HERO ------ -->
 <section id="sec-hero" class="hm-section active">
     <div class="hm-hero">
         <div class="hm-badge">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-            Prototype Â· Human Map System
+            Prototype · Human Map System
         </div>
         <h1>Wer bist du<br><span class="accent">wirklich?</span></h1>
-        <p>Die Human Map vereint PersÃ¶nlichkeit, Intelligenz, Emotionen und Genetik zu einem vollstÃ¤ndigen Bild â€“ deinem persÃ¶nlichen Skill Tree.</p>
+        <p>Die Human Map vereint Persönlichkeit, Intelligenz, Emotionen und Genetik zu einem vollständigen Bild – deinem persönlichen Skill Tree.</p>
         <div class="hm-hero-btns">
             <button class="hm-btn hm-btn-primary" onclick="showSection('sec-quiz')">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -237,7 +237,7 @@
         <div class="hm-dim-tiles">
             <div class="hm-dim-tile" data-dim="personality" onclick="openExplorer('personality')">
                 <span class="hm-tile-dot" style="background:#c9a84c"></span>
-                <span class="hm-tile-label">PersÃ¶nlichkeit</span>
+                <span class="hm-tile-label">Persönlichkeit</span>
                 <span class="hm-tile-sub">Big Five</span>
             </div>
             <div class="hm-dim-tile" data-dim="intelligence" onclick="openExplorer('intelligence')">
@@ -253,22 +253,22 @@
             <div class="hm-dim-tile" data-dim="nature" onclick="openExplorer('nature')">
                 <span class="hm-tile-dot" style="background:#3ecf8e"></span>
                 <span class="hm-tile-label">Natur &amp; Nurture</span>
-                <span class="hm-tile-sub">HeritabilitÃ¤t</span>
+                <span class="hm-tile-sub">Heritabilität</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- â•â•â•â•â•â• SECTION: EXPLORER â•â•â•â•â•â• -->
+<!-- ------ SECTION: EXPLORER ------ -->
 <section id="sec-explorer" class="hm-section">
     <div class="hm-explorer">
         <button class="hm-back" onclick="showSection('sec-hero')">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-            ZurÃ¼ck zur Ãœbersicht
+            Zurück zur Übersicht
         </button>
         <div class="hm-dim-tabs" role="tablist">
             <button class="hm-dim-tab active" data-dim="personality" role="tab">
-                <span class="hm-dim-tab-dot"></span> PersÃ¶nlichkeit
+                <span class="hm-dim-tab-dot"></span> Persönlichkeit
             </button>
             <button class="hm-dim-tab" data-dim="intelligence" role="tab">
                 <span class="hm-dim-tab-dot"></span> Intelligenz
@@ -283,8 +283,8 @@
         <div class="hm-exp-body">
             <div class="hm-map-card">
                 <div class="hm-map-card-head">
-                    <div class="hm-map-card-title" id="map-title">PersÃ¶nlichkeits-Dimensionen</div>
-                    <div class="hm-map-card-sub" id="map-sub">Big Five (OCEAN) Â· Klicke einen Knoten</div>
+                    <div class="hm-map-card-title" id="map-title">Persönlichkeits-Dimensionen</div>
+                    <div class="hm-map-card-sub" id="map-sub">Big Five (OCEAN) · Klicke einen Knoten</div>
                 </div>
                 <div id="hm-svg-wrap"></div>
                 <div class="hm-map-legend">
@@ -298,7 +298,7 @@
                     <div class="hm-detail-empty-ico">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     </div>
-                    <h3>WÃ¤hle einen Knoten</h3>
+                    <h3>Wähle einen Knoten</h3>
                     <p>Klicke auf einen Knoten in der Karte um Details zu sehen.</p>
                 </div>
             </div>
@@ -306,24 +306,24 @@
     </div>
 </section>
 
-<!-- â•â•â•â•â•â• SECTION: QUIZ â•â•â•â•â•â• -->
+<!-- ------ SECTION: QUIZ ------ -->
 <section id="sec-quiz" class="hm-section">
     <div class="hm-quiz-wrap">
         <button class="hm-back" onclick="showSection('sec-hero')">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-            ZurÃ¼ck
+            Zurück
         </button>
         <div class="hm-prog-bar"><div class="hm-prog-fill" id="quiz-prog" style="width:0%"></div></div>
         <div id="quiz-steps"></div>
     </div>
 </section>
 
-<!-- â•â•â•â•â•â• SECTION: RESULT â•â•â•â•â•â• -->
+<!-- ------ SECTION: RESULT ------ -->
 <section id="sec-result" class="hm-section">
     <div class="hm-result-wrap">
         <div class="hm-result-head">
             <h2>Dein <span class="accent">Human Map</span> Profil</h2>
-            <p>Basierend auf deinen Antworten â€“ dein persÃ¶nlicher Skill Tree.</p>
+            <p>Basierend auf deinen Antworten – dein persönlicher Skill Tree.</p>
         </div>
         <div id="result-content"></div>
         <div class="hm-result-actions">
@@ -335,62 +335,62 @@
 
 <div id="footer-slot"></div>
 
-<!-- â•â•â•â•â•â• DATA â•â•â•â•â•â• -->
+<!-- ------ DATA ------ -->
 <script>
 const DIM_META = {
-    personality: { label:'PersÃ¶nlichkeits-Dimensionen', sub:'Big Five (OCEAN) Â· Klicke einen Knoten', color:'#c9a84c' },
-    intelligence:{ label:'Intelligenz-Profil', sub:'Gardners 9 Intelligenzen Â· Klicke einen Knoten', color:'#4f8ef7' },
-    emotion:     { label:'Emotionskarte', sub:'Plutchiks Rad Â· Klicke eine Emotion', color:'#f75f5f' },
-    nature:      { label:'Natur & Nurture', sub:'Genetik vs. Umwelt Â· Klicke einen Bereich', color:'#3ecf8e' }
+    personality: { label:'Persönlichkeits-Dimensionen', sub:'Big Five (OCEAN) · Klicke einen Knoten', color:'#c9a84c' },
+    intelligence:{ label:'Intelligenz-Profil', sub:'Gardners 9 Intelligenzen · Klicke einen Knoten', color:'#4f8ef7' },
+    emotion:     { label:'Emotionskarte', sub:'Plutchiks Rad · Klicke eine Emotion', color:'#f75f5f' },
+    nature:      { label:'Natur & Nurture', sub:'Genetik vs. Umwelt · Klicke einen Bereich', color:'#3ecf8e' }
 };
 
 const DIM_NODES = {
 personality:{
  nodes:[
   {id:'O',  label:'Offenheit',         type:'core',x:260,y:110,dim:'personality',tagline:'Neugier auf das Unbekannte',
-   desc:'Offenheit beschreibt die Bereitschaft fÃ¼r neue Erfahrungen, kreatives Denken und intellektuelle Neugier. Menschen mit hoher Offenheit sind oft kÃ¼nstlerisch, philosophisch und neugierig.',
-   heri:57,sl:['Konservativ','Erkundend'],strengths:['KreativitÃ¤t','Anpassung','Einfallsreichtum'],challenges:['Zerstreutheit','UnbestÃ¤ndigkeit'],growth:['Neues ausprobieren','Art Journaling','Reisen']},
-  {id:'C',  label:'Gewissenhaftigkeit',type:'core',x:560,y:110,dim:'personality',tagline:'Ordnung, Disziplin, ZuverlÃ¤ssigkeit',
-   desc:'Gewissenhaftigkeit zeigt die FÃ¤higkeit zur Selbstregulation, Zielsetzung und Ausdauer. Sehr gewissenhafte Menschen sind organisiert, pÃ¼nktlich und ehrgeizig.',
-   heri:49,sl:['Spontan','Strukturiert'],strengths:['ZuverlÃ¤ssigkeit','Ausdauer','Disziplin'],challenges:['Perfektionismus','RigiditÃ¤t'],growth:['GTD-Methode','Habit Tracking','Journaling']},
-  {id:'E',  label:'Extraversion',      type:'core',x:100,y:310,dim:'personality',tagline:'Energie aus der AuÃŸenwelt',
-   desc:'Extraversion beschreibt wo du Energie schÃ¶pfst. Hohe Extraversion bedeutet Energie aus sozialen Interaktionen. Introversion ist keine SchwÃ¤che â€“ sondern eine andere Energiequelle.',
-   heri:54,sl:['Introvertiert','Extravertiert'],strengths:['Durchsetzung','Netzwerk','Enthusiasmus'],challenges:['ImpulsivitÃ¤t','OberflÃ¤chlichkeit'],growth:['Deep Work','Aktives ZuhÃ¶ren','Stille Ã¼ben']},
-  {id:'A',  label:'VertrÃ¤glichkeit',   type:'core',x:420,y:310,dim:'personality',tagline:'Kooperation und MitgefÃ¼hl',
-   desc:'VertrÃ¤glichkeit misst Kooperationsbereitschaft, Empathie und Vertrauen. Hohe VertrÃ¤glichkeit ermÃ¶glicht tiefe Beziehungen, jedoch manchmal auf Kosten eigener Grenzen.',
-   heri:42,sl:['Kompetitiv','Kooperativ'],strengths:['Empathie','Teamwork','KonfliktlÃ¶sung'],challenges:['Grenzsetzung','Selbstaufopferung'],growth:['Grenzen setzen','Assertiv kommunizieren']},
-  {id:'N',  label:'Neurotizismus',     type:'core',x:740,y:310,dim:'personality',tagline:'Emotionale ReaktivitÃ¤t',
-   desc:'Neurotizismus beschreibt emotionale InstabilitÃ¤t. Niedrig bedeutet emotionale StabilitÃ¤t â€“ nicht das Fehlen von Emotionen. Hohes Neurotizismus kann durch Training reduziert werden.',
-   heri:48,sl:['Stabil','Reaktiv'],strengths:['Tiefe GefÃ¼hle','Empfindsamkeit'],challenges:['Angst','Stimmungsschwankungen'],growth:['Achtsamkeit','Stressmanagement','Therapie']},
+   desc:'Offenheit beschreibt die Bereitschaft für neue Erfahrungen, kreatives Denken und intellektuelle Neugier. Menschen mit hoher Offenheit sind oft künstlerisch, philosophisch und neugierig.',
+   heri:57,sl:['Konservativ','Erkundend'],strengths:['Kreativität','Anpassung','Einfallsreichtum'],challenges:['Zerstreutheit','Unbeständigkeit'],growth:['Neues ausprobieren','Art Journaling','Reisen']},
+  {id:'C',  label:'Gewissenhaftigkeit',type:'core',x:560,y:110,dim:'personality',tagline:'Ordnung, Disziplin, Zuverlässigkeit',
+   desc:'Gewissenhaftigkeit zeigt die Fähigkeit zur Selbstregulation, Zielsetzung und Ausdauer. Sehr gewissenhafte Menschen sind organisiert, pünktlich und ehrgeizig.',
+   heri:49,sl:['Spontan','Strukturiert'],strengths:['Zuverlässigkeit','Ausdauer','Disziplin'],challenges:['Perfektionismus','Rigidität'],growth:['GTD-Methode','Habit Tracking','Journaling']},
+  {id:'E',  label:'Extraversion',      type:'core',x:100,y:310,dim:'personality',tagline:'Energie aus der Außenwelt',
+   desc:'Extraversion beschreibt wo du Energie schöpfst. Hohe Extraversion bedeutet Energie aus sozialen Interaktionen. Introversion ist keine Schwäche – sondern eine andere Energiequelle.',
+   heri:54,sl:['Introvertiert','Extravertiert'],strengths:['Durchsetzung','Netzwerk','Enthusiasmus'],challenges:['Impulsivität','Oberflächlichkeit'],growth:['Deep Work','Aktives Zuhören','Stille üben']},
+  {id:'A',  label:'Verträglichkeit',   type:'core',x:420,y:310,dim:'personality',tagline:'Kooperation und Mitgefühl',
+   desc:'Verträglichkeit misst Kooperationsbereitschaft, Empathie und Vertrauen. Hohe Verträglichkeit ermöglicht tiefe Beziehungen, jedoch manchmal auf Kosten eigener Grenzen.',
+   heri:42,sl:['Kompetitiv','Kooperativ'],strengths:['Empathie','Teamwork','Konfliktlösung'],challenges:['Grenzsetzung','Selbstaufopferung'],growth:['Grenzen setzen','Assertiv kommunizieren']},
+  {id:'N',  label:'Neurotizismus',     type:'core',x:740,y:310,dim:'personality',tagline:'Emotionale Reaktivität',
+   desc:'Neurotizismus beschreibt emotionale Instabilität. Niedrig bedeutet emotionale Stabilität – nicht das Fehlen von Emotionen. Hohes Neurotizismus kann durch Training reduziert werden.',
+   heri:48,sl:['Stabil','Reaktiv'],strengths:['Tiefe Gefühle','Empfindsamkeit'],challenges:['Angst','Stimmungsschwankungen'],growth:['Achtsamkeit','Stressmanagement','Therapie']},
   // Subs Offenheit
-  {id:'Oc', label:'KreativitÃ¤t', type:'sub',x:110,y:55, parent:'O',dim:'personality',tagline:'Neue Verbindungen erschaffen',
-   desc:'Die FÃ¤higkeit, originelle Ideen zu generieren und ungewÃ¶hnliche Verbindungen herzustellen.',heri:52,sl:['Linear','Divergent'],strengths:['Innovation','ProblemlÃ¶sung'],challenges:['UnvollstÃ¤ndigkeit'],growth:['Brainstorming','Art Journaling']},
+  {id:'Oc', label:'Kreativität', type:'sub',x:110,y:55, parent:'O',dim:'personality',tagline:'Neue Verbindungen erschaffen',
+   desc:'Die Fähigkeit, originelle Ideen zu generieren und ungewöhnliche Verbindungen herzustellen.',heri:52,sl:['Linear','Divergent'],strengths:['Innovation','Problemlösung'],challenges:['Unvollständigkeit'],growth:['Brainstorming','Art Journaling']},
   {id:'Ocu',label:'Neugier',     type:'sub',x:195,y:35, parent:'O',dim:'personality',tagline:'Der Drang zu verstehen',
-   desc:'Einer der stÃ¤rksten Lernmotoren. Neugier treibt an, tiefer zu graben und nicht aufzuhÃ¶ren bis etwas verstanden ist.',heri:45,sl:['GleichgÃ¼ltig','Wissbegierig'],strengths:['Lernen','Tiefgang'],challenges:['Prokrastination'],growth:['Lesen','Fragen stellen']},
+   desc:'Einer der stärksten Lernmotoren. Neugier treibt an, tiefer zu graben und nicht aufzuhören bis etwas verstanden ist.',heri:45,sl:['Gleichgültig','Wissbegierig'],strengths:['Lernen','Tiefgang'],challenges:['Prokrastination'],growth:['Lesen','Fragen stellen']},
   {id:'Oint',label:'Intuition',  type:'sub',x:325,y:35, parent:'O',dim:'personality',tagline:'Unbewusstes Wissen',
    desc:'Schnelles implizites Wissen aus Erfahrung. Das Gehirn erkennt Muster ohne bewusste Analyse.',heri:44,sl:['Analytisch','Intuitiv'],strengths:['Schnelle Entscheidungen','Menschenkenntnis'],challenges:['Fehler bei neuen Situationen'],growth:['Tagebuch','Stille']},
   // Subs Gewissen
   {id:'Cd', label:'Disziplin',   type:'sub',x:445,y:35, parent:'C',dim:'personality',tagline:'Handeln trotz Widerstand',
-   desc:'Die FÃ¤higkeit, Impulse zu kontrollieren und langfristige Ziele Ã¼ber kurzfristige Befriedigung zu stellen.',heri:47,sl:['Impulsiv','Diszipliniert'],strengths:['Zielerreichung','VerlÃ¤sslichkeit'],challenges:['Burnout-Risiko'],growth:['Habit Stacking','Routinen']},
+   desc:'Die Fähigkeit, Impulse zu kontrollieren und langfristige Ziele über kurzfristige Befriedigung zu stellen.',heri:47,sl:['Impulsiv','Diszipliniert'],strengths:['Zielerreichung','Verlässlichkeit'],challenges:['Burnout-Risiko'],growth:['Habit Stacking','Routinen']},
   {id:'Co', label:'Organisation',type:'sub',x:560,y:35, parent:'C',dim:'personality',tagline:'Struktur und Ordnung',
-   desc:'Der Hang zur Strukturierung von Informationen, Zeit und Raum. ErmÃ¶glicht Effizienz und Ãœbersicht.',heri:41,sl:['Chaotisch','Geordnet'],strengths:['Effizienz','Klarheit'],challenges:['FlexibilitÃ¤t'],growth:['Journaling','WochenplÃ¤ne']},
+   desc:'Der Hang zur Strukturierung von Informationen, Zeit und Raum. Ermöglicht Effizienz und Übersicht.',heri:41,sl:['Chaotisch','Geordnet'],strengths:['Effizienz','Klarheit'],challenges:['Flexibilität'],growth:['Journaling','Wochenpläne']},
   {id:'Ca', label:'Leistung',    type:'sub',x:675,y:35, parent:'C',dim:'personality',tagline:'Streben nach Exzellenz',
-   desc:'Leistungsmotivation â€“ der innere Antrieb, immer besser zu werden.',heri:46,sl:['Zufrieden','Ehrgeizig'],strengths:['Wachstum','Motivation'],challenges:['Selbstkritik'],growth:['SMART-Ziele','Mentoring']},
+   desc:'Leistungsmotivation – der innere Antrieb, immer besser zu werden.',heri:46,sl:['Zufrieden','Ehrgeizig'],strengths:['Wachstum','Motivation'],challenges:['Selbstkritik'],growth:['SMART-Ziele','Mentoring']},
   // Subs Extraversion
   {id:'Es', label:'Geselligkeit',type:'sub',x:28,y:220, parent:'E',dim:'personality',tagline:'Freude an Menschen',
-   desc:'Die FÃ¤higkeit und der Wunsch, soziale Verbindungen zu knÃ¼pfen und zu genieÃŸen.',heri:53,sl:['ZurÃ¼ckgezogen','Gesellig'],strengths:['Netzwerken','Teamwork'],challenges:['Einsamkeit'],growth:['Events','Clubs']},
+   desc:'Die Fähigkeit und der Wunsch, soziale Verbindungen zu knüpfen und zu genießen.',heri:53,sl:['Zurückgezogen','Gesellig'],strengths:['Netzwerken','Teamwork'],challenges:['Einsamkeit'],growth:['Events','Clubs']},
   {id:'Eas',label:'Durchsetzung',type:'sub',x:28,y:400, parent:'E',dim:'personality',tagline:'Die eigene Stimme erheben',
-   desc:'Die FÃ¤higkeit, klare Positionen zu vertreten und Einfluss auf andere auszuÃ¼ben.',heri:49,sl:['Passiv','Durchsetzungsstark'],strengths:['Leadership','Klarheit'],challenges:['Dominanz'],growth:['Public Speaking','Coaching']},
-  // Subs VertrÃ¤glichkeit
-  {id:'Ae', label:'Empathie',    type:'sub',x:298,y:408, parent:'A',dim:'personality',tagline:'Sich in andere einfÃ¼hlen',
-   desc:'Die FÃ¤higkeit, GefÃ¼hle anderer zu erkennen und mitzufÃ¼hlen. Basis jeder tiefen Beziehung.',heri:35,sl:['Distanziert','EinfÃ¼hlsam'],strengths:['Beziehungen','VerstÃ¤ndnis'],challenges:['ÃœberwÃ¤ltigung'],growth:['Aktives ZuhÃ¶ren','Perspektivwechsel']},
+   desc:'Die Fähigkeit, klare Positionen zu vertreten und Einfluss auf andere auszuüben.',heri:49,sl:['Passiv','Durchsetzungsstark'],strengths:['Leadership','Klarheit'],challenges:['Dominanz'],growth:['Public Speaking','Coaching']},
+  // Subs Verträglichkeit
+  {id:'Ae', label:'Empathie',    type:'sub',x:298,y:408, parent:'A',dim:'personality',tagline:'Sich in andere einfühlen',
+   desc:'Die Fähigkeit, Gefühle anderer zu erkennen und mitzufühlen. Basis jeder tiefen Beziehung.',heri:35,sl:['Distanziert','Einfühlsam'],strengths:['Beziehungen','Verständnis'],challenges:['Überwältigung'],growth:['Aktives Zuhören','Perspektivwechsel']},
   {id:'At', label:'Vertrauen',   type:'sub',x:542,y:408, parent:'A',dim:'personality',tagline:'Anderen das Gute zutrauen',
-   desc:'Die grundlegende Annahme, dass andere gute Absichten haben. ErmÃ¶glicht Verletzlichkeit und tiefe Bindungen.',heri:38,sl:['Misstrauisch','Vertrauend'],strengths:['Bindungstiefe','Kollaboration'],challenges:['EnttÃ¤uschungen'],growth:['Erfahrungen sammeln']},
+   desc:'Die grundlegende Annahme, dass andere gute Absichten haben. Ermöglicht Verletzlichkeit und tiefe Bindungen.',heri:38,sl:['Misstrauisch','Vertrauend'],strengths:['Bindungstiefe','Kollaboration'],challenges:['Enttäuschungen'],growth:['Erfahrungen sammeln']},
   // Subs Neurotizismus
   {id:'Nax',label:'Angst',       type:'sub',x:632,y:408, parent:'N',dim:'personality',tagline:'Das Sicherheitssystem',
-   desc:'Angst ist ein evolutionÃ¤res Schutzsystem. In MaÃŸen schÃ¤rft sie die Aufmerksamkeit, im ÃœbermaÃŸ lÃ¤hmt sie.',heri:48,sl:['Gelassen','Ã„ngstlich'],strengths:['Vorsicht','Planung'],challenges:['LÃ¤hmung','Vermeidung'],growth:['Exposition','AtemÃ¼bungen']},
-  {id:'Ns', label:'SensitivitÃ¤t',type:'sub',x:848,y:408, parent:'N',dim:'personality',tagline:'Tiefe Verarbeitung',
-   desc:'HochsensitivitÃ¤t: tiefere Verarbeitung, stÃ¤rkere emotionale Reaktionen. Kein Makel, sondern eine neurologische Eigenschaft.',heri:47,sl:['Robuste Haut','Hochsensitiv'],strengths:['Tiefe','MitgefÃ¼hl','KreativitÃ¤t'],challenges:['ReizÃ¼berflutung'],growth:['Grenzen setzen','RÃ¼ckzugsrÃ¤ume']},
+   desc:'Angst ist ein evolutionäres Schutzsystem. In Maßen schärft sie die Aufmerksamkeit, im Übermaß lähmt sie.',heri:48,sl:['Gelassen','Ängstlich'],strengths:['Vorsicht','Planung'],challenges:['Lähmung','Vermeidung'],growth:['Exposition','Atemübungen']},
+  {id:'Ns', label:'Sensitivität',type:'sub',x:848,y:408, parent:'N',dim:'personality',tagline:'Tiefe Verarbeitung',
+   desc:'Hochsensitivität: tiefere Verarbeitung, stärkere emotionale Reaktionen. Kein Makel, sondern eine neurologische Eigenschaft.',heri:47,sl:['Robuste Haut','Hochsensitiv'],strengths:['Tiefe','Mitgefühl','Kreativität'],challenges:['Reizüberflutung'],growth:['Grenzen setzen','Rückzugsräume']},
  ],
  edges:[
   ['O','Oc'],['O','Ocu'],['O','Oint'],
@@ -404,31 +404,31 @@ personality:{
 intelligence:{
  nodes:[
   {id:'LI',label:'Linguistisch',    type:'core',x:420,y:80, dim:'intelligence',tagline:'Die Kraft der Sprache',
-   desc:'Die FÃ¤higkeit, Sprache effektiv einzusetzen â€“ schriftlich und mÃ¼ndlich. Schriftsteller, Redner und Journalisten zeigen diese Intelligenz besonders stark.',
-   heri:50,sl:['Wortarm','WortmÃ¤chtig'],strengths:['Kommunikation','Ãœberzeugung','Storytelling'],challenges:['Verbale Dominanz'],growth:['Schreiben','Lesen','Ã–ffentlich reden']},
+   desc:'Die Fähigkeit, Sprache effektiv einzusetzen – schriftlich und mündlich. Schriftsteller, Redner und Journalisten zeigen diese Intelligenz besonders stark.',
+   heri:50,sl:['Wortarm','Wortmächtig'],strengths:['Kommunikation','Überzeugung','Storytelling'],challenges:['Verbale Dominanz'],growth:['Schreiben','Lesen','Öffentlich reden']},
   {id:'LM',label:'Logisch-Math.',   type:'core',x:180,y:190,dim:'intelligence',tagline:'Muster und Systeme',
-   desc:'Die FÃ¤higkeit, logisch zu denken, Muster zu erkennen und abstrakte Probleme zu lÃ¶sen. Basis fÃ¼r Mathematik, Programmierung und wissenschaftliches Denken.',
-   heri:57,sl:['Intuitiv','Logisch'],strengths:['ProblemlÃ¶sung','PrÃ¤zision','Analyse'],challenges:['KreativitÃ¤t'],growth:['Programmieren','RÃ¤tsel','Mathematik']},
-  {id:'SP',label:'RÃ¤umlich',         type:'core',x:660,y:190,dim:'intelligence',tagline:'Denken im Raum',
-   desc:'Die FÃ¤higkeit, dreidimensional zu denken und sich in RÃ¤umen zu orientieren. Grundlage fÃ¼r Design, Architektur und Navigation.',
-   heri:53,sl:['Linear','RÃ¤umlich'],strengths:['Design','Navigation','Visualisierung'],challenges:['Abstrakte Sprache'],growth:['3D-Modellierung','Zeichnen','Schach']},
+   desc:'Die Fähigkeit, logisch zu denken, Muster zu erkennen und abstrakte Probleme zu lösen. Basis für Mathematik, Programmierung und wissenschaftliches Denken.',
+   heri:57,sl:['Intuitiv','Logisch'],strengths:['Problemlösung','Präzision','Analyse'],challenges:['Kreativität'],growth:['Programmieren','Rätsel','Mathematik']},
+  {id:'SP',label:'Räumlich',         type:'core',x:660,y:190,dim:'intelligence',tagline:'Denken im Raum',
+   desc:'Die Fähigkeit, dreidimensional zu denken und sich in Räumen zu orientieren. Grundlage für Design, Architektur und Navigation.',
+   heri:53,sl:['Linear','Räumlich'],strengths:['Design','Navigation','Visualisierung'],challenges:['Abstrakte Sprache'],growth:['3D-Modellierung','Zeichnen','Schach']},
   {id:'MU',label:'Musikalisch',      type:'core',x:80, y:360,dim:'intelligence',tagline:'Rhythmus und Klang',
-   desc:'SensitivitÃ¤t fÃ¼r Rhythmus, TonhÃ¶he und Melodie. Musiker, aber auch Sprachbegabte haben oft eine starke musikalische Intelligenz.',
-   heri:54,sl:['Tontaub','Musikalisch'],strengths:['RhythmusgefÃ¼hl','Sprachmelodie','Emotionserkennung'],challenges:['Ablenkung durch GerÃ¤usche'],growth:['Instrument','Singen','Beatmaking']},
-  {id:'KI',label:'KÃ¶rperlich',       type:'core',x:290,y:420,dim:'intelligence',tagline:'Intelligenz des KÃ¶rpers',
-   desc:'Die FÃ¤higkeit, den eigenen KÃ¶rper prÃ¤zise zu steuern. TÃ¤nzer, Athleten, Chirurgen und Handwerker besitzen diese Intelligenz in hohem MaÃŸ.',
-   heri:49,sl:['Unkoordiniert','KÃ¶rperbewusst'],strengths:['Motorik','KÃ¶rperausdruck','Handwerk'],challenges:['Abstrakte Theorie'],growth:['Sport','Tanz','Handwerk']},
+   desc:'Sensitivität für Rhythmus, Tonhöhe und Melodie. Musiker, aber auch Sprachbegabte haben oft eine starke musikalische Intelligenz.',
+   heri:54,sl:['Tontaub','Musikalisch'],strengths:['Rhythmusgefühl','Sprachmelodie','Emotionserkennung'],challenges:['Ablenkung durch Geräusche'],growth:['Instrument','Singen','Beatmaking']},
+  {id:'KI',label:'Körperlich',       type:'core',x:290,y:420,dim:'intelligence',tagline:'Intelligenz des Körpers',
+   desc:'Die Fähigkeit, den eigenen Körper präzise zu steuern. Tänzer, Athleten, Chirurgen und Handwerker besitzen diese Intelligenz in hohem Maß.',
+   heri:49,sl:['Unkoordiniert','Körperbewusst'],strengths:['Motorik','Körperausdruck','Handwerk'],challenges:['Abstrakte Theorie'],growth:['Sport','Tanz','Handwerk']},
   {id:'IP',label:'Inter-\npersonell', type:'core',x:550,y:420,dim:'intelligence',tagline:'Menschen verstehen',
-   desc:'Die FÃ¤higkeit, andere Menschen zu verstehen und effektiv zu kommunizieren. Die Intelligenz von FÃ¼hrungskrÃ¤ften, Therapeuten und Diplomaten.',
-   heri:40,sl:['Sozial blind','Menschenleser'],strengths:['FÃ¼hrung','Empathie','Verhandlung'],challenges:['Eigene Grenzen'],growth:['Coaching','Gruppenarbeit','Soziologie']},
+   desc:'Die Fähigkeit, andere Menschen zu verstehen und effektiv zu kommunizieren. Die Intelligenz von Führungskräften, Therapeuten und Diplomaten.',
+   heri:40,sl:['Sozial blind','Menschenleser'],strengths:['Führung','Empathie','Verhandlung'],challenges:['Eigene Grenzen'],growth:['Coaching','Gruppenarbeit','Soziologie']},
   {id:'IA',label:'Intra-\npersonell', type:'core',x:760,y:360,dim:'intelligence',tagline:'Sich selbst kennen',
-   desc:'Selbstkenntnis â€“ das genaue VerstÃ¤ndnis eigener StÃ¤rken, SchwÃ¤chen und Motivationen. Grundlage emotionaler Intelligenz.',
+   desc:'Selbstkenntnis – das genaue Verständnis eigener Stärken, Schwächen und Motivationen. Grundlage emotionaler Intelligenz.',
    heri:45,sl:['Selbstfremd','Selbstbewusst'],strengths:['Reflexion','Entscheidungen','Wachstum'],challenges:['Objektive Sicht'],growth:['Journaling','Therapie','Meditation']},
   {id:'NA',label:'Naturalistisch',   type:'core',x:210,y:520,dim:'intelligence',tagline:'Muster in der Natur',
-   desc:'Die FÃ¤higkeit, Muster in der natÃ¼rlichen Welt zu erkennen. Biologen, Botaniker und KÃ¶che nutzen diese Intelligenz.',
+   desc:'Die Fähigkeit, Muster in der natürlichen Welt zu erkennen. Biologen, Botaniker und Köche nutzen diese Intelligenz.',
    heri:46,sl:['Stadtmensch','Naturverbunden'],strengths:['Kategorisierung','Systemdenken'],challenges:['Abstrakte Systeme'],growth:['Natur erkunden','Gartenbau','Tiere']},
-  {id:'EX',label:'Existenziell',     type:'core',x:630,y:520,dim:'intelligence',tagline:'Die groÃŸen Fragen',
-   desc:'Die FÃ¤higkeit, tiefe Fragen Ã¼ber Existenz, Tod und Sinn auszuhalten und zu erkunden. Philosophen und tiefe Denker aller Art.',
+  {id:'EX',label:'Existenziell',     type:'core',x:630,y:520,dim:'intelligence',tagline:'Die großen Fragen',
+   desc:'Die Fähigkeit, tiefe Fragen über Existenz, Tod und Sinn auszuhalten und zu erkunden. Philosophen und tiefe Denker aller Art.',
    heri:48,sl:['Pragmatisch','Philosophisch'],strengths:['Sinnfindung','Tiefe','Weitblick'],challenges:['Existenzielle Angst'],growth:['Philosophie','Meditation','Literatur']},
  ],
  edges:[
@@ -441,42 +441,42 @@ intelligence:{
 emotion:{
  nodes:[
   {id:'JO', label:'Freude',      type:'core',x:420,y:80, dim:'emotion',tagline:'Das Leuchten des Lebens',
-   desc:'Freude ist ein Zustand tiefer Befriedigung und Energie. Sie entsteht wenn BedÃ¼rfnisse erfÃ¼llt sind und wir uns verbunden fÃ¼hlen.',
-   heri:46,sl:['Neutral','Ekstatisch'],strengths:['Energie','Verbindung','KreativitÃ¤t'],challenges:['AbhÃ¤ngigkeit von positivem Feedback'],growth:['Dankbarkeit','Flow-ZustÃ¤nde','StÃ¤rken nutzen']},
+   desc:'Freude ist ein Zustand tiefer Befriedigung und Energie. Sie entsteht wenn Bedürfnisse erfüllt sind und wir uns verbunden fühlen.',
+   heri:46,sl:['Neutral','Ekstatisch'],strengths:['Energie','Verbindung','Kreativität'],challenges:['Abhängigkeit von positivem Feedback'],growth:['Dankbarkeit','Flow-Zustände','Stärken nutzen']},
   {id:'TR', label:'Vertrauen',   type:'core',x:640,y:165,dim:'emotion',tagline:'Die Basis aller Beziehungen',
-   desc:'Vertrauen als Emotion ist das sichere GefÃ¼hl, sich auf jemanden verlassen zu kÃ¶nnen. Es ermÃ¶glicht Verletzlichkeit und tiefe Bindungen.',
-   heri:38,sl:['Misstrauen','Tiefes Vertrauen'],strengths:['Bindungstiefe','Kooperation'],challenges:['EnttÃ¤uschungsrisiko'],growth:['Verletzlichkeit zulassen','Erfahrungen']},
-  {id:'FE', label:'Angst',       type:'core',x:720,y:330,dim:'emotion',tagline:'Das Ã¤lteste Schutzsystem',
-   desc:'Angst ist eine evolutionÃ¤re Schutzreaktion auf wahrgenommene Gefahr. In MaÃŸen schÃ¤rft sie die Sinne, chronisch lÃ¤hmt sie.',
-   heri:50,sl:['Gelassenheit','Panik'],strengths:['Schutz','Vorsicht','Vorbereitung'],challenges:['Vermeidung','LÃ¤hmung'],growth:['Exposition','Atemtechniken','Therapie']},
-  {id:'SU', label:'Ãœberraschung',type:'core',x:640,y:495,dim:'emotion',tagline:'Das Unerwartete',
-   desc:'Eine kurze intensive Reaktion auf etwas Unerwartetes. Neutral â€“ kippt schnell in Freude, Angst oder Ã„rger.',
-   heri:42,sl:['Blasiert','VerblÃ¼fft'],strengths:['Aufmerksamkeit','Neugier'],challenges:['Fehler in der Vorhersage'],growth:['Neue Erfahrungen suchen']},
+   desc:'Vertrauen als Emotion ist das sichere Gefühl, sich auf jemanden verlassen zu können. Es ermöglicht Verletzlichkeit und tiefe Bindungen.',
+   heri:38,sl:['Misstrauen','Tiefes Vertrauen'],strengths:['Bindungstiefe','Kooperation'],challenges:['Enttäuschungsrisiko'],growth:['Verletzlichkeit zulassen','Erfahrungen']},
+  {id:'FE', label:'Angst',       type:'core',x:720,y:330,dim:'emotion',tagline:'Das älteste Schutzsystem',
+   desc:'Angst ist eine evolutionäre Schutzreaktion auf wahrgenommene Gefahr. In Maßen schärft sie die Sinne, chronisch lähmt sie.',
+   heri:50,sl:['Gelassenheit','Panik'],strengths:['Schutz','Vorsicht','Vorbereitung'],challenges:['Vermeidung','Lähmung'],growth:['Exposition','Atemtechniken','Therapie']},
+  {id:'SU', label:'Überraschung',type:'core',x:640,y:495,dim:'emotion',tagline:'Das Unerwartete',
+   desc:'Eine kurze intensive Reaktion auf etwas Unerwartetes. Neutral – kippt schnell in Freude, Angst oder Ärger.',
+   heri:42,sl:['Blasiert','Verblüfft'],strengths:['Aufmerksamkeit','Neugier'],challenges:['Fehler in der Vorhersage'],growth:['Neue Erfahrungen suchen']},
   {id:'SA', label:'Trauer',      type:'core',x:420,y:580,dim:'emotion',tagline:'Das Verarbeiten von Verlust',
-   desc:'Trauer ist die emotionale Reaktion auf Verlust und Trennung. Sie ist notwendig fÃ¼r Heilung und Loslassen â€“ unterdrÃ¼ckt fÃ¼hrt sie zu tieferen Problemen.',
-   heri:44,sl:['UnberÃ¼hrt','Tief betrÃ¼bt'],strengths:['Tiefe','MitgefÃ¼hl','Wachstum'],challenges:['Depression','Isolation'],growth:['Journaling','Trauerarbeit','Verbindung']},
+   desc:'Trauer ist die emotionale Reaktion auf Verlust und Trennung. Sie ist notwendig für Heilung und Loslassen – unterdrückt führt sie zu tieferen Problemen.',
+   heri:44,sl:['Unberührt','Tief betrübt'],strengths:['Tiefe','Mitgefühl','Wachstum'],challenges:['Depression','Isolation'],growth:['Journaling','Trauerarbeit','Verbindung']},
   {id:'DI', label:'Ekel',        type:'core',x:200,y:495,dim:'emotion',tagline:'Der moralische Kompass',
-   desc:'Ekel schÃ¼tzt uns vor SchÃ¤dlichem â€“ kÃ¶rperlich und moralisch. Er ist ein starker sozialer Regulator.',
-   heri:47,sl:['Tolerant','AbgestoÃŸen'],strengths:['Werte','Moralisches Urteil'],challenges:['Intoleranz','RigiditÃ¤t'],growth:['Perspektivwechsel','Kulturkontakt']},
-  {id:'AN', label:'Ã„rger',       type:'core',x:120,y:330,dim:'emotion',tagline:'Die Kraft der Grenze',
-   desc:'Ã„rger entsteht wenn Grenzen Ã¼berschritten oder Ziele blockiert werden. Er ist Energie fÃ¼r VerÃ¤nderung â€“ konstruktiv oder destruktiv je nach Umgang.',
-   heri:49,sl:['SanftmÃ¼tig','WÃ¼tend'],strengths:['Energie','Grenzen setzen','Gerechtigkeit'],challenges:['Aggression','Kontrollverlust'],growth:['Sport','Assertiveness','Regulation']},
+   desc:'Ekel schützt uns vor Schädlichem – körperlich und moralisch. Er ist ein starker sozialer Regulator.',
+   heri:47,sl:['Tolerant','Abgestoßen'],strengths:['Werte','Moralisches Urteil'],challenges:['Intoleranz','Rigidität'],growth:['Perspektivwechsel','Kulturkontakt']},
+  {id:'AN', label:'Ärger',       type:'core',x:120,y:330,dim:'emotion',tagline:'Die Kraft der Grenze',
+   desc:'Ärger entsteht wenn Grenzen überschritten oder Ziele blockiert werden. Er ist Energie für Veränderung – konstruktiv oder destruktiv je nach Umgang.',
+   heri:49,sl:['Sanftmütig','Wütend'],strengths:['Energie','Grenzen setzen','Gerechtigkeit'],challenges:['Aggression','Kontrollverlust'],growth:['Sport','Assertiveness','Regulation']},
   {id:'AN2',label:'Vorfreude',   type:'core',x:200,y:165,dim:'emotion',tagline:'Die Energie des Erwartens',
-   desc:'Vorfreude ist die positive Erwartung eines zukÃ¼nftigen Ereignisses. Motivierend, aber auch potentiell enttÃ¤uschend.',
-   heri:43,sl:['GleichgÃ¼ltig','Gespannt'],strengths:['Motivation','Planung','Zielorientierung'],challenges:['EnttÃ¤uschung','Ungeduld'],growth:['Zielsetzung','Visualisierung']},
+   desc:'Vorfreude ist die positive Erwartung eines zukünftigen Ereignisses. Motivierend, aber auch potentiell enttäuschend.',
+   heri:43,sl:['Gleichgültig','Gespannt'],strengths:['Motivation','Planung','Zielorientierung'],challenges:['Enttäuschung','Ungeduld'],growth:['Zielsetzung','Visualisierung']},
   // Sub-emotions
   {id:'JOs',label:'Heiterkeit',  type:'sub',x:330,y:45, parent:'JO',dim:'emotion',tagline:'Ruhige Freude',
-   desc:'Freude in ihrer stillen Form â€“ innere Ruhe ohne Aufregung.',heri:44,sl:['Unruhig','Heiter'],strengths:['Gelassenheit'],challenges:['PassivitÃ¤t'],growth:['Meditation']},
-  {id:'JOe',label:'Ekstase',     type:'sub',x:510,y:45, parent:'JO',dim:'emotion',tagline:'Freude in voller IntensitÃ¤t',
-   desc:'Maximale Freude â€“ Ã¼berwÃ¤ltigende positive Emotion, oft verbunden mit Flow.',heri:46,sl:['GedÃ¤mpft','Ekstatisch'],strengths:['Peak-Erlebnisse'],challenges:['Suchtpotenzial'],growth:['Flow-AktivitÃ¤ten']},
+   desc:'Freude in ihrer stillen Form – innere Ruhe ohne Aufregung.',heri:44,sl:['Unruhig','Heiter'],strengths:['Gelassenheit'],challenges:['Passivität'],growth:['Meditation']},
+  {id:'JOe',label:'Ekstase',     type:'sub',x:510,y:45, parent:'JO',dim:'emotion',tagline:'Freude in voller Intensität',
+   desc:'Maximale Freude – überwältigende positive Emotion, oft verbunden mit Flow.',heri:46,sl:['Gedämpft','Ekstatisch'],strengths:['Peak-Erlebnisse'],challenges:['Suchtpotenzial'],growth:['Flow-Aktivitäten']},
   {id:'FEs',label:'Besorgnis',   type:'sub',x:790,y:250,parent:'FE',dim:'emotion',tagline:'Leise Angst',
-   desc:'Die milde Form der Angst â€“ unterschwelliges Unbehagen.',heri:48,sl:['Sorglos','Besorgt'],strengths:['Vorsicht'],challenges:['Chronische Anspannung'],growth:['Journaling','AtemÃ¼bungen']},
-  {id:'ANr',label:'Wut',         type:'sub',x:36, y:260,parent:'AN',dim:'emotion',tagline:'Intensiver Ã„rger',
-   desc:'Ã„rger in maximaler IntensitÃ¤t â€“ starke kÃ¶rperliche Aktivierung.',heri:50,sl:['Gelassen','Rasend'],strengths:['Kraftquelle'],challenges:['Kontrollverlust'],growth:['Sport','Biofeedback']},
+   desc:'Die milde Form der Angst – unterschwelliges Unbehagen.',heri:48,sl:['Sorglos','Besorgt'],strengths:['Vorsicht'],challenges:['Chronische Anspannung'],growth:['Journaling','Atemübungen']},
+  {id:'ANr',label:'Wut',         type:'sub',x:36, y:260,parent:'AN',dim:'emotion',tagline:'Intensiver Ärger',
+   desc:'Ärger in maximaler Intensität – starke körperliche Aktivierung.',heri:50,sl:['Gelassen','Rasend'],strengths:['Kraftquelle'],challenges:['Kontrollverlust'],growth:['Sport','Biofeedback']},
   {id:'SAg',label:'Gram',        type:'sub',x:326,y:638,parent:'SA',dim:'emotion',tagline:'Tiefe Trauer',
-   desc:'Intensive Trauer bei tiefem Verlust. Notwendig fÃ¼r vollstÃ¤ndige Verarbeitung.',heri:45,sl:['UnberÃ¼hrt','TiefbetrÃ¼bt'],strengths:['Heilung'],challenges:['Depression'],growth:['Trauerbegleitung']},
+   desc:'Intensive Trauer bei tiefem Verlust. Notwendig für vollständige Verarbeitung.',heri:45,sl:['Unberührt','Tiefbetrübt'],strengths:['Heilung'],challenges:['Depression'],growth:['Trauerbegleitung']},
   {id:'SAp',label:'Melancholie', type:'sub',x:514,y:638,parent:'SA',dim:'emotion',tagline:'Stille Trauer',
-   desc:'Trauer in leichter Form â€“ melancholisches Nachsinnen.',heri:43,sl:['Heiter','Melancholisch'],strengths:['Tiefe','Reflexion'],challenges:['GrÃ¼beln'],growth:['Spazierengehen','Schreiben']},
+   desc:'Trauer in leichter Form – melancholisches Nachsinnen.',heri:43,sl:['Heiter','Melancholisch'],strengths:['Tiefe','Reflexion'],challenges:['Grübeln'],growth:['Spazierengehen','Schreiben']},
  ],
  edges:[
   ['JO','TR'],['TR','FE'],['FE','SU'],['SU','SA'],['SA','DI'],['DI','AN'],['AN','AN2'],['AN2','JO'],
@@ -486,33 +486,33 @@ emotion:{
 },
 nature:{
  nodes:[
-  {id:'PE',  label:'PersÃ¶nlichkeit',   type:'core',x:420,y:90, dim:'nature',tagline:'Wie viel ist angeboren?',
-   desc:'Big Five Traits sind zu 40â€“60% erblich. Gene bestimmen keine Eigenschaften direkt, sondern die Empfindlichkeit gegenÃ¼ber bestimmten Umweltreizen (Gen-Umwelt-Interaktion).',
-   heri:50,sl:['Umwelt','Genetik'],strengths:['Stabile KernidentitÃ¤t'],challenges:['VerÃ¤nderung braucht Bewusstsein'],growth:['Psychotherapie','Bewusste Entscheidungen']},
-  {id:'IQ',  label:'Intelligenz',      type:'core',x:710,y:210,dim:'nature',tagline:'Anlage und FÃ¶rderung',
-   desc:'Intelligenz ist zu 50â€“80% erblich â€“ dieser Anteil steigt mit dem Alter. Bildung, ErnÃ¤hrung und Stimulation formen die AusprÃ¤gung massiv. Flynn-Effekt: IQ stieg im 20. Jh. um ~30 Punkte.',
-   heri:65,sl:['Umwelt','Genetik'],strengths:['Hohe Formbarkeit im Kindesalter'],challenges:['Chancenungleichheit'],growth:['FrÃ¼he FÃ¶rderung','Stimulation','ErnÃ¤hrung']},
-  {id:'EM',  label:'Emotionale\nReaktivitÃ¤t',type:'core',x:710,y:430,dim:'nature',tagline:'ReaktivitÃ¤t und Regulation',
-   desc:'Emotionale ReaktivitÃ¤t ist zu ~48% genetisch. Dein Ausgangslevel ist mitgegeben, aber Regulation ist erlernbar.',
+  {id:'PE',  label:'Persönlichkeit',   type:'core',x:420,y:90, dim:'nature',tagline:'Wie viel ist angeboren?',
+   desc:'Big Five Traits sind zu 40–60% erblich. Gene bestimmen keine Eigenschaften direkt, sondern die Empfindlichkeit gegenüber bestimmten Umweltreizen (Gen-Umwelt-Interaktion).',
+   heri:50,sl:['Umwelt','Genetik'],strengths:['Stabile Kernidentität'],challenges:['Veränderung braucht Bewusstsein'],growth:['Psychotherapie','Bewusste Entscheidungen']},
+  {id:'IQ',  label:'Intelligenz',      type:'core',x:710,y:210,dim:'nature',tagline:'Anlage und Förderung',
+   desc:'Intelligenz ist zu 50–80% erblich – dieser Anteil steigt mit dem Alter. Bildung, Ernährung und Stimulation formen die Ausprägung massiv. Flynn-Effekt: IQ stieg im 20. Jh. um ~30 Punkte.',
+   heri:65,sl:['Umwelt','Genetik'],strengths:['Hohe Formbarkeit im Kindesalter'],challenges:['Chancenungleichheit'],growth:['Frühe Förderung','Stimulation','Ernährung']},
+  {id:'EM',  label:'Emotionale\nReaktivität',type:'core',x:710,y:430,dim:'nature',tagline:'Reaktivität und Regulation',
+   desc:'Emotionale Reaktivität ist zu ~48% genetisch. Dein Ausgangslevel ist mitgegeben, aber Regulation ist erlernbar.',
    heri:48,sl:['Umwelt','Genetik'],strengths:['Regulation erlernbar'],challenges:['Reaktionsmuster'],growth:['Achtsamkeit','Therapie','Biofeedback']},
-  {id:'MH',  label:'Mentale\nGesundheit',   type:'core',x:420,y:570,dim:'nature',tagline:'AnfÃ¤lligkeit und Resilienz',
-   desc:'AnfÃ¤lligkeit fÃ¼r psychische Erkrankungen ist teils genetisch (Depression ~40%, ADHS ~76%), aber Umweltfaktoren sind entscheidend fÃ¼r den Verlauf.',
-   heri:50,sl:['Umwelt dominiert','Genetik dominiert'],strengths:['FrÃ¼hintervention mÃ¶glich'],challenges:['Stigma','Veranlagung'],growth:['PrÃ¤vention','UnterstÃ¼tzung','Therapie']},
-  {id:'TA',  label:'Talent &\nBegabung',    type:'core',x:130,y:430,dim:'nature',tagline:'Genetische PrÃ¤disposition',
-   desc:'Talente sind genetische PrÃ¤dispositionen die durch Ãœbung exponentiell wachsen. Genetik bestimmt die Lernkurve, nicht das Limit.',
-   heri:55,sl:['Umwelt','Genetik'],strengths:['FrÃ¼he StÃ¤rken nutzen'],challenges:['Falsche Bereiche'],growth:['Richtiges Feld finden','Deliberate Practice']},
+  {id:'MH',  label:'Mentale\nGesundheit',   type:'core',x:420,y:570,dim:'nature',tagline:'Anfälligkeit und Resilienz',
+   desc:'Anfälligkeit für psychische Erkrankungen ist teils genetisch (Depression ~40%, ADHS ~76%), aber Umweltfaktoren sind entscheidend für den Verlauf.',
+   heri:50,sl:['Umwelt dominiert','Genetik dominiert'],strengths:['Frühintervention möglich'],challenges:['Stigma','Veranlagung'],growth:['Prävention','Unterstützung','Therapie']},
+  {id:'TA',  label:'Talent &\nBegabung',    type:'core',x:130,y:430,dim:'nature',tagline:'Genetische Prädisposition',
+   desc:'Talente sind genetische Prädispositionen die durch Übung exponentiell wachsen. Genetik bestimmt die Lernkurve, nicht das Limit.',
+   heri:55,sl:['Umwelt','Genetik'],strengths:['Frühe Stärken nutzen'],challenges:['Falsche Bereiche'],growth:['Richtiges Feld finden','Deliberate Practice']},
   {id:'IE',  label:'Intro-/Extra-\nversion',type:'core',x:130,y:210,dim:'nature',tagline:'Neurologische Energiequelle',
    desc:'Introversion und Extraversion sind zu ~54% genetisch. Die Basis liegt in der kortikalen Grundaktivierung des Gehirns.',
-   heri:54,sl:['Umwelt','Genetik'],strengths:['FrÃ¼h erkennbar','Stabile Basis'],challenges:['Gesellschaftliche Normen'],growth:['Richtiges Umfeld finden']},
+   heri:54,sl:['Umwelt','Genetik'],strengths:['Früh erkennbar','Stabile Basis'],challenges:['Gesellschaftliche Normen'],growth:['Richtiges Umfeld finden']},
   // Subs
-  {id:'NP',label:'Neuro-\nplastizitÃ¤t',type:'sub',x:596,y:118,parent:'IQ',dim:'nature',tagline:'Das formbare Gehirn',
-   desc:'Das Gehirn ist formbar â€“ besonders bis 25 Jahre. Lernen, Sport und ErnÃ¤hrung formen Struktur und Funktion.',heri:35,sl:['Starr','Plastisch'],strengths:['Lebenslange Entwicklung'],challenges:['Aktive FÃ¶rderung nÃ¶tig'],growth:['Lernen','Sport','Meditation']},
+  {id:'NP',label:'Neuro-\nplastizität',type:'sub',x:596,y:118,parent:'IQ',dim:'nature',tagline:'Das formbare Gehirn',
+   desc:'Das Gehirn ist formbar – besonders bis 25 Jahre. Lernen, Sport und Ernährung formen Struktur und Funktion.',heri:35,sl:['Starr','Plastisch'],strengths:['Lebenslange Entwicklung'],challenges:['Aktive Förderung nötig'],growth:['Lernen','Sport','Meditation']},
   {id:'EPI',label:'Epigenetik', type:'sub',x:596,y:522,parent:'EM', dim:'nature',tagline:'Erfahrungen formen Gene',
-   desc:'Erfahrungen kÃ¶nnen die Genexpression verÃ¤ndern ohne die DNA zu Ã¤ndern. Trauma und positive Erlebnisse hinterlassen epigenetische Spuren.',heri:30,sl:['Stabil','VerÃ¤nderlich'],strengths:['Intergenerationaler Wandel'],challenges:['Trauma-Weitergabe'],growth:['Traumatherapie','Achtsamkeit']},
-  {id:'RE', label:'Resilienz',  type:'sub',x:296,y:570,parent:'MH', dim:'nature',tagline:'Die Kraft zurÃ¼ckzuspringen',
-   desc:'Resilienz ist zu ~40% genetisch, aber stark durch sichere Bindungen und Erfolgserlebnisse formbar.',heri:40,sl:['Erlernbar','Mitgegeben'],strengths:['Hochtrainierbar'],challenges:['BenÃ¶tigt UnterstÃ¼tzung'],growth:['Selbstwirksamkeit','Netzwerk']},
+   desc:'Erfahrungen können die Genexpression verändern ohne die DNA zu ändern. Trauma und positive Erlebnisse hinterlassen epigenetische Spuren.',heri:30,sl:['Stabil','Veränderlich'],strengths:['Intergenerationaler Wandel'],challenges:['Trauma-Weitergabe'],growth:['Traumatherapie','Achtsamkeit']},
+  {id:'RE', label:'Resilienz',  type:'sub',x:296,y:570,parent:'MH', dim:'nature',tagline:'Die Kraft zurückzuspringen',
+   desc:'Resilienz ist zu ~40% genetisch, aber stark durch sichere Bindungen und Erfolgserlebnisse formbar.',heri:40,sl:['Erlernbar','Mitgegeben'],strengths:['Hochtrainierbar'],challenges:['Benötigt Unterstützung'],growth:['Selbstwirksamkeit','Netzwerk']},
   {id:'GE', label:'Gen-Umwelt-\nInteraktion',type:'sub',x:282,y:100,parent:'PE',dim:'nature',tagline:'Gene reagieren auf Umwelt',
-   desc:'Gene sind keine fixen Programme sondern Reaktionssysteme. Dasselbe Gen kann in verschiedenen Umgebungen vÃ¶llig andere Traits produzieren.',heri:55,sl:['Fixiert','Reaktiv'],strengths:['Tiefes VerstÃ¤ndnis'],challenges:['KomplexitÃ¤t'],growth:['Epigenetik studieren']},
+   desc:'Gene sind keine fixen Programme sondern Reaktionssysteme. Dasselbe Gen kann in verschiedenen Umgebungen völlig andere Traits produzieren.',heri:55,sl:['Fixiert','Reaktiv'],strengths:['Tiefes Verständnis'],challenges:['Komplexität'],growth:['Epigenetik studieren']},
  ],
  edges:[
   ['PE','IQ'],['PE','IE'],['IQ','EM'],['EM','MH'],['MH','TA'],['TA','IE'],
@@ -523,29 +523,29 @@ nature:{
 };
 
 const QUIZ = [
-  {trait:'O',  dc:'#c9a84c',dl:'PersÃ¶nlichkeit', q:'Ich probiere gerne neue Dinge aus und lasse mich von unbekannten Ideen begeistern.',  hint:'Denke an deine letzten Monate â€“ wie neugierig warst du auf Neues?',       sl:['Stimmt gar nicht','Stimmt vÃ¶llig']},
-  {trait:'C',  dc:'#c9a84c',dl:'PersÃ¶nlichkeit', q:'Ich erledige Aufgaben zuverlÃ¤ssig und halte Deadlines konsequent ein.',               hint:'Wie organisiert gehst du typischerweise an Aufgaben heran?',               sl:['Stimmt gar nicht','Stimmt vÃ¶llig']},
-  {trait:'E',  dc:'#c9a84c',dl:'PersÃ¶nlichkeit', q:'Nach einem langen Tag mit vielen Menschen fÃ¼hle ich mich eher energiegeladen.',       hint:'Wo schÃ¶pfst du Energie â€“ aus sozialer Interaktion oder aus Zeit allein?',  sl:['ErschÃ¶pft (introvertiert)','Energiegeladen (extravertiert)']},
-  {trait:'A',  dc:'#c9a84c',dl:'PersÃ¶nlichkeit', q:'Mir ist wichtig, dass alle zufrieden sind â€“ auch wenn ich dafÃ¼r zurÃ¼ckstecke.',       hint:'Wie viel Gewicht gibst du den BedÃ¼rfnissen anderer gegenÃ¼ber deinen eigenen?',sl:['Priorisiere mich','Priorisiere andere']},
-  {trait:'N',  dc:'#c9a84c',dl:'PersÃ¶nlichkeit', q:'In stressigen Situationen fÃ¼hle ich mich schnell Ã¼berwÃ¤ltigt oder emotional aufgewÃ¼hlt.',hint:'Wie stark reagierst du emotional auf Druck und Unsicherheit?',           sl:['Bleibe sehr ruhig','Reagiere sehr stark']},
-  {trait:'LI', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich drÃ¼cke mich in Schrift oder Rede gerne prÃ¤zise und ausdrucksstark aus.',          hint:'FÃ¤llt dir Schreiben oder Reden leicht â€“ genieÃŸt du es?',                  sl:['Kein Talent dafÃ¼r','Meine grÃ¶ÃŸte StÃ¤rke']},
-  {trait:'LM', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich lÃ¶se gerne logische RÃ¤tsel oder Zahlenprobleme.',                                 hint:'Wie sehr genieÃŸt du mathematisches oder logisches Denken?',               sl:['Kein Talent dafÃ¼r','Meine grÃ¶ÃŸte StÃ¤rke']},
-  {trait:'KI', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich lerne am besten durch Ausprobieren mit den HÃ¤nden, Sport oder Bewegung.',         hint:'Bist du ein "Macher" â€“ lernst du durch kÃ¶rperliches Tun?',                sl:['Kein Talent dafÃ¼r','Meine grÃ¶ÃŸte StÃ¤rke']},
-  {trait:'IP', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich kann Menschen und ihre Emotionen gut lesen und passe mich schnell an.',           hint:'Wie gut verstehst du intuitiv was andere fÃ¼hlen oder denken?',            sl:['Kein Talent dafÃ¼r','Meine grÃ¶ÃŸte StÃ¤rke']},
-  {trait:'IA', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich kenne meine eigenen StÃ¤rken, SchwÃ¤chen und Motivationen sehr genau.',            hint:'Wie tief ist dein VerstÃ¤ndnis von dir selbst?',                           sl:['Kaum Selbstkenntnis','Sehr tiefe Selbstkenntnis']},
-  {trait:'EM_pos',dc:'#f75f5f',dl:'Emotionen',  q:'Ich erlebe positive Emotionen wie Freude und Dankbarkeit hÃ¤ufig und intensiv.',       hint:'Wie stark und hÃ¤ufig erlebst du positive GefÃ¼hle im Alltag?',            sl:['Selten und schwach','HÃ¤ufig und intensiv']},
-  {trait:'EM_reg',dc:'#f75f5f',dl:'Emotionen',  q:'Negative GefÃ¼hle wie Sorge oder Trauer verarbeite ich schnell ohne mich zu verlieren.',hint:'Wie gut regulierst du negative Emotionen?',                             sl:['Schwer zu regulieren','Leicht zu regulieren']},
-  {trait:'NA_gm',dc:'#3ecf8e',dl:'Natur & Nurture',q:'Ich glaube, dass meine FÃ¤higkeiten hauptsÃ¤chlich durch harte Arbeit entstehen.',   hint:'Growth Mindset vs. angeborene FÃ¤higkeiten â€“ wo siehst du dich?',        sl:['Talent ist entscheidend','Arbeit ist entscheidend']},
-  {trait:'NA_res',dc:'#3ecf8e',dl:'Natur & Nurture',q:'Nach RÃ¼ckschlÃ¤gen finde ich schnell wieder zu meiner Energie zurÃ¼ck.',            hint:'Wie resilient bist du â€“ wie schnell erholst du dich von Niederlagen?',   sl:['Brauche sehr lange','Erhole mich sehr schnell']},
+  {trait:'O',  dc:'#c9a84c',dl:'Persönlichkeit', q:'Ich probiere gerne neue Dinge aus und lasse mich von unbekannten Ideen begeistern.',  hint:'Denke an deine letzten Monate – wie neugierig warst du auf Neues?',       sl:['Stimmt gar nicht','Stimmt völlig']},
+  {trait:'C',  dc:'#c9a84c',dl:'Persönlichkeit', q:'Ich erledige Aufgaben zuverlässig und halte Deadlines konsequent ein.',               hint:'Wie organisiert gehst du typischerweise an Aufgaben heran?',               sl:['Stimmt gar nicht','Stimmt völlig']},
+  {trait:'E',  dc:'#c9a84c',dl:'Persönlichkeit', q:'Nach einem langen Tag mit vielen Menschen fühle ich mich eher energiegeladen.',       hint:'Wo schöpfst du Energie – aus sozialer Interaktion oder aus Zeit allein?',  sl:['Erschöpft (introvertiert)','Energiegeladen (extravertiert)']},
+  {trait:'A',  dc:'#c9a84c',dl:'Persönlichkeit', q:'Mir ist wichtig, dass alle zufrieden sind – auch wenn ich dafür zurückstecke.',       hint:'Wie viel Gewicht gibst du den Bedürfnissen anderer gegenüber deinen eigenen?',sl:['Priorisiere mich','Priorisiere andere']},
+  {trait:'N',  dc:'#c9a84c',dl:'Persönlichkeit', q:'In stressigen Situationen fühle ich mich schnell überwältigt oder emotional aufgewühlt.',hint:'Wie stark reagierst du emotional auf Druck und Unsicherheit?',           sl:['Bleibe sehr ruhig','Reagiere sehr stark']},
+  {trait:'LI', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich drücke mich in Schrift oder Rede gerne präzise und ausdrucksstark aus.',          hint:'Fällt dir Schreiben oder Reden leicht – genießt du es?',                  sl:['Kein Talent dafür','Meine größte Stärke']},
+  {trait:'LM', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich löse gerne logische Rätsel oder Zahlenprobleme.',                                 hint:'Wie sehr genießt du mathematisches oder logisches Denken?',               sl:['Kein Talent dafür','Meine größte Stärke']},
+  {trait:'KI', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich lerne am besten durch Ausprobieren mit den Händen, Sport oder Bewegung.',         hint:'Bist du ein "Macher" – lernst du durch körperliches Tun?',                sl:['Kein Talent dafür','Meine größte Stärke']},
+  {trait:'IP', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich kann Menschen und ihre Emotionen gut lesen und passe mich schnell an.',           hint:'Wie gut verstehst du intuitiv was andere fühlen oder denken?',            sl:['Kein Talent dafür','Meine größte Stärke']},
+  {trait:'IA', dc:'#4f8ef7',dl:'Intelligenz',    q:'Ich kenne meine eigenen Stärken, Schwächen und Motivationen sehr genau.',            hint:'Wie tief ist dein Verständnis von dir selbst?',                           sl:['Kaum Selbstkenntnis','Sehr tiefe Selbstkenntnis']},
+  {trait:'EM_pos',dc:'#f75f5f',dl:'Emotionen',  q:'Ich erlebe positive Emotionen wie Freude und Dankbarkeit häufig und intensiv.',       hint:'Wie stark und häufig erlebst du positive Gefühle im Alltag?',            sl:['Selten und schwach','Häufig und intensiv']},
+  {trait:'EM_reg',dc:'#f75f5f',dl:'Emotionen',  q:'Negative Gefühle wie Sorge oder Trauer verarbeite ich schnell ohne mich zu verlieren.',hint:'Wie gut regulierst du negative Emotionen?',                             sl:['Schwer zu regulieren','Leicht zu regulieren']},
+  {trait:'NA_gm',dc:'#3ecf8e',dl:'Natur & Nurture',q:'Ich glaube, dass meine Fähigkeiten hauptsächlich durch harte Arbeit entstehen.',   hint:'Growth Mindset vs. angeborene Fähigkeiten – wo siehst du dich?',        sl:['Talent ist entscheidend','Arbeit ist entscheidend']},
+  {trait:'NA_res',dc:'#3ecf8e',dl:'Natur & Nurture',q:'Nach Rückschlägen finde ich schnell wieder zu meiner Energie zurück.',            hint:'Wie resilient bist du – wie schnell erholst du dich von Niederlagen?',   sl:['Brauche sehr lange','Erhole mich sehr schnell']},
 ];
 </script>
 
-<!-- â•â•â•â•â•â• ENGINE â•â•â•â•â•â• -->
+<!-- ------ ENGINE ------ -->
 <script>
 (function(){
 const SVG_NS='http://www.w3.org/2000/svg';
 
-/* â”€â”€ Navigation â”€â”€ */
+/* -- Navigation -- */
 window.showSection = id => {
     document.querySelectorAll('.hm-section').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -553,7 +553,7 @@ window.showSection = id => {
 };
 window.openExplorer = dim => { showSection('sec-explorer'); setTimeout(()=>switchDim(dim),60); };
 
-/* â•â•â•â• SVG MAP â•â•â•â• */
+/* ---- SVG MAP ---- */
 function h2r(hex,a){ const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${a})`; }
 function svgEl(tag,attrs){ const e=document.createElementNS(SVG_NS,tag); Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v)); return e; }
 
@@ -635,7 +635,7 @@ function buildSVG(dimKey){
 }
 
 function renderDetail(node, color){
-    const dimNames={personality:'PersÃ¶nlichkeit',intelligence:'Intelligenz',emotion:'Emotionen',nature:'Natur & Nurture'};
+    const dimNames={personality:'Persönlichkeit',intelligence:'Intelligenz',emotion:'Emotionen',nature:'Natur & Nurture'};
     const h=node.heri||50;
     document.getElementById('hm-detail').innerHTML=`
         <div class="hm-d-head">
@@ -647,17 +647,17 @@ function renderDetail(node, color){
             <p class="hm-d-desc">${node.desc||''}</p>
             <div class="hm-d-block">
                 <div class="hm-d-block-title">Natur vs. Nurture</div>
-                <div class="hm-heri-labels"><span>Genetisch Â· <strong style="color:${color}">${h}%</strong></span><span>Umwelt Â· ${100-h}%</span></div>
+                <div class="hm-heri-labels"><span>Genetisch · <strong style="color:${color}">${h}%</strong></span><span>Umwelt · ${100-h}%</span></div>
                 <div class="hm-heri-track"><div class="hm-heri-fill" style="width:${h}%;background:linear-gradient(90deg,${color},${color}66)"></div></div>
             </div>
-            ${node.strengths?.length?`<div class="hm-d-block"><div class="hm-d-block-title">StÃ¤rken</div><div class="hm-pills">${node.strengths.map(s=>`<span class="hm-pill s">${s}</span>`).join('')}</div></div>`:''}
+            ${node.strengths?.length?`<div class="hm-d-block"><div class="hm-d-block-title">Stärken</div><div class="hm-pills">${node.strengths.map(s=>`<span class="hm-pill s">${s}</span>`).join('')}</div></div>`:''}
             ${node.challenges?.length?`<div class="hm-d-block"><div class="hm-d-block-title">Herausforderungen</div><div class="hm-pills">${node.challenges.map(c=>`<span class="hm-pill c">${c}</span>`).join('')}</div></div>`:''}
             ${node.growth?.length?`<div class="hm-d-block"><div class="hm-d-block-title">Wachstum</div><div class="hm-pills">${node.growth.map(g=>`<span class="hm-pill g">${g}</span>`).join('')}</div></div>`:''}
         </div>`;
 }
 
 function resetDetail(){
-    document.getElementById('hm-detail').innerHTML=`<div class="hm-detail-empty"><div class="hm-detail-empty-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>WÃ¤hle einen Knoten</h3><p>Klicke auf einen Knoten in der Karte um Details zu sehen.</p></div>`;
+    document.getElementById('hm-detail').innerHTML=`<div class="hm-detail-empty"><div class="hm-detail-empty-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>Wähle einen Knoten</h3><p>Klicke auf einen Knoten in der Karte um Details zu sehen.</p></div>`;
 }
 
 window.switchDim = dim => {
@@ -670,7 +670,7 @@ window.switchDim = dim => {
     resetDetail();
 };
 
-/* â•â•â•â• QUIZ â•â•â•â• */
+/* ---- QUIZ ---- */
 const answers={};
 
 window.restartQuiz = () => {
@@ -699,7 +699,7 @@ function buildQuiz(){
             <div class="hm-q-nav">
                 <span class="hm-q-counter">${i+1} / ${QUIZ.length}</span>
                 <button class="hm-btn hm-btn-outline" id="qn${i}" onclick="nextQ(${i})" style="opacity:.3;pointer-events:none">
-                    ${i<QUIZ.length-1?'Weiter â†’':'Ergebnis ansehen â†’'}
+                    ${i<QUIZ.length-1?'Weiter ?':'Ergebnis ansehen ?'}
                 </button>
             </div>`;
         wrap.appendChild(div);
@@ -727,7 +727,7 @@ window.nextQ = step => {
     }
 };
 
-/* â•â•â•â• RESULT â•â•â•â• */
+/* ---- RESULT ---- */
 function score(idx){ return answers[idx]!==undefined ? Math.round(((answers[idx]-1)/6)*100) : 50; }
 function scoreLabel(v){ return v>=72?{cls:'high',txt:'Stark'}:v>=42?{cls:'mid',txt:'Mittel'}:{cls:'low',txt:'Wachstumsfeld'}; }
 
@@ -746,12 +746,12 @@ function radarSVG(labels,values,color,size=200){
 
 function getArchetype(s){
     const hO=s.O>60,hC=s.C>60,hE=s.E>60,hA=s.A>60,hIA=s.IA>65,hLM=s.LM>60,hIP=s.IP>60;
-    if(hO&&hLM) return {name:'Der VisionÃ¤r',emoji:'ğŸ”­',color:'#9b6dff',desc:'Du verbindest kreatives Denken mit analytischer SchÃ¤rfe. Du siehst Muster wo andere Chaos sehen und baust Systeme die andere begeistern.'};
-    if(hE&&hIP) return {name:'Der Netzwerker',emoji:'ğŸŒ',color:'#4f8ef7',desc:'Menschen sind deine StÃ¤rke. Du liest RÃ¤ume, baust Verbindungen und weiÃŸt intuitiv wie du andere begeisterst und mitreiÃŸt.'};
-    if(hA&&hIA) return {name:'Der Empath',emoji:'ğŸ’™',color:'#f75f5f',desc:'Du fÃ¼hlst tief und verstehst andere auf einer Ebene die die meisten nie erreichen. Deine StÃ¤rke liegt in echten Beziehungen.'};
-    if(hC&&hLM) return {name:'Der Architekt',emoji:'ğŸ—ï¸',color:'#3ecf8e',desc:'Du baust Systeme, Strukturen und PlÃ¤ne die funktionieren. PrÃ¤zision und VerlÃ¤sslichkeit sind deine SuperkrÃ¤fte.'};
-    if(hIA&&hO) return {name:'Der TiefgrÃ¼ndige',emoji:'ğŸ§¿',color:'#c9a84c',desc:'Du kennst dich selbst besser als die meisten. Diese Selbstkenntnis kombiniert mit Neugier macht dich zu einem lebenslangen Lernenden.'};
-    return {name:'Der Vielseitige',emoji:'âš–ï¸',color:'#c9a84c',desc:'Du bist ausgewogen Ã¼ber alle Dimensionen â€“ ein echter Generalist. Deine FlexibilitÃ¤t ist deine grÃ¶ÃŸte StÃ¤rke in einer komplexen Welt.'};
+    if(hO&&hLM) return {name:'Der Visionär',emoji:'??',color:'#9b6dff',desc:'Du verbindest kreatives Denken mit analytischer Schärfe. Du siehst Muster wo andere Chaos sehen und baust Systeme die andere begeistern.'};
+    if(hE&&hIP) return {name:'Der Netzwerker',emoji:'??',color:'#4f8ef7',desc:'Menschen sind deine Stärke. Du liest Räume, baust Verbindungen und weißt intuitiv wie du andere begeisterst und mitreißt.'};
+    if(hA&&hIA) return {name:'Der Empath',emoji:'??',color:'#f75f5f',desc:'Du fühlst tief und verstehst andere auf einer Ebene die die meisten nie erreichen. Deine Stärke liegt in echten Beziehungen.'};
+    if(hC&&hLM) return {name:'Der Architekt',emoji:'???',color:'#3ecf8e',desc:'Du baust Systeme, Strukturen und Pläne die funktionieren. Präzision und Verlässlichkeit sind deine Superkräfte.'};
+    if(hIA&&hO) return {name:'Der Tiefgründige',emoji:'??',color:'#c9a84c',desc:'Du kennst dich selbst besser als die meisten. Diese Selbstkenntnis kombiniert mit Neugier macht dich zu einem lebenslangen Lernenden.'};
+    return {name:'Der Vielseitige',emoji:'??',color:'#c9a84c',desc:'Du bist ausgewogen über alle Dimensionen – ein echter Generalist. Deine Flexibilität ist deine größte Stärke in einer komplexen Welt.'};
 }
 
 function buildResult(){
@@ -761,22 +761,22 @@ function buildResult(){
         EM_pos:score(10),EM_reg:score(11),NA_gm:score(12),NA_res:score(13)
     };
 
-    const pTraits=[{n:'Offenheit',v:s.O},{n:'Gewissenhaftigkeit',v:s.C},{n:'Extraversion',v:s.E},{n:'VertrÃ¤glichkeit',v:s.A},{n:'Em. StabilitÃ¤t',v:s.N}];
-    const iTraits=[{n:'Linguistisch',v:s.LI},{n:'Logisch-Math.',v:s.LM},{n:'KÃ¶rperlich',v:s.KI},{n:'Interpersonell',v:s.IP},{n:'Intrapersonell',v:s.IA}];
+    const pTraits=[{n:'Offenheit',v:s.O},{n:'Gewissenhaftigkeit',v:s.C},{n:'Extraversion',v:s.E},{n:'Verträglichkeit',v:s.A},{n:'Em. Stabilität',v:s.N}];
+    const iTraits=[{n:'Linguistisch',v:s.LI},{n:'Logisch-Math.',v:s.LM},{n:'Körperlich',v:s.KI},{n:'Interpersonell',v:s.IP},{n:'Intrapersonell',v:s.IA}];
     const topP=[...pTraits].sort((a,b)=>b.v-a.v)[0];
     const botP=[...pTraits].sort((a,b)=>a.v-b.v)[0];
     const topI=[...iTraits].sort((a,b)=>b.v-a.v)[0];
     const arch=getArchetype(s);
 
     const skills=[
-        {n:'Offenheit',       dim:'PersÃ¶nlichkeit',color:'#c9a84c',v:s.O},
-        {n:'Gewissenhaftigkeit',dim:'PersÃ¶nlichkeit',color:'#c9a84c',v:s.C},
-        {n:'Extraversion',    dim:'PersÃ¶nlichkeit',color:'#c9a84c',v:s.E},
-        {n:'VertrÃ¤glichkeit', dim:'PersÃ¶nlichkeit',color:'#c9a84c',v:s.A},
-        {n:'Em. StabilitÃ¤t',  dim:'PersÃ¶nlichkeit',color:'#c9a84c',v:s.N},
+        {n:'Offenheit',       dim:'Persönlichkeit',color:'#c9a84c',v:s.O},
+        {n:'Gewissenhaftigkeit',dim:'Persönlichkeit',color:'#c9a84c',v:s.C},
+        {n:'Extraversion',    dim:'Persönlichkeit',color:'#c9a84c',v:s.E},
+        {n:'Verträglichkeit', dim:'Persönlichkeit',color:'#c9a84c',v:s.A},
+        {n:'Em. Stabilität',  dim:'Persönlichkeit',color:'#c9a84c',v:s.N},
         {n:'Sprache',         dim:'Intelligenz',   color:'#4f8ef7',v:s.LI},
         {n:'Logisches Denken',dim:'Intelligenz',   color:'#4f8ef7',v:s.LM},
-        {n:'KÃ¶rperintelligenz',dim:'Intelligenz',  color:'#4f8ef7',v:s.KI},
+        {n:'Körperintelligenz',dim:'Intelligenz',  color:'#4f8ef7',v:s.KI},
         {n:'Soziale Intelligenz',dim:'Intelligenz',color:'#4f8ef7',v:s.IP},
         {n:'Selbstkenntnis',  dim:'Intelligenz',   color:'#4f8ef7',v:s.IA},
     ];
@@ -793,53 +793,53 @@ function buildResult(){
     <!-- Radar Charts -->
     <div class="hm-radar-row">
         <div class="hm-radar-card">
-            <div class="hm-radar-card-title" style="color:#c9a84c">â— PersÃ¶nlichkeit (Big Five)</div>
-            ${radarSVG(['Offenheit','Gewissen-\nhaftigkeit','Extraver-\nsion','VertrÃ¤g-\nlichkeit','StabilitÃ¤t'],[s.O,s.C,s.E,s.A,s.N],'#c9a84c',210)}
+            <div class="hm-radar-card-title" style="color:#c9a84c">? Persönlichkeit (Big Five)</div>
+            ${radarSVG(['Offenheit','Gewissen-\nhaftigkeit','Extraver-\nsion','Verträg-\nlichkeit','Stabilität'],[s.O,s.C,s.E,s.A,s.N],'#c9a84c',210)}
         </div>
         <div class="hm-radar-card">
-            <div class="hm-radar-card-title" style="color:#4f8ef7">â— Intelligenz-Profil</div>
-            ${radarSVG(['Linguistisch','Logisch','KÃ¶rperlich','Inter-\npersonell','Intra-\npersonell'],[s.LI,s.LM,s.KI,s.IP,s.IA],'#4f8ef7',210)}
+            <div class="hm-radar-card-title" style="color:#4f8ef7">? Intelligenz-Profil</div>
+            ${radarSVG(['Linguistisch','Logisch','Körperlich','Inter-\npersonell','Intra-\npersonell'],[s.LI,s.LM,s.KI,s.IP,s.IA],'#4f8ef7',210)}
         </div>
     </div>
 
     <!-- Insights -->
     <div class="hm-insights-row">
         <div class="hm-insight-card">
-            <div class="hm-insight-emo">ğŸ’ª</div>
-            <div class="hm-insight-lbl">GrÃ¶ÃŸte PersÃ¶nlichkeitsstÃ¤rke</div>
+            <div class="hm-insight-emo">??</div>
+            <div class="hm-insight-lbl">Größte Persönlichkeitsstärke</div>
             <div class="hm-insight-title">${topP.n}</div>
-            <div class="hm-insight-desc">Mit ${topP.v}% deine stÃ¤rkste Dimension. Nutze sie als bewussten Hebel in Alltag und Arbeit.</div>
+            <div class="hm-insight-desc">Mit ${topP.v}% deine stärkste Dimension. Nutze sie als bewussten Hebel in Alltag und Arbeit.</div>
         </div>
         <div class="hm-insight-card">
-            <div class="hm-insight-emo">âš¡</div>
+            <div class="hm-insight-emo">?</div>
             <div class="hm-insight-lbl">Dominante Intelligenz</div>
             <div class="hm-insight-title">${topI.n}</div>
-            <div class="hm-insight-desc">Deine ausgeprÃ¤gteste Intelligenzform. Setze sie gezielt ein fÃ¼r schnelle Fortschritte.</div>
+            <div class="hm-insight-desc">Deine ausgeprägteste Intelligenzform. Setze sie gezielt ein für schnelle Fortschritte.</div>
         </div>
         <div class="hm-insight-card">
-            <div class="hm-insight-emo">ğŸŒ±</div>
-            <div class="hm-insight-lbl">GrÃ¶ÃŸtes Wachstumsfeld</div>
+            <div class="hm-insight-emo">??</div>
+            <div class="hm-insight-lbl">Größtes Wachstumsfeld</div>
             <div class="hm-insight-title">${botP.n}</div>
-            <div class="hm-insight-desc">Dein grÃ¶ÃŸtes Entwicklungspotenzial. Kleine Verbesserungen hier haben groÃŸe Wirkung.</div>
+            <div class="hm-insight-desc">Dein größtes Entwicklungspotenzial. Kleine Verbesserungen hier haben große Wirkung.</div>
         </div>
     </div>
 
     <!-- Skill Tree -->
     <div class="hm-tree-title">Dein Skill Tree</div>
-    <div class="hm-tree-hint">GrÃ¼n = stark Â· Gold = mittel Â· Rot = Wachstumsfeld</div>
+    <div class="hm-tree-hint">Grün = stark · Gold = mittel · Rot = Wachstumsfeld</div>
     <div class="hm-skill-grid">
         ${skills.map(sk=>{ const l=scoreLabel(sk.v); return `
         <div class="hm-skill-card ${l.cls}">
             <div class="hm-sk-name">${sk.n}</div>
             <div class="hm-sk-dim" style="color:${sk.color}">${sk.dim}</div>
             <div class="hm-sk-bar"><div class="hm-sk-fill" style="width:${sk.v}%;background:${sk.color}"></div></div>
-            <div class="hm-sk-txt">${sk.v}% Â· ${l.txt}</div>
+            <div class="hm-sk-txt">${sk.v}% · ${l.txt}</div>
         </div>`; }).join('')}
     </div>
 
     <!-- Emotion & Resilience -->
     <div class="hm-mini-grid">
-        ${[['Positive EmotionalitÃ¤t',s.EM_pos,'#f75f5f'],['Emotionsregulation',s.EM_reg,'#f75f5f'],['Growth Mindset',s.NA_gm,'#3ecf8e'],['Resilienz',s.NA_res,'#3ecf8e']].map(([l,v,c])=>`
+        ${[['Positive Emotionalität',s.EM_pos,'#f75f5f'],['Emotionsregulation',s.EM_reg,'#f75f5f'],['Growth Mindset',s.NA_gm,'#3ecf8e'],['Resilienz',s.NA_res,'#3ecf8e']].map(([l,v,c])=>`
         <div class="hm-mini-card">
             <div class="hm-mini-top"><span class="hm-mini-lbl">${l}</span><span class="hm-mini-val" style="color:${c}">${v}%</span></div>
             <div class="hm-mini-bar"><div class="hm-mini-fill" style="width:${v}%;background:${c}"></div></div>
@@ -849,7 +849,7 @@ function buildResult(){
     showSection('sec-result');
 }
 
-/* â”€â”€ Init â”€â”€ */
+/* -- Init -- */
 document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('.hm-dim-tab').forEach(t=>t.addEventListener('click',()=>switchDim(t.dataset.dim)));
     switchDim('personality');
@@ -859,7 +859,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 })();
 </script>
 
-<script src="js/components.js?v=2"></script>
+<script src="js/components.js?v=3"></script>
 <script src="js/main.js?v=2"></script>
 </body>
 </html>

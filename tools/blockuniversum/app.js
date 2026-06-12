@@ -573,15 +573,17 @@ function initProtocol() {
         steps[active].classList.remove('protocol-step--active');
         active = Math.max(0, Math.min(steps.length - 1, idx));
         steps[active].classList.add('protocol-step--active');
-        steps[active].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         prevBtn.disabled   = (active === 0);
         nextBtn.textContent = (active === steps.length - 1) ? 'Abgeschlossen ✓' : 'Weiter ►';
         counter.textContent = (active + 1) + ' / ' + steps.length;
-        if (conclusion && active === steps.length - 1) {
-            conclusion.hidden = false;
-            conclusion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+        if (conclusion) conclusion.hidden = (active !== steps.length - 1);
     }
+
+    // Click directly on a step to activate it
+    steps.forEach(function (step, idx) {
+        step.style.cursor = 'pointer';
+        step.addEventListener('click', function () { goTo(idx); });
+    });
 
     prevBtn.addEventListener('click', function () { goTo(active - 1); });
     nextBtn.addEventListener('click', function () { if (active < steps.length - 1) goTo(active + 1); });

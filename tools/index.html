@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools – Hybridlogs</title>
+    <meta name="description" content="Interaktive Visualisierungen zu Mindset, Produktivität und Bewusstsein.">
+    <link rel="stylesheet" href="shared/base.css">
+    <style>
+        /* ── Header ── */
+        .site-header {
+            padding: var(--space-5) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .site-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .site-header__logo {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+        .site-header__logo span { color: var(--gold); }
+        .site-header__back {
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: color var(--duration);
+        }
+        .site-header__back:hover { color: var(--gold); }
+
+        /* ── Hero ── */
+        .tools-hero {
+            padding: var(--space-24) 0 var(--space-12);
+        }
+        .tools-hero__label { margin-bottom: var(--space-4); }
+        .tools-hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 5vw, 52px);
+            font-weight: 300;
+            color: var(--text);
+            line-height: 1.1;
+            margin-bottom: var(--space-4);
+        }
+        .tools-hero__sub {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.6;
+        }
+
+        /* ── Grid ── */
+        .tools-grid-section { padding: 0 0 var(--space-24); }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* ── Tool Card ── */
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-solid);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform var(--duration) var(--ease-out),
+                        border-color var(--duration),
+                        box-shadow var(--duration);
+            text-decoration: none;
+            color: inherit;
+        }
+        .tool-card:hover:not(.tool-card--disabled) {
+            transform: translateY(-4px);
+            border-color: rgba(201, 168, 76, 0.3);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        }
+        .tool-card--disabled {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .tool-card__preview {
+            height: 200px;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-solid);
+        }
+        .tool-card__preview canvas {
+            display: block;
+            position: absolute;
+            inset: 0;
+        }
+        .tool-card__preview--placeholder {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .tool-card__body {
+            padding: var(--space-6);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+        .tool-card__title {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text);
+            margin-top: var(--space-2);
+            line-height: 1.3;
+        }
+        .tool-card__desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .tool-card__link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gold);
+            margin-top: var(--space-3);
+            transition: gap var(--duration);
+        }
+        .tool-card:hover .tool-card__link { gap: 10px; }
+
+        /* ── Footer ── */
+        .site-footer {
+            padding: var(--space-8) 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .site-footer a {
+            color: var(--gold);
+            transition: color var(--duration);
+        }
+        .site-footer a:hover { color: var(--gold-light); }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-header__inner">
+                <a href="../index.html" class="site-header__logo">hybrid<span>logs</span></a>
+                <a href="../index.html" class="site-header__back">← hybridlog.de</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="tools-hero">
+            <div class="container">
+                <p class="caption">Interaktive Tools</p>
+                <h1 class="tools-hero__title">Tools</h1>
+                <p class="tools-hero__sub">Interaktive Visualisierungen zu Mindset, Produktivität und Bewusstsein. Zum Erkunden, nicht zum Lesen.</p>
+            </div>
+        </section>
+
+        <section class="tools-grid-section">
+            <div class="container">
+                <div class="tools-grid">
+
+                    <!-- Tool 1 -->
+                    <a href="blockuniversum/" class="tool-card">
+                        <div class="tool-card__preview">
+                            <canvas id="preview-block"></canvas>
+                        </div>
+                        <div class="tool-card__body">
+                            <span class="caption">Bewusstsein · Physik</span>
+                            <h2 class="tool-card__title">Das Blockuniversum</h2>
+                            <p class="tool-card__desc">Warum existiert deine Zukunft bereits? Eine interaktive Reise durch die Physik der Raumzeit und ihre Bedeutung für Manifestation und Veränderung.</p>
+                            <span class="tool-card__link">Öffnen →</span>
+                        </div>
+                    </a>
+
+                    <!-- Tool 2: Placeholder -->
+                    <div class="tool-card tool-card--disabled">
+                        <div class="tool-card__preview tool-card__preview--placeholder">
+                            <span>In Entwicklung</span>
+                        </div>
+                        <div class="tool-card__body">
+                            <span class="caption">–</span>
+                            <h2 class="tool-card__title">Coming soon</h2>
+                            <p class="tool-card__desc">Das nächste Tool befindet sich in Entwicklung.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>← <a href="../index.html">hybridlog.de</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mini-preview: 5 parallel lines + slowly moving dot on middle line
+        (function () {
+            var canvas = document.getElementById('preview-block');
+            if (!canvas) return;
+            var wrap = canvas.parentElement;
+            var dpr = window.devicePixelRatio || 1;
+            var W = wrap.offsetWidth;
+            var H = 200;
+            canvas.width  = Math.round(W * dpr);
+            canvas.height = Math.round(H * dpr);
+            canvas.style.width  = W + 'px';
+            canvas.style.height = H + 'px';
+            var ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            var N = 5;
+            var padX = W * 0.12;
+            var padY = H * 0.20;
+            var spacing = (H - padY * 2) / (N - 1);
+            var mid = Math.floor(N / 2);
+            var progress = 0;
+            var lastTs = null;
+            var running = false;
+            var animId = null;
+
+            function draw(ts) {
+                if (!running) return;
+                if (lastTs !== null) {
+                    progress += ((ts - lastTs) / 1000) * 0.10;
+                    if (progress > 1) progress = 0;
+                }
+                lastTs = ts;
+
+                ctx.clearRect(0, 0, W, H);
+
+                for (var i = 0; i < N; i++) {
+                    var y = padY + i * spacing;
+                    var isMid = (i === mid);
+                    ctx.beginPath();
+                    ctx.moveTo(padX, y);
+                    ctx.lineTo(W - padX, y);
+                    ctx.strokeStyle = isMid ? '#c9a84c' : 'rgba(255,255,255,0.12)';
+                    ctx.lineWidth   = isMid ? 1.5 : 0.75;
+                    ctx.stroke();
+                }
+
+                // Moving dot on middle line
+                var midY = padY + mid * spacing;
+                var dotX = padX + progress * (W - padX * 2);
+
+                // Glow
+                var grad = ctx.createRadialGradient(dotX, midY, 0, dotX, midY, 14);
+                grad.addColorStop(0, 'rgba(201,168,76,0.35)');
+                grad.addColorStop(1, 'rgba(201,168,76,0)');
+                ctx.beginPath();
+                ctx.arc(dotX, midY, 14, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                // Dot
+                ctx.beginPath();
+                ctx.arc(dotX, midY, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#c9a84c';
+                ctx.fill();
+
+                animId = requestAnimationFrame(draw);
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                running = entries[0].isIntersecting;
+                if (running) {
+                    lastTs = null;
+                    animId = requestAnimationFrame(draw);
+                } else if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            }, { threshold: 0.1 });
+            observer.observe(canvas);
+        })();
+    </script>
+
+</body>
+</html>

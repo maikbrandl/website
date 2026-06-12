@@ -1,0 +1,136 @@
+/* ============================================================
+   Hybridlogs Tools – Base Styles
+   Adapted from hybridlogs.de dark design system
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Dark Background */
+    --bg:              #0a0a0a;
+    --bg-elevated:     #111111;
+    --bg-card:         #141414;
+    --bg-card-hover:   #1a1a1a;
+    --surface:         #1e1e1e;
+
+    /* Borders */
+    --border:          rgba(255, 255, 255, 0.07);
+    --border-solid:    #2a2a2a;
+    --border-hover:    rgba(255, 255, 255, 0.14);
+
+    /* Text */
+    --text:            #f0f0f0;
+    --text-dim:        #bbbbbb;
+    --text-secondary:  #888888;
+    --text-muted:      #555555;
+
+    /* Gold Accent */
+    --gold:            #c9a84c;
+    --gold-light:      #dfc47a;
+    --gold-dark:       #a68935;
+    --gold-glow:       rgba(201, 168, 76, 0.15);
+    --gold-glow-strong: rgba(201, 168, 76, 0.25);
+
+    /* Typography */
+    --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+
+    /* Spacing */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+
+    /* Radius */
+    --radius-sm:   6px;
+    --radius-md:   12px;
+    --radius-lg:   20px;
+    --radius-full: 9999px;
+
+    /* Canvas */
+    --canvas-line-main:     #c9a84c;
+    --canvas-line-sec:      rgba(255, 255, 255, 0.10);
+    --canvas-dot:           #f0f0f0;
+    --canvas-accessible:    rgba(201, 168, 76, 0.45);
+    --canvas-inaccessible:  rgba(255, 255, 255, 0.035);
+
+    /* Animation */
+    --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --duration:   300ms;
+
+    /* Layout */
+    --max-width:      1200px;
+    --max-width-text: 680px;
+}
+
+/* ── Base ── */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--text-dim);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── Layout ── */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-8);
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 var(--space-4); }
+}
+
+/* ── Utility ── */
+.caption {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+.caption--gold { color: var(--gold); }
+
+hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+.fact-tag {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    line-height: 1.5;
+}

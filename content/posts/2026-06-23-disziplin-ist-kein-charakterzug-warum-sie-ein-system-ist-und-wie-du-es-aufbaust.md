@@ -4,7 +4,7 @@ title: "Disziplin ist kein Charakterzug: Warum sie ein System ist und wie du es
 date: 2026-06-23T12:49:00.000+02:00
 category: Philosophie
 excerpt: ""
-cover: /images/uploads/kopie-von-desktop-wallpaper-mockup.png
+cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-1-.png
 related_post_slug: 2026-06-08-was-hochleistungslerner-anders-machen-5-gewohnheiten-die-niemand-dir-beibringt-7
 ---
 Es gibt Menschen, die du beobachtest und denkst: Die haben einfach mehr Disziplin als ich. Sie stehen früher auf. Sie ziehen ihre Pläne durch. Sie hören nicht auf wenn es unbequem wird. Und irgendwo im Hinterkopf sitzt die stille Überzeugung, dass du so nicht bist. Dass dir etwas fehlt, das die anderen haben.

@@ -75,6 +75,20 @@ const Galaxy = (() => {
         });
         // Scale from 800x600 design space to our 800x520
         uy = uy * (520/600);
+        // Push "Du" away from every archetype node (min distance 40px)
+        var MIN_DIST = 40;
+        for (var iter = 0; iter < 6; iter++) {
+            Object.keys(MODEL.GALAXY_POSITIONS).forEach(function(archId) {
+                var pos = MODEL.GALAXY_POSITIONS[archId];
+                var py  = pos.y * (520/600);
+                var dx  = ux - pos.x, dy = uy - py;
+                var dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < MIN_DIST) {
+                    if (dist < 0.5) { ux -= MIN_DIST * 0.6; uy += MIN_DIST * 0.6; }
+                    else { var push = (MIN_DIST - dist) / dist; ux += dx * push; uy += dy * push; }
+                }
+            });
+        }
         // Clamp to visible area
         ux = Math.max(40, Math.min(W-40, ux));
         uy = Math.max(40, Math.min(H-40, uy));
@@ -172,8 +186,8 @@ const Galaxy = (() => {
             var color = pos.color;
             var isPrimary = archId === galaxyPrimaryId;
 
-            // Node radius correlates with similarity
-            var r = isPrimary ? 26 : Math.round(12 + (sim/100)*10);
+            // Node radius correlates with similarity; minimum so small nodes stay tappable/readable
+            var r = isPrimary ? 26 : Math.max(18, Math.round(12 + (sim/100)*10));
 
             var g = el('g', {style:'cursor:pointer', 'data-arch':archId});
 
@@ -183,12 +197,13 @@ const Galaxy = (() => {
                     fill:'none', stroke:color, 'stroke-width':'1.2', 'stroke-opacity':'0.25'}));
             }
 
-            // Main circle
-            g.appendChild(el('circle', {cx:pos.x, cy:py, r:r,
+            // Main circle (ref kept for hover)
+            var mainC = el('circle', {cx:pos.x, cy:py, r:r,
                 fill:color, 'fill-opacity': isPrimary ? '0.22' : '0.12',
-                stroke:color, 'stroke-width': isPrimary ? '2' : '1.2'}));
+                stroke:color, 'stroke-width': isPrimary ? '2' : '1.2'});
+            g.appendChild(mainC);
 
-            // Emoji
+            // Emoji (ref kept for hover)
             var et = el('text', {x:pos.x, y:py,
                 'text-anchor':'middle', 'dominant-baseline':'middle',
                 'font-size': isPrimary ? '16' : '12', 'pointer-events':'none'});
@@ -215,6 +230,24 @@ const Galaxy = (() => {
             g.addEventListener('click', function() {
                 openDetailPanel(allScores, results.archetype.primary, similarities, archId);
             });
+
+            // Hover glow
+            (function(mainC, et, r, isPrimary) {
+                g.addEventListener('mouseenter', function() {
+                    mainC.setAttribute('r', String(r + 4));
+                    mainC.setAttribute('fill-opacity', isPrimary ? '0.36' : '0.24');
+                    et.setAttribute('font-size', isPrimary ? '18' : '14');
+                });
+                g.addEventListener('mouseleave', function() {
+                    mainC.setAttribute('r', String(r));
+                    mainC.setAttribute('fill-opacity', isPrimary ? '0.22' : '0.12');
+                    et.setAttribute('font-size', isPrimary ? '16' : '12');
+                });
+            })(mainC, et, r, isPrimary);
+
+            // Invisible enlarged tap target (important on mobile)
+            g.appendChild(el('circle', {cx:pos.x, cy:py, r:Math.max(30, r+6),
+                fill:'transparent', stroke:'none', 'pointer-events':'all'}));
 
             svgEl.appendChild(g);
         });
@@ -389,7 +422,9 @@ const Galaxy = (() => {
               '</div>' +
               '<div class="hm-adc__sim-badge" style="color:' + color + ';border-color:' + color + '44;background:' + color + '14">' + sim + '%</div>' +
             '</div>' +
-            (barsHtml ? '<div class="hm-adc__dims">' + barsHtml + '</div>' : '') +
+            (barsHtml ? '<div class="hm-adc__dims">' +
+                (isFocused ? '<div class="hm-adc__dims-hint">Farbiger Bereich = typischer Range des Archetyps &nbsp;·&nbsp; Punkt = dein Wert</div>' : '') +
+                barsHtml + '</div>' : '') +
             '<div class="hm-adc__extras">' +
               '<div class="hm-adc__strengths">' + strengthsHtml + '</div>' +
               '<div class="hm-adc__blindspot"><strong>Blinder Fleck:</strong> ' + (arch.blindspot||'') + '</div>' +

@@ -895,13 +895,13 @@ const MODEL = (() => {
 
     // ── Galaxy view: positions for 800×600 canvas (center 400,300) ──
     const GALAXY_POSITIONS = {
-        pioneer:   { x: 520, y: 120, color: '#f0a855' },
-        maker:     { x: 620, y: 300, color: '#58d4a0' },
-        connector: { x: 480, y: 460, color: '#f07090' },
-        analyst:   { x: 260, y: 460, color: '#60a0e8' },
-        guardian:  { x: 180, y: 300, color: '#88d878' },
-        endurer:   { x: 580, y: 420, color: '#d878c8' },
-        free:      { x: 400, y:  80, color: '#8b7cf8' },
+        free:      { x: 200, y:  80, color: '#8b7cf8' },
+        pioneer:   { x: 600, y:  80, color: '#f0a855' },
+        guardian:  { x: 100, y: 240, color: '#88d878' },
+        maker:     { x: 760, y: 320, color: '#58d4a0' },
+        analyst:   { x: 120, y: 480, color: '#60a0e8' },
+        endurer:   { x: 640, y: 480, color: '#d878c8' },
+        connector: { x: 400, y: 540, color: '#f07090' },
     };
 
     // ── Cross-cluster resonance lines (shown when a dim node is clicked) ─

@@ -7,7 +7,7 @@ excerpt: "Das MBTI geht auf die Ideen von Carl Gustav Jung zurück, ausgearbeite
   Jahrhunderts. Die Grundidee: Menschen unterscheiden sich systematisch darin,
   woher sie Energie ziehen, wie sie Informationen aufnehmen, wie sie entscheiden
   und wie sie ihr Leben strukturieren."
-cover: /images/uploads/18-denkfehler.png
+cover: /images/uploads/mbti-persoenlichkeitstypen.png
 ---
 Du machst nachts um eins einen dieser Tests im Internet, tippst dich durch sechzig Fragen, und am Ende steht ein Kürzel aus vier Buchstaben da. INFP. ENTJ. ISTJ. Und plötzlich liest du eine Beschreibung, die sich anfühlt, als hätte jemand heimlich in deinem Kopf mitgeschrieben. Genau da schnappt die Faszination zu. Der Myers-Briggs-Typenindikator, kurz MBTI, ist das bekannteste Persönlichkeitsmodell der Welt, und er verspricht etwas Verführerisches: dass dein Wesen in ein System passt, das dich erklärt. Die Wahrheit liegt dazwischen. Der MBTI ist kein exakter Bluttest deiner Seele, aber er ist eine erstaunlich gute Sprache dafür, wie unterschiedlich Menschen die Welt aufnehmen und Entscheidungen treffen. Und wer diese Sprache versteht, versteht sich selbst und andere ein Stück besser.
 

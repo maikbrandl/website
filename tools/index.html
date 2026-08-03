@@ -189,7 +189,20 @@
                         </div>
                     </a>
 
-                    <!-- Tool 2: Placeholder -->
+                    <!-- Tool 2: Human Map -->
+                    <a href="../human-map/" class="tool-card">
+                        <div class="tool-card__preview">
+                            <canvas id="preview-humanmap"></canvas>
+                        </div>
+                        <div class="tool-card__body">
+                            <span class="caption">Persönlichkeit · Selbsterkenntnis</span>
+                            <h2 class="tool-card__title">Human Map</h2>
+                            <p class="tool-card__desc">33 Fragen, dein persönlicher Archetyp und ein interaktiver Skill Tree. Finde heraus, wo du im Persönlichkeits-Universum stehst – und wer du werden kannst.</p>
+                            <span class="tool-card__link">Öffnen →</span>
+                        </div>
+                    </a>
+
+                    <!-- Tool 3: Placeholder -->
                     <div class="tool-card tool-card--disabled">
                         <div class="tool-card__preview tool-card__preview--placeholder">
                             <span>In Entwicklung</span>
@@ -276,6 +289,122 @@
                 ctx.beginPath();
                 ctx.arc(dotX, midY, 4, 0, Math.PI * 2);
                 ctx.fillStyle = '#c9a84c';
+                ctx.fill();
+
+                animId = requestAnimationFrame(draw);
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                running = entries[0].isIntersecting;
+                if (running) {
+                    lastTs = null;
+                    animId = requestAnimationFrame(draw);
+                } else if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            }, { threshold: 0.1 });
+            observer.observe(canvas);
+        })();
+    </script>
+
+    <script>
+        // Mini-preview: archetype stars + orbiting gold "you" dot (Human Map galaxy)
+        (function () {
+            var canvas = document.getElementById('preview-humanmap');
+            if (!canvas) return;
+            var wrap = canvas.parentElement;
+            var dpr = window.devicePixelRatio || 1;
+            var W = wrap.offsetWidth;
+            var H = 200;
+            canvas.width  = Math.round(W * dpr);
+            canvas.height = Math.round(H * dpr);
+            canvas.style.width  = W + 'px';
+            canvas.style.height = H + 'px';
+            var ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            var cx = W / 2, cy = H / 2;
+            // Archetype stars (relative positions + colors)
+            var stars = [
+                { dx: -0.34, dy: -0.30, c: '#8b7cf8' },
+                { dx:  0.34, dy: -0.30, c: '#f0a855' },
+                { dx: -0.42, dy:  0.06, c: '#88d878' },
+                { dx:  0.44, dy:  0.14, c: '#58d4a0' },
+                { dx: -0.30, dy:  0.34, c: '#60a0e8' },
+                { dx:  0.30, dy:  0.34, c: '#d878c8' },
+                { dx:  0.00, dy:  0.42, c: '#f07090' }
+            ];
+            // Faint background specks (seeded)
+            var specks = [];
+            var seed = 20260803;
+            function rnd() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return ((seed >>> 0) / 0x100000000); }
+            for (var s = 0; s < 26; s++) specks.push({ x: rnd() * W, y: rnd() * H, r: rnd() > 0.8 ? 1.1 : 0.6 });
+
+            var t = 0, lastTs = null, running = false, animId = null;
+
+            function draw(ts) {
+                if (!running) return;
+                if (lastTs !== null) t += (ts - lastTs) / 1000;
+                lastTs = ts;
+                ctx.clearRect(0, 0, W, H);
+
+                // Background specks
+                for (var s = 0; s < specks.length; s++) {
+                    ctx.beginPath();
+                    ctx.arc(specks[s].x, specks[s].y, specks[s].r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,0.10)';
+                    ctx.fill();
+                }
+
+                var scale = Math.min(W, H) * 0.9;
+                // Gold "you" dot orbits near center
+                var ux = cx + Math.cos(t * 0.6) * scale * 0.10;
+                var uy = cy + Math.sin(t * 0.6) * scale * 0.10;
+
+                // Connection lines to 3 nearest stars
+                for (var i = 0; i < 3; i++) {
+                    var sx = cx + stars[i].dx * scale;
+                    var sy = cy + stars[i].dy * scale;
+                    ctx.beginPath();
+                    ctx.moveTo(ux, uy);
+                    ctx.lineTo(sx, sy);
+                    ctx.strokeStyle = 'rgba(201,168,76,0.18)';
+                    ctx.lineWidth = 0.6;
+                    ctx.setLineDash([3, 4]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // Archetype stars
+                for (var i = 0; i < stars.length; i++) {
+                    var sx = cx + stars[i].dx * scale;
+                    var sy = cy + stars[i].dy * scale;
+                    var tw = 0.6 + 0.4 * Math.sin(t * 1.6 + i);
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 5, 0, Math.PI * 2);
+                    ctx.fillStyle = stars[i].c;
+                    ctx.globalAlpha = 0.25;
+                    ctx.fill();
+                    ctx.globalAlpha = tw;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 2.4, 0, Math.PI * 2);
+                    ctx.fillStyle = stars[i].c;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+
+                // Gold "you" glow + dot
+                var grad = ctx.createRadialGradient(ux, uy, 0, ux, uy, 16);
+                grad.addColorStop(0, 'rgba(240,200,64,0.40)');
+                grad.addColorStop(1, 'rgba(240,200,64,0)');
+                ctx.beginPath();
+                ctx.arc(ux, uy, 16, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(ux, uy, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#f0c840';
                 ctx.fill();
 
                 animId = requestAnimationFrame(draw);

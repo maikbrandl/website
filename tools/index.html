@@ -202,7 +202,20 @@
                         </div>
                     </a>
 
-                    <!-- Tool 3: Placeholder -->
+                    <!-- Tool 3: Atlas der Philosophie -->
+                    <a href="philosophie/" class="tool-card">
+                        <div class="tool-card__preview">
+                            <canvas id="preview-philo"></canvas>
+                        </div>
+                        <div class="tool-card__body">
+                            <span class="caption">Philosophie · Wissen</span>
+                            <h2 class="tool-card__title">Atlas der Philosophie</h2>
+                            <p class="tool-card__desc">Ein übersichtlicher Wegweiser durch die Philosophie der Welt – zum Durchklicken. Geordnet nach Epochen und nach Themengebieten, in einfacher Sprache erklärt. Jeder Denker und jede Denkrichtung anklickbar.</p>
+                            <span class="tool-card__link">Öffnen →</span>
+                        </div>
+                    </a>
+
+                    <!-- Tool 4: Placeholder -->
                     <div class="tool-card tool-card--disabled">
                         <div class="tool-card__preview tool-card__preview--placeholder">
                             <span>In Entwicklung</span>
@@ -419,6 +432,93 @@
                     cancelAnimationFrame(animId);
                     animId = null;
                 }
+            }, { threshold: 0.1 });
+            observer.observe(canvas);
+        })();
+    </script>
+
+    <script>
+        // Mini-preview: a timeline of philosophy — epoch bands + nodes lighting up left→right
+        (function () {
+            var canvas = document.getElementById('preview-philo');
+            if (!canvas) return;
+            var wrap = canvas.parentElement;
+            var dpr = window.devicePixelRatio || 1;
+            var W = wrap.offsetWidth;
+            var H = 200;
+            canvas.width  = Math.round(W * dpr);
+            canvas.height = Math.round(H * dpr);
+            canvas.style.width  = W + 'px';
+            canvas.style.height = H + 'px';
+            var ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            var padX = W * 0.10;
+            // four epoch bands
+            var bands = 4;
+            var colors = ['#c9a84c', '#e0894b', '#4fae86', '#6a8fd8'];
+            // seeded nodes across three lanes
+            var seed = 424242;
+            function rnd() { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return ((seed >>> 0) / 0x100000000); }
+            var nodes = [];
+            var lanes = 3;
+            for (var i = 0; i < 22; i++) {
+                nodes.push({
+                    x: padX + rnd() * (W - padX * 2),
+                    lane: Math.floor(rnd() * lanes),
+                    c: colors[Math.floor(rnd() * colors.length)]
+                });
+            }
+            nodes.sort(function (a, b) { return a.x - b.x; });
+            var laneY = function (l) { return H * 0.32 + l * (H * 0.20); };
+
+            var progress = 0, lastTs = null, running = false, animId = null;
+
+            function draw(ts) {
+                if (!running) return;
+                if (lastTs !== null) { progress += ((ts - lastTs) / 1000) * 0.14; if (progress > 1.25) progress = 0; }
+                lastTs = ts;
+                ctx.clearRect(0, 0, W, H);
+
+                // epoch bands
+                var bw = (W - padX * 2) / bands;
+                for (var b = 0; b < bands; b++) {
+                    ctx.fillStyle = (b % 2 === 0) ? 'rgba(255,255,255,0.025)' : 'rgba(255,255,255,0.05)';
+                    ctx.fillRect(padX + b * bw, H * 0.18, bw, H * 0.66);
+                }
+                // baseline gridlines
+                for (var l = 0; l < lanes; l++) {
+                    ctx.beginPath(); ctx.moveTo(padX, laneY(l)); ctx.lineTo(W - padX, laneY(l));
+                    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 0.75; ctx.stroke();
+                }
+
+                var sweepX = padX + progress * (W - padX * 2);
+                for (var i = 0; i < nodes.length; i++) {
+                    var n = nodes[i];
+                    var y = laneY(n.lane);
+                    var lit = n.x <= sweepX;
+                    var near = Math.abs(n.x - sweepX) < 26;
+                    if (lit && near) {
+                        var g = ctx.createRadialGradient(n.x, y, 0, n.x, y, 12);
+                        g.addColorStop(0, n.c); g.addColorStop(1, 'rgba(0,0,0,0)');
+                        ctx.globalAlpha = 0.5;
+                        ctx.beginPath(); ctx.arc(n.x, y, 12, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+                        ctx.globalAlpha = 1;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(n.x, y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = n.c;
+                    ctx.globalAlpha = lit ? 1 : 0.22;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+                animId = requestAnimationFrame(draw);
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                running = entries[0].isIntersecting;
+                if (running) { lastTs = null; animId = requestAnimationFrame(draw); }
+                else if (animId) { cancelAnimationFrame(animId); animId = null; }
             }, { threshold: 0.1 });
             observer.observe(canvas);
         })();

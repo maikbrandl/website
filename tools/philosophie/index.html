@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas der Philosophie – Hybridlogs Tools</title>
+    <meta name="description" content="Ein übersichtlicher Wegweiser durch die Philosophie der Welt – zum Durchklicken. Geordnet nach Epochen und nach Teildisziplinen. Jeder Denker und jede Strömung anklickbar.">
+    <link rel="stylesheet" href="../shared/base.css">
+    <link rel="stylesheet" href="style.css?v=20260804">
+</head>
+<body>
+
+    <!-- ── Sticky Header ── -->
+    <header class="tool-header">
+        <div class="tool-header__inner container">
+            <a href="../" class="tool-header__back">← Alle Tools</a>
+            <span class="tool-header__title">Atlas der <span>Philosophie</span></span>
+        </div>
+    </header>
+
+    <!-- ── Hero ── -->
+    <section class="tool-hero">
+        <div class="container">
+            <p class="caption caption--gold">Ein Wegweiser für Einsteiger</p>
+            <h1 class="tool-hero__title">Die ganze Philosophie,<br><em>zum Durchklicken.</em></h1>
+            <p class="tool-hero__sub">Kein Vorwissen nötig. Wähle unten, wie du stöbern möchtest: <strong>der Reihe nach durch die Zeit</strong> – von den ersten Denkern bis heute – oder <strong>nach Themengebieten</strong> wie Ethik, Logik oder der Frage nach dem Sein. Klappe einen Bereich auf und klicke auf jeden Namen oder jede Denkrichtung, um mehr zu erfahren.</p>
+
+            <!-- Umschalter: Ordnung wählen -->
+            <div class="mode-switch" role="tablist" aria-label="Ordnung wählen">
+                <button class="mode-btn mode-btn--active" id="modeEpoche" data-mode="epoche" role="tab" aria-selected="true">
+                    <span class="mode-btn__title">Nach Zeit</span>
+                    <span class="mode-btn__sub">Chronologisch, Epoche für Epoche</span>
+                </button>
+                <button class="mode-btn" id="modeDisziplin" data-mode="disziplin" role="tab" aria-selected="false">
+                    <span class="mode-btn__title">Nach Themengebiet</span>
+                    <span class="mode-btn__sub">Nach den großen Teildisziplinen</span>
+                </button>
+            </div>
+
+            <!-- Suche & Filter -->
+            <div class="controls">
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="search" id="searchInput" placeholder="Suche nach Denker, Begriff oder Strömung …" aria-label="Suche">
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select" id="filterTradition" aria-label="Nach Region / Tradition filtern">
+                        <option value="">Alle Regionen</option>
+                    </select>
+                    <button class="btn-ghost" id="btnExpand" type="button">Alle aufklappen</button>
+                    <button class="btn-reset" id="btnReset" type="button">Zurücksetzen</button>
+                </div>
+            </div>
+            <p class="result-count" id="resultCount"></p>
+        </div>
+    </section>
+
+    <main>
+        <!-- ══ ANSICHT 1 · NACH ZEIT ══ -->
+        <section class="view view--active" id="view-epoche">
+            <div class="container" id="epocheHost"></div>
+        </section>
+
+        <!-- ══ ANSICHT 2 · NACH THEMENGEBIET ══ -->
+        <section class="view" id="view-disziplin">
+            <div class="container" id="disziplinHost"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>← <a href="../index.html">Alle Tools</a> · <a href="../../index.html">hybridlog.de</a></p>
+            <p>Quellen: Stanford Encyclopedia of Philosophy · Internet Encyclopedia of Philosophy · Encyclopædia Britannica · Routledge Encyclopedia of Philosophy</p>
+        </div>
+    </footer>
+
+    <!-- ── Detail-Panel ── -->
+    <div class="panel-overlay" id="panelOverlay"></div>
+    <aside class="detail-panel" id="detailPanel" aria-label="Detailansicht"></aside>
+
+    <script src="data.js?v=20260804"></script>
+    <script src="app.js?v=20260804" defer></script>
+</body>
+</html>

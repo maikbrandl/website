@@ -935,6 +935,11 @@ details.hm-cluster-tile[open] .hm-tile__arrow { transform: rotate(90deg); }
     transition: border-color 0.2s;
 }
 .hm-galaxy-card:hover { border-color: var(--gc-color, #555); }
+.hm-galaxy-card:focus-visible {
+    outline: 2px solid var(--gc-color, #f0c840);
+    outline-offset: 2px;
+    border-color: var(--gc-color, #555);
+}
 .hm-gc__label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 6px; }
 .hm-gc__row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .hm-gc__emoji { font-size: 1.25rem; }

@@ -245,8 +245,10 @@ const Galaxy = (() => {
                 });
             })(mainC, et, r, isPrimary);
 
-            // Invisible enlarged tap target (important on mobile)
-            g.appendChild(el('circle', {cx:pos.x, cy:py, r:Math.max(30, r+6),
+            // Invisible enlarged tap target (important on mobile).
+            // SVG scales down on small screens (~0.43x on a 390px phone), so a
+            // generous viewBox radius is needed to meet the ~44px CSS touch target.
+            g.appendChild(el('circle', {cx:pos.x, cy:py, r:Math.max(52, r+10),
                 fill:'transparent', stroke:'none', 'pointer-events':'all'}));
 
             svgEl.appendChild(g);
@@ -291,7 +293,9 @@ const Galaxy = (() => {
             var arch  = MODEL.ARCHETYPES.find(function(a){ return a.id===item.id; });
             if (!arch) return '';
             var color = arch.color;
-            return '<div class="hm-galaxy-card" data-arch="' + item.id + '" style="--gc-color:' + color + ';cursor:pointer">' +
+            var ariaLabel = item.label + ': ' + arch.name + ', ' + item.sim + ' Prozent Übereinstimmung. Details öffnen.';
+            return '<div class="hm-galaxy-card" data-arch="' + item.id + '" role="button" tabindex="0"' +
+                ' aria-label="' + ariaLabel + '" style="--gc-color:' + color + ';cursor:pointer">' +
                 '<div class="hm-gc__label">' + item.label + '</div>' +
                 '<div class="hm-gc__row">' +
                   '<span class="hm-gc__emoji">' + (arch.emoji||'') + '</span>' +
@@ -301,14 +305,18 @@ const Galaxy = (() => {
                 '</div>';
         }).join('');
 
-        // Card clicks open detail panel
+        // Card clicks / keyboard open detail panel
         containerEl.querySelectorAll('.hm-galaxy-card').forEach(function(card) {
-            card.addEventListener('click', function() {
+            function open() {
                 var archId = card.getAttribute('data-arch');
                 var sims = {};
                 sorted.forEach(function(e){ sims[e[0]]=e[1]; });
                 sims[primary.id] = primaryScore;
                 openDetailPanel(allScores, primary, sims, archId);
+            }
+            card.addEventListener('click', open);
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
             });
         });
     }

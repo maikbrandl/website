@@ -526,9 +526,39 @@
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     font-size: 15px; color: var(--text-dim);
     font-style: italic; line-height: 1.55;
-    margin-bottom: var(--space-5);
+    margin: var(--space-6) 0 var(--space-6);
+}
+.detail-quote__source {
+    display: block;
+    margin-top: var(--space-2);
+    font-size: 12px; font-style: normal;
+    color: var(--text-muted);
 }
 .detail-text { font-size: 15px; color: var(--text-dim); line-height: 1.75; }
+
+/* ── Fachbegriff-Tooltips (Glossar), siehe data.js Feld "glossar" ── */
+.term-wrap { display: inline; }
+.term {
+    font: inherit;
+    color: var(--gold);
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--gold-dark);
+    padding: 0;
+    cursor: pointer;
+}
+.term:hover, .term:focus-visible { color: var(--text); border-color: var(--text); }
+.term-pop:not([hidden]) {
+    display: block;
+    margin: var(--space-2) 0 var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-elevated);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13px; font-style: normal;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
 
 .detail-panel__section { margin-top: var(--space-6); }
 .detail-panel__section h4 {
@@ -549,11 +579,41 @@
 .chip:hover { color: var(--gold); border-color: var(--gold-dark); }
 .chip--epoch { cursor: default; }
 .chip--epoch:hover { color: var(--text-dim); border-color: var(--border-solid); }
-.chip--static { cursor: default; color: var(--gold); border-color: var(--gold-dark); }
 
 .detail-panel__badge { margin-left: auto; }
 
-/* ── Fortschritt: Als gelesen markieren ── */
+/* ── Kompakte Metadaten-Leiste (2-Spalten-Raster: Label | Werte) ── */
+.detail-meta-grid {
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--border);
+}
+.detail-meta-row {
+    display: grid;
+    grid-template-columns: minmax(96px, 34%) 1fr;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border);
+}
+.detail-meta-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-muted); font-weight: 600;
+    padding-top: 4px;
+}
+.detail-meta-value { font-size: 14px; color: var(--text-dim); }
+
+/* ── Aktionszeile: Gelesen-Toggle + Buchlink ── */
+.detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+}
+.detail-actions__disclosure {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0 0 var(--space-6);
+    line-height: 1.5;
+}
 .read-toggle {
     display: inline-flex;
     align-items: center;
@@ -566,7 +626,6 @@
     border-radius: var(--radius-full);
     padding: 7px 14px;
     cursor: pointer;
-    margin-bottom: var(--space-5);
     transition: color var(--duration), border-color var(--duration), background var(--duration);
 }
 .read-toggle:hover { border-color: var(--gold-dark); color: var(--gold); }
@@ -579,6 +638,21 @@
 }
 .read-toggle--on { color: var(--gold); border-color: var(--gold-dark); background: rgba(201,168,76,0.08); }
 .read-toggle--on .read-toggle__icon { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+.book-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    color: var(--gold);
+    background: var(--bg-elevated);
+    border: 1px solid var(--gold-dark);
+    border-radius: var(--radius-full);
+    padding: 7px 14px;
+    text-decoration: none;
+    transition: background var(--duration), border-color var(--duration);
+}
+.book-action:hover { background: rgba(201,168,76,0.08); }
 
 /* ── Blogartikel-Link (optional, siehe data.js Feld "blogUrl") ── */
 .blog-rec__link {
@@ -593,40 +667,6 @@
     transition: color var(--duration), border-color var(--duration);
 }
 .blog-rec__link:hover { color: var(--text); border-color: var(--text); }
-
-/* ── Buchempfehlung (Amazon-Affiliate) ── */
-.book-rec__link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-4);
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-solid);
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    transition: border-color var(--duration), background var(--duration);
-}
-.book-rec__link:hover { border-color: var(--gold-dark); background: rgba(201,168,76,0.06); }
-.book-rec__icon {
-    flex-shrink: 0;
-    display: flex;
-    color: var(--gold);
-}
-.book-rec__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.book-rec__title { font-size: 14px; color: var(--text); font-weight: 500; line-height: 1.3; }
-.book-rec__author { font-size: 12px; color: var(--text-secondary); font-style: italic; }
-.book-rec__cta {
-    flex-shrink: 0;
-    font-size: 12px;
-    color: var(--gold);
-    white-space: nowrap;
-}
-.book-rec__disclosure {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: var(--space-2);
-    line-height: 1.5;
-}
 
 /* ── Footer ── */
 .site-footer {

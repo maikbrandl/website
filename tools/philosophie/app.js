@@ -300,21 +300,13 @@
             '</button>';
     }
 
-    /* Amazon-Affiliate-Buchempfehlung, siehe data.js (Feld "book") für das Format */
-    function bookRecHTML(book) {
+    /* Kompakter Amazon-Affiliate-Buchlink für die Aktionszeile, siehe data.js (Feld "book") für das Format */
+    function bookActionHTML(book) {
         if (!book || !book.url) return '';
-        return '<div class="detail-panel__section book-rec">' +
-            '<h4>Buchempfehlung</h4>' +
-            '<a class="book-rec__link" href="' + esc(book.url) + '" target="_blank" rel="nofollow sponsored noopener">' +
-                '<span class="book-rec__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>' +
-                '<span class="book-rec__info">' +
-                    '<span class="book-rec__title">' + esc(book.title) + '</span>' +
-                    (book.author ? '<span class="book-rec__author">' + esc(book.author) + '</span>' : '') +
-                '</span>' +
-                '<span class="book-rec__cta">Bei Amazon ansehen</span>' +
-            '</a>' +
-            '<p class="book-rec__disclosure">Affiliate-Link. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>' +
-        '</div>';
+        return '<a class="book-action" href="' + esc(book.url) + '" target="_blank" rel="nofollow sponsored noopener">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>' +
+            '<span>Wichtigstes Buch ansehen</span>' +
+        '</a>';
     }
 
     /* Optionaler Blogartikel-Link, siehe data.js (Feld "blogUrl") */
@@ -326,11 +318,35 @@
         '</div>';
     }
 
-    /* „Bekannt für": nutzt den beschreibenden Teil hinter dem letzten „·" in t.meta (z.B. „Begründer der Ethik") */
-    function knownForFromMeta(meta) {
-        var parts = String(meta).split('·');
-        if (parts.length < 2) return null;
-        return parts[parts.length - 1].trim();
+    /* Escaped Text mit antippbaren Fachbegriffen: [[glossarKey:Anzeigetext]] -> Popover-Button, siehe data.js (Feld "glossar") */
+    function withGlossary(str) {
+        return esc(str).replace(/\[\[([\w-]+):([^\]]+)\]\]/g, function (m, key, label) {
+            var explain = D.glossar && D.glossar[key];
+            return '<span class="term-wrap"><button type="button" class="term" data-term="' + key + '" aria-expanded="false">' + label + '</button>' +
+                (explain ? '<span class="term-pop" role="note" hidden>' + esc(explain) + '</span>' : '') +
+                '</span>';
+        });
+    }
+
+    /* Zitat-Block: neues Feld t.zitat={text,quelle} bevorzugt, sonst altes einfaches t.quote als Fallback */
+    function quoteHTML(t) {
+        if (t.zitat && t.zitat.text) {
+            return '<blockquote class="detail-quote">„' + esc(t.zitat.text.replace(/^„|"$/g, '')) + '"' +
+                (t.zitat.quelle ? '<footer class="detail-quote__source">' + esc(t.zitat.quelle) + '</footer>' : '') +
+                '</blockquote>';
+        }
+        if (t.quote) return '<blockquote class="detail-quote">„' + esc(t.quote.replace(/^„|"$/g, '')) + '"</blockquote>';
+        return '';
+    }
+
+    /* Kompakte Metadaten-Leiste (2-Spalten-Raster), ersetzt die frühere Reihe einzelner Blöcke */
+    function metaGridHTML(epochChip, strChips, disChips, hauptvertreter) {
+        var rows = '';
+        if (epochChip) rows += '<div class="detail-meta-row"><span class="detail-meta-label">Epoche</span><span class="detail-meta-value tag-row">' + epochChip + '</span></div>';
+        if (strChips) rows += '<div class="detail-meta-row"><span class="detail-meta-label">Denkrichtungen</span><span class="detail-meta-value tag-row">' + strChips + '</span></div>';
+        if (disChips) rows += '<div class="detail-meta-row"><span class="detail-meta-label">Themengebiete</span><span class="detail-meta-value tag-row">' + disChips + '</span></div>';
+        if (hauptvertreter) rows += '<div class="detail-meta-row"><span class="detail-meta-label">Hauptvertreter</span><span class="detail-meta-value">' + esc(hauptvertreter) + '</span></div>';
+        return rows ? '<div class="detail-meta-grid">' + rows + '</div>' : '';
     }
 
     function openDetail(id) {
@@ -348,7 +364,6 @@
             var dd = disziplinById[d];
             return dd ? '<button class="chip" data-dis="' + d + '">' + esc(dd.label) + '</button>' : '';
         }).join('');
-        var knownFor = knownForFromMeta(t.meta);
 
         var html = '<div class="detail-panel__head">' + closeBtnHTML() +
             '<span class="detail-panel__tradition"><span class="legend-dot" style="background:' + trad.color + '"></span>' + trad.label +
@@ -357,17 +372,28 @@
             '<h2 class="detail-panel__name">' + esc(t.name) + '</h2>' +
             '<p class="detail-panel__meta">' + esc(t.meta) + '</p>' +
             '</div><div class="detail-panel__body">';
+
+        html += '<div class="detail-actions">';
         html += '<button class="read-toggle' + (isRead(id) ? ' read-toggle--on' : '') + '" id="readToggle" type="button" aria-pressed="' + isRead(id) + '">' +
             '<span class="read-toggle__icon" aria-hidden="true">✓</span>' +
             '<span class="read-toggle__label">' + (isRead(id) ? 'Gelesen' : 'Als gelesen markieren') + '</span>' +
             '</button>';
-        if (t.quote) html += '<blockquote class="detail-quote">„' + esc(t.quote.replace(/^„|"$/g, '')) + '"</blockquote>';
-        html += '<div class="detail-panel__section"><h4>Kernidee</h4><p class="detail-text">' + esc(t.desc) + '</p></div>';
-        if (knownFor) html += '<div class="detail-panel__section"><h4>Bekannt für</h4><div class="tag-row"><span class="chip chip--static">' + esc(knownFor) + '</span></div></div>';
-        if (epochChip) html += '<div class="detail-panel__section"><h4>Epoche</h4><div class="tag-row">' + epochChip + '</div></div>';
-        if (strChips) html += '<div class="detail-panel__section"><h4>Denkrichtungen</h4><div class="tag-row">' + strChips + '</div></div>';
-        if (disChips) html += '<div class="detail-panel__section"><h4>Themengebiete</h4><div class="tag-row">' + disChips + '</div></div>';
-        if (t.book) html += bookRecHTML(t.book);
+        if (t.book) html += bookActionHTML(t.book);
+        html += '</div>';
+        if (t.book) html += '<p class="detail-actions__disclosure">Affiliate-Link. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>';
+
+        if (t.kernidee) {
+            // Neue, strukturierte Denker-Karte (Ziel: Kernidee/Worum es geht/Warum wichtig/Kritik)
+            html += '<div class="detail-panel__section"><h4>Kernidee</h4><p class="detail-text">' + withGlossary(t.kernidee) + '</p></div>';
+            if (t.inhalt) html += '<div class="detail-panel__section"><h4>Worum es geht</h4><p class="detail-text">' + withGlossary(t.inhalt) + '</p></div>';
+            if (t.wirkung) html += '<div class="detail-panel__section"><h4>Warum wichtig</h4><p class="detail-text">' + withGlossary(t.wirkung) + '</p></div>';
+            if (t.kritik) html += '<div class="detail-panel__section"><h4>Kritik</h4><p class="detail-text">' + withGlossary(t.kritik) + '</p></div>';
+        } else {
+            // Ältere Einträge ohne Kernidee/Inhalt/Wirkung/Kritik: Fallback auf den bisherigen Fließtext
+            html += '<div class="detail-panel__section"><h4>Kernidee</h4><p class="detail-text">' + esc(t.desc) + '</p></div>';
+        }
+        html += quoteHTML(t);
+        html += metaGridHTML(epochChip, strChips, disChips, t.hauptvertreter);
         if (t.blogUrl) html += blogLinkHTML(t.blogUrl);
         html += '</div>';
 
@@ -391,6 +417,16 @@
         });
         panel.querySelectorAll('[data-epoch]').forEach(function (el) {
             el.addEventListener('click', function () { jumpToSection('epoche', 'acc-ep-' + el.getAttribute('data-epoch')); });
+        });
+        panel.querySelectorAll('.term').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var pop = btn.nextElementSibling;
+                var willOpen = pop && pop.hasAttribute('hidden');
+                panel.querySelectorAll('.term-pop').forEach(function (p) { p.setAttribute('hidden', ''); });
+                panel.querySelectorAll('.term[aria-expanded="true"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+                if (pop && willOpen) { pop.removeAttribute('hidden'); btn.setAttribute('aria-expanded', 'true'); }
+            });
         });
     }
 

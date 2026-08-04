@@ -105,8 +105,7 @@ const HybridlogsComponents = (() => {
         <header class="site-header" id="siteHeader">
             <nav class="navbar container">
                 <a href="index.html" class="logo" aria-label="Hybridlogs – Startseite">
-                    <img src="images/Logo/Logo.png" alt="Hybridlogs" class="logo-img">
-                    <span class="logo-text">Hybridlogs</span>
+                    <span class="logo-text">hybrid<span class="logo-text__accent">logs</span></span>
                 </a>
                 <button class="nav-toggle" id="navToggle" aria-label="Navigation umschalten" aria-expanded="false">
                     <span class="nav-toggle-icon" id="navToggleIcon">${ICONS.menu}</span>
@@ -128,8 +127,7 @@ const HybridlogsComponents = (() => {
                 <div class="footer-top">
                     <div class="footer-brand">
                         <a href="index.html" class="footer-logo">
-                            <img src="images/Logo/Logo.png" alt="Hybridlogs" class="logo-img" style="height:32px;margin-bottom:var(--space-2)">
-                            Hybridlogs
+                            hybrid<span class="logo-text__accent">logs</span>
                         </a>
                         <p>Journals für Klarheit und Erfolg in Schule, Studium und Weiterbildung.</p>
                         <div class="footer-social">

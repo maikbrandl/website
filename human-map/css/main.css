@@ -52,15 +52,22 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
 }
 
 .hm-header__logo {
-    font-family: var(--hm-font-display);
+    font-family: var(--hm-font-sans);
     font-size: 1.1rem;
+    font-weight: 800;
     color: var(--hm-white);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
     display: flex;
     align-items: center;
     gap: var(--hm-space-2);
 }
 .hm-header__logo span { color: var(--hm-gold); }
+.hm-header__logo .hm-header__product {
+    font-family: var(--hm-font-display);
+    font-weight: 400;
+    color: var(--hm-text-dim);
+    margin-left: var(--hm-space-1);
+}
 
 .hm-header__nav {
     display: flex;

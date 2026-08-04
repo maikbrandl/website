@@ -192,6 +192,11 @@
     color: var(--text-muted);
     margin: var(--space-5) 0 0;
 }
+.progress-count {
+    font-size: 13px;
+    color: var(--gold);
+    margin: var(--space-2) 0 0;
+}
 
 /* ── Views ── */
 .view { display: none; padding: var(--space-8) 0 var(--space-24); }
@@ -234,6 +239,16 @@
     line-height: 1.2;
 }
 .accordion__sub { display: block; font-size: 13px; color: var(--text-muted); }
+.accordion__teaser {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60ch;
+}
 .accordion__count {
     font-size: 12px;
     color: var(--text-secondary);
@@ -294,6 +309,7 @@
 }
 
 .thinker-card {
+    position: relative;
     text-align: left;
     background: var(--bg-card);
     border: 1px solid var(--border-solid);
@@ -308,11 +324,42 @@
     font-family: var(--font-body);
     width: 100%;
 }
+.thinker-card__check {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+}
+.thinker-card--read .thinker-card__check { display: flex; }
+.thinker-card--read { border-left-color: var(--gold); }
 .thinker-card:hover {
     transform: translateY(-3px);
     background: var(--bg-card-hover);
     border-color: var(--border-hover);
     border-left-color: var(--tc, var(--gold));
+}
+.thinker-card__badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--gold);
+    border-radius: var(--radius-full);
+    padding: 3px 9px;
 }
 .thinker-card__top {
     display: flex;
@@ -502,6 +549,50 @@
 .chip:hover { color: var(--gold); border-color: var(--gold-dark); }
 .chip--epoch { cursor: default; }
 .chip--epoch:hover { color: var(--text-dim); border-color: var(--border-solid); }
+.chip--static { cursor: default; color: var(--gold); border-color: var(--gold-dark); }
+
+.detail-panel__badge { margin-left: auto; }
+
+/* ── Fortschritt: Als gelesen markieren ── */
+.read-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-full);
+    padding: 7px 14px;
+    cursor: pointer;
+    margin-bottom: var(--space-5);
+    transition: color var(--duration), border-color var(--duration), background var(--duration);
+}
+.read-toggle:hover { border-color: var(--gold-dark); color: var(--gold); }
+.read-toggle__icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid var(--border-solid);
+    font-size: 10px; font-weight: 700; color: transparent;
+    transition: background var(--duration), border-color var(--duration), color var(--duration);
+}
+.read-toggle--on { color: var(--gold); border-color: var(--gold-dark); background: rgba(201,168,76,0.08); }
+.read-toggle--on .read-toggle__icon { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+
+/* ── Blogartikel-Link (optional, siehe data.js Feld "blogUrl") ── */
+.blog-rec__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-dark);
+    padding-bottom: 2px;
+    transition: color var(--duration), border-color var(--duration);
+}
+.blog-rec__link:hover { color: var(--text); border-color: var(--text); }
 
 /* ── Buchempfehlung (Amazon-Affiliate) ── */
 .book-rec__link {

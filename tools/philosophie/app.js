@@ -63,6 +63,29 @@
     var panel = $('detailPanel');
     var overlay = $('panelOverlay');
 
+    /* ── Fortschritt (localStorage): gelesene Denker ── */
+    var PROGRESS_KEY = 'philo-progress-v1';
+    var progress = (function () {
+        try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch (e) { return {}; }
+    })();
+    function isRead(id) { return !!progress[id]; }
+    function saveProgress() {
+        try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) { /* z.B. Privatmodus ohne Storage */ }
+    }
+    function setRead(id, val) {
+        if (val) progress[id] = true; else delete progress[id];
+        saveProgress();
+        updateProgressCounter();
+        var card = document.querySelector('.thinker-card[data-id="' + id + '"]');
+        if (card) card.classList.toggle('thinker-card--read', val);
+    }
+    function updateProgressCounter() {
+        var el = $('progressCount');
+        if (!el) return;
+        var count = Object.keys(progress).length;
+        el.textContent = count + ' von ' + D.thinkers.length + ' entdeckt';
+    }
+
     /* ── Helpers ── */
     function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
@@ -110,7 +133,9 @@
     /* ── Denker-Karte ── */
     function cardHTML(t) {
         var trad = traditionById[t.tradition];
-        return '<button class="thinker-card" data-id="' + t.id + '" style="--tc:' + trad.color + '">' +
+        return '<button class="thinker-card' + (isRead(t.id) ? ' thinker-card--read' : '') + '" data-id="' + t.id + '" style="--tc:' + trad.color + '">' +
+            (t.entry ? '<span class="thinker-card__badge" title="Guter Einstieg für Einsteiger">★ Guter Einstieg</span>' : '') +
+            '<span class="thinker-card__check" aria-hidden="true" title="Gelesen">✓</span>' +
             '<span class="thinker-card__top">' +
             '<span class="thinker-card__year">' + yearBadge(t) + '</span>' +
             '<span class="thinker-card__trad"><span class="legend-dot" style="background:' + trad.color + '"></span>' + trad.label + '</span>' +
@@ -122,7 +147,7 @@
     }
 
     /* ── Ein Akkordeon-Abschnitt ── */
-    function accordionHTML(id, title, sub, count, bodyInner) {
+    function accordionHTML(id, title, sub, count, bodyInner, teaser) {
         var open = isOpen(id);
         return '<section class="accordion' + (open ? ' accordion--open' : '') + '" data-acc="' + id + '">' +
             '<button class="accordion__head" aria-expanded="' + open + '">' +
@@ -130,6 +155,7 @@
             '<span class="accordion__headtext">' +
             '<span class="accordion__title">' + esc(title) + '</span>' +
             (sub ? '<span class="accordion__sub">' + esc(sub) + '</span>' : '') +
+            (teaser ? '<span class="accordion__teaser">' + esc(teaser) + '</span>' : '') +
             '</span>' +
             '<span class="accordion__count">' + count + '</span>' +
             '<svg class="accordion__chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>' +
@@ -156,7 +182,7 @@
             ids.push(id);
             var body = '<p class="accordion__intro">' + epochIntro[ep.id] + '</p>' +
                 '<div class="card-grid">' + inEp.map(cardHTML).join('') + '</div>';
-            html += accordionHTML(id, ep.label, ep.short, inEp.length + (inEp.length === 1 ? ' Denker' : ' Denker'), body);
+            html += accordionHTML(id, ep.label, ep.short, inEp.length + (inEp.length === 1 ? ' Denker' : ' Denker'), body, excerpt(epochIntro[ep.id], 90));
         });
 
         // Undatierte / mündlich überlieferte
@@ -169,7 +195,7 @@
             ids.push(uid);
             var ubody = '<p class="accordion__intro">' + UNDATED_INTRO + '</p>' +
                 '<div class="card-grid">' + undated.map(cardHTML).join('') + '</div>';
-            html += accordionHTML(uid, 'Zeitübergreifend & mündlich überliefert', 'ohne feste Datierung', undated.length + ' Denker', ubody);
+            html += accordionHTML(uid, 'Zeitübergreifend & mündlich überliefert', 'ohne feste Datierung', undated.length + ' Denker', ubody, excerpt(UNDATED_INTRO, 90));
         }
 
         if (!anyResults) html += emptyState();
@@ -195,7 +221,7 @@
             ids.push(id);
             var body = '<p class="accordion__intro">' + disziplinIntro[d.id] + '</p>' +
                 '<div class="card-grid">' + inDis.map(cardHTML).join('') + '</div>';
-            html += accordionHTML(id, d.label, null, inDis.length + ' Denker', body);
+            html += accordionHTML(id, d.label, null, inDis.length + ' Denker', body, excerpt(disziplinIntro[d.id], 90));
         });
 
         // Denkrichtungen / „-ismen" (immer anklickbar)
@@ -214,7 +240,7 @@
             ids.push(sid);
             var introTxt = 'Die großen „-ismen" der Philosophie: benannte Denkrichtungen, die viele einzelne Denker verbinden. Klicke eine an, um zu sehen, worum es geht und wer dazugehört.';
             var body = '<p class="accordion__intro">' + introTxt + '</p>' + strBody;
-            html += accordionHTML(sid, 'Denkrichtungen & „-ismen"', 'die benannten Strömungen', strCount + ' Strömungen', body);
+            html += accordionHTML(sid, 'Denkrichtungen & „-ismen"', 'die benannten Strömungen', strCount + ' Strömungen', body, excerpt(introTxt, 90));
         }
 
         if (!anyResults) html += emptyState();
@@ -291,6 +317,22 @@
         '</div>';
     }
 
+    /* Optionaler Blogartikel-Link, siehe data.js (Feld "blogUrl") */
+    function blogLinkHTML(url) {
+        if (!url) return '';
+        return '<div class="detail-panel__section blog-rec">' +
+            '<h4>Mehr dazu im Blog</h4>' +
+            '<a class="blog-rec__link" href="' + esc(url) + '">Zum Blogartikel <span aria-hidden="true">→</span></a>' +
+        '</div>';
+    }
+
+    /* „Bekannt für": nutzt den beschreibenden Teil hinter dem letzten „·" in t.meta (z.B. „Begründer der Ethik") */
+    function knownForFromMeta(meta) {
+        var parts = String(meta).split('·');
+        if (parts.length < 2) return null;
+        return parts[parts.length - 1].trim();
+    }
+
     function openDetail(id) {
         var t = thinkerById[id];
         if (!t) return;
@@ -306,21 +348,40 @@
             var dd = disziplinById[d];
             return dd ? '<button class="chip" data-dis="' + d + '">' + esc(dd.label) + '</button>' : '';
         }).join('');
+        var knownFor = knownForFromMeta(t.meta);
 
         var html = '<div class="detail-panel__head">' + closeBtnHTML() +
-            '<span class="detail-panel__tradition"><span class="legend-dot" style="background:' + trad.color + '"></span>' + trad.label + '</span>' +
+            '<span class="detail-panel__tradition"><span class="legend-dot" style="background:' + trad.color + '"></span>' + trad.label +
+            (t.entry ? '<span class="thinker-card__badge detail-panel__badge">★ Guter Einstieg</span>' : '') +
+            '</span>' +
             '<h2 class="detail-panel__name">' + esc(t.name) + '</h2>' +
             '<p class="detail-panel__meta">' + esc(t.meta) + '</p>' +
             '</div><div class="detail-panel__body">';
+        html += '<button class="read-toggle' + (isRead(id) ? ' read-toggle--on' : '') + '" id="readToggle" type="button" aria-pressed="' + isRead(id) + '">' +
+            '<span class="read-toggle__icon" aria-hidden="true">✓</span>' +
+            '<span class="read-toggle__label">' + (isRead(id) ? 'Gelesen' : 'Als gelesen markieren') + '</span>' +
+            '</button>';
         if (t.quote) html += '<blockquote class="detail-quote">„' + esc(t.quote.replace(/^„|"$/g, '')) + '"</blockquote>';
-        html += '<p class="detail-text">' + esc(t.desc) + '</p>';
+        html += '<div class="detail-panel__section"><h4>Kernidee</h4><p class="detail-text">' + esc(t.desc) + '</p></div>';
+        if (knownFor) html += '<div class="detail-panel__section"><h4>Bekannt für</h4><div class="tag-row"><span class="chip chip--static">' + esc(knownFor) + '</span></div></div>';
         if (epochChip) html += '<div class="detail-panel__section"><h4>Epoche</h4><div class="tag-row">' + epochChip + '</div></div>';
         if (strChips) html += '<div class="detail-panel__section"><h4>Denkrichtungen</h4><div class="tag-row">' + strChips + '</div></div>';
         if (disChips) html += '<div class="detail-panel__section"><h4>Themengebiete</h4><div class="tag-row">' + disChips + '</div></div>';
         if (t.book) html += bookRecHTML(t.book);
+        if (t.blogUrl) html += blogLinkHTML(t.blogUrl);
         html += '</div>';
 
         panelShell(html);
+        setHash(id);
+
+        var readBtn = $('readToggle');
+        readBtn.addEventListener('click', function () {
+            var on = !readBtn.classList.contains('read-toggle--on');
+            readBtn.classList.toggle('read-toggle--on', on);
+            readBtn.setAttribute('aria-pressed', on);
+            readBtn.querySelector('.read-toggle__label').textContent = on ? 'Gelesen' : 'Als gelesen markieren';
+            setRead(id, on);
+        });
 
         panel.querySelectorAll('[data-str]').forEach(function (el) {
             el.addEventListener('click', function () { openStroemung(el.getAttribute('data-str')); });
@@ -352,6 +413,7 @@
         html += '</div>';
 
         panelShell(html);
+        setHash(id);
         panel.querySelectorAll('[data-id]').forEach(function (el) {
             el.addEventListener('click', function () { openDetail(el.getAttribute('data-id')); });
         });
@@ -360,6 +422,7 @@
     function closeDetail() {
         panel.classList.remove('detail-panel--on');
         overlay.classList.remove('panel-overlay--on');
+        clearHash();
     }
     overlay.addEventListener('click', closeDetail);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDetail(); });
@@ -370,6 +433,40 @@
         openIds[sectionId] = true;
         pendingScrollId = sectionId;
         setMode(mode);
+    }
+
+    /* ── Direktlinks: #<denker-id> oder #<stroemung-id> (z.B. aus Blogartikeln) ──
+       Setzt die URL per replaceState (kein hashchange-Loop), Klick auf X/Escape räumt sie wieder auf. */
+    var hashLock = false;
+    function setHash(id) {
+        if (hashLock) return;
+        history.replaceState(null, '', '#' + id);
+    }
+    function clearHash() {
+        if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    }
+    function openFromHash() {
+        var id = decodeURIComponent(location.hash.slice(1));
+        if (!id) return false;
+        hashLock = true;
+        if (thinkerById[id]) {
+            var t = thinkerById[id];
+            var sectionId = (t.epoch && epochById[t.epoch]) ? 'acc-ep-' + t.epoch : 'acc-ep-undatiert';
+            openIds[sectionId] = true;
+            pendingScrollId = sectionId;
+            setMode('epoche');
+            openDetail(id);
+        } else if (stroemungById[id]) {
+            openIds['acc-denkrichtungen'] = true;
+            pendingScrollId = 'acc-denkrichtungen';
+            setMode('disziplin');
+            openStroemung(id);
+        } else {
+            hashLock = false;
+            return false;
+        }
+        hashLock = false;
+        return true;
     }
 
     /* ══════════════════════════════════════════════
@@ -487,7 +584,9 @@
         hosts.epoche.addEventListener('click', hostClick);
         hosts.disziplin.addEventListener('click', hostClick);
         setDefaultOpen();
-        setMode('epoche');
+        updateProgressCounter();
+        if (!openFromHash()) setMode('epoche');
+        window.addEventListener('hashchange', function () { openFromHash(); });
     }
 
     init();

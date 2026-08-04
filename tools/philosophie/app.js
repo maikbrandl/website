@@ -433,10 +433,20 @@
         $('modeDisziplin').addEventListener('click', function () { if (state.mode !== 'disziplin') setMode('disziplin'); });
 
         var timer = null;
-        $('searchInput').addEventListener('input', function (e) {
+        var searchInput = $('searchInput');
+        var searchClear = $('searchClear');
+        searchInput.addEventListener('input', function (e) {
             clearTimeout(timer);
             var v = e.target.value.trim();
+            searchClear.hidden = !v;
             timer = setTimeout(function () { state.search = v; renderCurrent(); }, 120);
+        });
+        searchClear.addEventListener('click', function () {
+            searchInput.value = '';
+            searchClear.hidden = true;
+            state.search = '';
+            searchInput.focus();
+            renderCurrent();
         });
 
         $('filterTradition').addEventListener('change', function (e) {
@@ -457,6 +467,7 @@
         $('btnReset').addEventListener('click', function () {
             state.search = ''; state.tradition = '';
             $('searchInput').value = ''; $('filterTradition').value = '';
+            $('searchClear').hidden = true;
             openIds = {};
             setDefaultOpen();
             renderCurrent();

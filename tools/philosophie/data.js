@@ -77,7 +77,12 @@ window.PHILO = (function () {
 
     /* ── Denker & Schulen ──
        year = numerischer Sortier-/Positionswert (Geburt/Blüte, negativ = v. Chr.)
-       str  = Strömungen · dis = Teildisziplinen                                */
+       str  = Strömungen · dis = Teildisziplinen
+
+       book (optional) = Amazon-Affiliate-Buchempfehlung im Detail-Panel:
+         book: { title: 'Der Staat', author: 'Platon', url: 'https://www.amazon.de/dp/XXXXXXX?tag=DEIN-TAG-21' }
+       Einfach bei einem Denker ergänzen, sobald ein passender Affiliate-Link vorliegt –
+       ohne "book"-Feld erscheint im Panel keine Buchempfehlung.                */
     var thinkers = [
         /* ─── ANTIKE ─── */
         { id: 'thales', name: 'Thales von Milet', meta: 'ca. 624–546 v. Chr. · Milesische Schule', year: -624, tradition: 'west', epoch: 'antike', str: ['materialismus'], dis: ['metaphysik'],
@@ -100,7 +105,8 @@ window.PHILO = (function () {
           desc: 'Sokrates schrieb selbst nichts; wir kennen ihn vor allem durch seinen Schüler Platon. Mit seiner Methode des prüfenden Gesprächs (Elenchos, „sokratische Ironie" und „Hebammenkunst") deckte er Scheinwissen auf und machte die Frage nach dem richtigen Leben zum Zentrum der Philosophie. 399 v. Chr. wurde er wegen „Gottlosigkeit" und „Verführung der Jugend" zum Tod durch den Schierlingsbecher verurteilt – ein Gründungsmythos der intellektuellen Redlichkeit.' },
         { id: 'platon', name: 'Platon', meta: '428/427–348/347 v. Chr. · Gründer der Akademie', year: -427, tradition: 'west', epoch: 'antike', str: ['idealismus'], dis: ['metaphysik', 'epistemologie', 'politik'],
           quote: 'Der Anfang ist der wichtigste Teil der Arbeit.',
-          desc: 'Einer der einflussreichsten Denker überhaupt. In kunstvollen Dialogen entwickelte er die Ideenlehre: Hinter der wandelbaren Sinnenwelt liegt eine Welt unveränderlicher, vollkommener Ideen (Formen), an denen die Dinge nur „teilhaben". Das Höhlengleichnis veranschaulicht den Aufstieg der Erkenntnis vom Schein zur Wahrheit. In der Politeia entwarf er den idealen, von „Philosophenkönigen" geleiteten Staat. Sein Werk begründete Metaphysik, Erkenntnistheorie und politische Philosophie zugleich.' },
+          desc: 'Einer der einflussreichsten Denker überhaupt. In kunstvollen Dialogen entwickelte er die Ideenlehre: Hinter der wandelbaren Sinnenwelt liegt eine Welt unveränderlicher, vollkommener Ideen (Formen), an denen die Dinge nur „teilhaben". Das Höhlengleichnis veranschaulicht den Aufstieg der Erkenntnis vom Schein zur Wahrheit. In der Politeia entwarf er den idealen, von „Philosophenkönigen" geleiteten Staat. Sein Werk begründete Metaphysik, Erkenntnistheorie und politische Philosophie zugleich.',
+          book: { title: 'Der Staat', author: 'Platon', url: 'https://link.amazon/B0gpLNCNC' } },
         { id: 'aristoteles', name: 'Aristoteles', meta: '384–322 v. Chr. · Gründer des Lyzeums', year: -384, tradition: 'west', epoch: 'antike', str: ['tugendethik'], dis: ['logik', 'metaphysik', 'ethik', 'politik'],
           quote: 'Der Mensch ist von Natur aus ein staatenbildendes Lebewesen (zoon politikon).',
           desc: 'Platons bedeutendster Schüler und der wohl universalste Gelehrte der Antike. Er begründete die formale Logik (Syllogistik), systematisierte Biologie, Physik, Ethik, Politik, Rhetorik und Poetik. Gegen Platon verlegte er das Wesen (die „Form") in die Einzeldinge selbst. Seine Nikomachische Ethik begründet die Tugendethik: Das Gute liegt in der rechten Mitte (Mesotes), Ziel ist die Eudaimonia (gelingendes Leben). Über die arabische Welt prägte Aristoteles das gesamte europäische Mittelalter.' },

@@ -274,6 +274,23 @@
             '</button>';
     }
 
+    /* Amazon-Affiliate-Buchempfehlung, siehe data.js (Feld "book") für das Format */
+    function bookRecHTML(book) {
+        if (!book || !book.url) return '';
+        return '<div class="detail-panel__section book-rec">' +
+            '<h4>Buchempfehlung</h4>' +
+            '<a class="book-rec__link" href="' + esc(book.url) + '" target="_blank" rel="nofollow sponsored noopener">' +
+                '<span class="book-rec__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>' +
+                '<span class="book-rec__info">' +
+                    '<span class="book-rec__title">' + esc(book.title) + '</span>' +
+                    (book.author ? '<span class="book-rec__author">' + esc(book.author) + '</span>' : '') +
+                '</span>' +
+                '<span class="book-rec__cta">Bei Amazon ansehen</span>' +
+            '</a>' +
+            '<p class="book-rec__disclosure">Affiliate-Link. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>' +
+        '</div>';
+    }
+
     function openDetail(id) {
         var t = thinkerById[id];
         if (!t) return;
@@ -300,6 +317,7 @@
         if (epochChip) html += '<div class="detail-panel__section"><h4>Epoche</h4><div class="tag-row">' + epochChip + '</div></div>';
         if (strChips) html += '<div class="detail-panel__section"><h4>Denkrichtungen</h4><div class="tag-row">' + strChips + '</div></div>';
         if (disChips) html += '<div class="detail-panel__section"><h4>Themengebiete</h4><div class="tag-row">' + disChips + '</div></div>';
+        if (t.book) html += bookRecHTML(t.book);
         html += '</div>';
 
         panelShell(html);

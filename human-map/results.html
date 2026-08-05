@@ -7,7 +7,7 @@
     <meta name="description" content="Dein persönliches Human Map Ergebnis – Archetyp, Skill Tree und Wachstumsprofil.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/results.css?v=20260803">
+    <link rel="stylesheet" href="css/results.css?v=20260901">
 </head>
 <body>
 
@@ -34,7 +34,23 @@
     <!-- Results content (hidden until loaded) -->
     <div id="hm-results-content" style="display:none">
 
-        <!-- ── 1. Archetype Reveal ── -->
+        <!-- ── 1. Kernspannung ── -->
+        <section class="hm-tension-section hm-result-reveal" id="hm-tension-section">
+            <div class="hm-container--narrow hm-text-center">
+                <div class="hm-label">Deine Kernspannung</div>
+                <p class="hm-tension-text" id="hm-tension-text"></p>
+            </div>
+        </section>
+
+        <!-- ── 2. Brief an dich ── -->
+        <section class="hm-brief-section hm-result-reveal" id="hm-brief-section">
+            <div class="hm-container--narrow">
+                <div class="hm-label" style="margin-bottom:1rem">Ein Brief an dich</div>
+                <p class="hm-brief-text" id="hm-brief-text"></p>
+            </div>
+        </section>
+
+        <!-- ── 3. Archetype Reveal ── -->
         <section class="hm-reveal-section" id="hm-archetype-section">
             <div class="hm-result-reveal" id="hm-arch-reveal">
                 <div style="display:flex;flex-direction:column;align-items:center">
@@ -47,129 +63,46 @@
                     <p class="hm-archetype-tagline" id="hm-arch-tagline"></p>
                     <div class="hm-divider hm-divider--center"></div>
                     <p class="hm-archetype-desc" id="hm-arch-desc"></p>
+                    <p class="hm-arch-similar" id="hm-arch-similar"></p>
                     <div class="hm-arch-pills" id="hm-arch-strengths"></div>
                     <div class="hm-blindspot" id="hm-arch-blindspot"></div>
                 </div>
             </div>
         </section>
 
-        <!-- ── Rare unlock (if applicable) ── -->
-        <div class="hm-container--narrow" id="hm-rare-section" style="display:none;padding-bottom:3rem">
-            <div class="hm-rare-unlock">
-                <div class="hm-rare-unlock__label">✦ Seltene Eigenschaft freigeschaltet</div>
-                <div class="hm-rare-unlock__name" id="hm-rare-name"></div>
-                <div style="font-size:0.875rem;color:#777;margin-top:0.5rem" id="hm-rare-tagline"></div>
+        <!-- ── Rare unlock badge (if applicable) ── -->
+        <div class="hm-container--narrow hm-text-center" id="hm-rare-section" style="display:none;padding-bottom:2rem">
+            <div class="hm-rare-badge">
+                <span class="hm-rare-badge__icon">✦</span>
+                <span class="hm-rare-badge__name" id="hm-rare-name"></span>
             </div>
         </div>
 
-        <!-- ── Synergy banners ── -->
-        <div class="hm-container--narrow" id="hm-synergy-banners" style="padding-bottom:3rem"></div>
-
-        <!-- ── 2. Skill Tree + Galaxy View ── -->
-        <section class="hm-skilltree-section hm-result-reveal" id="hm-skilltree-section">
+        <!-- ── 4. Wo du stehst: 5 Lebensbereiche ── -->
+        <section class="hm-verort-section hm-result-reveal" id="hm-verort-section">
             <div class="hm-container">
                 <div class="hm-section-header">
-                    <div class="hm-label" id="hm-tree-section-label">Dein Skill Tree</div>
-                    <h2 class="hm-heading" style="margin-top:0.75rem" id="hm-tree-section-title">Dein persönlicher <em>Entwicklungsbaum</em></h2>
-                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto" id="hm-tree-section-desc">Jeder Knoten zeigt eine Dimension deines Profils. Goldene Knoten zeigen aktive Synergien.</p>
+                    <div class="hm-label">Wo du stehst</div>
+                    <h2 class="hm-heading" style="margin-top:0.75rem">Deine 5 <em>Lebensbereiche</em></h2>
+                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto">Relativ zu deinem eigenen Durchschnitt gelesen — nicht im Vergleich zu anderen Menschen.</p>
                 </div>
-
-                <!-- Mode switcher -->
-                <div class="hm-mode-switcher" id="hm-mode-switcher">
-                    <button class="hm-mode-btn is-active" data-mode="tree"  title="Skill Tree">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
-                        Skill Tree
-                    </button>
-                    <button class="hm-mode-btn" data-mode="galaxy" title="Profil-Vergleich">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>
-                        Galaxie
-                    </button>
+                <div class="hm-verort-chart-wrap">
+                    <canvas id="hm-chart-areas"></canvas>
                 </div>
-
-                <!-- ── Tree mode ── -->
-                <div id="hm-mode-tree" class="hm-mode-panel is-active">
-                    <!-- Synergy counter -->
-                    <div class="hm-synergy-count" id="hm-synergy-count"></div>
-                    <!-- Desktop: SVG tree -->
-                    <div class="hm-skilltree-wrap hm-desktop-only">
-                        <button id="hm-tree-back-btn" class="hm-tree-back-btn" onclick="SkillTree.resetZoom()">&#8592; Übersicht</button>
-                        <svg id="hm-skilltree-svg" viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" aria-label="Skill Tree Visualisierung"></svg>
-                    </div>
-                    <!-- Mobile: cluster tiles -->
-                    <div class="hm-cluster-tiles hm-mobile-only" id="hm-cluster-tiles"></div>
-                    <!-- Legend (desktop) -->
-                    <div class="hm-legend hm-desktop-only" id="hm-legend"></div>
-                </div>
-
-                <!-- ── Galaxy mode ── -->
-                <div id="hm-mode-galaxy" class="hm-mode-panel">
-                    <div class="hm-galaxy-wrap">
-                        <div class="hm-galaxy-intro">
-                            <div class="hm-label">PROFIL-VERGLEICH</div>
-                            <p class="hm-body--sm" style="margin-top:0.5rem;color:#888">Dein goldener Stern zeigt wo du stehst. Verbundene Archetypen sind dir am ähnlichsten.</p>
-                        </div>
-                        <svg id="hm-galaxy-svg" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" aria-label="Archetypen Galaxie"></svg>
-                        <!-- Similarity summary cards -->
-                        <div class="hm-galaxy-cards" id="hm-galaxy-cards"></div>
-                        <!-- All archetypes detail panel -->
-                        <button class="hm-btn hm-btn--ghost hm-galaxy-detail-btn" id="hm-galaxy-detail-btn">
-                            Alle Archetypen vergleichen →
-                        </button>
-                    </div>
-                </div>
+                <div class="hm-area-cards" id="hm-area-cards"></div>
             </div>
         </section>
 
-        <!-- Archetype detail slide-over (from right) -->
-        <div id="hm-archdetail-panel" class="hm-archdetail-panel" role="dialog" aria-modal="true" aria-label="Archetypen im Detail" aria-hidden="true">
-            <div class="hm-archdetail-panel__inner">
-                <div class="hm-archdetail-panel__header">
-                    <button class="hm-archdetail-panel__back" id="hm-archdetail-back">&#8592; Zurück zur Übersicht</button>
-                </div>
-                <div id="hm-archdetail-content" class="hm-archdetail-panel__content"></div>
-            </div>
-        </div>
-
-        <!-- ── 3. Radar Charts ── -->
-        <section class="hm-charts-section hm-result-reveal" id="hm-charts-section">
-            <div class="hm-container">
-                <div class="hm-section-header">
-                    <div class="hm-label">Dimensionsprofil</div>
-                    <h2 class="hm-heading" style="margin-top:0.75rem">Deine zwei <em>Kernprofile</em></h2>
-                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto">Big Five Persönlichkeit und dein individuelles Intelligenzprofil.</p>
-                </div>
-                <div class="hm-charts-row">
-                    <div class="hm-chart-card">
-                        <div class="hm-chart-card__title">Persönlichkeit</div>
-                        <div class="hm-chart-card__wrap">
-                            <canvas id="hm-chart-personality"></canvas>
-                        </div>
-                    </div>
-                    <div class="hm-chart-card">
-                        <div class="hm-chart-card__title">Intelligenzprofil</div>
-                        <div class="hm-chart-card__wrap">
-                            <canvas id="hm-chart-intel"></canvas>
-                        </div>
-                    </div>
-                </div>
+        <!-- ── 5. Dein nächster Schritt ── -->
+        <section class="hm-experiment-section hm-result-reveal" id="hm-experiment-section">
+            <div class="hm-container--narrow hm-text-center">
+                <div class="hm-label">Dein nächster Schritt</div>
+                <h2 class="hm-heading" style="margin-top:0.75rem">Ein Experiment für <em id="hm-experiment-area"></em></h2>
+                <p class="hm-experiment-text" id="hm-experiment-text"></p>
             </div>
         </section>
 
-        <!-- ── 4. Detail Dashboard ── -->
-        <section class="hm-dashboard hm-result-reveal" id="hm-dashboard-section">
-            <div class="hm-container">
-                <div class="hm-section-header">
-                    <div class="hm-label">Dimensionsprofil</div>
-                    <h2 class="hm-heading" style="margin-top:0.75rem">Deine <em>Detailwerte</em></h2>
-                </div>
-                <!-- Cluster filter tabs -->
-                <div class="hm-cluster-tabs" id="hm-cluster-tabs"></div>
-                <!-- Cards grid -->
-                <div class="hm-dashboard__grid" id="hm-dim-cards"></div>
-            </div>
-        </section>
-
-        <!-- ── 4. Email Capture ── -->
+        <!-- ── 6. Email Capture ── -->
         <section class="hm-email-section hm-result-reveal" id="hm-email-section">
             <div class="hm-container">
                 <div class="hm-email-card">
@@ -210,6 +143,78 @@
             </div>
         </section>
 
+        <!-- ── 7. Mehr Details (Skill Tree, Persönlichkeitsprofil, alle 17 Dimensionen) ── -->
+        <details class="hm-more-details" id="hm-mehr-details">
+            <summary class="hm-more-details__summary">Mehr Details ansehen — Skill Tree, Persönlichkeitsprofil &amp; alle 17 Dimensionen</summary>
+            <div class="hm-more-details__body">
+
+                <!-- Skill Tree -->
+                <section class="hm-skilltree-section hm-result-reveal is-visible" id="hm-skilltree-section">
+                    <div class="hm-container">
+                        <div class="hm-section-header">
+                            <div class="hm-label">Dein Skill Tree</div>
+                            <h2 class="hm-heading" style="margin-top:0.75rem">Dein persönlicher <em>Entwicklungsbaum</em></h2>
+                            <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto">Jeder Knoten zeigt eine Dimension deines Profils. Goldene Knoten zeigen aktive Synergien.</p>
+                        </div>
+
+                        <div id="hm-mode-tree" class="hm-mode-panel is-active">
+                            <!-- Synergy counter -->
+                            <div class="hm-synergy-count" id="hm-synergy-count"></div>
+                            <!-- Desktop: SVG tree -->
+                            <div class="hm-skilltree-wrap hm-desktop-only">
+                                <button id="hm-tree-back-btn" class="hm-tree-back-btn" onclick="SkillTree.resetZoom()">&#8592; Übersicht</button>
+                                <svg id="hm-skilltree-svg" viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" aria-label="Skill Tree Visualisierung"></svg>
+                            </div>
+                            <!-- Mobile: cluster tiles -->
+                            <div class="hm-cluster-tiles hm-mobile-only" id="hm-cluster-tiles"></div>
+                            <!-- Legend (desktop) -->
+                            <div class="hm-legend hm-desktop-only" id="hm-legend"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Radar Charts -->
+                <section class="hm-charts-section hm-result-reveal is-visible" id="hm-charts-section">
+                    <div class="hm-container">
+                        <div class="hm-section-header">
+                            <div class="hm-label">Dimensionsprofil</div>
+                            <h2 class="hm-heading" style="margin-top:0.75rem">Deine zwei <em>Kernprofile</em></h2>
+                            <p class="hm-body--sm" style="margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto">Big Five Persönlichkeit und dein individuelles Intelligenzprofil.</p>
+                        </div>
+                        <div class="hm-charts-row">
+                            <div class="hm-chart-card">
+                                <div class="hm-chart-card__title">Persönlichkeit</div>
+                                <div class="hm-chart-card__wrap">
+                                    <canvas id="hm-chart-personality"></canvas>
+                                </div>
+                            </div>
+                            <div class="hm-chart-card">
+                                <div class="hm-chart-card__title">Intelligenzprofil</div>
+                                <div class="hm-chart-card__wrap">
+                                    <canvas id="hm-chart-intel"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Detail Dashboard -->
+                <section class="hm-dashboard hm-result-reveal is-visible" id="hm-dashboard-section">
+                    <div class="hm-container">
+                        <div class="hm-section-header">
+                            <div class="hm-label">Dimensionsprofil</div>
+                            <h2 class="hm-heading" style="margin-top:0.75rem">Deine <em>Detailwerte</em></h2>
+                        </div>
+                        <!-- Cluster filter tabs -->
+                        <div class="hm-cluster-tabs" id="hm-cluster-tabs"></div>
+                        <!-- Cards grid -->
+                        <div class="hm-dashboard__grid" id="hm-dim-cards"></div>
+                    </div>
+                </section>
+
+            </div>
+        </details>
+
         <!-- ── CTA footer ── -->
         <section class="hm-section--sm hm-result-reveal">
             <div class="hm-container hm-text-center">
@@ -236,8 +241,10 @@
     <script src="js/model.js?v=20260716"></script>
     <script src="js/scoring.js?v=20260605d"></script>
     <script src="js/archetypes.js?v=20260605d"></script>
+    <script src="js/lifeareas.js?v=20260901"></script>
+    <script src="js/content.js?v=20260901"></script>
+    <script src="js/insights.js?v=20260901"></script>
     <script src="js/skilltree.js?v=20260605d"></script>
-    <script src="js/galaxy.js?v=20260803"></script>
-    <script src="js/results.js?v=20260605d"></script>
+    <script src="js/results.js?v=20260901"></script>
 </body>
 </html>

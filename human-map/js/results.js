@@ -32,12 +32,16 @@ const Results = (() => {
 
         document.getElementById('hm-results-content').style.display = 'block';
 
-        renderArchetype(results);
+        const ctx = buildInsightContext(results);
+
+        renderKernspannung(ctx);
+        renderArchetype(results, ctx);
         renderRare(results);
-        renderSynergies(results);
+        renderVerortung(ctx);
+        renderExperiment(ctx);
+        renderBrief(ctx);
         renderSkillTree(results);
         renderMobileTiles(results);
-        setupModeSwitcher(results);
         renderCharts(results);
         renderDashboard(results);
         setupEmailForm(results);
@@ -46,12 +50,99 @@ const Results = (() => {
         setupDebugMode(results);
     }
 
+    // ── Insight context (shared by Kernspannung / Brief / Verortung / Experiment) ──
+    function buildInsightContext(results) {
+        const scores      = results.scores || {};
+        const categorical = results.categorical || {};
+        const areaScores  = LifeAreas.computeAreaScores(scores);
+        const bands       = LifeAreas.relativeBands(areaScores);
+        const { strongestKey, weakestKey } = LifeAreas.strongestWeakest(bands);
+        const tension = Insights.pickTension(scores) || Insights.fallbackTension(areaScores);
+        return { scores, categorical, areaScores, bands, strongestKey, weakestKey, tension };
+    }
+
+    // ── Kernspannung ────────────────────────────────────────────────
+    function renderKernspannung(ctx) {
+        setText('hm-tension-text', ctx.tension.text);
+    }
+
+    // ── Brief an dich ───────────────────────────────────────────────
+    function renderBrief(ctx) {
+        const text = Insights.buildBrief(ctx.scores, ctx.strongestKey, ctx.weakestKey, ctx.tension);
+        setText('hm-brief-text', text);
+    }
+
+    // ── Verortung: 5 Lebensbereiche ─────────────────────────────────
+    function renderVerortung(ctx) {
+        const cards = Insights.buildAreaCards(ctx.scores, ctx.categorical, ctx.bands);
+        const gridEl = document.getElementById('hm-area-cards');
+        if (gridEl) {
+            gridEl.innerHTML = cards.map(c => {
+                const bandLabel = c.band === 'traegt' ? 'Trägt dich' : c.band === 'fordert' ? 'Fordert dich' : 'Im Gleichgewicht';
+                return `<div class="hm-area-card" style="--area-color:${c.accent}">
+                    <div class="hm-area-card__top">
+                        <span class="hm-area-card__label">${c.label}</span>
+                        <span class="hm-area-card__band hm-area-card__band--${c.band}">${bandLabel}</span>
+                    </div>
+                    <div class="hm-area-card__text">${c.leichtText}</div>
+                    <div class="hm-area-card__text">${c.schwerText}</div>
+                    ${c.flavorText ? `<div class="hm-area-card__flavor">${c.flavorText}</div>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        const canvasEl = document.getElementById('hm-chart-areas');
+        if (canvasEl && typeof Chart !== 'undefined') {
+            const rootStyles = getComputedStyle(document.documentElement);
+            const resolvedColors = cards.map(c => {
+                const match = c.accent.match(/--[\w-]+/);
+                return match ? (rootStyles.getPropertyValue(match[0]).trim() || '#c9a84c') : '#c9a84c';
+            });
+            new Chart(canvasEl, {
+                type: 'radar',
+                data: {
+                    labels: cards.map(c => c.label),
+                    datasets: [{
+                        data: cards.map(c => c.score),
+                        backgroundColor: 'rgba(201,168,76,0.12)',
+                        borderColor: '#c9a84c',
+                        borderWidth: 2,
+                        pointBackgroundColor: resolvedColors,
+                        pointBorderColor: '#0a0a0a',
+                        pointRadius: 4,
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            min: 0, max: 100,
+                            ticks: { display: false },
+                            grid: { color: 'rgba(255,255,255,0.08)' },
+                            angleLines: { color: 'rgba(255,255,255,0.08)' },
+                            pointLabels: { color: '#aaaaaa', font: { size: 11 } },
+                        }
+                    },
+                    plugins: { legend: { display: false } },
+                    animation: { duration: 800, easing: 'easeOutQuart' },
+                    maintainAspectRatio: true,
+                }
+            });
+        }
+    }
+
+    // ── Nächster Schritt (Experiment) ───────────────────────────────
+    function renderExperiment(ctx) {
+        const label = LifeAreas.LIFE_AREAS[ctx.weakestKey].label;
+        setText('hm-experiment-area', label);
+        setText('hm-experiment-text', Insights.pickExperiment(ctx.weakestKey));
+    }
+
     function showNoResults() {
         document.getElementById('hm-no-results').style.display = 'flex';
     }
 
     // ── Archetype reveal ──────────────────────────────────────────
-    function renderArchetype(results) {
+    function renderArchetype(results, ctx) {
         const arch  = results.archetype.primary;
         const color = arch.color;
 
@@ -93,6 +184,20 @@ const Results = (() => {
             bsEl.innerHTML = `<strong>Blinder Fleck:</strong> ${arch.blindspot}`;
         }
 
+        // Similarity sentence — closest other archetype by profile distance
+        const simEl = document.getElementById('hm-arch-similar');
+        if (simEl && ctx) {
+            const others = MODEL.ARCHETYPES.filter(a => a.id !== arch.id && !a.rare);
+            let best = null;
+            others.forEach(a => {
+                const sim = Archetypes.calculateSimilarity(ctx.scores, a.id);
+                if (sim !== null && (!best || sim > best.sim)) best = { name: a.name, sim };
+            });
+            simEl.textContent = best
+                ? `Am ehesten ähnelst du daneben dem Typ „${best.name}“ (${Math.round(best.sim)}% Übereinstimmung).`
+                : '';
+        }
+
         // Trigger reveal
         setTimeout(() => {
             const revealEl = document.getElementById('hm-arch-reveal');
@@ -110,28 +215,6 @@ const Results = (() => {
         const section = document.getElementById('hm-rare-section');
         if (section) section.style.display = 'block';
         setText('hm-rare-name',    rareArch.name);
-        setText('hm-rare-tagline', rareArch.tagline);
-    }
-
-    // ── Synergy banners ───────────────────────────────────────────
-    function renderSynergies(results) {
-        const container = document.getElementById('hm-synergy-banners');
-        if (!container || !results.synergies || results.synergies.length === 0) return;
-
-        const activeSyns = results.synergies
-            .map(id => MODEL.SYNERGIES.find(s => s.id === id))
-            .filter(Boolean);
-
-        if (activeSyns.length === 0) return;
-
-        container.innerHTML = activeSyns.map(syn => `
-            <div class="hm-synergy-banner">
-                <div class="hm-synergy-banner__icon">✦</div>
-                <div>
-                    <div class="hm-synergy-banner__name">${syn.name}</div>
-                    <div class="hm-synergy-banner__desc">${syn.desc}</div>
-                </div>
-            </div>`).join('');
     }
 
     // ── Skill tree ────────────────────────────────────────────────
@@ -204,46 +287,6 @@ const Results = (() => {
                 '<div class="hm-tile__body">' + dimRows + '</div>' +
                 '</details>';
         }).join('');
-    }
-
-    // ── Mode switcher ──────────────────────────────────────────────
-    function setupModeSwitcher(results) {
-        var btns       = document.querySelectorAll('.hm-mode-btn');
-        var treePanelEl   = document.getElementById('hm-mode-tree');
-        var galaxyPanelEl = document.getElementById('hm-mode-galaxy');
-        var labelEl    = document.getElementById('hm-tree-section-label');
-        var titleEl    = document.getElementById('hm-tree-section-title');
-        var descEl     = document.getElementById('hm-tree-section-desc');
-        var galaxyInited = false;
-
-        if (!btns.length) return;
-
-        btns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                var mode = btn.getAttribute('data-mode');
-                btns.forEach(function(b){ b.classList.remove('is-active'); });
-                btn.classList.add('is-active');
-
-                if (mode === 'tree') {
-                    treePanelEl   && treePanelEl.classList.add('is-active');
-                    galaxyPanelEl && galaxyPanelEl.classList.remove('is-active');
-                    if (labelEl)  labelEl.textContent = 'Dein Skill Tree';
-                    if (titleEl)  titleEl.innerHTML   = 'Dein persönlicher <em>Entwicklungsbaum</em>';
-                    if (descEl)   descEl.textContent  = 'Jeder Knoten zeigt eine Dimension deines Profils. Goldene Knoten zeigen aktive Synergien.';
-                } else if (mode === 'galaxy') {
-                    treePanelEl   && treePanelEl.classList.remove('is-active');
-                    galaxyPanelEl && galaxyPanelEl.classList.add('is-active');
-                    if (labelEl)  labelEl.textContent = 'Profil-Vergleich';
-                    if (titleEl)  titleEl.innerHTML   = 'Dein Platz im <em>Persönlichkeits-Universum</em>';
-                    if (descEl)   descEl.textContent  = 'Wo stehst du im Vergleich zu allen Archetypen?';
-                    // Lazy-init galaxy on first switch
-                    if (!galaxyInited && typeof Galaxy !== 'undefined') {
-                        Galaxy.init(results);
-                        galaxyInited = true;
-                    }
-                }
-            });
-        });
     }
 
     function renderLegend(results) {

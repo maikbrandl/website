@@ -1,7 +1,7 @@
 ﻿/* ===================================================================
    HUMAN MAP – Results Styles
    === */
-@import 'variables.css?v=20260605b';
+@import 'variables.css?v=20260901';
 @import 'main.css?v=20260605b';
 
 /* ── Archetype reveal ── */
@@ -137,6 +137,53 @@
     color: var(--hm-gold-light);
 }
 
+/* ── Rare archetype badge (compact) ── */
+.hm-rare-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hm-space-2);
+    padding: 0.4rem 1rem;
+    border-radius: var(--hm-radius-full);
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.3);
+}
+.hm-rare-badge__icon { color: var(--hm-gold); font-size: 0.875rem; }
+.hm-rare-badge__name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--hm-gold-light);
+}
+
+/* ── Kernspannung ── */
+.hm-tension-section { padding: var(--hm-space-12) 0 var(--hm-space-8); }
+.hm-tension-text {
+    font-family: var(--hm-font-display);
+    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--hm-white);
+    max-width: 680px;
+    margin: var(--hm-space-4) auto 0;
+}
+
+/* ── Brief an dich ── */
+.hm-brief-section { padding: var(--hm-space-8) 0 var(--hm-space-12); }
+.hm-brief-text {
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--hm-text);
+    margin-top: 0;
+}
+
+/* ── Archetype similarity sentence ── */
+.hm-arch-similar {
+    max-width: 540px;
+    margin: 0 auto var(--hm-space-6);
+    font-size: 0.9375rem;
+    color: var(--hm-text-dim);
+    line-height: 1.6;
+}
+
 /* ── Skill tree section ── */
 .hm-skilltree-section {
     padding: var(--hm-space-16) 0;
@@ -177,6 +224,102 @@
     border-radius: 50%;
     flex-shrink: 0;
 }
+
+/* ── Verortung: 5 Lebensbereiche ── */
+.hm-verort-section {
+    padding: var(--hm-space-16) 0;
+    background: var(--hm-bg-elevated);
+    border-top: 1px solid var(--hm-border);
+    border-bottom: 1px solid var(--hm-border);
+}
+.hm-verort-chart-wrap {
+    max-width: 460px;
+    margin: 0 auto var(--hm-space-10);
+}
+.hm-area-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--hm-space-5);
+}
+.hm-area-card {
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-left: 3px solid var(--area-color, var(--hm-gold));
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-5) var(--hm-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--hm-space-2);
+}
+.hm-area-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hm-area-card__label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--hm-white);
+}
+.hm-area-card__band {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--hm-radius-full);
+    white-space: nowrap;
+}
+.hm-area-card__band--traegt { color: #4ade80; background: rgba(74,222,128,0.1); }
+.hm-area-card__band--gleichgewicht { color: var(--hm-text-muted); background: rgba(255,255,255,0.05); }
+.hm-area-card__band--fordert { color: #f0a855; background: rgba(240,168,85,0.1); }
+.hm-area-card__text {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--hm-text-dim);
+}
+.hm-area-card__flavor {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--hm-text-muted);
+    font-style: italic;
+    margin-top: var(--hm-space-1);
+}
+
+/* ── Nächster Schritt (Experiment) ── */
+.hm-experiment-section { padding: var(--hm-space-12) 0 var(--hm-space-16); }
+.hm-experiment-text {
+    max-width: 560px;
+    margin: var(--hm-space-4) auto 0;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--hm-text);
+}
+.hm-experiment-section em { color: var(--hm-gold-light); font-style: italic; }
+
+/* ── Mehr Details wrapper ── */
+.hm-more-details { background: var(--hm-bg); }
+.hm-more-details__summary {
+    cursor: pointer;
+    list-style: none;
+    text-align: center;
+    padding: var(--hm-space-6) var(--hm-space-6);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--hm-text-dim);
+    border-top: 1px solid var(--hm-border);
+    transition: color 0.2s;
+}
+.hm-more-details__summary::-webkit-details-marker { display: none; }
+.hm-more-details__summary:hover { color: var(--hm-gold-light); }
+.hm-more-details__summary::after {
+    content: '▾';
+    display: inline-block;
+    margin-left: var(--hm-space-2);
+    transition: transform 0.2s;
+}
+.hm-more-details[open] .hm-more-details__summary::after { transform: rotate(180deg); }
 
 /* ── Detail dashboard ── */
 .hm-dashboard {
@@ -422,6 +565,7 @@ html { scroll-behavior: smooth; }
 .hm-skilltree-section,
 .hm-charts-section,
 .hm-dashboard,
+.hm-verort-section,
 .hm-email-section { padding-top: 5rem; padding-bottom: 5rem; }
 
 /* ── Skill tree: natural square aspect ratio from viewBox ── */

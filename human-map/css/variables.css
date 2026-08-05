@@ -51,6 +51,13 @@
     --c-synergy:      #c9a84c;
     --c-synergy-glow: rgba(201, 168, 76, 0.4);
 
+    /* ── Life Area Colors (Kernspannung / Verortung) ── */
+    --area-denken:      #8b7cf8;
+    --area-antrieb:     #f0a855;
+    --area-beziehungen: #f07090;
+    --area-balance:     #58d4a0;
+    --area-wachstum:    #c9a84c;
+
     /* ── Archetype Colors ── */
     --arch-pioneer:    #f0a855;
     --arch-maker:      #58d4a0;

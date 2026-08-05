@@ -122,14 +122,6 @@
 
     function isOpen(id) { return !!state.search || openIds[id] === true; }
 
-    /* ── Legende (Farb-Orientierung der Regionen) ── */
-    function legendHTML() {
-        var items = D.traditions.map(function (tr) {
-            return '<span class="legend-item"><span class="legend-dot" style="background:' + tr.color + '"></span>' + tr.label + '</span>';
-        }).join('');
-        return '<div class="tradition-legend">' + items + '</div>';
-    }
-
     /* ── Denker-Karte ── */
     function cardHTML(t) {
         var trad = traditionById[t.tradition];
@@ -170,7 +162,7 @@
     function renderEpoche() {
         var host = hosts.epoche;
         var ids = [];
-        var html = legendHTML();
+        var html = '';
         var anyResults = false;
 
         D.epochs.forEach(function (ep) {
@@ -209,7 +201,7 @@
     function renderDisziplin() {
         var host = hosts.disziplin;
         var ids = [];
-        var html = legendHTML();
+        var html = '';
         var anyResults = false;
 
         D.disziplinen.forEach(function (d) {
@@ -535,6 +527,7 @@
         var total = D.thinkers.length;
         var matched = D.thinkers.filter(matchesGlobal).length;
         var el = $('resultCount');
+        if (!el) return;
         if (state.search || state.tradition) {
             el.textContent = matched + ' von ' + total + ' Denkern' + (state.search ? ' passen zur Suche' : ' in dieser Region');
         } else {

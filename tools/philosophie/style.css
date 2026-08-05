@@ -187,17 +187,6 @@
 }
 .btn-ghost:hover { color: var(--gold); border-color: var(--gold-dark); }
 
-.result-count {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin: var(--space-5) 0 0;
-}
-.progress-count {
-    font-size: 13px;
-    color: var(--gold);
-    margin: var(--space-2) 0 0;
-}
-
 /* ── Views ── */
 .view { display: none; padding: var(--space-8) 0 var(--space-24); }
 .view--active { display: block; }
@@ -285,21 +274,6 @@
 /* ══════════════════════════════════════════════════
    KARTEN (Denker) & Legende
 ══════════════════════════════════════════════════ */
-.tradition-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3) var(--space-5);
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-5);
-    border-bottom: 1px solid var(--border);
-}
-.legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    color: var(--text-secondary);
-}
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 .card-grid {
@@ -687,4 +661,7 @@
     .accordion__title { font-size: 19px; }
     .accordion__body { padding: 0 var(--space-5) var(--space-5); }
     .detail-panel__name { font-size: 24px; }
+    /* Label über Wert statt nebeneinander, damit lange Werte (z.B. Hauptvertreter) nie überlappen */
+    .detail-meta-row { grid-template-columns: 1fr; gap: var(--space-1); }
+    .detail-meta-label { padding-top: 0; }
 }

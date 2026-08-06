@@ -14,13 +14,13 @@ const SceneContent = (() => {
             id: 'ankunft',
             eyebrow: 'Das Sinnbild',
             title: 'So bist du gebaut.',
-            caption: 'Kein Typ, kein Etikett. Ein Mensch — aus Licht, Gewohnheit und Richtung.',
+            caption: 'Kein Typ, kein Etikett. Ein Mensch, aus Licht, Gewohnheit und Richtung.',
         },
         {
             id: 'persoenlichkeit',
             eyebrow: 'Terrain',
             title: 'Dein Grundgelände.',
-            caption: 'Im Kopf pulsiert, wie du grundsätzlich tickst — stabil, über Jahre gewachsen.',
+            caption: 'Im Kopf pulsiert, wie du grundsätzlich tickst, stabil, über Jahre gewachsen.',
             block: 'terrain',
         },
         {
@@ -41,7 +41,7 @@ const SceneContent = (() => {
             id: 'sinn',
             eyebrow: 'Sinn',
             title: 'Dein Kompass.',
-            caption: 'Ein Strahl fällt auf genau einen Pfad — den, an dem sich Bewegung gerade am meisten lohnt.',
+            caption: 'Ein Strahl fällt auf genau einen Pfad, den, an dem sich Bewegung gerade am meisten lohnt.',
             block: 'sinn',
         },
         {
@@ -55,7 +55,7 @@ const SceneContent = (() => {
             id: 'veraenderung',
             eyebrow: 'Bewegung',
             title: 'Der Weg ist die Veränderung.',
-            caption: 'Du stehst nicht still. Jeder Schritt verschiebt die Landschaft — messbar, mit der Zeit.',
+            caption: 'Du stehst nicht still. Jeder Schritt verschiebt die Landschaft, messbar, mit der Zeit.',
             block: 'bewegung',
         },
     ];
@@ -66,19 +66,19 @@ const SceneContent = (() => {
         terrain: {
             label: 'Persönlichkeit · Big Five',
             title: 'Dein Terrain',
-            body: 'Das leuchtende Gehirn steht für deine Persönlichkeit — die fünf großen Dimensionen, '
+            body: 'Das leuchtende Gehirn steht für deine Persönlichkeit, die fünf großen Dimensionen, '
                 + 'auf denen jeder Mensch irgendwo liegt. Sie sind über die Lebensspanne relativ stabil: '
-                + 'nicht dein Schicksal, aber dein Ausgangsgelände. Alles andere — deine Werte, deine '
-                + 'Bedürfnisse, dein Sinn — spielt sich auf diesem Grund ab.',
+                + 'nicht dein Schicksal, aber dein Ausgangsgelände. Alles andere, deine Werte, deine '
+                + 'Bedürfnisse, dein Sinn, spielt sich auf diesem Grund ab.',
             readout: '{TRAITS}',
             note: 'Grundlage: Big-Five-Modell (Mini-IPIP). Ausprägungen auf einem Spektrum, keine Schubladen.',
         },
         praegung: {
             label: 'Glaubenssätze · Prägung',
             title: 'Die Maske',
-            body: 'Die Maske trägt einen Satz, den du früh über dich gelernt hast — nicht als Wahrheit, '
+            body: 'Die Maske trägt einen Satz, den du früh über dich gelernt hast, nicht als Wahrheit, '
                 + 'sondern als Schutz. Je stärker er gerade aktiv ist, desto dichter liegt die Maske auf '
-                + 'deinem Gesicht. Das Gute: Es ist eine Maske, kein Gesicht. Du kannst sie ablegen — '
+                + 'deinem Gesicht. Das Gute: Es ist eine Maske, kein Gesicht. Du kannst sie ablegen, '
                 + 'dahinter bist immer du.',
             readout: '{BELIEF}',
             note: 'In Anlehnung an die Schematheorie (Young). Kein klinisches Urteil, sondern ein Muster, das mitläuft.',
@@ -86,17 +86,17 @@ const SceneContent = (() => {
         werte: {
             label: 'Werte · Antrieb',
             title: 'Deine Richtungen',
-            body: 'An der Weggabelung stehen Schilder — deine wichtigsten Werte, in ihrer Reihenfolge. '
+            body: 'An der Weggabelung stehen Schilder, deine wichtigsten Werte, in ihrer Reihenfolge. '
                 + 'Sie sind kein Soll, sondern ein Ist: das, wonach du dich tatsächlich ausrichtest. '
                 + 'Wenn dein Alltag und deine obersten Schilder in verschiedene Richtungen zeigen, '
-                + 'entsteht Reibung — genau dort lohnt sich das Hinschauen.',
+                + 'entsteht Reibung, genau dort lohnt sich das Hinschauen.',
             readout: '{VALUES}',
             note: 'Grundlage: Schwartz’ Theorie der Grundwerte.',
         },
         sinn: {
             label: 'Sinn · Kompass',
             title: 'Dein Kompass',
-            body: 'Der Kompass steht für Sinn — aus drei Teilen: ob dein Leben sich stimmig anfühlt '
+            body: 'Der Kompass steht für Sinn, aus drei Teilen: ob dein Leben sich stimmig anfühlt '
                 + '(Kohärenz), ob du eine Richtung hast (Purpose) und ob dein Tun für andere zählt '
                 + '(Bedeutsamkeit). Der Lichtstrahl fällt auf den einen Pfad, an dem eine kleine '
                 + 'Veränderung gerade am meisten bewegt.',
@@ -106,7 +106,7 @@ const SceneContent = (() => {
         beduerfnisse: {
             label: 'Bedürfnisse · Selbstbestimmung',
             title: 'Was dir Kraft gibt',
-            body: 'Drei Lichter säumen die Wege — deine psychologischen Grundbedürfnisse. Der Schlüssel '
+            body: 'Drei Lichter säumen die Wege, deine psychologischen Grundbedürfnisse. Der Schlüssel '
                 + 'steht für Autonomie (frei entscheiden), die Flamme für Kompetenz (etwas gut können), '
                 + 'die Ringe für Verbundenheit (dazugehören). Leuchtet ein Licht hell und ruhig, ist das '
                 + 'Bedürfnis genährt. Flackert es matt, fehlt dir dort gerade etwas.',
@@ -117,11 +117,11 @@ const SceneContent = (() => {
             label: 'Veränderung · Bewegung',
             title: 'Der Weg ist die Veränderung',
             body: 'Die Figur geht. Veränderung ist kein Zustand, den man erreicht, sondern eine Bewegung, '
-                + 'die man macht — ein konkreter, machbarer Schritt nach dem anderen. Die Fußspuren hinter '
+                + 'die man macht, ein konkreter, machbarer Schritt nach dem anderen. Die Fußspuren hinter '
                 + 'dir zeigen, was du schon gegangen bist. Wenn du wiederkommst und neu misst, siehst du '
                 + 'die Landschaft sich verschieben.',
             readout: '{HISTORY}',
-            note: 'Grundlage: Zielverwirklichung nach WOOP (Oettingen) — Wunsch, Ergebnis, Hindernis, Plan.',
+            note: 'Grundlage: Zielverwirklichung nach WOOP (Oettingen), Wunsch, Ergebnis, Hindernis, Plan.',
         },
     };
 
@@ -132,7 +132,7 @@ const SceneContent = (() => {
         soundOn: 'Ton an',
         soundOff: 'Ton aus',
         replay: 'Reise wiederholen',
-        reducedNote: 'Bewegung ist reduziert — du siehst die vollständige, ruhige Komposition.',
+        reducedNote: 'Bewegung ist reduziert, du siehst die vollständige, ruhige Komposition.',
         posterNote: 'Deine Grafikeinstellungen zeigen die Standbild-Version dieser Szene.',
         cta: 'Zu deinem vollständigen Profil',
     };

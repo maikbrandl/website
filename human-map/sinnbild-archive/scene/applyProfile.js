@@ -139,7 +139,7 @@ const SceneApply = (() => {
         const praegung = belief
             ? `<p class="scd-quote">„${esc(belief.text)}"</p>`
               + bar('Aktivierung', belief.activation)
-            : `<p class="scd-quote">Kein Glaubenssatz läuft gerade stark im Hintergrund — deine Maske liegt locker.</p>`;
+            : `<p class="scd-quote">Kein Glaubenssatz läuft gerade stark im Hintergrund, deine Maske liegt locker.</p>`;
 
         const werte = (profile.values || []).slice(0, 4)
             .map((v, i) => `<div class="scd-row"><span>${i + 1}. ${esc(v.label)}</span>`
@@ -156,8 +156,8 @@ const SceneApply = (() => {
 
         const runs = profile.history ? profile.history.length : 0;
         const bewegung = runs > 0
-            ? `<p>Du hast dich schon <b>${runs}×</b> vermessen. Die Fußspuren zeigen deinen Weg — komm wieder und miss neu, um die Landschaft sich verschieben zu sehen.</p>`
-            : `<p>Das ist deine erste Messung — der Anfang des Wegs. Wenn du später die veränderbaren Ebenen neu misst, erscheinen weitere Fußspuren.</p>`;
+            ? `<p>Du hast dich schon <b>${runs}×</b> vermessen. Die Fußspuren zeigen deinen Weg, komm wieder und miss neu, um die Landschaft sich verschieben zu sehen.</p>`
+            : `<p>Das ist deine erste Messung, der Anfang des Wegs. Wenn du später die veränderbaren Ebenen neu misst, erscheinen weitere Fußspuren.</p>`;
 
         return { terrain, praegung, werte, sinn, beduerfnisse, bewegung };
     }

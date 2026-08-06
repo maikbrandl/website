@@ -3,40 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human Map, Ergebnis</title>
+    <title>Ergebnis · Human Map | Hybridlogs</title>
     <meta name="robots" content="noindex">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap">
-    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="result.css">
     <style>
-        body { margin:0; background:var(--hm-bg); }
         .rv-preview-bar {
             font-family:var(--hm-font-sans); font-size:0.75rem; color:var(--hm-text-muted);
             text-align:center; padding:0.5rem; border-bottom:1px solid var(--hm-border);
         }
-        .rv-subnav {
-            display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center;
-            padding: 0.6rem 1rem; border-bottom: 1px solid var(--hm-border);
-        }
-        .rv-subnav a {
-            font-family: var(--hm-font-sans); font-size: 0.75rem; color: var(--hm-text-dim);
-            border: 1px solid var(--hm-border); border-radius: 999px; padding: 0.35rem 0.8rem;
-            transition: color 0.2s, border-color 0.2s;
-        }
-        .rv-subnav a:hover { color: var(--hm-gold); border-color: var(--hm-gold); }
     </style>
 </head>
 <body>
-    <nav class="rv-subnav" aria-label="Human Map Navigation">
-        <a href="index.html">Start</a>
-        <a href="learn.html">Wissenschaft</a>
-        <a href="assessment.html">Fragebogen</a>
-        <a href="scene.html">Sinnbild</a>
-    </nav>
+
+    <header class="hm-header">
+        <a href="index.html" class="hm-header__logo">
+            hybrid<span>logs</span><span class="hm-header__product">Human Map</span>
+        </a>
+        <nav class="hm-header__nav" style="display:flex;gap:0.5rem;align-items:center">
+            <a href="learn.html" class="hm-btn hm-btn--ghost" style="padding:0.4rem 1rem;font-size:0.8125rem">
+                Wissenschaft
+            </a>
+            <a href="assessment.html" class="hm-btn hm-btn--ghost" style="padding:0.4rem 1rem;font-size:0.8125rem">
+                Fragebogen
+            </a>
+        </nav>
+    </header>
+
     <div class="rv-preview-bar">Vorschau · synthetische Testperson (spätere Daten kommen aus dem Fragebogen)</div>
     <div id="rv-root"></div>
+
+    <footer class="hm-footer">
+        <p>Hybridlogs Human Map &nbsp;·&nbsp; <a href="../datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="../impressum.html">Impressum</a></p>
+    </footer>
 
     <script src="model.js"></script>
     <script src="scoring.js"></script>

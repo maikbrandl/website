@@ -11,82 +11,82 @@ const Insights = (() => {
         { id: 'freiheit_vs_struktur',
           when: s => s.werte_freiheit >= 65 && s.struktur >= 65,
           strength: s => (s.werte_freiheit - 65) + (s.struktur - 65),
-          text: 'Du willst Freiheit — und baust dir gleichzeitig ständig Strukturen, die dich einengen. Dein Antrieb sucht Weite, dein Alltag klammert sich an Kontrolle.' },
+          text: 'Du willst Freiheit und baust dir gleichzeitig ständig Strukturen, die dich einengen. Dein Antrieb sucht Weite, dein Alltag klammert sich an Kontrolle.' },
 
         { id: 'antrieb_vs_gruebeln',
           when: s => (s.werte_leistung >= 65 || s.grit_passion >= 65) && s.rumination >= 65,
           strength: s => Math.max(s.werte_leistung, s.grit_passion) - 65 + (s.rumination - 65),
-          text: 'Du gibst Vollgas und trittst gleichzeitig innerlich auf die Bremse. Deine Energie ist da — sie versickert im Grübeln, bevor sie ankommt.' },
+          text: 'Du gibst Vollgas und trittst gleichzeitig innerlich auf die Bremse. Deine Energie ist da, versickert aber im Grübeln, bevor sie ankommt.' },
 
         { id: 'denken_vs_naehe',
           when: s => s.tiefe >= 65 && s.verbindung <= 40,
           strength: s => (s.tiefe - 65) + (40 - s.verbindung),
-          text: 'Du durchschaust Systeme in Sekunden — Menschen kosten dich mehr Kraft. Was dir im Kopf leichtfällt, wird im Herzen zur Arbeit.' },
+          text: 'Du durchschaust Systeme in Sekunden, Menschen kosten dich dagegen mehr Kraft. Was dir im Kopf leichtfällt, wird im Herzen zur Arbeit.' },
 
         { id: 'leistung_vs_selbstwirksamkeit',
           when: s => s.werte_leistung >= 65 && s.loc_internal <= 40,
           strength: s => (s.werte_leistung - 65) + (40 - s.loc_internal),
-          text: 'Du willst viel erreichen — glaubst aber insgeheim, dass der Erfolg nicht wirklich in deiner Hand liegt. Dein Anspruch ist größer als dein Zutrauen.' },
+          text: 'Du willst viel erreichen, glaubst aber insgeheim, dass der Erfolg nicht wirklich in deiner Hand liegt. Dein Anspruch ist größer als dein Zutrauen.' },
 
         { id: 'offenheit_vs_struktur',
           when: s => s.offenheit >= 65 && s.struktur >= 65,
           strength: s => (s.offenheit - 65) + (s.struktur - 65),
-          text: 'Dein Kopf sucht ständig Neues, dein Alltag hält am Bewährten fest. Du bist Entdecker und Verwalter zugleich — und beide streiten in dir.' },
+          text: 'Dein Kopf sucht ständig Neues, dein Alltag hält am Bewährten fest. Du bist Entdecker und Verwalter zugleich, und beide streiten in dir.' },
 
         { id: 'energie_vs_verbindung_hoch_niedrig',
           when: s => s.energie >= 65 && s.verbindung <= 40,
           strength: s => (s.energie - 65) + (40 - s.verbindung),
-          text: 'Du bist gern unter Menschen — echte Nähe hältst du trotzdem auf Abstand. Viel Kontakt, wenig Tiefe: Das schützt dich und einsam macht es dich zugleich.' },
+          text: 'Du bist gern unter Menschen, echte Nähe hältst du trotzdem auf Abstand. Viel Kontakt, wenig Tiefe: Das schützt dich und einsam macht es dich zugleich.' },
 
         { id: 'verbindung_vs_energie_hoch_niedrig',
           when: s => s.verbindung >= 65 && s.energie <= 40,
           strength: s => (s.verbindung - 65) + (40 - s.energie),
-          text: 'Du brauchst wenige Menschen, aber die ganz. Oberflächlicher Kontakt zehrt an dir — Tiefe gibt dir zurück, was Trubel dir nimmt.' },
+          text: 'Du brauchst wenige Menschen, aber die ganz. Oberflächlicher Kontakt zehrt an dir. Tiefe gibt dir zurück, was Trubel dir nimmt.' },
 
         { id: 'ausdauer_vs_leidenschaft',
           when: s => s.grit_ausdauer >= 65 && s.grit_passion <= 40,
           strength: s => (s.grit_ausdauer - 65) + (40 - s.grit_passion),
-          text: 'Du hältst durch — auch bei Dingen, die dir längst egal sind. Disziplin hast du reichlich; was fehlt, ist die Richtung, die sich lohnt.' },
+          text: 'Du hältst durch, auch bei Dingen, die dir längst egal sind. Disziplin hast du reichlich; was fehlt, ist die Richtung, die sich lohnt.' },
 
         { id: 'leidenschaft_vs_ausdauer',
           when: s => s.grit_passion >= 65 && s.grit_ausdauer <= 40,
           strength: s => (s.grit_passion - 65) + (40 - s.grit_ausdauer),
-          text: 'Du entflammst schnell — und verlierst ebenso schnell die Geduld. Feuer hast du genug, es fehlt der lange Atem, es brennen zu lassen.' },
+          text: 'Du entflammst schnell und verlierst ebenso schnell die Geduld. Feuer hast du genug, es fehlt der lange Atem, es brennen zu lassen.' },
 
         { id: 'leistung_vs_mindset',
           when: s => s.werte_leistung >= 65 && s.mindset_growth <= 40,
           strength: s => (s.werte_leistung - 65) + (40 - s.mindset_growth),
-          text: 'Du willst gewinnen, glaubst aber tief drin, dass Talent angeboren ist. Das macht jeden Rückschlag persönlich — statt zu einem Schritt nach vorn.' },
+          text: 'Du willst gewinnen, glaubst aber tief drin, dass Talent angeboren ist. Das macht jeden Rückschlag persönlich, statt zu einem Schritt nach vorn.' },
 
         { id: 'innovation_vs_struktur',
           when: s => s.werte_innovation >= 65 && s.struktur >= 65,
           strength: s => (s.werte_innovation - 65) + (s.struktur - 65),
-          text: 'Du willst umkrempeln — und gleichzeitig alles unter Kontrolle behalten. Dein Ehrgeiz will Chaos, dein Bedürfnis will Ordnung.' },
+          text: 'Du willst umkrempeln und gleichzeitig alles unter Kontrolle behalten. Dein Ehrgeiz will Chaos, dein Bedürfnis will Ordnung.' },
 
         { id: 'tiefe_vs_gruebeln',
           when: s => s.tiefe >= 65 && s.rumination >= 65,
           strength: s => (s.tiefe - 65) + (s.rumination - 65),
-          text: 'Deine Gründlichkeit ist ein Geschenk — bis sie ins Grübeln kippt und dich lähmt. Dieselbe Tiefe, die dich klug macht, hält dich manchmal fest.' },
+          text: 'Deine Gründlichkeit ist ein Geschenk, bis sie ins Grübeln kippt und dich lähmt. Dieselbe Tiefe, die dich klug macht, hält dich manchmal fest.' },
 
         { id: 'freiheit_vs_verbindung',
           when: s => s.werte_freiheit >= 65 && s.verbindung >= 65,
           strength: s => (s.werte_freiheit - 65) + (s.verbindung - 65),
-          text: 'Du sehnst dich nach Nähe und nach Unabhängigkeit — und beides zieht ständig in andere Richtungen. Bindung fühlt sich schnell wie ein Käfig, Freiheit wie Einsamkeit.' },
+          text: 'Du sehnst dich nach Nähe und nach Unabhängigkeit, und beides zieht ständig in andere Richtungen. Bindung fühlt sich schnell wie ein Käfig an, Freiheit wie Einsamkeit.' },
 
         { id: 'kontrolle_vs_gruebeln',
           when: s => s.loc_internal >= 65 && s.rumination >= 65,
           strength: s => (s.loc_internal - 65) + (s.rumination - 65),
-          text: 'Du glaubst, alles im Griff haben zu müssen — und genau deshalb lässt dich kein Gedanke los. Verantwortung und Grübeln sind bei dir dieselbe Münze.' },
+          text: 'Du glaubst, alles im Griff haben zu müssen, und genau deshalb lässt dich kein Gedanke los. Verantwortung und Grübeln sind bei dir dieselbe Münze.' },
 
         { id: 'anspruch_vs_risiko',
           when: s => s.offenheit <= 40 && s.werte_innovation >= 65,
           strength: s => (40 - s.offenheit) + (s.werte_innovation - 65),
-          text: 'Du willst Neues schaffen, bleibst aber lieber im Vertrauten. Dein Anspruch ist größer als deine Risikobereitschaft — da liegt dein größtes ungenutztes Feld.' },
+          text: 'Du willst Neues schaffen, bleibst aber lieber im Vertrauten. Dein Anspruch ist größer als deine Risikobereitschaft. Da liegt dein größtes ungenutztes Feld.' },
 
         { id: 'aussen_vs_innen',
           when: s => s.energie >= 65 && s.rumination >= 65,
           strength: s => (s.energie - 65) + (s.rumination - 65),
-          text: 'Nach außen offen und aktiv, nach innen ein Grübler — kaum jemand ahnt, wie viel in dir gleichzeitig arbeitet.' },
+          text: 'Nach außen offen und aktiv, nach innen ein Grübler: Kaum jemand ahnt, wie viel in dir gleichzeitig arbeitet.' },
     ];
 
     /** Top-scoring tension rule that fires for these scores, or null. */
@@ -113,7 +113,7 @@ const Insights = (() => {
         return {
             id: 'fallback',
             strength: 0,
-            text: `Dein stärkster Bereich ist ${sLabel}, dein leisester ${wLabel}. Dazwischen — in einem ungewöhnlich ausgewogenen Profil — spielt sich dein Alltag ab.`,
+            text: `Dein stärkster Bereich ist ${sLabel}, dein leisester ${wLabel}. Dazwischen, in einem ungewöhnlich ausgewogenen Profil, spielt sich dein Alltag ab.`,
         };
     }
 
@@ -127,6 +127,11 @@ const Insights = (() => {
         const t = Content.DIM_TEXT[driver.dim];
         if (!t) return '';
         return driver.inverted ? t.high : t.low;
+    }
+
+    /** Concrete, actionable micro-tip tied to the area's weakest driver dimension. */
+    function tipText(driver) {
+        return Content.DIM_TIPS[driver.dim] || '';
     }
 
     function flavorText(areaKey, categorical) {
@@ -157,6 +162,7 @@ const Insights = (() => {
                 band: band.band,
                 leichtText: leichtText(drivers.leicht),
                 schwerText: schwerText(drivers.schwer),
+                tipText: tipText(drivers.schwer),
                 flavorText: flavorText(key, categorical || {}),
             };
         });

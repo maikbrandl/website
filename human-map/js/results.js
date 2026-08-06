@@ -84,9 +84,10 @@ const Results = (() => {
                         <span class="hm-area-card__label">${c.label}</span>
                         <span class="hm-area-card__band hm-area-card__band--${c.band}">${bandLabel}</span>
                     </div>
-                    <div class="hm-area-card__text">${c.leichtText}</div>
-                    <div class="hm-area-card__text">${c.schwerText}</div>
-                    ${c.flavorText ? `<div class="hm-area-card__flavor">${c.flavorText}</div>` : ''}
+                    <p class="hm-area-card__text hm-area-card__text--strength"><strong>Stärke:</strong> ${c.leichtText}</p>
+                    <p class="hm-area-card__text hm-area-card__text--challenge"><strong>Herausforderung:</strong> ${c.schwerText}</p>
+                    ${c.tipText ? `<p class="hm-area-card__tip"><strong>Tipp:</strong> ${c.tipText}</p>` : ''}
+                    ${c.flavorText ? `<p class="hm-area-card__flavor">${c.flavorText}</p>` : ''}
                 </div>`;
             }).join('');
         }
@@ -98,10 +99,11 @@ const Results = (() => {
                 const match = c.accent.match(/--[\w-]+/);
                 return match ? (rootStyles.getPropertyValue(match[0]).trim() || '#c9a84c') : '#c9a84c';
             });
+            const isNarrow = window.innerWidth < 480;
             new Chart(canvasEl, {
                 type: 'radar',
                 data: {
-                    labels: cards.map(c => c.label),
+                    labels: cards.map(c => c.label.includes(' & ') ? c.label.split(' & ') : c.label),
                     datasets: [{
                         data: cards.map(c => c.score),
                         backgroundColor: 'rgba(201,168,76,0.12)',
@@ -119,7 +121,7 @@ const Results = (() => {
                             ticks: { display: false },
                             grid: { color: 'rgba(255,255,255,0.08)' },
                             angleLines: { color: 'rgba(255,255,255,0.08)' },
-                            pointLabels: { color: '#aaaaaa', font: { size: 11 } },
+                            pointLabels: { color: '#aaaaaa', font: { size: isNarrow ? 10 : 13 } },
                         }
                     },
                     plugins: { legend: { display: false } },

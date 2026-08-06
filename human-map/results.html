@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Profil – Human Map | Hybridlogs</title>
-    <meta name="description" content="Dein persönliches Human Map Ergebnis – Archetyp, Skill Tree und Wachstumsprofil.">
+    <title>Dein Profil · Human Map | Hybridlogs</title>
+    <meta name="description" content="Dein persönliches Human Map Ergebnis: Archetyp, Skill Tree und Wachstumsprofil.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/results.css?v=20260901">
+    <link rel="stylesheet" href="css/results.css?v=20260901e">
 </head>
 <body>
 
@@ -84,7 +84,7 @@
                 <div class="hm-section-header">
                     <div class="hm-label">Wo du stehst</div>
                     <h2 class="hm-heading" style="margin-top:0.75rem">Deine 5 <em>Lebensbereiche</em></h2>
-                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto">Relativ zu deinem eigenen Durchschnitt gelesen — nicht im Vergleich zu anderen Menschen.</p>
+                    <p class="hm-body--sm" style="margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto">Relativ zu deinem eigenen Durchschnitt gelesen, nicht im Vergleich zu anderen Menschen.</p>
                 </div>
                 <div class="hm-verort-chart-wrap">
                     <canvas id="hm-chart-areas"></canvas>
@@ -102,23 +102,22 @@
             </div>
         </section>
 
-        <!-- ── 6. Email Capture ── -->
+        <!-- ── 6. Email Capture (temporarily disabled) ──
         <section class="hm-email-section hm-result-reveal" id="hm-email-section">
             <div class="hm-container">
                 <div class="hm-email-card">
                     <div class="hm-label" style="margin-bottom:0.75rem">Nächste Schritte</div>
                     <h2 class="hm-heading" style="font-size:1.5rem;margin-bottom:0.5rem">Dein Profil in die Praxis bringen</h2>
                     <p class="hm-body--sm" style="margin-bottom:1rem">
-                        Erhalte deine persönliche Wachstumsstrategie – konkrete Schritte für deinen Archetyp, passende Ressourcen und Updates.
+                        Erhalte deine persönliche Wachstumsstrategie: konkrete Schritte für deinen Archetyp, passende Ressourcen und Updates.
                     </p>
 
                     <form class="hm-email-form" id="hm-email-form" action="https://formspree.io/f/PLACEHOLDER" method="POST" novalidate>
-                        <!-- Hidden segmentation fields (populated by JS) -->
                         <input type="hidden" name="archetype_id" id="hf-archetype-id">
                         <input type="hidden" name="archetype_name" id="hf-archetype-name">
                         <input type="hidden" name="synergies" id="hf-synergies">
                         <input type="hidden" name="rare_archetype" id="hf-rare-archetype">
-                        <input type="hidden" name="_subject" value="Human Map – neues Profil">
+                        <input type="hidden" name="_subject" value="Neues Human Map Profil">
                         <input type="hidden" name="_next" value="">
                         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -142,10 +141,11 @@
                 </div>
             </div>
         </section>
+        -->
 
         <!-- ── 7. Mehr Details (Skill Tree, Persönlichkeitsprofil, alle 17 Dimensionen) ── -->
         <details class="hm-more-details" id="hm-mehr-details">
-            <summary class="hm-more-details__summary">Mehr Details ansehen — Skill Tree, Persönlichkeitsprofil &amp; alle 17 Dimensionen</summary>
+            <summary class="hm-more-details__summary">Mehr Details ansehen: Skill Tree, Persönlichkeitsprofil &amp; alle 17 Dimensionen</summary>
             <div class="hm-more-details__body">
 
                 <!-- Skill Tree -->
@@ -219,7 +219,7 @@
         <section class="hm-section--sm hm-result-reveal">
             <div class="hm-container hm-text-center">
                 <div class="hm-label" style="margin-bottom:0.75rem">Hybridlogs Produkte</div>
-                <p class="hm-body" style="max-width:480px;margin:0 auto 2rem">Die richtigen Journals und Planer für deinen Archetyp – designed für echte Entwicklung.</p>
+                <p class="hm-body" style="max-width:480px;margin:0 auto 2rem">Die richtigen Journals und Planer für deinen Archetyp, designed für echte Entwicklung.</p>
                 <div class="hm-cta-row">
                     <a href="../index.html#produkte" class="hm-btn hm-btn--outline">Produkte entdecken</a>
                     <a href="assessment.html" class="hm-btn hm-btn--ghost">Assessment wiederholen</a>
@@ -241,10 +241,10 @@
     <script src="js/model.js?v=20260716"></script>
     <script src="js/scoring.js?v=20260605d"></script>
     <script src="js/archetypes.js?v=20260605d"></script>
-    <script src="js/lifeareas.js?v=20260901"></script>
-    <script src="js/content.js?v=20260901"></script>
-    <script src="js/insights.js?v=20260901"></script>
+    <script src="js/lifeareas.js?v=20260901d"></script>
+    <script src="js/content.js?v=20260901d"></script>
+    <script src="js/insights.js?v=20260901d"></script>
     <script src="js/skilltree.js?v=20260605d"></script>
-    <script src="js/results.js?v=20260901"></script>
+    <script src="js/results.js?v=20260901d"></script>
 </body>
 </html>

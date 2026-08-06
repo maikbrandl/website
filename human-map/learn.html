@@ -135,14 +135,20 @@
             margin: 0 auto;
             padding: 0 var(--hm-space-6) var(--hm-space-16);
         }
-        .lx-explain__intro { margin-bottom: var(--hm-space-8); }
+        .lx-explain__intro { margin-bottom: var(--hm-space-8); text-align: center; }
         .lx-explain__title {
             font-family: var(--hm-font-display);
             font-size: clamp(1.5rem, 3vw, 2rem);
             color: var(--hm-white);
             margin: 0 0 var(--hm-space-4);
         }
-        .lx-explain__text { color: var(--hm-text-dim); font-size: 1rem; line-height: 1.75; }
+        .lx-explain__text {
+            color: var(--hm-text-dim);
+            font-size: 1rem;
+            line-height: 1.75;
+            max-width: 620px;
+            margin: 0 auto;
+        }
 
         .lx-toggle {
             display: flex;

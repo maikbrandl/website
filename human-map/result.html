@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Map — Ergebnis</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="result.css">
+    <style>
+        body { margin:0; background:var(--hm-bg); }
+        .rv-preview-bar {
+            font-family:var(--hm-font-sans); font-size:0.75rem; color:var(--hm-text-muted);
+            text-align:center; padding:0.5rem; border-bottom:1px solid var(--hm-border);
+        }
+    </style>
+</head>
+<body>
+    <div class="rv-preview-bar">Vorschau · synthetische Testperson (spätere Daten kommen aus dem Fragebogen)</div>
+    <div id="rv-root"></div>
+
+    <script src="model.js"></script>
+    <script src="scoring.js"></script>
+    <script src="content.js"></script>
+    <script src="layers.js"></script>
+    <script src="insights.js"></script>
+    <script src="scene.js"></script>
+    <script src="store.js"></script>
+    <script src="result.js"></script>
+    <script>
+    (function () {
+        const ANSWERS_KEY = 'humanmap_v2_answers';
+        const previewBar = document.querySelector('.rv-preview-bar');
+
+        function loadAnswers() {
+            for (const store of [localStorage, sessionStorage]) {
+                try {
+                    const raw = store.getItem(ANSWERS_KEY);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        if (parsed && parsed.answers && Object.keys(parsed.answers).length) return parsed.answers;
+                    }
+                } catch (e) {}
+            }
+            return null;
+        }
+
+        // Same synthetic persona as test.html — fallback when no real answers exist yet.
+        function syntheticAnswers() {
+            const targets = {
+                bigfive: { O:80, C:50, E:45, A:75, N:65 },
+                values: { selbstbestimmung:90, benevolenz:80, stimulation:70, universalismus:65,
+                          hedonismus:55, sicherheit:50, leistung:55, konformitaet:45, tradition:35, macht:40 },
+                needs:  { autonomie:{sat:45,frust:60}, kompetenz:{sat:55,frust:50}, verbundenheit:{sat:40,frust:65} },
+                meaning:{ kohaerenz:45, purpose:50, bedeutsamkeit:40 },
+                schema: { abgetrenntheit:60, autonomie:45, grenzen:35, fremdbezogenheit:72, wachsamkeit:50 },
+            };
+            function targetFor(item) {
+                switch (item.scale) {
+                    case 'bigfive': return targets.bigfive[item.key];
+                    case 'values':  return targets.values[item.key];
+                    case 'needs':   return targets.needs[item.key][item.kind];
+                    case 'meaning': return targets.meaning[item.key];
+                    case 'schema':  return targets.schema[item.key];
+                }
+                return 50;
+            }
+            const answers = {};
+            ModelV2.CORE_ITEMS.forEach(item => {
+                const t = targetFor(item);
+                let likert = Math.min(7, Math.max(1, Math.round(t / 100 * 6) + 1));
+                answers[item.id] = item.reverse ? 8 - likert : likert;
+            });
+            return answers;
+        }
+
+        let answers = loadAnswers();
+        if (answers) {
+            if (previewBar) previewBar.remove();
+        } else {
+            answers = syntheticAnswers();
+        }
+
+        const raw = ScoringV2.computeRaw(answers);
+        const profile = LayersV2.buildProfile(raw, []);
+        InsightsV2.applyFocus(profile);
+
+        ResultV2.render(document.getElementById('rv-root'), profile);
+        window.__resultProfile = profile;
+    })();
+    </script>
+</body>
+</html>

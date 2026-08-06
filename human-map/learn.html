@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Wissenschaft dahinter · Human Map | Hybridlogs</title>
+    <meta name="description" content="Worauf Human Map beruht: Big Five, Selbstbestimmungstheorie, Werteforschung, Sinnforschung, Schema-Modell und Veränderungspsychologie — ehrlich erklärt.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* ── learn explorer (tokens only) ── */
+        .lx-hero {
+            max-width: var(--hm-max-narrow);
+            margin: 0 auto;
+            padding: var(--hm-space-16) var(--hm-space-6) var(--hm-space-8);
+            text-align: center;
+        }
+        .lx-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--hm-gold);
+            margin-bottom: var(--hm-space-4);
+        }
+        .lx-title {
+            font-family: var(--hm-font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--hm-white);
+            letter-spacing: -0.02em;
+            margin: 0 0 var(--hm-space-6);
+        }
+        .lx-lead {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--hm-text-dim);
+            line-height: 1.75;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .lx-list {
+            max-width: var(--hm-max-narrow);
+            margin: 0 auto;
+            padding: 0 var(--hm-space-6) var(--hm-space-16);
+            display: flex;
+            flex-direction: column;
+            gap: var(--hm-space-4);
+        }
+        .lx-card {
+            background: var(--hm-bg-card);
+            border: 1px solid var(--hm-border);
+            border-radius: var(--hm-radius-lg);
+            overflow: hidden;
+        }
+        .lx-card > summary {
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: var(--hm-space-4);
+            padding: var(--hm-space-6);
+        }
+        .lx-card > summary::-webkit-details-marker { display: none; }
+        .lx-card__dot {
+            width: 0.875rem; height: 0.875rem;
+            border-radius: var(--hm-radius-full);
+            flex: none;
+        }
+        .lx-card__head { flex: 1; }
+        .lx-card__title { color: var(--hm-white); font-size: 1.0625rem; margin: 0; }
+        .lx-card__scale { color: var(--hm-text-muted); font-size: 0.8125rem; margin-top: 2px; }
+        .lx-card__chevron {
+            color: var(--hm-gold);
+            font-size: 1.25rem;
+            transition: transform var(--hm-dur) var(--hm-ease);
+            flex: none;
+        }
+        .lx-card[open] .lx-card__chevron { transform: rotate(45deg); }
+
+        .lx-card__body {
+            padding: 0 var(--hm-space-6) var(--hm-space-6);
+            border-top: 1px solid var(--hm-border);
+            margin-top: 0;
+        }
+        .lx-card__body > * { margin-top: var(--hm-space-4); }
+        .lx-card__label {
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--hm-gold);
+            margin-bottom: var(--hm-space-1);
+        }
+        .lx-card__text { color: var(--hm-text); font-size: 0.9375rem; line-height: 1.7; }
+        .lx-card__source {
+            color: var(--hm-text-dim);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+        }
+
+        .lx-note {
+            max-width: var(--hm-max-narrow);
+            margin: 0 auto;
+            padding: var(--hm-space-8) var(--hm-space-6) var(--hm-space-24);
+        }
+        .lx-note__inner {
+            border: 1px solid var(--hm-border-light);
+            border-left: 3px solid var(--hm-gold);
+            border-radius: var(--hm-radius-md);
+            padding: var(--hm-space-6);
+            background: var(--hm-bg-elevated);
+        }
+        .lx-note__title { color: var(--hm-white); font-size: 1rem; margin: 0 0 var(--hm-space-2); }
+        .lx-note__text { color: var(--hm-text-dim); font-size: 0.875rem; line-height: 1.7; margin: 0; }
+
+        .lx-cta-wrap { text-align: center; margin-top: var(--hm-space-8); }
+        .lx-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--hm-space-2);
+            padding: 0.75rem 1.75rem;
+            background: var(--hm-gold);
+            color: #050505;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border-radius: var(--hm-radius-full);
+            transition: all var(--hm-dur) var(--hm-ease);
+        }
+        .lx-cta:hover { background: var(--hm-gold-light); transform: translateY(-2px); box-shadow: var(--hm-shadow-gold); }
+    </style>
+</head>
+<body>
+
+    <header class="hm-header">
+        <a href="index.html" class="hm-header__logo">
+            hybrid<span>logs</span><span class="hm-header__product">Human Map</span>
+        </a>
+        <nav class="hm-header__nav">
+            <a href="assessment.html" class="hm-btn hm-btn--ghost" style="padding:0.4rem 1rem;font-size:0.8125rem">
+                Fragebogen
+            </a>
+        </nav>
+    </header>
+
+    <section class="lx-hero">
+        <div class="lx-eyebrow">Transparenz</div>
+        <h1 class="lx-title">Die Wissenschaft dahinter</h1>
+        <p class="lx-lead">
+            Human Map steckt dich nicht in eine Schublade. Jede Ebene beruht auf einem etablierten
+            Forschungsmodell aus der Persönlichkeits- und Motivationspsychologie. Hier siehst du
+            offen, was gemessen wird, worauf es beruht — und wo die Grenzen liegen.
+        </p>
+    </section>
+
+    <div class="lx-list">
+
+        <!-- Terrain -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--area-denken)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Terrain — deine Persönlichkeit</h2>
+                    <div class="lx-card__scale">Big-Five-Modell (OCEAN)</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was gemessen wird</div>
+                    <p class="lx-card__text">
+                        Fünf grundlegende Persönlichkeitsdimensionen: Offenheit, Gewissenhaftigkeit,
+                        Extraversion, Verträglichkeit und emotionale Stabilität. Sie beschreiben keine
+                        Typen, sondern Ausprägungen auf einem Spektrum — jeder Mensch liegt irgendwo auf
+                        jeder Skala.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Die Big Five sind das am besten belegte Modell der Persönlichkeitsforschung. Sie
+                        sind über die Lebensspanne relativ stabil — dein „Grundgelände", auf dem sich alles
+                        andere abspielt.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage</div>
+                    <p class="lx-card__source">
+                        Costa &amp; McCrae; Goldberg. Erhoben über das Mini-IPIP (Donnellan et al. 2006),
+                        eine gemeinfreie Kurzform des International Personality Item Pool.
+                    </p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Antrieb: Werte -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--area-antrieb)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Antrieb — deine Werte</h2>
+                    <div class="lx-card__scale">Schwartz’ Theorie der Grundwerte</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was gemessen wird</div>
+                    <p class="lx-card__text">
+                        Zehn universelle Wertorientierungen — von Selbstbestimmung und Stimulation über
+                        Leistung und Sicherheit bis zu Fürsorge und Gerechtigkeit. Sie zeigen, was dir
+                        wichtig ist, und stehen teils in Spannung zueinander.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Werte sind der innere Kompass hinter Entscheidungen. Wo starke Werte kollidieren
+                        oder blockiert werden, entsteht Reibung — genau das macht Human Map sichtbar.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage</div>
+                    <p class="lx-card__source">
+                        Shalom H. Schwartz: Theory of Basic Human Values. Erhoben über adaptierte
+                        Kurzitems im Geist des PVQ / TwIVI.
+                    </p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Antrieb: Bedürfnisse -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--area-balance)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Bedürfnisse — was dich nährt</h2>
+                    <div class="lx-card__scale">Selbstbestimmungstheorie (SDT)</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was gemessen wird</div>
+                    <p class="lx-card__text">
+                        Drei psychologische Grundbedürfnisse: Autonomie (selbstbestimmt handeln),
+                        Kompetenz (wirksam sein) und Verbundenheit (dazugehören). Gemessen wird beides —
+                        wie erfüllt und wie frustriert jedes Bedürfnis gerade ist.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Sind diese Bedürfnisse erfüllt, wächst Wohlbefinden und Motivation. Werden sie
+                        frustriert, entstehen Stress und innerer Widerstand — ein starker Hebel für
+                        Veränderung.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage</div>
+                    <p class="lx-card__source">
+                        Deci &amp; Ryan: Self-Determination Theory. Erhoben in Anlehnung an die BPNSFS
+                        (Basic Psychological Need Satisfaction and Frustration Scale, Chen et al.).
+                    </p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Sinn -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--area-wachstum)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Sinn — ob es sich stimmig anfühlt</h2>
+                    <div class="lx-card__scale">Drei-Komponenten-Modell des Sinns</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was gemessen wird</div>
+                    <p class="lx-card__text">
+                        Sinn im Leben zerfällt in drei Teile: Kohärenz (das Leben ergibt Sinn), Purpose
+                        (es hat eine Richtung) und Bedeutsamkeit (mein Dasein zählt). Jede Komponente wird
+                        getrennt erfasst.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Sinn ist einer der stärksten Prädiktoren für Zufriedenheit und Resilienz. Fehlt
+                        eine Komponente, spürst du das oft als diffuse Leere trotz „funktionierendem" Leben.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage</div>
+                    <p class="lx-card__source">
+                        Martela &amp; Steger (2016); Steger, Meaning in Life. Erhoben über adaptierte Items
+                        zu den drei Komponenten.
+                    </p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Prägung -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--area-beziehungen)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Prägung — alte Grundüberzeugungen</h2>
+                    <div class="lx-card__scale">Schematheorie (Young)</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was gemessen wird</div>
+                    <p class="lx-card__text">
+                        Fünf Bereiche früh entstandener Grundüberzeugungen — etwa das Gefühl,
+                        abgetrennt zu sein, sich nichts zuzutrauen oder es allen recht machen zu müssen.
+                        Sie laufen oft unbewusst im Hintergrund mit.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Diese Muster bremsen genau dort, wo du eigentlich hin willst. Sie zu erkennen ist
+                        der erste Schritt, sie zu verändern — der Kern des Transformations-Wegs.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage &amp; Grenze</div>
+                    <p class="lx-card__source">
+                        Jeffrey Young: Schematherapie. Human Map nutzt ein kurzes Screening der fünf
+                        Schema-Domänen — es ist <strong>keine klinische Diagnose</strong> und ersetzt keinen
+                        validierten Fragebogen (YSQ).
+                    </p>
+                </div>
+            </div>
+        </details>
+
+        <!-- Bewegung -->
+        <details class="lx-card">
+            <summary>
+                <span class="lx-card__dot" style="background:var(--hm-gold)"></span>
+                <span class="lx-card__head">
+                    <h2 class="lx-card__title">Bewegung — wie Veränderung gelingt</h2>
+                    <div class="lx-card__scale">WOOP &amp; Verhaltensexperiment</div>
+                </span>
+                <span class="lx-card__chevron">＋</span>
+            </summary>
+            <div class="lx-card__body">
+                <div>
+                    <div class="lx-card__label">Was passiert</div>
+                    <p class="lx-card__text">
+                        Statt dich zu vermessen, führt dich diese Ebene: ein glaubwürdiger Gegen-Gedanke
+                        und ein kleines Verhaltensexperiment (WOOP: Wish, Outcome, Obstacle, Plan). Eine
+                        widersprechende Erfahrung verändert Überzeugungen wirksamer als reines Nachdenken.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Warum es zählt</div>
+                    <p class="lx-card__text">
+                        Neue Muster brauchen Wiederholung über Wochen, nicht Tage. Deshalb endet der Weg
+                        mit dem Verankern und einer späteren Wiedermessung — damit du deine Bewegung siehst.
+                    </p>
+                </div>
+                <div>
+                    <div class="lx-card__label">Grundlage</div>
+                    <p class="lx-card__source">
+                        Gabriele Oettingen: Mentales Kontrastieren / WOOP. Prinzipien der kognitiven
+                        Verhaltenspsychologie.
+                    </p>
+                </div>
+            </div>
+        </details>
+
+    </div>
+
+    <section class="lx-note">
+        <div class="lx-note__inner">
+            <h2 class="lx-note__title">Ehrlich zu den Grenzen</h2>
+            <p class="lx-note__text">
+                Human Map beruht auf Selbstauskunft. Das heißt: Es spiegelt, wie du dich gerade
+                siehst — an einem bestimmten Tag, in einer bestimmten Stimmung. Es ist ein Werkzeug zur
+                Selbstreflexion, keine Diagnose und kein Ersatz für psychologische oder therapeutische
+                Begleitung. Die verwendeten Kurzskalen sind an etablierte Modelle angelehnt und für den
+                Reflexionszweck gedacht, nicht für klinische Entscheidungen.
+            </p>
+        </div>
+        <div class="lx-cta-wrap">
+            <a href="assessment.html" class="lx-cta">
+                Fragebogen starten
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <footer class="hm-footer">
+        <p>Hybridlogs Human Map &nbsp;·&nbsp; <a href="../datenschutz.html">Datenschutz</a> &nbsp;·&nbsp; <a href="../impressum.html">Impressum</a></p>
+    </footer>
+
+</body>
+</html>

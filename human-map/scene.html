@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Sinnbild · Human Map | Hybridlogs</title>
+    <meta name="description" content="Ein cineastisches, scrollbares Sinnbild: wie ein Mensch aufgebaut ist — mit deinen echten Daten personalisiert.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="scene/scene.css">
+    <style> html, body { margin: 0; background: #06070b; } </style>
+</head>
+<body>
+    <!-- Static title card: the real reference artwork with hover/click hotspots on the
+         figure itself (mask, compass, signpost, path). -->
+    <section class="sc-poster" id="sc-poster">
+        <div class="sc-poster__caption">
+            <span class="sc-poster__eyebrow">Human Map</span>
+            <h1 class="sc-poster__title">Verstehe dich. Finde deinen Weg.</h1>
+            <p class="sc-poster__sub">Fahr über Maske, Kompass, Wegweiser und Wege — jede Stelle zeigt einen Teil deines Profils.</p>
+        </div>
+        <div class="sc-poster__stage" id="sc-poster-stage">
+            <div class="sc-poster__legend sc-poster__legend--left" id="sc-poster-legend-left"></div>
+
+            <div class="sc-poster__frame">
+                <img class="sc-poster__img" src="assets/sinnbild-reference.png"
+                     alt="Ein leuchtender Mensch mit Kompass und Maske an einer Weggabelung mit Wegweiser">
+                <button type="button" class="sc-poster__hot" data-block="terrain" style="left:33.0%;top:20.2%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Persönlichkeit</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="sinn" style="left:43.2%;top:32.4%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Sinn · Kompass</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="praegung" style="left:25.8%;top:59.9%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Glaubenssätze · Maske</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="werte" style="left:58.2%;top:8.0%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Werte · Wegweiser</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="bewegung" style="left:69.7%;top:46.3%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Veränderung · Schritt</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="beduerfnisse" data-need="autonomie" style="left:44.2%;top:49.5%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Autonomie</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="beduerfnisse" data-need="kompetenz" style="left:74.9%;top:69.3%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Kompetenz</span>
+                </button>
+                <button type="button" class="sc-poster__hot" data-block="beduerfnisse" data-need="verbundenheit" style="left:76.0%;top:56.8%">
+                    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">Verbundenheit</span>
+                </button>
+            </div>
+
+            <div class="sc-poster__legend sc-poster__legend--right" id="sc-poster-legend-right"></div>
+        </div>
+    </section>
+
+    <section class="scene-outro">
+        <h2 class="scene-outro__title">Das bist du.</h2>
+        <a href="result.html" class="scene-cta">
+            Zu deinem vollständigen Profil
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+    </section>
+
+    <!-- pipeline -->
+    <script src="model.js"></script>
+    <script src="scoring.js"></script>
+    <script src="content.js"></script>
+    <script src="layers.js"></script>
+    <script src="insights.js"></script>
+    <script src="store.js"></script>
+    <!-- scene modules (poster only: content = ANALYSIS text, applyProfile = readouts, overlay = detail panel) -->
+    <script src="scene/content.js"></script>
+    <script src="scene/applyProfile.js"></script>
+    <script src="scene/scene-overlay.js"></script>
+
+    <script>
+    (function () {
+        const ANSWERS_KEY = 'humanmap_v2_answers';
+
+        function loadAnswers() {
+            for (const store of [localStorage, sessionStorage]) {
+                try {
+                    const raw = store.getItem(ANSWERS_KEY);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        if (parsed && parsed.answers && Object.keys(parsed.answers).length) return parsed.answers;
+                    }
+                } catch (e) {}
+            }
+            return null;
+        }
+        function syntheticAnswers() {
+            const targets = {
+                bigfive: { O:78, C:74, E:42, A:80, N:60 },
+                values:  { selbstbestimmung:88, benevolenz:82, universalismus:70, leistung:80, stimulation:55,
+                           hedonismus:48, sicherheit:62, konformitaet:58, tradition:35, macht:45 },
+                needs:   { autonomie:{sat:44,frust:64}, kompetenz:{sat:52,frust:60}, verbundenheit:{sat:56,frust:48} },
+                meaning: { kohaerenz:50, purpose:56, bedeutsamkeit:46 },
+                schema:  { abgetrenntheit:52, autonomie:56, grenzen:32, fremdbezogenheit:74, wachsamkeit:66 },
+            };
+            const tf = (item) => ({
+                bigfive: targets.bigfive[item.key], values: targets.values[item.key],
+                needs: targets.needs[item.key] && targets.needs[item.key][item.kind],
+                meaning: targets.meaning[item.key], schema: targets.schema[item.key],
+            })[item.scale];
+            const answers = {};
+            ModelV2.CORE_ITEMS.forEach(item => {
+                let t = tf(item); if (t == null) t = 50;
+                let lk = Math.min(7, Math.max(1, Math.round(t / 100 * 6) + 1));
+                answers[item.id] = item.reverse ? 8 - lk : lk;
+            });
+            return answers;
+        }
+
+        // ── build profile from real answers or synthetic fallback ────
+        let answers = loadAnswers() || syntheticAnswers();
+        const history = (typeof StoreV2 !== 'undefined') ? StoreV2.getHistory() : [];
+        const raw = ScoringV2.computeRaw(answers);
+        const profile = LayersV2.buildProfile(raw, history);
+        InsightsV2.applyFocus(profile);
+        window.__sceneProfile = profile;
+
+        const readouts = SceneApply.readouts(profile);
+        const overlay = SceneOverlay.initDetail({ readouts });
+
+        // ── poster hotspots (static reference image) reuse the same detail panel ──
+        document.querySelectorAll('.sc-poster__hot').forEach((btn) => {
+            btn.addEventListener('click', () => overlay.openDetail(btn.dataset.block));
+        });
+
+        // ── poster legend (left = 6 layers, right = Bedürfnisse) + connector arrows ──
+        (function buildPosterLegend() {
+            const C = (typeof SceneContent !== 'undefined') ? SceneContent : { CHAPTERS: [], ANALYSIS: {} };
+            const ICONS = (typeof SceneOverlay !== 'undefined' && SceneOverlay.ICONS) || { LAYER_ICON: {}, NEED_ICON: {}, NEED_LABEL: {} };
+            const legendLeft = document.getElementById('sc-poster-legend-left');
+            const legendRight = document.getElementById('sc-poster-legend-right');
+            if (!legendLeft || !legendRight) return;
+
+            const layerHeading = document.createElement('div');
+            layerHeading.className = 'sc-poster__legend-heading';
+            layerHeading.textContent = 'Ebenen';
+            legendLeft.appendChild(layerHeading);
+            C.CHAPTERS.filter(ch => ch.block).forEach((ch) => {
+                const a = C.ANALYSIS[ch.block] || {};
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'sc-poster__legend-item';
+                item.dataset.block = ch.block;
+                item.innerHTML = `<span class="sc-poster__legend-icon">${ICONS.LAYER_ICON[ch.block] || ''}</span>`
+                    + `<span>${a.label ? a.label.split(' · ')[0] : ch.eyebrow}</span>`;
+                item.addEventListener('click', () => overlay.openDetail(ch.block));
+                legendLeft.appendChild(item);
+            });
+
+            const needHeading = document.createElement('div');
+            needHeading.className = 'sc-poster__legend-heading';
+            needHeading.textContent = 'Bedürfnisse';
+            legendRight.appendChild(needHeading);
+            Object.keys(ICONS.NEED_LABEL).forEach((k) => {
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'sc-poster__legend-item sc-poster__legend-item--need';
+                item.dataset.need = k;
+                item.innerHTML = `<span class="sc-poster__legend-icon">${ICONS.NEED_ICON[k] || ''}</span>`
+                    + `<span>${ICONS.NEED_LABEL[k]}</span>`;
+                item.addEventListener('click', () => overlay.openDetail('beduerfnisse'));
+                legendRight.appendChild(item);
+            });
+        })();
+
+        // ── manual hotspot edit mode: open scene.html?edit=1 to drag dots and copy coordinates ──
+        (function editMode() {
+            if (!new URLSearchParams(location.search).has('edit')) return;
+            const frame = document.querySelector('.sc-poster__frame');
+            const hots = [...document.querySelectorAll('.sc-poster__hot')];
+            document.body.classList.add('sc-edit-active');
+
+            // block the click->openDetail handler right after a drag (capture phase runs before it)
+            let justDragged = null;
+            document.addEventListener('click', (e) => {
+                const hot = e.target.closest('.sc-poster__hot');
+                if (hot && hot === justDragged) { e.stopImmediatePropagation(); e.preventDefault(); justDragged = null; }
+            }, true);
+
+            const panel = document.createElement('div');
+            panel.className = 'sc-edit-panel';
+            panel.innerHTML = '<div class="sc-edit-panel__title">Edit-Modus — Punkte ziehen, dann kopieren</div>'
+                + '<pre class="sc-edit-panel__code"></pre>'
+                + '<button type="button" class="sc-edit-panel__copy">Code kopieren</button>'
+                + '<span class="sc-edit-panel__status"></span>';
+            document.body.appendChild(panel);
+            const codeEl = panel.querySelector('.sc-edit-panel__code');
+            const statusEl = panel.querySelector('.sc-edit-panel__status');
+
+            function label(hot) {
+                return hot.querySelector('.sc-poster__hot-tip').textContent.trim();
+            }
+            function refreshCode() {
+                codeEl.textContent = hots.map((hot) => {
+                    const need = hot.dataset.need ? ` data-need="${hot.dataset.need}"` : '';
+                    return `<button type="button" class="sc-poster__hot" data-block="${hot.dataset.block}"${need} style="left:${parseFloat(hot.style.left).toFixed(1)}%;top:${parseFloat(hot.style.top).toFixed(1)}%">\n`
+                        + `    <span class="sc-poster__hot-dot"></span><span class="sc-poster__hot-tip">${label(hot)}</span>\n</button>`;
+                }).join('\n');
+            }
+            refreshCode();
+
+            hots.forEach((hot) => {
+                hot.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    hot.setPointerCapture(e.pointerId);
+                    const startX = e.clientX, startY = e.clientY;
+                    let moved = false;
+                    function onMove(ev) {
+                        if (!moved && (Math.abs(ev.clientX - startX) > 3 || Math.abs(ev.clientY - startY) > 3)) moved = true;
+                        const r = frame.getBoundingClientRect();
+                        const xPct = Math.min(100, Math.max(0, ((ev.clientX - r.left) / r.width) * 100));
+                        const yPct = Math.min(100, Math.max(0, ((ev.clientY - r.top) / r.height) * 100));
+                        hot.style.left = xPct.toFixed(1) + '%';
+                        hot.style.top = yPct.toFixed(1) + '%';
+                        refreshCode();
+                    }
+                    function onUp() {
+                        hot.removeEventListener('pointermove', onMove);
+                        hot.removeEventListener('pointerup', onUp);
+                        if (moved) justDragged = hot;
+                    }
+                    hot.addEventListener('pointermove', onMove);
+                    hot.addEventListener('pointerup', onUp);
+                });
+            });
+
+            panel.querySelector('.sc-edit-panel__copy').addEventListener('click', async () => {
+                const text = codeEl.textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    statusEl.textContent = 'kopiert ✓';
+                } catch (e) {
+                    statusEl.textContent = 'Bitte manuell markieren & kopieren';
+                }
+                setTimeout(() => { statusEl.textContent = ''; }, 2500);
+            });
+        })();
+    })();
+    </script>
+</body>
+</html>

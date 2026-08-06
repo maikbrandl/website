@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Map v2 — Pipeline Test</title>
+    <style>
+        body { background:#0a0a0a; color:#bbb; font-family:system-ui,sans-serif; padding:2rem; line-height:1.6; }
+        h1 { color:#c9a84c; font-size:1.25rem; }
+        h2 { color:#dfc47a; font-size:1rem; margin-top:1.5rem; }
+        .synth { color:#fff; font-size:1.1rem; border-left:3px solid #c9a84c; padding-left:1rem; margin:1rem 0; }
+        pre { background:#141414; border:1px solid #222; border-radius:8px; padding:1rem; overflow:auto; font-size:12px; }
+        .ok { color:#4ade80; } .warn { color:#f0a855; } .err { color:#f07090; }
+    </style>
+</head>
+<body>
+    <h1>Human Map v2 — Pipeline Test</h1>
+    <div id="out"></div>
+
+    <script src="model.js"></script>
+    <script src="scoring.js"></script>
+    <script src="content.js"></script>
+    <script src="layers.js"></script>
+    <script src="insights.js"></script>
+    <script>
+    (function () {
+        const out = document.getElementById('out');
+        const log = (html) => { out.insertAdjacentHTML('beforeend', html); };
+
+        // ── Build a synthetic persona by targeting each scale, then invert
+        //    reverse-scored items so scoring recovers the target. ──
+        const targets = {
+            bigfive: { O:80, C:50, E:45, A:75, N:65 },   // stability = 100 - 65 = 35
+            values: { selbstbestimmung:90, benevolenz:80, stimulation:70, universalismus:65,
+                      hedonismus:55, sicherheit:50, leistung:55, konformitaet:45, tradition:35, macht:40 },
+            needs:  { autonomie:{sat:45,frust:60}, kompetenz:{sat:55,frust:50}, verbundenheit:{sat:40,frust:65} },
+            meaning:{ kohaerenz:45, purpose:50, bedeutsamkeit:40 },
+            schema: { abgetrenntheit:60, autonomie:45, grenzen:35, fremdbezogenheit:72, wachsamkeit:50 },
+        };
+        function targetFor(item) {
+            switch (item.scale) {
+                case 'bigfive': return targets.bigfive[item.key];
+                case 'values':  return targets.values[item.key];
+                case 'needs':   return targets.needs[item.key][item.kind];
+                case 'meaning': return targets.meaning[item.key];
+                case 'schema':  return targets.schema[item.key];
+            }
+            return 50;
+        }
+        const answers = {};
+        ModelV2.CORE_ITEMS.forEach(item => {
+            const t = targetFor(item);
+            let likert = Math.min(7, Math.max(1, Math.round(t / 100 * 6) + 1));
+            answers[item.id] = item.reverse ? 8 - likert : likert;
+        });
+
+        // ── Run the pipeline ──
+        const raw = ScoringV2.computeRaw(answers);
+        const profile = LayersV2.buildProfile(raw, []);
+        InsightsV2.applyFocus(profile);              // §7 real focus
+        const picture = InsightsV2.wholePicture(profile);
+        const fmap = InsightsV2.frictionMap(profile);
+        const transform = InsightsV2.buildTransformation(profile);   // §8
+
+        // ── Assertions ──
+        const checks = [];
+        const near = (a, b, tol=8) => Math.abs(a-b) <= tol;
+        checks.push(['Item count = 58', ModelV2.CORE_ITEMS.length === 58]);
+        checks.push(['All items answered', raw.meta.answered === raw.meta.total]);
+        checks.push(['Offenheit ~80', near(profile.traits.offenheit, 80)]);
+        checks.push(['Stabilität ~35 (inverted N)', near(profile.traits.stabilitaet, 35)]);
+        checks.push(['Top value = Selbstbestimmung', profile.values[0].key === 'selbstbestimmung']);
+        checks.push(['Verbundenheit flagged', profile.needs.verbundenheit.flag === true]);
+        checks.push(['Top belief = fremdbezogenheit', profile.focusBelief && profile.focusBelief.domain === 'fremdbezogenheit']);
+        checks.push(['Synthesis sentence non-empty', picture.synthesis && picture.synthesis.length > 20]);
+        checks.push(['4 panels present', !!(picture.terrain && picture.antrieb && picture.sinn && picture.praegung)]);
+        checks.push(['Frictions detected (>=3)', fmap.active.length >= 3]);
+        checks.push(['Focus has leverage > 0', fmap.focus && fmap.focus.leverage > 0]);
+        checks.push(['Focus sorted (desc leverage)', fmap.active.every((f,i,a)=> i===0 || a[i-1].leverage >= f.leverage)]);
+        checks.push(['profile.focus applied', !!profile.focus]);
+        checks.push(['safety object present', !!fmap.safety]);
+        checks.push(['transformation built', !!transform && transform.steps.length === 5]);
+        checks.push(['WOOP has plan (if-then)', !!(transform && transform.steps[2].woop.plan.includes('Wenn'))]);
+
+        log('<h2>Synthese-Satz</h2>');
+        log(`<div class="synth">${picture.synthesis}</div>`);
+
+        log('<h2>Fokus (höchster Hebel)</h2>');
+        log(`<div class="synth">${fmap.focus ? fmap.focus.label + ' — Hebel ' + fmap.focus.leverage : '—'}</div>`);
+
+        log('<h2>Checks</h2><pre>' + checks.map(([label, ok]) =>
+            `${ok ? '<span class="ok">✓</span>' : '<span class="err">✗</span>'} ${label}`).join('\n') + '</pre>');
+
+        log('<h2>Reibungspunkte (nach Hebel)</h2><pre>' + JSON.stringify(fmap.active.map(f => ({
+            label: f.label, leverage: f.leverage, type: f.type, belief: f.belief, components: f.components
+        })), null, 2) + '</pre>');
+        log('<h2>safety</h2><pre>' + JSON.stringify(fmap.safety, null, 2) + '</pre>');
+
+        log('<h2>Transformation (§8)</h2><pre>' + JSON.stringify(transform, null, 2) + '</pre>');
+
+        log('<h2>traits</h2><pre>' + JSON.stringify(profile.traits, null, 2) + '</pre>');
+        log('<h2>values (sorted)</h2><pre>' + JSON.stringify(profile.values, null, 2) + '</pre>');
+        log('<h2>needs</h2><pre>' + JSON.stringify(profile.needs, null, 2) + '</pre>');
+        log('<h2>meaning</h2><pre>' + JSON.stringify(profile.meaning, null, 2) + '</pre>');
+        log('<h2>beliefs</h2><pre>' + JSON.stringify(profile.beliefs, null, 2) + '</pre>');
+        log('<h2>wholePicture panels</h2><pre>' + JSON.stringify({
+            antrieb: picture.antrieb, sinn: picture.sinn, praegung: picture.praegung
+        }, null, 2) + '</pre>');
+
+        const allOk = checks.every(c => c[1]);
+        log(`<h2 class="${allOk ? 'ok' : 'err'}">${allOk ? 'ALLE CHECKS BESTANDEN' : 'CHECKS FEHLGESCHLAGEN'}</h2>`);
+        window.__testResult = { allOk, checks, profile, picture };
+    })();
+    </script>
+</body>
+</html>

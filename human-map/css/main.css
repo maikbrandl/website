@@ -61,7 +61,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
     align-items: center;
     gap: var(--hm-space-2);
 }
-.hm-header__logo span { color: var(--hm-gold); }
+.hm-header__logo-accent { color: var(--hm-gold); }
 .hm-header__logo .hm-header__product {
     font-family: var(--hm-font-display);
     font-weight: 400;

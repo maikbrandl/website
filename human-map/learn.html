@@ -210,6 +210,7 @@
         .lx-legend__table-wrap { overflow-x: auto; }
         .lx-legend__table {
             width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             background: var(--hm-bg-card);
             border: 1px solid var(--hm-border);
@@ -220,11 +221,13 @@
             padding: var(--hm-space-3) var(--hm-space-4);
             text-align: left;
             border-bottom: 1px solid var(--hm-border);
-            white-space: nowrap;
+            white-space: normal;
+            word-break: break-word;
         }
+        .lx-legend__table th:first-child, .lx-legend__table td:first-child { width: 40%; }
         .lx-legend__table th { color: var(--hm-gold); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; }
         .lx-legend__table td:first-child { color: var(--hm-white); }
-        .lx-legend__table td:last-child { color: var(--hm-text-dim); white-space: normal; }
+        .lx-legend__table td:last-child { color: var(--hm-text-dim); }
         .lx-legend__table tr:last-child td { border-bottom: none; }
 
         .lx-steps { margin-top: var(--hm-space-16); }

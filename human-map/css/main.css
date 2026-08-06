@@ -300,7 +300,14 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
 @media (max-width: 640px) {
     .hm-container { padding: 0 var(--hm-space-4); }
     .hm-container--narrow { padding: 0 var(--hm-space-4); }
-    .hm-header { padding: var(--hm-space-3) var(--hm-space-4); }
+    .hm-header {
+        padding: var(--hm-space-3) var(--hm-space-4);
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: var(--hm-space-2);
+    }
+    .hm-header__product { display: none; }
+    .hm-header__nav { flex-wrap: wrap; justify-content: center; }
     .hm-section { padding: var(--hm-space-12) 0; }
     .hm-btn { padding: 0.625rem 1.25rem; font-size: 0.875rem; }
 }

@@ -103,13 +103,35 @@
     margin-bottom: var(--hm-space-6);
 }
 
+.hm-question__top {
+    display: flex;
+    align-items: center;
+    gap: var(--hm-space-3);
+    margin-bottom: var(--hm-space-3);
+}
+
+.hm-question__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--hm-border);
+    background: transparent;
+    color: var(--hm-text-dim);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color var(--hm-dur) var(--hm-ease), border-color var(--hm-dur) var(--hm-ease);
+}
+.hm-question__back:hover { color: var(--hm-gold); border-color: var(--hm-gold); }
+
 .hm-question__num {
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--hm-gold);
-    margin-bottom: var(--hm-space-3);
 }
 
 .hm-question__text {

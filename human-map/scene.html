@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Das Sinnbild · Human Map | Hybridlogs</title>
-    <meta name="description" content="Ein cineastisches, scrollbares Sinnbild: wie ein Mensch aufgebaut ist — mit deinen echten Daten personalisiert.">
+    <meta name="description" content="Ein cineastisches, scrollbares Sinnbild: wie ein Mensch aufgebaut ist, mit deinen echten Daten personalisiert.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="../images/Logo/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,16 +12,35 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="scene/scene.css">
-    <style> html, body { margin: 0; background: #06070b; } </style>
+    <style>
+        html, body { margin: 0; background: #06070b; }
+        .sc-subnav {
+            position: fixed; top: var(--hm-space-4, 1rem); left: var(--hm-space-4, 1rem); z-index: 50;
+            display: flex; gap: 0.4rem; flex-wrap: wrap;
+        }
+        .sc-subnav a {
+            font-family: var(--hm-font-sans, sans-serif); font-size: 0.75rem; color: var(--hm-text-dim, #999);
+            background: rgba(10,10,10,0.55); border: 1px solid var(--hm-border, #2a2a2a);
+            border-radius: 999px; padding: 0.4rem 0.85rem; backdrop-filter: blur(6px);
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .sc-subnav a:hover { color: var(--hm-gold, #c9a84c); border-color: var(--hm-gold, #c9a84c); }
+    </style>
 </head>
 <body>
+    <nav class="sc-subnav" aria-label="Human Map Navigation">
+        <a href="index.html">Start</a>
+        <a href="learn.html">Wissenschaft</a>
+        <a href="assessment.html">Fragebogen</a>
+        <a href="result.html">Ergebnis</a>
+    </nav>
     <!-- Static title card: the real reference artwork with hover/click hotspots on the
          figure itself (mask, compass, signpost, path). -->
     <section class="sc-poster" id="sc-poster">
         <div class="sc-poster__caption">
             <span class="sc-poster__eyebrow">Human Map</span>
             <h1 class="sc-poster__title">Verstehe dich. Finde deinen Weg.</h1>
-            <p class="sc-poster__sub">Fahr über Maske, Kompass, Wegweiser und Wege — jede Stelle zeigt einen Teil deines Profils.</p>
+            <p class="sc-poster__sub">Fahr über Maske, Kompass, Wegweiser und Wege, jede Stelle zeigt einen Teil deines Profils.</p>
         </div>
         <div class="sc-poster__stage" id="sc-poster-stage">
             <div class="sc-poster__legend sc-poster__legend--left" id="sc-poster-legend-left"></div>
@@ -190,7 +209,7 @@
 
             const panel = document.createElement('div');
             panel.className = 'sc-edit-panel';
-            panel.innerHTML = '<div class="sc-edit-panel__title">Edit-Modus — Punkte ziehen, dann kopieren</div>'
+            panel.innerHTML = '<div class="sc-edit-panel__title">Edit-Modus, Punkte ziehen, dann kopieren</div>'
                 + '<pre class="sc-edit-panel__code"></pre>'
                 + '<button type="button" class="sc-edit-panel__copy">Code kopieren</button>'
                 + '<span class="sc-edit-panel__status"></span>';

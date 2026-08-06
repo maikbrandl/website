@@ -18,6 +18,69 @@ const ResultV2 = (() => {
         praegung:'var(--area-beziehungen)',
     };
 
+    // ── layer popup: general explanation + a few personalized sentences ──
+    const LAYER_EXPLAINER = {
+        terrain:  'Deine Persönlichkeit nach den Big Five: fünf stabile Grundzüge, die beschreiben, wie du grundsätzlich tickst. Kein Typ, sondern eine Ausprägung auf einem Spektrum.',
+        antrieb:  'Deine wichtigsten Werte und deine drei psychologischen Grundbedürfnisse, Autonomie, Kompetenz und Verbundenheit. Sie zeigen, was dich antreibt und woran es dir gerade genug oder zu wenig gibt.',
+        sinn:     'Ob dein Leben sich stimmig, gerichtet und bedeutsam anfühlt, gemessen in drei Teilen: Kohärenz, Purpose und Bedeutsamkeit.',
+        praegung: 'Alte Grundüberzeugungen aus früher Prägung, die oft unbewusst im Hintergrund mitlaufen und dort bremsen, wo du eigentlich hin willst.',
+    };
+
+    function layerAnalysis(kind, picture) {
+        if (kind === 'terrain') {
+            const sorted = picture.terrain.slice().sort((a, b) => Math.abs(b.score - 50) - Math.abs(a.score - 50));
+            return sorted.slice(0, 2).map(t => t.read).join(' ');
+        }
+        if (kind === 'antrieb') {
+            const topValue = picture.antrieb.topValues[0];
+            const valueLine = topValue ? `Am wichtigsten ist dir gerade, ${topValue.text}.` : '';
+            const flagged = picture.antrieb.needs.find(n => n.flag);
+            const needLine = (flagged || picture.antrieb.needs[0]).line;
+            return [valueLine, needLine].filter(Boolean).join(' ');
+        }
+        if (kind === 'sinn') {
+            return picture.sinn.map(s => s.read).join(' ');
+        }
+        if (kind === 'praegung') {
+            return picture.praegung.length
+                ? picture.praegung.map(b => b.text).join(' ')
+                : 'Keine der geprüften Prägungen ist bei dir stark aktiv, ein gutes Zeichen für inneren Spielraum.';
+        }
+        return '';
+    }
+
+    let modalEl = null;
+    function ensureModal() {
+        if (modalEl) return modalEl;
+        modalEl = document.createElement('div');
+        modalEl.className = 'rv-modal';
+        modalEl.innerHTML = `<div class="rv-modal__backdrop"></div>
+            <div class="rv-modal__card" role="dialog" aria-modal="true">
+                <button type="button" class="rv-modal__close" aria-label="Schließen">&times;</button>
+                <div class="rv-modal__head">
+                    <span class="rv-modal__dot"></span>
+                    <h3 class="rv-modal__title"></h3>
+                </div>
+                <p class="rv-modal__explainer"></p>
+                <p class="rv-modal__analysis"></p>
+            </div>`;
+        document.body.appendChild(modalEl);
+        const close = () => modalEl.classList.remove('is-open');
+        modalEl.querySelector('.rv-modal__backdrop').addEventListener('click', close);
+        modalEl.querySelector('.rv-modal__close').addEventListener('click', close);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+        return modalEl;
+    }
+
+    function openLayerModal(kind, title, picture) {
+        const modal = ensureModal();
+        modal.querySelector('.rv-modal__dot').style.background = PANEL_COLOR[kind] || 'var(--hm-gold)';
+        modal.querySelector('.rv-modal__title').textContent = title;
+        modal.querySelector('.rv-modal__explainer').textContent = LAYER_EXPLAINER[kind] || '';
+        modal.querySelector('.rv-modal__analysis').textContent = layerAnalysis(kind, picture);
+        modal.classList.add('is-open');
+    }
+
     function bar(score, color) {
         const w = Math.max(0, Math.min(100, Math.round(score)));
         return `<div class="rv-bar"><div class="rv-bar__fill" style="width:${w}%;background:${color}"></div></div>`;
@@ -34,10 +97,11 @@ const ResultV2 = (() => {
     function panelShell(kind, title, inner) {
         const color = PANEL_COLOR[kind];
         return `<div class="rv-panel">
-            <div class="rv-panel__head">
+            <button type="button" class="rv-panel__head" data-layer-open="${kind}" data-layer-title="${esc(title)}" aria-haspopup="dialog">
                 <span class="rv-panel__dot" style="background:${color}"></span>
                 <p class="rv-panel__title">${esc(title)}</p>
-            </div>
+                <span class="rv-panel__info" aria-hidden="true">i</span>
+            </button>
             ${inner}
         </div>`;
     }
@@ -70,7 +134,7 @@ const ResultV2 = (() => {
     function praegungHtml(picture) {
         const items = picture.praegung.length
             ? picture.praegung.map(b => `<div class="rv-belief">${esc(b.text)}</div>`).join('')
-            : `<div class="rv-belief" style="color:var(--hm-text-dim)">Keine der geprüften Prägungen ist bei dir stark aktiv — ein gutes Zeichen für inneren Spielraum.</div>`;
+            : `<div class="rv-belief" style="color:var(--hm-text-dim)">Keine der geprüften Prägungen ist bei dir stark aktiv, ein gutes Zeichen für inneren Spielraum.</div>`;
         return panelShell('praegung', 'Prägung', items);
     }
 
@@ -150,7 +214,7 @@ const ResultV2 = (() => {
         // Need frustration per need (down is good).
         Object.keys(NEED_LABEL).forEach(k => {
             if (prev.needs[k] && cur.needs[k]) {
-                rows.push({ label: `${NEED_LABEL[k]} — Frustration`, delta: cur.needs[k].f - prev.needs[k].f, goodNeg: true });
+                rows.push({ label: `${NEED_LABEL[k]}, Frustration`, delta: cur.needs[k].f - prev.needs[k].f, goodNeg: true });
             }
         });
 
@@ -168,20 +232,20 @@ const ResultV2 = (() => {
         let focusLine;
         const pf = prev.focus, cf = cur.focus;
         if (pf && cf && pf.id === cf.id) {
-            focusLine = `Dein Hebel ist stabil geblieben: <strong>${esc(cf.label)}</strong>. Bleib dran — Wiederholung ist hier der Wirkstoff.`;
+            focusLine = `Dein Hebel ist stabil geblieben: <strong>${esc(cf.label)}</strong>. Bleib dran. Wiederholung ist hier der Wirkstoff.`;
         } else if (pf && cf) {
-            focusLine = `Dein Hebel hat sich verschoben — von <em>${esc(pf.label)}</em> zu <strong>${esc(cf.label)}</strong>.`;
+            focusLine = `Dein Hebel hat sich verschoben, von <em>${esc(pf.label)}</em> zu <strong>${esc(cf.label)}</strong>.`;
         } else if (cf) {
             focusLine = `Dein aktueller Fokus: <strong>${esc(cf.label)}</strong>.`;
         } else {
-            focusLine = `Gerade ist kein einzelner Reibungspunkt dominant — ein Zeichen von Spielraum.`;
+            focusLine = `Gerade ist kein einzelner Reibungspunkt dominant. Ein Zeichen von Spielraum.`;
         }
 
         const since = new Date(prev.at).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 
         return `<section class="rv-section">
             <h2 class="rv-section__title">Deine Bewegung</h2>
-            <p class="rv-section__sub">Veränderung seit deiner Messung vom ${esc(since)}. Nur die veränderbaren Ebenen — dein Terrain bleibt dein Terrain.</p>
+            <p class="rv-section__sub">Veränderung seit deiner Messung vom ${esc(since)}. Nur die veränderbaren Ebenen, dein Terrain bleibt dein Terrain.</p>
             <div class="rv-move">
                 ${rowsHtml}
                 <p class="rv-move__focus">${focusLine}</p>
@@ -199,7 +263,7 @@ const ResultV2 = (() => {
         const mean = Object.keys(profile.meaning)
             .map(k => `<div>${esc(ContentV2.MEANING_TEXT[k].label)}: <b>${Math.round(profile.meaning[k])}</b></div>`).join('');
         return `<details class="rv-details">
-            <summary>Mehr Details — die Zahlen dahinter</summary>
+            <summary>Mehr Details, die Zahlen dahinter</summary>
             <div class="rv-details__body">
                 <div class="rv-eyebrow rv__eyebrow">Terrain</div>${trait}
                 <div class="rv__eyebrow" style="margin-top:1rem">Werte</div>${val}
@@ -232,7 +296,7 @@ const ResultV2 = (() => {
         // 2. Four panels
         parts.push(`<section class="rv-section">
             <h2 class="rv-section__title">So bist du</h2>
-            <p class="rv-section__sub">Vier Ebenen, die zusammen dein Bild ergeben — vollständig im Verstehen.</p>
+            <p class="rv-section__sub">Vier Ebenen, die zusammen dein Bild ergeben, vollständig im Verstehen.</p>
             <div class="rv-panels">
                 ${terrainHtml(picture)}
                 ${antriebHtml(picture)}
@@ -246,7 +310,7 @@ const ResultV2 = (() => {
             const list = profile.frictions.map(f => frictionHtml(f, focus && f.id === focus.id)).join('');
             parts.push(`<section class="rv-section">
                 <h2 class="rv-section__title">Wo es reibt</h2>
-                <p class="rv-section__sub">Die Stellen, an denen dein Wollen und dein Gewordensein aneinandergeraten — sortiert nach Hebelwirkung.</p>
+                <p class="rv-section__sub">Die Stellen, an denen dein Wollen und dein Gewordensein aneinandergeraten, sortiert nach Hebelwirkung.</p>
                 <div class="rv-frictions">${list}</div>
             </section>`);
         }
@@ -255,7 +319,7 @@ const ResultV2 = (() => {
         if (focus && transform) {
             parts.push(`<section class="rv-section">
                 <div class="rv-focus">
-                    <div class="rv__eyebrow">Dein Fokus — Fokus im Verändern</div>
+                    <div class="rv__eyebrow">Dein Fokus, Fokus im Verändern</div>
                     <p class="rv-focus__label">${esc(focus.label)}</p>
                     ${transformHtml(transform)}
                 </div>
@@ -292,7 +356,7 @@ const ResultV2 = (() => {
         if (hasBaseline) {
             parts.push(`<div class="rv-remeasure">
                 <a href="assessment.html?mode=remeasure" class="rv-remeasure__btn">Veränderbare Ebenen neu messen</a>
-                <p class="rv-remeasure__note">Dein Terrain (Persönlichkeit) bleibt erhalten — du beantwortest nur die Ebenen, die sich bewegen können.</p>
+                <p class="rv-remeasure__note">Dein Terrain (Persönlichkeit) bleibt erhalten, du beantwortest nur die Ebenen, die sich bewegen können.</p>
             </div>`);
         }
 
@@ -305,6 +369,12 @@ const ResultV2 = (() => {
         </div>`);
 
         container.innerHTML = `<div class="rv">${parts.join('')}</div>`;
+
+        container.querySelectorAll('[data-layer-open]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                openLayerModal(btn.dataset.layerOpen, btn.dataset.layerTitle, picture);
+            });
+        });
     }
 
     return { render };

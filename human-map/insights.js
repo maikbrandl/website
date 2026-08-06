@@ -44,7 +44,7 @@ const InsightsV2 = (() => {
         const valuePart = topValue ? `, dir liegt vor allem daran, ${ContentV2.VALUE_TEXT[topValue.key]}` : '';
 
         const belief = profile.focusBelief;
-        const beliefPart = belief && BELIEF_CLAUSE[belief.domain] ? ` — ${BELIEF_CLAUSE[belief.domain]}` : '';
+        const beliefPart = belief && BELIEF_CLAUSE[belief.domain] ? `, ${BELIEF_CLAUSE[belief.domain]}` : '';
 
         return `Du bist ${traitPart}${valuePart}${beliefPart}.`;
     }
@@ -155,7 +155,7 @@ const InsightsV2 = (() => {
             when: p => needFrust(p, 'kompetenz') >= 55 && belAct(p, 'autonomie') >= 50,
             blockade: p => (needFrust(p, 'kompetenz') + belAct(p, 'autonomie')) / 2,
             origin: 'Du willst dich wirksam und fähig fühlen, trägst aber die alte Überzeugung, allein nicht zu genügen.',
-            cost:   'Du wartest auf Rückversicherung und übersiehst, wie viel du längst allein trägst — der Zweifel bestätigt sich selbst.',
+            cost:   'Du wartest auf Rückversicherung und übersiehst, wie viel du längst allein trägst. Der Zweifel bestätigt sich selbst.',
             break:  'Bring diese Woche eine kleine Sache bewusst allein zu Ende, ohne dir Bestätigung zu holen.',
         },
         {
@@ -174,9 +174,9 @@ const InsightsV2 = (() => {
             need: 'autonomie', belief: 'fremdbezogenheit', changeable: 'behavior',
             when: p => belAct(p, 'fremdbezogenheit') >= 55 && needFrust(p, 'autonomie') >= 55,
             blockade: p => (belAct(p, 'fremdbezogenheit') + needFrust(p, 'autonomie')) / 2,
-            origin: 'Du gibst viel und gern — weil dein Wert sich lange daran bemessen hat, gebraucht zu werden.',
+            origin: 'Du gibst viel und gern, weil dein Wert sich lange daran bemessen hat, gebraucht zu werden.',
             cost:   'Du sorgst für alle und verlierst die Verbindung zu dem, was du selbst brauchst, bis du leerläufst.',
-            break:  'Plane diese Woche eine kleine Sache fest ein, die nur dir gilt — und halte sie ein.',
+            break:  'Plane diese Woche eine kleine Sache fest ein, die nur dir gilt, und halte sie ein.',
         },
         {
             id: 'antrieb_ohne_richtung', type: 'luecke',
@@ -186,7 +186,7 @@ const InsightsV2 = (() => {
             blockade: p => (100 - p.meaning.purpose),
             origin: 'Du hast Energie und Anspruch, aber gerade keine Richtung, die sich wirklich lohnt.',
             cost:   'Ohne ein klares Wozu verpufft dein Antrieb in Betriebsamkeit, statt dich irgendwohin zu tragen.',
-            break:  'Schreib einen Satz auf, wofür sich dein Einsatz gerade lohnen soll — und richte eine Handlung daran aus.',
+            break:  'Schreib einen Satz auf, wofür sich dein Einsatz gerade lohnen soll, und richte eine Handlung daran aus.',
         },
         {
             id: 'nicht_bedeutsam', type: 'luecke',
@@ -196,7 +196,7 @@ const InsightsV2 = (() => {
             blockade: p => (100 - p.meaning.bedeutsamkeit + belAct(p, 'abgetrenntheit')) / 2,
             origin: 'Du willst spüren, dass dein Dasein zählt, hältst aber innerlich Abstand, um nicht enttäuscht zu werden.',
             cost:   'Weil du dich zurücknimmst, bekommst du selten zurückgespiegelt, dass du wirklich einen Unterschied machst.',
-            break:  'Teile einer Person mit, was sie dir bedeutet — und bleib da, um ihre Reaktion aufzunehmen.',
+            break:  'Teile einer Person mit, was sie dir bedeutet, und bleib da, um ihre Reaktion aufzunehmen.',
         },
         {
             id: 'genuss_vs_haerte', type: 'luecke',
@@ -205,7 +205,7 @@ const InsightsV2 = (() => {
             when: p => valScore(p, 'hedonismus') >= 55 && belAct(p, 'wachsamkeit') >= 55,
             blockade: p => belAct(p, 'wachsamkeit'),
             origin: 'Du möchtest das Leben genießen, hast aber gelernt, dass Leichtigkeit sich wie Nachlässigkeit anfühlt.',
-            cost:   'So verschiebst du das Genießen auf „wenn alles erledigt ist“ — und dieser Moment kommt nie.',
+            cost:   'So verschiebst du das Genießen auf „wenn alles erledigt ist“, und dieser Moment kommt nie.',
             break:  'Gönn dir diese Woche bewusst eine kleine Freude, ohne sie dir vorher verdient haben zu müssen.',
         },
         {
@@ -216,7 +216,7 @@ const InsightsV2 = (() => {
             blockade: p => Math.min(valScore(p, 'selbstbestimmung'), valScore(p, 'sicherheit')),
             origin: 'Zwei starke Werte in dir wollen Gegensätzliches: Weite und Halt zugleich.',
             cost:   'Jede Entscheidung fühlt sich nach Verrat am anderen Teil an, also bleibst du oft in der Schwebe.',
-            break:  'Triff eine anstehende Entscheidung bewusst zugunsten eines der beiden Werte — und benenne, was du bewusst loslässt.',
+            break:  'Triff eine anstehende Entscheidung bewusst zugunsten eines der beiden Werte, und benenne, was du bewusst loslässt.',
         },
         {
             id: 'neugier_vs_kontrolle', type: 'luecke',
@@ -255,7 +255,7 @@ const InsightsV2 = (() => {
             when: p => valScore(p, 'selbstbestimmung') >= 60 && valScore(p, 'konformitaet') >= 55,
             blockade: p => Math.min(valScore(p, 'selbstbestimmung'), valScore(p, 'konformitaet')),
             origin: 'Du willst deinen eigenen Weg gehen und gleichzeitig dazugehören und nicht anecken.',
-            cost:   'Aus Angst anzuecken passt du dich an — und fühlst dich dann fremdbestimmt in deinem eigenen Leben.',
+            cost:   'Aus Angst anzuecken passt du dich an, und fühlst dich dann fremdbestimmt in deinem eigenen Leben.',
             break:  'Vertritt in einer kleinen Sache offen deine eigene Meinung, auch wenn sie abweicht.',
         },
         {
@@ -294,7 +294,7 @@ const InsightsV2 = (() => {
             severity,
             message: 'Einige deiner Antworten deuten auf eine gerade hohe innere Belastung hin. ' +
                 'Dieses Tool ersetzt keine Therapie. Wenn dich das länger begleitet, ist es ein Zeichen von Stärke, ' +
-                'dir Unterstützung zu holen — etwa bei einer Beratungsstelle oder einer Fachperson.',
+                'dir Unterstützung zu holen, etwa bei einer Beratungsstelle oder einer Fachperson.',
         };
     }
 
@@ -389,24 +389,24 @@ const InsightsV2 = (() => {
                 },
                 {
                     key: 'formulieren', n: 2, title: 'Formulieren',
-                    lead: 'Ein glaubwürdiger, werte-basierter Gegensatz — klein und erreichbar, nicht grandios:',
+                    lead: 'Ein glaubwürdiger, werte-basierter Gegensatz, klein und erreichbar, nicht grandios:',
                     counter: t.counter,
                     valueAnchor: topValue ? `Er knüpft an das an, was dir wichtig ist: ${ContentV2.VALUE_TEXT[topValue.key]}.` : '',
                 },
                 {
                     key: 'widerlegen', n: 3, title: 'Widerlegen',
-                    lead: 'Ein kleines Verhaltensexperiment als WOOP — eine widersprechende Erfahrung ist der wirksamste Hebel:',
+                    lead: 'Ein kleines Verhaltensexperiment als WOOP. Eine widersprechende Erfahrung ist der wirksamste Hebel:',
                     woop: { wish: t.wish, outcome: t.outcome, obstacle: t.obstacle, plan: t.plan },
                 },
                 {
                     key: 'verankern', n: 4, title: 'Verankern',
-                    lead: 'Spüre die neue Erfahrung emotional nach — am besten abends, denn Schlaf festigt sie:',
+                    lead: 'Spüre die neue Erfahrung emotional nach, am besten abends, denn Schlaf festigt sie:',
                     prompt: 'Wie hat sich der Moment angefühlt, in dem der alte Satz nicht gestimmt hat? Bleib kurz bei diesem Gefühl.',
                 },
                 {
                     key: 'wiederholen', n: 5, title: 'Wiederholen & Wiedermessen',
                     lead: 'Neue Muster brauchen Wochen, nicht Tage (im Schnitt rund zwei Monate):',
-                    prompt: 'Wiederhole das Experiment über mehrere Wochen. Danach misst du Prägung, Bedürfnisse und Sinn erneut — und siehst deine Bewegung.',
+                    prompt: 'Wiederhole das Experiment über mehrere Wochen. Danach misst du Prägung, Bedürfnisse und Sinn erneut, und siehst deine Bewegung.',
                 },
             ],
         };

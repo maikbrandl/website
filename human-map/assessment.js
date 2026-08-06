@@ -91,8 +91,17 @@ const AssessmentV2 = (() => {
         if (!q) return;
         const existingAnswer = answers[q.id];
 
+        const backBtn = index > 0
+            ? `<button type="button" class="hm-question__back" aria-label="Vorherige Frage">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>`
+            : '';
+
         let html = `<div class="hm-question__card">
-            <div class="hm-question__num">Frage ${index + 1} von ${total}</div>
+            <div class="hm-question__top">
+                ${backBtn}
+                <div class="hm-question__num">Frage ${index + 1} von ${total}</div>
+            </div>
             <div class="hm-question__text">${escHtml(q.text)}</div>
             ${renderLikert(q, existingAnswer)}
         </div>`;
@@ -133,15 +142,30 @@ const AssessmentV2 = (() => {
     }
 
     function attachEvents(container, q) {
+        // Local lock (scoped to this render) blocks a double-click on the same
+        // question from firing recordAnswer/advance twice, which previously
+        // caused two questions to stack and one question to get skipped.
+        let locked = false;
         container.querySelectorAll('.hm-dot').forEach(btn => {
             btn.addEventListener('click', () => {
-                if (isTransitioning) return;
+                if (isTransitioning || locked) return;
+                locked = true;
                 recordAnswer(q.id, Number(btn.dataset.val));
                 container.querySelectorAll('.hm-dot').forEach(d => d.classList.remove('is-selected'));
                 btn.classList.add('is-selected');
                 setTimeout(() => advance(), 420);
             });
         });
+        const backBtn = container.querySelector('.hm-question__back');
+        if (backBtn) backBtn.addEventListener('click', () => { if (!isTransitioning) goBack(); });
+    }
+
+    function goBack() {
+        if (currentIndex <= 0) return;
+        currentIndex -= 1;
+        renderQuestion(currentIndex);
+        updateProgress();
+        saveSession();
     }
 
     function recordAnswer(qid, value) {

@@ -84,6 +84,13 @@
     align-items: center;
     gap: var(--hm-space-2);
     margin-bottom: var(--hm-space-4);
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
 }
 .rv-panel__dot {
     width: 0.625rem;
@@ -97,6 +104,99 @@
     text-transform: uppercase;
     color: var(--hm-text-dim);
     margin: 0;
+}
+.rv-panel__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    border: 1px solid var(--hm-border);
+    color: var(--hm-text-muted);
+    font-size: 0.6875rem;
+    font-style: italic;
+    font-family: Georgia, serif;
+    flex: none;
+    margin-left: auto;
+    transition: color 0.2s, border-color 0.2s;
+}
+.rv-panel__head:hover .rv-panel__info { color: var(--hm-gold); border-color: var(--hm-gold); }
+
+/* ── layer detail popup ── */
+.rv-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--hm-space-4);
+}
+.rv-modal.is-open { display: flex; }
+.rv-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(2px);
+}
+.rv-modal__card {
+    position: relative;
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border-light);
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-8);
+    max-width: 28rem;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.rv-modal__close {
+    position: absolute;
+    top: var(--hm-space-4);
+    right: var(--hm-space-4);
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    border: 1px solid var(--hm-border);
+    background: none;
+    color: var(--hm-text-dim);
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.rv-modal__close:hover { color: var(--hm-gold); border-color: var(--hm-gold); }
+.rv-modal__head {
+    display: flex;
+    align-items: center;
+    gap: var(--hm-space-2);
+    margin-bottom: var(--hm-space-4);
+    padding-right: var(--hm-space-8);
+}
+.rv-modal__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    flex: none;
+}
+.rv-modal__title {
+    font-family: var(--hm-font-display);
+    font-size: 1.25rem;
+    color: var(--hm-white);
+    margin: 0;
+}
+.rv-modal__explainer {
+    font-size: 0.875rem;
+    color: var(--hm-text-dim);
+    line-height: 1.6;
+    margin-bottom: var(--hm-space-4);
+    padding-bottom: var(--hm-space-4);
+    border-bottom: 1px solid var(--hm-border);
+}
+.rv-modal__analysis {
+    font-size: 0.9375rem;
+    color: var(--hm-text);
+    line-height: 1.7;
 }
 
 /* trait / meaning bar rows */

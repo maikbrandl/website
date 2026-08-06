@@ -91,19 +91,19 @@ const ContentV2 = (() => {
     const SCHEMA_BELIEFS = {
         abgetrenntheit: {
             text:   'Wenn ich mich wirklich zeige, werde ich verlassen oder abgelehnt.',
-            origin: 'Früh hast du gelernt, dass Nähe unsicher ist — also hältst du einen Teil von dir zurück.',
+            origin: 'Früh hast du gelernt, dass Nähe unsicher ist, also hältst du einen Teil von dir zurück.',
             cost:   'Genau der Schutz, der dich sicher hält, hält auch die Nähe draußen, die du dir wünschst.',
             break:  'Zeige einer vertrauten Person eine echte, kleine Verletzlichkeit und beobachte, was wirklich passiert.',
         },
         autonomie: {
-            text:   'Allein schaffe ich es nicht — ich bin nicht genug.',
+            text:   'Allein schaffe ich es nicht. Ich bin nicht genug.',
             origin: 'Irgendwann wurde dir vermittelt, dass du dich nicht auf dich selbst verlassen kannst.',
             cost:   'Du wartest auf Erlaubnis oder Rückversicherung und übersiehst, wie viel du längst allein trägst.',
             break:  'Triff diese Woche eine kleine Sache bewusst allein zu Ende, ohne dir Bestätigung zu holen.',
         },
         grenzen: {
             text:   'Regeln gelten für mich nicht ganz, und Unbequemes muss ich nicht aushalten.',
-            origin: 'Dir wurde selten zugemutet, Frust zu ertragen — also weicht ein Teil von dir ihm bis heute aus.',
+            origin: 'Dir wurde selten zugemutet, Frust zu ertragen, also weicht ein Teil von dir ihm bis heute aus.',
             cost:   'Das Vermeiden verschafft kurz Erleichterung und kostet dich langfristig Ziele, die dir wichtig sind.',
             break:  'Halte einmal bewusst eine unbequeme Aufgabe zu Ende aus, statt ihr auszuweichen.',
         },
@@ -115,7 +115,7 @@ const ContentV2 = (() => {
         },
         wachsamkeit: {
             text:   'Ich darf keine Schwäche zeigen und muss perfekt sein.',
-            origin: 'Stärke und Leistung waren dein sicherer Boden — Schwäche fühlte sich riskant an.',
+            origin: 'Stärke und Leistung waren dein sicherer Boden. Schwäche fühlte sich riskant an.',
             cost:   'Die Rüstung schützt dich und lässt dich zugleich nie ganz ankommen oder ausruhen.',
             break:  'Lass einmal bewusst etwas „nur gut genug“ und spüre, dass nichts Schlimmes passiert.',
         },

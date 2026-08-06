@@ -82,9 +82,9 @@ const ModelV2 = (() => {
 
     // ── Sections of the CORE questionnaire (for the assessment UI) ───
     const SECTIONS = [
-        { id: 'terrain',      layer: 'A', label: 'Dein Terrain',      sub: 'Wie du grundsätzlich tickst — deine Persönlichkeit.' },
-        { id: 'werte',        layer: 'C', label: 'Dein Antrieb',      sub: 'Was dir wirklich wichtig ist — deine Werte.' },
-        { id: 'beduerfnisse', layer: 'C', label: 'Deine Bedürfnisse', sub: 'Woran es dir gerade genug gibt — und woran nicht.' },
+        { id: 'terrain',      layer: 'A', label: 'Dein Terrain',      sub: 'Wie du grundsätzlich tickst, deine Persönlichkeit.' },
+        { id: 'werte',        layer: 'C', label: 'Dein Antrieb',      sub: 'Was dir wirklich wichtig ist, deine Werte.' },
+        { id: 'beduerfnisse', layer: 'C', label: 'Deine Bedürfnisse', sub: 'Woran es dir gerade genug gibt, und woran nicht.' },
         { id: 'sinn',         layer: 'D', label: 'Dein Sinn',         sub: 'Ob dein Leben sich stimmig und bedeutsam anfühlt.' },
         { id: 'praegung',     layer: 'B', label: 'Deine Prägung',     sub: 'Alte Grundüberzeugungen, die im Hintergrund mitlaufen.' },
     ];

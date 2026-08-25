@@ -44,12 +44,29 @@
         return base + path;
     }
 
+    // Website-weite Links (zur Hauptseite, Produkten, Blog, Tools); 'Wissen' = diese Plattform.
+    const SITE_LINKS = [
+        { label: 'Start', path: '../index.html' },
+        { label: 'Produkte', path: '../index.html#produkte' },
+        { label: 'Blog', path: '../blog.html' },
+        { label: 'Tools', path: '../tools/' },
+        { label: 'Wissen', path: 'index.html', active: true },
+    ];
+    function siteNavMarkup(cls) {
+        return '<nav class="' + cls + '" aria-label="Website">' +
+            SITE_LINKS.map((l) =>
+                '<a class="site-link' + (l.active ? ' site-link--active' : '') + '" href="' + href(l.path) + '"' +
+                (l.active ? ' aria-current="page"' : '') + '>' + esc(l.label) + '</a>'
+            ).join('') + '</nav>';
+    }
+
     // ────────────────────────────── Topbar ──────────────────────────────
     function buildTopbar() {
         const el = document.createElement('header');
         el.className = 'topbar';
         el.innerHTML =
-            '<a class="topbar__logo" href="' + href('index.html') + '" aria-label="Hybridlogs Startseite">hybrid<span class="logo-word__accent">logs</span></a>' +
+            '<a class="topbar__logo" href="' + href('../index.html') + '" aria-label="Hybridlogs Startseite">hybrid<span class="logo-word__accent">logs</span></a>' +
+            siteNavMarkup('topbar__nav') +
             '<div class="topbar__search">' + searchInput('topbar-search') + '</div>' +
             '<div class="topbar__actions">' +
             '<button type="button" class="icon-btn topbar__mobile-only" data-open-search aria-label="Suche öffnen">' + SVG.search + '</button>' +
@@ -125,7 +142,7 @@
             '<div class="drawer__head">' +
             '<span class="topbar__logo">hybrid<span class="logo-word__accent">logs</span></span>' +
             '<button type="button" class="icon-btn" data-close-drawer aria-label="Menü schließen">' + SVG.close + '</button>' +
-            '</div>' + navMarkup() +
+            '</div>' + siteNavMarkup('drawer__site') + navMarkup() +
             '</div>';
         body.appendChild(el);
         return el;

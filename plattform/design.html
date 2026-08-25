@@ -8,7 +8,7 @@
     <meta name="description"
         content="Übersicht der Bausteine des Hybridlog Design-Systems: Farben, Schriften, Buttons, Karten, Badges, Chips, Tags, Suche und Theme-Umschalter.">
     <meta name="robots" content="noindex">
-    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); document.documentElement.setAttribute('data-theme', t || 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); } })();</script>
     <link rel="stylesheet" href="css/system.css?v=20260825">
     <style>
         /* Nur fuer diese Demo-Seite */

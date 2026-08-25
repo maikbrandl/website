@@ -8,7 +8,7 @@
     <meta name="description" content="Ein Beitrag der Hybridlog Wissensplattform.">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="de_DE">
-    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); document.documentElement.setAttribute('data-theme', t || 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); } })();</script>
     <script>window.PLATFORM_BASE = '../';</script>
     <link rel="stylesheet" href="../css/system.css?v=20260825">
     <link rel="stylesheet" href="../css/shell.css?v=20260825">

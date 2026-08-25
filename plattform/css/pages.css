@@ -33,28 +33,10 @@
     flex-direction: column;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-top-left-radius: 0;
     border-radius: var(--r-lg);
     box-shadow: var(--shadow-sm);
     transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
     overflow: hidden;
-}
-
-/* Lasche oben */
-.folder::before {
-    content: "";
-    position: absolute;
-    top: -14px;
-    left: 0;
-    width: 42%;
-    max-width: 150px;
-    height: 16px;
-    background: var(--area);
-    border-radius: var(--r-sm) var(--r-sm) 0 0;
-}
-
-.folder {
-    margin-top: 14px;
 }
 
 .folder:hover {
@@ -63,83 +45,21 @@
     border-color: color-mix(in srgb, var(--area) 45%, var(--line));
 }
 
-.folder__peek {
-    position: relative;
-    padding: var(--sp-4);
-    background:
-        linear-gradient(color-mix(in srgb, var(--area) 8%, var(--surface-2)), var(--surface-2));
-    border-bottom: 1px solid var(--line);
-    min-height: 116px;
-}
-
-.folder__peek-label {
-    position: absolute;
-    top: var(--sp-2);
-    right: var(--sp-3);
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+/* Grafik/Symbol oben */
+.folder__art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 128px;
     color: var(--area);
-    opacity: .8;
+    background:
+        radial-gradient(120% 130% at 50% 0%, color-mix(in srgb, var(--area) 26%, var(--surface)) 0%, var(--surface) 70%);
+    border-bottom: 1px solid var(--line);
 }
 
-/* Mini-Vorschau eines Tools */
-.peek-tool {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-}
-
-.peek-tool__q {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: .98rem;
-    color: var(--text);
-    max-width: 30ch;
-}
-
-.peek-tool__opts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-1);
-}
-
-.peek-pill {
-    font-size: .72rem;
-    padding: .3em .7em;
-    border-radius: var(--r-full);
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text-muted);
-}
-
-.peek-pill--on {
-    background: var(--area);
-    color: #fff;
-    border-color: transparent;
-}
-
-.peek-tool__bar {
-    height: 5px;
-    border-radius: var(--r-full);
-    background: var(--line);
-    overflow: hidden;
-    margin-top: var(--sp-1);
-}
-
-.peek-tool__bar span {
-    display: block;
-    height: 100%;
-    width: 33%;
-    background: var(--area);
-}
-
-/* Vorschau eines Beitrags */
-.peek-read {
-    font-size: .92rem;
-    color: var(--text-muted);
-    font-style: italic;
+.folder__art svg {
+    width: 54px;
+    height: 54px;
 }
 
 .folder__body {

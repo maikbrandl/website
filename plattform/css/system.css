@@ -85,33 +85,33 @@
 /* Dark ueber prefers-color-scheme, ausser explizit auf light gestellt */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --bg: #15120A;
-        --surface: #1F1A10;
-        --surface-2: #262013;
-        --text: #F3EDDD;
-        --text-muted: #A79C84;
-        --line: #332B18;
+        --bg: #0a0a0a;
+        --surface: #141414;
+        --surface-2: #1a1a1a;
+        --text: #f0f0f0;
+        --text-muted: #8f8f8f;
+        --line: #262626;
         --on-accent: #5A4A00;
 
-        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
-        --shadow-md: 0 6px 20px rgba(0, 0, 0, .45);
-        --shadow-lg: 0 18px 44px rgba(0, 0, 0, .55);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .5);
+        --shadow-md: 0 6px 20px rgba(0, 0, 0, .55);
+        --shadow-lg: 0 18px 44px rgba(0, 0, 0, .65);
     }
 }
 
 /* Explizit Dark */
 :root[data-theme="dark"] {
-    --bg: #15120A;
-    --surface: #1F1A10;
-    --surface-2: #262013;
-    --text: #F3EDDD;
-    --text-muted: #A79C84;
-    --line: #332B18;
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1a1a1a;
+    --text: #f0f0f0;
+    --text-muted: #8f8f8f;
+    --line: #262626;
     --on-accent: #5A4A00;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
-    --shadow-md: 0 6px 20px rgba(0, 0, 0, .45);
-    --shadow-lg: 0 18px 44px rgba(0, 0, 0, .55);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .5);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, .55);
+    --shadow-lg: 0 18px 44px rgba(0, 0, 0, .65);
 }
 
 /* ====================== 5. Reset & Basis ====================== */

@@ -76,6 +76,47 @@
     display: inline-flex;
 }
 
+/* Website-Navigation (Start, Produkte, Blog, Tools, Wissen) */
+.topbar__nav {
+    display: none;
+    align-items: center;
+    gap: 2px;
+    flex: 0 0 auto;
+}
+
+.site-link {
+    padding: .4em .7em;
+    border-radius: var(--r-full);
+    font-size: .9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.site-link:hover {
+    color: var(--text);
+}
+
+.site-link--active {
+    color: var(--text);
+    font-weight: 600;
+    background: color-mix(in srgb, var(--text) 9%, transparent);
+}
+
+.drawer__site {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding-bottom: var(--sp-4);
+    margin-bottom: var(--sp-4);
+    border-bottom: 1px solid var(--line);
+}
+
+.drawer__site .site-link {
+    border: 1px solid var(--line);
+}
+
 /* ── App-Layout ── */
 .app {
     display: block;
@@ -424,6 +465,10 @@
     }
 
     .topbar__search {
+        display: flex;
+    }
+
+    .topbar__nav {
         display: flex;
     }
 

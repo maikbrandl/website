@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybridlog · Wissen über den Menschen</title>
+    <meta name="description"
+        content="Hybridlog ist eine Wissensplattform über den Menschen. Tools und Beiträge zu Philosophie, Psychologie, Lernen, Entwicklung, Kognition und Zukunft, klar und interaktiv.">
+    <link rel="canonical" href="https://www.hybridlogjournals.de/plattform/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hybridlog · Wissen über den Menschen">
+    <meta property="og:description" content="Tools und Beiträge, um dich und dein Denken besser zu verstehen.">
+    <meta property="og:locale" content="de_DE">
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
+    <script>window.PLATFORM_BASE = './';</script>
+    <link rel="stylesheet" href="css/system.css?v=20260825">
+    <link rel="stylesheet" href="css/shell.css?v=20260825">
+    <link rel="stylesheet" href="css/pages.css?v=20260825">
+</head>
+
+<body data-domaene="mental">
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+    <main id="main" class="container">
+        <!-- 1. Hero (bewusst schlicht, Platzhalter fuer spaeteren Auftritt) -->
+        <section class="hero">
+            <h1>Wissen über den Menschen, zum Anfassen</h1>
+            <p class="lead hero__lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken
+                besser zu verstehen. Für alle, die neugierig auf sich selbst sind.</p>
+            <div class="hero__search">
+                <div class="search">
+                    <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.3-4.3" />
+                    </svg>
+                    <input class="search__input" type="search" id="home-search"
+                        placeholder="Themen und Tools suchen" aria-label="Suchen">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Die Gebiete als grosse Tueren -->
+        <section class="section" aria-labelledby="gebiete-title">
+            <div class="section__head">
+                <h2 id="gebiete-title">Wähle ein Gebiet</h2>
+            </div>
+            <div class="doors" data-hl-doors></div>
+        </section>
+
+        <!-- 3. Zum Ausprobieren -->
+        <section class="section" aria-labelledby="probieren-title">
+            <div class="section__head">
+                <h2 id="probieren-title">Zum Ausprobieren</h2>
+            </div>
+            <div class="related-grid" data-hl-tools></div>
+        </section>
+
+        <!-- 4. Neu -->
+        <section class="section" aria-labelledby="neu-title">
+            <div class="section__head">
+                <h2 id="neu-title">Neu</h2>
+            </div>
+            <div class="related-grid" data-hl-neu></div>
+        </section>
+
+        <!-- 5. Mission -->
+        <section class="mission" aria-labelledby="mission-title">
+            <h2 id="mission-title">Wissen für Wachstum und Reflexion</h2>
+            <p>Wir sammeln, was hilft, den Menschen zu verstehen, verständlich erklärt und zum Ausprobieren gemacht.
+                Der mentale Bereich ist jetzt da. Der körperliche folgt.</p>
+        </section>
+
+        <!-- 6. Newsletter -->
+        <section class="newsletter" aria-labelledby="nl-title">
+            <h2 id="nl-title">Bleib neugierig</h2>
+            <p>Einmal die Woche eine Idee zum Weiterdenken. Kein Spam, jederzeit abbestellbar.</p>
+            <form class="newsletter__form" onsubmit="return false">
+                <input class="newsletter__input" type="email" required placeholder="deine@email.de"
+                    aria-label="E-Mail-Adresse">
+                <button class="btn btn--primary" type="submit">Anmelden</button>
+            </form>
+        </section>
+
+        <footer class="platform-footer">
+            <p>Hybridlog · Wissensplattform über den Menschen</p>
+        </footer>
+    </main>
+
+    <script src="js/data.js?v=20260825"></script>
+    <script src="js/render.js?v=20260825"></script>
+    <script>
+        (function () {
+            var D = window.HLData, R = window.HLRender;
+            // Gebiets-Tueren
+            document.querySelector('[data-hl-doors]').innerHTML = D.gebieteByDomaene('mental').map(function (g) {
+                var n = D.inhalteByGebiet(g.slug).length;
+                return '<a class="door" href="' + R.href('mental/gebiet.html?g=' + g.slug) + '" style="--area:var(' + g.farbeVar + ')">' +
+                    '<span class="door__tab"></span>' +
+                    '<span class="door__name">' + R.esc(g.name) + '</span>' +
+                    '<span class="door__intro">' + R.esc(g.einleitung) + '</span>' +
+                    '<span class="door__count">' + (n === 1 ? '1 Inhalt' : n + ' Inhalte') + '</span>' +
+                    '</a>';
+            }).join('');
+
+            // Zum Ausprobieren: handverlesene Tools quer durch die Gebiete
+            var tools = D.INHALTE.filter(function (i) { return i.type === 'tool'; }).slice(0, 3);
+            document.querySelector('[data-hl-tools]').innerHTML = tools.map(function (i) {
+                return R.related(i, D.gebietBySlug(i.gebiet));
+            }).join('');
+
+            // Neu
+            document.querySelector('[data-hl-neu]').innerHTML = D.neueste(3).map(function (i) {
+                return R.related(i, D.gebietBySlug(i.gebiet));
+            }).join('');
+        })();
+    </script>
+    <script src="js/theme.js?v=20260825"></script>
+    <script src="js/shell.js?v=20260825"></script>
+</body>
+
+</html>

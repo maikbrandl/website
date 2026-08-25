@@ -36,4 +36,16 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://www.hybridlogjournals.de/plattform/</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.hybridlogjournals.de/plattform/mental/philosophie/denkschule.html</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>

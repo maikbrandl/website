@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design-System · Hybridlog Plattform</title>
+    <meta name="description"
+        content="Übersicht der Bausteine des Hybridlog Design-Systems: Farben, Schriften, Buttons, Karten, Badges, Chips, Tags, Suche und Theme-Umschalter.">
+    <meta name="robots" content="noindex">
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
+    <link rel="stylesheet" href="css/system.css?v=20260825">
+    <style>
+        /* Nur fuer diese Demo-Seite */
+        .demo-wrap {
+            max-width: 1100px;
+            margin-inline: auto;
+            padding: var(--sp-6) var(--sp-5) var(--sp-9);
+        }
+
+        .demo-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--sp-4);
+            margin-bottom: var(--sp-7);
+            flex-wrap: wrap;
+        }
+
+        .demo-section {
+            padding: var(--sp-6) 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .demo-section>h2 {
+            margin-bottom: var(--sp-4);
+        }
+
+        .demo-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--sp-3);
+            align-items: center;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--sp-4);
+        }
+
+        .swatches {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--sp-3);
+        }
+
+        .swatch {
+            border: 1px solid var(--line);
+            border-radius: var(--r-md);
+            overflow: hidden;
+            font-size: .82rem;
+        }
+
+        .swatch__chip {
+            height: 64px;
+        }
+
+        .swatch__label {
+            padding: var(--sp-2) var(--sp-3);
+            color: var(--text-muted);
+        }
+
+        .type-scale>*+* {
+            margin-top: var(--sp-3);
+        }
+
+        .logo {
+            font-family: var(--font-body);
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+
+        .logo .logo-word__accent {
+            color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <div class="demo-wrap">
+        <header class="demo-topbar">
+            <span class="logo">hybrid<span class="logo-word__accent">logs</span></span>
+            <div class="demo-row">
+                <div class="search" style="min-width:220px">
+                    <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.3-4.3" />
+                    </svg>
+                    <input class="search__input" type="search" placeholder="Suchen" aria-label="Suchen">
+                </div>
+                <button type="button" class="theme-toggle" data-theme-toggle></button>
+            </div>
+        </header>
+
+        <main id="main">
+            <p class="eyebrow">Design-System</p>
+            <h1>Bausteine und Themes</h1>
+            <p class="lead">Diese Seite zeigt alle wiederverwendbaren Elemente in Hell und Dunkel. Über den Schalter
+                oben rechts lässt sich das Theme umstellen, die Wahl wird gemerkt.</p>
+
+            <section class="demo-section">
+                <h2>Farben</h2>
+                <div class="swatches">
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--bg)"></div>
+                        <div class="swatch__label">Hintergrund</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--surface)"></div>
+                        <div class="swatch__label">Fläche</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--accent)"></div>
+                        <div class="swatch__label">Signal-Gelb</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-philosophie)"></div>
+                        <div class="swatch__label">Philosophie</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-psychologie)"></div>
+                        <div class="swatch__label">Psychologie</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-lernen)"></div>
+                        <div class="swatch__label">Lernen</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-entwicklung)"></div>
+                        <div class="swatch__label">Entwicklung</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-kognition)"></div>
+                        <div class="swatch__label">Kognition</div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch__chip" style="background:var(--area-zukunft)"></div>
+                        <div class="swatch__label">Zukunft und KI</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="demo-section">
+                <h2>Typografie</h2>
+                <div class="type-scale">
+                    <h1>Überschrift H1 in Playfair</h1>
+                    <h2>Überschrift H2</h2>
+                    <h3>Überschrift H3</h3>
+                    <p class="lead">Ein Lead-Absatz führt in ein Thema ein und bleibt gut lesbar.</p>
+                    <p>Fließtext in Inter, rund 17 Pixel, mit einer Zeilenlänge um die 65 Zeichen für angenehmes
+                        Lesen über mehrere Zeilen hinweg.</p>
+                </div>
+            </section>
+
+            <section class="demo-section">
+                <h2>Buttons</h2>
+                <div class="demo-row">
+                    <button class="btn btn--primary">Primär</button>
+                    <button class="btn btn--area">In Gebietsfarbe</button>
+                    <button class="btn btn--ghost">Ghost</button>
+                    <button class="btn btn--ghost btn--sm">Klein</button>
+                </div>
+            </section>
+
+            <section class="demo-section">
+                <h2>Badges, Chips und Tags</h2>
+                <div class="demo-row" style="margin-bottom:var(--sp-4)">
+                    <span class="badge badge--tool">Tool interaktiv</span>
+                    <span class="badge badge--artikel">Beitrag</span>
+                </div>
+                <div class="demo-row" style="margin-bottom:var(--sp-4)">
+                    <button class="chip chip--active">Alle</button>
+                    <button class="chip">Tools</button>
+                    <button class="chip">Beiträge</button>
+                </div>
+                <div class="demo-row">
+                    <span class="tag">Philosophie</span>
+                    <span class="tag" style="--area:var(--area-lernen)">Lernen</span>
+                    <span class="tag" style="--area:var(--area-kognition)">Kognition</span>
+                </div>
+            </section>
+
+            <section class="demo-section">
+                <h2>Karten</h2>
+                <div class="demo-grid">
+                    <a class="card" href="#" style="--area:var(--area-philosophie)">
+                        <span class="tag">Philosophie</span>
+                        <h3 class="card__title" style="margin-top:var(--sp-2)">Welche Denkschule bist du?</h3>
+                        <p class="card__teaser">Ein kurzer Fragebogen ordnet dich einer philosophischen Richtung zu.</p>
+                    </a>
+                    <a class="card" href="#" style="--area:var(--area-lernen)">
+                        <span class="tag" style="--area:var(--area-lernen)">Lernen</span>
+                        <h3 class="card__title" style="margin-top:var(--sp-2)">Active Recall verstehen</h3>
+                        <p class="card__teaser">Warum Abrufen wirksamer ist als Wiederlesen, in fünf Minuten erklärt.</p>
+                    </a>
+                    <div class="card">
+                        <h3 class="card__title">Statische Karte</h3>
+                        <p class="card__teaser">Ohne Link, zum Zeigen von Inhalten.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/theme.js?v=20260825" defer></script>
+</body>
+
+</html>

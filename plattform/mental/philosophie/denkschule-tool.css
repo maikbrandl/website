@@ -1,0 +1,153 @@
+/* Island "Welche Denkschule bist du?" – nur auf der Tool-Seite geladen */
+.dt {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+}
+
+.dt__progress {
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--line);
+    overflow: hidden;
+}
+
+.dt__progress span {
+    display: block;
+    height: 100%;
+    background: var(--area);
+    transition: width var(--dur) var(--ease);
+}
+
+.dt__step {
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.dt__field {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.dt__q {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin-bottom: var(--sp-4);
+    padding: 0;
+}
+
+.dt__opts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.dt__opt {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    text-align: left;
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: .98rem;
+    line-height: 1.4;
+    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.dt__opt:hover {
+    border-color: var(--area);
+    transform: translateX(2px);
+}
+
+.dt__opt-mark {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    margin-top: 1px;
+    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.dt__opt[aria-checked="true"] {
+    border-color: var(--area);
+    background: color-mix(in srgb, var(--area) 12%, var(--surface-2));
+}
+
+.dt__opt[aria-checked="true"] .dt__opt-mark {
+    border-color: var(--area);
+    background: radial-gradient(circle at center, var(--area) 0 6px, transparent 7px);
+}
+
+.dt__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-top: var(--sp-2);
+}
+
+.dt__nav .btn[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* Ergebnis */
+.dt__result-name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--area);
+    margin: 0;
+}
+
+.dt__result-line {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dt__result-text {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.dt__bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-top: var(--sp-1);
+}
+
+.dt__bar-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 40%) 1fr;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: .85rem;
+    color: var(--text-muted);
+}
+
+.dt__bar {
+    height: 8px;
+    border-radius: var(--r-full);
+    background: var(--line);
+    overflow: hidden;
+}
+
+.dt__bar span {
+    display: block;
+    height: 100%;
+    background: var(--area);
+    transition: width var(--dur) var(--ease);
+}

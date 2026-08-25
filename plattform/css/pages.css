@@ -1,0 +1,537 @@
+/* ===================================================================
+   HYBRIDLOG PLATTFORM – Seiten-Bausteine
+   Ordner-Karten (Sneak Peek), Abschnitte, verwandte Inhalte,
+   Tool-Header, Newsletter, Weiter-Navigation, Gebiets-Tueren (Startseite).
+   =================================================================== */
+
+.section {
+    margin-top: var(--sp-7);
+}
+
+.section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+
+.section__head h2 {
+    scroll-margin-top: 80px;
+}
+
+/* ── Ordner-Karte mit Sneak Peek ── */
+.folder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+}
+
+.folder {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top-left-radius: 0;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    overflow: hidden;
+}
+
+/* Lasche oben */
+.folder::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    width: 42%;
+    max-width: 150px;
+    height: 16px;
+    background: var(--area);
+    border-radius: var(--r-sm) var(--r-sm) 0 0;
+}
+
+.folder {
+    margin-top: 14px;
+}
+
+.folder:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--area) 45%, var(--line));
+}
+
+.folder__peek {
+    position: relative;
+    padding: var(--sp-4);
+    background:
+        linear-gradient(color-mix(in srgb, var(--area) 8%, var(--surface-2)), var(--surface-2));
+    border-bottom: 1px solid var(--line);
+    min-height: 116px;
+}
+
+.folder__peek-label {
+    position: absolute;
+    top: var(--sp-2);
+    right: var(--sp-3);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--area);
+    opacity: .8;
+}
+
+/* Mini-Vorschau eines Tools */
+.peek-tool {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.peek-tool__q {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: .98rem;
+    color: var(--text);
+    max-width: 30ch;
+}
+
+.peek-tool__opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+}
+
+.peek-pill {
+    font-size: .72rem;
+    padding: .3em .7em;
+    border-radius: var(--r-full);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text-muted);
+}
+
+.peek-pill--on {
+    background: var(--area);
+    color: #fff;
+    border-color: transparent;
+}
+
+.peek-tool__bar {
+    height: 5px;
+    border-radius: var(--r-full);
+    background: var(--line);
+    overflow: hidden;
+    margin-top: var(--sp-1);
+}
+
+.peek-tool__bar span {
+    display: block;
+    height: 100%;
+    width: 33%;
+    background: var(--area);
+}
+
+/* Vorschau eines Beitrags */
+.peek-read {
+    font-size: .92rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.folder__body {
+    padding: var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    flex: 1 1 auto;
+}
+
+.folder__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.25;
+}
+
+.folder__teaser {
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1 1 auto;
+}
+
+.folder__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+}
+
+.folder__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--area);
+}
+
+.folder__cta svg {
+    width: 1em;
+    height: 1em;
+}
+
+.folder__min {
+    font-size: .82rem;
+    color: var(--text-muted);
+}
+
+.folder__link {
+    position: absolute;
+    inset: 0;
+}
+
+/* ── Beitrags-Liste ── */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+}
+
+.post-item {
+    position: relative;
+    display: block;
+    padding: var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.post-item:hover {
+    transform: translateX(3px);
+    border-color: color-mix(in srgb, var(--area) 45%, var(--line));
+}
+
+.post-item__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.25;
+    margin-bottom: var(--sp-2);
+}
+
+.post-item__sneak {
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+.post-item__meta {
+    font-size: .8rem;
+    color: var(--text-muted);
+    margin-top: var(--sp-2);
+}
+
+/* ── Tool-Header (Inhaltsseite) ── */
+.tool-header {
+    margin: var(--sp-4) 0 var(--sp-6);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: linear-gradient(color-mix(in srgb, var(--area) 7%, var(--surface)), var(--surface));
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.tool-header__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--line);
+    font-size: .82rem;
+    color: var(--text-muted);
+}
+
+.tool-header__dot {
+    width: .6em;
+    height: .6em;
+    border-radius: 50%;
+    background: var(--area);
+}
+
+.tool-header__mount {
+    padding: var(--sp-5);
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-3);
+}
+
+/* ── Verwandte Inhalte (Vertiefen) ── */
+.related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+}
+
+/* ── Newsletter ── */
+.newsletter {
+    margin-top: var(--sp-7);
+    padding: var(--sp-6);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    background: linear-gradient(color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface));
+}
+
+.newsletter h2 {
+    margin-bottom: var(--sp-2);
+}
+
+.newsletter p {
+    color: var(--text-muted);
+    margin-bottom: var(--sp-4);
+}
+
+.newsletter__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    max-width: 460px;
+}
+
+.newsletter__form .search__input,
+.newsletter__input {
+    flex: 1 1 220px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-full);
+    padding: .7em 1.1em;
+}
+
+.newsletter__input:focus {
+    outline: none;
+    border-color: var(--area);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--area) 22%, transparent);
+}
+
+.newsletter__note {
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin-top: var(--sp-3);
+    margin-bottom: 0;
+}
+
+/* ── Weiter-Navigation ── */
+.pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+    margin-top: var(--sp-7);
+}
+
+.pager__link {
+    display: block;
+    padding: var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--surface);
+    transition: border-color var(--dur) var(--ease);
+}
+
+.pager__link:hover {
+    border-color: var(--area);
+}
+
+.pager__dir {
+    display: block;
+    font-size: .78rem;
+    color: var(--text-muted);
+}
+
+.pager__title {
+    display: block;
+    font-weight: 600;
+    margin-top: var(--sp-1);
+}
+
+.pager__link--next {
+    text-align: right;
+}
+
+.pager__empty {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Mobile Sticky-Leiste (naechster Schritt) ── */
+.next-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    margin-top: var(--sp-6);
+}
+
+.next-bar__label {
+    font-size: .8rem;
+    color: var(--text-muted);
+}
+
+.next-bar__title {
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+/* ── Gebiets-Tueren (Startseite) ── */
+.doors {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+}
+
+.door {
+    position: relative;
+    display: block;
+    padding: var(--sp-5);
+    min-height: 148px;
+    border-radius: var(--r-lg);
+    border: 1px solid color-mix(in srgb, var(--area) 40%, var(--line));
+    background:
+        radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--area) 22%, var(--surface)) 0%, var(--surface) 60%);
+    overflow: hidden;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.door:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.door__tab {
+    position: absolute;
+    top: 0;
+    left: var(--sp-5);
+    width: 96px;
+    height: 10px;
+    background: var(--area);
+    border-radius: 0 0 var(--r-sm) var(--r-sm);
+}
+
+.door__name {
+    display: block;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1.15;
+    margin-top: var(--sp-3);
+}
+
+.door__intro {
+    display: block;
+    color: var(--text-muted);
+    font-size: .92rem;
+    line-height: 1.6;
+    margin-top: var(--sp-3);
+    max-width: 34ch;
+}
+
+.door__count {
+    display: block;
+    margin-top: var(--sp-4);
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--area);
+}
+
+.hero {
+    padding: var(--sp-7) 0 var(--sp-6);
+    text-align: center;
+}
+
+.hero__lead {
+    margin: var(--sp-3) auto var(--sp-5);
+}
+
+.hero__search {
+    max-width: 520px;
+    margin-inline: auto;
+}
+
+.mission {
+    margin-top: var(--sp-8);
+    padding: var(--sp-6);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    text-align: center;
+}
+
+.mission p {
+    max-width: 52ch;
+    margin: var(--sp-3) auto 0;
+    color: var(--text-muted);
+}
+
+.platform-footer {
+    margin-top: var(--sp-8);
+    padding: var(--sp-6) 0;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: .88rem;
+    text-align: center;
+}
+
+/* ====================== Desktop-Raster ====================== */
+@media (min-width: 720px) {
+
+    .folder-grid,
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .doors {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .folder-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .doors {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Mobile Sticky-Leiste auf Desktop ausblenden */
+    .next-bar {
+        display: none;
+    }
+}
+
+@media (min-width: 1280px) {
+    .folder-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

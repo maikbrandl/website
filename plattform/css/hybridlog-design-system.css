@@ -144,7 +144,7 @@ section.block.tight{padding:26px 0}
    CHROME. Topbar, Achsen Umschalter, Theme Button, Breadcrumbs.
    ------------------------------------------------------------------------- */
 header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top-inner{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.top-inner{max-width:var(--maxw);margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;text-decoration:none}
 .brand .mark{font-family:var(--font-ui);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
 .brand .mark b{font-weight:800;color:var(--teal)}

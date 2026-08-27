@@ -65,8 +65,8 @@
         el.innerHTML =
             '<div class="top-inner">' +
             '<a class="brand" href="' + href('../index.html') + '"><span class="mark">hybrid<b>logs</b></span></a>' +
-            siteNavMarkup() +
             '<div class="spacer"></div>' +
+            siteNavMarkup() +
             lensMarkup() +
             (window.HLTheme ? window.HLTheme.markup() : '') +
             '</div>';

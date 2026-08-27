@@ -46,12 +46,26 @@
             '</div>';
     }
 
+    // Hauptseiten-Navigation (Home/Produkte/Wissensraum/Ueber uns), gleiche
+    // Struktur wie js/components.js auf der Hauptseite. '../' vor dem Ziel
+    // steht relativ zur PLATFORM_BASE, also immer eine Ebene ueber der
+    // Wissensraum-Wurzel = Website-Wurzel, egal wie tief die Seite liegt.
+    function siteNavMarkup() {
+        return '<nav class="site-nav" aria-label="Hauptnavigation">' +
+            '<a href="' + href('../index.html') + '">Home</a>' +
+            '<a href="' + href('../index.html#produkte') + '">Produkte</a>' +
+            '<a href="' + href('index.html') + '" class="active">Wissensraum</a>' +
+            '<a href="' + href('../index.html#story') + '">Über uns</a>' +
+            '</nav>';
+    }
+
     function buildTopbar() {
         const el = document.createElement('header');
         el.className = 'top';
         el.innerHTML =
             '<div class="top-inner">' +
-            '<a class="brand" href="' + href('../index.html') + '"><span class="mark">Hybrid<b>log</b></span><span class="tag">Wissensraum</span></a>' +
+            '<a class="brand" href="' + href('../index.html') + '"><span class="mark">Hybrid<b>log</b>s</span></a>' +
+            siteNavMarkup() +
             '<div class="spacer"></div>' +
             lensMarkup() +
             (window.HLTheme ? window.HLTheme.markup() : '') +

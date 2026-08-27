@@ -61,11 +61,14 @@
 }
 
 /* Dunkel per Systemeinstellung, sofern kein expliziter Hell Wunsch gesetzt ist */
+/* Neutrals hier auf die Hauptseiten-Palette (Konzept 1) abgestimmt, damit
+   Hintergrund/Karten/Text ueberall gleich aussehen. Akzente (--gold/--world/
+   --mind/--body) unveraendert, das ist die etablierte Wissensraum-Identitaet. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#16140F;--surface:#1F1C15;--surface-2:#282318;
-    --ink:#ECE5D4;--muted:#A79E89;--faint:#7B7360;
-    --line:#332E24;--line-strong:#463F31;--gold:#C9A257;
+    --paper:#0b0c0b;--surface:#171915;--surface-2:#1d201b;
+    --ink:#f1efe6;--muted:#a9a79d;--faint:#6b6f63;
+    --line:#2a2d27;--line-strong:#454a3f;--gold:#C9A257;
     --world:#54A891;--mind:#8E88D8;--body:#D9855A;
     --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
     --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
@@ -73,9 +76,9 @@
 }
 /* Expliziter Dunkel Umschalter gewinnt in beide Richtungen */
 :root[data-theme="dark"]{
-  --paper:#16140F;--surface:#1F1C15;--surface-2:#282318;
-  --ink:#ECE5D4;--muted:#A79E89;--faint:#7B7360;
-  --line:#332E24;--line-strong:#463F31;--gold:#C9A257;
+  --paper:#0b0c0b;--surface:#171915;--surface-2:#1d201b;
+  --ink:#f1efe6;--muted:#a9a79d;--faint:#6b6f63;
+  --line:#2a2d27;--line-strong:#454a3f;--gold:#C9A257;
   --world:#54A891;--mind:#8E88D8;--body:#D9855A;
   --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
   --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
@@ -97,6 +100,11 @@ a{color:inherit}
 .ui{font-family:var(--font-ui)}
 .muted{color:var(--muted)}
 .reading{max-width:65ch}
+
+/* Skip-Link: unsichtbar bis Tastaturfokus, damit er nicht permanent aus der
+   Kopfzeile heraushaengt. */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;background:var(--surface);color:var(--ink);padding:10px 16px;border-radius:8px;z-index:100}
+.skip-link:focus{position:fixed;left:16px;top:16px;width:auto;height:auto;overflow:visible;box-shadow:0 4px 16px var(--shadow-lg)}
 
 /* Eyebrow, kleines Label ueber einer Ueberschrift, in Akzentfarbe */
 .eyebrow{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent)}
@@ -127,8 +135,14 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;text-decoration:none}
 .brand .mark{font-family:var(--font-display);font-weight:700;font-size:1.35rem}
 .brand .mark b{color:var(--world)}
-.brand .tag{font-family:var(--font-ui);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 .spacer{flex:1 1 auto}
+
+/* Hauptseiten-Navigation, damit der Wissensraum nicht wie eine losgeloeste
+   Seite wirkt und man immer zurueck zu Home/Produkte/Ueber uns kommt. */
+.site-nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.site-nav a{font-family:var(--font-ui);font-size:.85rem;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:.18s}
+.site-nav a:hover{color:var(--ink);background:var(--surface-2)}
+.site-nav a.active{color:var(--accent)}
 
 /* Achsen Umschalter Lesen, Sehen, Ausprobieren */
 .lens{display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px}

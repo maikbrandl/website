@@ -22,8 +22,9 @@
 
 /* -------------------------------------------------------------------------
    TOKENS. Alle Farben, Schriften und Schatten als Variablen.
-   Rollen der Weltfarben: mind Indigo, body Terrakotta, world Verdigris.
-   --accent ist die aktive Weltfarbe, Default world.
+   Weltfarben (Hybridlog Farb-Prompt, sitehweit verbindlich): mind Slate Blue,
+   body Teal, world Amber. Kein Lila.
+   --accent ist der primaere UI-Akzent (Teal), pro Welt via data-world ueberschrieben.
    ------------------------------------------------------------------------- */
 :root{
   /* Grund und Flaechen */
@@ -37,12 +38,16 @@
   /* Linien */
   --line:#E2DAC8;
   --line-strong:#CEC4AC;
-  /* Akzente */
-  --gold:#A6822F;         /* Quellen, feine Highlights */
-  --world:#2E6E5E;        /* Verdigris, Welt World */
-  --mind:#575299;         /* Indigo, Welt Mind */
-  --body:#B15C36;         /* Terrakotta, Welt Body */
-  --accent:var(--world);  /* aktive Weltfarbe */
+  /* Akzente (Hybridlog Farb-Prompt) */
+  --teal:#5FAF9F; --teal-dark:#4B9588; --teal-light:#A9D6CC;
+  --amber:#D4A24A; --amber-dark:#B4882E; --amber-light:#E8D7A6;
+  --slate:#4A6D7A; --slate-dark:#354F59; --slate-light:#9FB6BE;
+  --gold:var(--amber);     /* Quellen, feine Highlights */
+  --world:var(--amber);    /* Welt World */
+  --mind:var(--slate);     /* Welt Mind */
+  --body:var(--teal);      /* Welt Body */
+  --accent:var(--teal);    /* primaerer UI-Akzent, sitehweit */
+  --on-accent:#14120d;     /* Text auf Akzentflaechen, dunkel passt zu Teal/Amber */
   /* Semantik */
   --good:#3E7D5A;
   --warn:#A6822F;
@@ -61,25 +66,32 @@
 }
 
 /* Dunkel per Systemeinstellung, sofern kein expliziter Hell Wunsch gesetzt ist */
-/* Neutrals hier auf die Hauptseiten-Palette (Konzept 1) abgestimmt, damit
-   Hintergrund/Karten/Text ueberall gleich aussehen. Akzente (--gold/--world/
-   --mind/--body) unveraendert, das ist die etablierte Wissensraum-Identitaet. */
+/* Neutrals + Akzente hier exakt auf den Hybridlog Farb-Prompt abgestimmt (2026-08-27),
+   damit Hintergrund/Karten/Text/Akzente ueberall auf der Website identisch sind. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#0b0c0b;--surface:#171915;--surface-2:#1d201b;
-    --ink:#f1efe6;--muted:#a9a79d;--faint:#6b6f63;
-    --line:#2a2d27;--line-strong:#454a3f;--gold:#C9A257;
-    --world:#54A891;--mind:#8E88D8;--body:#D9855A;
+    --paper:#090A09;--surface:#171814;--surface-2:#1C1D19;
+    --ink:#F0EEE7;--muted:#A8A49A;--faint:#77756D;
+    --line:#2A2C26;--line-strong:#393B34;
+    --teal:#5FAF9F;--teal-dark:#4B9588;--teal-light:#A9D6CC;
+    --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
+    --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
+    --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
+    --accent:var(--teal);
     --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
     --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
   }
 }
 /* Expliziter Dunkel Umschalter gewinnt in beide Richtungen */
 :root[data-theme="dark"]{
-  --paper:#0b0c0b;--surface:#171915;--surface-2:#1d201b;
-  --ink:#f1efe6;--muted:#a9a79d;--faint:#6b6f63;
-  --line:#2a2d27;--line-strong:#454a3f;--gold:#C9A257;
-  --world:#54A891;--mind:#8E88D8;--body:#D9855A;
+  --paper:#090A09;--surface:#171814;--surface-2:#1C1D19;
+  --ink:#F0EEE7;--muted:#A8A49A;--faint:#77756D;
+  --line:#2A2C26;--line-strong:#393B34;
+  --teal:#5FAF9F;--teal-dark:#4B9588;--teal-light:#A9D6CC;
+  --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
+  --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
+  --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
+  --accent:var(--teal);
   --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
   --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
 }
@@ -110,8 +122,9 @@ a{color:inherit}
 .eyebrow{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent)}
 
 /* Weltkontext. Setze eine dieser Klassen oder data-world am Seitencontainer,
-   dann uebernehmen alle Akzente automatisch die Weltfarbe. */
-[data-world="mind"],.world-mind{--accent:var(--mind)}
+   dann uebernehmen alle Akzente automatisch die Weltfarbe. Slate (Mind) ist
+   dunkler als Teal/Amber, daher heller --on-accent-Text nur hier. */
+[data-world="mind"],.world-mind{--accent:var(--mind);--on-accent:#fff}
 [data-world="body"],.world-body{--accent:var(--body)}
 [data-world="world"],.world-world{--accent:var(--world)}
 
@@ -133,8 +146,8 @@ section.block.tight{padding:26px 0}
 header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top-inner{max-width:var(--maxw);margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;text-decoration:none}
-.brand .mark{font-family:var(--font-display);font-weight:700;font-size:1.35rem}
-.brand .mark b{color:var(--world)}
+.brand .mark{font-family:var(--font-ui);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
+.brand .mark b{font-weight:800;color:var(--teal)}
 .spacer{flex:1 1 auto}
 
 /* Hauptseiten-Navigation, damit der Wissensraum nicht wie eine losgeloeste
@@ -149,8 +162,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .lens .lens-label{font-family:var(--font-ui);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:0 8px}
 .lens button{font-family:var(--font-ui);font-size:.8rem;font-weight:500;border:0;background:transparent;color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer;transition:.18s}
 .lens button:hover{color:var(--ink)}
-.lens button[aria-pressed="true"]{background:var(--accent);color:#fff}
-:root[data-theme="dark"] .lens button[aria-pressed="true"]{color:#15130e}
+.lens button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 
 .iconbtn{font-family:var(--font-ui);font-size:.8rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--muted);width:38px;height:38px;border-radius:10px;cursor:pointer;display:grid;place-items:center;transition:.18s}
 .iconbtn:hover{color:var(--ink);border-color:var(--accent)}
@@ -176,9 +188,9 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* Chip, kleine Marke. Achsen Varianten faerben nach Erlebnisform. */
 .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:.72rem;letter-spacing:.04em;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);background:var(--surface)}
 .chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.chip.axis-lesen{color:var(--world);border-color:color-mix(in srgb,var(--world) 40%,var(--line))}
-.chip.axis-sehen{color:var(--mind);border-color:color-mix(in srgb,var(--mind) 40%,var(--line))}
-.chip.axis-ausprobieren{color:var(--body);border-color:color-mix(in srgb,var(--body) 40%,var(--line))}
+.chip.axis-lesen{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,var(--line))}
+.chip.axis-sehen{color:var(--slate);border-color:color-mix(in srgb,var(--slate) 40%,var(--line))}
+.chip.axis-ausprobieren{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,var(--line))}
 
 /* Seitentyp Marke, rechts oben im Seitenkopf */
 .typechip{margin-left:auto;font-family:var(--font-ui);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}
@@ -198,8 +210,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .vis{font-family:var(--font-ui);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
 
 /* Buttons */
-.btn{font-family:var(--font-ui);font-weight:500;font-size:.88rem;cursor:pointer;border-radius:var(--radius-sm);padding:10px 18px;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:.18s}
-:root[data-theme="dark"] .btn{color:#14120d}
+.btn{font-family:var(--font-ui);font-weight:500;font-size:.88rem;cursor:pointer;border-radius:var(--radius-sm);padding:10px 18px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);transition:.18s}
 .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--accent)}
 .btn.ghost:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
@@ -345,8 +356,7 @@ svg.map{width:100%;height:auto;display:block;min-width:560px}
 .map .node circle{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5;transition:.2s}
 .map .node text{font-family:var(--font-ui);font-size:11px;fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
 .map .node.center circle{fill:var(--accent);stroke:var(--accent)}
-.map .node.center text{fill:#fff;font-weight:600}
-:root[data-theme="dark"] .map .node.center text{fill:#14120d}
+.map .node.center text{fill:var(--on-accent);font-weight:600}
 .map .node.link{cursor:pointer}
 .map .node.link:hover circle{stroke:var(--accent);stroke-width:2.5;fill:color-mix(in srgb,var(--accent) 14%,var(--surface-2))}
 .legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--font-ui);font-size:.8rem;color:var(--muted);margin-top:14px}
@@ -361,7 +371,7 @@ svg.map{width:100%;height:auto;display:block;min-width:560px}
 .tool-item .lab{font-family:var(--font-ui);font-size:.92rem}
 .seg{display:flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;flex:none}
 .seg button{font-family:var(--font-ui);font-size:.72rem;border:0;background:var(--surface);color:var(--muted);padding:6px 10px;cursor:pointer;transition:.15s}
-.seg button.on-me{background:var(--world);color:#fff}
+.seg button.on-me{background:var(--accent);color:var(--on-accent)}
 .seg button.on-not{background:var(--faint);color:#fff}
 .tool-item.correct{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
 .tool-item.wrong{border-color:var(--crit);box-shadow:inset 0 0 0 1px var(--crit)}

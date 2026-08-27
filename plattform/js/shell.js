@@ -64,7 +64,7 @@
         el.className = 'top';
         el.innerHTML =
             '<div class="top-inner">' +
-            '<a class="brand" href="' + href('../index.html') + '"><span class="mark">Hybrid<b>log</b>s</span></a>' +
+            '<a class="brand" href="' + href('../index.html') + '"><span class="mark">hybrid<b>logs</b></span></a>' +
             siteNavMarkup() +
             '<div class="spacer"></div>' +
             lensMarkup() +

@@ -13,12 +13,14 @@
     <meta property="og:title" content="Welche Denkschule bist du?">
     <meta property="og:description" content="Sechs Fragen, am Ende deine philosophische Grundhaltung.">
     <meta property="og:locale" content="de_DE">
-    <script>(function () { try { var t = localStorage.getItem('hl-theme'); document.documentElement.setAttribute('data-theme', t || 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); } })();</script>
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
     <script>window.PLATFORM_BASE = '../../';</script>
-    <link rel="stylesheet" href="../../css/system.css?v=20260825">
-    <link rel="stylesheet" href="../../css/shell.css?v=20260825">
-    <link rel="stylesheet" href="../../css/pages.css?v=20260825">
-    <link rel="stylesheet" href="denkschule-tool.css?v=20260825">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../../css/hybridlog-design-system.css?v=20260901">
+    <link rel="stylesheet" href="denkschule-tool.css?v=20260901">
     <!-- JSON-LD: SoftwareApplication (Tool) -->
     <script type="application/ld+json">
     {
@@ -34,93 +36,93 @@
     </script>
 </head>
 
-<body data-domaene="mental" data-gebiet="philosophie" data-inhalt="denkschule"
-    style="--area: var(--area-philosophie)">
+<body data-welt="world" data-world="world" data-gebiet="philosophie" data-inhalt="denkschule" data-title="Welche Denkschule bist du?">
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <nav data-hl-crumbs></nav>
 
-    <div class="app">
-        <aside class="app__side" data-hl-sidebar></aside>
+    <main id="main">
+        <div class="wrap">
+            <div class="concept-grid">
+                <div class="concept-main">
+                    <p class="kernfrage">Philosophie</p>
+                    <h1>Welche Denkschule bist du?</h1>
+                    <p><span class="chip axis-ausprobieren"><span class="dot"></span>Ausprobieren</span></p>
+                    <p class="short-answer">Philosophie ist keine Frage von richtig oder falsch, sondern von Haltung.
+                        Dieser kurze Test zeigt dir, welcher Grundhaltung dein Denken am nächsten steht.</p>
 
-        <main id="main" class="app__main">
-            <nav data-hl-crumbs></nav>
+                    <div class="cb">
+                        <div class="tool-shell" aria-label="Interaktives Tool">
+                            <div id="denkschule-mount">
+                                <noscript>
+                                    <p>Dieses Tool braucht JavaScript. Du kannst stattdessen den <a
+                                            href="../../tools/philosophie/">Atlas der Philosophie</a> nutzen.</p>
+                                </noscript>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="title-row">
-                <h1>Welche Denkschule bist du?</h1>
-                <span class="badge badge--tool">Tool interaktiv</span>
+                    <div class="cb">
+                        <h3>Was es macht</h3>
+                        <p>Das Tool stellt dir sechs Alltagsfragen. Aus deinen Antworten schätzt es, welcher von vier
+                            Denkschulen du am meisten zuneigst, vom Stoizismus über den Existenzialismus bis zum
+                            Empirismus und Rationalismus. Am Ende siehst du deine Grundhaltung mit einer kurzen
+                            Erklärung und einer Verteilung über alle vier Richtungen.</p>
+                    </div>
+
+                    <div class="cb">
+                        <h3>So gehst du vor</h3>
+                        <p>Beantworte jede Frage spontan, es gibt keine falschen Antworten. Wähle die Aussage, die
+                            sich am ehesten nach dir anfühlt, nicht die, die klug klingt. Nach der letzten Frage
+                            erscheint dein Ergebnis. Du kannst den Test jederzeit wiederholen und schauen, wie stabil
+                            deine Haltung ist.</p>
+                    </div>
+
+                    <div class="cb">
+                        <h3>Hintergrund</h3>
+                        <p>Die vier Richtungen stehen für vier grundverschiedene Antworten auf die Frage, worauf man
+                            sein Leben gründet. Der Stoizismus setzt auf die Kontrolle des Eigenen, der
+                            Existenzialismus auf die Freiheit der Wahl, der Empirismus auf die Erfahrung und der
+                            Rationalismus auf die Vernunft. Keine ist die einzig richtige, jede beleuchtet einen
+                            anderen Teil des guten Lebens.</p>
+                    </div>
+                </div>
+
+                <aside class="aside">
+                    <div class="box">
+                        <h4>Einordnung</h4>
+                        <div class="meta-line"><span>Welt</span><b>World</b></div>
+                        <div class="meta-line"><span>Fachgebiet</span><b>Philosophie</b></div>
+                        <div class="meta-line"><span>Typ</span><b>Tool</b></div>
+                    </div>
+                    <div class="box" data-hl-related-box hidden>
+                        <h4>Weiterdenken</h4>
+                        <div class="rel" data-hl-related></div>
+                    </div>
+                </aside>
             </div>
 
-            <!-- Das Tool sitzt als Header direkt oben, sofort bedienbar (Island) -->
-            <section class="tool-header" aria-label="Interaktives Tool">
-                <div class="tool-header__bar"><span class="tool-header__dot"></span> Sofort spielbar, ohne Anmeldung
-                </div>
-                <div class="tool-header__mount" id="denkschule-mount">
-                    <noscript>
-                        <p>Dieses Tool braucht JavaScript. Du kannst stattdessen den <a
-                                href="../../tools/philosophie/">Atlas der Philosophie</a> nutzen.</p>
-                    </noscript>
-                </div>
-            </section>
-
-            <!-- Toc-Inline nur mobil -->
-            <details class="toc-inline" data-hl-toc-inline></details>
-
-            <p class="lead">Philosophie ist keine Frage von richtig oder falsch, sondern von Haltung. Dieser kurze Test
-                zeigt dir, welcher Grundhaltung dein Denken am nächsten steht.</p>
-
-            <div class="prose">
-                <h2>Was es macht</h2>
-                <p>Das Tool stellt dir sechs Alltagsfragen. Aus deinen Antworten schätzt es, welcher von vier
-                    Denkschulen du am meisten zuneigst, vom Stoizismus über den Existenzialismus bis zum Empirismus und
-                    Rationalismus. Am Ende siehst du deine Grundhaltung mit einer kurzen Erklärung und einer Verteilung
-                    über alle vier Richtungen.</p>
-
-                <h2>So gehst du vor</h2>
-                <p>Beantworte jede Frage spontan, es gibt keine falschen Antworten. Wähle die Aussage, die sich am
-                    ehesten nach dir anfühlt, nicht die, die klug klingt. Nach der letzten Frage erscheint dein
-                    Ergebnis. Du kannst den Test jederzeit wiederholen und schauen, wie stabil deine Haltung ist.</p>
-
-                <h2>Hintergrund</h2>
-                <p>Die vier Richtungen stehen für vier grundverschiedene Antworten auf die Frage, worauf man sein Leben
-                    gründet. Der Stoizismus setzt auf die Kontrolle des Eigenen, der Existenzialismus auf die Freiheit
-                    der Wahl, der Empirismus auf die Erfahrung und der Rationalismus auf die Vernunft. Keine ist die
-                    einzig richtige, jede beleuchtet einen anderen Teil des guten Lebens.</p>
-            </div>
-
-            <!-- Vertiefen -->
-            <section class="section">
-                <div class="section__head">
-                    <h2>Vertiefen</h2>
-                </div>
-                <div class="related-grid" data-hl-related></div>
-            </section>
-
-            <!-- Newsletter GENAU HIER, nach dem Wert -->
-            <section class="newsletter" aria-labelledby="nl-title">
+            <section class="block tight" aria-labelledby="nl-title">
+                <p class="eyebrow">Newsletter</p>
                 <h2 id="nl-title">Ein Gedanke pro Woche</h2>
-                <p>Wenn dir das gefallen hat, schicken wir dir einmal die Woche eine Idee zum Weiterdenken. Kein Spam,
-                    jederzeit abbestellbar.</p>
-                <form class="newsletter__form" onsubmit="return false">
-                    <input class="newsletter__input" type="email" required placeholder="deine@email.de"
-                        aria-label="E-Mail-Adresse">
-                    <button class="btn btn--primary" type="submit">Anmelden</button>
+                <p class="muted" style="margin-top:8px">Wenn dir das gefallen hat, schicken wir dir einmal die Woche
+                    eine Idee zum Weiterdenken. Kein Spam, jederzeit abbestellbar.</p>
+                <form class="stack" style="max-width:420px;margin-top:14px" onsubmit="return false">
+                    <input class="ui" type="email" required placeholder="deine@email.de" aria-label="E-Mail-Adresse"
+                        style="padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink)">
+                    <button class="btn" type="submit" style="justify-self:start">Anmelden</button>
                 </form>
-                <p class="newsletter__note">Mit der Anmeldung stimmst du dem Erhalt des Newsletters zu.</p>
             </section>
+        </div>
+    </main>
 
-            <!-- Weiter-Navigation -->
-            <nav class="pager" aria-label="Weiter im Gebiet" data-hl-pager></nav>
-        </main>
+    <footer>
+        <div class="wrap">Hybridlog · Wissensplattform über den Menschen</div>
+    </footer>
 
-        <aside class="app__toc" data-hl-toc></aside>
-    </div>
-
-    <!-- Mobile Sticky-Leiste: naechster Schritt -->
-    <div class="next-bar" data-hl-nextbar></div>
-
-    <script src="../../js/data.js?v=20260825"></script>
-    <script src="../../js/render.js?v=20260825"></script>
+    <script src="../../js/data.js?v=20260901"></script>
+    <script src="../../js/render.js?v=20260901"></script>
     <!-- Island: nur hier geladen -->
-    <script src="denkschule-tool.js?v=20260825"></script>
+    <script src="denkschule-tool.js?v=20260901"></script>
     <script>
         (function () {
             var D = window.HLData, R = window.HLRender, base = window.PLATFORM_BASE;
@@ -132,34 +134,18 @@
                 });
             }
             var gebiet = D.gebietBySlug('philosophie');
-            // Vertiefen: verwandte Inhalte desselben Gebiets (ohne dieses Tool)
+            // Weiterdenken: verwandte Inhalte desselben Gebiets (ohne dieses Tool)
             var related = D.inhalteByGebiet('philosophie').filter(function (i) { return i.slug !== 'denkschule'; });
-            document.querySelector('[data-hl-related]').innerHTML = related.map(function (i) { return R.related(i, gebiet); }).join('');
-
-            // Pager: vorheriger/naechster Eintrag im Gebiet
-            var all = D.inhalteByGebiet('philosophie');
-            var pos = all.findIndex(function (i) { return i.slug === 'denkschule'; });
-            var prev = all[pos - 1], next = all[pos + 1];
-            var pagerHtml = '';
-            pagerHtml += prev
-                ? '<a class="pager__link" href="' + R.href(prev.href) + '"><span class="pager__dir">Vorher</span><span class="pager__title">' + R.esc(prev.title) + '</span></a>'
-                : '<span class="pager__link pager__empty"></span>';
-            pagerHtml += next
-                ? '<a class="pager__link pager__link--next" href="' + R.href(next.href) + '"><span class="pager__dir">Nächster</span><span class="pager__title">' + R.esc(next.title) + '</span></a>'
-                : '<span class="pager__link pager__empty"></span>';
-            document.querySelector('[data-hl-pager]').innerHTML = pagerHtml;
-
-            // Mobile Sticky-Leiste: naechster sinnvoller Schritt
-            var step = next || related[0];
-            if (step) {
-                document.querySelector('[data-hl-nextbar]').innerHTML =
-                    '<div><div class="next-bar__label">Nächster Schritt</div><div class="next-bar__title">' + R.esc(step.title) + '</div></div>' +
-                    '<a class="btn btn--area btn--sm" href="' + R.href(step.href) + '">Weiter</a>';
+            if (related.length) {
+                document.querySelector('[data-hl-related]').innerHTML = related.map(function (i) {
+                    return '<a href="' + R.href(i.href) + '"><span class="rt">' + (i.type === 'tool' ? 'Tool' : 'Beitrag') + '</span>' + R.esc(i.title) + '</a>';
+                }).join('');
+                document.querySelector('[data-hl-related-box]').hidden = false;
             }
         })();
     </script>
-    <script src="../../js/theme.js?v=20260825"></script>
-    <script src="../../js/shell.js?v=20260825"></script>
+    <script src="../../js/theme.js?v=20260901"></script>
+    <script src="../../js/shell.js?v=20260901"></script>
 </body>
 
 </html>

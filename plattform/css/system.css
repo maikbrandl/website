@@ -36,13 +36,24 @@
     --gold: #c9a84c;
     --gold-dark: #a68935;
 
-    /* Gebietsfarben (bleiben in beiden Themes gleich definiert, s. u.) */
+    /* Fachgebietsfarben (bleiben in beiden Themes gleich definiert, s. u.) — 17 Fachgebiete, MIND/BODY/WORLD */
+    --area-kognition-wahrnehmung: #8A5B9E;
+    --area-emotion-motivation: #C96F4A;
+    --area-persoenlichkeit-identitaet: #B0527A;
+    --area-lernen-verhalten: #C79320;
+    --area-beziehungen-sozialpsychologie: #4A7FC9;
+    --area-bewusstsein-selbst: #3E8E7E;
+    --area-gehirn-nervensystem: #6E5BA8;
+    --area-schlaf-chronobiologie: #3E5E91;
+    --area-bewegung-leistungsphysiologie: #C74A4A;
+    --area-ernaehrung-stoffwechsel: #7FA33E;
+    --area-hormone-regulation: #B98A2E;
+    --area-gesundheit-praevention: #3E9E7A;
     --area-philosophie: #5A6BA8;
-    --area-psychologie: #C96F4A;
-    --area-lernen: #C79320;
-    --area-entwicklung: #3E8E7E;
-    --area-kognition: #8A5B9E;
-    --area-zukunft: #3E8391;
+    --area-naturwissenschaft: #3E8391;
+    --area-gesellschaft-systeme: #6E7B8B;
+    --area-geschichte-kultur: #9C7A4A;
+    --area-technologie-zukunft: #4A5FC9;
 
     /* aktive Gebietsfarbe (wird pro Seite/Kontext gesetzt) */
     --area: var(--area-philosophie);

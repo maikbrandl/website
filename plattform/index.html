@@ -12,112 +12,110 @@
     <meta property="og:title" content="Hybridlog · Wissen über den Menschen">
     <meta property="og:description" content="Tools und Beiträge, um dich und dein Denken besser zu verstehen.">
     <meta property="og:locale" content="de_DE">
-    <script>(function () { try { var t = localStorage.getItem('hl-theme'); document.documentElement.setAttribute('data-theme', t || 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); } })();</script>
+    <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
     <script>window.PLATFORM_BASE = './';</script>
-    <link rel="stylesheet" href="css/system.css?v=20260825">
-    <link rel="stylesheet" href="css/shell.css?v=20260825">
-    <link rel="stylesheet" href="css/pages.css?v=20260825">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/hybridlog-design-system.css?v=20260901">
 </head>
 
-<body data-domaene="mental">
+<body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-    <main id="main" class="container">
-        <!-- 1. Hero (bewusst schlicht, Platzhalter fuer spaeteren Auftritt) -->
-        <section class="hero">
-            <h1>Wissen über den Menschen, zum Anfassen</h1>
-            <p class="lead hero__lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken
-                besser zu verstehen. Für alle, die neugierig auf sich selbst sind.</p>
-            <div class="hero__search">
-                <div class="search">
-                    <svg class="search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        aria-hidden="true">
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="M21 21l-4.3-4.3" />
-                    </svg>
-                    <input class="search__input" type="search" id="home-search"
-                        placeholder="Themen und Tools suchen" aria-label="Suchen">
+    <main id="main">
+        <div class="wrap">
+            <section class="hero">
+                <p class="eyebrow">Hybridlog Wissensraum</p>
+                <h1>Wissen über den Menschen, zum Anfassen</h1>
+                <p class="lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken besser zu
+                    verstehen. Für alle, die neugierig auf sich selbst sind.</p>
+                <p class="principle">MIND und WORLD sind jetzt da. BODY folgt.</p>
+            </section>
+
+            <section class="block" aria-labelledby="welten-title">
+                <p class="eyebrow">Die drei Welten</p>
+                <h2 id="welten-title">Wähle eine Welt</h2>
+                <div class="worlds" data-hl-worlds style="margin-top:20px"></div>
+            </section>
+
+            <section class="block tight" aria-labelledby="achsen-title">
+                <p class="eyebrow">Drei Zugänge</p>
+                <h2 id="achsen-title" class="reading" style="margin-bottom:16px">Lesen, sehen, ausprobieren</h2>
+                <div class="axis-row">
+                    <div class="axis-cell">
+                        <h4><span class="sq" style="background:var(--world)"></span>Lesen</h4>
+                        <p class="muted">Artikel und Erklärungen, die ein Thema verständlich machen.</p>
+                    </div>
+                    <div class="axis-cell">
+                        <h4><span class="sq" style="background:var(--mind)"></span>Sehen</h4>
+                        <p class="muted">Landkarten und Visualisierungen, die Zusammenhänge zeigen.</p>
+                    </div>
+                    <div class="axis-cell">
+                        <h4><span class="sq" style="background:var(--body)"></span>Ausprobieren</h4>
+                        <p class="muted">Tools und Tests, die du direkt auf dich anwendest.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- 2. Die Gebiete als grosse Tueren -->
-        <section class="section" aria-labelledby="gebiete-title">
-            <div class="section__head">
-                <h2 id="gebiete-title">Wähle ein Gebiet</h2>
-            </div>
-            <div class="doors" data-hl-doors></div>
-        </section>
+            <section class="block" aria-labelledby="probieren-title">
+                <p class="eyebrow">Zum Ausprobieren</p>
+                <h2 id="probieren-title">Tools, die dich weiterbringen</h2>
+                <div class="cluster" data-hl-tools style="margin-top:20px"></div>
+            </section>
 
-        <!-- 3. Zum Ausprobieren -->
-        <section class="section" aria-labelledby="probieren-title">
-            <div class="section__head">
-                <h2 id="probieren-title">Zum Ausprobieren</h2>
-            </div>
-            <div class="related-grid" data-hl-tools></div>
-        </section>
+            <section class="block" aria-labelledby="neu-title">
+                <p class="eyebrow">Neu</p>
+                <h2 id="neu-title">Zuletzt hinzugefügt</h2>
+                <div class="cluster" data-hl-neu style="margin-top:20px"></div>
+            </section>
 
-        <!-- 4. Neu -->
-        <section class="section" aria-labelledby="neu-title">
-            <div class="section__head">
-                <h2 id="neu-title">Neu</h2>
-            </div>
-            <div class="related-grid" data-hl-neu></div>
-        </section>
+            <section class="block tight" aria-labelledby="nl-title">
+                <p class="eyebrow">Newsletter</p>
+                <h2 id="nl-title">Bleib neugierig</h2>
+                <p class="muted" style="margin-top:8px">Einmal die Woche eine Idee zum Weiterdenken. Kein Spam,
+                    jederzeit abbestellbar.</p>
+                <form class="stack" style="max-width:420px;margin-top:14px" onsubmit="return false">
+                    <input class="ui" type="email" required placeholder="deine@email.de"
+                        aria-label="E-Mail-Adresse"
+                        style="padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink)">
+                    <button class="btn" type="submit" style="justify-self:start">Anmelden</button>
+                </form>
+            </section>
+        </div>
 
-        <!-- 5. Mission -->
-        <section class="mission" aria-labelledby="mission-title">
-            <h2 id="mission-title">Wissen für Wachstum und Reflexion</h2>
-            <p>Wir sammeln, was hilft, den Menschen zu verstehen, verständlich erklärt und zum Ausprobieren gemacht.
-                Der mentale Bereich ist jetzt da. Der körperliche folgt.</p>
-        </section>
-
-        <!-- 6. Newsletter -->
-        <section class="newsletter" aria-labelledby="nl-title">
-            <h2 id="nl-title">Bleib neugierig</h2>
-            <p>Einmal die Woche eine Idee zum Weiterdenken. Kein Spam, jederzeit abbestellbar.</p>
-            <form class="newsletter__form" onsubmit="return false">
-                <input class="newsletter__input" type="email" required placeholder="deine@email.de"
-                    aria-label="E-Mail-Adresse">
-                <button class="btn btn--primary" type="submit">Anmelden</button>
-            </form>
-        </section>
-
-        <footer class="platform-footer">
-            <p>Hybridlog · Wissensplattform über den Menschen</p>
+        <footer>
+            <div class="wrap">Hybridlog · Wissensplattform über den Menschen</div>
         </footer>
     </main>
 
-    <script src="js/data.js?v=20260825"></script>
-    <script src="js/render.js?v=20260825"></script>
+    <script src="js/data.js?v=20260901"></script>
+    <script src="js/render.js?v=20260901"></script>
     <script>
         (function () {
             var D = window.HLData, R = window.HLRender;
-            // Gebiets-Tueren
-            document.querySelector('[data-hl-doors]').innerHTML = D.gebieteByDomaene('mental').map(function (g) {
-                var n = D.inhalteByGebiet(g.slug).length;
-                return '<a class="door" href="' + R.href('mental/gebiet.html?g=' + g.slug) + '" style="--area:var(' + g.farbeVar + ')">' +
-                    '<span class="door__tab"></span>' +
-                    '<span class="door__name">' + R.esc(g.name) + '</span>' +
-                    '<span class="door__intro">' + R.esc(g.einleitung) + '</span>' +
-                    '<span class="door__count">' + (n === 1 ? '1 Inhalt' : n + ' Inhalte') + '</span>' +
-                    '</a>';
+
+            // Weltkarten, alle drei Welten, BODY als "bald" ohne Link
+            document.querySelector('[data-hl-worlds]').innerHTML = D.WELTEN.map(function (w) {
+                var count = D.gebieteByWelt(w.slug, { onlyPublic: true }).length;
+                return R.worldCard(w, count);
             }).join('');
 
             // Zum Ausprobieren: handverlesene Tools quer durch die Gebiete
             var tools = D.INHALTE.filter(function (i) { return i.type === 'tool'; }).slice(0, 3);
             document.querySelector('[data-hl-tools]').innerHTML = tools.map(function (i) {
-                return R.related(i, D.gebietBySlug(i.gebiet));
+                return R.nodeCard(i, D.gebietBySlug(i.gebiet));
             }).join('');
 
             // Neu
             document.querySelector('[data-hl-neu]').innerHTML = D.neueste(3).map(function (i) {
-                return R.related(i, D.gebietBySlug(i.gebiet));
+                return R.nodeCard(i, D.gebietBySlug(i.gebiet));
             }).join('');
         })();
     </script>
-    <script src="js/theme.js?v=20260825"></script>
-    <script src="js/shell.js?v=20260825"></script>
+    <script src="js/theme.js?v=20260901"></script>
+    <script src="js/shell.js?v=20260901"></script>
 </body>
 
 </html>

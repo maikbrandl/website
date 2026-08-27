@@ -1,9 +1,16 @@
 /**
  * Hybridlog Plattform – Inhalte (Content Collections, vanilla)
  * Ersetzt Astro Content Collections durch eine statische Datenquelle.
- * window.HLData = { domaenen, gebiete, inhalte, helpers }
+ * window.HLData = { WELTEN, GEBIETE, INHALTE, helpers }
  *
- * gebiet:  { slug, name, farbeVar, domaene: 'mental'|'koerperlich', einleitung, reihenfolge }
+ * Taxonomie (Hybridlog Wissensplattform Masterplan): 3 Wissenswelten MIND/BODY/WORLD,
+ * darunter 17 Fachgebiete. Fachgebiete mit status:'draft'/visibility:'hidden' existieren
+ * bereits in der Taxonomie, sind aber noch nicht mit Inhalten gefuellt (siehe Masterplan
+ * §7-9: nicht alle Fachgebiete gleichzeitig fuellen, erst prominent zeigen ab Starter-Cluster).
+ *
+ * welt:    { slug: 'mind'|'body'|'world', name, leitidee, aktiv }
+ * gebiet:  { slug, name, farbeVar, welt, einleitung, reihenfolge, status: 'draft'|'active',
+ *            visibility: 'hidden'|'public' }
  * inhalt:  { slug, type: 'tool'|'artikel', gebiet, title, teaser, sneak, minutes, href }
  *   href = tatsaechliches Ziel (statische Seite, Blogbeitrag oder externes Tool)
  *   Blogbeitraege verlinken auf ../blog-artikel.html?slug=<dateiname-ohne-md>
@@ -11,41 +18,102 @@
 (function () {
     'use strict';
 
-    const DOMAENEN = [
-        { slug: 'mental', name: 'Mental', aktiv: true },
-        { slug: 'koerperlich', name: 'Körperlich', aktiv: false },
+    const WELTEN = [
+        { slug: 'mind', name: 'MIND', leitidee: 'Verstehe den Menschen.', aktiv: true },
+        { slug: 'body', name: 'BODY', leitidee: 'Verstehe deinen Körper.', aktiv: false },
+        { slug: 'world', name: 'WORLD', leitidee: 'Verstehe die Welt und die Ideen dahinter.', aktiv: true },
     ];
 
     const GEBIETE = [
+        // ── MIND · Mensch & Innenwelt ──
         {
-            slug: 'philosophie', name: 'Philosophie', farbeVar: '--area-philosophie', domaene: 'mental',
-            einleitung: 'Große Fragen nach Wahrheit, Sinn und dem guten Leben, verständlich gemacht.',
-            reihenfolge: 1,
+            slug: 'kognition-wahrnehmung', name: 'Kognition & Wahrnehmung', farbeVar: '--area-kognition-wahrnehmung', welt: 'mind',
+            einleitung: 'Wie wir denken, wahrnehmen, uns erinnern und Entscheidungen treffen.',
+            reihenfolge: 1, status: 'active', visibility: 'public',
         },
         {
-            slug: 'psychologie', name: 'Psychologie', farbeVar: '--area-psychologie', domaene: 'mental',
-            einleitung: 'Wie wir fühlen, entscheiden und uns verhalten, und was dahintersteckt.',
-            reihenfolge: 2,
+            slug: 'emotion-motivation', name: 'Emotion & Motivation', farbeVar: '--area-emotion-motivation', welt: 'mind',
+            einleitung: 'Gefühle, Bedürfnisse, Antrieb und wie wir uns selbst regulieren.',
+            reihenfolge: 2, status: 'active', visibility: 'public',
         },
         {
-            slug: 'lernen', name: 'Lernen und Lernmethoden', farbeVar: '--area-lernen', domaene: 'mental',
+            slug: 'persoenlichkeit-identitaet', name: 'Persönlichkeit & Identität', farbeVar: '--area-persoenlichkeit-identitaet', welt: 'mind',
+            einleitung: 'Persönlichkeitsmodelle, Selbstbild, Werte und was dich ausmacht.',
+            reihenfolge: 3, status: 'active', visibility: 'public',
+        },
+        {
+            slug: 'lernen-verhalten', name: 'Lernen & Verhalten', farbeVar: '--area-lernen-verhalten', welt: 'mind',
             einleitung: 'Methoden, die wirklich wirken, statt Tricks, die nur beschäftigt halten.',
-            reihenfolge: 3,
+            reihenfolge: 4, status: 'active', visibility: 'public',
         },
         {
-            slug: 'persoenliche-entwicklung', name: 'Persönliche Entwicklung', farbeVar: '--area-entwicklung', domaene: 'mental',
-            einleitung: 'Gewohnheiten, Disziplin und Reflexion als System, nicht als Zufall.',
-            reihenfolge: 4,
+            slug: 'beziehungen-sozialpsychologie', name: 'Beziehungen & Sozialpsychologie', farbeVar: '--area-beziehungen-sozialpsychologie', welt: 'mind',
+            einleitung: 'Bindung, Kommunikation, Vertrauen und wie Gruppen uns formen.',
+            reihenfolge: 5, status: 'active', visibility: 'public',
         },
         {
-            slug: 'kognition', name: 'Kognition und Gehirn', farbeVar: '--area-kognition', domaene: 'mental',
-            einleitung: 'Wie Aufmerksamkeit, Gedächtnis und Denkfehler unser Erleben formen.',
-            reihenfolge: 5,
+            slug: 'bewusstsein-selbst', name: 'Bewusstsein & Selbst', farbeVar: '--area-bewusstsein-selbst', welt: 'mind',
+            einleitung: 'Subjektives Erleben, Metakognition und Selbstwahrnehmung.',
+            reihenfolge: 6, status: 'active', visibility: 'public',
+        },
+
+        // ── BODY · Körper & Biologie (noch kein Starter-Cluster, bewusst hidden) ──
+        {
+            slug: 'gehirn-nervensystem', name: 'Gehirn & Nervensystem', farbeVar: '--area-gehirn-nervensystem', welt: 'body',
+            einleitung: 'Gehirnareale, Neuronen, Neurotransmitter und das Nervensystem.',
+            reihenfolge: 1, status: 'draft', visibility: 'hidden',
         },
         {
-            slug: 'zukunft-ki', name: 'Zukunft und KI', farbeVar: '--area-zukunft', domaene: 'mental',
-            einleitung: 'Was künstliche Intelligenz für Denken, Lernen und Alltag bedeutet.',
-            reihenfolge: 6,
+            slug: 'schlaf-chronobiologie', name: 'Schlaf & Chronobiologie', farbeVar: '--area-schlaf-chronobiologie', welt: 'body',
+            einleitung: 'Schlafphasen, circadianer Rhythmus und was guten Schlaf ausmacht.',
+            reihenfolge: 2, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'bewegung-leistungsphysiologie', name: 'Bewegung & Leistungsphysiologie', farbeVar: '--area-bewegung-leistungsphysiologie', welt: 'body',
+            einleitung: 'Kraft, Ausdauer, Regeneration und körperliche Anpassung.',
+            reihenfolge: 3, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'ernaehrung-stoffwechsel', name: 'Ernährung & Stoffwechsel', farbeVar: '--area-ernaehrung-stoffwechsel', welt: 'body',
+            einleitung: 'Energiehaushalt, Nährstoffe und Verdauung.',
+            reihenfolge: 4, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'hormone-regulation', name: 'Hormone & Regulation', farbeVar: '--area-hormone-regulation', welt: 'body',
+            einleitung: 'Hormonsystem und wie der Körper sich reguliert.',
+            reihenfolge: 5, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'gesundheit-praevention', name: 'Gesundheit & Prävention', farbeVar: '--area-gesundheit-praevention', welt: 'body',
+            einleitung: 'Gesundheitsfaktoren, Prävention und Langlebigkeit.',
+            reihenfolge: 6, status: 'draft', visibility: 'hidden',
+        },
+
+        // ── WORLD · Ideen & Wirklichkeit ──
+        {
+            slug: 'philosophie', name: 'Philosophie', farbeVar: '--area-philosophie', welt: 'world',
+            einleitung: 'Große Fragen nach Wahrheit, Sinn und dem guten Leben, verständlich gemacht.',
+            reihenfolge: 1, status: 'active', visibility: 'public',
+        },
+        {
+            slug: 'naturwissenschaft', name: 'Naturwissenschaft', farbeVar: '--area-naturwissenschaft', welt: 'world',
+            einleitung: 'Physik, Evolution und die Gesetze, die die Wirklichkeit formen.',
+            reihenfolge: 2, status: 'active', visibility: 'public',
+        },
+        {
+            slug: 'gesellschaft-systeme', name: 'Gesellschaft & Systeme', farbeVar: '--area-gesellschaft-systeme', welt: 'world',
+            einleitung: 'Soziologie, Ökonomie und wie menschliche Systeme funktionieren.',
+            reihenfolge: 3, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'geschichte-kultur', name: 'Geschichte & Kultur', farbeVar: '--area-geschichte-kultur', welt: 'world',
+            einleitung: 'Ideengeschichte, Zivilisationen und kultureller Wandel.',
+            reihenfolge: 4, status: 'draft', visibility: 'hidden',
+        },
+        {
+            slug: 'technologie-zukunft', name: 'Technologie & Zukunft', farbeVar: '--area-technologie-zukunft', welt: 'world',
+            einleitung: 'Künstliche Intelligenz, Zukunftsfragen und was sie für uns bedeuten.',
+            reihenfolge: 5, status: 'active', visibility: 'public',
         },
     ];
 
@@ -68,7 +136,7 @@
             href: '../tools/philosophie/',
         },
         {
-            slug: 'illusion-der-zeit', type: 'artikel', gebiet: 'philosophie', date: '2026-06-10',
+            slug: 'illusion-der-zeit', type: 'artikel', gebiet: 'naturwissenschaft', date: '2026-06-10',
             title: 'Die Illusion der Zeit, warum du sie nie wirklich erlebt hast',
             teaser: 'Warum wir die Gegenwart nie direkt erleben und was das für unser Zeitgefühl bedeutet.',
             sneak: 'Was wir Gegenwart nennen, ist immer schon einen Moment vergangen.',
@@ -86,7 +154,7 @@
 
         // ── Psychologie ──
         {
-            slug: 'human-map', type: 'tool', gebiet: 'psychologie',
+            slug: 'human-map', type: 'tool', gebiet: 'bewusstsein-selbst',
             title: 'Human Map',
             teaser: 'Ein wissenschaftlich gestütztes Selbstbild aus sechs Ebenen.',
             sneak: 'Ein Fragebogen zeichnet deine innere Landkarte, datenbasiert.',
@@ -94,7 +162,7 @@
             href: '../human-map/',
         },
         {
-            slug: 'metakognition', type: 'artikel', gebiet: 'psychologie', date: '2026-03-01',
+            slug: 'metakognition', type: 'artikel', gebiet: 'bewusstsein-selbst', date: '2026-03-01',
             title: 'Metakognition, Gedanken beobachten statt kontrolliert werden',
             teaser: 'Wie du lernst, deine Gedanken zu bemerken, statt dich von ihnen treiben zu lassen.',
             sneak: 'Wer seine Gedanken bemerkt, ist ihnen weniger ausgeliefert.',
@@ -102,7 +170,7 @@
             href: '../blog-artikel.html?slug=2026-03-01-willkommen-im-hybridlogs-blog',
         },
         {
-            slug: 'mehr-optionen', type: 'artikel', gebiet: 'psychologie', date: '2026-06-14',
+            slug: 'mehr-optionen', type: 'artikel', gebiet: 'kognition-wahrnehmung', date: '2026-06-14',
             title: 'Warum mehr Optionen dich nicht weiterbringen',
             teaser: 'Warum mehr Auswahl oft lähmt statt befreit, und was wirklich hilft.',
             sneak: 'Zu viele Optionen führen zu Zögern statt zu besseren Entscheidungen.',
@@ -110,7 +178,7 @@
             href: '../blog-artikel.html?slug=2026-06-14-warum-mehr-optionen-dich-nicht-weiterbringen',
         },
         {
-            slug: 'denkfehler-18', type: 'artikel', gebiet: 'psychologie', date: '2026-07-30',
+            slug: 'denkfehler-18', type: 'artikel', gebiet: 'kognition-wahrnehmung', date: '2026-07-30',
             title: '18 Denkfehler, die deine Entscheidungen heimlich sabotieren',
             teaser: 'Achtzehn kognitive Verzerrungen, die deine Entscheidungen unbemerkt lenken.',
             sneak: 'Kleine Denkfehler mit großer Wirkung auf dein Urteil.',
@@ -118,7 +186,7 @@
             href: '../blog-artikel.html?slug=2026-07-30-18-denkfehler-die-deine-entscheidungen-heimlich-sabotieren',
         },
         {
-            slug: 'carl-jung', type: 'artikel', gebiet: 'psychologie', date: '2026-07-30',
+            slug: 'carl-jung', type: 'artikel', gebiet: 'persoenlichkeit-identitaet', date: '2026-07-30',
             title: 'Carl Jung einfach erklärt, der Schatten als Lehrer',
             teaser: 'Warum der verdrängte Teil von dir dein größter Lehrer sein kann.',
             sneak: 'Was wir an uns verstecken, wirkt weiter, bis wir hinsehen.',
@@ -126,7 +194,7 @@
             href: '../blog-artikel.html?slug=2026-07-30-carl-jung-einfach-erklärt-warum-der-teil-von-dir-den-du-versteckst-dein-größter-lehrer-ist',
         },
         {
-            slug: 'mbti-16', type: 'artikel', gebiet: 'psychologie', date: '2026-07-30',
+            slug: 'mbti-16', type: 'artikel', gebiet: 'persoenlichkeit-identitaet', date: '2026-07-30',
             title: 'Die 16 MBTI-Persönlichkeitstypen, welcher bist du wirklich?',
             teaser: 'Die 16 Typen im Überblick und wie viel sie wirklich über dich aussagen.',
             sneak: 'Vier Gegensatzpaare ergeben die bekannten sechzehn Typen.',
@@ -134,7 +202,7 @@
             href: '../blog-artikel.html?slug=2026-07-30-die-16-mbti-persönlichkeitstypen-welcher-bist-du-wirklich-1',
         },
         {
-            slug: 'psychologie-experimente', type: 'artikel', gebiet: 'psychologie', date: '2026-08-03',
+            slug: 'psychologie-experimente', type: 'artikel', gebiet: 'beziehungen-sozialpsychologie', date: '2026-08-03',
             title: 'Die berühmtesten Psychologie-Experimente',
             teaser: 'Die bekanntesten Experimente der Psychologie und was sie über uns verraten.',
             sneak: 'Studien, die unser Bild vom Menschen für immer verändert haben.',
@@ -142,7 +210,7 @@
             href: '../blog-artikel.html?slug=2026-08-03-die-berühmtesten-psychologie-experimente-die-dein-bild-vom-menschen-für-immer-verändern',
         },
         {
-            slug: 'grosse-psychologen', type: 'artikel', gebiet: 'psychologie', date: '2026-08-03',
+            slug: 'grosse-psychologen', type: 'artikel', gebiet: 'persoenlichkeit-identitaet', date: '2026-08-03',
             title: 'Die großen Psychologen und ihre Theorien',
             teaser: 'Zwölf große Ideen der Psychologie, die erklären, warum du tickst, wie du tickst.',
             sneak: 'Von Freud bis heute, die Theorien hinter deinem Verhalten.',
@@ -152,7 +220,7 @@
 
         // ── Lernen ──
         {
-            slug: 'active-recall', type: 'artikel', gebiet: 'lernen', date: '2026-06-02',
+            slug: 'active-recall', type: 'artikel', gebiet: 'lernen-verhalten', date: '2026-06-02',
             title: 'Active Recall, die effektivste Lernmethode erklärt',
             teaser: 'Warum aktives Abrufen dem Wiederlesen klar überlegen ist, mit Belegen aus der Forschung.',
             sneak: 'Sich selbst abfragen schlägt das erneute Durchlesen deutlich.',
@@ -160,7 +228,7 @@
             href: '../blog-artikel.html?slug=2026-06-02-active-recall-die-effektivste-lernmethode-erklärt-1',
         },
         {
-            slug: 'hochleistungslerner', type: 'artikel', gebiet: 'lernen', date: '2026-06-08',
+            slug: 'hochleistungslerner', type: 'artikel', gebiet: 'lernen-verhalten', date: '2026-06-08',
             title: 'Was Hochleistungslerner anders machen, 5 Gewohnheiten',
             teaser: 'Fünf Gewohnheiten, die gute Lerner von bloß fleißigen unterscheiden.',
             sneak: 'Nicht mehr Stunden, sondern bessere Methoden machen den Unterschied.',
@@ -170,7 +238,7 @@
 
         // ── Persönliche Entwicklung ──
         {
-            slug: 'disziplin-system', type: 'artikel', gebiet: 'persoenliche-entwicklung', date: '2026-06-23',
+            slug: 'disziplin-system', type: 'artikel', gebiet: 'lernen-verhalten', date: '2026-06-23',
             title: 'Disziplin ist kein Charakterzug, sondern ein System',
             teaser: 'Warum Disziplin kein Charakterzug ist, sondern ein System, das man baut.',
             sneak: 'Nicht Willenskraft entscheidet, sondern die Umgebung und die Routine.',
@@ -178,7 +246,7 @@
             href: '../blog-artikel.html?slug=2026-06-23-disziplin-ist-kein-charakterzug-warum-sie-ein-system-ist-und-wie-du-es-aufbaust',
         },
         {
-            slug: 'entspannen-zwang', type: 'artikel', gebiet: 'persoenliche-entwicklung', date: '2026-06-23',
+            slug: 'entspannen-zwang', type: 'artikel', gebiet: 'emotion-motivation', date: '2026-06-23',
             title: 'Warum du nur entspannen kannst, wenn du dazu gezwungen wirst',
             teaser: 'Warum echte Erholung so schwerfällt und erst der Zwang uns zur Ruhe bringt.',
             sneak: 'Wer nie abschaltet, entspannt meist erst, wenn er muss.',
@@ -186,7 +254,7 @@
             href: '../blog-artikel.html?slug=2026-06-23-warum-du-nur-entspannen-kannst-wenn-du-dazu-gezwungen-wirst',
         },
         {
-            slug: '21-tage-mythos', type: 'artikel', gebiet: 'persoenliche-entwicklung', date: '2026-07-13',
+            slug: '21-tage-mythos', type: 'artikel', gebiet: 'lernen-verhalten', date: '2026-07-13',
             title: 'Der 21-Tage-Mythos, warum Gewohnheiten länger brauchen',
             teaser: 'Warum neue Gewohnheiten viel länger brauchen als die berühmten 21 Tage.',
             sneak: 'Die 21-Tage-Regel ist ein Missverständnis, die Wahrheit ist geduldiger.',
@@ -194,7 +262,7 @@
             href: '../blog-artikel.html?slug=2026-07-13-der-21-tage-mythos-warum-neue-gewohnheiten-so-viel-länger-brauchen-als-du-denkst',
         },
         {
-            slug: 'potenzial-flow-ikigai', type: 'artikel', gebiet: 'persoenliche-entwicklung', date: '2026-08-03',
+            slug: 'potenzial-flow-ikigai', type: 'artikel', gebiet: 'emotion-motivation', date: '2026-08-03',
             title: 'Dein volles Potenzial entfalten, Flow, Ikigai und Selbstwert',
             teaser: 'Wie Flow, Ikigai und echtes Selbstwertgefühl zusammen dein Potenzial entfalten.',
             sneak: 'Drei Ideen, wie sinnvolles Arbeiten und Wohlbefinden entstehen.',
@@ -204,7 +272,7 @@
 
         // ── Kognition und Gehirn ──
         {
-            slug: 'blockuniversum', type: 'tool', gebiet: 'kognition',
+            slug: 'blockuniversum', type: 'tool', gebiet: 'naturwissenschaft',
             title: 'Das Blockuniversum',
             teaser: 'Warum deine Zukunft in gewissem Sinn schon existiert, eine Reise durch die Raumzeit.',
             sneak: 'Von der Relativitätstheorie bis zu Manifestation und Veränderung.',
@@ -212,7 +280,7 @@
             href: '../tools/blockuniversum/',
         },
         {
-            slug: 'deep-work', type: 'artikel', gebiet: 'kognition', date: '2026-06-09',
+            slug: 'deep-work', type: 'artikel', gebiet: 'kognition-wahrnehmung', date: '2026-06-09',
             title: 'Deep Work, was hinter dem Flow-Zustand steckt',
             teaser: 'Was hinter dem Flow-Zustand steckt und wie du ihn gezielt auslöst.',
             sneak: 'Flow braucht klare Ziele, sofortiges Feedback und die richtige Schwierigkeit.',
@@ -220,7 +288,7 @@
             href: '../blog-artikel.html?slug=2026-06-09-deep-work-was-hat-es-denn-mit-dem-flow-zustand-auf-sich-und-wie-aktiviert-man-ihn',
         },
         {
-            slug: 'gehirn-erinnerungen', type: 'artikel', gebiet: 'kognition', date: '2026-07-13',
+            slug: 'gehirn-erinnerungen', type: 'artikel', gebiet: 'kognition-wahrnehmung', date: '2026-07-13',
             title: 'Dein Gehirn zählt keine Tage, sondern Erinnerungen',
             teaser: 'Warum die Zeit im Alltag rast und wie neue Erinnerungen sie wieder dehnen.',
             sneak: 'Dein Gehirn misst Zeit in Erinnerungen, nicht in Tagen.',
@@ -230,7 +298,7 @@
 
         // ── Zukunft und KI ──
         {
-            slug: 'emergenz-effekt', type: 'artikel', gebiet: 'zukunft-ki', date: '2026-07-30',
+            slug: 'emergenz-effekt', type: 'artikel', gebiet: 'technologie-zukunft', date: '2026-07-30',
             title: 'Emergenz-Effekt, warum sich Bewusstsein kaum nachbauen lässt',
             teaser: 'Warum dein Gehirn keine Festplatte ist und Bewusstsein sich vielleicht nie nachbauen lässt.',
             sneak: 'Aus dem Zusammenspiel vieler Teile entsteht etwas, das keiner allein erklärt.',
@@ -250,10 +318,22 @@
         return INHALTE
             .filter((i) => i.gebiet === slug && (!type || i.type === type));
     }
-    function gebieteByDomaene(domaene) {
+    function weltBySlug(slug) {
+        return WELTEN.find((w) => w.slug === slug) || null;
+    }
+    function gebieteByWelt(welt, opts) {
+        const onlyPublic = opts && opts.onlyPublic;
         return GEBIETE
-            .filter((g) => g.domaene === domaene)
+            .filter((g) => g.welt === welt && (!onlyPublic || g.visibility === 'public'))
             .sort((a, b) => a.reihenfolge - b.reihenfolge);
+    }
+    function publicGebiete() {
+        // Alle sichtbaren Fachgebiete, sortiert nach aktiver Wissenswelt-Reihenfolge, dann Fachgebiet.
+        const weltIndex = {};
+        WELTEN.forEach((w, i) => { weltIndex[w.slug] = i; });
+        return GEBIETE
+            .filter((g) => g.visibility === 'public')
+            .sort((a, b) => (weltIndex[a.welt] - weltIndex[b.welt]) || (a.reihenfolge - b.reihenfolge));
     }
     function neueste(n) {
         // Neueste zuerst nach Datum, Eintraege ohne Datum (Tools) ans Ende.
@@ -263,7 +343,7 @@
     }
 
     window.HLData = {
-        DOMAENEN, GEBIETE, INHALTE,
-        gebietBySlug, inhaltBySlug, inhalteByGebiet, gebieteByDomaene, neueste,
+        WELTEN, GEBIETE, INHALTE,
+        gebietBySlug, inhaltBySlug, inhalteByGebiet, weltBySlug, gebieteByWelt, publicGebiete, neueste,
     };
 })();

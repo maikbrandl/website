@@ -25,9 +25,13 @@ const HybridlogsComponents = (() => {
                 { label: 'Workout Logbuch', href: 'workoutlogbuch.html', id: 'workoutlogbuch' },
             ]
         },
-        { label: 'Blog', href: 'blog.html', id: 'blog' },
-        { label: 'Tools', href: 'tools/', id: 'tools' },
-        { label: 'Wissen', href: 'plattform/', id: 'plattform' },
+        {
+            label: 'Wissensraum', href: 'plattform/', id: 'plattform',
+            children: [
+                { label: 'Blog', href: 'blog.html', id: 'blog' },
+                { label: 'Tools', href: 'tools/', id: 'tools' },
+            ]
+        },
         { label: 'Über uns', href: 'index.html#story', id: 'about' },
     ];
 
@@ -79,22 +83,25 @@ const HybridlogsComponents = (() => {
         const pageId = getPageId();
         const isProductPage = ['studienplaner', 'notizbuch', 'lernjournal', 'workoutlogbuch'].includes(pageId);
 
+        const isKnowledgePage = ['blog', 'blog-artikel', 'tools', 'plattform'].includes(pageId);
+
         const navLinksHTML = NAV_ITEMS.map(item => {
             const isActive =
                 item.id === pageId ||
                 (item.id === 'home' && pageId === 'index') ||
                 (item.id === 'blog' && pageId === 'blog-artikel');
             const isProductDropdown = item.children && isProductPage;
+            const isKnowledgeDropdown = item.id === 'plattform' && item.children && isKnowledgePage;
 
             if (item.children) {
                 const childrenHTML = item.children.map(child => {
-                    const childActive = child.id === pageId;
+                    const childActive = child.id === pageId || (child.id === 'blog' && pageId === 'blog-artikel');
                     return `<li><a href="${child.href}" ${childActive ? 'class="active"' : ''}>${child.label}</a></li>`;
                 }).join('');
 
                 return `
                     <li class="dropdown">
-                        <a href="${item.href}" class="dropdown-toggle ${isProductDropdown ? 'active' : ''}">${item.label} ${icon('chevronDown', 'chevron')}</a>
+                        <a href="${item.href}" class="dropdown-toggle ${isProductDropdown || isKnowledgeDropdown ? 'active' : ''}">${item.label} ${icon('chevronDown', 'chevron')}</a>
                         <ul class="dropdown-menu">${childrenHTML}</ul>
                     </li>`;
             }

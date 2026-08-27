@@ -39,3 +39,38 @@ collections:
         hint: "Artikel auswählen, der am Ende des Beitrags als Vorschau erscheint"
       - { label: "Weiterer Artikel – Titel (optional überschreiben)", name: "related_post_title", widget: "string", required: false }
       - { label: "Weiterer Artikel – Teaser (optional überschreiben)", name: "related_post_excerpt", widget: "text", required: false }
+
+  - name: "fachgebiete"
+    label: "Fachgebiete (Wissensplattform)"
+    folder: "content/fachgebiete"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Titel", name: "title", widget: "string", hint: "z.B. Kognition & Wahrnehmung" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "z.B. kognition-wahrnehmung" }
+      - label: "Wissenswelt"
+        name: "world"
+        widget: "select"
+        options:
+          - { label: "MIND", value: "mind" }
+          - { label: "BODY", value: "body" }
+          - { label: "WORLD", value: "world" }
+      - { label: "Beschreibung", name: "description", widget: "text" }
+      - { label: "Reihenfolge innerhalb der Welt", name: "order", widget: "number", default: 1 }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "In Planung (draft)", value: "draft" }
+          - { label: "Wird aktiv aufgebaut (active)", value: "active" }
+        default: "draft"
+      - label: "Sichtbarkeit"
+        name: "visibility"
+        widget: "select"
+        options:
+          - { label: "Intern, noch nicht prominent (hidden)", value: "hidden" }
+          - { label: "Öffentlich (public)", value: "public" }
+        default: "hidden"
+      - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
+      - { label: "Meta-Beschreibung", name: "meta_description", widget: "text", required: false }

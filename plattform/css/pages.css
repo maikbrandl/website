@@ -324,6 +324,28 @@
 }
 
 /* ── Gebiets-Tueren (Startseite) ── */
+.doors-group {
+    margin-bottom: var(--sp-6);
+}
+
+.doors-group:last-child {
+    margin-bottom: 0;
+}
+
+.doors-group__heading {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: .02em;
+    margin-bottom: var(--sp-3);
+}
+
+.doors-group__lead {
+    color: var(--text-muted);
+    font-size: .88rem;
+    margin: -.5em 0 var(--sp-3);
+}
+
 .doors {
     display: grid;
     grid-template-columns: 1fr;

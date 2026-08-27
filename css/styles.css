@@ -35,37 +35,47 @@
 }
 
 /* ====================== 2. Design Tokens ====================== */
+/* Konzept 1 "Warm Teal & Amber" (Hybridlog Farbkonzept). Neutrals mit
+   warmem/gruenlichem Unterton statt reinem Schwarz-Grau. Primaerakzent =
+   Teal (--gold, Name beibehalten fuer Kompatibilitaet), Sekundaerakzent =
+   Amber/Gold fuer Highlights (z.B. Sterne-Bewertung). */
 :root {
     /* ── Color Palette ── */
-    --black: #050505;
-    --bg: #0a0a0a;
-    --bg-elevated: #111111;
-    --bg-card: #141414;
-    --bg-card-hover: #191919;
-    --surface: #1a1a1a;
-    --border: #222222;
-    --border-light: #2a2a2a;
-    --border-hover: #3a3a3a;
+    --black: #070806;
+    --bg: #0b0c0b;
+    --bg-elevated: #111312;
+    --bg-card: #171915;
+    --bg-card-hover: #1d201b;
+    --surface: #1d201b;
+    --border: #2a2d27;
+    --border-light: #363a32;
+    --border-hover: #454a3f;
 
     /* Neutrals */
-    --gray-900: #1a1a1a;
-    --gray-800: #2a2a2a;
-    --gray-700: #3a3a3a;
-    --gray-600: #555555;
-    --gray-500: #777777;
-    --gray-400: #999999;
-    --gray-300: #bbbbbb;
-    --gray-200: #dddddd;
-    --gray-100: #f0f0f0;
-    --white: #ffffff;
+    --gray-900: #171915;
+    --gray-800: #2a2d27;
+    --gray-700: #454a3f;
+    --gray-600: #6b6f63;
+    --gray-500: #8b8b7e;
+    --gray-400: #a9a79d;
+    --gray-300: #c7c5ba;
+    --gray-200: #dedcd1;
+    --gray-100: #f1efe6;
+    --white: #f1efe6;
 
-    /* Brand Gold */
-    --gold: #c9a84c;
-    --gold-light: #dfc47a;
-    --gold-lighter: #f0dfa3;
-    --gold-dark: #a68935;
-    --gold-glow: rgba(201, 168, 76, 0.15);
-    --gold-glow-strong: rgba(201, 168, 76, 0.25);
+    /* Primaerakzent Teal (Variablenname --gold beibehalten) */
+    --gold: #5faf9f;
+    --gold-light: #7fc0b3;
+    --gold-lighter: #a9d6cc;
+    --gold-dark: #4b9588;
+    --gold-glow: rgba(95, 175, 159, 0.15);
+    --gold-glow-strong: rgba(95, 175, 159, 0.25);
+
+    /* Sekundaerakzent Amber (Highlights, z.B. Bewertungssterne) */
+    --amber: #d4a24a;
+    --amber-light: #e8d7a6;
+    --amber-dark: #b4882e;
+    --amber-glow: rgba(212, 162, 74, 0.15);
 
     /* Amazon */
     --amazon: #ff9900;
@@ -76,7 +86,8 @@
     --error: #ef4444;
 
     /* ── Typography ── */
-    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body: 'Source Serif 4', 'Georgia', serif;
     --font-display: 'Playfair Display', 'Georgia', serif;
 
     /* Type Scale (Major Third 1.25) */
@@ -123,8 +134,8 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
     --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.6);
-    --shadow-gold: 0 4px 25px rgba(201, 168, 76, 0.2);
-    --shadow-glow: 0 0 40px rgba(201, 168, 76, 0.1);
+    --shadow-gold: 0 4px 25px rgba(95, 175, 159, 0.2);
+    --shadow-glow: 0 0 40px rgba(95, 175, 159, 0.1);
 
     /* ── Transitions ── */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -149,7 +160,7 @@ html {
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-weight: 400;
     color: var(--gray-300);
     background-color: var(--bg);
@@ -522,8 +533,8 @@ h1, h2, h3, h4, h5 {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 40%),
+        radial-gradient(ellipse at 20% 50%, rgba(95, 175, 159, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(95, 175, 159, 0.04) 0%, transparent 40%),
         linear-gradient(180deg, transparent 60%, var(--bg) 100%);
     z-index: 1;
     pointer-events: none;
@@ -555,7 +566,7 @@ h1, h2, h3, h4, h5 {
     gap: var(--space-2);
     padding: var(--space-2) var(--space-5);
     background: var(--gold-glow);
-    border: 1px solid rgba(201, 168, 76, 0.2);
+    border: 1px solid rgba(95, 175, 159, 0.2);
     border-radius: var(--radius-full);
     font-size: var(--text-xs);
     font-weight: 600;
@@ -684,7 +695,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .product-card:hover {
-    border-color: rgba(201, 168, 76, 0.3);
+    border-color: rgba(95, 175, 159, 0.3);
     transform: translateY(-8px);
     box-shadow: var(--shadow-xl), var(--shadow-glow);
 }
@@ -802,7 +813,7 @@ h1, h2, h3, h4, h5 {
 .stars {
     display: inline-flex;
     gap: 2px;
-    color: var(--gold);
+    color: var(--amber);
     margin-bottom: var(--space-4);
 }
 
@@ -1084,7 +1095,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .pillar:hover {
-    border-color: rgba(201, 168, 76, 0.3);
+    border-color: rgba(95, 175, 159, 0.3);
     box-shadow: var(--shadow-glow);
 }
 
@@ -2096,7 +2107,7 @@ h1, h2, h3, h4, h5 {
     text-transform: uppercase;
     background: var(--gold-glow);
     color: var(--gold-light);
-    border: 1px solid rgba(201, 168, 76, 0.3);
+    border: 1px solid rgba(95, 175, 159, 0.3);
     margin-bottom: var(--space-8);
 }
 
@@ -2272,7 +2283,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 700;
     color: var(--gold);
     background: var(--gold-glow);
-    border: 1px solid rgba(201,168,76,0.25);
+    border: 1px solid rgba(95,175,159,0.25);
     border-radius: var(--radius-sm);
     width: 22px;
     height: 22px;
@@ -2295,7 +2306,7 @@ h1, h2, h3, h4, h5 {
 .prose a {
     color: var(--gold);
     text-decoration: underline;
-    text-decoration-color: rgba(201,168,76,0.4);
+    text-decoration-color: rgba(95,175,159,0.4);
     text-underline-offset: 3px;
     transition: text-decoration-color var(--duration), color var(--duration);
 }
@@ -2379,7 +2390,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .related-post-card:hover {
-    border-color: rgba(201, 168, 76, 0.35);
+    border-color: rgba(95, 175, 159, 0.35);
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
@@ -2504,8 +2515,8 @@ h1, h2, h3, h4, h5 {
     gap: var(--space-4);
     margin-bottom: var(--space-6);
     padding: var(--space-4) var(--space-5);
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.18);
+    background: rgba(95,175,159,0.06);
+    border: 1px solid rgba(95,175,159,0.18);
     border-radius: var(--radius);
 }
 

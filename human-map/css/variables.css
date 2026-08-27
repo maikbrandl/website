@@ -1,35 +1,35 @@
 /* ===================================================================
    HUMAN MAP – Design Tokens
    Adapted from Hybridlogs website design system.
-   Fonts: Playfair Display (display) + Inter (body) – already loaded site-wide.
+   Fonts: Playfair Display (display) + IBM Plex Sans (body) – already loaded site-wide.
    === */
 
 :root {
-    /* ── Backgrounds (match site) ── */
-    --hm-bg:          #0a0a0a;
-    --hm-bg-elevated: #111111;
-    --hm-bg-card:     #141414;
-    --hm-bg-hover:    #191919;
-    --hm-surface:     #1a1a1a;
+    /* ── Backgrounds (aligned with hybridlogs.de main site, Konzept 1) ── */
+    --hm-bg:          #0b0c0b;
+    --hm-bg-elevated: #111312;
+    --hm-bg-card:     #171915;
+    --hm-bg-hover:    #1d201b;
+    --hm-surface:     #1d201b;
 
-    /* ── Borders (match site) ── */
-    --hm-border:       #222222;
-    --hm-border-light: #2a2a2a;
-    --hm-border-hover: #3a3a3a;
+    /* ── Borders (aligned with main site) ── */
+    --hm-border:       #2a2d27;
+    --hm-border-light: #363a32;
+    --hm-border-hover: #454a3f;
 
     /* ── Text ── */
-    --hm-text:        #bbbbbb;  /* --gray-300 */
-    --hm-text-dim:    #777777;  /* --gray-500 */
-    --hm-text-muted:  #555555;  /* --gray-600 */
-    --hm-white:       #ffffff;
+    --hm-text:        #c7c5ba;  /* --gray-300 */
+    --hm-text-dim:    #8b8b7e;  /* --gray-500 */
+    --hm-text-muted:  #6b6f63;  /* --gray-600 */
+    --hm-white:       #f1efe6;
 
-    /* ── Brand Gold (matches site --gold) ── */
-    --hm-gold:            #c9a84c;
-    --hm-gold-light:      #dfc47a;
-    --hm-gold-lighter:    #f0dfa3;
-    --hm-gold-dark:       #a68935;
-    --hm-gold-glow:       rgba(201, 168, 76, 0.15);
-    --hm-gold-glow-strong:rgba(201, 168, 76, 0.30);
+    /* ── Brand Teal (matches site --gold, formerly a gold/mustard tone) ── */
+    --hm-gold:            #5faf9f;
+    --hm-gold-light:      #7fc0b3;
+    --hm-gold-lighter:    #a9d6cc;
+    --hm-gold-dark:       #4b9588;
+    --hm-gold-glow:       rgba(95, 175, 159, 0.15);
+    --hm-gold-glow-strong:rgba(95, 175, 159, 0.30);
 
     /* ── Dimension Colors (RPG node palette) ── */
     --c-offenheit:    #8b7cf8;   /* violet  – KERN */
@@ -69,7 +69,7 @@
     --arch-synergy:    #c9a84c;
 
     /* ── Typography (match site) ── */
-    --hm-font-sans:    'Inter', system-ui, sans-serif;
+    --hm-font-sans:    'IBM Plex Sans', system-ui, sans-serif;
     --hm-font-display: 'Playfair Display', Georgia, serif;
 
     /* ── Spacing ── */
@@ -97,8 +97,8 @@
     /* ── Shadows ── */
     --hm-shadow-md:   0 4px 12px rgba(0,0,0,0.4);
     --hm-shadow-lg:   0 8px 30px rgba(0,0,0,0.5);
-    --hm-shadow-gold: 0 4px 25px rgba(201,168,76,0.2);
-    --hm-shadow-glow: 0 0 40px rgba(201,168,76,0.12);
+    --hm-shadow-gold: 0 4px 25px rgba(95,175,159,0.2);
+    --hm-shadow-glow: 0 0 40px rgba(95,175,159,0.12);
 
     /* ── Transitions ── */
     --hm-ease:    cubic-bezier(0.16, 1, 0.3, 1);

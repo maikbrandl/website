@@ -3,7 +3,7 @@
    Adapted from hybridlogs.de dark design system
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 *, *::before, *::after {
     margin: 0;
@@ -12,33 +12,33 @@
 }
 
 :root {
-    /* Dark Background */
-    --bg:              #0a0a0a;
-    --bg-elevated:     #111111;
-    --bg-card:         #141414;
-    --bg-card-hover:   #1a1a1a;
-    --surface:         #1e1e1e;
+    /* Dark Background — aligned with hybridlogs.de main site (Konzept 1) */
+    --bg:              #0b0c0b;
+    --bg-elevated:     #111312;
+    --bg-card:         #171915;
+    --bg-card-hover:   #1d201b;
+    --surface:         #1d201b;
 
     /* Borders */
     --border:          rgba(255, 255, 255, 0.07);
-    --border-solid:    #2a2a2a;
+    --border-solid:    #2a2d27;
     --border-hover:    rgba(255, 255, 255, 0.14);
 
     /* Text */
-    --text:            #f0f0f0;
-    --text-dim:        #bbbbbb;
-    --text-secondary:  #888888;
-    --text-muted:      #555555;
+    --text:            #f1efe6;
+    --text-dim:        #c7c5ba;
+    --text-secondary:  #8b8b7e;
+    --text-muted:      #6b6f63;
 
-    /* Gold Accent */
-    --gold:            #c9a84c;
-    --gold-light:      #dfc47a;
-    --gold-dark:       #a68935;
-    --gold-glow:       rgba(201, 168, 76, 0.15);
-    --gold-glow-strong: rgba(201, 168, 76, 0.25);
+    /* Teal Accent (aligned with hybridlogs.de main site) */
+    --gold:            #5faf9f;
+    --gold-light:      #7fc0b3;
+    --gold-dark:       #4b9588;
+    --gold-glow:       rgba(95, 175, 159, 0.15);
+    --gold-glow-strong: rgba(95, 175, 159, 0.25);
 
-    /* Typography */
-    --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+    /* Typography — aligned with hybridlogs.de main site */
+    --font-body:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
     --font-display: 'Playfair Display', Georgia, serif;
 
     /* Spacing */
@@ -96,6 +96,28 @@ body {
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+
+/* ── Global site nav (Home/Produkte/Wissensraum/Über uns) ── */
+.global-nav {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+.global-nav a {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: var(--radius-full, 999px);
+    transition: background var(--duration), color var(--duration);
+}
+.global-nav a:hover { color: var(--text); background: var(--bg-card-hover); }
+.global-nav a.active { color: var(--gold); }
+@media (max-width: 720px) {
+    .global-nav { display: none; }
+}
 
 /* ── Layout ── */
 .container {

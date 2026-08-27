@@ -1,7 +1,7 @@
 /* ===================================================================
    HUMAN MAP – Base / Shared Styles
    === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @import 'variables.css';
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -77,6 +77,31 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
     color: var(--hm-text-dim);
 }
 .hm-header__nav a:hover { color: var(--hm-text); }
+
+/* Global site nav (Home/Produkte/Wissensraum/Über uns) prepended to the
+   task-specific nav; hidden on small screens to avoid crowding the
+   existing 3-link contextual nav, which already wraps there. */
+.hm-header__nav .hm-global-link {
+    font-family: var(--hm-font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--hm-text-dim);
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    transition: color var(--hm-dur) var(--hm-ease), background var(--hm-dur) var(--hm-ease);
+}
+.hm-header__nav .hm-global-link:hover { color: var(--hm-white); background: var(--hm-bg-hover); }
+.hm-header__nav .hm-global-link.active { color: var(--hm-gold); }
+.hm-header__nav-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--hm-border);
+    margin: 0 var(--hm-space-1);
+}
+@media (max-width: 640px) {
+    .hm-header__nav .hm-global-link,
+    .hm-header__nav-divider { display: none; }
+}
 .hm-header__back {
     font-size: 0.8125rem;
     color: var(--hm-text-dim);
@@ -213,8 +238,8 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
     background: var(--hm-bg-hover);
 }
 .hm-card--gold {
-    border-color: rgba(201,168,76,0.3);
-    background: linear-gradient(135deg, var(--hm-bg-card), rgba(201,168,76,0.04));
+    border-color: rgba(95, 175, 159,0.3);
+    background: linear-gradient(135deg, var(--hm-bg-card), rgba(95, 175, 159,0.04));
 }
 
 /* ── Gold divider ── */
@@ -238,7 +263,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; }
     font-weight: 500;
     letter-spacing: 0.04em;
     background: var(--hm-gold-glow);
-    border: 1px solid rgba(201,168,76,0.25);
+    border: 1px solid rgba(95, 175, 159,0.25);
     color: var(--hm-gold-light);
 }
 

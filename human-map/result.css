@@ -246,7 +246,7 @@
     padding: var(--hm-space-1) var(--hm-space-3);
     border-radius: var(--hm-radius-full);
     background: var(--hm-gold-glow);
-    border: 1px solid rgba(201,168,76,0.25);
+    border: 1px solid rgba(95, 175, 159,0.25);
     color: var(--hm-gold-light);
 }
 
@@ -491,7 +491,7 @@
 .rv-learn a {
     color: var(--hm-gold-light);
     font-size: 0.9375rem;
-    border-bottom: 1px solid rgba(201,168,76,0.4);
+    border-bottom: 1px solid rgba(95, 175, 159,0.4);
     transition: color var(--hm-dur) var(--hm-ease);
 }
 .rv-learn a:hover { color: var(--hm-gold-lighter); }

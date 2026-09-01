@@ -33,7 +33,7 @@
                     <p class="lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken besser
                         zu verstehen. Für alle, die neugierig auf sich selbst sind.</p>
                     <div class="hero-cta">
-                        <a class="btn" href="welt.html?w=mind">Mit MIND starten</a>
+                        <a class="btn" id="ctaMind" href="welt.html?w=mind">Mit MIND starten</a>
                         <a class="btn ghost" href="mental/philosophie/denkschule.html">Ein Tool ausprobieren</a>
                     </div>
                     <div class="hero-stats" data-hl-stats></div>
@@ -107,13 +107,19 @@
 
             <section class="block" aria-labelledby="probieren-title">
                 <p class="eyebrow">Zum Ausprobieren</p>
-                <h2 id="probieren-title">Tools, die dich weiterbringen</h2>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                    <h2 id="probieren-title">Tools, die dich weiterbringen</h2>
+                    <a class="thema-link-gold" href="../tools/">Alle Tools ansehen →</a>
+                </div>
                 <div class="cluster" data-hl-tools style="margin-top:20px"></div>
             </section>
 
             <section class="block" aria-labelledby="neu-title">
                 <p class="eyebrow">Neu</p>
-                <h2 id="neu-title">Zuletzt hinzugefügt</h2>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                    <h2 id="neu-title">Zuletzt hinzugefügt</h2>
+                    <a class="thema-link-gold" href="../blog.html">Zum Blog →</a>
+                </div>
                 <div class="cluster" data-hl-neu style="margin-top:20px"></div>
             </section>
         </div>
@@ -123,7 +129,9 @@
         </footer>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="js/data.js?v=20260901"></script>
+    <script src="js/cms-fetch.js?v=20260901"></script>
     <script src="js/render.js?v=20260902"></script>
     <script>
         (function () {
@@ -153,6 +161,17 @@
             document.querySelector('[data-hl-neu]').innerHTML = D.neueste(3).map(function (i) {
                 return R.nodeCard(i, D.gebietBySlug(i.gebiet));
             }).join('');
+
+            // 'Mit MIND starten' fuehrt direkt in echten Inhalt statt in die
+            // Fachgebiete-Auswahl, sobald eine Themenseite fuer MIND existiert.
+            if (window.HLCms) {
+                window.HLCms.fetchCollection('content/themen').then(function (themen) {
+                    var match = themen.find(function (t) { return t.wissensraum === 'mind'; });
+                    if (!match) return;
+                    var cta = document.getElementById('ctaMind');
+                    if (cta) cta.href = 'mental/thema.html?slug=' + encodeURIComponent(match.slug);
+                }).catch(function (e) { console.error('Themen konnten nicht geladen werden', e); });
+            }
         })();
     </script>
     <script src="js/theme.js?v=20260901"></script>

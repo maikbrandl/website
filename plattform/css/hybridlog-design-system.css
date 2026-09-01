@@ -68,7 +68,7 @@
   /* Radien und Masse */
   --radius:14px;
   --radius-sm:10px;
-  --maxw:1200px;        /* identisch zu --max-width der Hauptseite */
+  --maxw:1320px;        /* etwas breiter als --max-width der Hauptseite (1200px) */
 }
 
 /* Dunkel per Systemeinstellung, sofern kein expliziter Hell Wunsch gesetzt ist */

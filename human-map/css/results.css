@@ -1,4 +1,4 @@
-﻿/* ===================================================================
+/* ===================================================================
    HUMAN MAP – Results Styles
    === */
 @import 'variables.css?v=20260901';
@@ -108,8 +108,8 @@
 
 /* ── Rare archetype unlock ── */
 .hm-rare-unlock {
-    background: linear-gradient(135deg, var(--hm-bg-card), rgba(95,175,159,0.06));
-    border: 1px solid rgba(95,175,159,0.3);
+    background: linear-gradient(135deg, var(--hm-bg-card), rgba(255, 212, 38,0.06));
+    border: 1px solid rgba(255, 212, 38,0.3);
     border-radius: var(--hm-radius-xl);
     padding: var(--hm-space-6) var(--hm-space-8);
     text-align: center;
@@ -118,8 +118,8 @@
     animation: unlockGlow 3s ease-in-out infinite;
 }
 @keyframes unlockGlow {
-    0%, 100% { box-shadow: 0 0 20px rgba(95,175,159,0.08); }
-    50%       { box-shadow: 0 0 40px rgba(95,175,159,0.18); }
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 212, 38,0.08); }
+    50%       { box-shadow: 0 0 40px rgba(255, 212, 38,0.18); }
 }
 .hm-rare-unlock__label {
     font-size: 0.6875rem;
@@ -143,8 +143,8 @@
     gap: var(--hm-space-2);
     padding: 0.4rem 1rem;
     border-radius: var(--hm-radius-full);
-    background: rgba(95,175,159,0.08);
-    border: 1px solid rgba(95,175,159,0.3);
+    background: rgba(255, 212, 38,0.08);
+    border: 1px solid rgba(255, 212, 38,0.3);
 }
 .hm-rare-badge__icon { color: var(--hm-gold); font-size: 0.875rem; }
 .hm-rare-badge__name {
@@ -289,8 +289,8 @@
     font-size: 0.8125rem;
     line-height: 1.6;
     color: var(--hm-text-dim);
-    background: rgba(95,175,159,0.08);
-    border: 1px solid rgba(95,175,159,0.2);
+    background: rgba(255, 212, 38,0.08);
+    border: 1px solid rgba(255, 212, 38,0.2);
     border-radius: var(--hm-radius-md, 10px);
     padding: var(--hm-space-3);
 }
@@ -463,7 +463,7 @@
     max-width: 560px;
     margin: 0 auto;
     background: var(--hm-bg-card);
-    border: 1px solid rgba(95,175,159,0.25);
+    border: 1px solid rgba(255, 212, 38,0.25);
     border-radius: var(--hm-radius-xl);
     padding: var(--hm-space-8) var(--hm-space-8);
     text-align: center;
@@ -527,8 +527,8 @@
 
 /* ── Synergy banner ── */
 .hm-synergy-banner {
-    background: linear-gradient(135deg, rgba(95,175,159,0.06), rgba(95,175,159,0.02));
-    border: 1px solid rgba(95,175,159,0.2);
+    background: linear-gradient(135deg, rgba(255, 212, 38,0.06), rgba(255, 212, 38,0.02));
+    border: 1px solid rgba(255, 212, 38,0.2);
     border-radius: var(--hm-radius-xl);
     padding: var(--hm-space-6) var(--hm-space-8);
     display: flex;

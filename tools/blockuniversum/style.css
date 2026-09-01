@@ -135,7 +135,7 @@
 .section-quote {
     border-left: 2px solid var(--gold);
     padding: var(--space-3) var(--space-5);
-    background: rgba(95, 175, 159, 0.05);
+    background: rgba(255, 212, 38, 0.05);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     font-size: 14px;
     color: var(--text-dim);
@@ -263,12 +263,12 @@
 .state-btn:hover {
     border-color: var(--gold-dark);
     color: var(--gold-light);
-    background: rgba(95, 175, 159, 0.05);
+    background: rgba(255, 212, 38, 0.05);
 }
 .state-btn--active {
     border-color: var(--gold);
     color: var(--gold);
-    background: rgba(95, 175, 159, 0.08);
+    background: rgba(255, 212, 38, 0.08);
 }
 
 /* ── Protocol ── */
@@ -300,7 +300,7 @@
 }
 .protocol-step:hover {
     background: rgba(255, 255, 255, 0.03);
-    border-left-color: rgba(95, 175, 159, 0.35);
+    border-left-color: rgba(255, 212, 38, 0.35);
 }
 .protocol-step--active {
     border-left-color: var(--gold);
@@ -385,7 +385,7 @@
     border-color: var(--gold-dark);
 }
 .protocol-nav__btn--next:hover {
-    background: rgba(95, 175, 159, 0.08);
+    background: rgba(255, 212, 38, 0.08);
     border-color: var(--gold);
 }
 .protocol-nav__counter { font-size: 13px; color: var(--text-muted); }
@@ -395,9 +395,9 @@
     max-width: var(--max-width-text);
     margin: var(--space-10) auto 0;
     padding: var(--space-8);
-    border: 1px solid rgba(95, 175, 159, 0.25);
+    border: 1px solid rgba(255, 212, 38, 0.25);
     border-radius: var(--radius-md);
-    background: rgba(95, 175, 159, 0.04);
+    background: rgba(255, 212, 38, 0.04);
     text-align: center;
 }
 .protocol-conclusion__text {
@@ -472,7 +472,7 @@
     white-space: nowrap;
 }
 .breath-btn:hover {
-    background: rgba(95, 175, 159, 0.1);
+    background: rgba(255, 212, 38, 0.1);
     border-color: var(--gold);
 }
 

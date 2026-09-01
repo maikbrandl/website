@@ -16,15 +16,16 @@
 /* Fonts. Bevorzugt im <head> als <link>:
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
    Alternativ dieser Import, falls kein Zugriff auf den head besteht: */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
 /* -------------------------------------------------------------------------
    TOKENS. Alle Farben, Schriften und Schatten als Variablen.
-   Weltfarben (Hybridlog Farb-Prompt, sitehweit verbindlich): mind Slate Blue,
-   body Teal, world Amber. Kein Lila.
-   --accent ist der primaere UI-Akzent (Teal), pro Welt via data-world ueberschrieben.
+   Gebietsfarben (Hybridlog Farb-Prompt, 2026-09-01): mind Slate Blue, body Teal,
+   world Amber, nur dekorativ je Welt/Gebiet (Karten, Tags, Akzentlinien im Content).
+   --accent ist die EINE Hauptfarbe (Signal-Gelb), sitehweit fuer Buttons, aktive
+   Navigation, Fokus, Highlights, Akzentlinien. Wird NICHT mehr pro Welt ueberschrieben.
    ------------------------------------------------------------------------- */
 :root{
   /* Grund und Flaechen */
@@ -38,7 +39,7 @@
   /* Linien */
   --line:#E2DAC8;
   --line-strong:#CEC4AC;
-  /* Akzente (Hybridlog Farb-Prompt) */
+  /* Gebietsfarben, nur dekorativ (Welten/Gebiete) */
   --teal:#5FAF9F; --teal-dark:#4B9588; --teal-light:#A9D6CC;
   --amber:#D4A24A; --amber-dark:#B4882E; --amber-light:#E8D7A6;
   --slate:#4A6D7A; --slate-dark:#354F59; --slate-light:#9FB6BE;
@@ -46,8 +47,8 @@
   --world:var(--amber);    /* Welt World */
   --mind:var(--slate);     /* Welt Mind */
   --body:var(--teal);      /* Welt Body */
-  --accent:var(--teal);    /* primaerer UI-Akzent, sitehweit */
-  --on-accent:#14120d;     /* Text auf Akzentflaechen, dunkel passt zu Teal/Amber */
+  --accent:#FFD426;        /* Hauptfarbe Signal-Gelb, sitehweit, EINE Farbe */
+  --on-accent:#5A4A00;     /* dunkle Schrift auf Gelb, immer */
   /* Semantik */
   --good:#3E7D5A;
   --warn:#A6822F;
@@ -55,10 +56,15 @@
   /* Schatten */
   --shadow:rgba(40,34,24,.09);
   --shadow-lg:rgba(40,34,24,.14);
-  /* Schriften */
-  --font-display:"Playfair Display",Georgia,serif;   /* Ueberschriften */
-  --font-body:"Source Serif 4",Georgia,serif;        /* Fliesstext, Lesen */
-  --font-ui:"IBM Plex Sans",system-ui,sans-serif;    /* Interface, Labels */
+  /* Schrift: eine einzige, Source Sans 3 */
+  --font-display:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-ui:'Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  /* Feste Typo-Skala (Prompt 6) */
+  --fs-label:12px; --fs-meta:13px; --fs-ui:15px; --fs-read:17px; --fs-card-title:18px; --fs-lead:19px;
+  --fs-world-title:27px; --fs-h2:clamp(23px,2.7vw,30px); --fs-h1:clamp(34px,5vw,54px);
+  /* Festes Abstands-Raster (Prompt 6) */
+  --space-box-pad:22px; --space-inner-gap:12px; --space-grid-gap:18px; --space-section:44px;
   /* Radien und Masse */
   --radius:14px;
   --radius-sm:10px;
@@ -66,8 +72,8 @@
 }
 
 /* Dunkel per Systemeinstellung, sofern kein expliziter Hell Wunsch gesetzt ist */
-/* Neutrals + Akzente hier exakt auf den Hybridlog Farb-Prompt abgestimmt (2026-08-27),
-   damit Hintergrund/Karten/Text/Akzente ueberall auf der Website identisch sind. */
+/* Neutrals hier exakt auf den Hybridlog Farb-Prompt abgestimmt (2026-08-27),
+   Hauptfarbe Signal-Gelb bleibt in beiden Themes identisch (2026-09-01). */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --paper:#090A09;--surface:#171814;--surface-2:#1C1D19;
@@ -77,7 +83,7 @@
     --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
     --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
     --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-    --accent:var(--teal);
+    --accent:#FFD426;--on-accent:#5A4A00;
     --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
     --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
   }
@@ -91,7 +97,7 @@
   --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
   --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
   --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-  --accent:var(--teal);
+  --accent:#FFD426;--on-accent:#5A4A00;
   --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
   --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
 }
@@ -103,10 +109,10 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.62;
+  font-family:var(--font-body);font-size:var(--fs-read);line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.14;text-wrap:balance;margin:0}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.16;letter-spacing:-.01em;text-wrap:balance;margin:0}
 p{margin:0 0 1em}
 a{color:inherit}
 .ui{font-family:var(--font-ui)}
@@ -119,14 +125,15 @@ a{color:inherit}
 .skip-link:focus{position:fixed;left:16px;top:16px;width:auto;height:auto;overflow:visible;box-shadow:0 4px 16px var(--shadow-lg)}
 
 /* Eyebrow, kleines Label ueber einer Ueberschrift, in Akzentfarbe */
-.eyebrow{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.eyebrow{font-family:var(--font-ui);font-size:var(--fs-label);letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--accent)}
 
 /* Weltkontext. Setze eine dieser Klassen oder data-world am Seitencontainer,
-   dann uebernehmen alle Akzente automatisch die Weltfarbe. Slate (Mind) ist
-   dunkler als Teal/Amber, daher heller --on-accent-Text nur hier. */
-[data-world="mind"],.world-mind{--accent:var(--mind);--on-accent:#fff}
-[data-world="body"],.world-body{--accent:var(--body)}
-[data-world="world"],.world-world{--accent:var(--world)}
+   dann faerben Welt-spezifische Elemente (Karten, Tags) automatisch in der
+   Gebietsfarbe. Die Hauptfarbe --accent (Buttons, aktive Navigation, Fokus)
+   bleibt bewusst ueberall Signal-Gelb, unabhaengig von der Welt (Prompt 6). */
+[data-world="mind"],.world-mind{--wc:var(--mind)}
+[data-world="body"],.world-body{--wc:var(--body)}
+[data-world="world"],.world-world{--wc:var(--world)}
 
 /* -------------------------------------------------------------------------
    LAYOUT
@@ -134,11 +141,11 @@ a{color:inherit}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 section.block{padding:40px 0}
 section.block.tight{padding:26px 0}
-.grid{display:grid;gap:18px}
+.grid{display:grid;gap:var(--space-grid-gap)}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
-.stack{display:grid;gap:12px}
+.stack{display:grid;gap:var(--space-inner-gap)}
 
 /* -------------------------------------------------------------------------
    CHROME. Topbar, Achsen Umschalter, Theme Button, Breadcrumbs.
@@ -147,7 +154,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .top-inner{max-width:var(--maxw);margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;text-decoration:none}
 .brand .mark{font-family:var(--font-ui);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
-.brand .mark b{font-weight:800;color:var(--teal)}
+.brand .mark b{font-weight:800;color:var(--accent)}
 .spacer{flex:1 1 auto}
 
 /* Hauptseiten-Navigation, damit der Wissensraum nicht wie eine losgeloeste
@@ -179,7 +186,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
    ------------------------------------------------------------------------- */
 
 /* Card, Grundbaustein fuer Boxen und Contentbloecke */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 1px 0 var(--shadow)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-box-pad);box-shadow:0 1px 0 var(--shadow)}
 
 /* Tap, macht ein Element als Kachel klickbar mit Hover Anhebung */
 .tap{cursor:pointer;transition:.2s;text-decoration:none;display:block}
@@ -221,23 +228,23 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* Seitenkopf, fuer Weltseite, Fachgebiet, Vergleich usw. */
 .page-head{padding:40px 0 8px}
 .page-head .headrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
-.page-head h1{font-size:clamp(2rem,4.4vw,3rem)}
+.page-head h1{font-size:var(--fs-h1)}
 .metaline-h{font-family:var(--font-ui);font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px}
 .metaline-h b{color:var(--ink);font-weight:600}
 
 /* Hero der Startseite */
 .hero{padding:56px 0 26px}
-.hero h1{font-size:clamp(2.3rem,5vw,3.7rem);letter-spacing:-.01em}
-.hero .lead{font-size:1.18rem;color:var(--muted);max-width:62ch;margin-top:16px}
+.hero h1{font-size:var(--fs-h1);letter-spacing:-.01em}
+.hero .lead{font-size:var(--fs-lead);color:var(--muted);max-width:62ch;margin-top:16px}
 .hero .principle{margin-top:22px;font-style:italic;font-family:var(--font-display);font-size:1.12rem;color:var(--ink);border-left:3px solid var(--accent);padding-left:16px}
 
 /* Weltkarten der Startseite */
-.worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
 @media(max-width:820px){.worlds{grid-template-columns:1fr}}
 .world-card{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--surface);padding:26px 24px 24px;min-height:210px;display:flex;flex-direction:column}
 .world-card .wc-accent{position:absolute;inset:0 0 auto 0;height:5px;background:var(--wc)}
 .world-card .wc-idx{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--wc);font-weight:600}
-.world-card h3{font-size:1.6rem;margin:8px 0 2px}
+.world-card h3{font-size:var(--fs-world-title);margin:8px 0 2px}
 .world-card .wc-lead{font-style:italic;color:var(--muted);margin-bottom:10px}
 .world-card .wc-count{font-family:var(--font-ui);font-size:.8rem;color:var(--faint);margin-top:auto}
 .world-card[data-w="mind"]{--wc:var(--mind)}
@@ -245,7 +252,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .world-card[data-w="world"]{--wc:var(--world)}
 
 /* Achsen Erklaerung, drei Zellen */
-.axis-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.axis-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
 @media(max-width:820px){.axis-row{grid-template-columns:1fr}}
 .axis-cell{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--surface)}
 .axis-cell h4{font-family:var(--font-ui);font-size:.95rem;display:flex;align-items:center;gap:8px;margin-bottom:6px}
@@ -271,7 +278,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* Listenzeile, fuer Fachgebiete und Unterbereiche */
 .list-row{display:flex;align-items:flex-start;gap:16px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .list-row .num{font-family:var(--font-ui);font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--faint);padding-top:3px;min-width:26px}
-.list-row h4{font-size:1.15rem;margin-bottom:3px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.list-row h4{font-size:var(--fs-card-title);margin-bottom:3px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .list-row .rm{font-size:.92rem;color:var(--muted)}
 .list-row .rside{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
@@ -280,11 +287,11 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 @media(max-width:820px){.hub-head{grid-template-columns:1fr}}
 .hub-meta{font-family:var(--font-ui);font-size:.85rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px 16px}
 .hub-meta b{color:var(--ink);font-weight:600}
-.cluster{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cluster{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
 @media(max-width:820px){.cluster{grid-template-columns:1fr}}
 .node-card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px}
 .node-card .nc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
-.node-card h4{font-size:1.1rem}
+.node-card h4{font-size:var(--fs-card-title)}
 .node-card p{font-size:.9rem;color:var(--muted);margin:0}
 /* Achsenfilter, gedimmte Karte wenn Linse aktiv und Achse nicht passt */
 .dimmed{opacity:.26;filter:saturate(.4)}
@@ -294,7 +301,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .concept-grid{display:grid;grid-template-columns:1fr 262px;gap:40px;align-items:start;padding-top:30px}
 @media(max-width:900px){.concept-grid{grid-template-columns:1fr}}
 .concept-main .kernfrage{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
-.concept-main h1{font-size:clamp(2rem,4.2vw,2.9rem);margin:6px 0 12px}
+.concept-main h1{font-size:var(--fs-h1);margin:6px 0 12px}
 /* Kurzantwort, hervorgehobener erster Absatz */
 .short-answer{font-size:1.26rem;line-height:1.5;font-family:var(--font-display);color:var(--ink);border-left:3px solid var(--accent);padding-left:18px;margin:18px 0 30px}
 

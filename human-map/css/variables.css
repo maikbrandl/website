@@ -23,13 +23,14 @@
     --hm-text-muted:  #6b6f63;  /* --gray-600 */
     --hm-white:       #f1efe6;
 
-    /* ── Brand Teal (matches site --gold, formerly a gold/mustard tone) ── */
-    --hm-gold:            #5faf9f;
-    --hm-gold-light:      #7fc0b3;
-    --hm-gold-lighter:    #a9d6cc;
-    --hm-gold-dark:       #4b9588;
-    --hm-gold-glow:       rgba(95, 175, 159, 0.15);
-    --hm-gold-glow-strong:rgba(95, 175, 159, 0.30);
+    /* ── Brand Signal-Gelb (Hybridlog Farb-Prompt 2026-09-01, matches site --gold) ── */
+    --hm-gold:            #ffd426;
+    --hm-gold-light:      #ffdd52;
+    --hm-gold-lighter:    #ffe98f;
+    --hm-gold-dark:       #e0b300;
+    --hm-gold-glow:       rgba(255, 212, 38, 0.15);
+    --hm-gold-glow-strong:rgba(255, 212, 38, 0.30);
+    --hm-on-gold:         #5a4a00;
 
     /* ── Dimension Colors (RPG node palette) ── */
     --c-offenheit:    #8b7cf8;   /* violet  – KERN */
@@ -69,8 +70,8 @@
     --arch-synergy:    #c9a84c;
 
     /* ── Typography (match site) ── */
-    --hm-font-sans:    'IBM Plex Sans', system-ui, sans-serif;
-    --hm-font-display: 'Playfair Display', Georgia, serif;
+    --hm-font-sans:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --hm-font-display: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
     /* ── Spacing ── */
     --hm-space-1:  0.25rem;
@@ -101,8 +102,8 @@
     /* ── Shadows ── */
     --hm-shadow-md:   0 4px 12px rgba(0,0,0,0.4);
     --hm-shadow-lg:   0 8px 30px rgba(0,0,0,0.5);
-    --hm-shadow-gold: 0 4px 25px rgba(95,175,159,0.2);
-    --hm-shadow-glow: 0 0 40px rgba(95,175,159,0.12);
+    --hm-shadow-gold: 0 4px 25px rgba(255, 212, 38,0.2);
+    --hm-shadow-glow: 0 0 40px rgba(255, 212, 38,0.12);
 
     /* ── Transitions ── */
     --hm-ease:    cubic-bezier(0.16, 1, 0.3, 1);

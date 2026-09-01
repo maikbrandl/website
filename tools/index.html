@@ -77,7 +77,7 @@
         }
         .tool-card:hover:not(.tool-card--disabled) {
             transform: translateY(-4px);
-            border-color: rgba(95, 175, 159, 0.3);
+            border-color: rgba(255, 212, 38, 0.3);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
         }
         .tool-card--disabled {
@@ -298,8 +298,8 @@
 
                 // Glow
                 var grad = ctx.createRadialGradient(dotX, midY, 0, dotX, midY, 14);
-                grad.addColorStop(0, 'rgba(95, 175, 159,0.35)');
-                grad.addColorStop(1, 'rgba(95, 175, 159,0)');
+                grad.addColorStop(0, 'rgba(255, 212, 38,0.35)');
+                grad.addColorStop(1, 'rgba(255, 212, 38,0)');
                 ctx.beginPath();
                 ctx.arc(dotX, midY, 14, 0, Math.PI * 2);
                 ctx.fillStyle = grad;
@@ -389,7 +389,7 @@
                     ctx.beginPath();
                     ctx.moveTo(ux, uy);
                     ctx.lineTo(sx, sy);
-                    ctx.strokeStyle = 'rgba(95, 175, 159,0.18)';
+                    ctx.strokeStyle = 'rgba(255, 212, 38,0.18)';
                     ctx.lineWidth = 0.6;
                     ctx.setLineDash([3, 4]);
                     ctx.stroke();
@@ -416,8 +416,8 @@
 
                 // "you" glow + dot
                 var grad = ctx.createRadialGradient(ux, uy, 0, ux, uy, 16);
-                grad.addColorStop(0, 'rgba(95,175,159,0.40)');
-                grad.addColorStop(1, 'rgba(95,175,159,0)');
+                grad.addColorStop(0, 'rgba(255, 212, 38,0.40)');
+                grad.addColorStop(1, 'rgba(255, 212, 38,0)');
                 ctx.beginPath();
                 ctx.arc(ux, uy, 16, 0, Math.PI * 2);
                 ctx.fillStyle = grad;

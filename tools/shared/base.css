@@ -3,7 +3,7 @@
    Adapted from hybridlogs.de dark design system
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
 *, *::before, *::after {
     margin: 0;
@@ -30,16 +30,22 @@
     --text-secondary:  #8b8b7e;
     --text-muted:      #6b6f63;
 
-    /* Teal Accent (aligned with hybridlogs.de main site) */
-    --gold:            #5faf9f;
-    --gold-light:      #7fc0b3;
-    --gold-dark:       #4b9588;
-    --gold-glow:       rgba(95, 175, 159, 0.15);
-    --gold-glow-strong: rgba(95, 175, 159, 0.25);
+    /* Signal-Gelb Akzent (Hybridlog Farb-Prompt 2026-09-01, Variablenname --gold beibehalten) */
+    --gold:            #ffd426;
+    --gold-light:      #ffdd52;
+    --gold-dark:       #e0b300;
+    --gold-glow:       rgba(255, 212, 38, 0.15);
+    --gold-glow-strong: rgba(255, 212, 38, 0.25);
+    --on-gold:         #5a4a00;
 
-    /* Typography — aligned with hybridlogs.de main site */
-    --font-body:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-    --font-display: 'Playfair Display', Georgia, serif;
+    /* Typografie: eine Schrift Source Sans 3 */
+    --font-body:    'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-display: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+    /* Feste Typo-Skala und Abstands-Raster (Prompt 6) */
+    --fs-label: 12px; --fs-meta: 13px; --fs-ui: 15px; --fs-read: 17px; --fs-card-title: 18px; --fs-lead: 19px;
+    --fs-h2: clamp(23px, 2.7vw, 30px); --fs-h1: clamp(34px, 5vw, 54px);
+    --space-box-pad: 22px; --space-inner-gap: 12px; --space-grid-gap: 18px; --space-section: 44px;
 
     /* Spacing */
     --space-1:  4px;

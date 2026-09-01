@@ -63,5 +63,28 @@
             ? '<div class="cluster" style="margin-top:18px">' + arts.map((it) => R.nodeCard(it, gebiet)).join('') + '</div>'
             : '<p class="disc" style="margin-top:14px">Bald folgen hier vertiefende Beiträge.</p>') +
         '</section>' +
+
+        '<section class="block" id="themen-block" aria-labelledby="themen-title" hidden>' +
+        '<p class="eyebrow">Wissen</p>' +
+        '<h2 id="themen-title">Themen in diesem Fachgebiet</h2>' +
+        '<div class="cluster" id="themen-cluster" style="margin-top:18px"></div>' +
+        '</section>' +
         '</div>';
+
+    // Themen sind ein dritter, CMS-gepflegter Inhaltstyp (content/themen, per
+    // Decap), zur Laufzeit von GitHub geholt. Fortschreitende Erweiterung:
+    // erscheint erst, sobald geladen, Rest der Seite haengt nicht davon ab.
+    if (window.HLCms) {
+        window.HLCms.fetchCollection('content/themen').then(function (themen) {
+            const inGebiet = themen.filter(function (t) { return t.gebiet === gebiet.slug; });
+            if (!inGebiet.length) return;
+            const cluster = document.getElementById('themen-cluster');
+            const block = document.getElementById('themen-block');
+            if (!cluster || !block) return;
+            cluster.innerHTML = inGebiet.map(function (t) {
+                return R.nodeCard({ type: 'thema', slug: t.slug, href: 'mental/thema.html?slug=' + encodeURIComponent(t.slug), title: t.title, teaser: t.lead }, gebiet);
+            }).join('');
+            block.hidden = false;
+        }).catch(function (e) { console.error('Themen konnten nicht geladen werden', e); });
+    }
 })();

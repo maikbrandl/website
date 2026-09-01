@@ -416,6 +416,146 @@ svg.map{width:100%;height:auto;display:block;min-width:560px}
 /* Footer */
 footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font-family:var(--font-ui);font-size:.82rem;color:var(--faint)}
 
+/* -------------------------------------------------------------------------
+   THEMENSEITE. Drei Spalten: Baum-Navigation, Block-Baukasten, Rechte Leiste.
+   Struktur- und Orientierungsfarbe ist hier durchgehend --teal (nicht die
+   Welt-Farbe), --accent (Gold) bleibt exklusiv fuer weiterfuehrende Links.
+   ------------------------------------------------------------------------- */
+.thema-shell{display:grid;grid-template-columns:288px minmax(0,1fr) 246px;gap:32px;max-width:var(--maxw);margin:0 auto;padding:26px 24px 60px;align-items:start}
+@media(max-width:1160px){.thema-shell{grid-template-columns:270px minmax(0,1fr)}.thema-rail{display:none}}
+@media(max-width:860px){.thema-shell{grid-template-columns:1fr}.thema-nav{position:static;max-height:none}}
+
+/* Linke Navigation, Baum aus <details> ohne eigenes JS fuer Auf/Zu */
+.thema-nav{position:sticky;top:88px;max-height:calc(100vh - 88px);overflow:auto;padding-right:6px}
+.thema-nav .eyebrow{display:block;margin-bottom:10px}
+.tn-room{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
+.tn-room>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 14px;font-family:var(--font-ui);font-weight:700;font-size:.95rem}
+.tn-room>summary::-webkit-details-marker{display:none}
+.tn-room .tn-ico{flex:none;width:16px;height:16px;color:var(--faint)}
+.tn-room[open] .tn-ico,.tn-room[open]>summary{color:var(--teal)}
+.tn-room>summary::after{content:"";flex:none;width:7px;height:7px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:auto;transition:.15s}
+.tn-room[open]>summary::after{transform:rotate(-135deg);border-color:var(--teal)}
+.tn-gebiete{padding:0 10px 10px}
+.tn-gebiet{border-top:1px solid var(--line)}
+.tn-gebiet:first-child{border-top:0}
+.tn-gebiet>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 4px;font-family:var(--font-ui);font-size:.86rem;color:var(--muted)}
+.tn-gebiet>summary::-webkit-details-marker{display:none}
+.tn-gebiet>summary::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--faint)}
+.tn-gebiet[open]>summary{color:var(--ink)}
+.tn-gebiet.on>summary{color:var(--teal)}
+.tn-gebiet.on>summary::before{background:var(--teal)}
+.tn-gebiet>summary::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:auto}
+.tn-gebiet[open]>summary::after{transform:rotate(-135deg)}
+.tn-themen{list-style:none;margin:0;padding:2px 0 6px 20px;border-left:1px solid var(--line)}
+.tn-themen li{margin:1px 0}
+.tn-themen a{display:block;font-family:var(--font-ui);font-size:.82rem;color:var(--muted);text-decoration:none;padding:5px 8px;border-radius:6px}
+.tn-themen a:hover{color:var(--ink);background:var(--surface-2)}
+.tn-themen a.on{color:var(--teal);font-weight:600}
+.tn-gruppe{margin-top:2px}
+.tn-gruppe>details{margin:0}
+.tn-gruppe summary{list-style:none;cursor:pointer;font-family:var(--font-ui);font-size:.82rem;color:var(--muted);padding:5px 8px;display:flex;align-items:center;gap:6px}
+.tn-gruppe summary::-webkit-details-marker{display:none}
+.tn-gruppe summary::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:auto}
+.tn-gruppe details[open] summary::after{transform:rotate(-135deg)}
+.tn-gruppe.trail>summary{color:var(--teal)}
+.tn-gruppe ul{list-style:none;margin:0;padding:0 0 4px 14px}
+.tn-all{display:inline-block;margin:6px 0 18px;font-family:var(--font-ui);font-size:.8rem;font-weight:600;color:var(--accent);text-decoration:none}
+.tn-all:hover{text-decoration:underline}
+.tn-ways{display:grid;gap:12px}
+.tn-ways h4{font-family:var(--font-display);font-size:1rem;margin-bottom:2px}
+.tn-way{display:flex;align-items:flex-start;gap:10px}
+.tn-way svg{flex:none;width:18px;height:18px;color:var(--teal);margin-top:1px}
+.tn-way b{display:block;font-family:var(--font-ui);font-size:.86rem}
+.tn-way span{font-size:.76rem;color:var(--faint)}
+
+/* Mittelteil: fester Kopf */
+.thema-head{padding:0 0 26px}
+.thema-art{font-family:var(--font-ui);font-size:var(--fs-label);letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--teal)}
+.thema-head h1{font-size:var(--fs-h1);margin:8px 0 14px}
+.thema-head .lead{font-size:var(--fs-lead);color:var(--muted);max-width:62ch}
+.thema-metaline{font-family:var(--font-ui);font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px}
+.thema-metaline span{display:inline-flex;align-items:center;gap:6px}
+.thema-metaline svg{width:14px;height:14px}
+
+/* Abschnittskarten, automatisch nummeriert */
+.thema-sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-box-pad);scroll-margin-top:96px}
+.thema-sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.thema-sec-num{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--font-ui);font-weight:700;font-size:.82rem;font-variant-numeric:tabular-nums;display:grid;place-items:center}
+.thema-sec-label{font-family:var(--font-ui);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink)}
+
+/* Blocktyp: icon_fakten */
+.thema-icon-fakten{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:640px){.thema-icon-fakten{grid-template-columns:1fr}}
+.thema-fakt{background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;display:flex;align-items:flex-start;gap:10px;font-size:.9rem}
+.thema-fakt svg{flex:none;width:18px;height:18px;color:var(--teal)}
+
+/* Blocktyp: prozess */
+.thema-prozess{display:flex;align-items:flex-start;gap:2px;flex-wrap:wrap}
+@media(max-width:760px){.thema-prozess{flex-direction:column;gap:16px}}
+.thema-prozess-step{flex:1;min-width:120px;text-align:center}
+@media(max-width:760px){.thema-prozess-step{text-align:left;display:flex;gap:12px;align-items:center}}
+.thema-prozess-icon{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--teal) 14%,var(--surface));color:var(--teal);display:grid;place-items:center;margin:0 auto 10px;flex:none}
+@media(max-width:760px){.thema-prozess-icon{margin:0}}
+.thema-prozess-icon svg{width:20px;height:20px}
+.thema-prozess-step h5{font-family:var(--font-ui);font-size:.9rem;margin-bottom:3px}
+.thema-prozess-step p{font-size:.8rem;color:var(--muted);margin:0}
+.thema-prozess-arrow{flex:none;color:var(--line-strong);font-size:1.1rem;padding-top:14px;align-self:flex-start}
+@media(max-width:760px){.thema-prozess-arrow{display:none}}
+
+/* Blocktyp: textabschnitt, beispiel, evidenz, zitat */
+.thema-textabschnitt{max-width:70ch}
+.thema-textabschnitt p{margin:0 0 1em}
+.thema-textabschnitt p:last-child{margin-bottom:0}
+.thema-beispiel blockquote{margin:0;font-family:var(--font-display);font-size:1.05rem;font-style:italic;color:var(--ink)}
+.thema-beispiel .tb-ergebnis{margin-top:14px;font-family:var(--font-ui);font-weight:600;color:var(--accent)}
+.thema-evidenz p{margin:0 0 12px}
+.thema-link-gold{color:var(--accent);font-family:var(--font-ui);font-weight:600;font-size:.88rem;text-decoration:none}
+.thema-link-gold:hover{text-decoration:underline}
+.thema-zitat{font-family:var(--font-display);font-style:italic;font-size:1.15rem;color:var(--accent);margin:0}
+.thema-zitat cite{display:block;margin-top:10px;font-style:normal;font-family:var(--font-ui);font-size:.8rem;color:var(--muted)}
+
+/* Blocktyp: liste */
+.thema-liste{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.thema-liste li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
+.thema-liste svg{flex:none;width:16px;height:16px;margin-top:2px;color:var(--teal)}
+
+/* Blocktyp: faq */
+.thema-faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.thema-faq details:last-child{border-bottom:0}
+.thema-faq summary{cursor:pointer;font-family:var(--font-ui);font-weight:500;list-style:none}
+.thema-faq summary::-webkit-details-marker{display:none}
+.thema-faq summary::before{content:"+";color:var(--teal);font-weight:700;margin-right:10px}
+.thema-faq details[open] summary::before{content:"\2013"}
+.thema-faq details p{margin:8px 0 0;font-size:.92rem;color:var(--muted)}
+
+/* Blocktyp: tool_einbindung (im Fluss, kleiner als die Tool-Karte der Leiste) */
+.thema-tool-inline{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;background:var(--surface-2);text-decoration:none;color:inherit}
+.thema-tool-inline .tt-icon{flex:none;width:52px;height:52px;border-radius:10px;background:var(--surface);display:grid;place-items:center;color:var(--teal)}
+.thema-tool-inline .tt-icon svg{width:60%;height:60%}
+.thema-tool-inline h5{font-size:.98rem;margin-bottom:2px}
+.thema-tool-inline p{font-size:.86rem;color:var(--muted);margin:0}
+
+/* Rechte Leiste */
+.thema-rail{position:sticky;top:88px;max-height:calc(100vh - 88px);overflow:auto;display:flex;flex-direction:column;gap:20px}
+.thema-toc{border-left:2px solid var(--line);padding-left:14px;display:grid;gap:7px}
+.thema-toc a{font-family:var(--font-ui);font-size:.82rem;color:var(--faint);text-decoration:none;display:block;padding:2px 0 2px 12px;margin-left:-16px;border-left:2px solid transparent}
+.thema-toc a:hover{color:var(--ink)}
+.thema-toc a.on{color:var(--teal);border-left-color:var(--teal);font-weight:600}
+.thema-progress-track{height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden;margin:10px 0}
+.thema-progress-fill{height:100%;background:var(--teal);width:0%;transition:width .15s}
+.thema-save{font-family:var(--font-ui);font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:7px;margin-top:8px;cursor:pointer;background:none;border:0;padding:0}
+.thema-save svg{width:15px;height:15px;flex:none}
+.thema-save.on{color:var(--teal)}
+.thema-tool-card .tt-preview{height:80px;border-radius:var(--radius-sm);background:var(--surface-2);display:grid;place-items:center;margin-bottom:12px;color:var(--teal)}
+.thema-tool-card .tt-preview svg{width:50%;height:70%}
+.thema-tool-card h4{font-size:.98rem;margin-bottom:4px}
+.thema-tool-card p{font-size:.86rem;color:var(--muted);margin-bottom:10px}
+.thema-related{display:grid;gap:10px}
+.thema-related a{display:block;text-decoration:none;color:var(--ink);padding:2px 0}
+.thema-related a b{display:block;font-size:.92rem;font-weight:600}
+.thema-related a span{font-size:.74rem;color:var(--faint)}
+.thema-related a:hover b{color:var(--teal)}
+
 /* Fokus und reduzierte Bewegung */
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}

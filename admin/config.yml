@@ -74,3 +74,132 @@ collections:
         default: "hidden"
       - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
       - { label: "Meta-Beschreibung", name: "meta_description", widget: "text", required: false }
+
+  - name: "themen"
+    label: "Themenseiten (Wissensplattform)"
+    folder: "content/themen"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Titel", name: "title", widget: "string", hint: "z.B. Confirmation Bias" }
+      - { label: "Art des Themas", name: "art", widget: "string", hint: "z.B. Denkfehler, Methode, Konzept" }
+      - label: "Wissensraum"
+        name: "wissensraum"
+        widget: "select"
+        options:
+          - { label: "MIND", value: "mind" }
+          - { label: "BODY", value: "body" }
+          - { label: "WORLD", value: "world" }
+      - label: "Fachgebiet"
+        name: "gebiet"
+        widget: "relation"
+        collection: "fachgebiete"
+        search_fields: ["title", "slug"]
+        value_field: "slug"
+        display_fields: ["title"]
+      - { label: "Unterbereich (optional)", name: "untergruppe", widget: "string", required: false, hint: "Gruppiert Themen im Baum, z.B. Kognitive Verzerrungen. Themen mit gleichem Text landen in derselben Gruppe." }
+      - { label: "Lead-Satz", name: "lead", widget: "text" }
+      - { label: "Kurz lesen (Minuten)", name: "lesezeit", widget: "number", required: false }
+      - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }
+      - name: "bloecke"
+        label: "Inhaltsblöcke"
+        label_singular: "Block"
+        widget: "list"
+        type_key: "type"
+        types:
+          - name: "kurz_erklaert"
+            label: "Kurz erklärt"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+          - name: "icon_fakten"
+            label: "Auf einen Blick (Icon-Fakten)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "fakten"
+                label: "Fakten"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+                  - { label: "Text", name: "text", widget: "string" }
+          - name: "prozess"
+            label: "Prozess (Schritte mit Pfeilen)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "schritte"
+                label: "Schritte"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Untertitel", name: "untertitel", widget: "string" }
+                  - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+          - name: "textabschnitt"
+            label: "Textabschnitt"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "markdown" }
+          - name: "beispiel"
+            label: "Beispiel aus dem Alltag"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Ergebnis-Zeile (optional)", name: "ergebnis", widget: "string", required: false }
+          - name: "liste"
+            label: "Liste (z. B. Missverständnisse)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "punkte"
+                label: "Punkte"
+                widget: "list"
+                field: { label: "Punkt", name: "punkt", widget: "string" }
+          - name: "evidenz"
+            label: "Grenzen & Evidenz"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Link-Text (optional)", name: "link_label", widget: "string", required: false }
+              - { label: "Link-Ziel (optional)", name: "link_url", widget: "string", required: false }
+          - name: "zitat"
+            label: "Zitat"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Quelle (optional)", name: "quelle", widget: "string", required: false }
+          - name: "faq"
+            label: "Häufige Fragen"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "eintraege"
+                label: "Fragen"
+                widget: "list"
+                fields:
+                  - { label: "Frage", name: "frage", widget: "string" }
+                  - { label: "Antwort", name: "antwort", widget: "markdown" }
+          - name: "tool_einbindung"
+            label: "Tool-Einbindung"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Tool", name: "tool", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], hint: "Muss einem der vier bestehenden Tools entsprechen" }
+      - { label: "Verwandte Themen", name: "verwandte_themen", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "slug", display_fields: ["title"], multiple: true, required: false }
+      - { label: "Verwandte Blogartikel", name: "verwandte_artikel", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
+      - { label: "Verwandte Tools", name: "verwandte_tools", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], multiple: true, required: false }
+      - name: "quellen"
+        label: "Quellen"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Titel", name: "titel", widget: "string" }
+          - { label: "URL", name: "url", widget: "string" }
+      - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
+      - { label: "Meta-Beschreibung", name: "seo_description", widget: "text", required: false }

@@ -13,8 +13,8 @@
         return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
 
-    // Label je Inhaltstyp: Tools sind "Interaktives Tool", Beitraege "Blogbeitrag".
-    function kindLabel(it) { return it.type === 'tool' ? 'Interaktives Tool' : 'Blogbeitrag'; }
+    // Label je Inhaltstyp: Tools sind "Interaktives Tool", Themen "Wissensknoten", Rest "Blogbeitrag".
+    function kindLabel(it) { return it.type === 'tool' ? 'Interaktives Tool' : it.type === 'thema' ? 'Wissensknoten' : 'Blogbeitrag'; }
 
     // Kleine abstrakte SVG-Icons je Tool, rein dekorativ. Fallback fuer neue
     // Tools ohne eigenes Icon.

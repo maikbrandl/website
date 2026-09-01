@@ -47,7 +47,7 @@
   --world:var(--amber);    /* Welt World */
   --mind:var(--slate);     /* Welt Mind */
   --body:var(--teal);      /* Welt Body */
-  --accent:#FFBF00;        /* Hauptfarbe Signal-Gelb, sitehweit, EINE Farbe */
+  --accent:#FFD426;        /* Hauptfarbe Signal-Gelb, sitehweit, EINE Farbe (identisch zu --gold der Hauptseite) */
   --on-accent:#5A4A00;     /* dunkle Schrift auf Gelb, immer */
   /* Semantik */
   --good:#3E7D5A;
@@ -68,7 +68,7 @@
   /* Radien und Masse */
   --radius:14px;
   --radius-sm:10px;
-  --maxw:1080px;
+  --maxw:1200px;        /* identisch zu --max-width der Hauptseite */
 }
 
 /* Dunkel per Systemeinstellung, sofern kein expliziter Hell Wunsch gesetzt ist */
@@ -83,7 +83,7 @@
     --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
     --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
     --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-    --accent:#FFBF00;--on-accent:#5A4A00;
+    --accent:#FFD426;--on-accent:#5A4A00;
     --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
     --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
   }
@@ -97,7 +97,7 @@
   --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
   --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
   --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-  --accent:#FFBF00;--on-accent:#5A4A00;
+  --accent:#FFD426;--on-accent:#5A4A00;
   --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
   --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
 }
@@ -151,16 +151,16 @@ section.block.tight{padding:26px 0}
    CHROME. Topbar, Achsen Umschalter, Theme Button, Breadcrumbs.
    ------------------------------------------------------------------------- */
 header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top-inner{max-width:var(--maxw);margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.top-inner{max-width:var(--maxw);height:72px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;text-decoration:none}
-.brand .mark{font-family:var(--font-ui);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
+.brand .mark{font-family:var(--font-ui);font-weight:800;font-size:1.5rem;letter-spacing:-.01em}
 .brand .mark b{font-weight:800;color:var(--accent)}
 .spacer{flex:1 1 auto}
 
 /* Hauptseiten-Navigation, damit der Wissensraum nicht wie eine losgeloeste
    Seite wirkt und man immer zurueck zu Home/Produkte/Ueber uns kommt. */
 .site-nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-.site-nav a{font-family:var(--font-ui);font-size:.85rem;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:.18s}
+.site-nav a{font-family:var(--font-ui);font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:.18s}
 .site-nav a:hover{color:var(--ink);background:var(--surface-2)}
 .site-nav a.active{color:var(--accent)}
 

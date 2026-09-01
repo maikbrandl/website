@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
-    <link rel="stylesheet" href="css/hybridlog-design-system.css?v=20260903">
+    <link rel="stylesheet" href="css/hybridlog-design-system.css?v=20260904">
 </head>
 
 <body>
@@ -27,11 +27,46 @@
     <main id="main">
         <div class="wrap">
             <section class="hero">
-                <p class="eyebrow">Hybridlog Wissensraum</p>
-                <h1>Wissen über den Menschen, zum Anfassen</h1>
-                <p class="lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken besser zu
-                    verstehen. Für alle, die neugierig auf sich selbst sind.</p>
-                <p class="principle">MIND und WORLD sind jetzt da. BODY folgt.</p>
+                <div class="hero-left">
+                    <p class="eyebrow">Hybridlog Wissensraum</p>
+                    <h1>Wissen über den Menschen, zum Anfassen</h1>
+                    <p class="lead">Hybridlog bündelt Tools und Beiträge, die dir helfen, dich und dein Denken besser
+                        zu verstehen. Für alle, die neugierig auf sich selbst sind.</p>
+                    <div class="hero-cta">
+                        <a class="btn" href="welt.html?w=mind">Mit MIND starten</a>
+                        <a class="btn ghost" href="mental/philosophie/denkschule.html">Ein Tool ausprobieren</a>
+                    </div>
+                    <div class="hero-stats" data-hl-stats></div>
+                </div>
+                <div class="hero-visual card">
+                    <p class="eyebrow">Die drei Welten</p>
+                    <p class="hv-lead">Ein Modell, das dich ganz erfasst.</p>
+                    <svg class="wdiagram" viewBox="0 0 240 200" aria-hidden="true">
+                        <line class="wd-edge" x1="120" y1="110" x2="58" y2="52"></line>
+                        <line class="wd-edge" x1="120" y1="110" x2="182" y2="52"></line>
+                        <line class="wd-edge wd-edge-dashed" x1="120" y1="110" x2="120" y2="168"></line>
+                        <g class="wd-node wd-mind">
+                            <circle cx="58" cy="52" r="30"></circle>
+                            <text class="wd-main" x="58" y="49">MIND</text>
+                            <text class="wd-sub" x="58" y="64">Geist</text>
+                        </g>
+                        <g class="wd-node wd-world">
+                            <circle cx="182" cy="52" r="30"></circle>
+                            <text class="wd-main" x="182" y="49">WORLD</text>
+                            <text class="wd-sub" x="182" y="64">Ideen</text>
+                        </g>
+                        <g class="wd-node wd-center">
+                            <circle cx="120" cy="110" r="26"></circle>
+                            <text class="wd-main" x="120" y="107">Mensch</text>
+                            <text class="wd-sub" x="120" y="121">du</text>
+                        </g>
+                        <g class="wd-node wd-body">
+                            <circle cx="120" cy="168" r="26"></circle>
+                            <text class="wd-main" x="120" y="165">BODY</text>
+                            <text class="wd-sub" x="120" y="179">bald</text>
+                        </g>
+                    </svg>
+                </div>
             </section>
 
             <section class="block" aria-labelledby="welten-title">
@@ -41,20 +76,31 @@
             </section>
 
             <section class="block tight" aria-labelledby="achsen-title">
-                <p class="eyebrow">Drei Zugänge</p>
-                <h2 id="achsen-title" class="reading" style="margin-bottom:16px">Lesen, sehen, ausprobieren</h2>
-                <div class="axis-row">
-                    <div class="axis-cell">
-                        <h4><span class="sq" style="background:var(--teal)"></span>Lesen</h4>
-                        <p class="muted">Artikel und Erklärungen, die ein Thema verständlich machen.</p>
-                    </div>
-                    <div class="axis-cell">
-                        <h4><span class="sq" style="background:var(--slate)"></span>Sehen</h4>
-                        <p class="muted">Landkarten und Visualisierungen, die Zusammenhänge zeigen.</p>
-                    </div>
-                    <div class="axis-cell">
-                        <h4><span class="sq" style="background:var(--amber)"></span>Ausprobieren</h4>
-                        <p class="muted">Tools und Tests, die du direkt auf dich anwendest.</p>
+                <div class="card">
+                    <p class="eyebrow">So nutzt du es</p>
+                    <h2 id="achsen-title" class="reading" style="margin-bottom:0">Drei Wege durch jedes Thema</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <span class="step-num">1</span>
+                            <div>
+                                <h4>Lesen</h4>
+                                <p class="muted">Artikel und Erklärungen, die ein Thema verständlich machen.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">2</span>
+                            <div>
+                                <h4>Sehen</h4>
+                                <p class="muted">Landkarten und Visualisierungen, die Zusammenhänge zeigen.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-num">3</span>
+                            <div>
+                                <h4>Ausprobieren</h4>
+                                <p class="muted">Tools und Tests, die du direkt auf dich anwendest.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -78,10 +124,18 @@
     </main>
 
     <script src="js/data.js?v=20260901"></script>
-    <script src="js/render.js?v=20260901"></script>
+    <script src="js/render.js?v=20260902"></script>
     <script>
         (function () {
             var D = window.HLData, R = window.HLRender;
+
+            // Hero-Kennzahlen
+            var mindCount = D.gebieteByWelt('mind', { onlyPublic: true }).length;
+            var toolsCount = D.INHALTE.filter(function (i) { return i.type === 'tool'; }).length;
+            document.querySelector('[data-hl-stats]').innerHTML =
+                '<span><span class="hd" style="background:var(--mind)"></span>' + mindCount + ' Fachgebiete</span>' +
+                '<span><span class="hd" style="background:var(--world)"></span>' + toolsCount + ' Tools zum Anwenden</span>' +
+                '<span><span class="hd" style="background:var(--body)"></span>Kostenlos lesbar</span>';
 
             // Weltkarten, alle drei Welten, BODY als "bald" ohne Link
             document.querySelector('[data-hl-worlds]').innerHTML = D.WELTEN.map(function (w) {
@@ -102,7 +156,7 @@
         })();
     </script>
     <script src="js/theme.js?v=20260901"></script>
-    <script src="js/shell.js?v=20260902"></script>
+    <script src="js/shell.js?v=20260903"></script>
 </body>
 
 </html>

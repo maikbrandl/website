@@ -1,16 +1,13 @@
 /**
  * Hybridlog Plattform – App-Shell (Design-System-Version)
- * Baut Topbar (Marke, Achsen-Linse, Theme-Button) und Brotkrumen.
- * Kein Sidebar/Drawer/Such-Overlay mehr, das neue Design kennt nur diese
- * beiden Chrome-Elemente (siehe Design-Prompt "Verbindliche Bausteine").
+ * Baut Topbar (Marke, Haupt-Navigation, Theme-Button) und Brotkrumen.
+ * Kein Sidebar/Drawer/Such-Overlay/Achsen-Linse mehr, das neue Design kennt
+ * nur diese Chrome-Elemente (siehe Design-Prompt "Verbindliche Bausteine").
  *
  * Seiten-Kontext wird ueber das <body> gesetzt:
  *   data-welt="world" data-gebiet="philosophie" data-inhalt="denkschule"
  *   data-title="..."  (fuer Brotkrumen, optional)
  * Basis-Pfad ueber window.PLATFORM_BASE ('./' Wurzel, '../' bzw. '../../' tiefer).
- *
- * Achsen-Linse: Klick auf einen Lens-Button dimmt alle [data-axis]-Karten,
- * deren Achse nicht passt (Klasse .dimmed).
  */
 (function () {
     'use strict';
@@ -36,15 +33,6 @@
     }
 
     // ────────────────────────────── Topbar ──────────────────────────────
-    function lensMarkup() {
-        return '<div class="lens" role="group" aria-label="Erlebnisachse">' +
-            '<span class="lens-label">Achse</span>' +
-            '<button type="button" data-lens="all" aria-pressed="true">Alle</button>' +
-            '<button type="button" data-lens="lesen" aria-pressed="false">Lesen</button>' +
-            '<button type="button" data-lens="sehen" aria-pressed="false">Sehen</button>' +
-            '<button type="button" data-lens="ausprobieren" aria-pressed="false">Ausprobieren</button>' +
-            '</div>';
-    }
 
     // Hauptseiten-Navigation (Home/Produkte/Wissensraum/Ueber uns), gleiche
     // Struktur wie js/components.js auf der Hauptseite. '../' vor dem Ziel
@@ -67,25 +55,11 @@
             '<a class="brand" href="' + href('../index.html') + '"><span class="mark">hybrid<b>logs</b></span></a>' +
             '<div class="spacer"></div>' +
             siteNavMarkup() +
-            lensMarkup() +
             (window.HLTheme ? window.HLTheme.markup() : '') +
             '</div>';
         body.insertBefore(el, body.firstChild);
         // Theme-Button idempotent verdrahten (attach schuetzt vor Doppelbindung).
         if (window.HLTheme) el.querySelectorAll('[data-theme-toggle]').forEach(window.HLTheme.attach);
-    }
-
-    function wireLens() {
-        const btns = Array.prototype.slice.call(document.querySelectorAll('.lens button'));
-        if (!btns.length) return;
-        btns.forEach((b) => b.addEventListener('click', () => {
-            const axis = b.getAttribute('data-lens');
-            btns.forEach((x) => x.setAttribute('aria-pressed', x.getAttribute('data-lens') === axis ? 'true' : 'false'));
-            document.querySelectorAll('[data-axis]').forEach((card) => {
-                const match = axis === 'all' || card.getAttribute('data-axis') === axis;
-                card.classList.toggle('dimmed', !match);
-            });
-        }));
     }
 
     // ────────────────────────────── Brotkrumen ──────────────────────────────
@@ -118,7 +92,6 @@
     // ────────────────────────────── Start ──────────────────────────────
     function init() {
         buildTopbar();
-        wireLens();
         fillCrumbs();
     }
 

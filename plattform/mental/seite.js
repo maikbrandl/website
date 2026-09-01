@@ -40,7 +40,6 @@
     const isTool = it.type === 'tool';
     const content = window.HLContent[it.slug];
     const stub = window.HLToolStub[it.slug];
-    const axis = R.axisFor(it);
 
     // JSON-LD (Article fuer Beitrag, SoftwareApplication fuer Tool)
     const ld = isTool
@@ -88,7 +87,7 @@
         '<div class="concept-main">' +
         '<p class="kernfrage">' + R.esc(gebiet.name) + '</p>' +
         '<h1>' + R.esc(it.title) + '</h1>' +
-        '<p><span class="chip axis-' + axis + '"><span class="dot"></span>' + R.AXIS_LABEL[axis] + '</span></p>' +
+        '<p><span class="nc-kind">' + R.kindLabel(it) + '</span></p>' +
         '<p class="short-answer">' + R.esc(lead) + '</p>' +
         cbs +
         '</div>' +

@@ -47,7 +47,7 @@
   --world:var(--amber);    /* Welt World */
   --mind:var(--slate);     /* Welt Mind */
   --body:var(--teal);      /* Welt Body */
-  --accent:#FFD426;        /* Hauptfarbe Signal-Gelb, sitehweit, EINE Farbe */
+  --accent:#FFBF00;        /* Hauptfarbe Signal-Gelb, sitehweit, EINE Farbe */
   --on-accent:#5A4A00;     /* dunkle Schrift auf Gelb, immer */
   /* Semantik */
   --good:#3E7D5A;
@@ -83,7 +83,7 @@
     --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
     --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
     --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-    --accent:#FFD426;--on-accent:#5A4A00;
+    --accent:#FFBF00;--on-accent:#5A4A00;
     --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
     --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
   }
@@ -97,7 +97,7 @@
   --amber:#D4A24A;--amber-dark:#B4882E;--amber-light:#E8D7A6;
   --slate:#4A6D7A;--slate-dark:#354F59;--slate-light:#9FB6BE;
   --gold:var(--amber);--world:var(--amber);--mind:var(--slate);--body:var(--teal);
-  --accent:#FFD426;--on-accent:#5A4A00;
+  --accent:#FFBF00;--on-accent:#5A4A00;
   --good:#5FA37B;--warn:#C9A257;--crit:#D07A5C;
   --shadow:rgba(0,0,0,.45);--shadow-lg:rgba(0,0,0,.6);
 }
@@ -164,13 +164,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .site-nav a:hover{color:var(--ink);background:var(--surface-2)}
 .site-nav a.active{color:var(--accent)}
 
-/* Achsen Umschalter Lesen, Sehen, Ausprobieren */
-.lens{display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px}
-.lens .lens-label{font-family:var(--font-ui);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:0 8px}
-.lens button{font-family:var(--font-ui);font-size:.8rem;font-weight:500;border:0;background:transparent;color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer;transition:.18s}
-.lens button:hover{color:var(--ink)}
-.lens button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
-
 .iconbtn{font-family:var(--font-ui);font-size:.8rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--muted);width:38px;height:38px;border-radius:10px;cursor:pointer;display:grid;place-items:center;transition:.18s}
 .iconbtn:hover{color:var(--ink);border-color:var(--accent)}
 
@@ -191,13 +184,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* Tap, macht ein Element als Kachel klickbar mit Hover Anhebung */
 .tap{cursor:pointer;transition:.2s;text-decoration:none;display:block}
 .tap:hover{transform:translateY(-3px);box-shadow:0 10px 26px var(--shadow-lg);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
-
-/* Chip, kleine Marke. Achsen Varianten faerben nach Erlebnisform. */
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:.72rem;letter-spacing:.04em;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);background:var(--surface)}
-.chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.chip.axis-lesen{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 40%,var(--line))}
-.chip.axis-sehen{color:var(--slate);border-color:color-mix(in srgb,var(--slate) 40%,var(--line))}
-.chip.axis-ausprobieren{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,var(--line))}
 
 /* Seitentyp Marke, rechts oben im Seitenkopf */
 .typechip{margin-left:auto;font-family:var(--font-ui);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}
@@ -233,10 +219,34 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .metaline-h b{color:var(--ink);font-weight:600}
 
 /* Hero der Startseite */
-.hero{padding:56px 0 26px}
+.hero{padding:56px 0 26px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
 .hero h1{font-size:var(--fs-h1);letter-spacing:-.01em}
 .hero .lead{font-size:var(--fs-lead);color:var(--muted);max-width:62ch;margin-top:16px}
-.hero .principle{margin-top:22px;font-style:italic;font-family:var(--font-display);font-size:1.12rem;color:var(--ink);border-left:3px solid var(--accent);padding-left:16px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:22px;font-family:var(--font-ui);font-size:.86rem;color:var(--muted)}
+.hero-stats span{display:flex;align-items:center;gap:7px}
+.hero-stats .hd{width:8px;height:8px;border-radius:50%;flex:none}
+
+/* Weltendiagramm, kleine Visualisierung neben dem Hero-Text */
+.hero-visual{padding:22px}
+.hero-visual .hv-lead{font-style:italic;color:var(--muted);margin:2px 0 14px;font-size:.92rem}
+.wdiagram{width:100%;height:auto;display:block}
+.wd-edge{stroke:var(--line-strong);stroke-width:1.6}
+.wd-edge-dashed{stroke-dasharray:4 4}
+.wd-node circle{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.6}
+.wd-node text{font-family:var(--font-ui);text-anchor:middle}
+.wd-node .wd-main{font-size:11px;font-weight:700;fill:var(--ink)}
+.wd-node .wd-sub{font-size:9px;font-weight:400;fill:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.wd-mind circle{stroke:var(--mind)}
+.wd-mind .wd-main{fill:var(--mind)}
+.wd-world circle{stroke:var(--world)}
+.wd-world .wd-main{fill:var(--world)}
+.wd-body circle{stroke:var(--line-strong);stroke-dasharray:3 3}
+.wd-body .wd-main{fill:var(--faint)}
+.wd-center circle{fill:var(--accent);stroke:var(--accent)}
+.wd-center .wd-main{fill:var(--on-accent)}
+.wd-center .wd-sub{fill:var(--on-accent);opacity:.75}
 
 /* Weltkarten der Startseite */
 .worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
@@ -246,17 +256,20 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .world-card .wc-idx{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--wc);font-weight:600}
 .world-card h3{font-size:var(--fs-world-title);margin:8px 0 2px}
 .world-card .wc-lead{font-style:italic;color:var(--muted);margin-bottom:10px}
-.world-card .wc-count{font-family:var(--font-ui);font-size:.8rem;color:var(--faint);margin-top:auto}
+.world-card .wc-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+.world-card .wc-count{font-family:var(--font-ui);font-size:.8rem;color:var(--faint)}
+.world-card .wc-cta{font-family:var(--font-ui);font-size:.82rem;font-weight:600;color:var(--wc)}
 .world-card[data-w="mind"]{--wc:var(--mind)}
 .world-card[data-w="body"]{--wc:var(--body)}
 .world-card[data-w="world"]{--wc:var(--world)}
 
-/* Achsen Erklaerung, drei Zellen */
-.axis-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
-@media(max-width:820px){.axis-row{grid-template-columns:1fr}}
-.axis-cell{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--surface)}
-.axis-cell h4{font-family:var(--font-ui);font-size:.95rem;display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.axis-cell .sq{width:11px;height:11px;border-radius:3px}
+/* So nutzt du es, drei nummerierte Schritte in einer Karte */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap);margin-top:18px}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--font-ui);font-weight:700;font-size:.9rem}
+.step h4{font-family:var(--font-ui);font-size:.98rem;margin-bottom:4px}
+.step p{font-size:.88rem}
 
 /* Taxonomiebaum, drei Spalten mit Statuspunkten */
 .tax{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -290,12 +303,15 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .cluster{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-grid-gap)}
 @media(max-width:820px){.cluster{grid-template-columns:1fr}}
 .node-card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:18px}
-.node-card .nc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.node-card .nc-graphic{height:96px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;margin-bottom:14px;color:var(--faint)}
+.node-card .nc-graphic svg{width:74%;height:60%}
+.node-card .nc-graphic[data-w="mind"]{color:var(--mind);background:color-mix(in srgb,var(--mind) 10%,var(--surface-2))}
+.node-card .nc-graphic[data-w="body"]{color:var(--body);background:color-mix(in srgb,var(--body) 10%,var(--surface-2))}
+.node-card .nc-graphic[data-w="world"]{color:var(--world);background:color-mix(in srgb,var(--world) 10%,var(--surface-2))}
+.node-card .nc-top{margin-bottom:8px}
+.node-card .nc-kind{font-family:var(--font-ui);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--faint)}
 .node-card h4{font-size:var(--fs-card-title)}
 .node-card p{font-size:.9rem;color:var(--muted);margin:0}
-/* Achsenfilter, gedimmte Karte wenn Linse aktiv und Achse nicht passt */
-.dimmed{opacity:.26;filter:saturate(.4)}
-.dimmed .tap:hover{transform:none;box-shadow:none}
 
 /* Konzeptseite, zweispaltig mit Sidebar */
 .concept-grid{display:grid;grid-template-columns:1fr 262px;gap:40px;align-items:start;padding-top:30px}

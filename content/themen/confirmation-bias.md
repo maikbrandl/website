@@ -38,15 +38,11 @@ bloecke:
         untertitel: Mehrdeutiges wird zu deinen Gunsten ausgelegt.
         icon: filter
   - type: textabschnitt
-    text: >
-      Der Effekt wirkt in praktisch jedem Lebensbereich: bei politischen
-      Meinungen,
-
-      Investment-Entscheidungen, in Beziehungen und im Lernen selbst. Besonders tückisch
-
-      ist, dass er sich subjektiv nicht wie ein Fehler anfühlt, sondern wie gesunder
-
-      Menschenverstand.
+    text: "Der Effekt wirkt in praktisch jedem Lebensbereich: bei politischen
+      Meinungen, Investment-Entscheidungen, in Beziehungen und im Lernen selbst.
+      Besonders tückisch ist, dass er sich subjektiv nicht wie ein Fehler
+      anfühlt, sondern wie gesunder Menschenverstand."
+    titel_override: Anwendung
   - type: beispiel
     text: Jemand ist überzeugt, dass eine bestimmte Lernmethode wirkt. Erfolge
       werden der Methode zugeschrieben, Misserfolge anderen Umständen.

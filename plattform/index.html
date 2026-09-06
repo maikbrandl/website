@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
-    <link rel="stylesheet" href="css/hybridlog-design-system.css?v=20260907">
+    <link rel="stylesheet" href="css/hybridlog-design-system.css?v=20260908">
 </head>
 
 <body>
@@ -34,7 +34,6 @@
                         zu verstehen. Für alle, die neugierig auf sich selbst sind.</p>
                     <div class="hero-cta">
                         <a class="btn" id="ctaMind" href="welt.html?w=mind">Mit MIND starten</a>
-                        <a class="btn ghost" href="mental/philosophie/denkschule.html">Ein Tool ausprobieren</a>
                     </div>
                     <div class="hero-stats" data-hl-stats></div>
                 </div>
@@ -42,6 +41,24 @@
                     <p class="eyebrow">Die drei Welten</p>
                     <p class="hv-lead">Ein Modell, das dich ganz erfasst.</p>
                     <svg class="wdiagram" viewBox="0 0 240 200" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="gradMind" cx="32%" cy="26%" r="80%">
+                                <stop offset="0%" class="wd-stop-mind-a"></stop>
+                                <stop offset="100%" class="wd-stop-mind-b"></stop>
+                            </radialGradient>
+                            <radialGradient id="gradWorld" cx="32%" cy="26%" r="80%">
+                                <stop offset="0%" class="wd-stop-world-a"></stop>
+                                <stop offset="100%" class="wd-stop-world-b"></stop>
+                            </radialGradient>
+                            <radialGradient id="gradBody" cx="32%" cy="26%" r="80%">
+                                <stop offset="0%" class="wd-stop-body-a"></stop>
+                                <stop offset="100%" class="wd-stop-body-b"></stop>
+                            </radialGradient>
+                            <radialGradient id="gradCenter" cx="32%" cy="24%" r="85%">
+                                <stop offset="0%" class="wd-stop-center-a"></stop>
+                                <stop offset="100%" class="wd-stop-center-b"></stop>
+                            </radialGradient>
+                        </defs>
                         <line class="wd-edge" x1="120" y1="110" x2="58" y2="52"></line>
                         <line class="wd-edge" x1="120" y1="110" x2="182" y2="52"></line>
                         <line class="wd-edge wd-edge-dashed" x1="120" y1="110" x2="120" y2="168"></line>
@@ -73,36 +90,6 @@
                 <p class="eyebrow">Die drei Welten</p>
                 <h2 id="welten-title">Wähle eine Welt</h2>
                 <div class="worlds" data-hl-worlds style="margin-top:20px"></div>
-            </section>
-
-            <section class="block tight" aria-labelledby="achsen-title">
-                <div class="card">
-                    <p class="eyebrow">So nutzt du es</p>
-                    <h2 id="achsen-title" class="reading" style="margin-bottom:0">Drei Wege durch jedes Thema</h2>
-                    <div class="steps">
-                        <div class="step">
-                            <span class="step-num">1</span>
-                            <div>
-                                <h4>Lesen</h4>
-                                <p class="muted">Artikel und Erklärungen, die ein Thema verständlich machen.</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-num">2</span>
-                            <div>
-                                <h4>Sehen</h4>
-                                <p class="muted">Landkarten und Visualisierungen, die Zusammenhänge zeigen.</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-num">3</span>
-                            <div>
-                                <h4>Ausprobieren</h4>
-                                <p class="muted">Tools und Tests, die du direkt auf dich anwendest.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <section class="block" aria-labelledby="probieren-title">

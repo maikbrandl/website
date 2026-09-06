@@ -203,7 +203,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .vis{font-family:var(--font-ui);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
 
 /* Buttons */
-.btn{font-family:var(--font-ui);font-weight:500;font-size:.88rem;cursor:pointer;border-radius:var(--radius-sm);padding:10px 18px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);transition:.18s}
+.btn{font-family:var(--font-ui);font-weight:700;font-size:.88rem;cursor:pointer;border-radius:var(--radius-sm);padding:10px 18px;border:1px solid var(--accent);background:var(--accent);color:#000;text-decoration:none;transition:.18s}
 .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--accent)}
 .btn.ghost:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
@@ -232,19 +232,27 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .hero-visual{padding:22px}
 .hero-visual .hv-lead{font-style:italic;color:var(--muted);margin:2px 0 14px;font-size:.92rem}
 .wdiagram{width:100%;height:auto;display:block}
-.wd-edge{stroke:var(--line-strong);stroke-width:1.6}
+.wd-edge{stroke:var(--line-strong);stroke-width:2.4}
 .wd-edge-dashed{stroke-dasharray:4 4}
-.wd-node circle{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.6}
+.wd-node circle{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:2.2;filter:drop-shadow(0 5px 12px var(--shadow-lg))}
 .wd-node text{font-family:var(--font-ui);text-anchor:middle}
 .wd-node .wd-main{font-size:11px;font-weight:700;fill:var(--ink)}
 .wd-node .wd-sub{font-size:9px;font-weight:400;fill:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.wd-mind circle{stroke:var(--mind)}
+.wd-stop-mind-a{stop-color:color-mix(in srgb,var(--mind) 40%,var(--surface-2))}
+.wd-stop-mind-b{stop-color:var(--surface-2)}
+.wd-stop-world-a{stop-color:color-mix(in srgb,var(--world) 40%,var(--surface-2))}
+.wd-stop-world-b{stop-color:var(--surface-2)}
+.wd-stop-body-a{stop-color:var(--surface-2)}
+.wd-stop-body-b{stop-color:var(--surface)}
+.wd-stop-center-a{stop-color:color-mix(in srgb,white 32%,var(--accent))}
+.wd-stop-center-b{stop-color:var(--accent)}
+.wd-mind circle{fill:url(#gradMind);stroke:var(--mind)}
 .wd-mind .wd-main{fill:var(--mind)}
-.wd-world circle{stroke:var(--world)}
+.wd-world circle{fill:url(#gradWorld);stroke:var(--world)}
 .wd-world .wd-main{fill:var(--world)}
-.wd-body circle{stroke:var(--line-strong);stroke-dasharray:3 3}
+.wd-body circle{fill:url(#gradBody);stroke:var(--line-strong);stroke-dasharray:3 3;filter:none}
 .wd-body .wd-main{fill:var(--faint)}
-.wd-center circle{fill:var(--accent);stroke:var(--accent)}
+.wd-center circle{fill:url(#gradCenter);stroke:var(--accent);filter:drop-shadow(0 6px 16px var(--shadow-lg)) drop-shadow(0 0 16px color-mix(in srgb,var(--accent) 55%,transparent))}
 .wd-center .wd-main{fill:var(--on-accent)}
 .wd-center .wd-sub{fill:var(--on-accent);opacity:.75}
 

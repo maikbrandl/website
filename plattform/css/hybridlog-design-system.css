@@ -229,15 +229,18 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .hero-stats .hd{width:8px;height:8px;border-radius:50%;flex:none}
 
 /* Weltendiagramm, kleine Visualisierung neben dem Hero-Text */
-.hero-visual{padding:22px}
-.hero-visual .hv-lead{font-style:italic;color:var(--muted);margin:2px 0 14px;font-size:.92rem}
+.hero-visual{padding:18px;max-width:280px;justify-self:start}
+.hero-visual .hv-lead{font-style:italic;color:var(--muted);margin:2px 0 12px;font-size:.86rem}
 .wdiagram{width:100%;height:auto;display:block}
+
+/* Trennlinie zwischen Abschnitten */
+.divider{border:none;border-top:1px solid var(--line);margin:8px 0}
 .wd-edge{stroke:var(--line-strong);stroke-width:2.4}
 .wd-edge-dashed{stroke-dasharray:4 4}
 .wd-node circle{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:2.2;filter:drop-shadow(0 5px 12px var(--shadow-lg))}
 .wd-node text{font-family:var(--font-ui);text-anchor:middle}
-.wd-node .wd-main{font-size:11px;font-weight:700;fill:var(--ink)}
-.wd-node .wd-sub{font-size:9px;font-weight:400;fill:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.wd-node .wd-main{font-size:13px;font-weight:700;fill:var(--ink)}
+.wd-node .wd-sub{font-size:10px;font-weight:400;fill:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .wd-stop-mind-a{stop-color:color-mix(in srgb,var(--mind) 40%,var(--surface-2))}
 .wd-stop-mind-b{stop-color:var(--surface-2)}
 .wd-stop-world-a{stop-color:color-mix(in srgb,var(--world) 40%,var(--surface-2))}

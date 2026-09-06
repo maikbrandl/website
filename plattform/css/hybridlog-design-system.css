@@ -229,7 +229,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .hero-stats .hd{width:8px;height:8px;border-radius:50%;flex:none}
 
 /* Weltendiagramm, kleine Visualisierung neben dem Hero-Text */
-.hero-visual{padding:18px;max-width:280px;justify-self:start}
+.hero-visual{padding:20px;max-width:300px;justify-self:end}
 .hero-visual .hv-lead{font-style:italic;color:var(--muted);margin:2px 0 12px;font-size:.86rem}
 .wdiagram{width:100%;height:auto;display:block}
 

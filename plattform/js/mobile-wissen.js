@@ -58,9 +58,11 @@
 
         contentEl.innerHTML =
             renderThemenSection(gebiet) +
+            '<hr class="mw-divider">' +
             section('Ausprobieren', 'Tools zum Ausprobieren',
                 tools.length ? '<div class="cluster mw-cluster">' + tools.map(function (it) { return R.nodeCard(it, gebiet); }).join('') + '</div>' : '',
                 'Für dieses Fachgebiet sind bald Tools verfügbar.') +
+            '<hr class="mw-divider">' +
             section('Lesen', 'Beiträge zum Vertiefen',
                 arts.length ? '<div class="cluster mw-cluster">' + arts.map(function (it) { return R.nodeCard(it, gebiet); }).join('') + '</div>' : '',
                 'Bald folgen hier vertiefende Beiträge.');

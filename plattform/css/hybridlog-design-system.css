@@ -275,8 +275,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
   section[aria-labelledby="neu-title"]{display:none!important}
 
   .mobile-wissen{display:block;padding-top:20px}
-  .mw-head{margin-bottom:18px}
-  .mw-head h1{font-size:var(--fs-h2);margin-top:6px}
 
   .mw-tabs{display:flex;gap:6px;background:var(--surface-2);padding:4px;border-radius:var(--radius-sm);margin-bottom:14px}
   .mw-tab{
@@ -299,6 +297,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
   .mw-section h3{font-size:1.05rem;margin-top:4px;margin-bottom:12px}
   .mw-cluster{grid-template-columns:1fr!important}
   .mw-empty{font-size:.88rem}
+  .mw-divider{border:none;border-top:1px solid var(--line);margin:26px 0}
 }
 
 /* -------------------------------------------------------------------------

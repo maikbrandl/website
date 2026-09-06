@@ -192,8 +192,8 @@ body {
 }
 
 @keyframes pageIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 a {
@@ -1894,6 +1894,57 @@ h1, h2, h3, h4, h5 {
 .sticky-cta.visible {
     transform: translateY(0);
 }
+
+/* ====================== Bottom Tab Bar (mobil, persistent) ====================== */
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    body:has(.bottom-nav) {
+        padding-bottom: 60px;
+    }
+
+    .sticky-cta {
+        bottom: 60px;
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: var(--z-cookie);
+        background: var(--bg-elevated);
+        border-top: 1px solid var(--border);
+        padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav-item {
+        flex: 1 1 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 6px 2px;
+        color: var(--gray-500);
+        text-decoration: none;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        border-radius: var(--radius-token, 10px);
+        transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .bottom-nav-item .icon {
+        display: flex;
+    }
+
+    .bottom-nav-item.active {
+        color: var(--gold);
+    }
+}
+
 
 .sticky-cta-inner {
     display: flex;

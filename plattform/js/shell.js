@@ -52,6 +52,9 @@
         el.className = 'top';
         el.innerHTML =
             '<div class="top-inner">' +
+            '<button type="button" class="back-btn" data-back aria-label="Zurück" hidden>' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>' +
+            '</button>' +
             '<a class="brand" href="' + href('../index.html') + '"><span class="mark">hybrid<b>logs</b></span></a>' +
             '<div class="spacer"></div>' +
             siteNavMarkup() +
@@ -60,6 +63,85 @@
         body.insertBefore(el, body.firstChild);
         // Theme-Button idempotent verdrahten (attach schuetzt vor Doppelbindung).
         if (window.HLTheme) el.querySelectorAll('[data-theme-toggle]').forEach(window.HLTheme.attach);
+
+        // Zurueck-Pfeil: nur mobil sichtbar (CSS), navigiert per Browser-Historie.
+        // Auf der Wissensraum-Startseite gibt es keine sinnvolle "Zurueck"-Ebene
+        // innerhalb der Plattform, daher dort ausgeblendet.
+        const backBtn = el.querySelector('[data-back]');
+        const isRoot = /(^|\/)plattform\/index\.html$/.test(location.pathname) || /\/plattform\/?$/.test(location.pathname);
+        if (backBtn && !isRoot) {
+            backBtn.hidden = false;
+            backBtn.addEventListener('click', function () { history.back(); });
+        }
+    }
+
+    // ────────────────────────────── Bottom Tab Bar (mobil) ──────────────────────────────
+    function isSearchPage() {
+        return /suche\.html$/.test(location.pathname);
+    }
+
+    function bottomNavMarkup() {
+        const items = [
+            {
+                label: 'Wissen', href: href('index.html'), active: !isSearchPage(),
+                icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 2z"/></svg>',
+            },
+            {
+                label: 'Suche', href: href('suche.html'), active: isSearchPage(),
+                icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+            },
+            {
+                label: 'Tools', href: href('../tools/'), active: false,
+                icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2 2.5-2.5z"/></svg>',
+            },
+        ];
+        const linksHTML = items.map(function (it) {
+            return '<a href="' + it.href + '" class="bottom-nav-item' + (it.active ? ' active' : '') + '">' + it.icon + '<span>' + it.label + '</span></a>';
+        }).join('');
+        const mehrHTML = '<button type="button" class="bottom-nav-item" data-mehr-toggle aria-haspopup="true" aria-expanded="false">' +
+            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>' +
+            '<span>Mehr</span></button>';
+        return '<nav class="bottom-nav" aria-label="Mobile Wissensraum-Navigation">' + linksHTML + mehrHTML + '</nav>';
+    }
+
+    function mehrOverlayMarkup() {
+        return '<div class="mehr-overlay" data-mehr-overlay hidden>' +
+            '<div class="mehr-backdrop" data-mehr-close></div>' +
+            '<div class="mehr-panel">' +
+            '<p class="eyebrow">Mehr</p>' +
+            '<a href="' + href('../index.html') + '">' + 'Home' + '</a>' +
+            '<a href="' + href('../index.html#produkte') + '">' + 'Produkte' + '</a>' +
+            '<a href="' + href('../index.html#story') + '">' + 'Über uns' + '</a>' +
+            '<button type="button" class="mehr-close" data-mehr-close>Schließen</button>' +
+            '</div>' +
+            '</div>';
+    }
+
+    function buildBottomNav() {
+        body.insertAdjacentHTML('beforeend', bottomNavMarkup() + mehrOverlayMarkup());
+        const overlay = document.querySelector('[data-mehr-overlay]');
+        const toggle = document.querySelector('[data-mehr-toggle]');
+        if (!overlay || !toggle) return;
+
+        function open() {
+            overlay.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.classList.add('active');
+        }
+        function close() {
+            overlay.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.classList.remove('active');
+        }
+        toggle.addEventListener('click', function () {
+            if (overlay.hidden) open(); else close();
+        });
+        overlay.querySelectorAll('[data-mehr-close]').forEach(function (el) {
+            el.addEventListener('click', close);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !overlay.hidden) close();
+        });
     }
 
     // ────────────────────────────── Brotkrumen ──────────────────────────────
@@ -93,6 +175,7 @@
     function init() {
         buildTopbar();
         fillCrumbs();
+        buildBottomNav();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

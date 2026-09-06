@@ -60,6 +60,10 @@ const HybridlogsComponents = (() => {
         calendar: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
         clipboardCheck: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h-2a3 3 0 1 0-4 0H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="M9 14l2 2 4-4"/></svg>`,
         globe: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+        navHome: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>`,
+        navProdukte: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>`,
+        navWissen: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 2z"/></svg>`,
+        navUeber: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg>`,
     };
 
     // ——— Helpers ———
@@ -165,6 +169,27 @@ const HybridlogsComponents = (() => {
         return `<div class="stars" aria-label="${count} von 5 Sternen">${ICONS.star.repeat(count)}</div>`;
     }
 
+    // ——— Bottom Tab Bar (mobil, persistent) ———
+    const BOTTOM_NAV_ITEMS = [
+        { label: 'Home', href: 'index.html', id: 'home', icon: 'navHome' },
+        { label: 'Produkte', href: 'index.html#produkte', id: 'produkte', icon: 'navProdukte' },
+        { label: 'Wissen', href: 'plattform/', id: 'plattform', icon: 'navWissen' },
+        { label: 'Über uns', href: 'index.html#story', id: 'about', icon: 'navUeber' },
+    ];
+
+    function renderBottomNav() {
+        const pageId = getPageId();
+        const isProductPage = ['studienplaner', 'notizbuch', 'lernjournal', 'workoutlogbuch'].includes(pageId);
+        const itemsHTML = BOTTOM_NAV_ITEMS.map(item => {
+            const isActive =
+                (item.id === 'home' && pageId === 'index') ||
+                (item.id === 'produkte' && isProductPage) ||
+                (item.id !== 'home' && item.id !== 'produkte' && item.id === pageId);
+            return `<a href="${item.href}" class="bottom-nav-item${isActive ? ' active' : ''}">${icon(item.icon)}<span>${item.label}</span></a>`;
+        }).join('');
+        return `<nav class="bottom-nav" aria-label="Mobile Hauptnavigation">${itemsHTML}</nav>`;
+    }
+
     // ——— Public Init ———
     function init() {
         // Inject header
@@ -174,6 +199,9 @@ const HybridlogsComponents = (() => {
         // Inject footer
         const footerSlot = document.getElementById('footer-slot');
         if (footerSlot) footerSlot.outerHTML = renderFooter();
+
+        // Persistent mobile bottom tab bar
+        document.body.insertAdjacentHTML('beforeend', renderBottomNav());
 
         // Remove legacy cookie slot if present (custom cookie banner is external)
         const cookieSlot = document.getElementById('cookie-slot');

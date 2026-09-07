@@ -88,6 +88,7 @@
         const arts = D.inhalteByGebiet(gebiet.slug, 'artikel');
 
         contentEl.innerHTML =
+            '<hr class="mw-divider">' +
             renderThemenSection(gebiet) +
             '<hr class="mw-divider">' +
             section('Ausprobieren', 'Tools zum Ausprobieren',

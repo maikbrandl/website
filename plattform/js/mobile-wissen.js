@@ -37,16 +37,47 @@
             (html || '<p class="disc mw-empty">' + esc(emptyMsg) + '</p>') + '</div>';
     }
 
+    function themaCard(t, gebiet) {
+        return R.nodeCard({ type: 'thema', slug: t.slug, href: 'mental/thema.html?slug=' + encodeURIComponent(t.slug), title: t.title, teaser: t.lead }, gebiet);
+    }
+
+    function cardsHtml(list, gebiet) {
+        return '<div class="cluster mw-cluster mw-cluster-compact">' + list.map(function (t) { return themaCard(t, gebiet); }).join('') + '</div>';
+    }
+
+    // Themen ohne Unterkategorie bleiben lose Karten, mit Unterkategorie
+    // wandern sie in ein Dropdown (Unterkategorie in Teal = Klappauslöser),
+    // damit auf kleinen Screens nicht alles auf einmal sichtbar ist.
     function renderThemenSection(gebiet) {
         if (themenCache === null) {
             return section('Wissen', 'Themen', '', 'Themen werden geladen …');
         }
         const inGebiet = themenCache.filter(function (t) { return t.gebiet === gebiet.slug; });
-        const html = inGebiet.length
-            ? '<div class="cluster mw-cluster mw-cluster-compact">' + inGebiet.map(function (t) {
-                return R.nodeCard({ type: 'thema', slug: t.slug, href: 'mental/thema.html?slug=' + encodeURIComponent(t.slug), title: t.title, teaser: t.lead, subcat: t.untergruppe }, gebiet);
-            }).join('') + '</div>'
-            : '';
+        if (!inGebiet.length) {
+            return section('Wissen', 'Themen', '', 'Für dieses Fachgebiet sind bald Themen verfügbar.');
+        }
+
+        const flat = inGebiet.filter(function (t) { return !t.untergruppe; });
+        const gruppen = [];
+        inGebiet.forEach(function (t) {
+            if (!t.untergruppe) return;
+            let g = gruppen.find(function (x) { return x.name === t.untergruppe; });
+            if (!g) { g = { name: t.untergruppe, themen: [] }; gruppen.push(g); }
+            g.themen.push(t);
+        });
+
+        const flatHtml = flat.length ? cardsHtml(flat, gebiet) : '';
+        const gruppenHtml = gruppen.map(function (g) {
+            return '<details class="mw-thema-group">' +
+                '<summary><span class="mw-tg-name">' + esc(g.name) + '</span>' +
+                '<span class="mw-tg-count">' + g.themen.length + (g.themen.length === 1 ? ' Thema' : ' Themen') + '</span></summary>' +
+                cardsHtml(g.themen, gebiet) +
+                '</details>';
+        }).join('');
+
+        const html = flatHtml && gruppenHtml
+            ? flatHtml + '<hr class="mw-divider mw-divider-sm">' + gruppenHtml
+            : (flatHtml || gruppenHtml);
         return section('Wissen', 'Themen', html, 'Für dieses Fachgebiet sind bald Themen verfügbar.');
     }
 

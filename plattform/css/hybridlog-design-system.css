@@ -306,6 +306,19 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
   .mw-cluster-compact .node-card .nc-top,
   .mw-cluster-compact .node-card p{display:none}
   .mw-cluster-compact .node-card h4{font-size:.95rem}
+  .mw-divider-sm{margin:16px 0}
+
+  /* Unterkategorien als Dropdown: Teal-Label ist der Klappauslöser, damit
+     nicht alle Themen einer Kategorie auf einmal sichtbar sind. */
+  .mw-thema-group{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
+  .mw-thema-group:last-child{margin-bottom:0}
+  .mw-thema-group summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px}
+  .mw-thema-group summary::-webkit-details-marker{display:none}
+  .mw-thema-group .mw-tg-name{font-family:var(--font-ui);font-size:.84rem;font-weight:700;color:var(--teal)}
+  .mw-thema-group .mw-tg-count{margin-left:auto;font-family:var(--font-ui);font-size:.74rem;color:var(--faint);font-weight:600}
+  .mw-thema-group summary::after{content:"";flex:none;width:7px;height:7px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:6px;transition:.15s}
+  .mw-thema-group[open] summary::after{transform:rotate(-135deg);border-color:var(--teal)}
+  .mw-thema-group .mw-cluster-compact{margin:0;padding:0 12px 12px}
 }
 
 /* -------------------------------------------------------------------------
@@ -457,7 +470,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .node-card .nc-top{margin-bottom:8px}
 .node-card .nc-kind{font-family:var(--font-ui);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--faint)}
 .node-card h4{font-size:var(--fs-card-title)}
-.node-card .nc-subcat{margin-left:8px;font-family:var(--font-ui);font-size:.68rem;font-weight:600;color:var(--teal);vertical-align:middle}
 .node-card p{font-size:.9rem;color:var(--muted);margin:0}
 
 /* Konzeptseite, zweispaltig mit Sidebar */

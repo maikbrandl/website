@@ -616,6 +616,7 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 .thema-metaline svg{width:14px;height:14px}
 
 /* Abschnittskarten, automatisch nummeriert */
+.thema-main>.stack{gap:28px}
 .thema-sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-box-pad);scroll-margin-top:96px}
 .thema-sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .thema-sec-num{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--font-ui);font-weight:700;font-size:.82rem;font-variant-numeric:tabular-nums;display:grid;place-items:center}

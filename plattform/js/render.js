@@ -36,7 +36,7 @@
         return '<a class="node-card tap" href="' + href(it.href) + '">' +
             graphic +
             '<div class="nc-top"><span class="nc-kind">' + kindLabel(it) + '</span></div>' +
-            '<h4>' + esc(it.title) + '</h4>' +
+            '<h4>' + esc(it.title) + (it.subcat ? '<span class="nc-subcat">' + esc(it.subcat) + '</span>' : '') + '</h4>' +
             '<p>' + esc(it.teaser) + '</p>' +
             '</a>';
     }

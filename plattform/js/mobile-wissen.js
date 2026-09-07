@@ -43,8 +43,8 @@
         }
         const inGebiet = themenCache.filter(function (t) { return t.gebiet === gebiet.slug; });
         const html = inGebiet.length
-            ? '<div class="cluster mw-cluster">' + inGebiet.map(function (t) {
-                return R.nodeCard({ type: 'thema', slug: t.slug, href: 'mental/thema.html?slug=' + encodeURIComponent(t.slug), title: t.title, teaser: t.lead }, gebiet);
+            ? '<div class="cluster mw-cluster mw-cluster-compact">' + inGebiet.map(function (t) {
+                return R.nodeCard({ type: 'thema', slug: t.slug, href: 'mental/thema.html?slug=' + encodeURIComponent(t.slug), title: t.title, teaser: t.lead, subcat: t.untergruppe }, gebiet);
             }).join('') + '</div>'
             : '';
         return section('Wissen', 'Themen', html, 'Für dieses Fachgebiet sind bald Themen verfügbar.');

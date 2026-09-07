@@ -265,6 +265,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
      und ohne Media-Query sonst in der Kaskade gewinnen wuerden. */
   .thema-metaline{display:none!important}
   .thema-nav{display:none!important}
+  .thema-rail{display:none!important}
 
   /* Wissensraum-Startseite: Desktop-Hero/Weltkarten/Tools/Neu weichen dem
      App-artigen Welt-Tabs -> Fachgebiet-Chips -> Inhalte Browser. */
@@ -298,6 +299,13 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
   .mw-cluster{grid-template-columns:1fr!important}
   .mw-empty{font-size:.88rem}
   .mw-divider{border:none;border-top:1px solid var(--line);margin:26px 0}
+
+  /* Themen-Karten im mobilen Browser: nur Titel + Unterkategorie, kein
+     Eyebrow/Teaser, damit sich viele Themen schnell durchscrollen lassen. */
+  .mw-cluster-compact .node-card{padding:13px 16px}
+  .mw-cluster-compact .node-card .nc-top,
+  .mw-cluster-compact .node-card p{display:none}
+  .mw-cluster-compact .node-card h4{font-size:.95rem}
 }
 
 /* -------------------------------------------------------------------------
@@ -449,6 +457,7 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .node-card .nc-top{margin-bottom:8px}
 .node-card .nc-kind{font-family:var(--font-ui);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--faint)}
 .node-card h4{font-size:var(--fs-card-title)}
+.node-card .nc-subcat{margin-left:8px;font-family:var(--font-ui);font-size:.68rem;font-weight:600;color:var(--teal);vertical-align:middle}
 .node-card p{font-size:.9rem;color:var(--muted);margin:0}
 
 /* Konzeptseite, zweispaltig mit Sidebar */
@@ -633,6 +642,7 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 @media(max-width:760px){.thema-prozess{flex-direction:column;gap:16px}}
 .thema-prozess-step{flex:1;min-width:120px;text-align:center}
 @media(max-width:760px){.thema-prozess-step{text-align:left;display:flex;gap:12px;align-items:center}}
+.thema-prozess-text{min-width:0}
 .thema-prozess-icon{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--teal) 14%,var(--surface));color:var(--teal);display:grid;place-items:center;margin:0 auto 10px;flex:none}
 @media(max-width:760px){.thema-prozess-icon{margin:0}}
 .thema-prozess-icon svg{width:20px;height:20px}

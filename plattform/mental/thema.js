@@ -173,9 +173,15 @@
                             '</details></li>';
                     }).join('');
 
+                const gebietTools = D.inhalteByGebiet(g.slug, 'tool');
+                const toolsLis = gebietTools.length ? '<ul class="tn-tools">' + gebietTools.map(function (it) {
+                    return '<li><a href="' + href(it.href) + '">' + icon('flask') + esc(it.title) + '</a></li>';
+                }).join('') + '</ul>' : '';
+
                 return '<details class="tn-gebiet' + (isActiveGebiet ? ' on' : '') + '"' + (isActiveGebiet ? ' open' : '') + '>' +
                     '<summary>' + esc(g.title) + '</summary>' +
                     (themenLis ? '<ul class="tn-themen">' + themenLis + '</ul>' : '<p class="muted" style="font-size:.78rem;padding:0 0 8px 20px">Noch keine Themen.</p>') +
+                    toolsLis +
                     '</details>';
             }).join('') : '<p class="muted" style="font-size:.78rem;padding:8px 4px">Noch keine öffentlichen Fachgebiete.</p>';
 

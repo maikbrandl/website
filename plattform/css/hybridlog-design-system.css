@@ -612,6 +612,11 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 .tn-themen a.on{color:var(--teal);font-weight:600}
 .tn-gruppe{margin-top:2px}
 .tn-gruppe>details{margin:0}
+.tn-tools{list-style:none;margin:2px 0 0;padding:2px 0 6px 20px;border-left:1px solid var(--line)}
+.tn-tools li{margin:1px 0}
+.tn-tools a{display:flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:.82rem;font-weight:600;color:var(--accent);text-decoration:none;padding:5px 8px;border-radius:6px}
+.tn-tools a:hover{background:var(--surface-2)}
+.tn-tools a svg{width:14px;height:14px;flex:none}
 .tn-gruppe summary{list-style:none;cursor:pointer;font-family:var(--font-ui);font-size:.82rem;color:var(--muted);padding:5px 8px;display:flex;align-items:center;gap:6px}
 .tn-gruppe summary::-webkit-details-marker{display:none}
 .tn-gruppe summary::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:auto}

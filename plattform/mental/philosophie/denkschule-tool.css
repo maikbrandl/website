@@ -1,13 +1,14 @@
-/* Island "Welche Denkschule bist du?" – nur auf der Tool-Seite geladen */
+/* Island "Welche Denkschule bist du?" – nur auf der Tool-Seite geladen.
+   Nutzt ausschliesslich reale Tokens aus hybridlog-design-system.css. */
 .dt {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: 22px;
 }
 
 .dt__progress {
     height: 6px;
-    border-radius: var(--r-full);
+    border-radius: 999px;
     background: var(--line);
     overflow: hidden;
 }
@@ -15,16 +16,17 @@
 .dt__progress span {
     display: block;
     height: 100%;
-    background: var(--area);
-    transition: width var(--dur) var(--ease);
+    background: var(--accent);
+    transition: width .25s ease;
 }
 
 .dt__step {
+    font-family: var(--font-ui);
     font-size: .8rem;
     font-weight: 600;
     letter-spacing: .04em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--faint);
     margin: 0;
 }
 
@@ -35,37 +37,42 @@
 }
 
 .dt__q {
-    font-family: var(--font-head);
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.3rem;
-    line-height: 1.2;
-    margin-bottom: var(--sp-4);
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 6px 0 18px;
     padding: 0;
 }
 
 .dt__opts {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
+    gap: 10px;
 }
 
 .dt__opt {
     display: flex;
     align-items: flex-start;
-    gap: var(--sp-3);
+    gap: 14px;
+    width: 100%;
     text-align: left;
-    padding: var(--sp-3) var(--sp-4);
+    padding: 14px 18px;
     border: 1px solid var(--line);
-    border-radius: var(--r-md);
-    background: var(--surface-2);
-    color: var(--text);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-body);
     font-size: .98rem;
     line-height: 1.4;
-    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
 }
 
 .dt__opt:hover {
-    border-color: var(--area);
+    border-color: var(--accent);
+    background: var(--surface-2);
     transform: translateX(2px);
 }
 
@@ -74,80 +81,114 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid var(--line);
+    border: 2px solid var(--line-strong);
     margin-top: 1px;
-    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+    transition: border-color .18s ease, background .18s ease;
 }
 
 .dt__opt[aria-checked="true"] {
-    border-color: var(--area);
-    background: color-mix(in srgb, var(--area) 12%, var(--surface-2));
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
 }
 
 .dt__opt[aria-checked="true"] .dt__opt-mark {
-    border-color: var(--area);
-    background: radial-gradient(circle at center, var(--area) 0 6px, transparent 7px);
+    border-color: var(--accent);
+    background: radial-gradient(circle at center, var(--accent) 0 6px, transparent 7px);
 }
 
 .dt__nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--sp-3);
-    margin-top: var(--sp-2);
+    gap: 14px;
+    margin-top: 4px;
 }
 
 .dt__nav .btn[disabled] {
     opacity: .5;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* Ergebnis */
 .dt__result-name {
-    font-family: var(--font-head);
+    font-family: var(--font-display);
     font-weight: 800;
     font-size: 1.8rem;
-    color: var(--area);
+    color: var(--ink);
     margin: 0;
 }
 
 .dt__result-line {
     font-size: 1.1rem;
     font-weight: 600;
+    color: var(--ink);
     margin: 0;
 }
 
 .dt__result-text {
-    color: var(--text-muted);
+    color: var(--muted);
     margin: 0;
+}
+
+.dt__bars-label {
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 4px 0 0;
 }
 
 .dt__bars {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
-    margin-top: var(--sp-1);
+    gap: 12px;
+    margin-top: 4px;
 }
 
 .dt__bar-row {
     display: grid;
-    grid-template-columns: minmax(120px, 40%) 1fr;
+    grid-template-columns: minmax(120px, 34%) 1fr auto;
     align-items: center;
-    gap: var(--sp-3);
-    font-size: .85rem;
-    color: var(--text-muted);
+    gap: 14px;
+    font-family: var(--font-ui);
+    font-size: .86rem;
+    color: var(--muted);
+}
+
+.dt__bar-row.is-winner {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.dt__bar-pct {
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+    min-width: 2.6em;
+    text-align: right;
+}
+
+.dt__bar-row.is-winner .dt__bar-pct {
+    color: var(--ink);
 }
 
 .dt__bar {
-    height: 8px;
-    border-radius: var(--r-full);
-    background: var(--line);
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
     overflow: hidden;
 }
 
 .dt__bar span {
     display: block;
     height: 100%;
-    background: var(--area);
-    transition: width var(--dur) var(--ease);
+    background: var(--line-strong);
+    transition: width .25s ease;
+}
+
+.dt__bar-row.is-winner .dt__bar span {
+    background: var(--accent);
 }

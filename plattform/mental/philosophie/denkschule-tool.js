@@ -112,8 +112,8 @@
                 ).join('') +
                 '</div></fieldset>' +
                 '<div class="dt__nav">' +
-                (idx > 0 ? '<button type="button" class="btn btn--ghost btn--sm" data-back>Zurück</button>' : '<span></span>') +
-                '<button type="button" class="btn btn--area btn--sm" data-next ' + (answers[idx] === null ? 'disabled' : '') + '>' +
+                (idx > 0 ? '<button type="button" class="btn ghost" data-back>Zurück</button>' : '<span></span>') +
+                '<button type="button" class="btn" data-next ' + (answers[idx] === null ? 'disabled' : '') + '>' +
                 (idx === QUESTIONS.length - 1 ? 'Ergebnis zeigen' : 'Weiter') + '</button>' +
                 '</div>' +
                 '</div>';
@@ -142,11 +142,14 @@
             const s = SCHOOLS[winner];
             const total = QUESTIONS.length;
 
-            const bars = Object.keys(SCHOOLS).map((k) => {
-                const p = Math.round(score[k] / total * 100);
-                return '<div class="dt__bar-row"><span>' + esc(SCHOOLS[k].name) + '</span>' +
-                    '<span class="dt__bar"><span style="width:' + p + '%"></span></span></div>';
-            }).join('');
+            const bars = Object.keys(SCHOOLS)
+                .sort((a, b) => score[b] - score[a])
+                .map((k) => {
+                    const p = Math.round(score[k] / total * 100);
+                    return '<div class="dt__bar-row' + (k === winner ? ' is-winner' : '') + '"><span>' + esc(SCHOOLS[k].name) + '</span>' +
+                        '<span class="dt__bar"><span style="width:' + p + '%"></span></span>' +
+                        '<span class="dt__bar-pct">' + p + '&nbsp;%</span></div>';
+                }).join('');
 
             root.innerHTML =
                 '<div class="dt dt--result">' +
@@ -154,10 +157,11 @@
                 '<h3 class="dt__result-name">' + esc(s.name) + '</h3>' +
                 '<p class="dt__result-line">' + esc(s.line) + '</p>' +
                 '<p class="dt__result-text">' + esc(s.text) + '</p>' +
+                '<p class="dt__bars-label">Deine Übereinstimmung je Denkschule</p>' +
                 '<div class="dt__bars">' + bars + '</div>' +
                 '<div class="dt__nav">' +
-                '<button type="button" class="btn btn--ghost btn--sm" data-again>Noch einmal</button>' +
-                (opts.deeperHref ? '<a class="btn btn--area btn--sm" href="' + esc(opts.deeperHref) + '">' + esc(opts.deeperLabel || 'Mehr erfahren') + '</a>' : '') +
+                '<button type="button" class="btn ghost" data-again>Noch einmal</button>' +
+                (opts.deeperHref ? '<a class="btn" href="' + esc(opts.deeperHref) + '">' + esc(opts.deeperLabel || 'Mehr erfahren') + '</a>' : '') +
                 '</div>' +
                 '</div>';
             root.querySelector('[data-again]').addEventListener('click', () => { for (let i = 0; i < answers.length; i++) answers[i] = null; idx = 0; render(); });

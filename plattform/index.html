@@ -125,7 +125,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-    <script src="js/data.js?v=20260901"></script>
+    <script src="js/data.js?v=20260902"></script>
     <script src="js/cms-fetch.js?v=20260901"></script>
     <script src="js/render.js?v=20260903"></script>
     <script src="js/mobile-wissen.js?v=20260917"></script>
@@ -158,14 +158,21 @@
                 return R.nodeCard(i, D.gebietBySlug(i.gebiet));
             }).join('');
 
-            // 'Mit MIND starten' fuehrt direkt in echten Inhalt statt in die
-            // Fachgebiete-Auswahl, sobald eine Themenseite fuer MIND existiert.
+            // 'Mit MIND starten' und die 3 Welt-Cards fuehren direkt in echten
+            // Inhalt statt in die Fachgebiete-Auswahl, sobald eine Themenseite
+            // fuer die jeweilige Welt existiert.
             if (window.HLCms) {
                 window.HLCms.fetchCollection('content/themen').then(function (themen) {
-                    var match = themen.find(function (t) { return t.wissensraum === 'mind'; });
-                    if (!match) return;
                     var cta = document.getElementById('ctaMind');
-                    if (cta) cta.href = 'mental/thema.html?slug=' + encodeURIComponent(match.slug);
+                    var ctaMatch = themen.find(function (t) { return t.wissensraum === 'mind'; });
+                    if (cta && ctaMatch) cta.href = 'mental/thema.html?slug=' + encodeURIComponent(ctaMatch.slug);
+
+                    D.WELTEN.forEach(function (w) {
+                        var match = themen.find(function (t) { return t.wissensraum === w.slug; });
+                        if (!match) return;
+                        var card = document.querySelector('.worlds [data-w="' + w.slug + '"]');
+                        if (card) card.href = 'mental/thema.html?slug=' + encodeURIComponent(match.slug);
+                    });
                 }).catch(function (e) { console.error('Themen konnten nicht geladen werden', e); });
             }
         })();

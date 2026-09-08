@@ -20,7 +20,7 @@
 
     const WELTEN = [
         { slug: 'mind', name: 'MIND', leitidee: 'Verstehe den Menschen.', aktiv: true },
-        { slug: 'body', name: 'BODY', leitidee: 'Verstehe deinen Körper.', aktiv: false },
+        { slug: 'body', name: 'BODY', leitidee: 'Verstehe deinen Körper.', aktiv: true },
         { slug: 'world', name: 'WORLD', leitidee: 'Verstehe die Welt und die Ideen dahinter.', aktiv: true },
     ];
 

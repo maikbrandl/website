@@ -1099,6 +1099,12 @@ h1, h2, h3, h4, h5 {
     margin-top: var(--space-4);
 }
 
+.affiliate-disclosure {
+    font-size: var(--text-xs);
+    color: var(--gray-500);
+    margin-top: var(--space-2);
+}
+
 /* ====================== 16. Pillars, Description, Details ====================== */
 .pillars-grid {
     display: grid;

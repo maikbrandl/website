@@ -655,13 +655,11 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 .thema-fakt{background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;display:flex;align-items:flex-start;gap:10px;font-size:.9rem}
 .thema-fakt svg{flex:none;width:18px;height:18px;color:var(--teal)}
 
-/* Blocktyp: prozess, Schritte nebeneinander, Icon immer ueber dem Text, linksbuendig (keine Pfeile) */
+/* Blocktyp: prozess, Schritte nebeneinander, ohne Icon, linksbuendig (keine Pfeile) */
 .thema-prozess{display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap}
 @media(max-width:760px){.thema-prozess{flex-direction:column;gap:16px}}
 .thema-prozess-step{flex:1;min-width:160px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .thema-prozess-text{min-width:0;width:100%}
-.thema-prozess-icon{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--teal) 14%,var(--surface));color:var(--teal);display:grid;place-items:center;margin:0;flex:none}
-.thema-prozess-icon svg{width:20px;height:20px}
 .thema-prozess-step h5{font-family:var(--font-ui);font-size:.9rem;margin-bottom:3px;text-align:left}
 .thema-prozess-step p{font-size:.8rem;color:var(--muted);margin:0;text-align:left}
 

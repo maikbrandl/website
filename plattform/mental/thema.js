@@ -94,7 +94,6 @@
             case 'prozess':
                 return '<div class="thema-prozess">' + (b.schritte || []).map(function (s) {
                     return '<div class="thema-prozess-step">' +
-                        '<div class="thema-prozess-icon">' + icon(s.icon) + '</div>' +
                         '<div class="thema-prozess-text"><h5>' + esc(s.titel) + '</h5><p>' + esc(s.untertitel) + '</p></div></div>';
                 }).join('') + '</div>';
             case 'textabschnitt':

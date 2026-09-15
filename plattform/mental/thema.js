@@ -92,11 +92,10 @@
                     return '<div class="thema-fakt">' + icon(f.icon) + '<span>' + esc(f.text) + '</span></div>';
                 }).join('') + '</div>';
             case 'prozess':
-                return '<div class="thema-prozess">' + (b.schritte || []).map(function (s, i, arr) {
+                return '<div class="thema-prozess">' + (b.schritte || []).map(function (s) {
                     return '<div class="thema-prozess-step">' +
                         '<div class="thema-prozess-icon">' + icon(s.icon) + '</div>' +
-                        '<div class="thema-prozess-text"><h5>' + esc(s.titel) + '</h5><p>' + esc(s.untertitel) + '</p></div></div>' +
-                        (i < arr.length - 1 ? '<div class="thema-prozess-arrow">┄→</div>' : '');
+                        '<div class="thema-prozess-text"><h5>' + esc(s.titel) + '</h5><p>' + esc(s.untertitel) + '</p></div></div>';
                 }).join('') + '</div>';
             case 'textabschnitt':
                 return '<div class="thema-textabschnitt">' + mdParagraphs(b.text) + '</div>';

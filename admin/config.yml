@@ -108,16 +108,6 @@ collections:
         widget: "list"
         type_key: "type"
         types:
-          - name: "ueberschrift"
-            label: "Titel (Überschrift)"
-            widget: "object"
-            fields:
-              - { label: "Text", name: "text", widget: "string" }
-          - name: "untertitel"
-            label: "Untertitel"
-            widget: "object"
-            fields:
-              - { label: "Text", name: "text", widget: "string" }
           - name: "kurz_erklaert"
             label: "Kurz erklärt"
             widget: "object"
@@ -208,18 +198,6 @@ collections:
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
               - { label: "Tool", name: "tool", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], hint: "Muss einem der vier bestehenden Tools entsprechen" }
-          - name: "artikel_einbindung"
-            label: "Verlinkung: Blogartikel"
-            widget: "object"
-            fields:
-              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
-              - name: "artikel"
-                label: "Blogartikel"
-                widget: "relation"
-                collection: "posts"
-                search_fields: ["title", "excerpt"]
-                value_field: "{{slug}}"
-                display_fields: ["title"]
       - { label: "Verwandte Themen", name: "verwandte_themen", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "slug", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Blogartikel", name: "verwandte_artikel", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Tools", name: "verwandte_tools", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], multiple: true, required: false }

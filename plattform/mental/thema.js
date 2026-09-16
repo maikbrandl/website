@@ -71,11 +71,18 @@
     const ROOM_ICON = { mind: 'lightbulb', body: 'refresh', world: 'world' };
 
     const DEFAULT_TITLES = {
+        ueberschrift: 'Titel', untertitel: 'Untertitel',
         kurz_erklaert: 'Kurz erklärt', icon_fakten: 'Auf einen Blick', prozess: 'So funktioniert das',
-        textabschnitt: 'Textabschnitt', beispiel: 'Beispiel aus dem Alltag', liste: 'Wichtig zu wissen',
-        evidenz: 'Grenzen & Evidenz', zitat: 'Zitat', faq: 'Häufig gefragt', tool_einbindung: 'Zum Ausprobieren',
+        textabschnitt: 'Richtext', beispiel: 'Beispiel aus dem Alltag', liste: 'Wichtig zu wissen',
+        evidenz: 'Grenzen & Evidenz', zitat: 'Zitat', bild: 'Bild', faq: 'Häufig gefragt',
+        tool_einbindung: 'Zum Ausprobieren', artikel_einbindung: 'Weiterlesen',
     };
+    // Titel/Untertitel sind selbst schon die Ueberschrift, TOC zeigt darum
+    // ihren eigenen Text statt eines generischen Labels.
     function secTitle(b) {
+        if (b.type === 'ueberschrift' || b.type === 'untertitel') {
+            return (b.text && String(b.text).trim()) || DEFAULT_TITLES[b.type];
+        }
         return (b.titel_override && String(b.titel_override).trim()) || DEFAULT_TITLES[b.type] || 'Abschnitt';
     }
 
@@ -85,6 +92,10 @@
     // ---------------------------------------------------------------------
     function renderBlockBody(b, ctx) {
         switch (b.type) {
+            case 'ueberschrift':
+                return '<h2 class="thema-ueberschrift">' + esc(b.text) + '</h2>';
+            case 'untertitel':
+                return '<p class="thema-untertitel">' + esc(b.text) + '</p>';
             case 'kurz_erklaert':
                 return '<div class="thema-copy">' + mdParagraphs(b.text) + '</div>';
             case 'icon_fakten':
@@ -121,15 +132,28 @@
                     '<h5>' + esc(tool.title) + '</h5><p>' + esc(tool.teaser) + '</p>' +
                     '<a class="thema-link-gold" href="' + href(tool.href) + '">Tool öffnen →</a></div>';
             }
+            case 'bild':
+                return '<figure class="thema-bild"><img src="' + esc(b.bild) + '" alt="' + esc(b.alt || '') + '" loading="lazy">' +
+                    (b.bildunterschrift ? '<figcaption>' + esc(b.bildunterschrift) + '</figcaption>' : '') + '</figure>';
+            case 'artikel_einbindung': {
+                const artikel = ctx.artikelBySlug(b.artikel);
+                if (!artikel) return '<p class="muted">Artikel nicht gefunden.</p>';
+                return '<div class="thema-tool-inline">' +
+                    '<h5>' + esc(artikel.title) + '</h5><p>' + esc(artikel.excerpt || '') + '</p>' +
+                    '<a class="thema-link-gold" href="' + href('blog-artikel.html?slug=' + encodeURIComponent(artikel.slug)) + '">Artikel lesen →</a></div>';
+            }
             default:
                 return '';
         }
     }
 
+    // Titel/Untertitel tragen ihre Ueberschrift schon im Inhalt, das kleine
+    // Label darueber waere redundant und entfaellt fuer diese beiden Typen.
+    const NO_LABEL_TYPES = { ueberschrift: true, untertitel: true };
     function wrapSection(b, num, id) {
-        return '<section class="thema-sec" id="' + id + '">' +
-            '<p class="thema-sec-label">' + esc(secTitle(b)) + '</p>' +
-            renderBlockBody(b, { toolBySlug: toolBySlug }) +
+        const label = NO_LABEL_TYPES[b.type] ? '' : '<p class="thema-sec-label">' + esc(secTitle(b)) + '</p>';
+        return '<section class="thema-sec" id="' + id + '">' + label +
+            renderBlockBody(b, { toolBySlug: toolBySlug, artikelBySlug: artikelBySlug }) +
             '</section>';
     }
 
@@ -138,6 +162,11 @@
     // ---------------------------------------------------------------------
     function toolBySlug(slug) {
         return (D.INHALTE || []).find(function (i) { return i.type === 'tool' && i.slug === slug; }) || null;
+    }
+
+    let POSTS = [];
+    function artikelBySlug(slug) {
+        return POSTS.find(function (p) { return p.slug === slug; }) || null;
     }
 
     // ---------------------------------------------------------------------
@@ -351,6 +380,14 @@
             console.error(e);
             renderError(main, 'Die Inhalte konnten nicht geladen werden. Bitte später erneut versuchen.');
             return;
+        }
+        // Artikel-Verlinkung ist optional, ein Fehlschlag hier darf die
+        // ganze Themenseite nicht blockieren.
+        try {
+            POSTS = await CMS.fetchCollection('content/posts');
+        } catch (e) {
+            console.error(e);
+            POSTS = [];
         }
 
         const thema = themen.find(function (t) { return t.slug === slug; });

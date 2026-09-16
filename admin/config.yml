@@ -108,6 +108,16 @@ collections:
         widget: "list"
         type_key: "type"
         types:
+          - name: "ueberschrift"
+            label: "Titel (Überschrift)"
+            widget: "object"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+          - name: "untertitel"
+            label: "Untertitel"
+            widget: "object"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
           - name: "kurz_erklaert"
             label: "Kurz erklärt"
             widget: "object"
@@ -126,7 +136,7 @@ collections:
                   - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
                   - { label: "Text", name: "text", widget: "string" }
           - name: "prozess"
-            label: "Prozess (Schritte mit Pfeilen)"
+            label: "Drei-Spalten Layout (Prozess/Schritte)"
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
@@ -138,11 +148,18 @@ collections:
                   - { label: "Untertitel", name: "untertitel", widget: "string" }
                   - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
           - name: "textabschnitt"
-            label: "Textabschnitt"
+            label: "Richtext (freier Text)"
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
               - { label: "Text", name: "text", widget: "markdown" }
+          - name: "bild"
+            label: "Bild einfügen"
+            widget: "object"
+            fields:
+              - { label: "Bild", name: "bild", widget: "image" }
+              - { label: "Alt-Text (Barrierefreiheit/SEO)", name: "alt", widget: "string" }
+              - { label: "Bildunterschrift (optional)", name: "bildunterschrift", widget: "string", required: false }
           - name: "beispiel"
             label: "Beispiel aus dem Alltag"
             widget: "object"
@@ -151,7 +168,7 @@ collections:
               - { label: "Text", name: "text", widget: "text" }
               - { label: "Ergebnis-Zeile (optional)", name: "ergebnis", widget: "string", required: false }
           - name: "liste"
-            label: "Liste (z. B. Missverständnisse)"
+            label: "Aufzählung (Liste)"
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
@@ -168,7 +185,7 @@ collections:
               - { label: "Link-Text (optional)", name: "link_label", widget: "string", required: false }
               - { label: "Link-Ziel (optional)", name: "link_url", widget: "string", required: false }
           - name: "zitat"
-            label: "Zitat"
+            label: "Zitatabsatz"
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
@@ -186,11 +203,23 @@ collections:
                   - { label: "Frage", name: "frage", widget: "string" }
                   - { label: "Antwort", name: "antwort", widget: "markdown" }
           - name: "tool_einbindung"
-            label: "Tool-Einbindung"
+            label: "Verlinkung: Tool"
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
               - { label: "Tool", name: "tool", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], hint: "Muss einem der vier bestehenden Tools entsprechen" }
+          - name: "artikel_einbindung"
+            label: "Verlinkung: Blogartikel"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "artikel"
+                label: "Blogartikel"
+                widget: "relation"
+                collection: "posts"
+                search_fields: ["title", "excerpt"]
+                value_field: "{{slug}}"
+                display_fields: ["title"]
       - { label: "Verwandte Themen", name: "verwandte_themen", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "slug", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Blogartikel", name: "verwandte_artikel", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Tools", name: "verwandte_tools", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], multiple: true, required: false }

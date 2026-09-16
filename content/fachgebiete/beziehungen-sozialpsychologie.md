@@ -1,9 +1,9 @@
 ---
-title: "Beziehungen & Sozialpsychologie"
+title: "Psychologie der Beziehung"
 slug: "beziehungen-sozialpsychologie"
 world: "mind"
 description: >
-  Bindung, Kommunikation, Vertrauen und wie Gruppen uns formen.
+  Wie dein Inneres deine Verbindungen, Empathie und Kommunikation mit anderen prägt.
 order: 5
 status: "active"
 visibility: "public"

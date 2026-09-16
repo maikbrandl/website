@@ -86,7 +86,7 @@
     function renderBlockBody(b, ctx) {
         switch (b.type) {
             case 'kurz_erklaert':
-                return mdParagraphs(b.text);
+                return '<div class="thema-copy">' + mdParagraphs(b.text) + '</div>';
             case 'icon_fakten':
                 return '<div class="thema-icon-fakten">' + (b.fakten || []).map(function (f) {
                     return '<div class="thema-fakt">' + icon(f.icon) + '<span>' + esc(f.text) + '</span></div>';
@@ -97,13 +97,13 @@
                         '<div class="thema-prozess-text"><h5>' + esc(s.titel) + '</h5><p>' + esc(s.untertitel) + '</p></div></div>';
                 }).join('') + '</div>';
             case 'textabschnitt':
-                return '<div class="thema-textabschnitt">' + mdParagraphs(b.text) + '</div>';
+                return '<div class="thema-copy">' + mdParagraphs(b.text) + '</div>';
             case 'beispiel':
                 return '<div class="thema-beispiel"><blockquote>' + esc(b.text) + '</blockquote>' +
                     (b.ergebnis ? '<p class="tb-ergebnis">Ergebnis: ' + esc(b.ergebnis) + '</p>' : '') + '</div>';
             case 'liste':
                 return '<ul class="thema-liste">' + (b.punkte || []).map(function (p) {
-                    return '<li>' + icon('check') + '<span>' + esc(p) + '</span></li>';
+                    return '<li><span class="thema-dot" aria-hidden="true"></span><span>' + esc(p) + '</span></li>';
                 }).join('') + '</ul>';
             case 'evidenz':
                 return '<div class="thema-evidenz"><p>' + esc(b.text) + '</p>' +
@@ -117,9 +117,9 @@
             case 'tool_einbindung': {
                 const tool = ctx.toolBySlug(b.tool);
                 if (!tool) return '<p class="muted">Tool nicht gefunden.</p>';
-                return '<a class="thema-tool-inline tap" href="' + href(tool.href) + '">' +
-                    '<span class="tt-icon">' + icon('flask') + '</span>' +
-                    '<span><h5>' + esc(tool.title) + '</h5><p>' + esc(tool.teaser) + '</p></span></a>';
+                return '<div class="thema-tool-inline">' +
+                    '<h5>' + esc(tool.title) + '</h5><p>' + esc(tool.teaser) + '</p>' +
+                    '<a class="thema-link-gold" href="' + href(tool.href) + '">Tool öffnen →</a></div>';
             }
             default:
                 return '';
@@ -128,8 +128,7 @@
 
     function wrapSection(b, num, id) {
         return '<section class="thema-sec" id="' + id + '">' +
-            '<div class="thema-sec-head"><span class="thema-sec-num">' + num + '</span>' +
-            '<span class="thema-sec-label">' + esc(secTitle(b)) + '</span></div>' +
+            '<p class="thema-sec-label">' + esc(secTitle(b)) + '</p>' +
             renderBlockBody(b, { toolBySlug: toolBySlug }) +
             '</section>';
     }

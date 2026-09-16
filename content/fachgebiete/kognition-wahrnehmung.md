@@ -1,9 +1,9 @@
 ---
-title: "Kognition & Wahrnehmung"
+title: "Wahrnehmung & Denken"
 slug: "kognition-wahrnehmung"
 world: "mind"
 description: >
-  Wie wir denken, wahrnehmen, uns erinnern und Entscheidungen treffen.
+  Die Art und Weise, wie du deine Umwelt aufnimmst.
 order: 1
 status: "active"
 visibility: "public"

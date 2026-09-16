@@ -1,9 +1,9 @@
 ---
-title: Lernen
+title: "Lerntipps & Persönliche Entwicklung"
 slug: lernen-verhalten
 world: mind
 description: |
-  Methoden, die wirklich wirken, statt Tricks, die nur beschäftigt halten.
+  Wie du neue Fähigkeiten entwickelst, das Gehirn neu programmierst und Gewohnheiten änderst.
 order: 4
 status: active
 visibility: public

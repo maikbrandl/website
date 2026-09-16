@@ -1,9 +1,9 @@
 ---
-title: "Emotion & Motivation"
+title: "Emotion & Energie"
 slug: "emotion-motivation"
 world: "mind"
 description: >
-  Gefühle, Bedürfnisse, Antrieb und wie wir uns selbst regulieren.
+  Warum du denkst und dich verhältst, wie du es eben tust.
 order: 2
 status: "active"
 visibility: "public"

@@ -27,34 +27,29 @@
     const GEBIETE = [
         // ── MIND · Mensch & Innenwelt ──
         {
-            slug: 'kognition-wahrnehmung', name: 'Kognition & Wahrnehmung', farbeVar: '--area-kognition-wahrnehmung', welt: 'mind',
-            einleitung: 'Wie wir denken, wahrnehmen, uns erinnern und Entscheidungen treffen.',
+            slug: 'kognition-wahrnehmung', name: 'Wahrnehmung & Denken', farbeVar: '--area-kognition-wahrnehmung', welt: 'mind',
+            einleitung: 'Die Art und Weise, wie du deine Umwelt aufnimmst.',
             reihenfolge: 1, status: 'active', visibility: 'public',
         },
         {
-            slug: 'emotion-motivation', name: 'Emotion & Motivation', farbeVar: '--area-emotion-motivation', welt: 'mind',
-            einleitung: 'Gefühle, Bedürfnisse, Antrieb und wie wir uns selbst regulieren.',
+            slug: 'emotion-motivation', name: 'Emotion & Energie', farbeVar: '--area-emotion-motivation', welt: 'mind',
+            einleitung: 'Warum du denkst und dich verhältst, wie du es eben tust.',
             reihenfolge: 2, status: 'active', visibility: 'public',
         },
         {
-            slug: 'persoenlichkeit-identitaet', name: 'Persönlichkeit & Identität', farbeVar: '--area-persoenlichkeit-identitaet', welt: 'mind',
-            einleitung: 'Persönlichkeitsmodelle, Selbstbild, Werte und was dich ausmacht.',
+            slug: 'persoenlichkeit-identitaet', name: 'Identität & Prägung', farbeVar: '--area-persoenlichkeit-identitaet', welt: 'mind',
+            einleitung: 'Die Wahrheit hinter deinen Ecken und Kanten sowie Stärken und Schwächen.',
             reihenfolge: 3, status: 'active', visibility: 'public',
         },
         {
-            slug: 'lernen-verhalten', name: 'Lernen & Verhalten', farbeVar: '--area-lernen-verhalten', welt: 'mind',
-            einleitung: 'Methoden, die wirklich wirken, statt Tricks, die nur beschäftigt halten.',
+            slug: 'lernen-verhalten', name: 'Lerntipps & Persönliche Entwicklung', farbeVar: '--area-lernen-verhalten', welt: 'mind',
+            einleitung: 'Wie du neue Fähigkeiten entwickelst, das Gehirn neu programmierst und Gewohnheiten änderst.',
             reihenfolge: 4, status: 'active', visibility: 'public',
         },
         {
-            slug: 'beziehungen-sozialpsychologie', name: 'Beziehungen & Sozialpsychologie', farbeVar: '--area-beziehungen-sozialpsychologie', welt: 'mind',
-            einleitung: 'Bindung, Kommunikation, Vertrauen und wie Gruppen uns formen.',
+            slug: 'beziehungen-sozialpsychologie', name: 'Psychologie der Beziehung', farbeVar: '--area-beziehungen-sozialpsychologie', welt: 'mind',
+            einleitung: 'Wie dein Inneres deine Verbindungen, Empathie und Kommunikation mit anderen prägt.',
             reihenfolge: 5, status: 'active', visibility: 'public',
-        },
-        {
-            slug: 'bewusstsein-selbst', name: 'Bewusstsein & Selbst', farbeVar: '--area-bewusstsein-selbst', welt: 'mind',
-            einleitung: 'Subjektives Erleben, Metakognition und Selbstwahrnehmung.',
-            reihenfolge: 6, status: 'active', visibility: 'public',
         },
 
         // ── BODY · Körper & Biologie (noch kein Starter-Cluster, bewusst hidden) ──
@@ -154,7 +149,7 @@
 
         // ── Psychologie ──
         {
-            slug: 'human-map', type: 'tool', gebiet: 'bewusstsein-selbst',
+            slug: 'human-map', type: 'tool', gebiet: 'persoenlichkeit-identitaet',
             title: 'Human Map',
             teaser: 'Ein wissenschaftlich gestütztes Selbstbild aus sechs Ebenen.',
             sneak: 'Ein Fragebogen zeichnet deine innere Landkarte, datenbasiert.',
@@ -162,7 +157,7 @@
             href: '../human-map/',
         },
         {
-            slug: 'metakognition', type: 'artikel', gebiet: 'bewusstsein-selbst', date: '2026-03-01',
+            slug: 'metakognition', type: 'artikel', gebiet: 'persoenlichkeit-identitaet', date: '2026-03-01',
             title: 'Metakognition, Gedanken beobachten statt kontrolliert werden',
             teaser: 'Wie du lernst, deine Gedanken zu bemerken, statt dich von ihnen treiben zu lassen.',
             sneak: 'Wer seine Gedanken bemerkt, ist ihnen weniger ausgeliefert.',

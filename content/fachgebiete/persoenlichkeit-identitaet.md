@@ -1,9 +1,9 @@
 ---
-title: "Persönlichkeit & Identität"
+title: "Identität & Prägung"
 slug: "persoenlichkeit-identitaet"
 world: "mind"
 description: >
-  Persönlichkeitsmodelle, Selbstbild, Werte und was dich ausmacht.
+  Die Wahrheit hinter deinen Ecken und Kanten sowie Stärken und Schwächen.
 order: 3
 status: "active"
 visibility: "public"

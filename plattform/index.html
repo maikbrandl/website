@@ -162,7 +162,8 @@
             // Inhalt statt in die Fachgebiete-Auswahl, sobald eine Themenseite
             // fuer die jeweilige Welt existiert.
             if (window.HLCms) {
-                window.HLCms.fetchCollection('content/themen').then(function (themen) {
+                var themenPromise = window.HLCms.fetchCollection('content/themen');
+                themenPromise.then(function (themen) {
                     var cta = document.getElementById('ctaMind');
                     var ctaMatch = themen.find(function (t) { return t.wissensraum === 'mind'; });
                     if (cta && ctaMatch) cta.href = 'mental/thema.html?slug=' + encodeURIComponent(ctaMatch.slug);
@@ -174,6 +175,23 @@
                         if (card) card.href = 'mental/thema.html?slug=' + encodeURIComponent(match.slug);
                     });
                 }).catch(function (e) { console.error('Themen konnten nicht geladen werden', e); });
+
+                // Wer klickt, bevor der Fetch oben durch ist, wuerde sonst auf dem
+                // Fallback-Link (welt.html, nur die Fachgebiete-Auswahl) landen statt
+                // auf der echten Themenseite. Klick abfangen und bis zur Aufloesung
+                // warten, dann zum (ggf. inzwischen aktualisierten) Ziel navigieren.
+                document.addEventListener('click', function (e) {
+                    var link = e.target.closest('#ctaMind, .worlds a[data-w]');
+                    if (!link || link.dataset.hlResolved) return;
+                    e.preventDefault();
+                    var cursor = link.style.cursor;
+                    link.style.cursor = 'wait';
+                    themenPromise.catch(function () { }).then(function () {
+                        link.dataset.hlResolved = '1';
+                        link.style.cursor = cursor;
+                        window.location.href = link.href;
+                    });
+                });
             }
         })();
     </script>

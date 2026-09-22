@@ -40,30 +40,33 @@
    Teal (--gold, Name beibehalten fuer Kompatibilitaet), Sekundaerakzent =
    Amber/Gold fuer Highlights (z.B. Sterne-Bewertung). */
 :root {
-    /* ── Color Palette ── */
+    /* ── Color Palette: HELL (Papier-Design), Standard-Theme ──
+       Umschaltbar per data-theme="dark" am <html> (siehe [data-theme="dark"] unten),
+       gesetzt/gemerkt durch plattform/js/theme.js (localStorage-Key "hl-theme"). */
     --black: #070806;
-    --bg: #0b0c0b;
-    --bg-elevated: #111312;
-    --bg-card: #171915;
-    --bg-card-hover: #1d201b;
-    --surface: #1d201b;
-    --border: #2a2d27;
-    --border-light: #363a32;
-    --border-hover: #454a3f;
+    --bg: #F7F7F5;
+    --bg-elevated: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F0F0EC;
+    --surface: #FFFFFF;
+    --border: #E3E2DD;
+    --border-light: #EDECE8;
+    --border-hover: #CFCECA;
 
-    /* Neutrals */
-    --gray-900: #171915;
-    --gray-800: #2a2d27;
-    --gray-700: #454a3f;
-    --gray-600: #6b6f63;
-    --gray-500: #8b8b7e;
-    --gray-400: #a9a79d;
-    --gray-300: #c7c5ba;
-    --gray-200: #dedcd1;
-    --gray-100: #f1efe6;
-    --white: #f1efe6;
+    /* Neutrals: Textfarben, hell = dunkle Schrift auf hellem Grund */
+    --gray-900: #E3E2DD;
+    --gray-800: #CFCECA;
+    --gray-700: #B0A896;
+    --gray-600: #978D79;
+    --gray-500: #857C6C;
+    --gray-400: #6C6454;
+    --gray-300: #55504A;
+    --gray-200: #3A342E;
+    --gray-100: #F7F7F5;
+    --white: #211D18;
 
-    /* Primaerakzent Signal-Gelb (Variablenname --gold beibehalten, Hybridlog Farb-Prompt 2026-09-01) */
+    /* Primaerakzent Signal-Gelb (Variablenname --gold beibehalten, Hybridlog Farb-Prompt 2026-09-01),
+       identisch in Hell und Dunkel */
     --gold: #ffd426;
     --gold-light: #ffdd52;
     --gold-lighter: #ffe98f;
@@ -148,13 +151,13 @@
     --radius-xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* ── Shadows ── */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.6);
-    --shadow-gold: 0 4px 25px rgba(255, 212, 38, 0.2);
-    --shadow-glow: 0 0 40px rgba(255, 212, 38, 0.1);
+    /* ── Shadows: hell, dezente warme Schatten statt Schwarz-auf-Schwarz ── */
+    --shadow-sm: 0 1px 2px rgba(40, 34, 24, 0.07);
+    --shadow-md: 0 4px 12px rgba(40, 34, 24, 0.09);
+    --shadow-lg: 0 8px 30px rgba(40, 34, 24, 0.13);
+    --shadow-xl: 0 16px 50px rgba(40, 34, 24, 0.18);
+    --shadow-gold: 0 4px 25px rgba(255, 212, 38, 0.25);
+    --shadow-glow: 0 0 40px rgba(255, 212, 38, 0.15);
 
     /* ── Transitions ── */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -169,6 +172,36 @@
     --z-overlay: 500;
     --z-nav: 600;
     --z-cookie: 900;
+}
+
+/* ── Dunkles Theme: explizit per data-theme="dark" am <html>, gesetzt durch
+   den Toggle-Button (plattform/js/theme.js). Ohne Toggle bleibt die Seite hell,
+   folgt bewusst NICHT prefers-color-scheme (Standard ist immer hell). ── */
+:root[data-theme="dark"] {
+    --bg: #0b0c0b;
+    --bg-elevated: #111312;
+    --bg-card: #171915;
+    --bg-card-hover: #1d201b;
+    --surface: #1d201b;
+    --border: #2a2d27;
+    --border-light: #363a32;
+    --border-hover: #454a3f;
+
+    --gray-900: #171915;
+    --gray-800: #2a2d27;
+    --gray-700: #454a3f;
+    --gray-600: #6b6f63;
+    --gray-500: #8b8b7e;
+    --gray-400: #a9a79d;
+    --gray-300: #c7c5ba;
+    --gray-200: #dedcd1;
+    --gray-100: #f1efe6;
+    --white: #f1efe6;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* ====================== 3. Base Styles ====================== */
@@ -481,6 +514,29 @@ h1, h2, h3, h4, h5 {
 .dropdown-menu li a:hover,
 .dropdown-menu li a.active {
     color: var(--white);
+    background: var(--surface);
+}
+
+/* Theme-Umschalter (Hell/Dunkel) */
+.iconbtn.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--gray-400);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.iconbtn.theme-toggle:hover {
+    color: var(--white);
+    border-color: var(--border-hover);
     background: var(--surface);
 }
 

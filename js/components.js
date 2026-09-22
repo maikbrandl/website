@@ -111,6 +111,7 @@ const hybridlogComponents = (() => {
                 <a href="index.html" class="logo" aria-label="hybridlog – Startseite">
                     <span class="logo-text">hybrid<span class="logo-text__accent">logs</span></span>
                 </a>
+                <button type="button" class="iconbtn theme-toggle" data-theme-toggle aria-label="Theme wechseln">◐</button>
                 <button class="nav-toggle" id="navToggle" aria-label="Navigation umschalten" aria-expanded="false">
                     <span class="nav-toggle-icon" id="navToggleIcon">${ICONS.menu}</span>
                 </button>
@@ -209,6 +210,12 @@ const hybridlogComponents = (() => {
         // Inject header
         const headerSlot = document.getElementById('header-slot');
         if (headerSlot) headerSlot.outerHTML = renderHeader();
+
+        // Wire the theme toggle button (theme.js loads earlier and defines window.HLTheme,
+        // but the button itself only exists after the header markup above is injected)
+        if (window.HLTheme) {
+            document.querySelectorAll('[data-theme-toggle]').forEach(window.HLTheme.attach);
+        }
 
         // Inject footer
         const footerSlot = document.getElementById('footer-slot');

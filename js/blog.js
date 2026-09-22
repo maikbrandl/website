@@ -423,5 +423,9 @@
         initBlogList(posts);
         initBlogDetail(posts);
     });
+
+    // Exposed so other pages (e.g. index.html "Neueste Essays") can reuse the
+    // same post-loading logic without duplicating the frontmatter parser.
+    window.hybridlogBlog = { getPosts: getPosts, postUrl: postUrl, formatDate: formatDate };
 })();
 

@@ -31,10 +31,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
-    <link rel="preload" href="css/styles.css?v=10" as="style">
+    <link rel="preload" href="css/styles.css?v=11" as="style">
     <script>(function () { try { var t = localStorage.getItem('hl-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
 
-    <link rel="stylesheet" href="css/styles.css?v=10">
+    <link rel="stylesheet" href="css/styles.css?v=11">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -70,14 +70,19 @@
     <div class="hero-inner" data-animate>
         <span class="hero-badge">Neu bei Amazon verfügbar</span>
         <h1 class="hero-title">
-            Struktur trifft<br><span class="accent">Kreativität.</span>
+            Verstehe dich, dein Denken<br>und die <span class="accent">Ideen dahinter.</span>
         </h1>
         <p class="hero-subtitle">
-            Hochwertige Journals, die dein Lernen auf das nächste Level bringen, entwickelt für Schüler, Studierende und alle, die mehr aus sich herausholen wollen.
+            Kurz erklärt, sofort anwendbar. hybridlog verbindet Wissensbeiträge über den Menschen mit Tools zum Ausprobieren und Journals zum Anwenden.
         </p>
         <div class="hero-cta">
-            <a href="#produkte" class="btn btn-primary btn-lg">Produkte entdecken</a>
-            <a href="#story" class="btn btn-outline btn-lg">Unsere Vision</a>
+            <a href="plattform/" class="btn btn-primary btn-lg" data-track="verwandtes-thema">Themen entdecken</a>
+            <a href="plattform/mental/philosophie/denkschule.html" class="btn btn-outline btn-lg" data-track="tool-start">Denkschule ausprobieren</a>
+        </div>
+        <div class="hero-facts" aria-label="hybridlog in Zahlen">
+            <span>72 Themen</span><span aria-hidden="true">·</span>
+            <span>16 Fachgebiete</span><span aria-hidden="true">·</span>
+            <span>4 Journals</span>
         </div>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
@@ -85,14 +90,172 @@
     </div>
 </section>
 
-<!-- ===== Products ===== -->
+<!-- ===== Was du hier machen kannst ===== -->
+<section class="section section-elevated">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <span class="section-label">So funktioniert hybridlog</span>
+            <h2 class="section-title">Was du hier machen kannst</h2>
+        </div>
+
+        <div class="features-grid" data-stagger>
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 2z"/></svg>
+                </div>
+                <h3>Verstehen</h3>
+                <p>Kurze, verständliche Wissensbeiträge über Denken, Emotionen, Lernen und mehr, mit Quellenangaben statt leeren Behauptungen.</p>
+                <a href="plattform/" class="btn btn-ghost btn-sm" style="margin-top:var(--space-3)">Themen ansehen</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <h3>Ausprobieren</h3>
+                <p>Interaktive Tools wie die Denkschule oder Human Map, damit Theorie sofort erlebbar wird, nicht nur gelesen.</p>
+                <a href="tools/index.html" class="btn btn-ghost btn-sm" style="margin-top:var(--space-3)">Tools ansehen</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <h3>Anwenden</h3>
+                <p>Vier Journals übersetzen die Methoden in feste Gewohnheiten, für Schule, Studium, Lernen und Training.</p>
+                <a href="#produkte" class="btn btn-ghost btn-sm" style="margin-top:var(--space-3)">Journals ansehen</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Welten ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <span class="section-label">Der Wissensraum</span>
+            <h2 class="section-title">Drei Welten, ein Thema: der Mensch</h2>
+            <p class="section-subtitle">MIND, BODY und WORLD gliedern alle Themen und Fachgebiete, damit du gezielt findest, was dich beschäftigt.</p>
+        </div>
+
+        <div class="world-tiles" data-stagger>
+            <a href="plattform/welt.html?w=mind" class="world-tile world-tile--mind">
+                <span class="world-tile-label">MIND</span>
+                <h3>Denken, Fühlen, Verhalten</h3>
+                <p>Kognition, Emotion, Persönlichkeit, Lernen und mentale Gesundheit.</p>
+            </a>
+            <a href="plattform/welt.html?w=body" class="world-tile world-tile--body">
+                <span class="world-tile-label">BODY</span>
+                <h3>Körper und Biologie</h3>
+                <p>Bewegung, Ernährung, Hormone, Schlaf, in Vorbereitung.</p>
+            </a>
+            <a href="plattform/welt.html?w=world" class="world-tile world-tile--world">
+                <span class="world-tile-label">WORLD</span>
+                <h3>Gesellschaft und Kultur</h3>
+                <p>Geschichte, Philosophie, Technologie, gesellschaftliche Systeme.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Beliebte Themen ===== -->
+<section class="section section-elevated">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <span class="section-label">Beliebte Themen</span>
+            <h2 class="section-title">Guter Einstieg in den Wissensraum</h2>
+        </div>
+
+        <div class="topic-grid" data-stagger>
+            <a href="plattform/mental/thema.html?slug=dunning-kruger-effekt" class="topic-card">
+                <span class="topic-card-art">Effekt</span>
+                <h3>Dunning-Kruger-Effekt</h3>
+                <p>Wer wenig von einer Sache versteht, überschätzt sein Können oft am stärksten.</p>
+            </a>
+            <a href="plattform/mental/thema.html?slug=flow" class="topic-card">
+                <span class="topic-card-art">Konzept</span>
+                <h3>Flow</h3>
+                <p>Der Zustand völliger Vertiefung, in dem Zeit und Selbstzweifel verschwinden.</p>
+            </a>
+            <a href="plattform/mental/thema.html?slug=prokrastination" class="topic-card">
+                <span class="topic-card-art">Phänomen</span>
+                <h3>Prokrastination</h3>
+                <p>Aufschieben ist kein Zeitmanagement-Problem, sondern eine Flucht vor einem unangenehmen Gefühl.</p>
+            </a>
+            <a href="plattform/mental/thema.html?slug=abc-modell-der-bewertung" class="topic-card">
+                <span class="topic-card-art">Modell</span>
+                <h3>Das ABC-Modell der Bewertung</h3>
+                <p>Nicht das Ereignis löst dein Gefühl aus, sondern deine Bewertung dazwischen.</p>
+            </a>
+            <a href="plattform/mental/thema.html?slug=active-recall" class="topic-card">
+                <span class="topic-card-art">Lernmethode</span>
+                <h3>Active Recall</h3>
+                <p>Wissen aktiv aus dem Kopf holen statt nur zu lesen, die wirksamste Lernmethode überhaupt.</p>
+            </a>
+            <a href="plattform/mental/thema.html?slug=mbti" class="topic-card">
+                <span class="topic-card-art">Persönlichkeitsmodell</span>
+                <h3>MBTI</h3>
+                <p>Ein weltweit beliebtes Modell, das Menschen in 16 Typen einteilt, wissenschaftlich aber wenig zuverlässig.</p>
+            </a>
+        </div>
+
+        <div class="cta-center" data-animate style="margin-top:var(--space-8)">
+            <a href="plattform/" class="btn btn-outline">Alle Themen ansehen</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Tool Spotlight ===== -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-content" data-animate>
+                <span class="section-label">Tool-Spotlight</span>
+                <h2>Human Map: dich selbst besser kennenlernen.</h2>
+                <p>
+                    Human Map ist eine interaktive Standortbestimmung: Du beantwortest Fragen zu Denken, Fühlen und Verhalten und bekommst eine visuelle Landkarte deiner Persönlichkeit, mit Erklärungen statt vager Testergebnisse.
+                </p>
+                <p>
+                    Kein Account, keine Kosten, direkt im Browser. Am Ende verlinken wir passende Themen und Journals für die nächsten Schritte.
+                </p>
+                <a href="human-map.html" class="btn btn-primary" style="margin-top:var(--space-4)" data-track="tool-start">Human Map starten</a>
+            </div>
+            <div class="story-image" data-animate>
+                <picture>
+                    <source srcset="images/Hauptbil/mockup-of-a-book-placed-over-an-old-wooden-table-with-antique-stuff-m23711.webp" type="image/webp">
+                    <img src="images/Hauptbil/mockup-of-a-book-placed-over-an-old-wooden-table-with-antique-stuff-m23711.png" alt="hybridlog Human Map Tool" loading="lazy" decoding="async" width="1920" height="1280">
+                </picture>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Neueste Essays ===== -->
+<section class="section section-elevated">
+    <div class="container">
+        <div class="section-header" data-animate>
+            <span class="section-label">Aus dem Wissensraum</span>
+            <h2 class="section-title">Neueste Essays</h2>
+        </div>
+
+        <div class="blog-grid" id="homeEssaysGrid" data-stagger>
+            <p class="muted">Essays werden geladen…</p>
+        </div>
+
+        <div class="cta-center" data-animate style="margin-top:var(--space-6)">
+            <a href="blog.html" class="btn btn-outline">Alle Essays ansehen</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Vom Verstehen zum Tun (Journals) ===== -->
 <section class="section section-dark" id="produkte">
     <div class="container">
         <div class="section-header" data-animate>
-            <span class="section-label">Unsere Bestseller</span>
+            <span class="section-label">Vom Verstehen zum Tun</span>
             <h2 class="section-title">Vier Journals. Ein Ziel:<br>Dein Erfolg.</h2>
             <p class="section-subtitle">
-                Jedes hybridlog Journal wurde mit wissenschaftlichen Lernmethoden und durchdachtem Design entwickelt.
+                Jedes hybridlog Journal übersetzt die Methoden aus dem Wissensraum in feste, alltagstaugliche Routinen.
             </p>
         </div>
 
@@ -160,175 +323,35 @@
     </div>
 </section>
 
-<!-- ===== Why hybridlog ===== -->
-<section class="section section-elevated">
+<!-- ===== Über hybridlog ===== -->
+<section class="section section-elevated" id="story">
     <div class="container">
         <div class="section-header" data-animate>
-            <span class="section-label">Warum hybridlog</span>
-            <h2 class="section-title">Mehr als nur Notizbücher</h2>
-            <p class="section-subtitle">
-                Unsere Journals verbinden erprobte Lernstrategien mit durchdachtem Design, für messbaren Fortschritt.
+            <span class="section-label">Über hybridlog</span>
+            <h2 class="section-title">Wissen mit Quellen, Tools zum Erleben.</h2>
+            <p class="section-subtitle reading" style="margin-left:auto;margin-right:auto">
+                hybridlog entstand aus einer einfachen Frage: Warum gibt es kein Angebot, das Wissen über den Menschen verständlich erklärt, direkt erlebbar macht und in konkrete Gewohnheiten übersetzt? Die meisten Quellen bieten entweder trockene Theorie oder unbelegte Behauptungen, aber selten beides sauber getrennt und beides sofort anwendbar.
             </p>
-        </div>
-
-        <div class="features-grid" data-stagger>
-            <div class="feature-card">
-                <div class="feature-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                </div>
-                <h3>Wissenschaftlich fundiert</h3>
-                <p>Jedes Journal basiert auf bewährten Lernmethoden wie Active Recall, Spaced Repetition und der Cornell-Methode.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                </div>
-                <h3>Premium Materialien</h3>
-                <p>Hochwertige Hardcover, edles Papier und durchdachte Layouts, die du gerne in die Hand nimmst.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3z"/><path d="M19 15l.75 2.25L22 18l-2.25.75L19 21l-.75-2.25L16 18l2.25-.75L19 15z"/></svg>
-                </div>
-                <h3>Hybrid-Konzept</h3>
-                <p>Die Kombination aus Struktur und kreativer Freiheit, damit du lernst, wie es zu dir passt.</p>
-            </div>
+            <p class="section-subtitle reading" style="margin-left:auto;margin-right:auto">
+                Deshalb arbeiten wir mit einem Quellenstandard: Wissensbeiträge im Wissensraum verlinken, wo möglich, auf ihre Quellen, statt unbelegte Aussagen zu wiederholen. Tools übersetzen Theorie in Erfahrung. Journals übersetzen Erfahrung in Gewohnheit.
+            </p>
+            <a href="https://www.instagram.com/hybridlogjournals/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:var(--space-4)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                @hybridlogjournals
+            </a>
         </div>
     </div>
 </section>
 
-<!-- ===== Facts ===== -->
+<!-- ===== Abschluss-CTA ===== -->
 <section class="section section-dark">
     <div class="container">
-        <div class="section-header" data-animate>
-            <span class="section-label">Auf einen Blick</span>
-            <h2 class="section-title">Die Journals in Zahlen</h2>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats-bar" data-stagger>
-            <div class="stat-item">
-                <h3><span data-count="4">0</span></h3>
-                <p>Einzigartige Journals</p>
-            </div>
-            <div class="stat-item">
-                <h3><span data-count="832">0</span></h3>
-                <p>Seiten voller Struktur</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== Product Comparison ===== -->
-<section class="section section-elevated">
-    <div class="container">
-        <div class="section-header" data-animate>
-            <span class="section-label">Vergleich</span>
-            <h2 class="section-title">Welches Journal passt zu dir?</h2>
-            <p class="section-subtitle">Alle vier Journals im direkten Vergleich, finde deinen perfekten Begleiter.</p>
-        </div>
-
-        <div data-animate>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Eigenschaft</th>
-                        <th>Studienplaner</th>
-                        <th>Schul-Notizbuch</th>
-                        <th>Lernjournal</th>
-                        <th>Workout Logbuch</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Seitenanzahl</td><td>311</td><td>125</td><td>190</td><td>206</td>
-                    </tr>
-                    <tr>
-                        <td>Format</td><td>A5</td><td>A4</td><td>A5</td><td>A5</td>
-                    </tr>
-                    <tr>
-                        <td>Einband</td><td>Hardcover</td><td>Hardcover</td><td>Hardcover</td><td>Ringbuch</td>
-                    </tr>
-                    <tr>
-                        <td>Semesterplanung</td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                    </tr>
-                    <tr>
-                        <td>Cornell-Methode</td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                    </tr>
-                    <tr>
-                        <td>Wissenstracking</td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                    </tr>
-                    <tr>
-                        <td>Reflexionsfragen</td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                    </tr>
-                    <tr>
-                        <td>Trainingstracking</td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-dash">—</span></td>
-                        <td><span class="comparison-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span></td>
-                    </tr>
-                    <tr>
-                        <td>Ideal für</td>
-                        <td>Studium</td>
-                        <td>Schule</td>
-                        <td>Alle Lernenden</td>
-                        <td>Kraft- &amp; Fitnesstraining</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="cta-center" data-animate style="margin-top:var(--space-6)">
-            <a href="#produkte" class="btn btn-primary">Journal auswählen</a>
-        </div>
-    </div>
-</section>
-
-<!-- ===== Story / Über uns ===== -->
-<section class="section section-dark" id="story">
-    <div class="container">
-        <div class="story-grid">
-            <div class="story-content" data-animate>
-                <span class="section-label">Unsere Geschichte</span>
-                <h2>Von Studenten,<br>für Lernende.</h2>
-                <p>
-                    hybridlog entstand aus einer einfachen Frage: Warum gibt es kein Journal, das wirklich beim Lernen hilft? Die meisten Planer und Notizbücher bieten entweder starre Strukturen oder leere Seiten, aber nichts dazwischen.
-                </p>
-                <p>
-                   Die Idee zu den hybridlog Journals entstand aus der Erfahrung, wie wichtig die richtige Methodik und Struktur für nachhaltigen Lernerfolg sind. Daraus wurden Werkzeuge entwickelt, die Struktur und Kreativität vereinen.
-                </p>
-                <p>
-                    Heute helfen unsere Journals Schülern, Studierenden und lebenslang Lernenden dabei, ihre Ziele klar zu definieren, ihren Fortschritt zu tracken und ihre Lernmethoden zu optimieren.
-                </p>
-                <a href="https://www.instagram.com/hybridlogjournals/" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:var(--space-4)">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    @hybridlogjournals
-                </a>
-            </div>
-            <div class="story-image" data-animate>
-                <picture>
-                    <source srcset="images/Hauptbil/mockup-of-a-book-placed-over-an-old-wooden-table-with-antique-stuff-m23711.webp" type="image/webp">
-                    <img src="images/Hauptbil/mockup-of-a-book-placed-over-an-old-wooden-table-with-antique-stuff-m23711.png" alt="hybridlog – Unsere Vision" loading="lazy" decoding="async" width="1920" height="1280">
-                </picture>
+        <div class="cta-center" data-animate>
+            <h2 class="section-title">Womit möchtest du starten?</h2>
+            <p class="section-subtitle" style="margin-bottom:var(--space-6)">Ein Thema verstehen, ein Tool ausprobieren oder direkt ein Journal in die Hand nehmen.</p>
+            <div class="hero-cta" style="justify-content:center">
+                <a href="plattform/" class="btn btn-primary btn-lg">Themen entdecken</a>
+                <a href="#produkte" class="btn btn-outline btn-lg">Journals ansehen</a>
             </div>
         </div>
     </div>
@@ -343,6 +366,34 @@
 <script src="js/components.js?v=8" defer></script>
 <script src="js/main.js?v=2" defer></script>
 <script src="js/track.js?v=1" defer></script>
+<script src="js/blog.js" defer></script>
+<script defer>
+document.addEventListener('DOMContentLoaded', async function () {
+    const grid = document.getElementById('homeEssaysGrid');
+    if (!grid || !window.hybridlogBlog) return;
+    try {
+        const posts = await window.hybridlogBlog.getPosts();
+        const latest = posts.slice(0, 3);
+        if (!latest.length) { grid.innerHTML = ''; return; }
+        grid.innerHTML = latest.map(function (post) {
+            const img = post.image
+                ? '<img src="' + post.image + '" alt="" loading="lazy" decoding="async">'
+                : '<div class="blog-card-placeholder"><span>Bild folgt</span></div>';
+            return '<article class="blog-card" data-category="' + (post.category || 'Essay') + '">' +
+                '<a class="blog-card-link" href="' + window.hybridlogBlog.postUrl(post.slug) + '" aria-label="' + post.title + ' lesen">' +
+                '<div class="blog-card-image">' + img + '</div>' +
+                '<div class="blog-card-body">' +
+                '<span class="blog-date">' + window.hybridlogBlog.formatDate(post.date) + ' · ' + (post.category || 'Essay') + '</span>' +
+                '<h2>' + post.title + '</h2>' +
+                '<p>' + (post.excerpt || '') + '</p>' +
+                '<span class="read-more">Weiterlesen</span>' +
+                '</a></article>';
+        }).join('');
+    } catch (e) {
+        grid.innerHTML = '';
+    }
+});
+</script>
 
 <!-- Back to Top -->
 <button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">

@@ -684,6 +684,91 @@ h1, h2, h3, h4, h5 {
     flex-wrap: wrap;
 }
 
+.hero-facts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+    font-family: var(--font-ui, var(--font-sans));
+    font-size: var(--fs-meta);
+    color: var(--gray-500);
+    flex-wrap: wrap;
+}
+
+/* Welt-Kacheln (Startseite) */
+.world-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-grid-gap);
+}
+
+.world-tile {
+    display: block;
+    padding: var(--space-box-pad);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: var(--radius-lg);
+    transition: transform var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out);
+}
+
+.world-tile:hover { transform: translateY(-2px); border-color: var(--border-hover); }
+
+.world-tile-label {
+    display: inline-block;
+    font-size: var(--fs-label);
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: var(--space-2);
+}
+
+.world-tile h3 { font-size: var(--fs-card-title); margin-bottom: var(--space-2); color: var(--white); }
+.world-tile p { color: var(--gray-500); margin: 0; font-size: var(--fs-ui); }
+
+/* Themen-Karten (Startseite) */
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-grid-gap);
+}
+
+.topic-card {
+    display: block;
+    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: transform var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out);
+}
+
+.topic-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+
+.topic-card-art {
+    display: inline-block;
+    font-size: var(--fs-label);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold-dark);
+    background: var(--gold-glow);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-3);
+}
+
+.topic-card h3 { font-size: var(--fs-card-title); margin-bottom: var(--space-2); color: var(--white); }
+.topic-card p { color: var(--gray-500); margin: 0; font-size: var(--fs-ui); line-height: 1.5; }
+
+@media (max-width: 860px) {
+    .world-tiles { grid-template-columns: 1fr; }
+    .topic-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+    .topic-grid { grid-template-columns: 1fr; }
+}
+
 /* ====================== 9. Section Styles ====================== */
 .section {
     padding: var(--space-24) 0;

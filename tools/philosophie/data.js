@@ -80,7 +80,7 @@ window.PHILO = (function () {
        str  = Strömungen · dis = Teildisziplinen
 
        book (optional) = Amazon-Affiliate-Buchempfehlung im Detail-Panel:
-         book: { title: 'Der Staat', author: 'Platon', url: 'https://www.amazon.de/dp/XXXXXXX?tag=DEIN-TAG-21' }
+         book: { title: 'Der Staat', author: 'Platon', url: 'https://link.amazon/B0gpLNCNC' }
        Einfach bei einem Denker ergänzen, sobald ein passender Affiliate-Link vorliegt –
        ohne "book"-Feld erscheint im Panel keine Buchempfehlung.                */
     var thinkers = [

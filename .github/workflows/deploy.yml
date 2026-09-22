@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Disabled automatic deploys: Cloudflare Pages is the live host (see _headers).
+# Kept as manual-only fallback (workflow_dispatch) in case it's ever needed again.
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:

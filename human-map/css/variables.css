@@ -1,11 +1,11 @@
 /* ===================================================================
    HUMAN MAP – Design Tokens
-   Adapted from Hybridlogs website design system.
+   Adapted from hybridlog website design system.
    Fonts: Playfair Display (display) + IBM Plex Sans (body) – already loaded site-wide.
    === */
 
 :root {
-    /* ── Backgrounds (aligned with hybridlogs.de main site, Konzept 1) ── */
+    /* ── Backgrounds (aligned with hybridlog.de main site, Konzept 1) ── */
     --hm-bg:          #0b0c0b;
     --hm-bg-elevated: #111312;
     --hm-bg-card:     #171915;

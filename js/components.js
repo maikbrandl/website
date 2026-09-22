@@ -1,15 +1,15 @@
 /**
- * Hybridlogs – Component System
+ * hybridlog – Component System
  * Shared UI components rendered via JS to eliminate duplication.
  * Each page only defines its own content; header and footer
  * are injected once from here.
  */
 
-const HybridlogsComponents = (() => {
+const hybridlogComponents = (() => {
 
     // ——— Configuration ———
     const CONFIG = {
-        siteName: 'Hybridlogs',
+        siteName: 'hybridlog',
         instagram: 'https://www.instagram.com/hybridlogjournals/',
         year: new Date().getFullYear(),
     };
@@ -107,7 +107,7 @@ const HybridlogsComponents = (() => {
         return `
         <header class="site-header" id="siteHeader">
             <nav class="navbar container">
-                <a href="index.html" class="logo" aria-label="Hybridlogs – Startseite">
+                <a href="index.html" class="logo" aria-label="hybridlog – Startseite">
                     <span class="logo-text">hybrid<span class="logo-text__accent">logs</span></span>
                 </a>
                 <button class="nav-toggle" id="navToggle" aria-label="Navigation umschalten" aria-expanded="false">
@@ -213,7 +213,7 @@ const HybridlogsComponents = (() => {
 
 // Auto-init when DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    HybridlogsComponents.init();
+    hybridlogComponents.init();
 
     // Dispatch custom event so main.js knows components are ready
     document.dispatchEvent(new CustomEvent('components:ready'));

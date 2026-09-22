@@ -1,6 +1,6 @@
 /* ============================================================
-   Hybridlogs Tools – Base Styles
-   Adapted from hybridlogs.de dark design system
+   hybridlog Tools – Base Styles
+   Adapted from hybridlog.de dark design system
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
@@ -12,7 +12,7 @@
 }
 
 :root {
-    /* Dark Background — aligned with hybridlogs.de main site (Konzept 1) */
+    /* Dark Background — aligned with hybridlog.de main site (Konzept 1) */
     --bg:              #0b0c0b;
     --bg-elevated:     #111312;
     --bg-card:         #171915;
@@ -62,7 +62,7 @@
     --space-24: 96px;
     --space-32: 128px;
 
-    /* Radius — aligned with hybridlogs.de main site */
+    /* Radius — aligned with hybridlog.de main site */
     --radius-sm:   6px;
     --radius-md:   10px;
     --radius-lg:   16px;

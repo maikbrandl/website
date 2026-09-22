@@ -1,5 +1,5 @@
 /* ===================================================================
-   HYBRIDLOGS – Premium Design System v2
+   HYBRIDLOG – Premium Design System v2
    ===================================================================
    Table of Contents:
    1. Fonts & Reset
@@ -1234,7 +1234,7 @@ h1, h2, h3, h4, h5 {
     padding-top: var(--space-4);
 }
 
-/* Why Hybridlogs (Product Page) */
+/* Why hybridlog (Product Page) */
 .why-banner {
     background: var(--bg-card);
     border: 1px solid var(--border);

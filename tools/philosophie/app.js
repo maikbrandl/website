@@ -298,6 +298,7 @@
         return '<a class="book-action" href="' + esc(book.url) + '" target="_blank" rel="nofollow sponsored noopener">' +
             '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>' +
             '<span>Wichtigstes Buch ansehen</span>' +
+            '<span class="book-action__ad">Anzeige</span>' +
         '</a>';
     }
 

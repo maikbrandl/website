@@ -12,7 +12,7 @@
     const CACHE_TTL_MS = 10 * 60 * 1000;
 
     function cmsSource() {
-        const cfg = window.HybridlogsCmsSource || {};
+        const cfg = window.hybridlogCmsSource || {};
         return {
             owner: cfg.owner || DEFAULT_SOURCE.owner,
             repo: cfg.repo || DEFAULT_SOURCE.repo,
@@ -60,6 +60,35 @@
         const cacheKey = 'hl_cms_v1_' + folder;
         const cached = cacheGet(cacheKey);
         if (cached) return cached;
+
+        const parseEntries = function (entries) {
+            return entries.map(function (file) {
+                const parsed = parseFrontmatter(file.markdown);
+                const slug = (parsed.data.slug || file.name.replace(/\.md$/i, '')).trim();
+                return Object.assign({}, parsed.data, { slug: slug, _body: parsed.body });
+            }).filter(Boolean);
+        };
+
+        // Prefer the same-origin build cache (scripts/build-content.js, refreshed by
+        // CI on every push touching content/**) — avoids the GitHub API's 60 req/h
+        // unauthenticated rate limit. Site-root-absolute path since this module is
+        // called from pages at varying folder depths (plattform/, plattform/mental/…);
+        // only resolves over http(s) (production), so file:// testing still falls
+        // back to the GitHub API below exactly as before — no regression there.
+        const buildCacheUrl = '/' + folder.replace(/^content\//, 'data/') + '.json';
+        try {
+            const buildRes = await fetch(buildCacheUrl, { cache: 'no-cache' });
+            if (buildRes.ok) {
+                const entries = await buildRes.json();
+                if (Array.isArray(entries)) {
+                    const result = parseEntries(entries);
+                    cacheSet(cacheKey, result);
+                    return result;
+                }
+            }
+        } catch (e) {
+            console.warn('CMS: Build-Cache nicht verfügbar, Fallback auf GitHub API.', e);
+        }
 
         const source = cmsSource();
         const listUrl = 'https://api.github.com/repos/' + encodeURIComponent(source.owner) + '/' +

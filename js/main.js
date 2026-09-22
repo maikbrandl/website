@@ -1,5 +1,5 @@
 /**
- * Hybridlogs – Main JavaScript
+ * hybridlog – Main JavaScript
  * Interactions, animations, and behavior.
  * Waits for components:ready event before binding.
  */
@@ -16,7 +16,7 @@ document.addEventListener('components:ready', () => {
         navLinks.classList.add('open');
         navOverlay.classList.add('visible');
         navToggle.setAttribute('aria-expanded', 'true');
-        navToggleIcon.innerHTML = HybridlogsComponents.ICONS.close;
+        navToggleIcon.innerHTML = hybridlogComponents.ICONS.close;
         document.body.style.overflow = 'hidden';
     }
 
@@ -24,7 +24,7 @@ document.addEventListener('components:ready', () => {
         navLinks.classList.remove('open');
         navOverlay.classList.remove('visible');
         navToggle.setAttribute('aria-expanded', 'false');
-        navToggleIcon.innerHTML = HybridlogsComponents.ICONS.menu;
+        navToggleIcon.innerHTML = hybridlogComponents.ICONS.menu;
         document.body.style.overflow = '';
     }
 

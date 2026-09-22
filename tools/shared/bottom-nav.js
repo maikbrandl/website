@@ -1,5 +1,5 @@
 /**
- * Hybridlogs Tools – mobile Bottom-Tab-Bar (Wissen/Suche/Tools/Mehr)
+ * hybridlog Tools – mobile Bottom-Tab-Bar (Wissen/Suche/Tools/Mehr)
  * Setzt window.TOOLS_BASE ('./' auf tools/index.html, '../' in Unterordnern
  * wie tools/blockuniversum/) vor dem Einbinden dieses Skripts.
  */

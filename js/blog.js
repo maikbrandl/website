@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     const DEFAULT_CMS_SOURCE = {
         owner: 'maikbrandl',
         repo: 'website',
@@ -7,7 +7,7 @@
     };
 
     function cmsSource() {
-        const cfg = window.HybridlogsCmsSource || {};
+        const cfg = window.hybridlogCmsSource || {};
         return {
             owner: cfg.owner || DEFAULT_CMS_SOURCE.owner,
             repo: cfg.repo || DEFAULT_CMS_SOURCE.repo,
@@ -192,6 +192,23 @@
 
     async function fetchMarkdownFiles() {
         const source = cmsSource();
+
+        // Prefer the same-origin build cache (scripts/build-content.js, refreshed by
+        // CI on every push touching content/**) — avoids the GitHub API's 60 req/h
+        // unauthenticated rate limit and works without waiting on cross-origin calls.
+        const cacheUrl = source.folder.replace(/^content\//, 'data/') + '.json';
+        try {
+            const cacheRes = await fetch(cacheUrl, { cache: 'no-cache' });
+            if (cacheRes.ok) {
+                const cached = await cacheRes.json();
+                if (Array.isArray(cached)) {
+                    return cached.map(function (file) { return normalizeMarkdownPost(file, file.markdown); });
+                }
+            }
+        } catch (error) {
+            console.warn('Content cache not available, falling back to GitHub API.', error);
+        }
+
         const listUrl = 'https://api.github.com/repos/' + encodeURIComponent(source.owner) + '/' + encodeURIComponent(source.repo) + '/contents/' + source.folder + '?ref=' + encodeURIComponent(source.branch);
         const listRes = await fetch(listUrl, { headers: { 'Accept': 'application/vnd.github+json' } });
         if (!listRes.ok) throw new Error('Cannot list posts: ' + listRes.status);
@@ -214,7 +231,7 @@
     }
 
     function getStaticPosts() {
-        return Array.isArray(window.HybridlogsBlogPosts) ? window.HybridlogsBlogPosts : [];
+        return Array.isArray(window.hybridlogBlogPosts) ? window.hybridlogBlogPosts : [];
     }
 
     async function getPosts() {
@@ -348,7 +365,7 @@
         if (!post) {
             postNode.hidden = true;
             if (notFoundNode) notFoundNode.hidden = false;
-            document.title = 'Artikel nicht gefunden - Hybridlogs';
+            document.title = 'Artikel nicht gefunden - hybridlog';
             return;
         }
 
@@ -366,7 +383,7 @@
         }
 
         renderPostContent(contentNode, post);
-        document.title = post.title + ' - Hybridlogs Blog';
+        document.title = post.title + ' - hybridlog Blog';
 
         const description = document.querySelector('meta[name="description"]');
         if (description && post.excerpt) {

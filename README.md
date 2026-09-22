@@ -1,6 +1,6 @@
-# Hybridlogs – Premium Website
+# hybridlog – Premium Website
 
-Premium Website für [Hybridlogs Journals](https://www.hybridlogjournals.de/) – hochwertige Journals für Schule, Studium und Weiterbildung.
+Premium Website für [hybridlog Journals](https://hybridlog.de/) – hochwertige Journals für Schule, Studium und Weiterbildung.
 
 ## Architektur
 

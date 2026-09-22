@@ -1,5 +1,5 @@
 ## Project Details
-- **Type:** Static Website (HTML/CSS/JS) – Hybridlogs Journals
+- **Type:** Static Website (HTML/CSS/JS) – hybridlog Journals
 - **Structure:** Multi-page website with product pages, blog, legal pages
 
 ## Pages
@@ -15,7 +15,7 @@
 - `images/` — Product and blog images (placeholders to be added)
 
 ## Notes
-- Dark, minimalist design matching Hybridlogs brand
+- Dark, minimalist design matching hybridlog brand
 - Colors and spacing configurable via CSS variables in `:root`
 - Mobile navigation with hamburger menu and slide-in panel
 - Cookie consent banner with localStorage persistence

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.hybridlogjournals.de/sitemap.xml
+Sitemap: https://hybridlog.de/sitemap.xml

@@ -627,6 +627,15 @@
     transition: background var(--duration), border-color var(--duration);
 }
 .book-action:hover { background: rgba(255, 212, 38,0.08); }
+.book-action__ad {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--text-muted);
+    border: 1px solid currentColor;
+    border-radius: var(--radius-full);
+    padding: 1px 6px;
+}
 
 /* ── Blogartikel-Link (optional, siehe data.js Feld "blogUrl") ── */
 .blog-rec__link {

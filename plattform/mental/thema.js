@@ -260,16 +260,42 @@
         const related = (thema.verwandte_themen || []).map(function (slug) {
             return themen.find(function (t) { return t.slug === slug; });
         }).filter(Boolean);
+        // Kein manuell gepflegtes verwandte_themen vorhanden (bei allen 76 Themen
+        // aktuell leer) -> automatisch aus gleichem Fachgebiet ableiten, gleiche
+        // Untergruppe zuerst, sich selbst ausschliessen.
+        const autoRelated = related.length ? related : themen
+            .filter(function (t) { return t.slug !== thema.slug && t.gebiet === thema.gebiet; })
+            .sort(function (a, b) {
+                const aMatch = a.untergruppe === thema.untergruppe ? 0 : 1;
+                const bMatch = b.untergruppe === thema.untergruppe ? 0 : 1;
+                return aMatch - bMatch;
+            })
+            .slice(0, 4);
         const gebiet = gebiete.find(function (g) { return g.slug === thema.gebiet; });
-        const relatedHtml = related.length ? '<div class="card"><p class="eyebrow">Ähnliche Themen</p>' +
-            '<div class="thema-related" style="margin-top:12px">' + related.map(function (t) {
+        const relatedHtml = autoRelated.length ? '<div class="card"><p class="eyebrow">Ähnliche Themen</p>' +
+            '<div class="thema-related" style="margin-top:12px">' + autoRelated.map(function (t) {
                 const g = gebiete.find(function (x) { return x.slug === t.gebiet; });
                 return '<a href="' + href('mental/thema.html?slug=' + encodeURIComponent(t.slug)) + '"><b>' + esc(t.title) + '</b><span>' + esc(t.art || (g ? g.title : '')) + '</span></a>';
             }).join('') + '</div>' +
             (gebiet ? '<a class="thema-link-gold" style="display:inline-block;margin-top:12px" href="' + href('mental/gebiet.html?g=' + gebiet.slug) + '">Alle anzeigen →</a>' : '') +
             '</div>' : '';
 
-        return '<div class="thema-rail">' + tocHtml + progressHtml + toolHtml + relatedHtml + '</div>';
+        // verwandte_artikel wird ebenfalls nicht manuell gepflegt -> Blogartikel
+        // desselben Fachgebiets aus der statischen INHALTE-Tabelle ableiten.
+        const relatedArtikel = (D.inhalteByGebiet(thema.gebiet, 'artikel') || []).slice(0, 3);
+        const artikelHtml = relatedArtikel.length ? '<div class="card"><p class="eyebrow">Weiterlesen</p>' +
+            '<div class="thema-related" style="margin-top:12px">' + relatedArtikel.map(function (a) {
+                return '<a href="' + href(a.href) + '"><b>' + esc(a.title) + '</b><span>Blogartikel</span></a>';
+            }).join('') + '</div></div>' : '';
+
+        const quellen = Array.isArray(thema.quellen) ? thema.quellen.filter(function (q) { return q && q.titel; }) : [];
+        const quellenHtml = quellen.length ? '<div class="card"><p class="eyebrow">Quellen</p>' +
+            '<ul class="sources" style="margin-top:12px">' + quellen.map(function (q) {
+                const label = esc(q.titel);
+                return '<li>' + (q.url ? '<a href="' + esc(q.url) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>' : label) + '</li>';
+            }).join('') + '</ul></div>' : '';
+
+        return '<div class="thema-rail">' + tocHtml + progressHtml + toolHtml + relatedHtml + artikelHtml + quellenHtml + '</div>';
     }
 
     function wireRail() {

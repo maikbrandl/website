@@ -39,6 +39,7 @@ const hybridlogComponents = (() => {
     const FOOTER_LEGAL = [
         { label: 'Impressum', href: 'impressum.html' },
         { label: 'Datenschutzerklärung', href: 'datenschutz.html' },
+        { label: 'Cookie-Einstellungen', action: 'cookie-settings' },
     ];
 
     // ——— SVG Icons ———
@@ -122,7 +123,10 @@ const hybridlogComponents = (() => {
     // ——— Footer ———
     function renderFooter() {
         const productsHTML = FOOTER_PRODUCTS.map(p => `<li><a href="${p.href}">${p.label}</a></li>`).join('');
-        const legalHTML = FOOTER_LEGAL.map(l => `<li><a href="${l.href}">${l.label}</a></li>`).join('');
+        const legalHTML = FOOTER_LEGAL.map(l => l.action
+            ? `<li><a href="#" data-action="${l.action}">${l.label}</a></li>`
+            : `<li><a href="${l.href}">${l.label}</a></li>`
+        ).join('');
 
         return `
         <footer class="site-footer">
@@ -163,6 +167,16 @@ const hybridlogComponents = (() => {
     }
 
     // ——— Cookie Banner ———
+    // Usercentrics CMP is loaded sitewide (see <script id="usercentrics-cmp">); this delegated
+    // handler reopens its settings layer from the "Cookie-Einstellungen" footer link.
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-action="cookie-settings"]');
+        if (!trigger) return;
+        e.preventDefault();
+        if (window.UC_UI && typeof window.UC_UI.showSecondLayer === 'function') {
+            window.UC_UI.showSecondLayer();
+        }
+    });
 
     // ——— Stars (for ratings) ———
     function renderStars(count = 5) {

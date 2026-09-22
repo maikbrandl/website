@@ -519,6 +519,11 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .sources li{padding-left:22px;position:relative}
 .sources li::before{content:"\00A7";position:absolute;left:0;color:var(--gold)}
 
+/* Empfehlung (Affiliate/Buch, im empfehlung-Block) */
+.thema-empfehlung{display:grid;gap:6px}
+.thema-empfehlung h5{font-family:var(--font-ui);font-size:1rem;font-weight:600;color:var(--ink);margin:0}
+.ad-badge{display:inline-block;font-family:var(--font-ui);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line-strong);border-radius:4px;padding:2px 6px;width:fit-content}
+
 /* Sidebar der Konzeptseite */
 .aside{position:sticky;top:88px;display:grid;gap:18px}
 .aside .box{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px}

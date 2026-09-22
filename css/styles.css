@@ -1190,6 +1190,48 @@ h1, h2, h3, h4, h5 {
     color: var(--gray-200);
 }
 
+/* Methoden dahinter (Produktseiten -> Wissensraum-Themen) */
+.methoden-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+}
+
+.methoden-card {
+    display: block;
+    padding: var(--space-8) var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    transition: all var(--duration) var(--ease-out);
+    text-decoration: none;
+}
+
+.methoden-card:hover {
+    border-color: rgba(255, 212, 38, 0.3);
+    box-shadow: var(--shadow-glow);
+}
+
+.methoden-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-3);
+    color: var(--gold);
+}
+
+.methoden-card p {
+    color: var(--gray-500);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+}
+
+.methoden-card-link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--gray-200);
+}
+
 /* Product Details Table */
 .details-table {
     width: 100%;

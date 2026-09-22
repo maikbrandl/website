@@ -198,6 +198,17 @@ collections:
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
               - { label: "Tool", name: "tool", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], hint: "Muss einem der vier bestehenden Tools entsprechen" }
+          - name: "empfehlung"
+            label: "Empfehlung (Buch/Werkzeug/Journal)"
+            widget: "object"
+            hint: "Affiliate-Empfehlung. Maximal einen empfehlung-Block pro Thema verwenden."
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Autor (optional)", name: "autor", widget: "string", required: false }
+              - { label: "Warum passt das hierher? (1 Satz)", name: "warum", widget: "string" }
+              - { label: "Typ", name: "typ", widget: "select", options: ["Buch", "Werkzeug", "Eigenes Journal"] }
+              - { label: "Amazon ASIN (nur bei Typ Buch)", name: "asin", widget: "string", required: false, hint: "10-stellige Amazon-Produkt-ID, z.B. B0006YY4NC. Partner-Tag wird zentral im Code ergänzt." }
       - { label: "Verwandte Themen", name: "verwandte_themen", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "slug", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Blogartikel", name: "verwandte_artikel", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Tools", name: "verwandte_tools", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], multiple: true, required: false }

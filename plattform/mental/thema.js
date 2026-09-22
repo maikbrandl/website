@@ -15,6 +15,32 @@
     const CMS = window.HLCms;
     const base = window.PLATFORM_BASE || '../';
 
+    // Amazon-Partner-Tag an EINER Stelle, fuer den empfehlung-Block (5.9 Masterplan).
+    // TODO: echten Partner-Tag eintragen, sobald vorhanden.
+    const AFFILIATE_TAG = 'hybridlog-21';
+    function amazonLink(asin) {
+        return 'https://www.amazon.de/dp/' + encodeURIComponent(asin) + '?tag=' + AFFILIATE_TAG;
+    }
+
+    // Fachgebiet/Untergruppe -> passendes Journal ("Anwenden"-Modul, 5.8 Masterplan).
+    // Untergruppe hat Vorrang vor Fachgebiet. Philosophie bewusst ohne Eintrag:
+    // dort passt eher eine Buchempfehlung (empfehlung-Block) als ein Journal.
+    const JOURNAL_BY_UNTERGRUPPE = {
+        'Lernmethoden': [
+            { href: '../lernjournal.html', title: 'Lernjournal', fuer: 'Dein Werkzeug für nachhaltiges Wissenstracking.' },
+            { href: '../notizbuch.html', title: 'Schul-Notizbuch', fuer: 'Strukturierte Cornell-Methode für maximale Klarheit.' },
+        ],
+        'Antrieb und Motivation': [
+            { href: '../workoutlogbuch.html', title: 'Workout Logbuch', fuer: 'Dein Trainingsbegleiter für messbaren Fortschritt.' },
+        ],
+    };
+    const JOURNAL_BY_GEBIET = {
+        'lernen-verhalten': [{ href: '../lernjournal.html', title: 'Lernjournal', fuer: 'Dein Werkzeug für nachhaltiges Wissenstracking.' }],
+        'kognition-wahrnehmung': [{ href: '../lernjournal.html', title: 'Lernjournal', fuer: 'Dein Werkzeug für nachhaltiges Wissenstracking.' }],
+        'emotion-motivation': [{ href: '../lernjournal.html', title: 'Lernjournal', fuer: 'Dein Werkzeug für nachhaltiges Wissenstracking.' }],
+        'persoenlichkeit-identitaet': [{ href: '../lernjournal.html', title: 'Lernjournal', fuer: 'Dein Werkzeug für nachhaltiges Wissenstracking.' }],
+    };
+
     function esc(s) {
         return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
@@ -74,7 +100,7 @@
         kurz_erklaert: 'Kurz erklärt', icon_fakten: 'Auf einen Blick', prozess: 'So funktioniert das',
         textabschnitt: 'Richtext', beispiel: 'Beispiel aus dem Alltag', liste: 'Wichtig zu wissen',
         evidenz: 'Grenzen & Evidenz', zitat: 'Zitat', bild: 'Bild', faq: 'Häufig gefragt',
-        tool_einbindung: 'Zum Ausprobieren',
+        tool_einbindung: 'Zum Ausprobieren', empfehlung: 'Empfehlung',
     };
     function secTitle(b) {
         return (b.titel_override && String(b.titel_override).trim()) || DEFAULT_TITLES[b.type] || 'Abschnitt';
@@ -125,6 +151,18 @@
             case 'bild':
                 return '<figure class="thema-bild"><img src="' + esc(b.bild) + '" alt="' + esc(b.alt || '') + '" loading="lazy">' +
                     (b.bildunterschrift ? '<figcaption>' + esc(b.bildunterschrift) + '</figcaption>' : '') + '</figure>';
+            case 'empfehlung': {
+                const isBuch = b.typ === 'Buch';
+                const link = b.asin ? amazonLink(b.asin) : '';
+                return '<div class="thema-empfehlung">' +
+                    (isBuch ? '<span class="ad-badge">Anzeige</span>' : '') +
+                    '<h5>' + esc(b.titel) + '</h5>' +
+                    (b.autor ? '<p class="muted" style="font-size:.82rem">' + esc(b.autor) + '</p>' : '') +
+                    (b.warum ? '<p>' + esc(b.warum) + '</p>' : '') +
+                    (link ? '<a class="thema-link-gold" href="' + esc(link) + '" target="_blank" rel="sponsored noopener" data-track="affiliate-klick">Ansehen →</a>' : '') +
+                    (isBuch && link ? '<p class="muted" style="font-size:.72rem;margin-top:6px">*Werbelink. Als Amazon-Partner verdienen wir an qualifizierten Käufen.</p>' : '') +
+                    '</div>';
+            }
             default:
                 return '';
         }
@@ -255,7 +293,7 @@
         const toolHtml = tool ? '<div class="card thema-tool-card"><p class="eyebrow">Zum Ausprobieren</p>' +
             '<div class="tt-preview">' + icon('network') + '</div>' +
             '<h4>' + esc(tool.title) + '</h4><p>' + esc(tool.teaser) + '</p>' +
-            '<a class="thema-link-gold" href="' + href(tool.href) + '">Tool öffnen →</a></div>' : '';
+            '<a class="thema-link-gold" href="' + href(tool.href) + '" data-track="tool-start">Tool öffnen →</a></div>' : '';
 
         const related = (thema.verwandte_themen || []).map(function (slug) {
             return themen.find(function (t) { return t.slug === slug; });
@@ -272,20 +310,30 @@
             })
             .slice(0, 4);
         const gebiet = gebiete.find(function (g) { return g.slug === thema.gebiet; });
-        const relatedHtml = autoRelated.length ? '<div class="card"><p class="eyebrow">Ähnliche Themen</p>' +
+        const relatedHtml = autoRelated.length ? '<div class="card"><p class="eyebrow">Weiter im Thema</p>' +
             '<div class="thema-related" style="margin-top:12px">' + autoRelated.map(function (t) {
                 const g = gebiete.find(function (x) { return x.slug === t.gebiet; });
-                return '<a href="' + href('mental/thema.html?slug=' + encodeURIComponent(t.slug)) + '"><b>' + esc(t.title) + '</b><span>' + esc(t.art || (g ? g.title : '')) + '</span></a>';
+                return '<a href="' + href('mental/thema.html?slug=' + encodeURIComponent(t.slug)) + '" data-track="verwandtes-thema"><b>' + esc(t.title) + '</b><span>' + esc(t.art || (g ? g.title : '')) + '</span></a>';
             }).join('') + '</div>' +
             (gebiet ? '<a class="thema-link-gold" style="display:inline-block;margin-top:12px" href="' + href('mental/gebiet.html?g=' + gebiet.slug) + '">Alle anzeigen →</a>' : '') +
             '</div>' : '';
 
+        // "Anwenden"-Modul: greift nur, wenn der Wissensbeitrag keinen eigenen
+        // empfehlung-Block hat (CMS-kuratiert schlaegt Auto-Vorschlag, hoechstens
+        // ein Modul pro Seite, siehe Masterplan 5.8/5.9).
+        const hasEmpfehlungBlock = (thema.bloecke || []).some(function (b) { return b.type === 'empfehlung'; });
+        const journals = hasEmpfehlungBlock ? [] : (JOURNAL_BY_UNTERGRUPPE[thema.untergruppe] || JOURNAL_BY_GEBIET[thema.gebiet] || []);
+        const anwendenHtml = journals.length ? '<div class="card"><p class="eyebrow">Anwenden</p>' +
+            '<div class="thema-related" style="margin-top:12px">' + journals.map(function (j) {
+                return '<a href="' + href(j.href) + '" data-track="journal-klick"><b>' + esc(j.title) + '</b><span>' + esc(j.fuer) + '</span></a>';
+            }).join('') + '</div></div>' : '';
+
         // verwandte_artikel wird ebenfalls nicht manuell gepflegt -> Blogartikel
         // desselben Fachgebiets aus der statischen INHALTE-Tabelle ableiten.
         const relatedArtikel = (D.inhalteByGebiet(thema.gebiet, 'artikel') || []).slice(0, 3);
-        const artikelHtml = relatedArtikel.length ? '<div class="card"><p class="eyebrow">Weiterlesen</p>' +
+        const artikelHtml = relatedArtikel.length ? '<div class="card"><p class="eyebrow">Vertiefen</p>' +
             '<div class="thema-related" style="margin-top:12px">' + relatedArtikel.map(function (a) {
-                return '<a href="' + href(a.href) + '"><b>' + esc(a.title) + '</b><span>Blogartikel</span></a>';
+                return '<a href="' + href(a.href) + '"><b>' + esc(a.title) + '</b><span>Essay</span></a>';
             }).join('') + '</div></div>' : '';
 
         const quellen = Array.isArray(thema.quellen) ? thema.quellen.filter(function (q) { return q && q.titel; }) : [];
@@ -295,7 +343,7 @@
                 return '<li>' + (q.url ? '<a href="' + esc(q.url) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>' : label) + '</li>';
             }).join('') + '</ul></div>' : '';
 
-        return '<div class="thema-rail">' + tocHtml + progressHtml + toolHtml + relatedHtml + artikelHtml + quellenHtml + '</div>';
+        return '<div class="thema-rail">' + tocHtml + progressHtml + relatedHtml + toolHtml + anwendenHtml + quellenHtml + artikelHtml + '</div>';
     }
 
     function wireRail() {

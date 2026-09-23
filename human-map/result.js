@@ -375,6 +375,11 @@ const ResultV2 = (() => {
                 openLayerModal(btn.dataset.layerOpen, btn.dataset.layerTitle, picture);
             });
         });
+
+        if (!window.__hmGezaehlt) {
+            window.__hmGezaehlt = true;
+            window.HLTrack && HLTrack('human-map-fertig', { wiederholung: hasBaseline });
+        }
     }
 
     return { render };

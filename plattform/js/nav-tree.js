@@ -1,12 +1,15 @@
 /**
  * Hybridlog Plattform – gemeinsamer Navigations-Baum (Wissensräume/Fachgebiete/
- * Themen/Tools + die flache Wissensfragen-Kategorie). Genutzt von mental/thema.js
- * (Themenseite), mental/frage.js (Wissensfrage-Seite) UND der Wissensraum-
- * Startseite (index.html + js/start.js), damit die Baum-Logik nur an einer
- * Stelle gepflegt werden muss. `active` ist optional ({thema,gebiet} oder
- * {frageSlug}) und markiert nur den aktuellen Pfad; ohne active (z.B. auf der
- * Startseite) wird einfach kein Zweig hervorgehoben. `fragen` ist optional
- * (Array aus content/wissensfragen), ohne sie wird die Kategorie ausgeblendet.
+ * Themen + die flachen Kategorien Wissensfragen/Essays/Tools). Genutzt von
+ * mental/thema.js (Themenseite), mental/frage.js (Wissensfrage-Seite) UND der
+ * Wissensraum-Startseite (index.html + js/start.js), damit die Baum-Logik nur
+ * an einer Stelle gepflegt werden muss. `active` ist optional ({thema,gebiet}
+ * oder {frageSlug}) und markiert nur den aktuellen Pfad; ohne active (z.B. auf
+ * der Startseite) wird einfach kein Zweig hervorgehoben. `fragen` ist optional
+ * (Array aus content/wissensfragen), `posts` ist optional (Array aus
+ * content/posts, fuer die Essays-Sektion nach `category` gruppiert) — fehlt
+ * einer der beiden, wird die jeweilige Kategorie ausgeblendet. Tools kommen
+ * direkt aus window.HLData (D.INHALTE), kein extra Parameter noetig.
  */
 (function () {
     'use strict';
@@ -39,7 +42,7 @@
         return '<li><a href="' + href('mental/thema.html?slug=' + encodeURIComponent(t.slug)) + '"' + (isOn ? ' class="on"' : '') + '>' + esc(t.title) + '</a></li>';
     }
 
-    function buildNav(gebiete, themen, active, fragen) {
+    function buildNav(gebiete, themen, active, fragen, posts) {
         const rooms = D.WELTEN.map(function (w) {
             const gebieteInWelt = gebiete.filter(function (g) { return g.world === w.slug && g.visibility === 'public'; })
                 .sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
@@ -95,9 +98,41 @@
             }).join('')
         ) : '';
 
+        // Essays: Blogartikel gruppiert nach ihrer `category` (Frontmatter-Feld),
+        // gleiche Baum-Optik wie Fachgebiet -> Themen, aber ohne Welt-Zuordnung.
+        const essaysHtml = (posts && posts.length) ? (function () {
+            const gruppen = [];
+            posts.slice().sort(function (a, b) { return String(b.date || '').localeCompare(String(a.date || '')); })
+                .forEach(function (p) {
+                    const cat = p.category || 'Sonstiges';
+                    let grp = gruppen.find(function (g) { return g.name === cat; });
+                    if (!grp) { grp = { name: cat, posts: [] }; gruppen.push(grp); }
+                    grp.posts.push(p);
+                });
+            const gruppenHtml = gruppen.map(function (g) {
+                return '<details class="tn-gebiet"><summary>' + esc(g.name) + '</summary>' +
+                    '<ul class="tn-themen">' + g.posts.map(function (p) {
+                        return '<li><a href="' + href('../blog-artikel.html?slug=' + encodeURIComponent(p.slug)) + '">' + esc(p.title) + '</a></li>';
+                    }).join('') + '</ul></details>';
+            }).join('');
+            return '<p class="eyebrow" style="margin-top:22px">Essays</p><div class="tn-gebiete" style="padding:0">' + gruppenHtml + '</div>';
+        })() : '';
+
+        // Tools: flache Liste, gleiche Optik wie die Tools-Liste innerhalb eines
+        // Fachgebiets, hier aber alle Tools uebergreifend an einer Stelle.
+        const toolsList = (D.INHALTE || []).filter(function (i) { return i.type === 'tool'; });
+        const toolsHtml = toolsList.length ? (
+            '<p class="eyebrow" style="margin-top:22px">Tools</p>' +
+            '<ul class="tn-tools" style="border-left:0;padding-left:0">' + toolsList.map(function (t) {
+                return '<li><a href="' + href(t.href) + '">' + icon('flask') + esc(t.title) + '</a></li>';
+            }).join('') + '</ul>'
+        ) : '';
+
         return '<div class="thema-nav">' +
             '<p class="eyebrow">Wissensräume</p>' + rooms +
             fragenHtml +
+            essaysHtml +
+            toolsHtml +
             '<a class="tn-all" href="' + href('index.html') + '">Alle anzeigen →</a>' +
             '<div class="card tn-ways"><h4>Wissen auf deine Weise</h4>' +
             '<div class="tn-way">' + icon('book') + '<span><b>Lesen</b><span>Texte & Erklärungen</span></span></div>' +

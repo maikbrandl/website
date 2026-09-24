@@ -534,10 +534,10 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
    ------------------------------------------------------------------------- */
 .thema-shell{display:grid;grid-template-columns:288px minmax(0,1fr) 246px;gap:32px;max-width:var(--maxw);margin:0 auto;padding:26px 24px 60px;align-items:start}
 @media(max-width:1160px){.thema-shell{grid-template-columns:270px minmax(0,1fr)}.thema-rail{display:none}}
-@media(max-width:860px){.thema-shell{grid-template-columns:1fr}.thema-nav{position:static;max-height:none}}
+@media(max-width:860px){.thema-shell{grid-template-columns:1fr}.thema-nav{position:static;max-height:none;border-right:0;padding-right:0}}
 
 /* Linke Navigation, Baum aus <details> ohne eigenes JS fuer Auf/Zu */
-.thema-nav{position:sticky;top:88px;max-height:calc(100vh - 88px);overflow:auto;padding-right:6px}
+.thema-nav{position:sticky;top:88px;max-height:calc(100vh - 88px);overflow:auto;padding-right:20px;border-right:1px solid var(--line)}
 .thema-nav .eyebrow{display:block;margin-bottom:10px}
 .tn-room{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
 .tn-room>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 14px;font-family:var(--font-ui);font-weight:700;font-size:.95rem}

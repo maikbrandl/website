@@ -51,6 +51,11 @@
                     'Klicke ein Thema direkt an, es öffnet sich als kurzer, in sich abgeschlossener Wissensbeitrag.',
                 ],
             },
+            {
+                type: 'textabschnitt',
+                titel_override: 'Wissensraum, Tools, Essays, Wissensfragen: der Unterschied',
+                text: '**Wissensraum** ist der Sammelbegriff für alles hier: die drei Welten MIND, BODY und WORLD mit ihren Fachgebieten und Themen. Ein **Thema** ist ein kurzer, in sich abgeschlossener Wissensbeitrag zu einem Fachgebiet, mit Kernaussage, Beispielen und Quellen.\n\n**Tools** sind interaktive Anwendungen statt Lesestoff: Ein Fragebogen, eine Simulation oder ein Rechner gibt dir ein Ergebnis zu dir selbst, statt nur Theorie zu erklären.\n\n**Essays** sind die Blogartikel: persönlicher geschrieben, oft länger und mit einer eigenen Perspektive, sortiert nach Kategorien wie Psychologie oder Philosophie statt nach Fachgebiet.\n\n**Wissensfragen** lösen ein einzelnes, konkretes Problem von Anfang bis Ende, ausgehend von einer echten Frage wie „Wie höre ich auf mit Rauchen?". Sie sind flacher als ein Thema, brauchen kein Fachgebiet und bündeln mehrere Blickwinkel auf dieselbe Frage.',
+            },
         ],
     };
 
@@ -86,12 +91,13 @@
         const main = document.querySelector('#main');
         if (!main || !NAV || !BLOCKS) return;
 
-        let gebiete = [], themen = [], fragen = [];
+        let gebiete = [], themen = [], fragen = [], posts = [];
         try {
-            [gebiete, themen, fragen] = await Promise.all([
+            [gebiete, themen, fragen, posts] = await Promise.all([
                 CMS.fetchCollection('content/fachgebiete'),
                 CMS.fetchCollection('content/themen'),
                 CMS.fetchCollection('content/wissensfragen'),
+                CMS.fetchCollection('content/posts'),
             ]);
         } catch (e) {
             console.error('Fachgebiete/Themen konnten nicht geladen werden', e);
@@ -100,7 +106,7 @@
         const blocks = BLOCKS.buildBlocks(OVERVIEW);
 
         main.innerHTML = '<div class="thema-shell">' +
-            NAV.build(gebiete, themen, null, fragen) +
+            NAV.build(gebiete, themen, null, fragen, posts) +
             '<div class="thema-main">' + headHtml() + blocks.html + '</div>' +
             railHtml(blocks.toc) +
             '</div>';

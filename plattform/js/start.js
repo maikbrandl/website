@@ -106,6 +106,14 @@
             '</div>';
 
         BLOCKS.wireRail();
+
+        // Von der Startseite verlinkt (#mind/#body/#world) -> passende Welt
+        // im Navigationsbaum direkt aufklappen und dorthin scrollen.
+        const wanted = (location.hash || '').replace('#', '').toLowerCase();
+        if (wanted) {
+            const room = main.querySelector('.tn-room[data-w="' + wanted + '"]');
+            if (room) { room.open = true; room.scrollIntoView({ block: 'nearest' }); }
+        }
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

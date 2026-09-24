@@ -221,3 +221,162 @@ collections:
           - { label: "URL", name: "url", widget: "string" }
       - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
       - { label: "Meta-Beschreibung", name: "seo_description", widget: "text", required: false }
+
+  - name: "wissensfragen"
+    label: "Wissensfragen (Wissensplattform)"
+    folder: "content/wissensfragen"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Titel (als konkrete Frage formuliert)", name: "title", widget: "string", hint: "z.B. Wie höre ich auf mit Rauchen?" }
+      - label: "Wissensräume"
+        name: "welten"
+        widget: "select"
+        options:
+          - { label: "MIND", value: "mind" }
+          - { label: "BODY", value: "body" }
+          - { label: "WORLD", value: "world" }
+        multiple: true
+        hint: "Meist mehrere, eine Wissensfrage betrifft oft mehr als einen Raum."
+      - { label: "Lead-Satz", name: "lead", widget: "text" }
+      - { label: "Kurz lesen (Minuten)", name: "kurzlesezeit", widget: "number", required: false }
+      - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }
+      - name: "bloecke"
+        label: "Inhaltsblöcke"
+        label_singular: "Block"
+        widget: "list"
+        type_key: "type"
+        hint: "Ein klares Problem mit Fragestellung, von Anfang bis Ende erklärt und gelöst — dieselben Bloecke wie bei Themen, plus Perspektive/Verknüpfungen."
+        types:
+          - name: "kurz_erklaert"
+            label: "Kurz erklärt"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+          - name: "icon_fakten"
+            label: "Auf einen Blick (Icon-Fakten)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "fakten"
+                label: "Fakten"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+                  - { label: "Text", name: "text", widget: "string" }
+          - name: "textabschnitt"
+            label: "Richtext (freier Text)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "markdown" }
+          - name: "perspektive"
+            label: "Perspektive (ein fachlicher Blickwinkel)"
+            widget: "object"
+            hint: "Für die mehreren Blickwinkel auf dasselbe Problem, z.B. biologisch/psychologisch/praktisch/philosophisch. Nummerierung im Label kommt automatisch aus der Position im Block."
+            fields:
+              - { label: "Kategorie (z.B. Biologisch)", name: "kategorie", widget: "string", required: false }
+              - { label: "Titel (z.B. Die Sucht)", name: "titel", widget: "string" }
+              - { label: "Text", name: "text", widget: "markdown" }
+              - { label: "Fazit-Zeile (hervorgehoben, optional)", name: "fazit", widget: "string", required: false }
+          - name: "prozess"
+            label: "Drei-Spalten Layout (Prozess/Schritte)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "schritte"
+                label: "Schritte"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Untertitel", name: "untertitel", widget: "string" }
+                  - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+          - name: "liste"
+            label: "Aufzählung (Liste)"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "punkte"
+                label: "Punkte"
+                widget: "list"
+                field: { label: "Punkt", name: "punkt", widget: "string" }
+          - name: "beispiel"
+            label: "Beispiel aus dem Alltag"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Ergebnis-Zeile (optional)", name: "ergebnis", widget: "string", required: false }
+          - name: "evidenz"
+            label: "Grenzen & Evidenz"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Link-Text (optional)", name: "link_label", widget: "string", required: false }
+              - { label: "Link-Ziel (optional)", name: "link_url", widget: "string", required: false }
+          - name: "zitat"
+            label: "Zitatabsatz"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Quelle (optional)", name: "quelle", widget: "string", required: false }
+          - name: "faq"
+            label: "Häufige Fragen"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "eintraege"
+                label: "Fragen"
+                widget: "list"
+                fields:
+                  - { label: "Frage", name: "frage", widget: "string" }
+                  - { label: "Antwort", name: "antwort", widget: "markdown" }
+          - name: "verknuepfungen"
+            label: "Womit sich dieser Weg verknüpft"
+            widget: "object"
+            hint: "Verweise auf verwandte Themen. Link-Ziel leer lassen, solange die Themenseite noch nicht existiert (zeigt dann 'Themenseite folgt')."
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - name: "eintraege"
+                label: "Einträge"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Link-Ziel (optional, leer lassen falls noch keine Seite existiert)", name: "href", widget: "string", required: false }
+          - name: "bild"
+            label: "Bild einfügen"
+            widget: "object"
+            fields:
+              - { label: "Bild", name: "bild", widget: "image" }
+              - { label: "Alt-Text (Barrierefreiheit/SEO)", name: "alt", widget: "string" }
+              - { label: "Bildunterschrift (optional)", name: "bildunterschrift", widget: "string", required: false }
+          - name: "tool_einbindung"
+            label: "Verlinkung: Tool"
+            widget: "object"
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Tool", name: "tool", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], hint: "Muss einem der vier bestehenden Tools entsprechen" }
+          - name: "empfehlung"
+            label: "Empfehlung (Buch/Werkzeug/Journal)"
+            widget: "object"
+            hint: "Affiliate-Empfehlung. Maximal einen empfehlung-Block pro Wissensfrage verwenden."
+            fields:
+              - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Autor (optional)", name: "autor", widget: "string", required: false }
+              - { label: "Warum passt das hierher? (1 Satz)", name: "warum", widget: "string" }
+              - { label: "Typ", name: "typ", widget: "select", options: ["Buch", "Werkzeug", "Eigenes Journal"] }
+              - { label: "Amazon ASIN (nur bei Typ Buch)", name: "asin", widget: "string", required: false, hint: "10-stellige Amazon-Produkt-ID, z.B. B0006YY4NC. Partner-Tag wird zentral im Code ergänzt." }
+      - name: "quellen"
+        label: "Quellen"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Titel", name: "titel", widget: "string" }
+          - { label: "URL", name: "url", widget: "string", required: false }
+      - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
+      - { label: "Meta-Beschreibung", name: "seo_description", widget: "text", required: false }

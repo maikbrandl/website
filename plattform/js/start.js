@@ -86,11 +86,12 @@
         const main = document.querySelector('#main');
         if (!main || !NAV || !BLOCKS) return;
 
-        let gebiete = [], themen = [];
+        let gebiete = [], themen = [], fragen = [];
         try {
-            [gebiete, themen] = await Promise.all([
+            [gebiete, themen, fragen] = await Promise.all([
                 CMS.fetchCollection('content/fachgebiete'),
                 CMS.fetchCollection('content/themen'),
+                CMS.fetchCollection('content/wissensfragen'),
             ]);
         } catch (e) {
             console.error('Fachgebiete/Themen konnten nicht geladen werden', e);
@@ -99,7 +100,7 @@
         const blocks = BLOCKS.buildBlocks(OVERVIEW);
 
         main.innerHTML = '<div class="thema-shell">' +
-            NAV.build(gebiete, themen, null) +
+            NAV.build(gebiete, themen, null, fragen) +
             '<div class="thema-main">' + headHtml() + blocks.html + '</div>' +
             railHtml(blocks.toc) +
             '</div>';

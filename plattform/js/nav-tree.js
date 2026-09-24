@@ -1,10 +1,12 @@
 /**
  * Hybridlog Plattform – gemeinsamer Navigations-Baum (Wissensräume/Fachgebiete/
- * Themen/Tools). Genutzt von mental/thema.js (Themenseite) UND der Wissensraum-
+ * Themen/Tools + die flache Wissensfragen-Kategorie). Genutzt von mental/thema.js
+ * (Themenseite), mental/frage.js (Wissensfrage-Seite) UND der Wissensraum-
  * Startseite (index.html + js/start.js), damit die Baum-Logik nur an einer
- * Stelle gepflegt werden muss. `active` ist optional ({thema,gebiet}) und
- * markiert nur den aktuellen Pfad; ohne active (z.B. auf der Startseite) wird
- * einfach kein Zweig hervorgehoben.
+ * Stelle gepflegt werden muss. `active` ist optional ({thema,gebiet} oder
+ * {frageSlug}) und markiert nur den aktuellen Pfad; ohne active (z.B. auf der
+ * Startseite) wird einfach kein Zweig hervorgehoben. `fragen` ist optional
+ * (Array aus content/wissensfragen), ohne sie wird die Kategorie ausgeblendet.
  */
 (function () {
     'use strict';
@@ -36,7 +38,7 @@
         return '<li><a href="' + href('mental/thema.html?slug=' + encodeURIComponent(t.slug)) + '"' + (isOn ? ' class="on"' : '') + '>' + esc(t.title) + '</a></li>';
     }
 
-    function buildNav(gebiete, themen, active) {
+    function buildNav(gebiete, themen, active, fragen) {
         const rooms = D.WELTEN.map(function (w) {
             const gebieteInWelt = gebiete.filter(function (g) { return g.world === w.slug && g.visibility === 'public'; })
                 .sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
@@ -81,8 +83,20 @@
                 '</details>';
         }).join('');
 
+        // Wissensfragen: eigene, flache Kategorie unterhalb der Wissensräume,
+        // bewusst ohne Gliederung/Details-Verschachtelung (siehe Themenbaum
+        // oben) -- ein klares Problem von Anfang bis Ende, kein Fachgebiet-Baum.
+        const fragenHtml = (fragen && fragen.length) ? (
+            '<p class="eyebrow" style="margin-top:22px">Wissensfragen</p>' +
+            '<ul class="tn-themen" style="border-left:0;padding-left:0">' + fragen.map(function (f) {
+                const isOn = active && active.frageSlug === f.slug;
+                return '<li><a href="' + href('mental/frage.html?slug=' + encodeURIComponent(f.slug)) + '"' + (isOn ? ' class="on"' : '') + '>' + esc(f.title) + '</a></li>';
+            }).join('') + '</ul>'
+        ) : '';
+
         return '<div class="thema-nav">' +
             '<p class="eyebrow">Wissensräume</p>' + rooms +
+            fragenHtml +
             '<a class="tn-all" href="' + href('index.html') + '">Alle anzeigen →</a>' +
             '<div class="card tn-ways"><h4>Wissen auf deine Weise</h4>' +
             '<div class="tn-way">' + icon('book') + '<span><b>Lesen</b><span>Texte & Erklärungen</span></span></div>' +

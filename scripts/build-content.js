@@ -27,7 +27,8 @@ const SITE_URL = 'https://hybridlog.de';
 const COLLECTIONS = [
     { dir: 'content/posts', out: 'data/posts.json' },
     { dir: 'content/themen', out: 'data/themen.json' },
-    { dir: 'content/fachgebiete', out: 'data/fachgebiete.json' }
+    { dir: 'content/fachgebiete', out: 'data/fachgebiete.json' },
+    { dir: 'content/wissensfragen', out: 'data/wissensfragen.json' }
 ];
 
 const STATIC_PAGES = [
@@ -114,7 +115,7 @@ function main() {
         return urlEntry(page.loc, { lastmod: today, changefreq: page.changefreq, priority: page.priority });
     });
 
-    let postCount = 0, themaCount = 0, gebietCount = 0;
+    let postCount = 0, themaCount = 0, gebietCount = 0, frageCount = 0;
 
     // Posts: one URL per blog article, lastmod from frontmatter `date`.
     const posts = buildCollectionCache('content/posts', 'data/posts.json');
@@ -150,6 +151,17 @@ function main() {
         gebietCount++;
     });
 
+    // Wissensfragen: eigene, flache SEO-Zielseiten (Google/Bing-KI-Antworten),
+    // keine Gating-Felder, jede Datei ist sofort oeffentlich.
+    const wissensfragen = buildCollectionCache('content/wissensfragen', 'data/wissensfragen.json');
+    wissensfragen.forEach(function (file) {
+        const slug = slugFromFile(file.name, file.markdown);
+        urls.push(urlEntry('/plattform/mental/frage.html?slug=' + encodeURIComponent(slug), {
+            lastmod: today, changefreq: 'monthly', priority: '0.6'
+        }));
+        frageCount++;
+    });
+
     const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         urls.join('\n') + '\n' +
@@ -158,9 +170,9 @@ function main() {
 
     console.log(
         'Content build done: ' + posts.length + ' posts, ' + themen.length + ' themen, ' +
-        fachgebiete.length + ' fachgebiete cached. Sitemap: ' + urls.length + ' URLs (' +
+        fachgebiete.length + ' fachgebiete, ' + wissensfragen.length + ' wissensfragen cached. Sitemap: ' + urls.length + ' URLs (' +
         STATIC_PAGES.length + ' static, ' + postCount + ' posts, ' + themaCount + ' themen, ' +
-        gebietCount + ' gebiete).'
+        gebietCount + ' gebiete, ' + frageCount + ' wissensfragen).'
     );
 }
 

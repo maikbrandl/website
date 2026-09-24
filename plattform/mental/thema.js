@@ -173,11 +173,12 @@
         const slug = qs('slug');
         if (!main || !slug) { renderError(main, 'Kein Thema angegeben.'); return; }
 
-        let gebiete, themen;
+        let gebiete, themen, fragen;
         try {
-            [gebiete, themen] = await Promise.all([
+            [gebiete, themen, fragen] = await Promise.all([
                 CMS.fetchCollection('content/fachgebiete'),
                 CMS.fetchCollection('content/themen'),
+                CMS.fetchCollection('content/wissensfragen'),
             ]);
         } catch (e) {
             console.error(e);
@@ -197,7 +198,7 @@
         const blocks = window.HLBlocks.buildBlocks(thema);
 
         main.innerHTML = '<div class="thema-shell">' +
-            window.HLNavTree.build(gebiete, themen, active) +
+            window.HLNavTree.build(gebiete, themen, active, fragen) +
             '<div class="thema-main">' + buildHead(thema, gebiet) + blocks.html + '</div>' +
             buildRail(thema, themen, gebiete, blocks.toc) +
             '</div>';

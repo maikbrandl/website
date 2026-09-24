@@ -68,8 +68,15 @@
         textabschnitt: 'Richtext', beispiel: 'Beispiel aus dem Alltag', liste: 'Wichtig zu wissen',
         evidenz: 'Grenzen & Evidenz', zitat: 'Zitat', bild: 'Bild', faq: 'Häufig gefragt',
         tool_einbindung: 'Zum Ausprobieren', empfehlung: 'Empfehlung',
+        verknuepfungen: 'Womit sich dieser Weg verknüpft',
     };
-    function secTitle(b) {
+    // perspektive-Bloecke (nur Wissensfragen) tragen ihr Label selbst: Nummer
+    // kommt aus der Blockposition, Kategorie ist ein freies CMS-Feld.
+    function secTitle(b, num) {
+        if (b.type === 'perspektive') {
+            const n = String(num || 1).padStart(2, '0');
+            return 'Perspektive ' + n + (b.kategorie ? ' · ' + b.kategorie : '');
+        }
         return (b.titel_override && String(b.titel_override).trim()) || DEFAULT_TITLES[b.type] || 'Abschnitt';
     }
 
@@ -125,6 +132,15 @@
             case 'bild':
                 return '<figure class="thema-bild"><img src="' + esc(b.bild) + '" alt="' + esc(b.alt || '') + '" loading="lazy">' +
                     (b.bildunterschrift ? '<figcaption>' + esc(b.bildunterschrift) + '</figcaption>' : '') + '</figure>';
+            case 'perspektive':
+                return '<div class="thema-perspektive"><h3>' + esc(b.titel) + '</h3>' + mdParagraphs(b.text) +
+                    (b.fazit ? '<p class="tp-fazit">' + esc(b.fazit) + '</p>' : '') + '</div>';
+            case 'verknuepfungen':
+                return '<div class="thema-verknuepfungen">' + (b.eintraege || []).map(function (e) {
+                    return '<div class="thema-verkn-item">' + (e.href
+                        ? '<a href="' + href(e.href) + '">' + esc(e.titel) + '</a>'
+                        : '<span>' + esc(e.titel) + '</span><span class="tv-status">Themenseite folgt</span>') + '</div>';
+                }).join('') + '</div>';
             case 'empfehlung': {
                 const isBuch = b.typ === 'Buch';
                 const link = b.asin ? amazonLink(b.asin) : '';
@@ -144,7 +160,7 @@
 
     function wrapSection(b, num, id) {
         return '<section class="thema-sec" id="' + id + '">' +
-            '<p class="thema-sec-label">' + esc(secTitle(b)) + '</p>' +
+            '<p class="thema-sec-label">' + esc(secTitle(b, num)) + '</p>' +
             renderBlockBody(b, { toolBySlug: toolBySlug }) +
             '</section>';
     }
@@ -154,7 +170,8 @@
         const html = (thema.bloecke || []).map(function (b, i) {
             const num = i + 1;
             const id = 'sec-' + num;
-            toc.push({ id: id, title: secTitle(b) });
+            // perspektive: kurzer Titel (z.B. "Die Sucht") statt "Perspektive 01 · ..." im TOC
+            toc.push({ id: id, title: b.type === 'perspektive' ? (b.titel || secTitle(b, num)) : secTitle(b, num) });
             return wrapSection(b, num, id);
         }).join('');
         return { html: '<div class="stack">' + html + '</div>', toc: toc };

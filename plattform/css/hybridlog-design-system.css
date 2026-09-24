@@ -630,6 +630,18 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 .thema-bild img{width:100%;height:auto;border-radius:10px;display:block}
 .thema-bild figcaption{margin-top:10px;font-size:13.5px;color:var(--faint)}
 
+/* Blocktyp: perspektive (nur Wissensfragen), mehrere fachliche Blickwinkel */
+.thema-perspektive h3{font-family:var(--font-display);font-size:1.3rem;margin:0 0 12px}
+.thema-perspektive .tp-fazit{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--font-ui);font-weight:600;font-size:.92rem;color:var(--accent-ink)}
+
+/* Blocktyp: verknuepfungen (nur Wissensfragen), Platzhalter fuer noch nicht bestehende Themenseiten */
+.thema-verknuepfungen{display:grid;gap:2px}
+.thema-verkn-item{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.92rem;padding:10px 0;border-bottom:1px solid var(--line)}
+.thema-verkn-item:last-child{border-bottom:0}
+.thema-verkn-item a{color:var(--ink);text-decoration:none;font-weight:600}
+.thema-verkn-item a:hover{color:var(--teal)}
+.thema-verkn-item .tv-status{font-size:.74rem;color:var(--faint);white-space:nowrap}
+
 /* Blocktyp: liste, Haekchen durch einen kleinen teal Punkt ersetzt */
 .thema-liste{list-style:none;margin:0;padding:0;display:grid;gap:9px}
 .thema-liste li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink)}

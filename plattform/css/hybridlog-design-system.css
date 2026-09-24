@@ -577,8 +577,8 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 46px;font
 .tn-gruppe ul{list-style:none;margin:0;padding:0 0 4px 14px}
 .tn-all{display:inline-block;margin:6px 0 18px;font-family:var(--font-ui);font-size:.8rem;font-weight:600;color:var(--accent-ink);text-decoration:none}
 .tn-all:hover{text-decoration:underline}
-.tn-frage{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;padding:12px 14px;font-family:var(--font-ui);font-weight:700;font-size:.95rem;color:var(--ink);text-decoration:none}
-.tn-frage:hover{color:var(--teal)}
+.tn-frage{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;padding:12px 14px;font-family:var(--font-ui);font-weight:400;font-size:.86rem;color:var(--muted);text-decoration:none}
+.tn-frage:hover{color:var(--ink)}
 .tn-frage .tn-ico{flex:none;width:16px;height:16px;color:var(--faint)}
 .tn-frage.on{color:var(--teal)}
 .tn-frage.on .tn-ico{color:var(--teal)}

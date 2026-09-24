@@ -208,7 +208,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
    ------------------------------------------------------------------------- */
 .bottom-nav{display:none}
 .mehr-overlay{display:none}
-.mobile-wissen{display:none}
 
 @media(max-width:700px){
   body:has(.bottom-nav){padding-bottom:64px}
@@ -267,59 +266,6 @@ header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
   .thema-metaline{display:none!important}
   .thema-nav{display:none!important}
   .thema-rail{display:none!important}
-
-  /* Wissensraum-Startseite: Desktop-Hero/Weltkarten/Tools/Neu weichen dem
-     App-artigen Welt-Tabs -> Fachgebiet-Chips -> Inhalte Browser. */
-  .hero{display:none!important}
-  hr.divider{display:none!important}
-  section[aria-labelledby="welten-title"],
-  section[aria-labelledby="probieren-title"],
-  section[aria-labelledby="neu-title"]{display:none!important}
-
-  .mobile-wissen{display:block;padding-top:20px}
-
-  .mw-tabs{display:flex;gap:6px;background:var(--surface-2);padding:4px;border-radius:var(--radius-sm);margin-bottom:14px}
-  .mw-tab{
-    flex:1 1 0;font-family:var(--font-ui);font-size:.86rem;font-weight:600;
-    padding:9px 6px;border:none;border-radius:8px;background:none;color:var(--muted);cursor:pointer;
-  }
-  .mw-tab.active{background:var(--accent);color:var(--on-accent)}
-  .mw-tab.disabled{opacity:.5;cursor:not-allowed}
-
-  .mw-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:6px;scrollbar-width:none}
-  .mw-chips::-webkit-scrollbar{display:none}
-  .mw-chip{
-    flex:0 0 auto;font-family:var(--font-ui);font-size:.82rem;font-weight:500;white-space:nowrap;
-    padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);
-    color:var(--muted);cursor:pointer;
-  }
-  .mw-chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-
-  .mw-section{margin:22px 0}
-  .mw-section h3{font-size:1.05rem;margin-top:4px;margin-bottom:12px}
-  .mw-cluster{grid-template-columns:1fr!important}
-  .mw-empty{font-size:.88rem}
-  .mw-divider{border:none;border-top:1px solid var(--line);margin:26px 0}
-
-  /* Themen-Karten im mobilen Browser: nur Titel + Unterkategorie, kein
-     Eyebrow/Teaser, damit sich viele Themen schnell durchscrollen lassen. */
-  .mw-cluster-compact .node-card{padding:13px 16px}
-  .mw-cluster-compact .node-card .nc-top,
-  .mw-cluster-compact .node-card p{display:none}
-  .mw-cluster-compact .node-card h4{font-size:.95rem}
-  .mw-divider-sm{margin:16px 0}
-
-  /* Unterkategorien als Dropdown: Teal-Label ist der Klappauslöser, damit
-     nicht alle Themen einer Kategorie auf einmal sichtbar sind. */
-  .mw-thema-group{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin-bottom:10px;overflow:hidden}
-  .mw-thema-group:last-child{margin-bottom:0}
-  .mw-thema-group summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px}
-  .mw-thema-group summary::-webkit-details-marker{display:none}
-  .mw-thema-group .mw-tg-name{font-family:var(--font-ui);font-size:.84rem;font-weight:700;color:var(--teal)}
-  .mw-thema-group .mw-tg-count{margin-left:auto;font-family:var(--font-ui);font-size:.74rem;color:var(--faint);font-weight:600}
-  .mw-thema-group summary::after{content:"";flex:none;width:7px;height:7px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-left:6px;transition:.15s}
-  .mw-thema-group[open] summary::after{transform:rotate(-135deg);border-color:var(--teal)}
-  .mw-thema-group .mw-cluster-compact{margin:0;padding:0 12px 12px}
 }
 
 /* -------------------------------------------------------------------------

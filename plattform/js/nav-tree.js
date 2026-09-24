@@ -29,6 +29,7 @@
         flask: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6.3L4.2 18a2 2 0 0 0 1.8 3h12a2 2 0 0 0 1.8-3L15 8.3V2"/><line x1="8" y1="2" x2="16" y2="2"/><line x1="8.5" y1="14" x2="15.5" y2="14"/></svg>',
         book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
         eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+        question: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a2.9 2.9 0 0 1 5.7.7c0 1.9-2.8 1.9-2.8 3.6"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
     };
     function icon(name) { return ICONS[name] || ''; }
     const ROOM_ICON = { mind: 'lightbulb', body: 'refresh', world: 'world' };
@@ -88,10 +89,10 @@
         // oben) -- ein klares Problem von Anfang bis Ende, kein Fachgebiet-Baum.
         const fragenHtml = (fragen && fragen.length) ? (
             '<p class="eyebrow" style="margin-top:22px">Wissensfragen</p>' +
-            '<ul class="tn-themen" style="border-left:0;padding-left:0">' + fragen.map(function (f) {
+            fragen.map(function (f) {
                 const isOn = active && active.frageSlug === f.slug;
-                return '<li><a href="' + href('mental/frage.html?slug=' + encodeURIComponent(f.slug)) + '"' + (isOn ? ' class="on"' : '') + '>' + esc(f.title) + '</a></li>';
-            }).join('') + '</ul>'
+                return '<a class="tn-frage' + (isOn ? ' on' : '') + '" href="' + href('mental/frage.html?slug=' + encodeURIComponent(f.slug)) + '"><span class="tn-ico">' + icon('question') + '</span>' + esc(f.title) + '</a>';
+            }).join('')
         ) : '';
 
         return '<div class="thema-nav">' +

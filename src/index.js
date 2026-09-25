@@ -22,16 +22,25 @@ export default {
       return Response.redirect(redirect.toString(), 302);
     }
 
+    // ALLOWED_ORIGINS (comma-separated) can add e.g. the pages.dev preview origin.
+    const allowedOrigins = [
+      "https://hybridlog.de",
+      "https://www.hybridlog.de",
+      ...(env.ALLOWED_ORIGINS || "").split(",").map((o) => o.trim()).filter(Boolean)
+    ];
+
     function callbackScriptResponse(status, token) {
       return new Response(
         `
 <html>
   <head>
     <script>
+      const allowed = ${JSON.stringify(allowedOrigins)};
       const receiveMessage = (message) => {
+        if (!allowed.includes(message.origin)) return;
         window.opener.postMessage(
           'authorization:github:${status}:${JSON.stringify({ token: token || "" })}',
-          '*'
+          message.origin
         );
         window.removeEventListener("message", receiveMessage, false);
       };

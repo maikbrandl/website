@@ -20,6 +20,10 @@ collections:
       - { label: "Titel", name: "title", widget: "string" }
       - { label: "Datum", name: "date", widget: "datetime" }
       - { label: "Kategorie", name: "category", widget: "string", default: "Lernstrategien" }
+      - { label: "Adresse (url)", name: "url", widget: "string", required: false, hint: "kurz, Kleinbuchstaben, ae oe ue ss, ohne Datum, z.B. active-recall-lernmethode" }
+      - { label: "Lebensbereich", name: "bereich", widget: "select", options: ["gewohnheiten", "lernen", "gefuehle", "denken", "ich-selbst", "sinn"], required: false }
+      - { label: "Passender Lexikoneintrag", name: "verwandtes_thema", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Nur eines von beidem: Lexikoneintrag ODER Weg" }
+      - { label: "Passender Weg", name: "verwandter_weg", widget: "relation", collection: "wissensfragen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
       - { label: "Lesezeit (z.B. 5 Min.)", name: "readingTime", widget: "string", required: false, hint: "Leer lassen für automatische Berechnung" }

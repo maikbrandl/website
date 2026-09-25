@@ -1,6 +1,9 @@
 ---
 title: "Active Recall: Die effektivste Lernmethode erklärt"
 date: 2026-06-02T18:34:00.000+02:00
+url: "active-recall-lernmethode"
+bereich: "lernen"
+verwandtes_thema: "active-recall"
 category: Lernstrategien
 excerpt: Du sitzt stundenlang über deinen Unterlagen, liest alles dreimal durch,
   markierst die wichtigsten Stellen in Gelb und fühlst dich danach sicher. In

@@ -1,6 +1,9 @@
 ---
 title: 18 Denkfehler, die deine Entscheidungen heimlich sabotieren
 date: 2026-07-30T21:08:00.000+02:00
+url: "18-denkfehler"
+bereich: "denken"
+verwandtes_thema: "availability-heuristic"
 category: Persönliche Entwicklung
 excerpt: Denkfehler sind keine Zeichen von Dummheit. Sie sind ein Nebenprodukt
   von Effizienz. Dein Gehirn verarbeitet jeden Tag eine Flut von Reizen und kann

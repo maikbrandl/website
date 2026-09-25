@@ -2,6 +2,9 @@
 title: "Die großen Psychologen und ihre Theorien: 12 Ideen, die erklären, warum
   du tickst, wie du tickst"
 date: 2026-08-03T19:10:00.000+02:00
+url: "grosse-psychologen-theorien"
+bereich: "ich-selbst"
+verwandtes_thema: "disg"
 category: Psychologie
 excerpt: Ein großer Teil unseres Handelns wird von unbewussten Kräften
   gesteuert. Freud teilte die Psyche in Es, Ich und Über-Ich, in die triebhaften

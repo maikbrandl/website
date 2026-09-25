@@ -2,6 +2,9 @@
 title: "Disziplin ist kein Charakterzug: Warum sie ein System ist und wie du es
   aufbaust"
 date: 2026-06-23T12:49:00.000+02:00
+url: "disziplin-als-system"
+bereich: "gewohnheiten"
+verwandtes_thema: "intrinsische-extrinsische-motivation"
 category: Philosophie
 excerpt: ""
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-1-.png

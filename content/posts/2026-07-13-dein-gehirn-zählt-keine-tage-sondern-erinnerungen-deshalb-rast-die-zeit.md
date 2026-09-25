@@ -1,6 +1,9 @@
 ---
 title: Dein Gehirn zählt keine Tage, sondern Erinnerungen. Deshalb rast die Zeit
 date: 2026-07-13T20:10:00.000+02:00
+url: "zeit-und-erinnerung"
+bereich: "sinn"
+verwandtes_thema: "phaenomenologie"
 category: Persönliche Entwicklung
 excerpt: Die Vorstellung, dass Zeit objektiv schneller vergeht, je älter du
   wirst, ist beruhigend in ihrer Endgültigkeit, aber sie stimmt nur zur Hälfte.

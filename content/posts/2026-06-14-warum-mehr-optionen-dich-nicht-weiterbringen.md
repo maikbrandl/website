@@ -1,6 +1,9 @@
 ---
 title: Warum mehr Optionen dich nicht weiterbringen
 date: 2026-06-14T15:10:00.000+02:00
+url: "mehr-optionen"
+bereich: "denken"
+verwandtes_thema: "loss-aversion"
 category: Philosophie
 excerpt: Wir leben in einer Zeit mit mehr Optionen als je zuvor. Mehr Berufe,
   mehr Lebensstile, mehr Wege, mehr Informationen darüber was möglich wäre. Und

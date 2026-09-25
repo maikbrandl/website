@@ -1,6 +1,9 @@
 ---
 title: "Die 16 MBTI-Persönlichkeitstypen: Welcher bist du wirklich?"
 date: 2026-07-30T21:04:00.000+02:00
+url: "mbti-persoenlichkeitstypen"
+bereich: "ich-selbst"
+verwandtes_thema: "ocean-modell"
 category: Persönliche Entwicklung
 excerpt: "Das MBTI geht auf die Ideen von Carl Gustav Jung zurück, ausgearbeitet
   von Katharine Cook Briggs und ihrer Tochter Isabel Briggs Myers Mitte des 20.

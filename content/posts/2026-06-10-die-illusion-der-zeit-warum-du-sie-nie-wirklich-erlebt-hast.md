@@ -1,6 +1,9 @@
 ---
 title: "Die Illusion der Zeit: Warum du sie nie wirklich erlebt hast"
 date: 2026-06-10T18:31:00.000+02:00
+url: "illusion-der-zeit"
+bereich: "sinn"
+verwandtes_thema: "phaenomenologie"
 category: Philosophie
 excerpt: '"Zeit" ist das Etikett, das der Verstand auf den Vergleich zwischen
   diesem Jetzt und einem erinnerten Jetzt klebt. Die Vergangenheit ist ein

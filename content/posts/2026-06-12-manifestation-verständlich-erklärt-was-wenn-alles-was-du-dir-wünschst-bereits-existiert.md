@@ -2,6 +2,9 @@
 title: "Manifestation verständlich erklärt: Was wenn alles, was du dir wünschst,
   bereits existiert?"
 date: 2026-06-12T21:23:00.000+02:00
+url: "manifestation-erklaert"
+bereich: "sinn"
+verwandtes_thema: "confirmation-bias"
 category: Philosophie
 excerpt: "Vielleicht kennst du dieses Gefühl. Du liegst abends im Bett, schaust
   an die Decke und denkst: Irgendwo da draußen gibt es eine Version meines

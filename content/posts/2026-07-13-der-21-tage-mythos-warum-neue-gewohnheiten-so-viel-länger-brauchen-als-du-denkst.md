@@ -2,6 +2,9 @@
 title: "Der 21-Tage-Mythos: Warum neue Gewohnheiten so viel länger brauchen als
   du denkst"
 date: 2026-07-13T18:18:00.000+02:00
+url: "21-tage-mythos"
+bereich: "gewohnheiten"
+verwandter_weg: "wie-hoere-ich-auf-mit-rauchen"
 category: Persönliche Entwicklung
 excerpt: Dein Gehirn verbraucht etwa 20 Prozent deiner täglichen Energie, obwohl
   es nur rund zwei Prozent deines Körpergewichts ausmacht. Diese Zahl ist der

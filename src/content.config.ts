@@ -9,6 +9,8 @@ const relaunchFelder = {
   geprueft_am: z.string().optional().catch(undefined),
   kurzantwort: z.string().optional().catch(undefined),
   wege: z.array(z.string()).optional().catch(undefined),
+  verwandter_weg: z.string().optional().catch(undefined),
+  verwandtes_thema: z.string().optional().catch(undefined),
 };
 
 // Ein Baustein aus dem Block-Baukasten. Nur "type" wird geprueft, alles andere

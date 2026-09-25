@@ -1,6 +1,9 @@
 ---
 title: Warum du nur entspannen kannst wenn du dazu gezwungen wirst
 date: 2026-06-23T13:15:00.000+02:00
+url: "erzwungene-entspannung"
+bereich: "gefuehle"
+verwandtes_thema: "akuter-vs-chronischer-stress"
 category: Psychologie
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-2-.png
 ---

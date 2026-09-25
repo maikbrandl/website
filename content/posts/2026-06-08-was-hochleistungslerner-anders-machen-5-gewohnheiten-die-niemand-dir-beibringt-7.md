@@ -2,6 +2,9 @@
 title: "Was Hochleistungslerner anders machen: 5 Gewohnheiten, die niemand dir
   beibringt"
 date: 2026-06-08T20:58:00.000+02:00
+url: "hochleistungslerner-gewohnheiten"
+bereich: "lernen"
+verwandtes_thema: "spaced-repetition"
 category: Lernstrategien
 cover: /images/uploads/desktop-wallpaper-mockup-1-.png
 ---

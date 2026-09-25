@@ -2,6 +2,9 @@
 title: "Deep Work: Was hat es denn mit dem Flow-Zustand auf sich und wie
   aktiviert man ihn?"
 date: 2026-06-09T20:40:00.000+02:00
+url: "deep-work-flow-zustand"
+bereich: "lernen"
+verwandtes_thema: "flow"
 category: Lernstrategien
 excerpt: Es gibt einen Grund warum tiefe Konzentration sich anstrengend anfühlt,
   bevor sie sich gut anfühlt. Dein Gehirn ist nicht darauf ausgelegt, dauerhaft

@@ -2,6 +2,9 @@
 title: "Carl Jung einfach erklärt: Warum der Teil von dir, den du versteckst,
   dein größter Lehrer ist"
 date: 2026-07-30T21:01:00.000+02:00
+url: "carl-jung-schatten"
+bereich: "ich-selbst"
+verwandtes_thema: "mbti"
 category: Psychologie
 excerpt: Die meisten Menschen behandeln ihre dunklen Seiten wie Unkraut, das man
   ausreißen muss. Jung sah es genau umgekehrt. In dem, was du an dir ablehnst,

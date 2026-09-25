@@ -2,6 +2,9 @@
 title: Emergenz-Effekt:Warum dein Gehirn keine Festplatte ist und Bewusstsein
   sich vielleicht nie nachbauen lässt
 date: 2026-07-30T20:38:00.000+02:00
+url: "emergenz-effekt"
+bereich: "sinn"
+verwandtes_thema: "philosophie-des-geistes"
 category: Philosophie
 excerpt: Ein einzelnes Wassermolekül ist nicht nass. Nässe, Flüssigkeit, das
   Gefühl von Wasser auf der Haut, all das existiert nur, wenn Milliarden

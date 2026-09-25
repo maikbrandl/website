@@ -1,0 +1,87 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import { formatiereDatum } from '../../lib/datum';
+import { breadcrumbListJsonLd, articleJsonLd } from '../../lib/jsonld';
+
+export async function getStaticPaths() {
+  const essays = (await getCollection('posts')).filter((p) => p.data.url);
+  return essays.map((entry) => ({
+    params: { url: entry.data.url },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const daten = entry.data;
+const { Content } = await render(entry);
+
+const bereich = daten.bereich ? await getEntry('bereiche', daten.bereich) : undefined;
+const verwandtesThema = daten.verwandtes_thema ? await getEntry('themen', daten.verwandtes_thema) : undefined;
+const verwandterWeg = daten.verwandter_weg ? await getEntry('wissensfragen', daten.verwandter_weg) : undefined;
+
+const geprueftAmText = formatiereDatum(daten.geprueft_am);
+const datumText = formatiereDatum(daten.date?.toISOString());
+
+const titel = daten.title ? `${daten.title} · Hybridlog` : 'Essay · Hybridlog';
+const beschreibung = daten.excerpt || daten.title || 'Ein Essay von Hybridlog.';
+const canonical = new URL(`/essays/${daten.url}/`, Astro.site).toString();
+
+const jsonLd = [
+  articleJsonLd({
+    headline: daten.title ?? daten.url ?? entry.id,
+    description: beschreibung,
+    url: canonical,
+    datumGeprueft: daten.geprueft_am ?? daten.date?.toISOString().slice(0, 10),
+  }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Essays', url: new URL('/essays/', Astro.site).toString() },
+    { name: daten.title ?? entry.id },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} bild={daten.cover} jsonLd={jsonLd}>
+  <div class="container">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Essays', href: '/essays/' },
+        { label: daten.title ?? entry.id },
+      ]}
+    />
+
+    <article class="essay-eintrag">
+      <header class="lexikon-eintrag-kopf">
+        <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> Essay</p>
+        <h1>{daten.title}</h1>
+        <p class="lexikon-meta">
+          {bereich && <span>{bereich.data.title ?? bereich.id}</span>}
+          {datumText && <span>{datumText}</span>}
+          {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
+        </p>
+      </header>
+
+      <div class="prosa essay-eintrag__text">
+        <Content />
+      </div>
+
+      {(verwandtesThema || verwandterWeg) && (
+        <section class="lexikon-abschnitt essay-eintrag__weiter">
+          <h2>Weiterlesen</h2>
+          <ul class="lexikon-liste">
+            {verwandterWeg && (
+              <li><a href={`/wege/${verwandterWeg.id}/`}>{verwandterWeg.data.title ?? verwandterWeg.id}</a></li>
+            )}
+            {verwandtesThema && (
+              <li><a href={`/lexikon/${verwandtesThema.id}/`}>{verwandtesThema.data.title ?? verwandtesThema.id}</a></li>
+            )}
+          </ul>
+        </section>
+      )}
+    </article>
+  </div>
+</Base>

@@ -2,6 +2,9 @@
 title: Die berühmtesten Psychologie-Experimente, die dein Bild vom Menschen für
   immer verändern
 date: 2026-08-03T19:13:00.000+02:00
+url: "psychologie-experimente"
+bereich: "denken"
+verwandtes_thema: "dunning-kruger-effekt"
 category: Psychologie
 excerpt: "Es gibt einen Denkfehler, der fast allen gemeinsam ist. Wir erklären
   das Verhalten anderer mit ihrem Charakter und unser eigenes mit der Situation.

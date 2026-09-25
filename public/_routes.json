@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "include": [
+    "/plattform/*",
+    "/blog-artikel.html",
+    "/blog.html",
+    "/impressum.html",
+    "/datenschutz.html",
+    "/lernjournal.html",
+    "/studienplaner.html",
+    "/notizbuch.html",
+    "/workoutlogbuch.html"
+  ],
+  "exclude": []
+}

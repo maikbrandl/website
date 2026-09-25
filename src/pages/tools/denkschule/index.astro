@@ -1,0 +1,93 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Brotkrumen from '../../../components/Brotkrumen.astro';
+import Formatzeichen from '../../../components/Formatzeichen.astro';
+import { breadcrumbListJsonLd, softwareApplicationJsonLd } from '../../../lib/jsonld';
+
+const titel = 'Welche Denkschule bist du? · Tools · Hybridlog';
+const beschreibung =
+  'Ein kurzer Fragebogen ordnet dich einer philosophischen Grundhaltung zu, von Stoizismus bis Existenzialismus. Sofort spielbar, ohne Anmeldung.';
+const canonical = new URL('/tools/denkschule/', Astro.site).toString();
+
+const jsonLd = [
+  softwareApplicationJsonLd({
+    name: 'Welche Denkschule bist du?',
+    description: beschreibung,
+    url: canonical,
+  }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Tools', url: new URL('/tools/', Astro.site).toString() },
+    { name: 'Denkschule' },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen
+      items={[{ label: 'Start', href: '/' }, { label: 'Tools', href: '/tools/' }, { label: 'Denkschule' }]}
+    />
+
+    <header class="tool-kopf">
+      <p class="tool-kopf__label"><Formatzeichen typ="tools" /> Tool · Philosophie</p>
+      <h1>Welche Denkschule bist du?</h1>
+      <p class="prosa">
+        Philosophie ist keine Frage von richtig oder falsch, sondern von Haltung. Dieser kurze Test
+        zeigt dir, welcher Grundhaltung dein Denken am naechsten steht.
+      </p>
+    </header>
+
+    <div class="tool-schale" aria-label="Interaktives Tool">
+      <div id="denkschule-mount">
+        <noscript>
+          <p>
+            Dieses Tool braucht JavaScript. Du kannst stattdessen den
+            <a href="/tools/philosophie/">Atlas der Philosophie</a> nutzen.
+          </p>
+        </noscript>
+      </div>
+    </div>
+
+    <section class="prosa stack">
+      <h2>Was es macht</h2>
+      <p>
+        Das Tool stellt dir sechs Alltagsfragen. Aus deinen Antworten schaetzt es, welcher von vier
+        Denkschulen du am meisten zuneigst, vom Stoizismus ueber den Existenzialismus bis zum
+        Empirismus und Rationalismus. Am Ende siehst du deine Grundhaltung mit einer kurzen
+        Erklaerung und einer Verteilung ueber alle vier Richtungen.
+      </p>
+
+      <h2>So gehst du vor</h2>
+      <p>
+        Beantworte jede Frage spontan, es gibt keine falschen Antworten. Waehle die Aussage, die
+        sich am ehesten nach dir anfuehlt, nicht die, die klug klingt. Nach der letzten Frage
+        erscheint dein Ergebnis. Du kannst den Test jederzeit wiederholen und schauen, wie stabil
+        deine Haltung ist.
+      </p>
+
+      <h2>Hintergrund</h2>
+      <p>
+        Die vier Richtungen stehen fuer vier grundverschiedene Antworten auf die Frage, worauf man
+        sein Leben gruendet. Der Stoizismus setzt auf die Kontrolle des Eigenen, der Existenzialismus
+        auf die Freiheit der Wahl, der Empirismus auf die Erfahrung und der Rationalismus auf die
+        Vernunft. Keine ist die einzig richtige, jede beleuchtet einen anderen Teil des guten Lebens.
+      </p>
+
+      <p><a href="/tools/philosophie/">Weiter zum Atlas der Philosophie →</a></p>
+    </section>
+  </div>
+
+  <link rel="stylesheet" href="/tools/denkschule/denkschule-tool.css" />
+  <script is:inline src="/tools/denkschule/denkschule-tool.js"></script>
+  <script is:inline>
+    (function () {
+      if (window.DenkschuleTool) {
+        window.DenkschuleTool.mount(document.getElementById('denkschule-mount'), {
+          deeperHref: '/tools/philosophie/',
+          deeperLabel: 'Atlas der Philosophie',
+        });
+      }
+    })();
+  </script>
+</Base>

@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { JOURNALE } from '../../lib/journale';
+
+const titel = 'Journale · Hybridlog';
+const beschreibung =
+  'Vier hybridlog Journale übersetzen die Methoden aus dem Wissensraum in feste Gewohnheiten: für Schule, Studium, Lernen und Training.';
+const canonical = new URL('/journale/', Astro.site).toString();
+
+const jsonLd = [
+  collectionPageJsonLd({ name: titel, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Journale' },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross" id="produkte">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Journale' }]} />
+
+    <header class="tool-kopf">
+      <p class="tool-kopf__label">Vom Verstehen zum Tun</p>
+      <h1>Vier Journale. Ein Ziel: dein Erfolg.</h1>
+      <p class="prosa">
+        Jedes hybridlog Journal übersetzt Methoden aus dem Wissensraum in feste, alltagstaugliche
+        Routinen, für Schule, Studium, Lernen und Training.
+      </p>
+    </header>
+
+    <div class="journal-grid">
+      {JOURNALE.map((j) => (
+        <a class="journal-karte" href={`/journale/${j.slug}/`}>
+          <div class="journal-karte__bild">
+            <img src={j.bild} alt={`hybridlog ${j.titel}`} loading="lazy" decoding="async" />
+          </div>
+          <div class="journal-karte__body">
+            <h2 class="journal-karte__titel">{j.titel}</h2>
+            <p class="journal-karte__meta">
+              {j.seiten} Seiten · {j.format} · {j.einband}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

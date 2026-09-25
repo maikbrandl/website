@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import ToolVorschau from '../../components/ToolVorschau.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { TOOLS_UEBERSICHT } from '../../lib/toolsUebersicht';
+
+const titel = 'Tools · Hybridlog';
+const beschreibung =
+  'Vier interaktive Tools zum Ausprobieren: Atlas der Philosophie, Blockuniversum, Human Map und die Denkschule.';
+const canonical = new URL('/tools/', Astro.site).toString();
+
+const jsonLd = [
+  collectionPageJsonLd({ name: titel, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Tools' },
+  ]),
+];
+
+const tools = TOOLS_UEBERSICHT;
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Tools' }]} />
+
+    <header class="tool-kopf">
+      <p class="tool-kopf__label"><Formatzeichen typ="tools" /> Tools</p>
+      <h1>Ausprobieren statt nur lesen</h1>
+      <p class="prosa">
+        Vier interaktive Werkzeuge machen Theorie erlebbar: Philosophie zum Durchklicken, Physik zum
+        Erkunden und zwei Selbsttests zu Persoenlichkeit und Denkhaltung.
+      </p>
+    </header>
+
+    <div class="tools-grid">
+      {tools.map((tool) => (
+        <a class="tool-karte" href={tool.href}>
+          <div class="tool-karte__vorschau">
+            <ToolVorschau typ={tool.vorschau} />
+          </div>
+          <div class="tool-karte__body">
+            <span class="tool-karte__label">{tool.label}</span>
+            <h2 class="tool-karte__titel">{tool.titel}</h2>
+            <p class="tool-karte__text">{tool.text}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

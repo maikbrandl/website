@@ -1,6 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Formatzeichen from '../components/Formatzeichen.astro';
+import ToolVorschau from '../components/ToolVorschau.astro';
 import { pruefeEintraege } from '../lib/contentWarnings';
+import { formatiereDatum } from '../lib/datum';
+import { organizationJsonLd, websiteJsonLd } from '../lib/jsonld';
+import { TOOLS_UEBERSICHT } from '../lib/toolsUebersicht';
+import { JOURNALE } from '../lib/journale';
 
 const themen = await getCollection('themen');
 const fachgebiete = await getCollection('fachgebiete');
@@ -20,14 +27,164 @@ console.log(
     `${wissensfragen.length} Wissensfrage${wissensfragen.length === 1 ? '' : 'n'}, ${bereiche.length} Bereiche, ` +
     `${warnungen} Warnung${warnungen === 1 ? '' : 'en'}.`,
 );
+
+const sechsBereiche = bereiche
+  .sort((a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99))
+  .slice(0, 6);
+
+const beliebteWege = wissensfragen.slice(0, 3);
+if (beliebteWege.length < 3) {
+  console.warn(`Startseite: nur ${beliebteWege.length} Wissenswege verfuegbar, geplant sind 3.`);
+}
+
+const beliebteThemen = themen
+  .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
+  .slice(0, 6);
+
+const neueEssays = posts
+  .filter((p) => p.data.url)
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0))
+  .slice(0, 2);
+
+const titel = 'Hybridlog · Wissen über den Menschen';
+const beschreibung =
+  'Hybridlog beantwortet echte Fragen über den Menschen gründlich, mit einem Lexikon, Wissenswegen, Essays und interaktiven Tools.';
+const canonical = new URL('/', Astro.site).toString();
+
+const jsonLd = [organizationJsonLd(), websiteJsonLd()];
 ---
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <title>Hybridlog</title>
-  </head>
-  <body>
-    <p>Astro Platzhalter, wird in einem späteren Schritt ersetzt.</p>
-  </body>
-</html>
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <section class="start-hero">
+    <div class="container">
+      <h1>Was willst du über den Menschen wissen?</h1>
+      <p class="prosa start-hero__lead">
+        Echte Fragen, gründlich beantwortet. Kein Scrollen durch Häppchen, sondern ein Lexikon,
+        Wissenswege und Essays, die dir wirklich weiterhelfen.
+      </p>
+      <form class="suchformular start-hero__suche" action="/suche/" method="get" role="search">
+        <label class="nur-sr" for="start-suche">Suche</label>
+        <input id="start-suche" type="search" name="q" placeholder="Zum Beispiel: Warum kann ich mich nicht konzentrieren?" />
+        <button type="submit">Suchen</button>
+      </form>
+      {beliebteWege.length > 0 && (
+        <div class="start-hero__beispiele">
+          {beliebteWege.map((w) => (
+            <a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="container stack-gross">
+    <section class="start-abschnitt">
+      <h2>Sechs Lebensbereiche</h2>
+      <div class="start-bereiche-grid">
+        {sechsBereiche.map((b) => (
+          <a class="start-bereich-karte" href={`/bereiche/${b.id}/`}>
+            <strong>{b.data.title}</strong>
+            {b.data.beschreibung && <span>{b.data.beschreibung}</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    {beliebteWege.length > 0 && (
+      <section class="start-abschnitt">
+        <h2>Beliebte Wissenswege</h2>
+        <div class="start-wege-grid">
+          {beliebteWege.map((w) => (
+            <a class="start-weg-karte" href={`/wege/${w.id}/`}>
+              <p class="tool-kopf__label"><Formatzeichen typ="wege" /> Wissensweg</p>
+              <strong>{w.data.title}</strong>
+              {(w.data.kurzantwort || w.data.lead) && <span>{w.data.kurzantwort || w.data.lead}</span>}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="start-abschnitt">
+      <h2>Tools zum Ausprobieren</h2>
+      <div class="tools-grid">
+        {TOOLS_UEBERSICHT.map((tool) => (
+          <a class="tool-karte" href={tool.href}>
+            <div class="tool-karte__vorschau">
+              <ToolVorschau typ={tool.vorschau} />
+            </div>
+            <div class="tool-karte__body">
+              <span class="tool-karte__label">{tool.label}</span>
+              <h3 class="tool-karte__titel">{tool.titel}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="start-abschnitt">
+      <h2>Lexikon: kurz erklärt</h2>
+      <ul class="lexikon-fachgebiete">
+        {beliebteThemen.map((t) => (
+          <li>
+            <a href={`/lexikon/${t.id}/`}>
+              <strong>{t.data.title ?? t.id}</strong>
+              {t.data.lead && <span>{t.data.lead}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p><a href="/lexikon/">Alle Einträge von A bis Z →</a></p>
+    </section>
+
+    {neueEssays.length > 0 && (
+      <section class="start-abschnitt">
+        <h2>Neue Essays</h2>
+        <ul class="essay-liste">
+          {neueEssays.map((essay) => (
+            <li class="essay-karte">
+              <a href={`/essays/${essay.data.url}/`}>
+                <p class="essay-karte__meta">
+                  {essay.data.date && <span>{formatiereDatum(essay.data.date.toISOString())}</span>}
+                </p>
+                <strong>{essay.data.title}</strong>
+                {essay.data.excerpt && <span class="essay-karte__teaser">{essay.data.excerpt}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p><a href="/essays/">Alle Essays →</a></p>
+      </section>
+    )}
+
+    <section class="start-abschnitt" id="produkte">
+      <h2>Die Journale</h2>
+      <p class="prosa">Wissen wird erst wirksam, wenn du es anwendest. Die hybridlog Journale übersetzen die Methoden in feste Gewohnheiten.</p>
+      <div class="journal-streifen">
+        {JOURNALE.map((j) => (
+          <a class="journal-streifen__eintrag" href={`/journale/${j.slug}/`}>
+            <div class="journal-streifen__bild">
+              <img src={j.bild} alt={`hybridlog ${j.titel}`} loading="lazy" decoding="async" />
+            </div>
+            <span class="journal-streifen__titel">{j.titel}</span>
+          </a>
+        ))}
+      </div>
+      <p><a href="/journale/">Alle Journale ansehen →</a></p>
+    </section>
+
+    <section class="start-abschnitt start-ueber" id="story">
+      <h2>Über Hybridlog</h2>
+      <p class="prosa">
+        Hybridlog ist entstanden aus einer einfachen Frustration: zu viele Antworten im Netz sind
+        entweder oberflächlich oder unnötig kompliziert. Hybridlog versucht es anders, jede Frage so
+        gründlich zu beantworten, wie sie es verdient, und dabei so klar zu bleiben, dass sie
+        wirklich hilft.
+      </p>
+      <p class="prosa">
+        Hinter Hybridlog steht Maik Brandl, der die Plattform aus eigenem Interesse an Psychologie,
+        Lernen und Philosophie aufgebaut hat, und sie seither stetig weiter füllt.
+      </p>
+    </section>
+  </section>
+</Base>

@@ -62,3 +62,65 @@ export function faqPageJsonLd(eintraege: { frage: string; antwort: string }[]) {
     })),
   };
 }
+
+export function organizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Hybridlog',
+    url: 'https://hybridlog.de',
+    logo: 'https://hybridlog.de/images/Logo/Logo.png',
+    description: 'Wissensplattform ueber den Menschen',
+    founder: { '@type': 'Person', name: 'Maik Brandl' },
+    sameAs: ['https://www.instagram.com/hybridlogjournals/'],
+  };
+}
+
+export function websiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Hybridlog',
+    url: 'https://hybridlog.de/',
+    inLanguage: 'de-DE',
+  };
+}
+
+export function softwareApplicationJsonLd(opts: { name: string; description: string; url: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: opts.name,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    inLanguage: 'de',
+    description: opts.description,
+    url: opts.url,
+  };
+}
+
+export function productJsonLd(opts: {
+  name: string;
+  description: string;
+  bild: string;
+  amazonUrl: string;
+  sku?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: opts.name,
+    description: opts.description,
+    ...(opts.sku ? { sku: opts.sku } : {}),
+    image: opts.bild,
+    brand: { '@type': 'Brand', name: 'hybridlog' },
+    offers: {
+      '@type': 'Offer',
+      url: opts.amazonUrl,
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+    },
+  };
+}
+

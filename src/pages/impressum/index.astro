@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import { breadcrumbListJsonLd } from '../../lib/jsonld';
+// @ts-ignore - Vite raw Import, einmalig aus legacy/impressum.html portiert.
+import impressumHtml from '../../content-extracted/impressum.html?raw';
+
+const titel = 'Impressum · Hybridlog';
+const beschreibung = 'Impressum von Hybridlog nach § 5 TMG.';
+const canonical = new URL('/impressum/', Astro.site).toString();
+
+const jsonLd = [
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Impressum' },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd} umami={false}>
+  <div class="container stack-gross">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Impressum' }]} />
+
+    <header class="tool-kopf">
+      <h1>Impressum</h1>
+    </header>
+
+    <div class="prosa legal-inhalt" set:html={impressumHtml} />
+  </div>
+</Base>

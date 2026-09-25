@@ -1306,6 +1306,487 @@ main {
   border-top: 1px solid var(--linie);
 }
 
+/* ---------- Tools ---------- */
+.tool-kopf {
+  max-width: var(--lesebreite);
+}
+
+.tool-kopf__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--bleistift);
+  margin-bottom: var(--space-2);
+}
+
+.tool-schale {
+  background: var(--blatt);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-5);
+}
+
+.tool-karte {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--blatt);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--dauer) ease, border-color var(--dauer) ease;
+}
+
+.tool-karte:hover {
+  transform: translateY(-2px);
+  border-color: var(--petrol);
+}
+
+.tool-karte__vorschau {
+  height: 120px;
+  background: var(--papier);
+  border-bottom: 1px solid var(--linie);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tool-karte__body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tool-karte__label {
+  font-size: 0.85rem;
+  color: var(--bleistift);
+}
+
+.tool-karte__titel {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.tool-karte__text {
+  color: var(--bleistift);
+  margin: 0;
+  flex: 1;
+}
+
+/* Kleine, ruhige CSS/SVG Vorschauen. Aus bei prefers-reduced-motion (siehe unten). */
+.tool-vorschau {
+  width: 100%;
+  height: 100%;
+}
+
+.tool-vorschau--blockuniversum .tool-vorschau__linie {
+  stroke: var(--linie);
+}
+
+.tool-vorschau--blockuniversum .tool-vorschau__mittellinie {
+  stroke: var(--petrol);
+}
+
+.tool-vorschau--blockuniversum .tool-vorschau__punkt {
+  fill: var(--petrol);
+  animation: tool-vorschau-wandern 4s ease-in-out infinite;
+}
+
+@keyframes tool-vorschau-wandern {
+  0%, 100% { transform: translateX(-30%); }
+  50% { transform: translateX(30%); }
+}
+
+.tool-vorschau--humanmap .tool-vorschau__ring {
+  fill: none;
+  stroke: var(--petrol);
+  opacity: 0.5;
+  transform-origin: center;
+  animation: tool-vorschau-pulsieren 3s ease-in-out infinite;
+}
+
+.tool-vorschau--humanmap .tool-vorschau__ring:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.tool-vorschau--humanmap .tool-vorschau__ring:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+@keyframes tool-vorschau-pulsieren {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+.tool-vorschau--philosophie .tool-vorschau__satellit {
+  fill: var(--petrol);
+  transform-origin: center;
+  animation: tool-vorschau-kreisen 6s linear infinite;
+}
+
+@keyframes tool-vorschau-kreisen {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tool-vorschau--denkschule .tool-vorschau__balken {
+  fill: var(--linie);
+}
+
+.tool-vorschau--denkschule .tool-vorschau__balken--aktiv {
+  fill: var(--petrol);
+  animation: tool-vorschau-hervorheben 4s ease-in-out infinite;
+}
+
+@keyframes tool-vorschau-hervorheben {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ---------- Journale ---------- */
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+
+.journal-karte {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--blatt);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--dauer) ease, border-color var(--dauer) ease;
+}
+
+.journal-karte:hover {
+  transform: translateY(-2px);
+  border-color: var(--petrol);
+}
+
+.journal-karte__bild {
+  aspect-ratio: 4 / 3;
+  background: var(--papier);
+  border-bottom: 1px solid var(--linie);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.journal-karte__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journal-karte__body {
+  padding: var(--space-4);
+}
+
+.journal-karte__titel {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0 0 var(--space-1);
+}
+
+.journal-karte__meta {
+  color: var(--bleistift);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.journal-hero {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .journal-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.journal-hero__bild {
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--blatt);
+}
+
+.journal-hero__bild img {
+  width: 100%;
+  display: block;
+}
+
+.journal-highlights {
+  list-style: none;
+  margin: var(--space-4) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.journal-highlights li {
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.journal-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--petrol);
+}
+
+.journal-meta {
+  color: var(--bleistift);
+  margin: 0 0 var(--space-4);
+}
+
+.journal-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--marker);
+  color: var(--tinte);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.journal-cta__anzeige {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.journal-hinweis {
+  font-size: 0.85rem;
+  color: var(--bleistift);
+  margin-top: var(--space-2);
+}
+
+.journal-faq {
+  margin: var(--space-4) 0 0;
+}
+
+.journal-faq__eintrag {
+  margin-bottom: var(--space-5);
+}
+
+.journal-faq__eintrag dt {
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.journal-faq__eintrag dd {
+  margin: 0;
+  color: var(--bleistift);
+}
+
+/* ---------- Journale Streifen (Startseite) ---------- */
+.journal-streifen {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+
+.journal-streifen__eintrag {
+  flex: 0 0 auto;
+  width: 140px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.journal-streifen__bild {
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--blatt);
+}
+
+.journal-streifen__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journal-streifen__titel {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+}
+
+/* ---------- Rechtstexte (Impressum, Datenschutz) ---------- */
+.legal-inhalt :where(h2, h3, h4) {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.legal-inhalt h2 {
+  font-size: clamp(20px, 2.5vw, 24px);
+}
+
+.legal-inhalt h3 {
+  font-size: 1.1rem;
+}
+
+.legal-inhalt h4 {
+  font-size: 1rem;
+}
+
+.legal-inhalt a {
+  word-break: break-word;
+}
+
+/* ---------- 404 ---------- */
+.seite-404 {
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+.seite-404__code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(64px, 12vw, 120px);
+  color: var(--linie);
+  margin: 0;
+  line-height: 1;
+}
+
+.seite-404 .prosa {
+  margin: var(--space-4) auto var(--space-6);
+}
+
+.seite-404__aktionen {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.iconbtn-text {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--tinte);
+}
+
+/* ---------- Startseite ---------- */
+.start-hero {
+  background: var(--blatt);
+  border-bottom: 1px solid var(--linie);
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+.start-hero__lead {
+  max-width: var(--lesebreite);
+  margin: var(--space-4) auto var(--space-5);
+}
+
+.start-hero__suche {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.start-hero__beispiele {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.start-hero__beispiele a {
+  border: 1px solid var(--linie);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  color: var(--tinte);
+  font-size: 0.9rem;
+}
+
+.start-hero__beispiele a:hover {
+  border-color: var(--petrol);
+  color: var(--petrol);
+}
+
+.start-abschnitt {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--linie);
+}
+
+.start-abschnitt:first-child {
+  border-top: none;
+}
+
+.start-bereiche-grid,
+.start-wege-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.start-bereich-karte,
+.start-weg-karte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--blatt);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dauer) ease;
+}
+
+.start-bereich-karte:hover,
+.start-weg-karte:hover {
+  border-color: var(--petrol);
+}
+
+.start-bereich-karte span,
+.start-weg-karte span {
+  color: var(--bleistift);
+  font-size: 0.9rem;
+}
+
+.start-ueber {
+  max-width: var(--lesebreite);
+}
+
 /* ---------- Bewegung respektieren ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1316,4 +1797,9 @@ main {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
+
+
+
+
 }

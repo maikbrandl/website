@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+
+const titel = 'Seite nicht gefunden · Hybridlog';
+const beschreibung = 'Die angeforderte Seite existiert leider nicht oder wurde verschoben.';
+---
+
+<Base title={titel} description={beschreibung} noindex={true}>
+  <section class="seite-404">
+    <div class="container">
+      <p class="seite-404__code">404</p>
+      <h1>Seite nicht gefunden</h1>
+      <p class="prosa">
+        Die angeforderte Seite existiert leider nicht oder wurde verschoben.<br />
+        Keine Sorge, du findest sicher zurück.
+      </p>
+      <div class="seite-404__aktionen">
+        <a href="/" class="journal-cta">Zur Startseite</a>
+        <a href="/journale/" class="iconbtn-text">Journale ansehen</a>
+      </div>
+    </div>
+  </section>
+</Base>

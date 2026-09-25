@@ -1,0 +1,45 @@
+---
+// Kleine, ruhige CSS/SVG Vorschau je Tool. Reines CSS, keine Skripte, aus bei prefers-reduced-motion.
+interface Props {
+  typ: 'blockuniversum' | 'humanmap' | 'philosophie' | 'denkschule';
+}
+
+const { typ } = Astro.props as Props;
+---
+
+{typ === 'blockuniversum' && (
+  <svg class="tool-vorschau tool-vorschau--blockuniversum" viewBox="0 0 200 120" aria-hidden="true">
+    <line class="tool-vorschau__linie" x1="20" y1="20" x2="180" y2="20" stroke-width="1.5" />
+    <line class="tool-vorschau__linie" x1="20" y1="45" x2="180" y2="45" stroke-width="1.5" />
+    <line class="tool-vorschau__mittellinie" x1="20" y1="70" x2="180" y2="70" stroke-width="2" />
+    <line class="tool-vorschau__linie" x1="20" y1="95" x2="180" y2="95" stroke-width="1.5" />
+    <circle class="tool-vorschau__punkt" cx="100" cy="70" r="5" />
+  </svg>
+)}
+
+{typ === 'humanmap' && (
+  <svg class="tool-vorschau tool-vorschau--humanmap" viewBox="0 0 200 120" aria-hidden="true">
+    <circle class="tool-vorschau__ring" cx="100" cy="60" r="20" stroke-width="2" />
+    <circle class="tool-vorschau__ring" cx="100" cy="60" r="20" stroke-width="2" />
+    <circle class="tool-vorschau__ring" cx="100" cy="60" r="20" stroke-width="2" />
+  </svg>
+)}
+
+{typ === 'philosophie' && (
+  <svg class="tool-vorschau tool-vorschau--philosophie" viewBox="0 0 200 120" aria-hidden="true">
+    <circle cx="100" cy="60" r="6" fill="var(--linie)" />
+    <circle cx="100" cy="60" r="34" fill="none" stroke="var(--linie)" stroke-width="1" />
+    <g class="tool-vorschau__satellit">
+      <circle cx="134" cy="60" r="4" />
+    </g>
+  </svg>
+)}
+
+{typ === 'denkschule' && (
+  <svg class="tool-vorschau tool-vorschau--denkschule" viewBox="0 0 200 120" aria-hidden="true">
+    <rect class="tool-vorschau__balken tool-vorschau__balken--aktiv" x="30" y="70" width="20" height="30" rx="2" />
+    <rect class="tool-vorschau__balken" x="65" y="50" width="20" height="50" rx="2" />
+    <rect class="tool-vorschau__balken" x="100" y="35" width="20" height="65" rx="2" />
+    <rect class="tool-vorschau__balken" x="135" y="55" width="20" height="45" rx="2" />
+  </svg>
+)}

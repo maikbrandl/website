@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import { breadcrumbListJsonLd, faqPageJsonLd, productJsonLd } from '../../lib/jsonld';
+import { JOURNALE } from '../../lib/journale';
+
+export async function getStaticPaths() {
+  return JOURNALE.map((journal) => ({
+    params: { slug: journal.slug },
+    props: { journal },
+  }));
+}
+
+const { journal } = Astro.props;
+const titel = `${journal.titel} · hybridlog | ${journal.seiten} Seiten`;
+const beschreibung = journal.untertitel;
+const canonical = new URL(`/journale/${journal.slug}/`, Astro.site).toString();
+const bildUrl = new URL(journal.bild, Astro.site).toString();
+
+const jsonLd: Record<string, unknown>[] = [
+  productJsonLd({
+    name: `hybridlog ${journal.titel}`,
+    description: journal.untertitel,
+    bild: bildUrl,
+    amazonUrl: journal.amazonUrl,
+    sku: journal.asin,
+  }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Journale', url: new URL('/journale/', Astro.site).toString() },
+    { name: journal.titel },
+  ]),
+];
+if (journal.faq.length > 0) {
+  jsonLd.push(faqPageJsonLd(journal.faq.map((f) => ({ frage: f.frage, antwort: f.antwort }))));
+}
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} bild={journal.bild} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Journale', href: '/journale/' },
+        { label: journal.titel },
+      ]}
+    />
+
+    <div class="journal-hero">
+      <div class="journal-hero__bild">
+        <img src={journal.bild} alt={`hybridlog ${journal.titel}`} loading="eager" decoding="async" />
+      </div>
+      <div class="journal-hero__inhalt">
+        <p class="tool-kopf__label">{journal.kicker}</p>
+        <h1>{journal.h1}</h1>
+        <p class="prosa">{journal.untertitel}</p>
+
+        <ul class="journal-highlights">
+          {journal.highlights.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+
+        <p class="journal-meta">
+          {journal.seiten} Seiten · {journal.format} · {journal.einband}
+        </p>
+
+        <a
+          href={journal.amazonUrl}
+          target="_blank"
+          rel="sponsored noopener"
+          data-track="affiliate-klick"
+          data-produkt={journal.slug}
+          class="journal-cta"
+        >
+          Bei Amazon kaufen <span class="journal-cta__anzeige">Anzeige</span>
+        </a>
+        <p class="journal-hinweis">Affiliate-Link. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+      </div>
+    </div>
+
+    {journal.faq.length > 0 && (
+      <section class="prosa stack">
+        <h2>Häufig gefragt</h2>
+        <dl class="journal-faq">
+          {journal.faq.map((f) => (
+            <div class="journal-faq__eintrag">
+              <dt>{f.frage}</dt>
+              <dd>{f.antwort}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+  </div>
+</Base>

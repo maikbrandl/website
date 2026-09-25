@@ -1,5 +1,5 @@
-/* Island "Welche Denkschule bist du?" – nur auf der Tool-Seite geladen.
-   Nutzt ausschliesslich reale Tokens aus hybridlog-design-system.css. */
+/* Island "Welche Denkschule bist du?" – nur auf /tools/denkschule/ geladen.
+   Nutzt ausschliesslich die Logbuch Tokens aus src/styles/logbuch.css. */
 .dt {
     display: flex;
     flex-direction: column;
@@ -9,24 +9,24 @@
 .dt__progress {
     height: 6px;
     border-radius: 999px;
-    background: var(--line);
+    background: var(--linie);
     overflow: hidden;
 }
 
 .dt__progress span {
     display: block;
     height: 100%;
-    background: var(--accent);
+    background: var(--petrol);
     transition: width .25s ease;
 }
 
 .dt__step {
-    font-family: var(--font-ui);
+    font-family: var(--font-body);
     font-size: .8rem;
     font-weight: 600;
     letter-spacing: .04em;
     text-transform: uppercase;
-    color: var(--faint);
+    color: var(--bleistift);
     margin: 0;
 }
 
@@ -38,10 +38,10 @@
 
 .dt__q {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.3rem;
     line-height: 1.25;
-    color: var(--ink);
+    color: var(--tinte);
     margin: 6px 0 18px;
     padding: 0;
 }
@@ -59,10 +59,10 @@
     width: 100%;
     text-align: left;
     padding: 14px 18px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    color: var(--ink);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius);
+    background: var(--blatt);
+    color: var(--tinte);
     font-family: var(--font-body);
     font-size: .98rem;
     line-height: 1.4;
@@ -71,8 +71,8 @@
 }
 
 .dt__opt:hover {
-    border-color: var(--accent);
-    background: var(--surface-2);
+    border-color: var(--petrol);
+    background: var(--papier);
     transform: translateX(2px);
 }
 
@@ -81,19 +81,19 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid var(--line-strong);
+    border: 2px solid var(--linie);
     margin-top: 1px;
     transition: border-color .18s ease, background .18s ease;
 }
 
 .dt__opt[aria-checked="true"] {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+    border-color: var(--petrol);
+    background: color-mix(in srgb, var(--petrol) 14%, var(--blatt));
 }
 
 .dt__opt[aria-checked="true"] .dt__opt-mark {
-    border-color: var(--accent);
-    background: radial-gradient(circle at center, var(--accent) 0 6px, transparent 7px);
+    border-color: var(--petrol);
+    background: radial-gradient(circle at center, var(--petrol) 0 6px, transparent 7px);
 }
 
 .dt__nav {
@@ -102,6 +102,33 @@
     justify-content: space-between;
     gap: 14px;
     margin-top: 4px;
+}
+
+.dt .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--petrol);
+    background: var(--petrol);
+    color: var(--blatt);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity .18s ease;
+}
+
+.dt .btn:hover {
+    opacity: .85;
+}
+
+.dt .btn.ghost {
+    background: transparent;
+    border-color: var(--linie);
+    color: var(--tinte);
 }
 
 .dt__nav .btn[disabled] {
@@ -113,31 +140,31 @@
 /* Ergebnis */
 .dt__result-name {
     font-family: var(--font-display);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.8rem;
-    color: var(--ink);
+    color: var(--tinte);
     margin: 0;
 }
 
 .dt__result-line {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--tinte);
     margin: 0;
 }
 
 .dt__result-text {
-    color: var(--muted);
+    color: var(--bleistift);
     margin: 0;
 }
 
 .dt__bars-label {
-    font-family: var(--font-ui);
+    font-family: var(--font-body);
     font-size: .78rem;
     font-weight: 600;
     letter-spacing: .04em;
     text-transform: uppercase;
-    color: var(--faint);
+    color: var(--bleistift);
     margin: 4px 0 0;
 }
 
@@ -153,42 +180,42 @@
     grid-template-columns: minmax(120px, 34%) 1fr auto;
     align-items: center;
     gap: 14px;
-    font-family: var(--font-ui);
+    font-family: var(--font-body);
     font-size: .86rem;
-    color: var(--muted);
+    color: var(--bleistift);
 }
 
 .dt__bar-row.is-winner {
-    color: var(--ink);
+    color: var(--tinte);
     font-weight: 700;
 }
 
 .dt__bar-pct {
     font-variant-numeric: tabular-nums;
-    color: var(--faint);
+    color: var(--bleistift);
     min-width: 2.6em;
     text-align: right;
 }
 
 .dt__bar-row.is-winner .dt__bar-pct {
-    color: var(--ink);
+    color: var(--tinte);
 }
 
 .dt__bar {
     height: 10px;
     border-radius: 999px;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
+    background: var(--papier);
+    border: 1px solid var(--linie);
     overflow: hidden;
 }
 
 .dt__bar span {
     display: block;
     height: 100%;
-    background: var(--line-strong);
+    background: var(--linie);
     transition: width .25s ease;
 }
 
 .dt__bar-row.is-winner .dt__bar span {
-    background: var(--accent);
+    background: var(--petrol);
 }

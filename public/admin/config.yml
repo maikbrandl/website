@@ -7,7 +7,7 @@
 
 publish_mode: simple
 
-media_folder: "images/uploads"
+media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
@@ -26,7 +26,7 @@ collections:
       - label: "Inhalt"
         name: "body"
         widget: "markdown"
-        media_folder: "/images/uploads"
+        media_folder: "/public/images/uploads"
         public_folder: "/images/uploads"
       - label: "Weiterer Artikel (Call to Action)"
         name: "related_post_slug"

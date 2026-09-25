@@ -130,6 +130,7 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+                  - { label: "Kurzwort (optional, erscheint fett vor dem Text)", name: "label", widget: "string", required: false }
                   - { label: "Text", name: "text", widget: "string" }
           - name: "prozess"
             label: "Drei-Spalten Layout (Prozess/Schritte)"
@@ -287,6 +288,7 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
+                  - { label: "Kurzwort (optional, erscheint fett vor dem Text)", name: "label", widget: "string", required: false }
                   - { label: "Text", name: "text", widget: "string" }
           - name: "textabschnitt"
             label: "Richtext (freier Text)"
@@ -372,9 +374,11 @@ collections:
           - name: "ebene"
             label: "Ebene (Teil des Wissenswegs)"
             widget: "object"
-            hint: "Eine Ebene des Problems, formuliert als Unterfrage im Titel."
+            hint: "Eine Ebene des Problems. Kurzname erscheint im Karteireiter, Titel als Unterfrage im Inhalt."
             fields:
+              - { label: "Kurzname (im Karteireiter, 1 bis 2 Wörter)", name: "label", widget: "string", required: false }
               - { label: "Titel (als Unterfrage)", name: "titel", widget: "string" }
+              - { label: "Kernsatz (kurzer, fett hervorgehobener Leitsatz)", name: "kernsatz", widget: "string", required: false }
               - { label: "Was passiert", name: "was_passiert", widget: "markdown", required: false }
               - { label: "Woran du es merkst", name: "woran_merkst", widget: "markdown", required: false }
               - { label: "Was konkret hilft", name: "was_hilft", widget: "markdown", required: false }

@@ -959,12 +959,145 @@ main {
   border-top: 1px solid var(--linie);
 }
 
+.baustein-ebene__frage {
+  margin: 0 0 var(--space-3);
+}
+
 .baustein-ebene__aufbauend {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+
+.baustein-ebene__aufbauend li a,
+.baustein-ebene__aufbauend li span {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-1);
+  height: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+}
+
+.baustein-ebene__aufbauend li a:hover {
+  border-color: var(--petrol);
+}
+
+.baustein-ebene__aufbauend-typ {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bleistift);
+}
+
+.baustein-ebene__aufbauend strong {
+  font-weight: 600;
+  color: var(--tinte);
+}
+
+/* ---------- Ebenen als Karteireiter (CSS-only, ohne JavaScript) ---------- */
+.ebenen-tabs {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+.ebenen-tabs__leiste {
+  order: -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  border-top: 1px solid var(--linie);
+  padding-top: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.ebenen-tabs__tab {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bleistift);
+  text-decoration: none;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid transparent;
+}
+
+.ebenen-tabs__tab:hover {
+  color: var(--petrol);
+}
+
+.ebenen-tabs__panel {
+  display: none;
+}
+
+.ebenen-tabs__panel:first-of-type {
+  display: block;
+}
+
+.ebenen-tabs__panel:target {
+  display: block;
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:target) .ebenen-tabs__panel:first-of-type:not(:target) {
+  display: none;
+}
+
+.ebenen-tabs__eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: var(--petrol);
+  margin: 0 0 var(--space-2);
+}
+
+.ebenen-tabs__kernsatz {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-4);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(1):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(1),
+.ebenen-tabs__panels:not(:has(.ebenen-tabs__panel:target)) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(1) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(2):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(2) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(3):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(3) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(4):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(4) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(5):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(5) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
+}
+
+.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(6):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(6) {
+  color: var(--tinte);
+  border-bottom-color: var(--petrol);
 }
 
 .baustein-selbsttest {
@@ -1293,11 +1426,96 @@ main {
     align-items: start;
   }
 
+  .lexikon-eintrag-layout--kompakt {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
   .lexikon-sidebar,
   .lexikon-toc {
     position: sticky;
     top: calc(var(--space-6) + 56px);
   }
+}
+
+/* ---------- Lexikon-Eintrag: kompakte Kopfbloecke ohne eigenes Label ---------- */
+.lexikon-haupt--eintrag .baustein-sektion:nth-of-type(-n + 2) {
+  padding-top: 0;
+}
+
+.lexikon-haupt--eintrag .baustein-sektion:nth-of-type(-n + 2) .baustein-sektion__label {
+  display: none;
+}
+
+.lexikon-haupt--eintrag .baustein-icon-fakten {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--linie);
+}
+
+.lexikon-haupt--eintrag .baustein-fakt {
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--linie);
+}
+
+.lexikon-haupt--eintrag .baustein-fakt:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.lexikon-haupt--eintrag .baustein-fakt__icon {
+  display: none;
+}
+
+.baustein-fakt__label {
+  display: block;
+  font-family: var(--font-display);
+  color: var(--tinte);
+}
+
+/* ---------- "Kommt vor" Karte auf Lexikon-Eintraegen ---------- */
+.lexikon-verwandt-karte {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-5);
+  background: var(--blatt);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+
+.lexikon-verwandt-karte li {
+  border-bottom: 1px solid var(--linie);
+}
+
+.lexikon-verwandt-karte li:last-child {
+  border-bottom: none;
+}
+
+.lexikon-verwandt-karte a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  text-decoration: none;
+  color: var(--tinte);
+}
+
+.lexikon-verwandt-karte__titel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+}
+
+.lexikon-verwandt-karte__typ {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--bleistift);
 }
 
 /* ---------- Essays ---------- */

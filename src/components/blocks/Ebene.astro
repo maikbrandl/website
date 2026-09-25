@@ -1,5 +1,6 @@
 ---
 import { markdownZuHtml } from '../../lib/markdown';
+import Formatzeichen from '../Formatzeichen.astro';
 
 interface DarunterEintrag {
   titel?: string;
@@ -7,6 +8,9 @@ interface DarunterEintrag {
 }
 
 interface Props {
+  eyebrow?: string;
+  frage?: string;
+  kernsatz?: string;
   was_passiert?: string;
   woran_merkst?: string;
   was_hilft?: string;
@@ -15,10 +19,14 @@ interface Props {
   darauf_aufbauend?: DarunterEintrag[];
 }
 
-const { was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = [] } = Astro.props as Props;
+const { eyebrow, frage, kernsatz, was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = [] } =
+  Astro.props as Props;
 ---
 
 <div class="baustein-ebene">
+  {eyebrow && <p class="ebenen-tabs__eyebrow">{eyebrow}</p>}
+  {frage && <h3 class="baustein-ebene__frage">{frage}</h3>}
+  {kernsatz && <p class="ebenen-tabs__kernsatz">{kernsatz}</p>}
   {was_passiert && (
     <div class="baustein-ebene__teil">
       <p class="baustein-ebene__label">Was passiert</p>
@@ -48,9 +56,24 @@ const { was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = 
     <div class="baustein-ebene__teil">
       <p class="baustein-ebene__label">Darauf aufbauend</p>
       <ul class="baustein-ebene__aufbauend">
-        {darauf_aufbauend.map((e) => (
-          <li>{e.href ? <a href={e.href}>{e.titel}</a> : <span>{e.titel}</span>}</li>
-        ))}
+        {darauf_aufbauend.map((e) => {
+          const typ = e.href?.startsWith('/essays/') ? 'essays' : 'lexikon';
+          return (
+            <li>
+              {e.href ? (
+                <a href={e.href}>
+                  <span class="baustein-ebene__aufbauend-typ">
+                    <Formatzeichen typ={typ} />
+                    {typ === 'essays' ? 'Essay' : 'Lexikon'}
+                  </span>
+                  <strong>{e.titel}</strong>
+                </a>
+              ) : (
+                <span>{e.titel}</span>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   )}

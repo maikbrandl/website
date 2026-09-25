@@ -28,62 +28,115 @@ interface Props {
 
 const { bloecke = [] } = Astro.props as Props;
 const abschnitte = berechneAbschnitte(bloecke);
+
+// Aufeinanderfolgende "ebene"-Bloecke werden zu einer Karteireiter-Gruppe
+// zusammengefasst (CSS-only, ohne JavaScript). Andere Bloecke bleiben einzelne Abschnitte.
+type Eintrag = (typeof abschnitte)[number];
+type Gruppe = { art: 'einzel'; eintrag: Eintrag } | { art: 'ebenen'; eintraege: Eintrag[] };
+
+const gruppen: Gruppe[] = [];
+for (const eintrag of abschnitte) {
+  if (eintrag.block.type === 'ebene') {
+    const letzte = gruppen[gruppen.length - 1];
+    if (letzte && letzte.art === 'ebenen') {
+      letzte.eintraege.push(eintrag);
+    } else {
+      gruppen.push({ art: 'ebenen', eintraege: [eintrag] });
+    }
+  } else {
+    gruppen.push({ art: 'einzel', eintrag });
+  }
+}
 ---
 
 <div class="stack">
-  {abschnitte.map(({ block: b, titel, id }) => (
-    <section class="baustein-sektion" id={id}>
-      <p class="baustein-sektion__label">{titel}</p>
-      {b.type === 'kurz_erklaert' && <KurzErklaert text={b.text as string} />}
-      {b.type === 'icon_fakten' && <IconFakten fakten={b.fakten as any} />}
-      {b.type === 'prozess' && <Prozess schritte={b.schritte as any} />}
-      {b.type === 'textabschnitt' && <Textabschnitt text={b.text as string} />}
-      {b.type === 'bild' && (
-        <Bild bild={b.bild as string} alt={b.alt as string} bildunterschrift={b.bildunterschrift as string} />
-      )}
-      {b.type === 'beispiel' && <Beispiel text={b.text as string} ergebnis={b.ergebnis as string} />}
-      {b.type === 'liste' && <Liste punkte={b.punkte as string[]} />}
-      {b.type === 'evidenz' && (
-        <Evidenz text={b.text as string} link_url={b.link_url as string} link_label={b.link_label as string} />
-      )}
-      {b.type === 'zitat' && <Zitat text={b.text as string} quelle={b.quelle as string} />}
-      {b.type === 'faq' && <Faq eintraege={b.eintraege as any} />}
-      {b.type === 'tool_einbindung' && <ToolEinbindung tool={b.tool as string} />}
-      {b.type === 'perspektive' && (
-        <Perspektive titel={b.titel as string} text={b.text as string} fazit={b.fazit as string} />
-      )}
-      {b.type === 'verknuepfungen' && <Verknuepfungen eintraege={b.eintraege as any} />}
-      {b.type === 'empfehlung' && (
-        <Empfehlung
-          titel={b.titel as string}
-          autor={b.autor as string}
-          warum={b.warum as string}
-          typ={b.typ as string}
-          asin={b.asin as string}
-        />
-      )}
-      {b.type === 'ebene' && (
-        <Ebene
-          was_passiert={b.was_passiert as string}
-          woran_merkst={b.woran_merkst as string}
-          was_hilft={b.was_hilft as string}
-          beleg={b.beleg as string}
-          fazit={b.fazit as string}
-          darauf_aufbauend={b.darauf_aufbauend as any}
-        />
-      )}
-      {b.type === 'selbsttest' && <Selbsttest tool={b.tool as string} fragen={b.fragen as any} />}
-      {b.type === 'plan' && <Plan schritte={b.schritte as any} />}
-      {b.type === 'hilfe' && <Hilfe eintraege={b.eintraege as any} />}
-      {b.type === 'angebot' && (
-        <Angebot
-          titel={b.titel as string}
-          text={b.text as string}
-          kennzeichnung={b.kennzeichnung as string}
-          url={b.url as string}
-          cta_label={b.cta_label as string}
-        />
-      )}
-    </section>
-  ))}
+  {gruppen.map((g) =>
+    g.art === 'ebenen' ? (
+      <div class="ebenen-tabs">
+        <div class="ebenen-tabs__panels">
+          {g.eintraege.map((eintrag, i) => {
+            const b = eintrag.block;
+            const label = (b.label as string) || eintrag.titel;
+            return (
+              <section class="ebenen-tabs__panel" id={eintrag.id}>
+                <Ebene
+                  eyebrow={`Ebene ${i + 1} von ${g.eintraege.length} · ${label}`}
+                  frage={b.titel as string}
+                  kernsatz={b.kernsatz as string}
+                  was_passiert={b.was_passiert as string}
+                  woran_merkst={b.woran_merkst as string}
+                  was_hilft={b.was_hilft as string}
+                  beleg={b.beleg as string}
+                  fazit={b.fazit as string}
+                  darauf_aufbauend={b.darauf_aufbauend as any}
+                />
+              </section>
+            );
+          })}
+        </div>
+        <div class="ebenen-tabs__leiste" role="tablist" aria-label="Ebenen">
+          {g.eintraege.map((eintrag, i) => {
+            const b = eintrag.block;
+            const label = (b.label as string) || eintrag.titel;
+            return (
+              <a href={`#${eintrag.id}`} class="ebenen-tabs__tab">
+                {i + 1} · {label}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    ) : (
+      <section class="baustein-sektion" id={g.eintrag.id}>
+        <p class="baustein-sektion__label">{g.eintrag.titel}</p>
+        {(() => {
+          const b = g.eintrag.block;
+          return (
+            <>
+              {b.type === 'kurz_erklaert' && <KurzErklaert text={b.text as string} />}
+              {b.type === 'icon_fakten' && <IconFakten fakten={b.fakten as any} />}
+              {b.type === 'prozess' && <Prozess schritte={b.schritte as any} />}
+              {b.type === 'textabschnitt' && <Textabschnitt text={b.text as string} />}
+              {b.type === 'bild' && (
+                <Bild bild={b.bild as string} alt={b.alt as string} bildunterschrift={b.bildunterschrift as string} />
+              )}
+              {b.type === 'beispiel' && <Beispiel text={b.text as string} ergebnis={b.ergebnis as string} />}
+              {b.type === 'liste' && <Liste punkte={b.punkte as string[]} />}
+              {b.type === 'evidenz' && (
+                <Evidenz text={b.text as string} link_url={b.link_url as string} link_label={b.link_label as string} />
+              )}
+              {b.type === 'zitat' && <Zitat text={b.text as string} quelle={b.quelle as string} />}
+              {b.type === 'faq' && <Faq eintraege={b.eintraege as any} />}
+              {b.type === 'tool_einbindung' && <ToolEinbindung tool={b.tool as string} />}
+              {b.type === 'perspektive' && (
+                <Perspektive titel={b.titel as string} text={b.text as string} fazit={b.fazit as string} />
+              )}
+              {b.type === 'verknuepfungen' && <Verknuepfungen eintraege={b.eintraege as any} />}
+              {b.type === 'empfehlung' && (
+                <Empfehlung
+                  titel={b.titel as string}
+                  autor={b.autor as string}
+                  warum={b.warum as string}
+                  typ={b.typ as string}
+                  asin={b.asin as string}
+                />
+              )}
+              {b.type === 'selbsttest' && <Selbsttest tool={b.tool as string} fragen={b.fragen as any} />}
+              {b.type === 'plan' && <Plan schritte={b.schritte as any} />}
+              {b.type === 'hilfe' && <Hilfe eintraege={b.eintraege as any} />}
+              {b.type === 'angebot' && (
+                <Angebot
+                  titel={b.titel as string}
+                  text={b.text as string}
+                  kennzeichnung={b.kennzeichnung as string}
+                  url={b.url as string}
+                  cta_label={b.cta_label as string}
+                />
+              )}
+            </>
+          );
+        })()}
+      </section>
+    )
+  )}
 </div>

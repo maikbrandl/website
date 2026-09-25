@@ -30,6 +30,18 @@ const geschwister = bereich
 
 const abschnitte = berechneAbschnitte(daten.bloecke);
 
+// TOC-Eintraege: aufeinanderfolgende "ebene"-Bloecke bekommen eine lokale Nummer
+// und ihren kurzen `label`, damit die Liste zum Karteireiter im Hauptinhalt passt.
+let ebeneZaehler = 0;
+const tocEintraege = abschnitte.map((a) => {
+  if (a.block.type === 'ebene') {
+    ebeneZaehler += 1;
+    const label = (a.block.label as string) || a.titel;
+    return { ...a, titel: `${ebeneZaehler} · ${label}` };
+  }
+  return a;
+});
+
 const faqEintraege = (daten.bloecke ?? [])
   .filter((b): b is typeof b & { eintraege: { frage?: string; antwort?: string }[] } => b.type === 'faq')
   .flatMap((b) => b.eintraege ?? [])
@@ -83,8 +95,9 @@ if (faqEintraege.length > 0) {
       <p class="lexikon-meta">
         <span>Von {daten.autor || 'Maik'}</span>
         {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
-        {daten.kurzlesezeit && <span>{daten.kurzlesezeit} Min. kurz lesen</span>}
-        {daten.vertiefzeit && <span>{daten.vertiefzeit} Min. vertiefen</span>}
+        {(daten.vertiefzeit || daten.kurzlesezeit) && (
+          <span>{daten.vertiefzeit || daten.kurzlesezeit} Min.</span>
+        )}
         {(daten.quellen ?? []).length > 0 && (
           <span>{(daten.quellen ?? []).length} Quelle{(daten.quellen ?? []).length === 1 ? '' : 'n'}</span>
         )}
@@ -116,11 +129,11 @@ if (faqEintraege.length > 0) {
       </main>
 
       <nav class="lexikon-toc" aria-label="Verzeichnis der Abschnitte">
-        {abschnitte.length > 0 && (
+        {tocEintraege.length > 0 && (
           <>
             <p class="lexikon-sidebar__label">Auf dieser Seite</p>
             <ul>
-              {abschnitte.map((a) => (
+              {tocEintraege.map((a) => (
                 <li><a href={`#${a.id}`}>{a.titel}</a></li>
               ))}
             </ul>

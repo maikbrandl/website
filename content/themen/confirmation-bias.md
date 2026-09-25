@@ -5,8 +5,7 @@ art: Denkfehler
 wissensraum: mind
 gebiet: kognition-wahrnehmung
 untergruppe: Kognitive Verzerrungen
-lead: Wir suchen, deuten und erinnern Informationen so, dass sie bestätigen, was
-  wir ohnehin schon glauben – und blenden alles aus, was dagegenspricht.
+lead: "Wir suchen, deuten und erinnern Informationen so, dass sie <mark class=\"marker\">bestätigen, was wir ohnehin schon glauben</mark>, und blenden alles aus, was dagegenspricht."
 lesezeit: 4
 bloecke:
   - type: kurz_erklaert
@@ -21,10 +20,13 @@ bloecke:
     titel_override: Auf einen Blick
     fakten:
       - icon: search
+        label: "Suchen"
         text: Wir suchen aktiv nach bestätigenden Informationen.
       - icon: filter
+        label: "Deuten"
         text: Widersprüchliches wird unbewusst herausgefiltert.
       - icon: refresh
+        label: "Erinnern"
         text: Erinnerungen werden im Nachhinein passend verzerrt.
   - type: prozess
     titel_override: So entsteht der Bias

@@ -3,6 +3,7 @@ import { iconSvg } from '../../lib/icons';
 
 interface Fakt {
   icon?: string;
+  label?: string;
   text?: string;
 }
 
@@ -17,7 +18,10 @@ const { fakten = [] } = Astro.props as Props;
   {fakten.map((f) => (
     <div class="baustein-fakt">
       <span class="baustein-fakt__icon" aria-hidden="true" set:html={iconSvg(f.icon)} />
-      <span>{f.text}</span>
+      <span>
+        {f.label && <strong class="baustein-fakt__label">{f.label}</strong>}
+        {f.text}
+      </span>
     </div>
   ))}
 </div>

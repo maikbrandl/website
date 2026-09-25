@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
-import { berechneAbschnitte } from '../../lib/bausteine';
 import { formatiereDatum } from '../../lib/datum';
 import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
@@ -37,7 +36,12 @@ const verwandteThemen = verwandteSlugs.length
   ? (await getCollection('themen')).filter((t) => verwandteSlugs.includes(t.id))
   : [];
 
-const abschnitte = berechneAbschnitte(daten.bloecke);
+const essaysHier = (await getCollection('posts')).filter((p) => p.data.verwandtes_thema === entry.id);
+
+const verwandteEintraege = [
+  ...wege.map((w) => ({ href: `/wege/${w.id}/`, titel: w.data.title ?? w.id, typ: 'wege' as const })),
+  ...essaysHier.map((p) => ({ href: `/essays/${p.data.url}/`, titel: p.data.title ?? p.id, typ: 'essays' as const })),
+];
 
 const faqEintraege = (daten.bloecke ?? [])
   .filter((b): b is typeof b & { eintraege: { frage?: string; antwort?: string }[] } => b.type === 'faq')
@@ -84,16 +88,16 @@ if (faqEintraege.length > 0) {
 
     <div data-pagefind-body data-pagefind-filter="Format:Lexikon">
     <header class="lexikon-eintrag-kopf">
-      <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Lexikon</p>
       <h1>{daten.title}</h1>
-      {daten.lead && <p class="prosa lexikon-eintrag-lead">{daten.lead}</p>}
+      {daten.lead && <p class="prosa lexikon-eintrag-lead" set:html={daten.lead} />}
       <p class="lexikon-meta">
-        {daten.lesezeit && <span>{daten.lesezeit} Min. Lesezeit</span>}
-        {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
+        <span>Lexikon{daten.art ? ` · ${daten.art}` : ''}</span>
+        {daten.lesezeit && <span>{daten.lesezeit} Min.</span>}
+        {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
       </p>
     </header>
 
-    <div class="lexikon-eintrag-layout">
+    <div class="lexikon-eintrag-layout lexikon-eintrag-layout--kompakt">
       <aside class="lexikon-sidebar" aria-label="Weitere Einträge aus diesem Fachgebiet">
         {fachgebiet && geschwister.length > 0 && (
           <>
@@ -113,34 +117,30 @@ if (faqEintraege.length > 0) {
         )}
       </aside>
 
-      <main class="lexikon-haupt">
+      <main class="lexikon-haupt lexikon-haupt--eintrag">
         <BlockRenderer bloecke={daten.bloecke} />
       </main>
-
-      <nav class="lexikon-toc" aria-label="Verzeichnis der Abschnitte">
-        {abschnitte.length > 0 && (
-          <>
-            <p class="lexikon-sidebar__label">Auf dieser Seite</p>
-            <ul>
-              {abschnitte.map((a) => (
-                <li><a href={`#${a.id}`}>{a.titel}</a></li>
-              ))}
-            </ul>
-          </>
-        )}
-      </nav>
     </div>
 
-    {wege.length > 0 && (
+    {verwandteEintraege.length > 0 && (
       <section class="lexikon-abschnitt">
-        <h2>Kommt vor in diesen Wegen</h2>
-        <ul class="lexikon-liste">
-          {wege.map((w) => (
-            <li><a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a></li>
+        <h2>Kommt vor</h2>
+        <ul class="lexikon-verwandt-karte">
+          {verwandteEintraege.map((e) => (
+            <li>
+              <a href={e.href}>
+                <span class="lexikon-verwandt-karte__titel">
+                  <Formatzeichen typ={e.typ} />
+                  {e.titel}
+                </span>
+                <span class="lexikon-verwandt-karte__typ">{e.typ === 'essays' ? 'Essay' : 'Weg'}</span>
+              </a>
+            </li>
           ))}
         </ul>
       </section>
     )}
+
 
     {verwandteThemen.length > 0 && (
       <section class="lexikon-abschnitt">

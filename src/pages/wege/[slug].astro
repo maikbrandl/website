@@ -1,0 +1,102 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import Kurzantwort from '../../components/Kurzantwort.astro';
+import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
+import { formatiereDatum } from '../../lib/datum';
+import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
+
+export async function getStaticPaths() {
+  const wege = await getCollection('wissensfragen');
+  return wege.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const daten = entry.data;
+
+const bereich = daten.bereich ? await getEntry('bereiche', daten.bereich) : undefined;
+
+const faqEintraege = (daten.bloecke ?? [])
+  .filter((b): b is typeof b & { eintraege: { frage?: string; antwort?: string }[] } => b.type === 'faq')
+  .flatMap((b) => b.eintraege ?? [])
+  .filter((e): e is { frage: string; antwort: string } => Boolean(e.frage && e.antwort));
+
+const geprueftAmText = formatiereDatum(daten.geprueft_am);
+
+const titel = daten.seo_title || `${daten.title} · Hybridlog`;
+const beschreibung = daten.seo_description || daten.kurzantwort || daten.lead || daten.title || 'Ein Wissensweg von Hybridlog.';
+const canonical = new URL(`/wege/${entry.id}/`, Astro.site).toString();
+
+const jsonLd: Record<string, unknown>[] = [
+  articleJsonLd({
+    headline: daten.title ?? entry.id,
+    description: beschreibung,
+    url: canonical,
+    datumGeprueft: daten.geprueft_am,
+  }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Bereiche', url: new URL('/bereiche/', Astro.site).toString() },
+    ...(bereich
+      ? [{ name: bereich.data.title ?? bereich.id, url: new URL(`/bereiche/${bereich.id}/`, Astro.site).toString() }]
+      : []),
+    { name: daten.title ?? entry.id },
+  ]),
+];
+if (faqEintraege.length > 0) {
+  jsonLd.push(faqPageJsonLd(faqEintraege));
+}
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Bereiche', href: '/bereiche/' },
+        ...(bereich ? [{ label: bereich.data.title ?? bereich.id, href: `/bereiche/${bereich.id}/` }] : []),
+        { label: daten.title ?? entry.id },
+      ]}
+    />
+
+    <header class="lexikon-eintrag-kopf">
+      <p class="lexikon-kopf__label"><Formatzeichen typ="wege" /> Wissensweg</p>
+      <h1>{daten.title}</h1>
+
+      {daten.kurzantwort && <Kurzantwort>{daten.kurzantwort}</Kurzantwort>}
+
+      <p class="lexikon-meta">
+        <span>{daten.autor || 'Maik'}</span>
+        {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
+        {daten.kurzlesezeit && <span>{daten.kurzlesezeit} Min. kurz lesen</span>}
+        {daten.vertiefzeit && <span>{daten.vertiefzeit} Min. vertiefen</span>}
+      </p>
+    </header>
+
+    <main class="lexikon-haupt lexikon-eintrag-kopf">
+      <BlockRenderer bloecke={daten.bloecke} />
+    </main>
+
+    {(daten.quellen ?? []).length > 0 && (
+      <section class="lexikon-abschnitt lexikon-eintrag-kopf">
+        <h2>Quellen</h2>
+        <ul class="lexikon-liste">
+          {(daten.quellen ?? []).map((q) => (
+            <li>
+              {q.url ? (
+                <a href={q.url} target="_blank" rel="noopener">{q.titel}</a>
+              ) : (
+                <span>{q.titel}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Base>

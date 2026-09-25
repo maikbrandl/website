@@ -916,6 +916,140 @@ main {
   font-style: italic;
 }
 
+.baustein-ebene {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.baustein-ebene__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: var(--petrol);
+  margin: 0 0 var(--space-1);
+}
+
+.baustein-ebene__fazit {
+  font-weight: 600;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--linie);
+}
+
+.baustein-ebene__aufbauend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.baustein-selbsttest {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.baustein-selbsttest__fragen {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.baustein-selbsttest__fragen p {
+  margin: 0;
+}
+
+.baustein-selbsttest__hinweis {
+  color: var(--bleistift);
+  font-size: 14px;
+}
+
+.baustein-plan {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.baustein-plan__schritt {
+  padding: var(--space-4);
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+
+.baustein-plan__kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.baustein-plan__kopf h5 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+.baustein-plan__dauer {
+  color: var(--bleistift);
+  font-size: 13px;
+}
+
+.baustein-plan__schritt p {
+  margin: var(--space-2) 0 0;
+  color: var(--bleistift);
+}
+
+.baustein-hilfe {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.baustein-hilfe__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+.baustein-hilfe__item:last-child {
+  border-bottom: none;
+}
+
+.baustein-hilfe__item span {
+  color: var(--bleistift);
+  font-size: 14px;
+}
+
+.baustein-angebot {
+  padding: var(--space-4);
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+
+.baustein-angebot h5 {
+  font-family: var(--font-display);
+  margin: var(--space-2) 0;
+}
+
+.baustein-angebot__kennzeichnung {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  color: var(--bleistift);
+}
+
 /* ---------- Lexikon ---------- */
 .stack {
   display: flex;

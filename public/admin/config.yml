@@ -245,6 +245,10 @@ collections:
         multiple: true
         hint: "Meist mehrere, eine Wissensfrage betrifft oft mehr als einen Raum."
       - { label: "Lead-Satz", name: "lead", widget: "text" }
+      - { label: "Kurzantwort (40 bis 60 Wörter)", name: "kurzantwort", widget: "text", required: false }
+      - { label: "Autor", name: "autor", widget: "string", required: false, default: "Maik" }
+      - { label: "Geprüft am", name: "geprueft_am", widget: "string", required: false, hint: "Format YYYY-MM-DD" }
+      - { label: "Lebensbereich", name: "bereich", widget: "select", options: ["gewohnheiten", "lernen", "gefuehle", "denken", "ich-selbst", "sinn"], required: false }
       - { label: "Kurz lesen (Minuten)", name: "kurzlesezeit", widget: "number", required: false }
       - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }
       - name: "bloecke"
@@ -352,6 +356,69 @@ collections:
                 fields:
                   - { label: "Titel", name: "titel", widget: "string" }
                   - { label: "Link-Ziel (optional, leer lassen falls noch keine Seite existiert)", name: "href", widget: "string", required: false }
+          - name: "ebene"
+            label: "Ebene (Teil des Wissenswegs)"
+            widget: "object"
+            hint: "Eine Ebene des Problems, formuliert als Unterfrage im Titel."
+            fields:
+              - { label: "Titel (als Unterfrage)", name: "titel", widget: "string" }
+              - { label: "Was passiert", name: "was_passiert", widget: "markdown", required: false }
+              - { label: "Woran du es merkst", name: "woran_merkst", widget: "markdown", required: false }
+              - { label: "Was konkret hilft", name: "was_hilft", widget: "markdown", required: false }
+              - { label: "Beleg", name: "beleg", widget: "markdown", required: false }
+              - { label: "Fazit-Zeile (optional)", name: "fazit", widget: "string", required: false }
+              - name: "darauf_aufbauend"
+                label: "Darauf aufbauend"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Link-Ziel (optional)", name: "href", widget: "string", required: false }
+          - name: "selbsttest"
+            label: "Selbsttest"
+            widget: "object"
+            hint: "Entweder ein Tool verlinken oder kleine eingebaute Fragen, nie beides zwingend."
+            fields:
+              - { label: "Tool (optional)", name: "tool", widget: "select", options: ["denkschule", "philosophie", "human-map", "blockuniversum"], required: false }
+              - name: "fragen"
+                label: "Fragen (optional)"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Frage", name: "frage", widget: "string" }
+                  - { label: "Hinweis (optional)", name: "hinweis", widget: "string", required: false }
+          - name: "plan"
+            label: "Plan"
+            widget: "object"
+            fields:
+              - name: "schritte"
+                label: "Schritte"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Text", name: "text", widget: "text" }
+                  - { label: "Dauer (optional)", name: "dauer", widget: "string", required: false }
+          - name: "hilfe"
+            label: "Hilfe und Werkzeuge"
+            widget: "object"
+            fields:
+              - name: "eintraege"
+                label: "Einträge"
+                widget: "list"
+                fields:
+                  - { label: "Titel", name: "titel", widget: "string" }
+                  - { label: "Beschreibung (optional)", name: "beschreibung", widget: "string", required: false }
+                  - { label: "Link (optional)", name: "url", widget: "string", required: false }
+          - name: "angebot"
+            label: "Angebot"
+            widget: "object"
+            hint: "Höchstens zwei Angebote pro Weg, erst nach etwa 70 Prozent der Seite. Kennzeichnung ist Pflicht."
+            fields:
+              - { label: "Kennzeichnung (Pflicht, z.B. Anzeige)", name: "kennzeichnung", widget: "string", default: "Anzeige" }
+              - { label: "Titel (optional)", name: "titel", widget: "string", required: false }
+              - { label: "Text (optional)", name: "text", widget: "text", required: false }
+              - { label: "Link (optional)", name: "url", widget: "string", required: false }
+              - { label: "Link-Beschriftung (optional)", name: "cta_label", widget: "string", required: false }
           - name: "bild"
             label: "Bild einfügen"
             widget: "object"

@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+
+export async function getStaticPaths() {
+  const bereiche = await getCollection('bereiche');
+  return bereiche.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const daten = entry.data;
+
+const wege = (await getCollection('wissensfragen'))
+  .filter((w) => w.data.bereich === entry.id)
+  .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'));
+
+const essays = (await getCollection('posts'))
+  .filter((p) => p.data.bereich === entry.id && p.data.url)
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+
+const titel = `${daten.title} · Lebensbereich · Hybridlog`;
+const beschreibung = daten.beschreibung || `Wissenswege und Essays aus dem Bereich ${daten.title}.`;
+const canonical = new URL(`/bereiche/${entry.id}/`, Astro.site).toString();
+
+const jsonLd = [
+  collectionPageJsonLd({ name: daten.title ?? entry.id, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Bereiche', url: new URL('/bereiche/', Astro.site).toString() },
+    { name: daten.title ?? entry.id },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Bereiche', href: '/bereiche/' },
+        { label: daten.title ?? entry.id },
+      ]}
+    />
+
+    <header class="lexikon-kopf">
+      <h1>{daten.title}</h1>
+      {daten.beschreibung && <p class="prosa">{daten.beschreibung}</p>}
+    </header>
+
+    <section class="lexikon-abschnitt">
+      <h2>Wege in diesem Bereich</h2>
+      {wege.length === 0 ? (
+        <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Wissenswege.</p>
+      ) : (
+        <ul class="lexikon-liste">
+          {wege.map((w) => (
+            <li>
+              <a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a>
+              {w.data.lead && <span>{w.data.lead}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+
+    <section class="lexikon-abschnitt">
+      <h2>Essays in diesem Bereich</h2>
+      {essays.length === 0 ? (
+        <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Essays.</p>
+      ) : (
+        <ul class="lexikon-liste">
+          {essays.map((e) => (
+            <li>
+              <a href={`/essays/${e.data.url}/`}>{e.data.title ?? e.id}</a>
+              {e.data.excerpt && <span>{e.data.excerpt}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </div>
+</Base>

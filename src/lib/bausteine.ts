@@ -19,6 +19,10 @@ export const STANDARD_TITEL: Record<string, string> = {
   tool_einbindung: 'Zum Ausprobieren',
   empfehlung: 'Empfehlung',
   verknuepfungen: 'Womit sich dieser Weg verknüpft',
+  selbsttest: 'Selbsttest',
+  plan: 'Dein Plan',
+  hilfe: 'Hilfe und Werkzeuge',
+  angebot: 'Angebot',
 };
 
 export const BEKANNTE_TYPEN = new Set([
@@ -36,6 +40,11 @@ export const BEKANNTE_TYPEN = new Set([
   'perspektive',
   'verknuepfungen',
   'empfehlung',
+  'ebene',
+  'selbsttest',
+  'plan',
+  'hilfe',
+  'angebot',
 ]);
 
 export function abschnittTitel(b: Baustein, nummer: number): string {
@@ -43,6 +52,10 @@ export function abschnittTitel(b: Baustein, nummer: number): string {
     const n = String(nummer).padStart(2, '0');
     const kategorie = typeof b.kategorie === 'string' ? b.kategorie : '';
     return `Perspektive ${n}${kategorie ? ' · ' + kategorie : ''}`;
+  }
+  if (b.type === 'ebene') {
+    const titel = typeof b.titel === 'string' ? b.titel : '';
+    return titel || `Ebene ${nummer}`;
   }
   const override = typeof b.titel_override === 'string' ? b.titel_override : '';
   return override || (b.type ? STANDARD_TITEL[b.type] : undefined) || 'Abschnitt';

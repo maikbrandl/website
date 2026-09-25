@@ -1,0 +1,57 @@
+---
+import { markdownZuHtml } from '../../lib/markdown';
+
+interface DarunterEintrag {
+  titel?: string;
+  href?: string;
+}
+
+interface Props {
+  was_passiert?: string;
+  woran_merkst?: string;
+  was_hilft?: string;
+  beleg?: string;
+  fazit?: string;
+  darauf_aufbauend?: DarunterEintrag[];
+}
+
+const { was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = [] } = Astro.props as Props;
+---
+
+<div class="baustein-ebene">
+  {was_passiert && (
+    <div class="baustein-ebene__teil">
+      <p class="baustein-ebene__label">Was passiert</p>
+      <div class="prosa" set:html={markdownZuHtml(was_passiert)} />
+    </div>
+  )}
+  {woran_merkst && (
+    <div class="baustein-ebene__teil">
+      <p class="baustein-ebene__label">Woran du es merkst</p>
+      <div class="prosa" set:html={markdownZuHtml(woran_merkst)} />
+    </div>
+  )}
+  {was_hilft && (
+    <div class="baustein-ebene__teil">
+      <p class="baustein-ebene__label">Was konkret hilft</p>
+      <div class="prosa" set:html={markdownZuHtml(was_hilft)} />
+    </div>
+  )}
+  {beleg && (
+    <div class="baustein-ebene__teil">
+      <p class="baustein-ebene__label">Beleg</p>
+      <div class="prosa" set:html={markdownZuHtml(beleg)} />
+    </div>
+  )}
+  {fazit && <p class="baustein-ebene__fazit">{fazit}</p>}
+  {darauf_aufbauend.length > 0 && (
+    <div class="baustein-ebene__teil">
+      <p class="baustein-ebene__label">Darauf aufbauend</p>
+      <ul class="baustein-ebene__aufbauend">
+        {darauf_aufbauend.map((e) => (
+          <li>{e.href ? <a href={e.href}>{e.titel}</a> : <span>{e.titel}</span>}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>

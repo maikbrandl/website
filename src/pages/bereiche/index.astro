@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+
+const bereiche = (await getCollection('bereiche')).sort(
+  (a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99),
+);
+
+const canonical = new URL('/bereiche/', Astro.site).toString();
+const titel = 'Lebensbereiche · Hybridlog';
+const beschreibung = 'Alle Lebensbereiche von Hybridlog, mit den passenden Wissenswegen und Essays.';
+
+const jsonLd = [
+  collectionPageJsonLd({ name: titel, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Bereiche' },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Bereiche' }]} />
+
+    <header class="lexikon-kopf">
+      <h1>Lebensbereiche</h1>
+      <p class="prosa">
+        Sechs Bereiche, in denen sich die Wissenswege und Essays von Hybridlog einordnen lassen.
+      </p>
+    </header>
+
+    <section class="lexikon-abschnitt">
+      <ul class="lexikon-fachgebiete">
+        {bereiche.map((b) => (
+          <li>
+            <a href={`/bereiche/${b.id}/`}>
+              <strong>{b.data.title}</strong>
+              {b.data.beschreibung && <span>{b.data.beschreibung}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>

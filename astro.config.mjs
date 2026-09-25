@@ -40,6 +40,24 @@ function essaysLastmodMap() {
 const lexikonLastmod = lexikonLastmodMap();
 const essaysLastmod = essaysLastmodMap();
 
+// lastmod fuer Wege Seiten, geschluesselt nach dem Dateinamen (= Slug):
+// geprueft_am aus dem Frontmatter, nie das Dateisystem Datum.
+function wegeLastmodMap() {
+  const verzeichnis = new URL('./content/wissensfragen/', import.meta.url);
+  const map = new Map();
+  for (const datei of readdirSync(verzeichnis)) {
+    if (!datei.endsWith('.md')) continue;
+    const inhalt = readFileSync(new URL(datei, verzeichnis), 'utf8');
+    const treffer = inhalt.match(/^geprueft_am:\s*"?(\d{4}-\d{2}-\d{2})"?/m);
+    if (treffer) {
+      map.set(datei.replace(/\.md$/, ''), treffer[1]);
+    }
+  }
+  return map;
+}
+
+const wegeLastmod = wegeLastmodMap();
+
 export default defineConfig({
   site: 'https://hybridlog.de',
   trailingSlash: 'always',
@@ -61,6 +79,11 @@ export default defineConfig({
         const essayTreffer = pfad.match(/^\/essays\/([^/]+)\/$/);
         if (essayTreffer) {
           const lastmod = essaysLastmod.get(essayTreffer[1]);
+          return lastmod ? { ...item, lastmod } : item;
+        }
+        const wegTreffer = pfad.match(/^\/wege\/([^/]+)\/$/);
+        if (wegTreffer) {
+          const lastmod = wegeLastmod.get(wegTreffer[1]);
           return lastmod ? { ...item, lastmod } : item;
         }
         return item;

@@ -1,0 +1,22 @@
+---
+interface Props {
+  titel?: string;
+  text?: string;
+  kennzeichnung: string;
+  url?: string;
+  cta_label?: string;
+}
+
+const { titel, text, kennzeichnung, url, cta_label } = Astro.props as Props;
+---
+
+<div class="baustein-angebot">
+  <span class="baustein-angebot__kennzeichnung">{kennzeichnung || 'Anzeige'}</span>
+  {titel && <h5>{titel}</h5>}
+  {text && <p>{text}</p>}
+  {url && (
+    <a class="baustein-link" href={url} target="_blank" rel="sponsored noopener">
+      {cta_label || 'Mehr erfahren'} &rarr;
+    </a>
+  )}
+</div>

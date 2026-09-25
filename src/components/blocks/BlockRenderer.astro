@@ -15,6 +15,11 @@ import ToolEinbindung from './ToolEinbindung.astro';
 import Perspektive from './Perspektive.astro';
 import Verknuepfungen from './Verknuepfungen.astro';
 import Empfehlung from './Empfehlung.astro';
+import Ebene from './Ebene.astro';
+import Selbsttest from './Selbsttest.astro';
+import Plan from './Plan.astro';
+import Hilfe from './Hilfe.astro';
+import Angebot from './Angebot.astro';
 import { berechneAbschnitte, type Baustein } from '../../lib/bausteine';
 
 interface Props {
@@ -55,6 +60,28 @@ const abschnitte = berechneAbschnitte(bloecke);
           warum={b.warum as string}
           typ={b.typ as string}
           asin={b.asin as string}
+        />
+      )}
+      {b.type === 'ebene' && (
+        <Ebene
+          was_passiert={b.was_passiert as string}
+          woran_merkst={b.woran_merkst as string}
+          was_hilft={b.was_hilft as string}
+          beleg={b.beleg as string}
+          fazit={b.fazit as string}
+          darauf_aufbauend={b.darauf_aufbauend as any}
+        />
+      )}
+      {b.type === 'selbsttest' && <Selbsttest tool={b.tool as string} fragen={b.fragen as any} />}
+      {b.type === 'plan' && <Plan schritte={b.schritte as any} />}
+      {b.type === 'hilfe' && <Hilfe eintraege={b.eintraege as any} />}
+      {b.type === 'angebot' && (
+        <Angebot
+          titel={b.titel as string}
+          text={b.text as string}
+          kennzeichnung={b.kennzeichnung as string}
+          url={b.url as string}
+          cta_label={b.cta_label as string}
         />
       )}
     </section>

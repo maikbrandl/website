@@ -8,6 +8,7 @@ const relaunchFelder = {
   url: z.string().optional().catch(undefined),
   geprueft_am: z.string().optional().catch(undefined),
   kurzantwort: z.string().optional().catch(undefined),
+  autor: z.string().optional().catch(undefined),
   wege: z.array(z.string()).optional().catch(undefined),
   verwandter_weg: z.string().optional().catch(undefined),
   verwandtes_thema: z.string().optional().catch(undefined),

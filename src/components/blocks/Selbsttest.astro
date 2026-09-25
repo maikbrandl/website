@@ -1,0 +1,36 @@
+---
+import { toolBySlug } from '../../lib/tools';
+
+interface Frage {
+  frage?: string;
+  hinweis?: string;
+}
+
+interface Props {
+  tool?: string;
+  fragen?: Frage[];
+}
+
+const { tool, fragen = [] } = Astro.props as Props;
+const eintrag = toolBySlug(tool);
+---
+
+<div class="baustein-selbsttest">
+  {eintrag && (
+    <div class="baustein-tool">
+      <h5>{eintrag.title}</h5>
+      <p>{eintrag.teaser}</p>
+      <a class="baustein-link" href={eintrag.href}>Test starten &rarr;</a>
+    </div>
+  )}
+  {fragen.length > 0 && (
+    <ol class="baustein-selbsttest__fragen">
+      {fragen.map((f) => (
+        <li>
+          <p>{f.frage}</p>
+          {f.hinweis && <p class="baustein-selbsttest__hinweis">{f.hinweis}</p>}
+        </li>
+      ))}
+    </ol>
+  )}
+</div>

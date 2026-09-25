@@ -5,6 +5,10 @@ welten:
   - mind
   - world
 lead: "Rauchen aufhören scheitert selten am fehlenden Willen. Es scheitert daran, dass ein Problem bekämpft wird, das in Wirklichkeit vier sind, mit vier verschiedenen Lösungen."
+kurzantwort: "Rauchen aufzuhören scheitert selten an fehlendem Willen. Es sind vier verschiedene Probleme in einem Wort: eine körperliche Sucht, eine trainierte Gewohnheit, eine emotionale Funktion und eine Frage der eigenen Identität. Die Sucht ist nach drei bis vier Wochen durchgestanden. Gewohnheit, Gefühl und Identität brauchen eigene, bewusst gewählte Antworten."
+autor: "Maik"
+geprueft_am: "2026-09-20"
+bereich: "gewohnheiten"
 kurzlesezeit: 4
 vertiefzeit: 14
 bloecke:

@@ -1,0 +1,25 @@
+---
+interface Schritt {
+  titel?: string;
+  text?: string;
+  dauer?: string;
+}
+
+interface Props {
+  schritte?: Schritt[];
+}
+
+const { schritte = [] } = Astro.props as Props;
+---
+
+<ol class="baustein-plan">
+  {schritte.map((s) => (
+    <li class="baustein-plan__schritt">
+      <div class="baustein-plan__kopf">
+        <h5>{s.titel}</h5>
+        {s.dauer && <span class="baustein-plan__dauer">{s.dauer}</span>}
+      </div>
+      <p>{s.text}</p>
+    </li>
+  ))}
+</ol>

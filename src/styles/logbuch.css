@@ -1787,6 +1787,52 @@ main {
   max-width: var(--lesebreite);
 }
 
+/* ---------- Suche ---------- */
+.suche-ergebnisse {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.suche-ergebnis a {
+  display: block;
+  padding: var(--space-4);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dauer) ease;
+}
+
+.suche-ergebnis a:hover {
+  border-color: var(--petrol);
+}
+
+.suche-ergebnis__format {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--petrol);
+  margin-bottom: var(--space-1);
+}
+
+.suche-ergebnis strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.suche-ergebnis__auszug {
+  color: var(--bleistift);
+  font-size: 0.9rem;
+}
+
+.suche-ergebnis__auszug mark {
+  background: var(--marker-flaeche);
+  color: inherit;
+}
+
 /* ---------- Bewegung respektieren ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1797,6 +1843,7 @@ main {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
 
 
 

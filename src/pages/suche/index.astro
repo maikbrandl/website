@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+
+const titel = 'Suche · Hybridlog';
+const beschreibung = 'Durchsuche Lexikon, Wissenswege und Essays von Hybridlog.';
+const canonical = new URL('/suche/', Astro.site).toString();
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} noindex={true}>
+  <div class="container stack-gross">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Suche' }]} />
+
+    <header class="tool-kopf">
+      <h1>Suche</h1>
+      <form class="suchformular start-hero__suche" action="/suche/" method="get" role="search">
+        <label class="nur-sr" for="suche-eingabe-seite">Suche</label>
+        <input id="suche-eingabe-seite" type="search" name="q" placeholder="Wonach suchst du?" />
+        <button type="submit">Suchen</button>
+      </form>
+    </header>
+
+    <noscript>
+      <p class="prosa">
+        Die Suche braucht JavaScript. Du findest Inhalte auch ohne Suche: alle Lexikoneinträge
+        stehen <a href="/lexikon/">von A bis Z im Lexikon</a>, thematisch geordnet in den
+        <a href="/bereiche/">sechs Lebensbereichen</a>.
+      </p>
+    </noscript>
+
+    <div id="suche-status" class="prosa" role="status"></div>
+    <ul id="suche-ergebnisse" class="suche-ergebnisse"></ul>
+  </div>
+
+  <script is:inline>
+    (async function () {
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('q') || '';
+      var eingabe = document.getElementById('suche-eingabe-seite');
+      if (eingabe) eingabe.value = q;
+
+      var status = document.getElementById('suche-status');
+      var liste = document.getElementById('suche-ergebnisse');
+
+      if (!q) {
+        status.textContent = 'Gib oben einen Suchbegriff ein.';
+        return;
+      }
+
+      status.textContent = 'Suche läuft …';
+
+      try {
+        var pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.init();
+        var suche = await pagefind.search(q);
+
+        if (!suche.results.length) {
+          status.textContent = 'Keine Treffer für „' + q + '".';
+          return;
+        }
+
+        var eintraege = await Promise.all(suche.results.slice(0, 20).map(function (r) { return r.data(); }));
+        status.textContent = eintraege.length + ' Treffer für „' + q + '"';
+
+        eintraege.forEach(function (eintrag) {
+          var li = document.createElement('li');
+          li.className = 'suche-ergebnis';
+
+          var format = (eintrag.filters && eintrag.filters.Format && eintrag.filters.Format[0]) || '';
+
+          li.innerHTML =
+            '<a href="' + eintrag.url + '">' +
+            (format ? '<span class="suche-ergebnis__format">' + format + '</span>' : '') +
+            '<strong>' + eintrag.meta.title + '</strong>' +
+            '<span class="suche-ergebnis__auszug">' + eintrag.excerpt + '</span>' +
+            '</a>';
+          liste.appendChild(li);
+        });
+      } catch (e) {
+        status.textContent = 'Die Suche ist gerade nicht verfügbar.';
+      }
+    })();
+  </script>
+</Base>

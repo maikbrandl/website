@@ -13,6 +13,12 @@ const fachgebiete = (await getCollection('fachgebiete'))
   .filter((f) => f.data.visibility === 'public')
   .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
+const themenProGebiet = new Map<string, number>();
+for (const t of alleThemen) {
+  if (!t.data.gebiet) continue;
+  themenProGebiet.set(t.data.gebiet, (themenProGebiet.get(t.data.gebiet) ?? 0) + 1);
+}
+
 const gruppen = new Map<string, typeof alleThemen>();
 for (const eintrag of alleThemen) {
   const titel = eintrag.data.title ?? eintrag.id;
@@ -50,16 +56,22 @@ const jsonLd = [
     </header>
 
     <section class="lexikon-abschnitt">
-      <h2>Nach Fachgebiet</h2>
+      <div class="start-abschnitt__kopf">
+        <h2>Nach Fachgebiet</h2>
+      </div>
       <ul class="lexikon-fachgebiete">
-        {fachgebiete.map((f) => (
-          <li>
-            <a href={`/lexikon/fachgebiet/${f.id}/`}>
-              <strong>{f.data.title}</strong>
-              {f.data.description && <span>{f.data.description}</span>}
-            </a>
-          </li>
-        ))}
+        {fachgebiete.map((f) => {
+          const anzahl = themenProGebiet.get(f.id) ?? 0;
+          return (
+            <li>
+              <a href={`/lexikon/fachgebiet/${f.id}/`}>
+                <strong>{f.data.title}</strong>
+                {f.data.description && <span>{f.data.description}</span>}
+                <span class="lexikon-fachgebiete__anzahl">{anzahl} {anzahl === 1 ? 'Begriff' : 'Begriffe'}</span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </section>
 

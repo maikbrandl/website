@@ -1120,7 +1120,15 @@ main {
   margin-bottom: var(--space-4);
 }
 
-.lexikon-fachgebiete,
+.lexikon-fachgebiete {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
 .lexikon-liste {
   list-style: none;
   margin: 0;
@@ -1135,15 +1143,23 @@ main {
 }
 
 .lexikon-fachgebiete a {
+  height: 100%;
   padding: var(--space-4);
   background: var(--blatt);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
   text-decoration: none;
+  transition: border-color var(--dauer) ease;
+}
+
+.lexikon-fachgebiete a:hover {
+  border-color: var(--petrol);
 }
 
 .lexikon-fachgebiete a strong {
   display: block;
+  font-family: var(--font-display);
+  font-size: 18px;
   color: var(--tinte);
   margin-bottom: var(--space-1);
 }
@@ -1152,6 +1168,17 @@ main {
   display: block;
   color: var(--bleistift);
   font-size: 14px;
+}
+
+.lexikon-fachgebiete__anzahl {
+  color: var(--petrol);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: var(--space-2);
+}
+
+.lexikon-fachgebiete a span.lexikon-fachgebiete__anzahl {
+  color: var(--petrol);
 }
 
 .lexikon-liste li span {
@@ -1174,10 +1201,17 @@ main {
   width: 28px;
   height: 28px;
   border: 1px solid var(--linie);
-  border-radius: var(--radius);
+  border-radius: 999px;
   text-decoration: none;
+  color: var(--tinte);
   font-size: 13px;
   font-weight: 600;
+  transition: border-color var(--dauer) ease, color var(--dauer) ease;
+}
+
+.lexikon-az-sprung a:hover {
+  border-color: var(--petrol);
+  color: var(--petrol);
 }
 
 .lexikon-az {

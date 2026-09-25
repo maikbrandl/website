@@ -1,0 +1,16 @@
+---
+interface Props {
+  text?: string;
+  link_url?: string;
+  link_label?: string;
+}
+
+const { text, link_url, link_label } = Astro.props as Props;
+---
+
+<div class="baustein-evidenz">
+  <p>{text}</p>
+  {link_url && (
+    <a class="baustein-link" href={link_url}>{link_label || 'Mehr erfahren'} &rarr;</a>
+  )}
+</div>

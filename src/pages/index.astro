@@ -1,4 +1,25 @@
 ---
+import { getCollection } from 'astro:content';
+import { pruefeEintraege } from '../lib/contentWarnings';
+
+const themen = await getCollection('themen');
+const fachgebiete = await getCollection('fachgebiete');
+const posts = await getCollection('posts');
+const wissensfragen = await getCollection('wissensfragen');
+const bereiche = await getCollection('bereiche');
+
+let warnungen = 0;
+warnungen += pruefeEintraege('themen', themen, ['title']);
+warnungen += pruefeEintraege('fachgebiete', fachgebiete, ['title']);
+warnungen += pruefeEintraege('posts', posts, ['title']);
+warnungen += pruefeEintraege('wissensfragen', wissensfragen, ['title']);
+warnungen += pruefeEintraege('bereiche', bereiche, ['title', 'beschreibung', 'reihenfolge']);
+
+console.log(
+  `Build: ${themen.length} Themen, ${fachgebiete.length} Fachgebiete, ${posts.length} Essays, ` +
+    `${wissensfragen.length} Wissensfrage${wissensfragen.length === 1 ? '' : 'n'}, ${bereiche.length} Bereiche, ` +
+    `${warnungen} Warnung${warnungen === 1 ? '' : 'en'}.`,
+);
 ---
 <!doctype html>
 <html lang="de">

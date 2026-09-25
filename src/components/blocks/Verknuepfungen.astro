@@ -1,0 +1,27 @@
+---
+interface Eintrag {
+  titel?: string;
+  href?: string;
+}
+
+interface Props {
+  eintraege?: Eintrag[];
+}
+
+const { eintraege = [] } = Astro.props as Props;
+---
+
+<div class="baustein-verknuepfungen">
+  {eintraege.map((e) => (
+    <div class="baustein-verknuepfungen__item">
+      {e.href ? (
+        <a href={e.href}>{e.titel}</a>
+      ) : (
+        <>
+          <span>{e.titel}</span>
+          <span class="baustein-verknuepfungen__status">Themenseite folgt</span>
+        </>
+      )}
+    </div>
+  ))}
+</div>

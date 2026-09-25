@@ -1,10 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import Marker from '../../components/Marker.astro';
 import Karte from '../../components/Karte.astro';
 import Kurzantwort from '../../components/Kurzantwort.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
+import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
+
+// Beispielhafte Wissensfrage, um die portierten Block-Komponenten mit echten Inhalten zu pruefen.
+const [beispielfrage] = await getCollection('wissensfragen');
 ---
 
 <Base
@@ -81,5 +86,13 @@ import Brotkrumen from '../../components/Brotkrumen.astro';
         Schwerpunkt im Logo: hybrid<span class="marker--flaeche">log</span>.
       </p>
     </section>
+
+    {beispielfrage && (
+      <section class="muster-abschnitt">
+        <h2>Bausteine (Beispiel aus einer echten Wissensfrage)</h2>
+        <p class="prosa">Quelle: {beispielfrage.data.title}</p>
+        <BlockRenderer bloecke={beispielfrage.data.bloecke} />
+      </section>
+    )}
   </div>
 </Base>

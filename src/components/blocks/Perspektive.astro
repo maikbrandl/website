@@ -1,0 +1,17 @@
+---
+import { markdownZuHtml } from '../../lib/markdown';
+
+interface Props {
+  titel?: string;
+  text?: string;
+  fazit?: string;
+}
+
+const { titel, text, fazit } = Astro.props as Props;
+---
+
+<div class="baustein-perspektive">
+  <h3>{titel}</h3>
+  <div class="prosa" set:html={markdownZuHtml(text)} />
+  {fazit && <p class="baustein-perspektive__fazit">{fazit}</p>}
+</div>

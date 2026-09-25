@@ -1,0 +1,16 @@
+---
+interface Props {
+  bild?: string;
+  alt?: string;
+  bildunterschrift?: string;
+}
+
+const { bild, alt = '', bildunterschrift } = Astro.props as Props;
+---
+
+{bild && (
+  <figure class="baustein-bild">
+    <img src={bild} alt={alt} loading="lazy" />
+    {bildunterschrift && <figcaption>{bildunterschrift}</figcaption>}
+  </figure>
+)}

@@ -1,5 +1,6 @@
 ---
 import '../styles/logbuch.css';
+import { getCollection } from 'astro:content';
 
 interface JsonLdEntry extends Record<string, unknown> {}
 
@@ -21,14 +22,10 @@ const {
 
 const jsonLdListe = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
-const bereiche = [
-  { slug: 'gewohnheiten', label: 'Gewohnheiten', beschreibung: 'Rauchen aufhoeren, Routinen aufbauen, Aufschieben.' },
-  { slug: 'lernen', label: 'Lernen', beschreibung: 'Behalten, Pruefungen, Konzentration.' },
-  { slug: 'gefuehle', label: 'Gefuehle', beschreibung: 'Stress, Angst, Gelassenheit.' },
-  { slug: 'denken', label: 'Denken', beschreibung: 'Entscheidungen und Denkfehler.' },
-  { slug: 'ich-selbst', label: 'Ich selbst', beschreibung: 'Persoenlichkeit und Selbstbild.' },
-  { slug: 'sinn', label: 'Sinn', beschreibung: 'Gutes Leben, Philosophie, Zukunft und KI.' },
-];
+// Wege Klappmenue: aus der bereiche Sammlung, sortiert nach Reihenfolge.
+const bereicheEintraege = (await getCollection('bereiche')).sort(
+  (a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99),
+);
 ---
 
 <!doctype html>
@@ -92,11 +89,11 @@ const bereiche = [
               </button>
               <div id="wege-panel" class="wege-panel" data-disclosure-panel hidden>
                 <ul>
-                  {bereiche.map((b) => (
+                  {bereicheEintraege.map((b) => (
                     <li>
-                      <a href={`/bereiche/${b.slug}/`}>
-                        <strong>{b.label}</strong><br />
-                        <small>{b.beschreibung}</small>
+                      <a href={`/bereiche/${b.id}/`}>
+                        <strong>{b.data.title}</strong><br />
+                        <small>{b.data.beschreibung}</small>
                       </a>
                     </li>
                   ))}
@@ -158,8 +155,8 @@ const bereiche = [
           <li><a href="/journale/">Journale</a></li>
         </ul>
         <ul class="mobile-menu__bereiche">
-          {bereiche.map((b) => (
-            <li><a href={`/bereiche/${b.slug}/`}>{b.label}</a></li>
+          {bereicheEintraege.map((b) => (
+            <li><a href={`/bereiche/${b.id}/`}>{b.data.title}</a></li>
           ))}
         </ul>
         <form class="suchformular-mobil" action="/suche/" method="get" role="search">

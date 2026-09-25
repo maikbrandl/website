@@ -1,0 +1,13 @@
+---
+interface Props {
+  punkte?: string[];
+}
+
+const { punkte = [] } = Astro.props as Props;
+---
+
+<ul class="baustein-liste">
+  {punkte.map((p) => (
+    <li><span class="baustein-liste__punkt" aria-hidden="true"></span><span>{p}</span></li>
+  ))}
+</ul>

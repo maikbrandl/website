@@ -1,0 +1,21 @@
+---
+interface Schritt {
+  titel?: string;
+  untertitel?: string;
+}
+
+interface Props {
+  schritte?: Schritt[];
+}
+
+const { schritte = [] } = Astro.props as Props;
+---
+
+<div class="baustein-prozess">
+  {schritte.map((s) => (
+    <div class="baustein-prozess__schritt">
+      <h5>{s.titel}</h5>
+      <p>{s.untertitel}</p>
+    </div>
+  ))}
+</div>

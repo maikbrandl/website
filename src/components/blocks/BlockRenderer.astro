@@ -1,0 +1,113 @@
+---
+// Ein Renderer je Blocktyp, portiert aus legacy/plattform/js/content-blocks.js.
+// Unbekannte Blocktypen werden uebersprungen und gewarnt, nicht abgebrochen.
+import KurzErklaert from './KurzErklaert.astro';
+import IconFakten from './IconFakten.astro';
+import Prozess from './Prozess.astro';
+import Textabschnitt from './Textabschnitt.astro';
+import Bild from './Bild.astro';
+import Beispiel from './Beispiel.astro';
+import Liste from './Liste.astro';
+import Evidenz from './Evidenz.astro';
+import Zitat from './Zitat.astro';
+import Faq from './Faq.astro';
+import ToolEinbindung from './ToolEinbindung.astro';
+import Perspektive from './Perspektive.astro';
+import Verknuepfungen from './Verknuepfungen.astro';
+import Empfehlung from './Empfehlung.astro';
+
+interface Baustein extends Record<string, unknown> {
+  type?: string;
+}
+
+interface Props {
+  bloecke?: Baustein[];
+}
+
+const { bloecke = [] } = Astro.props as Props;
+
+const STANDARD_TITEL: Record<string, string> = {
+  kurz_erklaert: 'Kurz erklärt',
+  icon_fakten: 'Auf einen Blick',
+  prozess: 'So funktioniert das',
+  textabschnitt: 'Richtext',
+  beispiel: 'Beispiel aus dem Alltag',
+  liste: 'Wichtig zu wissen',
+  evidenz: 'Grenzen und Evidenz',
+  zitat: 'Zitat',
+  bild: 'Bild',
+  faq: 'Häufig gefragt',
+  tool_einbindung: 'Zum Ausprobieren',
+  empfehlung: 'Empfehlung',
+  verknuepfungen: 'Womit sich dieser Weg verknüpft',
+};
+
+const BEKANNTE_TYPEN = new Set([
+  'kurz_erklaert',
+  'icon_fakten',
+  'prozess',
+  'textabschnitt',
+  'bild',
+  'beispiel',
+  'liste',
+  'evidenz',
+  'zitat',
+  'faq',
+  'tool_einbindung',
+  'perspektive',
+  'verknuepfungen',
+  'empfehlung',
+]);
+
+function abschnittTitel(b: Baustein, nummer: number): string {
+  if (b.type === 'perspektive') {
+    const n = String(nummer).padStart(2, '0');
+    const kategorie = typeof b.kategorie === 'string' ? b.kategorie : '';
+    return `Perspektive ${n}${kategorie ? ' · ' + kategorie : ''}`;
+  }
+  const override = typeof b.titel_override === 'string' ? b.titel_override : '';
+  return override || (b.type ? STANDARD_TITEL[b.type] : undefined) || 'Abschnitt';
+}
+
+const anzeigbareBloecke = bloecke.filter((b) => {
+  if (b.type && BEKANNTE_TYPEN.has(b.type)) return true;
+  console.warn(`[Bausteine] Unbekannter Blocktyp "${b.type}" wird uebersprungen.`);
+  return false;
+});
+---
+
+<div class="stack">
+  {anzeigbareBloecke.map((b, i) => (
+    <section class="baustein-sektion">
+      <p class="baustein-sektion__label">{abschnittTitel(b, i + 1)}</p>
+      {b.type === 'kurz_erklaert' && <KurzErklaert text={b.text as string} />}
+      {b.type === 'icon_fakten' && <IconFakten fakten={b.fakten as any} />}
+      {b.type === 'prozess' && <Prozess schritte={b.schritte as any} />}
+      {b.type === 'textabschnitt' && <Textabschnitt text={b.text as string} />}
+      {b.type === 'bild' && (
+        <Bild bild={b.bild as string} alt={b.alt as string} bildunterschrift={b.bildunterschrift as string} />
+      )}
+      {b.type === 'beispiel' && <Beispiel text={b.text as string} ergebnis={b.ergebnis as string} />}
+      {b.type === 'liste' && <Liste punkte={b.punkte as string[]} />}
+      {b.type === 'evidenz' && (
+        <Evidenz text={b.text as string} link_url={b.link_url as string} link_label={b.link_label as string} />
+      )}
+      {b.type === 'zitat' && <Zitat text={b.text as string} quelle={b.quelle as string} />}
+      {b.type === 'faq' && <Faq eintraege={b.eintraege as any} />}
+      {b.type === 'tool_einbindung' && <ToolEinbindung tool={b.tool as string} />}
+      {b.type === 'perspektive' && (
+        <Perspektive titel={b.titel as string} text={b.text as string} fazit={b.fazit as string} />
+      )}
+      {b.type === 'verknuepfungen' && <Verknuepfungen eintraege={b.eintraege as any} />}
+      {b.type === 'empfehlung' && (
+        <Empfehlung
+          titel={b.titel as string}
+          autor={b.autor as string}
+          warum={b.warum as string}
+          typ={b.typ as string}
+          asin={b.asin as string}
+        />
+      )}
+    </section>
+  ))}
+</div>

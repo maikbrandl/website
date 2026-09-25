@@ -1,0 +1,20 @@
+---
+import { toolBySlug } from '../../lib/tools';
+
+interface Props {
+  tool?: string;
+}
+
+const { tool } = Astro.props as Props;
+const eintrag = toolBySlug(tool);
+---
+
+{eintrag ? (
+  <div class="baustein-tool">
+    <h5>{eintrag.title}</h5>
+    <p>{eintrag.teaser}</p>
+    <a class="baustein-link" href={eintrag.href}>Tool öffnen &rarr;</a>
+  </div>
+) : (
+  <p class="baustein-hinweis">Tool nicht gefunden.</p>
+)}

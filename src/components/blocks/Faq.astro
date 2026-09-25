@@ -1,0 +1,21 @@
+---
+interface Eintrag {
+  frage?: string;
+  antwort?: string;
+}
+
+interface Props {
+  eintraege?: Eintrag[];
+}
+
+const { eintraege = [] } = Astro.props as Props;
+---
+
+<div class="baustein-faq">
+  {eintraege.map((e) => (
+    <details>
+      <summary>{e.frage}</summary>
+      <p>{e.antwort}</p>
+    </details>
+  ))}
+</div>

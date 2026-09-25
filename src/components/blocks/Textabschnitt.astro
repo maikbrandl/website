@@ -1,0 +1,11 @@
+---
+import { markdownZuHtml } from '../../lib/markdown';
+
+interface Props {
+  text?: string;
+}
+
+const { text } = Astro.props as Props;
+---
+
+<div class="baustein-text prosa" set:html={markdownZuHtml(text)} />

@@ -677,6 +677,245 @@ main {
   }
 }
 
+/* ---------- Bausteine (Block-Baukasten fuer Themen und Wissensfragen) ---------- */
+.baustein-sektion {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+.baustein-sektion:last-child {
+  border-bottom: none;
+}
+
+.baustein-sektion__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+  color: var(--petrol);
+  margin: 0 0 var(--space-3);
+}
+
+.baustein-text :last-child {
+  margin-bottom: 0;
+}
+
+.baustein-icon-fakten {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.baustein-fakt {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.baustein-fakt__icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  color: var(--petrol);
+}
+
+.baustein-fakt__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.baustein-prozess {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.baustein-prozess__schritt {
+  padding: var(--space-4);
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+
+.baustein-prozess__schritt h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+}
+
+.baustein-prozess__schritt p {
+  margin: 0;
+  color: var(--bleistift);
+}
+
+.baustein-bild img {
+  border-radius: var(--radius);
+  border: 1px solid var(--linie);
+}
+
+.baustein-bild figcaption {
+  margin-top: var(--space-2);
+  font-size: 14px;
+  color: var(--bleistift);
+}
+
+.baustein-beispiel blockquote {
+  margin: 0;
+  padding: var(--space-4);
+  background: var(--papier);
+  border-left: 3px solid var(--petrol);
+  border-radius: var(--radius);
+}
+
+.baustein-beispiel__ergebnis {
+  margin: var(--space-2) 0 0;
+  font-weight: 600;
+}
+
+.baustein-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.baustein-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.baustein-liste__punkt {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--petrol);
+  transform: translateY(-3px);
+}
+
+.baustein-evidenz {
+  color: var(--bleistift);
+}
+
+.baustein-link {
+  font-weight: 600;
+}
+
+.baustein-zitat {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--marker);
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.baustein-zitat p {
+  margin: 0;
+}
+
+.baustein-zitat cite {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 14px;
+  color: var(--bleistift);
+}
+
+.baustein-faq details {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+.baustein-faq details:last-child {
+  border-bottom: none;
+}
+
+.baustein-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.baustein-faq p {
+  margin: var(--space-2) 0 0;
+  color: var(--bleistift);
+}
+
+.baustein-tool,
+.baustein-empfehlung {
+  padding: var(--space-4);
+  background: var(--papier);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+
+.baustein-tool h5,
+.baustein-empfehlung h5 {
+  font-family: var(--font-display);
+  margin: 0 0 var(--space-2);
+}
+
+.baustein-empfehlung__anzeige {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  padding: 2px var(--space-2);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  color: var(--bleistift);
+}
+
+.baustein-empfehlung__autor {
+  color: var(--bleistift);
+  font-size: 14px;
+}
+
+.baustein-empfehlung__hinweis {
+  margin-top: var(--space-2);
+  font-size: 12px;
+  color: var(--bleistift);
+}
+
+.baustein-perspektive h3 {
+  margin-bottom: var(--space-3);
+}
+
+.baustein-perspektive__fazit {
+  font-weight: 600;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--linie);
+}
+
+.baustein-verknuepfungen {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.baustein-verknuepfungen__item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+.baustein-verknuepfungen__item:last-child {
+  border-bottom: none;
+}
+
+.baustein-verknuepfungen__status {
+  color: var(--bleistift);
+  font-size: 13px;
+}
+
+.baustein-hinweis {
+  color: var(--bleistift);
+  font-style: italic;
+}
+
 /* ---------- Bewegung respektieren ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,

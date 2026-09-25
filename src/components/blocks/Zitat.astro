@@ -1,0 +1,13 @@
+---
+interface Props {
+  text?: string;
+  quelle?: string;
+}
+
+const { text, quelle } = Astro.props as Props;
+---
+
+<blockquote class="baustein-zitat">
+  <p>„{text}“</p>
+  {quelle && <cite>{quelle}</cite>}
+</blockquote>

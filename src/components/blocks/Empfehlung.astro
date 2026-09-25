@@ -1,0 +1,28 @@
+---
+import { amazonLink } from '../../lib/empfehlung';
+
+interface Props {
+  titel?: string;
+  autor?: string;
+  warum?: string;
+  typ?: string;
+  asin?: string;
+}
+
+const { titel, autor, warum, typ, asin } = Astro.props as Props;
+const istBuch = typ === 'Buch';
+const link = asin ? amazonLink(asin) : undefined;
+---
+
+<div class="baustein-empfehlung">
+  {istBuch && <span class="baustein-empfehlung__anzeige">Anzeige</span>}
+  <h5>{titel}</h5>
+  {autor && <p class="baustein-empfehlung__autor">{autor}</p>}
+  {warum && <p>{warum}</p>}
+  {link && (
+    <a class="baustein-link" href={link} target="_blank" rel="sponsored noopener">Ansehen &rarr;</a>
+  )}
+  {istBuch && link && (
+    <p class="baustein-empfehlung__hinweis">Werbelink. Als Amazon-Partner verdienen wir an qualifizierten Käufen.</p>
+  )}
+</div>

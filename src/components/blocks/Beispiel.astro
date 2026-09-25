@@ -1,0 +1,13 @@
+---
+interface Props {
+  text?: string;
+  ergebnis?: string;
+}
+
+const { text, ergebnis } = Astro.props as Props;
+---
+
+<div class="baustein-beispiel">
+  <blockquote>{text}</blockquote>
+  {ergebnis && <p class="baustein-beispiel__ergebnis">Ergebnis: {ergebnis}</p>}
+</div>

@@ -1,0 +1,23 @@
+---
+import { iconSvg } from '../../lib/icons';
+
+interface Fakt {
+  icon?: string;
+  text?: string;
+}
+
+interface Props {
+  fakten?: Fakt[];
+}
+
+const { fakten = [] } = Astro.props as Props;
+---
+
+<div class="baustein-icon-fakten">
+  {fakten.map((f) => (
+    <div class="baustein-fakt">
+      <span class="baustein-fakt__icon" aria-hidden="true" set:html={iconSvg(f.icon)} />
+      <span>{f.text}</span>
+    </div>
+  ))}
+</div>

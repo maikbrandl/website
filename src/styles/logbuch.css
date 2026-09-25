@@ -428,36 +428,58 @@ p {
   font-weight: 600 !important;
 }
 
-.suchformular {
+.suchformular,
+.suchformular-mobil {
   display: none;
   align-items: center;
   gap: var(--space-2);
-}
-
-.suchformular input[type="search"] {
-  font: inherit;
-  padding: var(--space-2) var(--space-3);
   border: 1px solid var(--linie);
-  border-radius: var(--radius);
+  border-radius: 999px;
   background: var(--blatt);
-  color: var(--tinte);
-  width: 160px;
+  padding: var(--space-2) var(--space-4);
+  transition: border-color var(--dauer) ease;
 }
 
-.suchformular button {
-  font: inherit;
-  font-weight: 600;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--linie);
-  border-radius: var(--radius);
-  background: var(--blatt);
-  color: var(--tinte);
-  cursor: pointer;
-}
-
-.suchformular button:hover {
+.suchformular:focus-within,
+.suchformular-mobil:focus-within {
   border-color: var(--petrol);
-  color: var(--petrol);
+}
+
+.suchformular-mobil {
+  display: flex;
+  width: 100%;
+}
+
+.suchformular__icon {
+  width: 18px;
+  height: 18px;
+  color: var(--bleistift);
+  flex: none;
+}
+
+.suchformular input[type="search"],
+.suchformular-mobil input[type="search"] {
+  font: inherit;
+  border: none;
+  background: none;
+  color: var(--tinte);
+  width: 180px;
+  min-width: 0;
+  padding: var(--space-1) 0;
+}
+
+.suchformular-mobil input[type="search"] {
+  width: 100%;
+}
+
+.suchformular input[type="search"]:focus,
+.suchformular-mobil input[type="search"]:focus {
+  outline: none;
+}
+
+.suchformular input[type="search"]::placeholder,
+.suchformular-mobil input[type="search"]::placeholder {
+  color: var(--bleistift);
 }
 
 .iconbtn {
@@ -1703,20 +1725,52 @@ main {
 
 /* ---------- Startseite ---------- */
 .start-hero {
-  background: var(--blatt);
+  position: relative;
+  background:
+    linear-gradient(var(--linie) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linie) 1px, transparent 1px),
+    var(--blatt);
+  background-size: 32px 32px;
+  background-position: center top;
   border-bottom: 1px solid var(--linie);
   padding: var(--space-8) 0;
   text-align: center;
 }
 
+.start-hero__inner {
+  position: relative;
+}
+
+.start-hero__eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: var(--bleistift);
+  margin-bottom: var(--space-4);
+}
+
 .start-hero__lead {
   max-width: var(--lesebreite);
   margin: var(--space-4) auto var(--space-5);
+  color: var(--bleistift);
 }
 
 .start-hero__suche {
   max-width: 560px;
   margin: 0 auto;
+}
+
+.start-hero__suche.suchformular {
+  padding: var(--space-3) var(--space-5);
+  border: 2px solid var(--tinte);
+}
+
+.start-hero__suche.suchformular input[type="search"] {
+  width: 100%;
+  font-size: 1rem;
 }
 
 .start-hero__beispiele {
@@ -1733,6 +1787,7 @@ main {
   padding: var(--space-2) var(--space-4);
   text-decoration: none;
   color: var(--tinte);
+  background: var(--papier);
   font-size: 0.9rem;
 }
 
@@ -1750,12 +1805,40 @@ main {
   border-top: none;
 }
 
-.start-bereiche-grid,
+.start-abschnitt__kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.start-abschnitt__kopf h2 {
+  margin: 0;
+}
+
+.start-abschnitt__kopf a {
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--petrol);
+}
+
+.start-abschnitt__kopf a:hover {
+  text-decoration: underline;
+}
+
+.start-bereiche-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
 .start-wege-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--space-4);
-  margin-top: var(--space-4);
 }
 
 .start-bereich-karte,
@@ -1777,14 +1860,96 @@ main {
   border-color: var(--petrol);
 }
 
-.start-bereich-karte span,
+.start-bereich-karte strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.start-bereich-karte__anzahl {
+  color: var(--petrol);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.start-weg-karte__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--petrol);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
 .start-weg-karte span {
   color: var(--bleistift);
   font-size: 0.9rem;
 }
 
+.start-weg-karte__fortschritt {
+  display: flex;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.start-weg-karte__fortschritt span {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--linie);
+}
+
+.start-weg-karte__fortschritt span[data-gefuellt] {
+  background: var(--petrol);
+}
+
 .start-ueber {
   max-width: var(--lesebreite);
+}
+
+.start-promo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--blatt);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.start-promo p {
+  margin: 0;
+  max-width: 46ch;
+}
+
+.start-promo__cta {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-weight: 600;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--tinte);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--tinte);
+  flex: none;
+}
+
+.start-promo__cta:hover {
+  background: var(--tinte);
+  color: var(--papier);
+}
+
+@media (min-width: 640px) {
+  .start-bereiche-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* ---------- Suche ---------- */

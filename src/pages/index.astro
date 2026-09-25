@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Formatzeichen from '../components/Formatzeichen.astro';
+import Marker from '../components/Marker.astro';
 import ToolVorschau from '../components/ToolVorschau.astro';
 import { pruefeEintraege } from '../lib/contentWarnings';
 import { formatiereDatum } from '../lib/datum';
@@ -32,6 +33,12 @@ const sechsBereiche = bereiche
   .sort((a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99))
   .slice(0, 6);
 
+const wegeProBereich = new Map<string, number>();
+for (const w of wissensfragen) {
+  if (!w.data.bereich) continue;
+  wegeProBereich.set(w.data.bereich, (wegeProBereich.get(w.data.bereich) ?? 0) + 1);
+}
+
 const beliebteWege = wissensfragen.slice(0, 3);
 if (beliebteWege.length < 3) {
   console.warn(`Startseite: nur ${beliebteWege.length} Wissenswege verfuegbar, geplant sind 3.`);
@@ -56,16 +63,21 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <section class="start-hero">
-    <div class="container">
-      <h1>Was willst du über den Menschen wissen?</h1>
+    <div class="container start-hero__inner">
+      <p class="start-hero__eyebrow">Wissen über den Menschen, gründlich erklärt</p>
+      <h1>Was beschäftigt dich <Marker>gerade</Marker>?</h1>
       <p class="prosa start-hero__lead">
-        Echte Fragen, gründlich beantwortet. Kein Scrollen durch Häppchen, sondern ein Lexikon,
-        Wissenswege und Essays, die dir wirklich weiterhelfen.
+        Hybridlog beantwortet echte Lebensfragen aus Psychologie, Lernen und Philosophie. Jede
+        Ebene erklärt, jede Aussage belegt.
       </p>
       <form class="suchformular start-hero__suche" action="/suche/" method="get" role="search">
+        <svg class="suchformular__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.3-4.3" />
+        </svg>
         <label class="nur-sr" for="start-suche">Suche</label>
-        <input id="start-suche" type="search" name="q" placeholder="Zum Beispiel: Warum kann ich mich nicht konzentrieren?" />
-        <button type="submit">Suchen</button>
+        <input id="start-suche" type="search" name="q" placeholder="z. B. Warum schiebe ich alles auf?" />
+        <button class="nur-sr" type="submit">Suchen</button>
       </form>
       {beliebteWege.length > 0 && (
         <div class="start-hero__beispiele">
@@ -79,34 +91,56 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
 
   <section class="container stack-gross">
     <section class="start-abschnitt">
-      <h2>Sechs Lebensbereiche</h2>
+      <div class="start-abschnitt__kopf">
+        <h2>Lebensbereiche</h2>
+      </div>
       <div class="start-bereiche-grid">
-        {sechsBereiche.map((b) => (
-          <a class="start-bereich-karte" href={`/bereiche/${b.id}/`}>
-            <strong>{b.data.title}</strong>
-            {b.data.beschreibung && <span>{b.data.beschreibung}</span>}
-          </a>
-        ))}
+        {sechsBereiche.map((b) => {
+          const anzahl = wegeProBereich.get(b.id) ?? 0;
+          return (
+            <a class="start-bereich-karte" href={`/bereiche/${b.id}/`}>
+              <strong>{b.data.title}</strong>
+              <span class="start-bereich-karte__anzahl">{anzahl} {anzahl === 1 ? 'Weg' : 'Wege'}</span>
+            </a>
+          );
+        })}
       </div>
     </section>
 
     {beliebteWege.length > 0 && (
       <section class="start-abschnitt">
-        <h2>Beliebte Wissenswege</h2>
+        <div class="start-abschnitt__kopf">
+          <h2>Beliebte Wege</h2>
+          <a href="/wege/">Alle Wege →</a>
+        </div>
         <div class="start-wege-grid">
-          {beliebteWege.map((w) => (
-            <a class="start-weg-karte" href={`/wege/${w.id}/`}>
-              <p class="tool-kopf__label"><Formatzeichen typ="wege" /> Wissensweg</p>
-              <strong>{w.data.title}</strong>
-              {(w.data.kurzantwort || w.data.lead) && <span>{w.data.kurzantwort || w.data.lead}</span>}
-            </a>
-          ))}
+          {beliebteWege.map((w) => {
+            const gesamtzeit = (w.data.kurzlesezeit ?? 0) + (w.data.vertiefzeit ?? 0);
+            const ebenen = (w.data.bloecke ?? []).filter((b) => b.type === 'perspektive' || b.type === 'ebene').length;
+            return (
+              <a class="start-weg-karte" href={`/wege/${w.id}/`}>
+                <p class="start-weg-karte__meta">
+                  <Formatzeichen typ="wege" /> Wissensweg{gesamtzeit > 0 && ` · ${gesamtzeit} Min.`}
+                </p>
+                <strong>{w.data.title}</strong>
+                {(w.data.kurzantwort || w.data.lead) && <span>{w.data.kurzantwort || w.data.lead}</span>}
+                {ebenen > 0 && (
+                  <p class="start-weg-karte__fortschritt">
+                    {Array.from({ length: ebenen }).map(() => <span data-gefuellt="" />)}
+                  </p>
+                )}
+              </a>
+            );
+          })}
         </div>
       </section>
     )}
 
     <section class="start-abschnitt">
-      <h2>Tools zum Ausprobieren</h2>
+      <div class="start-abschnitt__kopf">
+        <h2>Ausprobieren</h2>
+        <a href="/tools/">Alle Tools →</a>
+      </div>
       <div class="tools-grid">
         {TOOLS_UEBERSICHT.map((tool) => (
           <a class="tool-karte" href={tool.href}>
@@ -123,7 +157,10 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
     </section>
 
     <section class="start-abschnitt">
-      <h2>Lexikon: kurz erklärt</h2>
+      <div class="start-abschnitt__kopf">
+        <h2>Lexikon: kurz erklärt</h2>
+        <a href="/lexikon/">Alle Einträge →</a>
+      </div>
       <ul class="lexikon-fachgebiete">
         {beliebteThemen.map((t) => (
           <li>
@@ -134,12 +171,14 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
           </li>
         ))}
       </ul>
-      <p><a href="/lexikon/">Alle Einträge von A bis Z →</a></p>
     </section>
 
     {neueEssays.length > 0 && (
       <section class="start-abschnitt">
-        <h2>Neue Essays</h2>
+        <div class="start-abschnitt__kopf">
+          <h2>Neue Essays</h2>
+          <a href="/essays/">Alle Essays →</a>
+        </div>
         <ul class="essay-liste">
           {neueEssays.map((essay) => (
             <li class="essay-karte">
@@ -153,13 +192,15 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
             </li>
           ))}
         </ul>
-        <p><a href="/essays/">Alle Essays →</a></p>
       </section>
     )}
 
     <section class="start-abschnitt" id="produkte">
-      <h2>Die Journale</h2>
-      <p class="prosa">Wissen wird erst wirksam, wenn du es anwendest. Die hybridlog Journale übersetzen die Methoden in feste Gewohnheiten.</p>
+      <h2>Journale von Hybridlog</h2>
+      <div class="start-promo">
+        <p>Das Logbuch zu deinem Plan, analog. Wissen wird erst wirksam, wenn du es anwendest.</p>
+        <a class="start-promo__cta" href="/journale/">Zu den Journalen →</a>
+      </div>
       <div class="journal-streifen">
         {JOURNALE.map((j) => (
           <a class="journal-streifen__eintrag" href={`/journale/${j.slug}/`}>
@@ -170,7 +211,6 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
           </a>
         ))}
       </div>
-      <p><a href="/journale/">Alle Journale ansehen →</a></p>
     </section>
 
     <section class="start-abschnitt start-ueber" id="story">

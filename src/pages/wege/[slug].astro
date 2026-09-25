@@ -5,6 +5,7 @@ import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import Kurzantwort from '../../components/Kurzantwort.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
+import { berechneAbschnitte } from '../../lib/bausteine';
 import { formatiereDatum } from '../../lib/datum';
 import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
@@ -20,6 +21,14 @@ const { entry } = Astro.props;
 const daten = entry.data;
 
 const bereich = daten.bereich ? await getEntry('bereiche', daten.bereich) : undefined;
+
+const geschwister = bereich
+  ? (await getCollection('wissensfragen'))
+      .filter((w) => w.data.bereich === bereich.id)
+      .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
+  : [];
+
+const abschnitte = berechneAbschnitte(daten.bloecke);
 
 const faqEintraege = (daten.bloecke ?? [])
   .filter((b): b is typeof b & { eintraege: { frage?: string; antwort?: string }[] } => b.type === 'faq')
@@ -72,19 +81,56 @@ if (faqEintraege.length > 0) {
       {daten.kurzantwort && <Kurzantwort>{daten.kurzantwort}</Kurzantwort>}
 
       <p class="lexikon-meta">
-        <span>{daten.autor || 'Maik'}</span>
-        {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
+        <span>Von {daten.autor || 'Maik'}</span>
+        {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
         {daten.kurzlesezeit && <span>{daten.kurzlesezeit} Min. kurz lesen</span>}
         {daten.vertiefzeit && <span>{daten.vertiefzeit} Min. vertiefen</span>}
+        {(daten.quellen ?? []).length > 0 && (
+          <span>{(daten.quellen ?? []).length} Quelle{(daten.quellen ?? []).length === 1 ? '' : 'n'}</span>
+        )}
       </p>
     </header>
 
-    <main class="lexikon-haupt lexikon-eintrag-kopf">
-      <BlockRenderer bloecke={daten.bloecke} />
-    </main>
+    <div class="lexikon-eintrag-layout">
+      <aside class="lexikon-sidebar" aria-label="Weitere Wege aus diesem Lebensbereich">
+        {bereich && geschwister.length > 0 && (
+          <>
+            <p class="lexikon-sidebar__label">{bereich.data.title}</p>
+            <ul>
+              {geschwister.map((g) => (
+                <li>
+                  {g.id === entry.id ? (
+                    <span aria-current="page">{g.data.title ?? g.id}</span>
+                  ) : (
+                    <a href={`/wege/${g.id}/`}>{g.data.title ?? g.id}</a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </aside>
+
+      <main class="lexikon-haupt">
+        <BlockRenderer bloecke={daten.bloecke} />
+      </main>
+
+      <nav class="lexikon-toc" aria-label="Verzeichnis der Abschnitte">
+        {abschnitte.length > 0 && (
+          <>
+            <p class="lexikon-sidebar__label">Auf dieser Seite</p>
+            <ul>
+              {abschnitte.map((a) => (
+                <li><a href={`#${a.id}`}>{a.titel}</a></li>
+              ))}
+            </ul>
+          </>
+        )}
+      </nav>
+    </div>
 
     {(daten.quellen ?? []).length > 0 && (
-      <section class="lexikon-abschnitt lexikon-eintrag-kopf">
+      <section class="lexikon-abschnitt">
         <h2>Quellen</h2>
         <ul class="lexikon-liste">
           {(daten.quellen ?? []).map((q) => (

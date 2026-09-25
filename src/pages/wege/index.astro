@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+
+const bereicheNamen = new Map(
+  (await getCollection('bereiche')).map((b) => [b.id, b.data.title ?? b.id]),
+);
+
+const wege = (await getCollection('wissensfragen')).sort((a, b) =>
+  (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'),
+);
+
+const canonical = new URL('/wege/', Astro.site).toString();
+const titel = 'Wissenswege · Hybridlog';
+const beschreibung = 'Alle Wissenswege von Hybridlog: echte Fragen, gründlich über mehrere Ebenen beantwortet.';
+
+const jsonLd = [
+  collectionPageJsonLd({ name: titel, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Wege' },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Wege' }]} />
+
+    <header class="lexikon-kopf">
+      <p class="lexikon-kopf__label"><Formatzeichen typ="wege" /> Wissenswege</p>
+      <h1>Wissenswege</h1>
+      <p class="prosa">
+        {wege.length} Wissensweg{wege.length === 1 ? '' : 'e'}, jede Frage gründlich über mehrere Ebenen beantwortet.
+      </p>
+    </header>
+
+    {wege.length === 0 ? (
+      <p class="prosa lexikon-leer">Hier entstehen gerade die ersten Wissenswege.</p>
+    ) : (
+      <ul class="essay-liste">
+        {wege.map((w) => (
+          <li class="essay-karte">
+            <a href={`/wege/${w.id}/`}>
+              <p class="essay-karte__meta">
+                {w.data.bereich && <span>{bereicheNamen.get(w.data.bereich) ?? w.data.bereich}</span>}
+                {w.data.kurzlesezeit && <span>{w.data.kurzlesezeit} Min. kurz lesen</span>}
+              </p>
+              <strong>{w.data.title}</strong>
+              {(w.data.kurzantwort || w.data.lead) && <span class="essay-karte__teaser">{w.data.kurzantwort || w.data.lead}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Base>

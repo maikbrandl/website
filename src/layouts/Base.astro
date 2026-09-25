@@ -116,9 +116,13 @@ const bereicheEintraege = (await getCollection('bereiche')).sort(
         </nav>
 
         <form class="suchformular" action="/suche/" method="get" role="search">
+          <svg class="suchformular__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
           <label class="nur-sr" for="suche-eingabe">Suche</label>
-          <input id="suche-eingabe" type="search" name="q" placeholder="Suchen..." />
-          <button type="submit">Suchen</button>
+          <input id="suche-eingabe" type="search" name="q" placeholder="Frage oder Begriff suchen" />
+          <button class="nur-sr" type="submit">Suchen</button>
         </form>
 
         <button
@@ -165,9 +169,13 @@ const bereicheEintraege = (await getCollection('bereiche')).sort(
           ))}
         </ul>
         <form class="suchformular-mobil" action="/suche/" method="get" role="search">
+          <svg class="suchformular__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
           <label class="nur-sr" for="suche-eingabe-mobil">Suche</label>
-          <input id="suche-eingabe-mobil" type="search" name="q" placeholder="Suchen..." />
-          <button type="submit">Suchen</button>
+          <input id="suche-eingabe-mobil" type="search" name="q" placeholder="Frage oder Begriff suchen" />
+          <button class="nur-sr" type="submit">Suchen</button>
         </form>
       </div>
     </header>

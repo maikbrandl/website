@@ -1,0 +1,10 @@
+---
+// Gelber Marker fuer die eine wichtige Stelle im Absatz. Hoechstens einer pro Absatz verwenden.
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props as Props;
+---
+
+<mark class={`marker ${className}`}><slot /></mark>

@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import Marker from '../../components/Marker.astro';
+import Karte from '../../components/Karte.astro';
+import Kurzantwort from '../../components/Kurzantwort.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+---
+
+<Base
+  title="Musterseite | Hybridlog"
+  description="Musterseite mit allen Logbuch Bausteinen: Farben, Typografie, Formatzeichen, Marker, Karten, Kurzantwort und Brotkrumen."
+>
+  <div class="container">
+    <section class="muster-abschnitt">
+      <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Musterseite' }]} />
+      <h1>Musterseite</h1>
+      <p class="prosa">
+        Diese Seite zeigt alle Logbuch Bausteine hell und dunkel. Den Theme Schalter oben rechts
+        nutzen, um zwischen hell und dunkel zu wechseln. Der Text hier ist auf eine Lesebreite von
+        hoechstens 66 Zeichen begrenzt, damit lange Absaetze gut lesbar bleiben.
+      </p>
+    </section>
+
+    <section class="muster-abschnitt">
+      <h2>Typografie</h2>
+      <h1>Ueberschrift Ebene 1</h1>
+      <h2>Ueberschrift Ebene 2</h2>
+      <h3>Ueberschrift Ebene 3</h3>
+      <p class="prosa">
+        Fliesstext in Source Sans 3, 17 bis 18 Pixel, Zeilenhoehe 1.6. Ueberschriften und Zahlen in
+        Karten stehen in Fraunces. Ein Marker hebt <Marker>eine wichtige Stelle</Marker> im
+        Absatz hervor, hoechstens einen pro Absatz.
+      </p>
+    </section>
+
+    <section class="muster-abschnitt">
+      <h2>Formatzeichen</h2>
+      <p class="prosa">Vier Formatzeichen kennzeichnen ueberall gleich die Inhaltsform.</p>
+      <div class="muster-raster">
+        <div class="formatzeichen-probe"><Formatzeichen typ="lexikon" /> Lexikon</div>
+        <div class="formatzeichen-probe"><Formatzeichen typ="wege" /> Wege</div>
+        <div class="formatzeichen-probe"><Formatzeichen typ="essays" /> Essays</div>
+        <div class="formatzeichen-probe"><Formatzeichen typ="tools" /> Tools</div>
+      </div>
+    </section>
+
+    <section class="muster-abschnitt">
+      <h2>Karten</h2>
+      <div class="muster-raster">
+        <Karte>
+          <span class="karte__zahl">16</span>
+          <p>Lernmethoden im Lexikon, jede einzeln erklaert.</p>
+        </Karte>
+        <Karte>
+          <span class="karte__zahl">21</span>
+          <p>Philosophie Eintraege, vom Atlas bis zum Blockuniversum.</p>
+        </Karte>
+        <Karte>
+          <span class="karte__zahl">6</span>
+          <p>Lebensbereiche, die alle Wissenswege einordnen.</p>
+        </Karte>
+      </div>
+    </section>
+
+    <section class="muster-abschnitt">
+      <h2>Kurzantwort mit Papierecke</h2>
+      <Kurzantwort>
+        <p>
+          Diese Kurzantwort beantwortet eine echte Suchfrage in 40 bis 60 Woertern. Die Papierecke
+          oben rechts markiert diesen Baustein und wird nur an dieser einen Stelle eines
+          Wissenswegs verwendet, nirgendwo sonst auf der Seite.
+        </p>
+      </Kurzantwort>
+    </section>
+
+    <section class="muster-abschnitt">
+      <h2>Marker als Flaeche</h2>
+      <p class="prosa">
+        Gelb als Flaeche gilt nur fuer die eine Hauptaktion einer Seite, zum Beispiel einen
+        Schwerpunkt im Logo: hybrid<span class="marker--flaeche">log</span>.
+      </p>
+    </section>
+  </div>
+</Base>

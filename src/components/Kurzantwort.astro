@@ -1,0 +1,15 @@
+---
+// Kurzantwort mit Papierecke, nur an dieser einen Stelle eines Wissenswegs verwenden.
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props as Props;
+---
+
+<div class={`kurzantwort ${className}`}>
+  <p class="kurzantwort__label">Kurzantwort</p>
+  <div class="kurzantwort__text prosa">
+    <slot />
+  </div>
+</div>

@@ -1,5 +1,6 @@
 ---
 title: "Voreilige Verallgemeinerung"
+geprueft_am: "2026-08-28"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

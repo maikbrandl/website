@@ -1,5 +1,6 @@
 ---
 title: "Akuter gegen chronischen Stress"
+geprueft_am: "2026-02-14"
 art: "Begriff"
 wissensraum: mind
 gebiet: emotion-motivation

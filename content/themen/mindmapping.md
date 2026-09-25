@@ -1,5 +1,6 @@
 ---
 title: "Mindmapping"
+geprueft_am: "2026-06-14"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

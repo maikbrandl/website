@@ -1,5 +1,6 @@
 ---
 title: "Zirkelschluss"
+geprueft_am: "2026-09-15"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

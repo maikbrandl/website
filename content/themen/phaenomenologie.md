@@ -1,5 +1,6 @@
 ---
 title: "Phänomenologie"
+geprueft_am: "2026-06-26"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

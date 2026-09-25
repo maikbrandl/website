@@ -1,5 +1,6 @@
 ---
 title: "Spaced Repetition"
+geprueft_am: "2026-08-01"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

@@ -1,5 +1,6 @@
 ---
 title: "Prokrastination"
+geprueft_am: "2026-07-11"
 art: "Phänomen"
 wissensraum: mind
 gebiet: emotion-motivation

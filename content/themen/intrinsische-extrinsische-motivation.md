@@ -1,5 +1,6 @@
 ---
 title: "Intrinsische und extrinsische Motivation"
+geprueft_am: "2026-05-09"
 art: "Modell"
 wissensraum: mind
 gebiet: emotion-motivation

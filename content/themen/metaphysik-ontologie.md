@@ -1,5 +1,6 @@
 ---
 title: "Metaphysik & Ontologie"
+geprueft_am: "2026-06-11"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

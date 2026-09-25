@@ -1,5 +1,6 @@
 ---
 title: "DiSG"
+geprueft_am: "2026-03-16"
 art: "Persönlichkeitsmodell"
 wissensraum: mind
 gebiet: persoenlichkeit-identitaet

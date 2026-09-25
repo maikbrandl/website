@@ -1,5 +1,6 @@
 ---
 title: "Emotionale Intelligenz kritisch betrachtet"
+geprueft_am: "2026-03-31"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

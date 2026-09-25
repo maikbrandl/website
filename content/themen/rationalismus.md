@@ -1,5 +1,6 @@
 ---
 title: "Rationalismus"
+geprueft_am: "2026-07-14"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

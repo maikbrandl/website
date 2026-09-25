@@ -1,5 +1,6 @@
 ---
 title: "Analytische Philosophie"
+geprueft_am: "2026-02-17"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

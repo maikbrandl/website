@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Brotkrumen from '../../../components/Brotkrumen.astro';
+import Formatzeichen from '../../../components/Formatzeichen.astro';
+import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../../lib/jsonld';
+
+export async function getStaticPaths() {
+  const fachgebiete = (await getCollection('fachgebiete')).filter((f) => f.data.visibility === 'public');
+  return fachgebiete.map((fachgebiet) => ({
+    params: { slug: fachgebiet.id },
+    props: { fachgebiet },
+  }));
+}
+
+const { fachgebiet } = Astro.props;
+
+const themen = (await getCollection('themen'))
+  .filter((t) => t.data.gebiet === fachgebiet.id)
+  .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'));
+
+const gruppen = new Map<string, typeof themen>();
+for (const eintrag of themen) {
+  const gruppe = eintrag.data.untergruppe ?? 'Weitere Themen';
+  const liste = gruppen.get(gruppe) ?? [];
+  liste.push(eintrag);
+  gruppen.set(gruppe, liste);
+}
+const untergruppen = Array.from(gruppen.keys()).sort((a, b) => a.localeCompare(b, 'de'));
+
+const titel = fachgebiet.data.seo_title || `${fachgebiet.data.title} · Lexikon · Hybridlog`;
+const beschreibung =
+  fachgebiet.data.meta_description || fachgebiet.data.description || `Lexikoneinträge zum Fachgebiet ${fachgebiet.data.title}.`;
+const canonical = new URL(`/lexikon/fachgebiet/${fachgebiet.id}/`, Astro.site).toString();
+
+const jsonLd = [
+  collectionPageJsonLd({ name: fachgebiet.data.title ?? fachgebiet.id, description: beschreibung, url: canonical }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Lexikon', url: new URL('/lexikon/', Astro.site).toString() },
+    { name: fachgebiet.data.title ?? fachgebiet.id },
+  ]),
+];
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container stack-gross">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Lexikon', href: '/lexikon/' },
+        { label: fachgebiet.data.title ?? fachgebiet.id },
+      ]}
+    />
+
+    <header class="lexikon-kopf">
+      <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Fachgebiet</p>
+      <h1>{fachgebiet.data.title}</h1>
+      {fachgebiet.data.description && <p class="prosa">{fachgebiet.data.description}</p>}
+    </header>
+
+    {untergruppen.length === 0 ? (
+      <p class="prosa lexikon-leer">Für dieses Fachgebiet entstehen gerade die ersten Lexikoneinträge.</p>
+    ) : (
+      <div class="stack-gross">
+        {untergruppen.map((gruppe) => (
+          <section class="lexikon-abschnitt">
+            <h2>{gruppe}</h2>
+            <ul class="lexikon-liste">
+              {gruppen.get(gruppe)!.map((eintrag) => (
+                <li>
+                  <a href={`/lexikon/${eintrag.id}/`}>{eintrag.data.title ?? eintrag.id}</a>
+                  {eintrag.data.lead && <span>{eintrag.data.lead}</span>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    )}
+  </div>
+</Base>

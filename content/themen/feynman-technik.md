@@ -1,5 +1,6 @@
 ---
 title: "Feynman-Technik"
+geprueft_am: "2026-04-18"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

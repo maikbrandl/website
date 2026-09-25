@@ -1,5 +1,6 @@
 ---
 title: "Mnemotechniken und Eselsbrücken"
+geprueft_am: "2026-06-17"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

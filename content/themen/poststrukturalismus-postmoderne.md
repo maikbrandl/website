@@ -1,5 +1,6 @@
 ---
 title: "Poststrukturalismus / Postmoderne"
+geprueft_am: "2026-07-08"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

@@ -1,5 +1,6 @@
 ---
 title: "Vorsokratiker"
+geprueft_am: "2026-08-31"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

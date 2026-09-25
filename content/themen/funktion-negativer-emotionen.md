@@ -1,5 +1,6 @@
 ---
 title: "Die Funktion vermeintlich negativer Emotionen"
+geprueft_am: "2026-04-24"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

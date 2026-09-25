@@ -1,5 +1,6 @@
 ---
 title: "Anchoring Bias"
+geprueft_am: "2026-02-20"
 art: "Effekt"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

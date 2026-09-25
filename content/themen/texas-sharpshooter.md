@@ -1,5 +1,6 @@
 ---
 title: "Texas Sharpshooter"
+geprueft_am: "2026-08-19"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

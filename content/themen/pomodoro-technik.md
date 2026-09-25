@@ -1,5 +1,6 @@
 ---
 title: "Pomodoro-Technik"
+geprueft_am: "2026-07-05"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

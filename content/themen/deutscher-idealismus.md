@@ -1,5 +1,6 @@
 ---
 title: "Deutscher Idealismus"
+geprueft_am: "2026-03-13"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

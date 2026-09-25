@@ -1,5 +1,6 @@
 ---
 title: "Whataboutism"
+geprueft_am: "2026-09-03"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

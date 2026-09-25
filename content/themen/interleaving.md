@@ -1,5 +1,6 @@
 ---
 title: "Interleaving"
+geprueft_am: "2026-05-06"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

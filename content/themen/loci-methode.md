@@ -1,5 +1,6 @@
 ---
 title: "Loci-Methode"
+geprueft_am: "2026-05-27"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

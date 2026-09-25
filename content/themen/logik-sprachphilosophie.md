@@ -1,5 +1,6 @@
 ---
 title: "Logik & Sprachphilosophie"
+geprueft_am: "2026-05-30"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

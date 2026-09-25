@@ -1,5 +1,6 @@
 ---
 title: "Active Recall"
+geprueft_am: "2026-02-05"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

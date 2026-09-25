@@ -1,5 +1,6 @@
 ---
 title: "Dual Coding"
+geprueft_am: "2026-03-22"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

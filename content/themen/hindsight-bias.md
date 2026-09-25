@@ -1,5 +1,6 @@
 ---
 title: "Hindsight Bias"
+geprueft_am: "2026-04-30"
 art: "Denkfehler"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

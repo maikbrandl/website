@@ -1,5 +1,6 @@
 ---
 title: "Korrelation und Kausalität"
+geprueft_am: "2026-05-18"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

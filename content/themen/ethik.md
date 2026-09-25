@@ -1,5 +1,6 @@
 ---
 title: "Ethik"
+geprueft_am: "2026-04-12"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

@@ -1,5 +1,6 @@
 ---
 title: "Emotionsregulation"
+geprueft_am: "2026-04-03"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

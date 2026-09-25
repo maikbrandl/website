@@ -1,5 +1,6 @@
 ---
 title: "Sunk Cost Fallacy"
+geprueft_am: "2026-08-13"
 art: "Denkfehler"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

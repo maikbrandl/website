@@ -1,5 +1,6 @@
 ---
 title: "Dopamin und Belohnung"
+geprueft_am: "2026-03-19"
 art: "Phänomen"
 wissensraum: mind
 gebiet: emotion-motivation

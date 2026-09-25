@@ -1,5 +1,6 @@
 ---
 title: "Klassik"
+geprueft_am: "2026-05-12"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

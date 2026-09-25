@@ -1,5 +1,6 @@
 ---
 title: "Erkenntnistheorie"
+geprueft_am: "2026-04-09"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

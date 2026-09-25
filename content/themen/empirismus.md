@@ -1,5 +1,6 @@
 ---
 title: "Empirismus"
+geprueft_am: "2026-04-06"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

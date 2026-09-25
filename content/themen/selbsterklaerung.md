@@ -1,5 +1,6 @@
 ---
 title: "Selbsterklärung"
+geprueft_am: "2026-07-23"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

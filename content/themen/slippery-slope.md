@@ -1,5 +1,6 @@
 ---
 title: "Slippery Slope"
+geprueft_am: "2026-07-26"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

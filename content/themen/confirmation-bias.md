@@ -1,5 +1,6 @@
 ---
 title: Confirmation Bias
+geprueft_am: "2026-03-07"
 art: Denkfehler
 wissensraum: mind
 gebiet: kognition-wahrnehmung

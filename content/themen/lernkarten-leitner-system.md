@@ -1,5 +1,6 @@
 ---
 title: "Lernkarten und Leitner-System"
+geprueft_am: "2026-05-24"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

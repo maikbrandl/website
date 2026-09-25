@@ -1,5 +1,6 @@
 ---
 title: "Philosophie des Geistes"
+geprueft_am: "2026-06-29"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

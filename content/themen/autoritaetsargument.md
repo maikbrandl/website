@@ -1,5 +1,6 @@
 ---
 title: "Autoritätsargument"
+geprueft_am: "2026-02-23"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

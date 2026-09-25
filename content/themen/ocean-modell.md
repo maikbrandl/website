@@ -1,5 +1,6 @@
 ---
 title: "OCEAN-Modell (Big Five)"
+geprueft_am: "2026-06-23"
 art: "Persönlichkeitsmodell"
 wissensraum: mind
 gebiet: persoenlichkeit-identitaet

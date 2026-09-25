@@ -1,5 +1,6 @@
 ---
 title: "Vokabeln lernen"
+geprueft_am: "2026-08-25"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

@@ -1,5 +1,6 @@
 ---
 title: "Kritische Theorie"
+geprueft_am: "2026-05-21"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

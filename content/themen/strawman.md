@@ -1,5 +1,6 @@
 ---
 title: "Strawman"
+geprueft_am: "2026-08-07"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

@@ -1,5 +1,6 @@
 ---
 title: "Ad hominem"
+geprueft_am: "2026-02-08"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

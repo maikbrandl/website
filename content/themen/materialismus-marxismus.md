@@ -1,5 +1,6 @@
 ---
 title: "Materialismus & Marxismus"
+geprueft_am: "2026-06-05"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

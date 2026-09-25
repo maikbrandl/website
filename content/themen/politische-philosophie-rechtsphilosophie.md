@@ -1,5 +1,6 @@
 ---
 title: "Politische Philosophie & Rechtsphilosophie"
+geprueft_am: "2026-07-02"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

@@ -1,5 +1,6 @@
 ---
 title: "Scholastik"
+geprueft_am: "2026-07-20"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

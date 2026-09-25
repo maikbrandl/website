@@ -1,5 +1,6 @@
 ---
 title: "Umgang mit Angst"
+geprueft_am: "2026-08-22"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

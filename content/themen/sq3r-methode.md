@@ -1,5 +1,6 @@
 ---
 title: "SQ3R-Methode"
+geprueft_am: "2026-08-04"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

@@ -1,0 +1,155 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
+import { berechneAbschnitte } from '../../lib/bausteine';
+import { formatiereDatum } from '../../lib/datum';
+import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
+
+export async function getStaticPaths() {
+  const themen = await getCollection('themen');
+  return themen.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const daten = entry.data;
+
+const fachgebiet = daten.gebiet ? await getEntry('fachgebiete', daten.gebiet) : undefined;
+
+const geschwister = fachgebiet
+  ? (await getCollection('themen'))
+      .filter((t) => t.data.gebiet === fachgebiet.id)
+      .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
+  : [];
+
+const wegeSlugs = (daten.wege ?? []).filter((s): s is string => typeof s === 'string');
+const wege = wegeSlugs.length
+  ? (await getCollection('wissensfragen')).filter((w) => wegeSlugs.includes(w.id))
+  : [];
+
+const verwandteSlugs = (daten.verwandte_themen ?? []).filter((s): s is string => typeof s === 'string');
+const verwandteThemen = verwandteSlugs.length
+  ? (await getCollection('themen')).filter((t) => verwandteSlugs.includes(t.id))
+  : [];
+
+const abschnitte = berechneAbschnitte(daten.bloecke);
+
+const faqEintraege = (daten.bloecke ?? [])
+  .filter((b): b is typeof b & { eintraege: { frage?: string; antwort?: string }[] } => b.type === 'faq')
+  .flatMap((b) => b.eintraege ?? [])
+  .filter((e): e is { frage: string; antwort: string } => Boolean(e.frage && e.antwort));
+
+const geprueftAmText = formatiereDatum(daten.geprueft_am);
+
+const titel = daten.seo_title || `${daten.title} · Lexikon · Hybridlog`;
+const beschreibung = daten.seo_description || daten.lead || `${daten.title} kurz erklärt.`;
+const canonical = new URL(`/lexikon/${entry.id}/`, Astro.site).toString();
+
+const jsonLd: Record<string, unknown>[] = [
+  articleJsonLd({
+    headline: daten.title ?? entry.id,
+    description: beschreibung,
+    url: canonical,
+    datumGeprueft: daten.geprueft_am,
+  }),
+  breadcrumbListJsonLd([
+    { name: 'Start', url: new URL('/', Astro.site).toString() },
+    { name: 'Lexikon', url: new URL('/lexikon/', Astro.site).toString() },
+    ...(fachgebiet
+      ? [{ name: fachgebiet.data.title ?? fachgebiet.id, url: new URL(`/lexikon/fachgebiet/${fachgebiet.id}/`, Astro.site).toString() }]
+      : []),
+    { name: daten.title ?? entry.id },
+  ]),
+];
+if (faqEintraege.length > 0) {
+  jsonLd.push(faqPageJsonLd(faqEintraege));
+}
+---
+
+<Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <div class="container">
+    <Brotkrumen
+      items={[
+        { label: 'Start', href: '/' },
+        { label: 'Lexikon', href: '/lexikon/' },
+        ...(fachgebiet ? [{ label: fachgebiet.data.title ?? fachgebiet.id, href: `/lexikon/fachgebiet/${fachgebiet.id}/` }] : []),
+        { label: daten.title ?? entry.id },
+      ]}
+    />
+
+    <header class="lexikon-eintrag-kopf">
+      <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Lexikon</p>
+      <h1>{daten.title}</h1>
+      {daten.lead && <p class="prosa lexikon-eintrag-lead">{daten.lead}</p>}
+      <p class="lexikon-meta">
+        {daten.lesezeit && <span>{daten.lesezeit} Min. Lesezeit</span>}
+        {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
+      </p>
+    </header>
+
+    <div class="lexikon-eintrag-layout">
+      <aside class="lexikon-sidebar" aria-label="Weitere Einträge aus diesem Fachgebiet">
+        {fachgebiet && geschwister.length > 0 && (
+          <>
+            <p class="lexikon-sidebar__label">{fachgebiet.data.title}</p>
+            <ul>
+              {geschwister.map((g) => (
+                <li>
+                  {g.id === entry.id ? (
+                    <span aria-current="page">{g.data.title ?? g.id}</span>
+                  ) : (
+                    <a href={`/lexikon/${g.id}/`}>{g.data.title ?? g.id}</a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </aside>
+
+      <main class="lexikon-haupt">
+        <BlockRenderer bloecke={daten.bloecke} />
+      </main>
+
+      <nav class="lexikon-toc" aria-label="Verzeichnis der Abschnitte">
+        {abschnitte.length > 0 && (
+          <>
+            <p class="lexikon-sidebar__label">Auf dieser Seite</p>
+            <ul>
+              {abschnitte.map((a) => (
+                <li><a href={`#${a.id}`}>{a.titel}</a></li>
+              ))}
+            </ul>
+          </>
+        )}
+      </nav>
+    </div>
+
+    {wege.length > 0 && (
+      <section class="lexikon-abschnitt">
+        <h2>Kommt vor in diesen Wegen</h2>
+        <ul class="lexikon-liste">
+          {wege.map((w) => (
+            <li><a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {verwandteThemen.length > 0 && (
+      <section class="lexikon-abschnitt">
+        <h2>Verwandte Einträge</h2>
+        <ul class="lexikon-liste">
+          {verwandteThemen.map((v) => (
+            <li><a href={`/lexikon/${v.id}/`}>{v.data.title ?? v.id}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</Base>

@@ -1,5 +1,6 @@
 ---
 title: Halo-Effekt
+geprueft_am: "2026-04-27"
 art: Effekt
 wissensraum: mind
 gebiet: kognition-wahrnehmung

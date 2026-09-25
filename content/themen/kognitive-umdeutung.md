@@ -1,5 +1,6 @@
 ---
 title: "Kognitive Umdeutung"
+geprueft_am: "2026-05-15"
 art: "Methode"
 wissensraum: mind
 gebiet: emotion-motivation

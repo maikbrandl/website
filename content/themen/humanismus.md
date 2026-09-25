@@ -1,5 +1,6 @@
 ---
 title: "Humanismus"
+geprueft_am: "2026-05-03"
 art: "Strömung"
 wissensraum: world
 gebiet: philosophie

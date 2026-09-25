@@ -1,5 +1,6 @@
 ---
 title: "MBTI"
+geprueft_am: "2026-06-08"
 art: "Persönlichkeitsmodell"
 wissensraum: mind
 gebiet: persoenlichkeit-identitaet

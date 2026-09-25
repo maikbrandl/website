@@ -1,5 +1,6 @@
 ---
 title: "Survivorship Bias"
+geprueft_am: "2026-08-16"
 art: "Denkfehler"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

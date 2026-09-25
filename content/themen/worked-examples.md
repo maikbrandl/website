@@ -1,5 +1,6 @@
 ---
 title: "An Lösungsbeispielen lernen"
+geprueft_am: "2026-09-12"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

@@ -1,5 +1,6 @@
 ---
 title: "Emotion, Gefühl und Stimmung im Unterschied"
+geprueft_am: "2026-03-28"
 art: "Begriff"
 wissensraum: mind
 gebiet: emotion-motivation

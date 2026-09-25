@@ -1,5 +1,6 @@
 ---
 title: "Die Basisemotionen nach Ekman"
+geprueft_am: "2026-03-01"
 art: "Modell"
 wissensraum: mind
 gebiet: emotion-motivation

@@ -1,5 +1,6 @@
 ---
 title: Loss Aversion
+geprueft_am: "2026-06-02"
 art: Prinzip
 wissensraum: mind
 gebiet: kognition-wahrnehmung

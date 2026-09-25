@@ -1,5 +1,6 @@
 ---
 title: "Chunking"
+geprueft_am: "2026-03-04"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

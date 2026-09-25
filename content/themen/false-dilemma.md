@@ -1,5 +1,6 @@
 ---
 title: "False Dilemma"
+geprueft_am: "2026-04-15"
 art: "Fehlschluss"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

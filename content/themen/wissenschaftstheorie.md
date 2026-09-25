@@ -1,5 +1,6 @@
 ---
 title: "Wissenschaftstheorie"
+geprueft_am: "2026-09-09"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

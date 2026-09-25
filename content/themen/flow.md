@@ -1,5 +1,6 @@
 ---
 title: "Flow"
+geprueft_am: "2026-04-21"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

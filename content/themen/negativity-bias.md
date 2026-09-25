@@ -1,5 +1,6 @@
 ---
 title: Negativity Bias
+geprueft_am: "2026-06-20"
 art: Effekt
 wissensraum: mind
 gebiet: kognition-wahrnehmung

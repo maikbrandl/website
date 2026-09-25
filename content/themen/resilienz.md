@@ -1,5 +1,6 @@
 ---
 title: "Resilienz"
+geprueft_am: "2026-07-17"
 art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation

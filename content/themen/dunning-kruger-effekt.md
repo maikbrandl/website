@@ -1,5 +1,6 @@
 ---
 title: "Dunning-Kruger-Effekt"
+geprueft_am: "2026-03-25"
 art: "Effekt"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

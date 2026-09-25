@@ -1,5 +1,6 @@
 ---
 title: "Sozialphilosophie"
+geprueft_am: "2026-07-29"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

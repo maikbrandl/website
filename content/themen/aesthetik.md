@@ -1,5 +1,6 @@
 ---
 title: "Ästhetik"
+geprueft_am: "2026-02-11"
 art: "Disziplin"
 wissensraum: world
 gebiet: philosophie

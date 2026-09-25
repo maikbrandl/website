@@ -102,6 +102,7 @@ collections:
       - { label: "Lead-Satz", name: "lead", widget: "text" }
       - { label: "Kurz lesen (Minuten)", name: "lesezeit", widget: "number", required: false }
       - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }
+      - { label: "Geprüft am", name: "geprueft_am", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Datum der letzten inhaltlichen Prüfung, erscheint im Lexikon-Eintrag." }
       - name: "bloecke"
         label: "Inhaltsblöcke"
         label_singular: "Block"

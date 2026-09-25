@@ -1,5 +1,6 @@
 ---
 title: "Cornell-Methode"
+geprueft_am: "2026-03-10"
 art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten

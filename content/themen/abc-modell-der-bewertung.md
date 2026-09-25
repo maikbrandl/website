@@ -1,5 +1,6 @@
 ---
 title: "Das ABC-Modell der Bewertung"
+geprueft_am: "2026-02-02"
 art: "Modell"
 wissensraum: mind
 gebiet: emotion-motivation

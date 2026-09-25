@@ -1,5 +1,6 @@
 ---
 title: "Availability Heuristic"
+geprueft_am: "2026-02-26"
 art: "Heuristik"
 wissensraum: mind
 gebiet: kognition-wahrnehmung

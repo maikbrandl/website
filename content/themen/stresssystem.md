@@ -1,5 +1,6 @@
 ---
 title: "Das Stresssystem"
+geprueft_am: "2026-08-10"
 art: "Phänomen"
 wissensraum: mind
 gebiet: emotion-motivation

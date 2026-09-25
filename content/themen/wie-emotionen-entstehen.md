@@ -1,5 +1,6 @@
 ---
 title: "Wie Emotionen entstehen"
+geprueft_am: "2026-09-06"
 art: "Modell"
 wissensraum: mind
 gebiet: emotion-motivation

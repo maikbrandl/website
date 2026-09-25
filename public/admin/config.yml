@@ -1,7 +1,7 @@
 ﻿backend:
   name: github
   repo: maikbrandl/website
-  branch: master
+  branch: relaunch
   base_url: https://winter-darkness-b5cf.mbdigitalbusinessmail.workers.dev
   auth_endpoint: auth
 
@@ -12,7 +12,7 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "posts"
-    label: "Blogposts"
+    label: "Essays"
     folder: "content/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -24,6 +24,7 @@ collections:
       - { label: "Lebensbereich", name: "bereich", widget: "select", options: ["gewohnheiten", "lernen", "gefuehle", "denken", "ich-selbst", "sinn"], required: false }
       - { label: "Passender Lexikoneintrag", name: "verwandtes_thema", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false, hint: "Nur eines von beidem: Lexikoneintrag ODER Weg" }
       - { label: "Passender Weg", name: "verwandter_weg", widget: "relation", collection: "wissensfragen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
+      - { label: "Geprüft am", name: "geprueft_am", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Datum der letzten inhaltlichen Prüfung." }
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
       - { label: "Lesezeit (z.B. 5 Min.)", name: "readingTime", widget: "string", required: false, hint: "Leer lassen für automatische Berechnung" }
@@ -80,7 +81,7 @@ collections:
       - { label: "Meta-Beschreibung", name: "meta_description", widget: "text", required: false }
 
   - name: "themen"
-    label: "Themenseiten (Wissensplattform)"
+    label: "Lexikon"
     folder: "content/themen"
     create: true
     slug: "{{slug}}"
@@ -217,6 +218,7 @@ collections:
       - { label: "Verwandte Themen", name: "verwandte_themen", widget: "relation", collection: "themen", search_fields: ["title"], value_field: "slug", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Blogartikel", name: "verwandte_artikel", widget: "relation", collection: "posts", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
       - { label: "Verwandte Tools", name: "verwandte_tools", widget: "select", options: ["denkschule", "atlas-philosophie", "human-map", "blockuniversum"], multiple: true, required: false }
+      - { label: "Kommt vor in diesen Wegen", name: "wege", widget: "relation", collection: "wissensfragen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], multiple: true, required: false }
       - name: "quellen"
         label: "Quellen"
         widget: "list"
@@ -227,8 +229,19 @@ collections:
       - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
       - { label: "Meta-Beschreibung", name: "seo_description", widget: "text", required: false }
 
+  - name: "bereiche"
+    label: "Lebensbereiche"
+    folder: "content/bereiche"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Titel", name: "title", widget: "string", hint: "z.B. Gewohnheiten" }
+      - { label: "Beschreibung", name: "beschreibung", widget: "text" }
+      - { label: "Reihenfolge", name: "reihenfolge", widget: "number", default: 1 }
+
   - name: "wissensfragen"
-    label: "Wissensfragen (Wissensplattform)"
+    label: "Wissenswege"
     folder: "content/wissensfragen"
     create: true
     slug: "{{slug}}"

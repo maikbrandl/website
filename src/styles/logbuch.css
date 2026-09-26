@@ -317,7 +317,8 @@ p {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-3) 0;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
 }
 
 .logo {
@@ -531,7 +532,8 @@ p {
 
 .mobile-menu {
   border-top: 1px solid var(--linie);
-  padding: var(--space-4) 0;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
 }
 
 .mobile-menu[hidden] {
@@ -1545,7 +1547,8 @@ main {
   }
 
   .lexikon-eintrag-layout--kompakt {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: 230px minmax(0, 720px);
+    column-gap: var(--space-8);
   }
 
   .lexikon-sidebar,
@@ -1555,31 +1558,98 @@ main {
   }
 }
 
-/* ---------- Lexikon-Eintrag: kompakte Kopfbloecke ohne eigenes Label ---------- */
-.lexikon-haupt--eintrag .baustein-sektion:nth-of-type(-n + 2) {
-  padding-top: 0;
+/* ---------- Lexikon-Eintrag ---------- */
+.lexikon-seite {
+  padding-top: var(--space-6);
 }
 
-.lexikon-haupt--eintrag .baustein-sektion:nth-of-type(-n + 2) .baustein-sektion__label {
+.lexikon-seite .lexikon-eintrag-layout {
+  margin-top: 0;
+}
+
+.lexikon-seite .brotkrumen {
+  margin-bottom: var(--space-3);
+}
+
+.lexikon-seite .lexikon-eintrag-lead {
+  color: var(--bleistift);
+  font-size: clamp(18px, 1vw + 14px, 21px);
+  line-height: 1.55;
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 959px) {
+  .lexikon-seite .lexikon-sidebar {
+    display: none;
+  }
+}
+
+.lexikon-sidebar__gruppe {
+  margin-bottom: var(--space-5);
+}
+
+.lexikon-sidebar__gruppentitel {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--bleistift);
+  margin: 0 0 var(--space-2);
+}
+
+.lexikon-seite .lexikon-sidebar {
+  font-size: 15px;
+}
+
+.lexikon-seite .lexikon-sidebar ul {
+  gap: 2px;
+}
+
+.lexikon-seite .lexikon-sidebar li > a,
+.lexikon-seite .lexikon-sidebar li > span {
+  display: block;
+  padding: 5px 10px;
+  margin: 0 -10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--bleistift);
+}
+
+.lexikon-seite .lexikon-sidebar li > a:hover {
+  color: var(--petrol);
+}
+
+.lexikon-seite .lexikon-sidebar [aria-current="page"] {
+  background: var(--blatt);
+  border-color: var(--linie);
+  color: var(--tinte);
+  font-weight: 600;
+}
+
+/* Die ersten zwei Bloecke bilden den Einstieg, ohne eigenes Label. */
+.lexikon-einstieg .baustein-sektion {
+  padding: var(--space-4) 0 0;
+  border-bottom: none;
+}
+
+.lexikon-einstieg .baustein-sektion__label {
   display: none;
+}
+
+.lexikon-einstieg .baustein-text {
+  font-size: 18px;
 }
 
 .lexikon-haupt--eintrag .baustein-icon-fakten {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--linie);
+  gap: var(--space-4) var(--space-5);
 }
 
 .lexikon-haupt--eintrag .baustein-fakt {
   flex-direction: column;
   gap: var(--space-1);
-  padding-left: var(--space-4);
-  border-left: 1px solid var(--linie);
-}
-
-.lexikon-haupt--eintrag .baustein-fakt:first-child {
-  padding-left: 0;
-  border-left: none;
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--tinte);
+  color: var(--bleistift);
+  font-size: 15px;
 }
 
 .lexikon-haupt--eintrag .baustein-fakt__icon {
@@ -1592,14 +1662,35 @@ main {
   color: var(--tinte);
 }
 
+.lexikon-haupt--eintrag .baustein-fakt__label {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: var(--space-1);
+}
+
 /* ---------- "Kommt vor" Karte auf Lexikon-Eintraegen ---------- */
 .lexikon-verwandt-karte {
-  list-style: none;
-  margin: 0;
-  padding: var(--space-2) var(--space-5);
+  margin: var(--space-6) 0 var(--space-4);
+  padding: var(--space-4) var(--space-5) var(--space-2);
   background: var(--blatt);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
+}
+
+.lexikon-verwandt-karte__label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--bleistift);
+  margin: 0 0 var(--space-1);
+}
+
+.lexikon-verwandt-karte ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .lexikon-verwandt-karte li {
@@ -1612,7 +1703,7 @@ main {
 
 .lexikon-verwandt-karte a {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-3) 0;
@@ -1620,19 +1711,30 @@ main {
   color: var(--tinte);
 }
 
+.lexikon-verwandt-karte a:hover .lexikon-verwandt-karte__titel {
+  color: var(--petrol);
+}
+
 .lexikon-verwandt-karte__titel {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-2);
   font-weight: 600;
 }
 
+.lexikon-verwandt-karte__titel .formatzeichen {
+  margin-top: 3px;
+}
+
+.lexikon-verwandt-karte__titel .formatzeichen svg {
+  width: 18px;
+  height: 18px;
+}
+
 .lexikon-verwandt-karte__typ {
   flex: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: var(--bleistift);
 }
 

@@ -9,6 +9,7 @@ import { formatiereDatum } from '../lib/datum';
 import { organizationJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { TOOLS_UEBERSICHT } from '../lib/toolsUebersicht';
 import { JOURNALE } from '../lib/journale';
+import { klartext } from '../lib/markdown';
 
 const themen = await getCollection('themen');
 const fachgebiete = await getCollection('fachgebiete');
@@ -123,7 +124,7 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
                   <Formatzeichen typ="wege" /> Wissensweg{gesamtzeit > 0 && ` · ${gesamtzeit} Min.`}
                 </p>
                 <strong>{w.data.title}</strong>
-                {(w.data.kurzantwort || w.data.lead) && <span>{w.data.kurzantwort || w.data.lead}</span>}
+                {(w.data.kurzantwort || w.data.lead) && <span>{klartext(w.data.kurzantwort || w.data.lead)}</span>}
                 {ebenen > 0 && (
                   <p class="start-weg-karte__fortschritt">
                     {Array.from({ length: ebenen }).map(() => <span data-gefuellt="" />)}
@@ -166,7 +167,7 @@ const jsonLd = [organizationJsonLd(), websiteJsonLd()];
           <li>
             <a href={`/lexikon/${t.id}/`}>
               <strong>{t.data.title ?? t.id}</strong>
-              {t.data.lead && <span>{t.data.lead}</span>}
+              {t.data.lead && <span>{klartext(t.data.lead)}</span>}
             </a>
           </li>
         ))}

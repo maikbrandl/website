@@ -35,3 +35,9 @@ export function markdownInline(text: string | undefined | null): string {
   if (!text) return '';
   return marked.parseInline(text, { async: false }) as string;
 }
+
+// Fuer Meta Description und Vorschautexte: ohne Marker und HTML.
+export function klartext(text: string | undefined | null): string {
+  if (!text) return '';
+  return text.replace(/<[^>]*>/g, '').replace(/==/g, '');
+}

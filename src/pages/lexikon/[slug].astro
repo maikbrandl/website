@@ -5,6 +5,8 @@ import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
 import { formatiereDatum } from '../../lib/datum';
+import { markdownInline, klartext } from '../../lib/markdown';
+import { gruppenAnker } from '../../lib/bausteine';
 import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
 export async function getStaticPaths() {
@@ -19,6 +21,17 @@ const { entry } = Astro.props;
 const daten = entry.data;
 
 const fachgebiet = daten.gebiet ? await getEntry('fachgebiete', daten.gebiet) : undefined;
+// Nur oeffentliche Fachgebiete haben eine eigene Seite.
+const fachgebietOeffentlich = fachgebiet?.data.visibility === 'public';
+const fachgebietHref = fachgebiet && fachgebietOeffentlich ? `/lexikon/fachgebiet/${fachgebiet.id}/` : undefined;
+
+const brotkrumen = [
+  { label: 'Lexikon', href: '/lexikon/' },
+  ...(fachgebiet ? [{ label: fachgebiet.data.title ?? fachgebiet.id, href: fachgebietHref }] : []),
+  ...(daten.untergruppe
+    ? [{ label: daten.untergruppe, href: fachgebietHref && `${fachgebietHref}#${gruppenAnker(daten.untergruppe)}` }]
+    : []),
+];
 
 const geschwister = fachgebiet
   ? (await getCollection('themen'))
@@ -26,10 +39,34 @@ const geschwister = fachgebiet
       .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
   : [];
 
+// Seitenleiste: eigene Untergruppe zuerst und komplett, andere Gruppen gekuerzt.
+const VORSCHAU_ANDERE_GRUPPEN = 2;
+const eigeneGruppe = daten.untergruppe ?? '';
+const gruppenMap = new Map<string, typeof geschwister>();
+for (const g of geschwister) {
+  const name = g.data.untergruppe ?? '';
+  gruppenMap.set(name, [...(gruppenMap.get(name) ?? []), g]);
+}
+const sidebarGruppen = [...gruppenMap.entries()]
+  .sort(([a], [b]) => (a === eigeneGruppe ? -1 : b === eigeneGruppe ? 1 : a.localeCompare(b, 'de')))
+  .map(([name, eintraege]) => {
+    const eigene = name === eigeneGruppe;
+    const sichtbar = eigene ? eintraege : eintraege.slice(0, VORSCHAU_ANDERE_GRUPPEN);
+    return { name, sichtbar, weitere: eintraege.length - sichtbar.length };
+  });
+
+const eigeneHref = `/lexikon/${entry.id}/`;
 const wegeSlugs = (daten.wege ?? []).filter((s): s is string => typeof s === 'string');
-const wege = wegeSlugs.length
-  ? (await getCollection('wissensfragen')).filter((w) => wegeSlugs.includes(w.id))
-  : [];
+// Wege zaehlen auch, wenn eine ihrer Ebenen unter "Darauf aufbauend" auf diesen Eintrag verweist.
+const wege = (await getCollection('wissensfragen'))
+  .map((w) => {
+    const ebenen = (w.data.bloecke ?? []).filter((b) => b.type === 'ebene');
+    const index = ebenen.findIndex((b) =>
+      ((b.darauf_aufbauend as { href?: string }[] | undefined) ?? []).some((d) => d?.href === eigeneHref),
+    );
+    return { w, ebene: index >= 0 ? index + 1 : undefined };
+  })
+  .filter(({ w, ebene }) => ebene !== undefined || wegeSlugs.includes(w.id));
 
 const verwandteSlugs = (daten.verwandte_themen ?? []).filter((s): s is string => typeof s === 'string');
 const verwandteThemen = verwandteSlugs.length
@@ -39,8 +76,13 @@ const verwandteThemen = verwandteSlugs.length
 const essaysHier = (await getCollection('posts')).filter((p) => p.data.verwandtes_thema === entry.id);
 
 const verwandteEintraege = [
-  ...wege.map((w) => ({ href: `/wege/${w.id}/`, titel: w.data.title ?? w.id, typ: 'wege' as const })),
-  ...essaysHier.map((p) => ({ href: `/essays/${p.data.url}/`, titel: p.data.title ?? p.id, typ: 'essays' as const })),
+  ...wege.map(({ w, ebene }) => ({
+    href: `/wege/${w.id}/`,
+    titel: w.data.title ?? w.id,
+    typ: 'wege' as const,
+    hinweis: ebene ? `Ebene ${ebene}` : 'Wissensweg',
+  })),
+  ...essaysHier.map((p) => ({ href: `/essays/${p.data.url}/`, titel: p.data.title ?? p.id, typ: 'essays' as const, hinweis: 'Essay' })),
 ];
 
 const faqEintraege = (daten.bloecke ?? [])
@@ -51,7 +93,7 @@ const faqEintraege = (daten.bloecke ?? [])
 const geprueftAmText = formatiereDatum(daten.geprueft_am);
 
 const titel = daten.seo_title || `${daten.title} · Lexikon · Hybridlog`;
-const beschreibung = daten.seo_description || daten.lead || `${daten.title} kurz erklärt.`;
+const beschreibung = daten.seo_description || klartext(daten.lead) || `${daten.title} kurz erklärt.`;
 const canonical = new URL(`/lexikon/${entry.id}/`, Astro.site).toString();
 
 const jsonLd: Record<string, unknown>[] = [
@@ -76,82 +118,90 @@ if (faqEintraege.length > 0) {
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
-  <div class="container">
-    <Brotkrumen
-      items={[
-        { label: 'Start', href: '/' },
-        { label: 'Lexikon', href: '/lexikon/' },
-        ...(fachgebiet ? [{ label: fachgebiet.data.title ?? fachgebiet.id, href: `/lexikon/fachgebiet/${fachgebiet.id}/` }] : []),
-        { label: daten.title ?? entry.id },
-      ]}
-    />
-
-    <div data-pagefind-body data-pagefind-filter="Format:Lexikon">
-    <header class="lexikon-eintrag-kopf">
-      <h1>{daten.title}</h1>
-      {daten.lead && <p class="prosa lexikon-eintrag-lead" set:html={daten.lead} />}
-      <p class="lexikon-meta">
-        <span>Lexikon{daten.art ? ` · ${daten.art}` : ''}</span>
-        {daten.lesezeit && <span>{daten.lesezeit} Min.</span>}
-        {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
-      </p>
-    </header>
-
+  <div class="container lexikon-seite">
     <div class="lexikon-eintrag-layout lexikon-eintrag-layout--kompakt">
       <aside class="lexikon-sidebar" aria-label="Weitere Einträge aus diesem Fachgebiet">
         {fachgebiet && geschwister.length > 0 && (
           <>
             <p class="lexikon-sidebar__label">{fachgebiet.data.title}</p>
-            <ul>
-              {geschwister.map((g) => (
-                <li>
-                  {g.id === entry.id ? (
-                    <span aria-current="page">{g.data.title ?? g.id}</span>
-                  ) : (
-                    <a href={`/lexikon/${g.id}/`}>{g.data.title ?? g.id}</a>
+            {sidebarGruppen.map((gruppe) => (
+              <div class="lexikon-sidebar__gruppe">
+                {gruppe.name && <p class="lexikon-sidebar__gruppentitel">{gruppe.name}</p>}
+                <ul>
+                  {gruppe.sichtbar.map((g) => (
+                    <li>
+                      {g.id === entry.id ? (
+                        <span aria-current="page">{g.data.title ?? g.id}</span>
+                      ) : (
+                        <a href={`/lexikon/${g.id}/`}>{g.data.title ?? g.id}</a>
+                      )}
+                    </li>
+                  ))}
+                  {gruppe.weitere > 0 && (
+                    <li>
+                      {fachgebietOeffentlich ? (
+                        <a href={`/lexikon/fachgebiet/${fachgebiet.id}/#${gruppenAnker(gruppe.name)}`}>+ {gruppe.weitere} weitere</a>
+                      ) : (
+                        <span>+ {gruppe.weitere} weitere</span>
+                      )}
+                    </li>
                   )}
-                </li>
-              ))}
-            </ul>
+                </ul>
+              </div>
+            ))}
           </>
         )}
       </aside>
 
-      <main class="lexikon-haupt lexikon-haupt--eintrag">
-        <BlockRenderer bloecke={daten.bloecke} />
-      </main>
-    </div>
+      <div class="lexikon-haupt lexikon-haupt--eintrag" data-pagefind-body data-pagefind-filter="Format:Lexikon">
+        <div data-pagefind-ignore><Brotkrumen items={brotkrumen} /></div>
 
-    {verwandteEintraege.length > 0 && (
-      <section class="lexikon-abschnitt">
-        <h2>Kommt vor</h2>
-        <ul class="lexikon-verwandt-karte">
-          {verwandteEintraege.map((e) => (
-            <li>
-              <a href={e.href}>
-                <span class="lexikon-verwandt-karte__titel">
-                  <Formatzeichen typ={e.typ} />
-                  {e.titel}
-                </span>
-                <span class="lexikon-verwandt-karte__typ">{e.typ === 'essays' ? 'Essay' : 'Weg'}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+        <header class="lexikon-eintrag-kopf">
+          <h1>{daten.title}</h1>
+          {daten.lead && <p class="prosa lexikon-eintrag-lead" set:html={markdownInline(daten.lead)} />}
+          <p class="lexikon-meta">
+            <span>Lexikon{daten.art ? ` · ${daten.art}` : ''}</span>
+            {daten.lesezeit && <span>{daten.lesezeit} Min.</span>}
+            {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
+          </p>
+        </header>
 
+        <div class="lexikon-einstieg">
+          <BlockRenderer bloecke={daten.bloecke} bis={2} />
+        </div>
 
-    {verwandteThemen.length > 0 && (
-      <section class="lexikon-abschnitt">
-        <h2>Verwandte Einträge</h2>
-        <ul class="lexikon-liste">
-          {verwandteThemen.map((v) => (
-            <li><a href={`/lexikon/${v.id}/`}>{v.data.title ?? v.id}</a></li>
-          ))}
-        </ul>
-      </section>
-    )}
+        {verwandteEintraege.length > 0 && (
+          <section class="lexikon-verwandt-karte" aria-labelledby="kommt-vor-titel">
+            <p class="lexikon-verwandt-karte__label" id="kommt-vor-titel">Kommt vor in diesen Wegen</p>
+            <ul>
+              {verwandteEintraege.map((e) => (
+                <li>
+                  <a href={e.href}>
+                    <span class="lexikon-verwandt-karte__titel">
+                      <Formatzeichen typ={e.typ} />
+                      {e.titel}
+                    </span>
+                    <span class="lexikon-verwandt-karte__typ">{e.hinweis}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <BlockRenderer bloecke={daten.bloecke} von={2} />
+
+        {verwandteThemen.length > 0 && (
+          <section class="lexikon-abschnitt">
+            <h2>Verwandte Einträge</h2>
+            <ul class="lexikon-liste">
+              {verwandteThemen.map((v) => (
+                <li><a href={`/lexikon/${v.id}/`}>{v.data.title ?? v.id}</a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
     </div>
   </div>
 </Base>

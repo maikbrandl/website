@@ -65,6 +65,18 @@ export function abschnittId(nummer: number): string {
   return `abschnitt-${nummer}`;
 }
 
+// Anker fuer Untergruppen auf der Fachgebietsseite, z. B. "Kognitive Verzerrungen" -> "kognitive-verzerrungen".
+export function gruppenAnker(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 export interface Abschnitt {
   block: Baustein;
   titel: string;

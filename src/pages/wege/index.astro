@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { klartext } from '../../lib/markdown';
 
 const bereicheNamen = new Map(
   (await getCollection('bereiche')).map((b) => [b.id, b.data.title ?? b.id]),
@@ -50,7 +51,7 @@ const jsonLd = [
                 {w.data.kurzlesezeit && <span>{w.data.kurzlesezeit} Min. kurz lesen</span>}
               </p>
               <strong>{w.data.title}</strong>
-              {(w.data.kurzantwort || w.data.lead) && <span class="essay-karte__teaser">{w.data.kurzantwort || w.data.lead}</span>}
+              {(w.data.kurzantwort || w.data.lead) && <span class="essay-karte__teaser">{klartext(w.data.kurzantwort || w.data.lead)}</span>}
             </a>
           </li>
         ))}

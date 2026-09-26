@@ -4,6 +4,8 @@ import Base from '../../../layouts/Base.astro';
 import Brotkrumen from '../../../components/Brotkrumen.astro';
 import Formatzeichen from '../../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../../lib/jsonld';
+import { gruppenAnker } from '../../../lib/bausteine';
+import { klartext } from '../../../lib/markdown';
 
 export async function getStaticPaths() {
   const fachgebiete = (await getCollection('fachgebiete')).filter((f) => f.data.visibility === 'public');
@@ -64,13 +66,13 @@ const jsonLd = [
     ) : (
       <div class="stack-gross">
         {untergruppen.map((gruppe) => (
-          <section class="lexikon-abschnitt">
+          <section class="lexikon-abschnitt" id={gruppenAnker(gruppe)}>
             <h2>{gruppe}</h2>
             <ul class="lexikon-liste">
               {gruppen.get(gruppe)!.map((eintrag) => (
                 <li>
                   <a href={`/lexikon/${eintrag.id}/`}>{eintrag.data.title ?? eintrag.id}</a>
-                  {eintrag.data.lead && <span>{eintrag.data.lead}</span>}
+                  {eintrag.data.lead && <span>{klartext(eintrag.data.lead)}</span>}
                 </li>
               ))}
             </ul>

@@ -104,7 +104,7 @@ collections:
         value_field: "slug"
         display_fields: ["title"]
       - { label: "Unterbereich (optional)", name: "untergruppe", widget: "string", required: false, hint: "Gruppiert Themen im Baum, z.B. Kognitive Verzerrungen. Themen mit gleichem Text landen in derselben Gruppe." }
-      - { label: "Lead-Satz", name: "lead", widget: "text" }
+      - { label: "Lead-Satz", name: "lead", widget: "text", hint: "Erscheint grau unter der Überschrift. Markieren mit ==so== ist möglich." }
       - { label: "Kurz lesen (Minuten)", name: "lesezeit", widget: "number", required: false }
       - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }
       - { label: "Geprüft am", name: "geprueft_am", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Datum der letzten inhaltlichen Prüfung, erscheint im Lexikon-Eintrag." }
@@ -119,7 +119,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Titel überschreiben (optional)", name: "titel_override", widget: "string", required: false }
-              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Text", name: "text", widget: "text", hint: "Die wichtigste Stelle mit ==so== gelb markieren, höchstens eine pro Absatz." }
           - name: "icon_fakten"
             label: "Auf einen Blick (Icon-Fakten)"
             widget: "object"
@@ -130,7 +130,7 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Icon", name: "icon", widget: "select", options: ["search", "eye", "lock", "lightbulb", "filter", "refresh", "link", "check", "shield", "flag"] }
-                  - { label: "Kurzwort (optional, erscheint fett vor dem Text)", name: "label", widget: "string", required: false }
+                  - { label: "Kurzwort (optional, im Lexikon als Spaltentitel)", name: "label", widget: "string", required: false }
                   - { label: "Text", name: "text", widget: "string" }
           - name: "prozess"
             label: "Drei-Spalten Layout (Prozess/Schritte)"
@@ -259,7 +259,7 @@ collections:
         multiple: true
         hint: "Meist mehrere, eine Wissensfrage betrifft oft mehr als einen Raum."
       - { label: "Lead-Satz", name: "lead", widget: "text" }
-      - { label: "Kurzantwort (40 bis 60 Wörter)", name: "kurzantwort", widget: "text", required: false }
+      - { label: "Kurzantwort (40 bis 60 Wörter)", name: "kurzantwort", widget: "text", required: false, hint: "Wichtige Stelle mit ==so== markieren, höchstens eine." }
       - { label: "Autor", name: "autor", widget: "string", required: false, default: "Maik" }
       - { label: "Geprüft am", name: "geprueft_am", widget: "string", required: false, hint: "Format YYYY-MM-DD" }
       - { label: "Lebensbereich", name: "bereich", widget: "select", options: ["gewohnheiten", "lernen", "gefuehle", "denken", "ich-selbst", "sinn"], required: false }
@@ -379,6 +379,7 @@ collections:
               - { label: "Kurzname (im Karteireiter, 1 bis 2 Wörter)", name: "label", widget: "string", required: false }
               - { label: "Titel (als Unterfrage)", name: "titel", widget: "string" }
               - { label: "Kernsatz (kurzer, fett hervorgehobener Leitsatz)", name: "kernsatz", widget: "string", required: false }
+              - { label: "Einstieg (Fließtext direkt nach dem Kernsatz, im selben Absatz)", name: "einstieg", widget: "text", required: false, hint: "Wichtige Stelle mit ==so== markieren, höchstens eine pro Absatz." }
               - { label: "Was passiert", name: "was_passiert", widget: "markdown", required: false }
               - { label: "Woran du es merkst", name: "woran_merkst", widget: "markdown", required: false }
               - { label: "Was konkret hilft", name: "was_hilft", widget: "markdown", required: false }
@@ -391,6 +392,7 @@ collections:
                 fields:
                   - { label: "Titel", name: "titel", widget: "string" }
                   - { label: "Link-Ziel (optional)", name: "href", widget: "string", required: false }
+                  - { label: "Art (optional, sonst aus dem Link erkannt)", name: "typ", widget: "select", options: ["lexikon", "essay", "weg"], required: false }
           - name: "selbsttest"
             label: "Selbsttest"
             widget: "object"
@@ -429,9 +431,11 @@ collections:
           - name: "angebot"
             label: "Angebot"
             widget: "object"
-            hint: "Höchstens zwei Angebote pro Weg, erst nach etwa 70 Prozent der Seite. Kennzeichnung ist Pflicht."
+            hint: "Höchstens zwei Angebote pro Weg, erst nach etwa 70 Prozent der Seite. Zwei Angebote direkt hintereinander stehen nebeneinander."
             fields:
-              - { label: "Kennzeichnung (Pflicht, z.B. Anzeige)", name: "kennzeichnung", widget: "string", default: "Anzeige" }
+              - { label: "Kennzeichnung (Pflicht bei bezahlten Links, z.B. Anzeige)", name: "kennzeichnung", widget: "string", default: "Anzeige", required: false, hint: "Nur bei kostenlosen oder eigenen Angeboten leer lassen." }
+              - { label: "Label (optional, z.B. Kostenlos oder Von Hybridlog)", name: "label", widget: "string", required: false }
+              - { label: "Hervorheben (gelber Rand, nur für die eine Hauptaktion)", name: "hervorheben", widget: "boolean", default: false, required: false }
               - { label: "Titel (optional)", name: "titel", widget: "string", required: false }
               - { label: "Text (optional)", name: "text", widget: "text", required: false }
               - { label: "Link (optional)", name: "url", widget: "string", required: false }

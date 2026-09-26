@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { klartext } from '../../lib/markdown';
 
 export async function getStaticPaths() {
   const bereiche = await getCollection('bereiche');
@@ -61,7 +62,7 @@ const jsonLd = [
           {wege.map((w) => (
             <li>
               <a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a>
-              {w.data.lead && <span>{w.data.lead}</span>}
+              {w.data.lead && <span>{klartext(w.data.lead)}</span>}
             </li>
           ))}
         </ul>

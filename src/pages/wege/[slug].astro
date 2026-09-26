@@ -6,7 +6,7 @@ import Kurzantwort from '../../components/Kurzantwort.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
 import { berechneAbschnitte } from '../../lib/bausteine';
 import { formatiereDatum } from '../../lib/datum';
-import { markdownInline } from '../../lib/markdown';
+import { markdownInline, klartext } from '../../lib/markdown';
 import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
 export async function getStaticPaths() {
@@ -49,7 +49,7 @@ const faqEintraege = (daten.bloecke ?? [])
 const geprueftAmText = formatiereDatum(daten.geprueft_am);
 
 const titel = daten.seo_title || `${daten.title} · Hybridlog`;
-const beschreibung = daten.seo_description || daten.kurzantwort || daten.lead || daten.title || 'Ein Wissensweg von Hybridlog.';
+const beschreibung = daten.seo_description || klartext(daten.kurzantwort || daten.lead) || daten.title || 'Ein Wissensweg von Hybridlog.';
 const canonical = new URL(`/wege/${entry.id}/`, Astro.site).toString();
 
 const jsonLd: Record<string, unknown>[] = [

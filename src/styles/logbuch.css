@@ -14,7 +14,7 @@
   --bleistift: #5F5B50;
   --linie: #D3D0C3;
   --marker: #F5D813;
-  --marker-flaeche: rgba(245, 216, 19, 0.3);
+  --marker-flaeche: #F5D813;
   --petrol: #2F6B5E;
   --rot: #B23A2E;
 
@@ -187,7 +187,7 @@ p {
 
 .marker--flaeche {
   display: inline-block;
-  background: var(--marker);
+  background: var(--marker-flaeche);
   color: var(--tinte);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
@@ -198,7 +198,7 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--petrol);
+  color: inherit;
   flex: none;
 }
 
@@ -238,21 +238,19 @@ p {
 .kurzantwort::before {
   content: "";
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -1px;
+  right: -1px;
   width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, transparent 50%, var(--papier) 50%);
-  border-bottom: 1px solid var(--linie);
-  border-left: 1px solid var(--linie);
+  background: linear-gradient(225deg, var(--papier) 50%, var(--linie) 50%);
 }
 
 .kurzantwort__label {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 13px;
+  letter-spacing: 0.1em;
+  font-size: 12px;
   color: var(--petrol);
   margin: 0 0 var(--space-2);
 }
@@ -337,7 +335,7 @@ p {
 .hauptnav__liste {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -347,8 +345,24 @@ p {
 
 .hauptnav a,
 .hauptnav button.wege-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 6px 10px;
+  border-radius: var(--radius);
   color: var(--tinte);
   text-decoration: none;
+}
+
+.hauptnav__neben a {
+  font-weight: 400;
+  color: var(--bleistift);
+}
+
+.hauptnav a[aria-current],
+.hauptnav button.wege-toggle[data-aktiv] {
+  background: color-mix(in srgb, var(--linie) 60%, transparent);
+  color: var(--tinte);
 }
 
 .hauptnav a:hover,
@@ -365,7 +379,6 @@ p {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  padding: var(--space-1) 0;
 }
 
 .wege-toggle svg {
@@ -434,7 +447,7 @@ p {
   align-items: center;
   gap: var(--space-2);
   border: 1px solid var(--linie);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--blatt);
   padding: var(--space-2) var(--space-4);
   transition: border-color var(--dauer) ease;
@@ -588,6 +601,11 @@ p {
   color: var(--petrol);
 }
 
+.mobil-tableiste a[aria-current] {
+  color: var(--tinte);
+  font-weight: 700;
+}
+
 main {
   padding-bottom: var(--space-8);
 }
@@ -710,12 +728,12 @@ main {
 }
 
 .baustein-sektion__label {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 13px;
-  color: var(--petrol);
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--bleistift);
   margin: 0 0 var(--space-3);
 }
 
@@ -1227,11 +1245,11 @@ main {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 13px;
+  letter-spacing: 0.1em;
+  font-size: 12px;
   color: var(--petrol);
   margin: 0 0 var(--space-2);
 }
@@ -1411,12 +1429,12 @@ main {
 }
 
 .lexikon-sidebar__label {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   font-size: 12px;
-  color: var(--petrol);
+  color: var(--bleistift);
   margin: 0 0 var(--space-3);
 }
 
@@ -2018,6 +2036,7 @@ main {
 .start-hero__suche.suchformular {
   padding: var(--space-3) var(--space-5);
   border: 2px solid var(--tinte);
+  border-radius: 999px;
 }
 
 .start-hero__suche.suchformular input[type="search"] {

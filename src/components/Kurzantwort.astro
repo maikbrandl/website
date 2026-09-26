@@ -2,12 +2,13 @@
 // Kurzantwort mit Papierecke, nur an dieser einen Stelle eines Wissenswegs verwenden.
 interface Props {
   class?: string;
+  id?: string;
 }
 
-const { class: className = '' } = Astro.props as Props;
+const { class: className = '', id = 'kurz-beantwortet' } = Astro.props as Props;
 ---
 
-<div class={`kurzantwort ${className}`}>
+<div class={`kurzantwort ${className}`} id={id}>
   <p class="kurzantwort__label">Kurz beantwortet</p>
   <div class="kurzantwort__text prosa">
     <slot />

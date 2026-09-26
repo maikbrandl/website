@@ -30,6 +30,14 @@ const jsonLdListe = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const bereicheEintraege = (await getCollection('bereiche')).sort(
   (a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99),
 );
+
+const pfad = Astro.url.pathname;
+const rubrik = pfad === '/'
+  ? 'start'
+  : pfad.startsWith('/wege/') || pfad.startsWith('/bereiche/')
+    ? 'wege'
+    : (['lexikon', 'essays', 'tools', 'journale', 'suche'].find((r) => pfad.startsWith(`/${r}/`)) ?? '');
+const aktiv = (r: string) => (rubrik === r ? 'true' : undefined);
 ---
 
 <!doctype html>
@@ -83,6 +91,7 @@ const bereicheEintraege = (await getCollection('bereiche')).sort(
               <button
                 type="button"
                 class="wege-toggle"
+                data-aktiv={aktiv('wege')}
                 data-disclosure-trigger
                 aria-expanded="false"
                 aria-controls="wege-panel"
@@ -108,10 +117,10 @@ const bereicheEintraege = (await getCollection('bereiche')).sort(
                 </ul>
               </div>
             </li>
-            <li><a href="/lexikon/">Lexikon</a></li>
-            <li><a href="/essays/">Essays</a></li>
-            <li><a href="/tools/">Tools</a></li>
-            <li><a href="/journale/">Journale</a></li>
+            <li><a href="/lexikon/" aria-current={aktiv('lexikon')}>Lexikon</a></li>
+            <li class="hauptnav__neben"><a href="/essays/" aria-current={aktiv('essays')}>Essays</a></li>
+            <li class="hauptnav__neben"><a href="/tools/" aria-current={aktiv('tools')}>Tools</a></li>
+            <li class="hauptnav__neben"><a href="/journale/" aria-current={aktiv('journale')}>Journale</a></li>
           </ul>
         </nav>
 
@@ -199,26 +208,28 @@ const bereicheEintraege = (await getCollection('bereiche')).sort(
     </footer>
 
     <nav class="mobil-tableiste" aria-label="Mobile Navigation">
-      <a href="/">
+      <a href="/" aria-current={aktiv('start')}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M4 11l8-7 8 7" />
           <path d="M6 10v10h12V10" />
         </svg>
         Start
       </a>
-      <a href="/wege/">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 18c3-1 3-5 6-6s3 5 6 6 5-2 5-2" />
+      <a href="/wege/" aria-current={aktiv('wege')}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M6.5 17.5c3-2 4-6 11-11" />
+          <circle cx="5" cy="19" r="2" />
+          <circle cx="19" cy="5" r="2" />
         </svg>
         Wege
       </a>
-      <a href="/lexikon/">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4.5" />
+      <a href="/lexikon/" aria-current={aktiv('lexikon')}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 4h14a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" />
         </svg>
         Lexikon
       </a>
-      <a href="/suche/">
+      <a href="/suche/" aria-current={aktiv('suche')}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
           <path d="M21 21l-4.3-4.3" />

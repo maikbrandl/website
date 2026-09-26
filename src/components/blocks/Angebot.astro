@@ -1,22 +1,38 @@
 ---
 interface Props {
+  id?: string;
+  label?: string;
   titel?: string;
   text?: string;
-  kennzeichnung: string;
+  kennzeichnung?: string;
   url?: string;
   cta_label?: string;
+  hervorheben?: boolean;
 }
 
-const { titel, text, kennzeichnung, url, cta_label } = Astro.props as Props;
+const { id, label, titel, text, kennzeichnung, url, cta_label, hervorheben = false } = Astro.props as Props;
+// Nur gekennzeichnete Angebote (z. B. Anzeige) sind bezahlte Links.
+const extern = Boolean(url?.startsWith('http'));
+const rel = kennzeichnung ? 'sponsored noopener' : extern ? 'noopener' : undefined;
+const target = extern ? '_blank' : undefined;
 ---
 
-<div class="baustein-angebot">
-  <span class="baustein-angebot__kennzeichnung">{kennzeichnung || 'Anzeige'}</span>
-  {titel && <h5>{titel}</h5>}
-  {text && <p>{text}</p>}
-  {url && (
-    <a class="baustein-link" href={url} target="_blank" rel="sponsored noopener">
-      {cta_label || 'Mehr erfahren'} &rarr;
+<div class="baustein-angebot" id={id} data-hervorheben={hervorheben ? '' : undefined}>
+  {(label || kennzeichnung) && (
+    <p class="baustein-angebot__kopf">
+      {label && <span class="baustein-angebot__label">{label}</span>}
+      {kennzeichnung && <span class="baustein-angebot__kennzeichnung">{kennzeichnung}</span>}
+    </p>
+  )}
+  {titel && (
+    <p class="baustein-angebot__titel">
+      {url && !cta_label ? <a href={url} target={target} rel={rel}>{titel}</a> : titel}
+    </p>
+  )}
+  {text && <p class="baustein-angebot__text">{text}</p>}
+  {url && cta_label && (
+    <a class="baustein-link" href={url} target={target} rel={rel}>
+      {cta_label} &rarr;
     </a>
   )}
 </div>

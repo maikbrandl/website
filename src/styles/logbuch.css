@@ -168,6 +168,11 @@ p {
   outline-offset: 2px;
 }
 
+/* Sprungziele nicht unter der festen Kopfleiste verstecken. */
+:target {
+  scroll-margin-top: 88px;
+}
+
 .container {
   width: 100%;
   max-width: 1120px;
@@ -284,6 +289,7 @@ p {
 
 .brotkrumen a {
   color: var(--bleistift);
+  text-decoration: none;
 }
 
 .brotkrumen a:hover {
@@ -295,7 +301,7 @@ p {
 }
 
 .brotkrumen__sep {
-  color: var(--linie);
+  color: var(--bleistift);
 }
 
 /* ---------- Kopfleiste ---------- */
@@ -962,23 +968,45 @@ main {
 }
 
 .baustein-ebene__label {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 12px;
-  color: var(--petrol);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--tinte);
   margin: 0 0 var(--space-1);
 }
 
+.baustein-ebene__teil .prosa > :last-child {
+  margin-bottom: 0;
+}
+
+.baustein-ebene__einstieg {
+  margin: 0;
+}
+
+.baustein-ebene__einstieg strong {
+  font-weight: 700;
+}
+
 .baustein-ebene__fazit {
-  font-weight: 600;
+  font-weight: 700;
   padding-top: var(--space-3);
-  border-top: 1px solid var(--linie);
+  border-top: 2px solid var(--tinte);
+  margin: var(--space-2) 0 0;
 }
 
 .baustein-ebene__frage {
-  margin: 0 0 var(--space-3);
+  font-size: clamp(24px, 3vw, 30px);
+  margin: 0;
+}
+
+.baustein-ebene__kleinlabel {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--bleistift);
+  margin: var(--space-4) 0 var(--space-3);
 }
 
 .baustein-ebene__aufbauend {
@@ -986,24 +1014,26 @@ main {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-2);
 }
 
-.baustein-ebene__aufbauend li a,
-.baustein-ebene__aufbauend li span {
+.baustein-ebene__aufbauend li > a,
+.baustein-ebene__aufbauend li > span {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
   height: 100%;
   padding: var(--space-3);
+  background: var(--blatt);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
+  transition: border-color var(--dauer) ease;
 }
 
-.baustein-ebene__aufbauend li a:hover {
+.baustein-ebene__aufbauend li > a:hover {
   border-color: var(--petrol);
 }
 
@@ -1011,15 +1041,19 @@ main {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: var(--bleistift);
 }
 
+.baustein-ebene__aufbauend-typ .formatzeichen svg {
+  width: 14px;
+  height: 14px;
+}
+
 .baustein-ebene__aufbauend strong {
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.35;
   color: var(--tinte);
 }
 
@@ -1072,13 +1106,13 @@ main {
 }
 
 .ebenen-tabs__eyebrow {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   font-size: 12px;
-  color: var(--petrol);
-  margin: 0 0 var(--space-2);
+  color: var(--bleistift);
+  margin: 0 0 calc(var(--space-2) * -1);
 }
 
 .ebenen-tabs__kernsatz {
@@ -1202,15 +1236,81 @@ main {
 }
 
 .baustein-angebot {
-  padding: var(--space-4);
-  background: var(--papier);
+  position: relative;
+  padding: var(--space-5);
+  background: var(--blatt);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
 }
 
-.baustein-angebot h5 {
-  font-family: var(--font-display);
-  margin: var(--space-2) 0;
+/* Gelber Rand nur fuer die eine Hauptaktion der Seite. */
+.baustein-angebot[data-hervorheben] {
+  border: 2px solid var(--marker);
+}
+
+.baustein-angebot__kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+.baustein-angebot__label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  color: var(--bleistift);
+}
+
+.baustein-angebot__titel {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.35;
+  margin: 0 0 var(--space-1);
+}
+
+.baustein-angebot__titel a {
+  color: var(--tinte);
+  text-decoration: none;
+}
+
+.baustein-angebot__titel a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.baustein-angebot:has(.baustein-angebot__titel a):hover {
+  border-color: var(--petrol);
+}
+
+.baustein-angebot[data-hervorheben]:has(.baustein-angebot__titel a):hover {
+  border-color: var(--marker);
+}
+
+.baustein-angebot__text {
+  color: var(--bleistift);
+  font-size: 15px;
+  margin: 0 0 var(--space-2);
+}
+
+.baustein-angebot__text:last-child {
+  margin-bottom: 0;
+}
+
+.angebote-reihe {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--linie);
+}
+
+@media (min-width: 640px) {
+  .angebote-reihe {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
 }
 
 .baustein-angebot__kennzeichnung {
@@ -1534,6 +1634,139 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--bleistift);
+}
+
+/* ---------- Wissensweg Seite ---------- */
+.weg-seite {
+  padding-top: var(--space-6);
+}
+
+.weg-kopf {
+  margin-top: var(--space-4);
+}
+
+.weg-kopf h1,
+.lexikon-eintrag-kopf h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  margin-bottom: var(--space-4);
+}
+
+.weg-kopf .kurzantwort {
+  margin-bottom: var(--space-4);
+}
+
+.weg-kopf .kurzantwort__text {
+  max-width: none;
+}
+
+.ebenen-leiste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) 6px;
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .ebenen-leiste {
+    grid-template-columns: repeat(var(--anzahl, 4), minmax(0, 1fr));
+  }
+}
+
+.ebenen-leiste__tab {
+  display: block;
+  padding-top: var(--space-2);
+  border-top: 3px solid var(--linie);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bleistift);
+  text-decoration: none;
+}
+
+.ebenen-leiste__tab:hover {
+  color: var(--petrol);
+}
+
+/* Aktive Ebene per :target, ohne Auswahl gilt Ebene 1. */
+.weg-seite:not(:has(.ebenen-tabs__panel:target)) .ebenen-leiste__tab:first-child,
+.weg-seite:has(.ebenen-tabs__panel:nth-child(1):target) .ebenen-leiste__tab:nth-child(1),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .ebenen-leiste__tab:nth-child(2),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .ebenen-leiste__tab:nth-child(3),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .ebenen-leiste__tab:nth-child(4),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .ebenen-leiste__tab:nth-child(5),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .ebenen-leiste__tab:nth-child(6),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .ebenen-leiste__tab:nth-child(7),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .ebenen-leiste__tab:nth-child(8) {
+  border-top-color: var(--petrol);
+  color: var(--tinte);
+}
+
+.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .ebenen-leiste__tab:nth-child(-n + 1),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .ebenen-leiste__tab:nth-child(-n + 2),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .ebenen-leiste__tab:nth-child(-n + 3),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .ebenen-leiste__tab:nth-child(-n + 4),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .ebenen-leiste__tab:nth-child(-n + 5),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .ebenen-leiste__tab:nth-child(-n + 6),
+.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .ebenen-leiste__tab:nth-child(-n + 7) {
+  border-top-color: color-mix(in srgb, var(--petrol) 45%, transparent);
+}
+
+.weg-layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.weg-haupt {
+  min-width: 0;
+}
+
+.weg-toc {
+  display: none;
+  font-size: 14px;
+}
+
+.weg-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.weg-toc a {
+  color: var(--bleistift);
+  text-decoration: none;
+}
+
+.weg-toc a:hover {
+  color: var(--petrol);
+}
+
+.weg-seite:not(:has(.ebenen-tabs__panel:target)) .weg-toc a[data-ebene="1"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(1):target) .weg-toc a[data-ebene="1"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .weg-toc a[data-ebene="2"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .weg-toc a[data-ebene="3"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .weg-toc a[data-ebene="4"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .weg-toc a[data-ebene="5"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .weg-toc a[data-ebene="6"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .weg-toc a[data-ebene="7"],
+.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .weg-toc a[data-ebene="8"] {
+  color: var(--tinte);
+  font-weight: 700;
+}
+
+@media (min-width: 960px) {
+  .weg-layout {
+    grid-template-columns: minmax(0, 680px) 200px;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .weg-toc {
+    display: block;
+    position: sticky;
+    top: calc(var(--space-6) + 56px);
+    padding-top: var(--space-6);
+  }
 }
 
 /* ---------- Essays ---------- */

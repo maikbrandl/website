@@ -24,34 +24,57 @@ import { berechneAbschnitte, type Baustein } from '../../lib/bausteine';
 
 interface Props {
   bloecke?: Baustein[];
+  ebenenLeiste?: boolean;
+  von?: number;
+  bis?: number;
 }
 
-const { bloecke = [] } = Astro.props as Props;
-const abschnitte = berechneAbschnitte(bloecke);
+const { bloecke = [], ebenenLeiste = true, von = 0, bis } = Astro.props as Props;
+const abschnitte = berechneAbschnitte(bloecke).slice(von, bis);
 
 // Aufeinanderfolgende "ebene"-Bloecke werden zu einer Karteireiter-Gruppe
-// zusammengefasst (CSS-only, ohne JavaScript). Andere Bloecke bleiben einzelne Abschnitte.
+// zusammengefasst (CSS-only, ohne JavaScript), aufeinanderfolgende Angebote zu einer Reihe.
 type Eintrag = (typeof abschnitte)[number];
-type Gruppe = { art: 'einzel'; eintrag: Eintrag } | { art: 'ebenen'; eintraege: Eintrag[] };
+type Gruppe =
+  | { art: 'einzel'; eintrag: Eintrag }
+  | { art: 'ebenen'; eintraege: Eintrag[] }
+  | { art: 'angebote'; eintraege: Eintrag[] };
 
 const gruppen: Gruppe[] = [];
 for (const eintrag of abschnitte) {
-  if (eintrag.block.type === 'ebene') {
-    const letzte = gruppen[gruppen.length - 1];
-    if (letzte && letzte.art === 'ebenen') {
-      letzte.eintraege.push(eintrag);
-    } else {
-      gruppen.push({ art: 'ebenen', eintraege: [eintrag] });
-    }
+  const art = eintrag.block.type === 'ebene' ? 'ebenen' : eintrag.block.type === 'angebot' ? 'angebote' : 'einzel';
+  const letzte = gruppen[gruppen.length - 1];
+  if (art !== 'einzel' && letzte && letzte.art === art) {
+    letzte.eintraege.push(eintrag);
+  } else if (art === 'einzel') {
+    gruppen.push({ art, eintrag });
   } else {
-    gruppen.push({ art: 'einzel', eintrag });
+    gruppen.push({ art, eintraege: [eintrag] });
   }
 }
 ---
 
 <div class="stack">
   {gruppen.map((g) =>
-    g.art === 'ebenen' ? (
+    g.art === 'angebote' ? (
+      <div class="angebote-reihe">
+        {g.eintraege.map((eintrag) => {
+          const b = eintrag.block;
+          return (
+            <Angebot
+              id={eintrag.id}
+              label={b.label as string}
+              titel={b.titel as string}
+              text={b.text as string}
+              kennzeichnung={b.kennzeichnung as string}
+              url={b.url as string}
+              cta_label={b.cta_label as string}
+              hervorheben={b.hervorheben === true}
+            />
+          );
+        })}
+      </div>
+    ) : g.art === 'ebenen' ? (
       <div class="ebenen-tabs">
         <div class="ebenen-tabs__panels">
           {g.eintraege.map((eintrag, i) => {
@@ -63,6 +86,7 @@ for (const eintrag of abschnitte) {
                   eyebrow={`Ebene ${i + 1} von ${g.eintraege.length} · ${label}`}
                   frage={b.titel as string}
                   kernsatz={b.kernsatz as string}
+                  einstieg={b.einstieg as string}
                   was_passiert={b.was_passiert as string}
                   woran_merkst={b.woran_merkst as string}
                   was_hilft={b.was_hilft as string}
@@ -74,17 +98,19 @@ for (const eintrag of abschnitte) {
             );
           })}
         </div>
-        <div class="ebenen-tabs__leiste" role="tablist" aria-label="Ebenen">
-          {g.eintraege.map((eintrag, i) => {
-            const b = eintrag.block;
-            const label = (b.label as string) || eintrag.titel;
-            return (
-              <a href={`#${eintrag.id}`} class="ebenen-tabs__tab">
-                {i + 1} · {label}
-              </a>
-            );
-          })}
-        </div>
+        {ebenenLeiste && (
+          <div class="ebenen-tabs__leiste" role="tablist" aria-label="Ebenen">
+            {g.eintraege.map((eintrag, i) => {
+              const b = eintrag.block;
+              const label = (b.label as string) || eintrag.titel;
+              return (
+                <a href={`#${eintrag.id}`} class="ebenen-tabs__tab">
+                  {i + 1} · {label}
+                </a>
+              );
+            })}
+          </div>
+        )}
       </div>
     ) : (
       <section class="baustein-sektion" id={g.eintrag.id}>
@@ -124,15 +150,6 @@ for (const eintrag of abschnitte) {
               {b.type === 'selbsttest' && <Selbsttest tool={b.tool as string} fragen={b.fragen as any} />}
               {b.type === 'plan' && <Plan schritte={b.schritte as any} />}
               {b.type === 'hilfe' && <Hilfe eintraege={b.eintraege as any} />}
-              {b.type === 'angebot' && (
-                <Angebot
-                  titel={b.titel as string}
-                  text={b.text as string}
-                  kennzeichnung={b.kennzeichnung as string}
-                  url={b.url as string}
-                  cta_label={b.cta_label as string}
-                />
-              )}
             </>
           );
         })()}

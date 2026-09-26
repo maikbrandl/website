@@ -17,7 +17,7 @@ const { items, class: className = '' } = Astro.props as Props;
     {items.map((item, i) => (
       <li>
         {i > 0 && <span class="brotkrumen__sep" aria-hidden="true">&rsaquo;</span>}
-        {item.href && i < items.length - 1 ? (
+        {item.href ? (
           <a href={item.href}>{item.label}</a>
         ) : (
           <span aria-current="page">{item.label}</span>

@@ -1,16 +1,18 @@
 ---
-import { markdownZuHtml } from '../../lib/markdown';
+import { markdownZuHtml, markdownInline } from '../../lib/markdown';
 import Formatzeichen from '../Formatzeichen.astro';
 
 interface DarunterEintrag {
   titel?: string;
   href?: string;
+  typ?: string;
 }
 
 interface Props {
   eyebrow?: string;
   frage?: string;
   kernsatz?: string;
+  einstieg?: string;
   was_passiert?: string;
   woran_merkst?: string;
   was_hilft?: string;
@@ -19,57 +21,66 @@ interface Props {
   darauf_aufbauend?: DarunterEintrag[];
 }
 
-const { eyebrow, frage, kernsatz, was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = [] } =
+const { eyebrow, frage, kernsatz, einstieg, was_passiert, woran_merkst, was_hilft, beleg, fazit, darauf_aufbauend = [] } =
   Astro.props as Props;
+
+const TYPEN = { lexikon: 'Lexikon', essays: 'Essay', wege: 'Wissensweg' } as const;
+type Typ = keyof typeof TYPEN;
+function typVon(e: DarunterEintrag): Typ {
+  if (e.typ === 'essay' || e.href?.startsWith('/essays/')) return 'essays';
+  if (e.typ === 'weg' || e.href?.startsWith('/wege/')) return 'wege';
+  return 'lexikon';
+}
+
+const teile = [
+  { titel: 'Was passiert', text: was_passiert },
+  { titel: 'Woran du es merkst', text: woran_merkst },
+  { titel: 'Was konkret hilft', text: was_hilft },
+  { titel: 'Beleg', text: beleg },
+].filter((t) => t.text);
 ---
 
 <div class="baustein-ebene">
   {eyebrow && <p class="ebenen-tabs__eyebrow">{eyebrow}</p>}
-  {frage && <h3 class="baustein-ebene__frage">{frage}</h3>}
-  {kernsatz && <p class="ebenen-tabs__kernsatz">{kernsatz}</p>}
-  {was_passiert && (
-    <div class="baustein-ebene__teil">
-      <p class="baustein-ebene__label">Was passiert</p>
-      <div class="prosa" set:html={markdownZuHtml(was_passiert)} />
-    </div>
+  {frage && <h2 class="baustein-ebene__frage">{frage}</h2>}
+  {(kernsatz || einstieg) && (
+    <p class="baustein-ebene__einstieg prosa">
+      {kernsatz && <strong set:html={markdownInline(kernsatz)} />}
+      {kernsatz && einstieg && ' '}
+      {einstieg && <Fragment set:html={markdownInline(einstieg)} />}
+    </p>
   )}
-  {woran_merkst && (
+  {teile.map((t) => (
     <div class="baustein-ebene__teil">
-      <p class="baustein-ebene__label">Woran du es merkst</p>
-      <div class="prosa" set:html={markdownZuHtml(woran_merkst)} />
+      <h3 class="baustein-ebene__label">{t.titel}</h3>
+      <div class="prosa" set:html={markdownZuHtml(t.text)} />
     </div>
-  )}
-  {was_hilft && (
-    <div class="baustein-ebene__teil">
-      <p class="baustein-ebene__label">Was konkret hilft</p>
-      <div class="prosa" set:html={markdownZuHtml(was_hilft)} />
-    </div>
-  )}
-  {beleg && (
-    <div class="baustein-ebene__teil">
-      <p class="baustein-ebene__label">Beleg</p>
-      <div class="prosa" set:html={markdownZuHtml(beleg)} />
-    </div>
-  )}
-  {fazit && <p class="baustein-ebene__fazit">{fazit}</p>}
+  ))}
+  {fazit && <p class="baustein-ebene__fazit prosa" set:html={markdownInline(fazit)} />}
   {darauf_aufbauend.length > 0 && (
     <div class="baustein-ebene__teil">
-      <p class="baustein-ebene__label">Darauf aufbauend</p>
+      <p class="baustein-ebene__kleinlabel">Darauf aufbauend</p>
       <ul class="baustein-ebene__aufbauend">
         {darauf_aufbauend.map((e) => {
-          const typ = e.href?.startsWith('/essays/') ? 'essays' : 'lexikon';
+          const typ = typVon(e);
           return (
             <li>
               {e.href ? (
                 <a href={e.href}>
                   <span class="baustein-ebene__aufbauend-typ">
                     <Formatzeichen typ={typ} />
-                    {typ === 'essays' ? 'Essay' : 'Lexikon'}
+                    {TYPEN[typ]}
                   </span>
                   <strong>{e.titel}</strong>
                 </a>
               ) : (
-                <span>{e.titel}</span>
+                <span>
+                  <span class="baustein-ebene__aufbauend-typ">
+                    <Formatzeichen typ={typ} />
+                    {TYPEN[typ]}
+                  </span>
+                  <strong>{e.titel}</strong>
+                </span>
               )}
             </li>
           );

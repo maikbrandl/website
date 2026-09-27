@@ -5,6 +5,7 @@ art: "Disziplin"
 wissensraum: world
 gebiet: philosophie
 untergruppe: "Systematische Disziplinen & Zentrale Fragestellungen"
+einstieg: true
 lead: "Die Lehre vom Wissen fragt, wie wir überhaupt zu gesicherter Erkenntnis kommen und wo ihre Grenzen liegen."
 lesezeit: 4
 vertiefzeit: 15

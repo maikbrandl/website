@@ -11,6 +11,7 @@ excerpt: "Vielleicht kennst du dieses Gefühl. Du liegst abends im Bett, schaust
   Lebens, die besser aussieht als das hier. Eine andere Arbeit. Eine andere
   Stadt. Ein anderes Gefühl beim Aufwachen. Du weißt nicht wie, du weißt nicht
   warum, aber du spürst es irgendwie. Dieses Leben existiert. Irgendwo."
+beschreibung: "Was hinter dem Manifestations-Trend wirklich steckt, und warum der Bestätigungsfehler oft mehr erklärt als jedes Universum, das mitdenkt."
 cover: /images/uploads/desktop-wallpaper-mockup-5-.png
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---

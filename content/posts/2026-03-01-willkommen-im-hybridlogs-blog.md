@@ -10,6 +10,7 @@ excerpt: Du kennst den Moment. Jemand sagt etwas und plötzlich ist da dieses
   passiert, hast du schon reagiert. Eine Antwort geschickt die du bereust. Ein
   Gespräch abgebrochen. Eine Entscheidung getroffen aus dem Bauch heraus, die
   sich einen Tag später falsch anfühlt.
+beschreibung: "Warum du oft reagierst statt zu antworten, und wie Metakognition dir hilft, eigene Gedanken zu beobachten statt von ihnen kontrolliert zu werden."
 cover: /images/uploads/desktop-wallpaper-mockup-4-.png
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---

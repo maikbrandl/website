@@ -12,6 +12,7 @@ excerpt: Die Vorstellung, dass Zeit objektiv schneller vergeht, je älter du
   wie jedes andere, kann sich im Rückblick trotzdem karg oder reich anfühlen, je
   nachdem, wie viele Momente darin einen eigenen Platz im Gedächtnis gefunden
   haben.
+beschreibung: "Dein Gehirn zählt keine Tage, sondern Erinnerungen. Warum ein Leben sich lang oder kurz anfühlt, je nachdem, was darin hängen bleibt."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-4-.png
 ---
 Eben war noch Januar. Du hast dir vorgenommen, dieses Jahr wird anders, langsamer, bewusster. Und dann blätterst du im Kalender und stehst plötzlich vor Dezember, ohne zu wissen, wo die Monate dazwischen geblieben sind. Das Gefühl beschleicht dich nicht nur einmal im Jahr. Es taucht auf, wenn du merkst, dass dein letzter Schulabschluss oder Umzug sich anfühlt, als wäre er letztes Jahr gewesen, obwohl er schon fünf zurückliegt.

@@ -13,6 +13,7 @@ excerpt: Die meisten Menschen behandeln ihre dunklen Seiten wie Unkraut, das man
   Deine verleugnete Bedürftigkeit ist auch deine Fähigkeit, echte Nähe
   zuzulassen. Wer seinen Schatten wegsperrt, sperrt einen Teil seiner Kraft mit
   weg.
+beschreibung: "Carl Jung sah in den Seiten, die wir an uns ablehnen, verborgene Kraft. Warum dein Schatten mehr über dich lehrt als jede Stärke."
 cover: /images/uploads/carl-jung-schatten.png
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---

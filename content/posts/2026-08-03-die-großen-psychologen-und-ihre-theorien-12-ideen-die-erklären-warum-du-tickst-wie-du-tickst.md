@@ -11,6 +11,7 @@ excerpt: Ein großer Teil unseres Handelns wird von unbewussten Kräften
   Wünsche, die vermittelnde Vernunft und die verinnerlichten Regeln. Wann immer
   du innerlich zerrissen bist zwischen dem, was du willst, was du solltest und
   was vernünftig wäre, beschreibst du genau dieses Modell.
+beschreibung: "Zwölf Ideen großer Psychologen von Freud bis heute, die erklären, warum du fühlst, denkst und handelst, wie du es tust."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-5-.png
 related_post_slug: 2026-06-23-disziplin-ist-kein-charakterzug-warum-sie-ein-system-ist-und-wie-du-es-aufbaust
 ---

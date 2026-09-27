@@ -5,6 +5,7 @@ url: "erzwungene-entspannung"
 bereich: "gefuehle"
 verwandtes_thema: "akuter-vs-chronischer-stress"
 category: Psychologie
+beschreibung: "Warum echte Ruhe sich oft erst dann richtig anfühlt, wenn niemand mehr etwas von dir will, und wie du das ändern kannst."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-2-.png
 ---
 Du kennst den Moment. Feierabend, Wochenende, freier Nachmittag. Du könntest jetzt einfach nichts tun. Und trotzdem sitzt da dieses Gefühl. Ein leises Unbehagen. Der Gedanke dass du eigentlich noch etwas erledigen müsstest. Dass diese Pause irgendwie nicht verdient ist. Dass Ruhe ohne konkreten Grund sich einfach falsch anfühlt.

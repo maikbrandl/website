@@ -13,6 +13,7 @@ excerpt: Ein einzelnes Wassermolekül ist nicht nass. Nässe, Flüssigkeit, das
   Nahrung, baut Klimaanlagen in den Bau, führt Krieg. Niemand hat es der Ameise
   gesagt. Die Intelligenz sitzt nicht in einem Tier, sie taucht zwischen ihnen
   auf.
+beschreibung: "Warum Bewusstsein vielleicht nicht in einzelnen Nervenzellen steckt, sondern erst zwischen ihnen entsteht, so wie Nässe zwischen Wassermolekülen."
 cover: /images/uploads/gehirn-keine-festplatte.png
 related_post_slug: 2026-03-01-willkommen-im-hybridlogs-blog
 ---

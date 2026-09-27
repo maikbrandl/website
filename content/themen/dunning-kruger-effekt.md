@@ -5,6 +5,7 @@ art: "Effekt"
 wissensraum: mind
 gebiet: kognition-wahrnehmung
 untergruppe: "Kognitive Verzerrungen"
+einstieg: true
 lead: "Wer wenig von einer Sache versteht, überschätzt sein Können oft am stärksten, weil ihm genau das Wissen fehlt, um die eigenen Fehler zu erkennen."
 lesezeit: 4
 vertiefzeit: 15

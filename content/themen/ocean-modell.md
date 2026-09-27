@@ -5,6 +5,7 @@ art: "Persönlichkeitsmodell"
 wissensraum: mind
 gebiet: persoenlichkeit-identitaet
 untergruppe: "Persönlichkeitsmodelle"
+einstieg: true
 lead: "Das wissenschaftlich am besten belegte Persönlichkeitsmodell beschreibt jeden Menschen über fünf Eigenschaften, die jeweils auf einem Spektrum liegen."
 lesezeit: 5
 vertiefzeit: 20

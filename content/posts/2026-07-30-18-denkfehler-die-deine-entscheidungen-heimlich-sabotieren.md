@@ -12,6 +12,7 @@ excerpt: Denkfehler sind keine Zeichen von Dummheit. Sie sind ein Nebenprodukt
   Problem ist nur, dass sie in bestimmten Situationen zuverlässig danebenliegen.
   Und weil sie automatisch ablaufen, merkst du nicht einmal, dass sie am Werk
   sind.
+beschreibung: "18 Denkfehler, die täglich unbemerkt deine Entscheidungen beeinflussen, und warum sie ein Nebenprodukt von Effizienz sind, nicht von Dummheit."
 cover: /images/uploads/18-denkfehler.png
 related_post_slug: 2026-07-13-dein-gehirn-zählt-keine-tage-sondern-erinnerungen-deshalb-rast-die-zeit
 ---

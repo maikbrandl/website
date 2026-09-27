@@ -13,6 +13,7 @@ excerpt: Es gibt einen Grund warum tiefe Konzentration sich anstrengend anfühlt
   war evolutionär sinnvoll. In einer Welt mit Smartphones, Benachrichtigungen
   und endlosem Content trifft dieses uralte System auf eine Umgebung, die es
   permanent aktiviert.
+beschreibung: "Warum tiefe Konzentration sich zuerst anstrengend anfühlt und wie du den Flow-Zustand gezielt aktivierst, obwohl dein Gehirn dagegenarbeitet."
 cover: /images/uploads/desktop-wallpaper-mockup-2-.png
 readingTime: ""
 related_post_slug: 2026-06-08-was-hochleistungslerner-anders-machen-5-gewohnheiten-die-niemand-dir-beibringt-7

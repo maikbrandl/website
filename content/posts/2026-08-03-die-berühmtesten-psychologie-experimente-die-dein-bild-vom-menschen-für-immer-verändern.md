@@ -11,6 +11,7 @@ excerpt: "Es gibt einen Denkfehler, der fast allen gemeinsam ist. Wir erklären
   Tut jemand etwas Schlechtes, denken wir: Was für ein schlechter Mensch. Tun
   wir selbst etwas Fragwürdiges, denken wir: Ich hatte keine Wahl.
   Sozialpsychologen nennen das den fundamentalen Attributionsfehler."
+beschreibung: "Die berühmtesten Psychologie-Experimente der Geschichte und was sie bis heute über blinde Flecken im eigenen Denken verraten."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-6-.png
 related_post_slug: 2026-03-01-willkommen-im-hybridlogs-blog
 ---

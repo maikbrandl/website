@@ -10,6 +10,7 @@ excerpt: '"Zeit" ist das Etikett, das der Verstand auf den Vergleich zwischen
   Gedanke, der jetzt entsteht. Die Zukunft ist ein Gedanke, der jetzt entsteht.
   Das Einzige, das real ist, ist das Erleben selbst, und das hat keine Einheit,
   keinen Anfang, kein Ende.'
+beschreibung: "Zeit ist kein Fluss, den du erlebst, sondern ein Gedanke, der jetzt entsteht. Warum du die Vergangenheit und Zukunft nie wirklich erlebt hast."
 cover: /images/uploads/desktop-wallpaper-mockup-3-.png
 related_post_slug: 2026-06-09-deep-work-was-hat-es-denn-mit-dem-flow-zustand-auf-sich-und-wie-aktiviert-man-ihn
 ---

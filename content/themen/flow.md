@@ -5,6 +5,7 @@ art: "Konzept"
 wissensraum: mind
 gebiet: emotion-motivation
 untergruppe: "Antrieb und Motivation"
+einstieg: true
 lead: "Der Zustand völliger Vertiefung, in dem Zeit und Selbstzweifel verschwinden."
 lesezeit: 4
 vertiefzeit: 12

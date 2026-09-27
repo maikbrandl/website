@@ -10,6 +10,7 @@ excerpt: "Der größte Irrtum über persönliches Wachstum lautet: Ich muss mich
   geht. Wer darauf wartet, wartet ewig. Menschen, die dauerhaft über sich
   hinauswachsen, verlassen sich nicht auf einen Zustand, sondern auf eine
   Struktur, die das Beste aus ihnen herausholt, auch an den Tagen ohne Lust."
+beschreibung: "Warum Motivation allein nicht reicht, um über sich hinauszuwachsen, und was Flow, Ikigai und echtes Selbstwertgefühl wirklich verbindet."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-8-.png
 related_post_slug: 2026-06-09-deep-work-was-hat-es-denn-mit-dem-flow-zustand-auf-sich-und-wie-aktiviert-man-ihn
 ---

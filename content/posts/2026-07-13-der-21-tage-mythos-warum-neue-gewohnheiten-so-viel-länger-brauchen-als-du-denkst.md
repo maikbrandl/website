@@ -11,6 +11,7 @@ excerpt: Dein Gehirn verbraucht etwa 20 Prozent deiner täglichen Energie, obwoh
   Grund, warum es so effizient wie möglich arbeiten will. Für jede
   wiederkehrende Handlung baut es feste neuronale Pfade, die im Alltag ohne
   bewusstes Nachdenken ablaufen können.
+beschreibung: "Warum der bekannte 21-Tage-Mythos falsch ist und neue Gewohnheiten in Wirklichkeit sehr viel länger brauchen, um sich zu festigen."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-3-.png
 related_post_slug: 2026-03-01-willkommen-im-hybridlogs-blog
 ---

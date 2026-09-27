@@ -5,6 +5,7 @@ art: Denkfehler
 wissensraum: mind
 gebiet: kognition-wahrnehmung
 untergruppe: Kognitive Verzerrungen
+einstieg: true
 lead: "Wir suchen, deuten und erinnern Informationen so, dass sie <mark class=\"marker\">bestätigen, was wir ohnehin schon glauben</mark>, und blenden alles aus, was dagegenspricht."
 lesezeit: 4
 bloecke:

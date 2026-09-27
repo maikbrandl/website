@@ -6,6 +6,7 @@ url: "hochleistungslerner-gewohnheiten"
 bereich: "lernen"
 verwandtes_thema: "spaced-repetition"
 category: Lernstrategien
+beschreibung: "Fünf Gewohnheiten, die Hochleistungslerner von allen anderen unterscheiden, und warum reines Lesen und Zusammenfassen kaum etwas bringt."
 cover: /images/uploads/desktop-wallpaper-mockup-1-.png
 ---
 # Was Hochleistungslerner anders machen: 5 Gewohnheiten, die niemand dir beibringt

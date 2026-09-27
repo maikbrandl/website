@@ -7,6 +7,7 @@ bereich: "gewohnheiten"
 verwandtes_thema: "intrinsische-extrinsische-motivation"
 category: Philosophie
 excerpt: ""
+beschreibung: "Disziplin ist kein Talent, das manche haben und andere nicht. Warum sie ein System ist, das du aufbauen kannst, und wie das konkret geht."
 cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-1-.png
 related_post_slug: 2026-06-08-was-hochleistungslerner-anders-machen-5-gewohnheiten-die-niemand-dir-beibringt-7
 ---

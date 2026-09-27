@@ -10,6 +10,7 @@ excerpt: Wir leben in einer Zeit mit mehr Optionen als je zuvor. Mehr Berufe,
   gleichzeitig berichten immer mehr Menschen zwischen 20 und 35, dass sie sich
   orientierungslos fühlen. Dass sie nicht wissen wohin. Dass sie zwar
   vorankommen, aber nicht wirklich ankommen.
+beschreibung: "Wir haben mehr Optionen als je zuvor, und trotzdem fühlen sich viele orientierungslos. Warum mehr Auswahl nicht automatisch weiterhilft."
 cover: /images/uploads/desktop-wallpaper-mockup-6-.png
 readingTime: 10 Minuten
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast

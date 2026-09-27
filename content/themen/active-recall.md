@@ -5,6 +5,7 @@ art: "Lernmethode"
 wissensraum: mind
 gebiet: lernen-verhalten
 untergruppe: "Lernmethoden"
+einstieg: true
 lead: "Wissen aktiv aus dem Kopf holen statt nur zu lesen, das ist die wirksamste Lernmethode überhaupt."
 lesezeit: 3
 vertiefzeit: 10

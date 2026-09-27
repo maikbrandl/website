@@ -6,7 +6,7 @@ import Formatzeichen from '../../components/Formatzeichen.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
 import { formatiereDatum } from '../../lib/datum';
 import { markdownInline, klartext } from '../../lib/markdown';
-import { gruppenAnker } from '../../lib/bausteine';
+import { berechneAbschnitte, gruppenAnker } from '../../lib/bausteine';
 import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
 export async function getStaticPaths() {
@@ -35,25 +35,22 @@ const brotkrumen = [
 
 const geschwister = fachgebiet
   ? (await getCollection('themen'))
-      .filter((t) => t.data.gebiet === fachgebiet.id)
+      .filter((t) => t.data.gebiet === fachgebiet.id && t.id !== entry.id)
       .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
   : [];
 
-// Seitenleiste: eigene Untergruppe zuerst und komplett, andere Gruppen gekuerzt.
-const VORSCHAU_ANDERE_GRUPPEN = 2;
-const eigeneGruppe = daten.untergruppe ?? '';
-const gruppenMap = new Map<string, typeof geschwister>();
-for (const g of geschwister) {
-  const name = g.data.untergruppe ?? '';
-  gruppenMap.set(name, [...(gruppenMap.get(name) ?? []), g]);
-}
-const sidebarGruppen = [...gruppenMap.entries()]
-  .sort(([a], [b]) => (a === eigeneGruppe ? -1 : b === eigeneGruppe ? 1 : a.localeCompare(b, 'de')))
-  .map(([name, eintraege]) => {
-    const eigene = name === eigeneGruppe;
-    const sichtbar = eigene ? eintraege : eintraege.slice(0, VORSCHAU_ANDERE_GRUPPEN);
-    return { name, sichtbar, weitere: eintraege.length - sichtbar.length };
-  });
+// Kompakter Hinweis auf weitere Eintraege aus dem gleichen Fachgebiet, verlinkt
+// auf die Fachgebietsseite mit dem vollstaendigen Kartenraster.
+const VORSCHAU_GESCHWISTER = 6;
+const geschwisterVorschau = geschwister.slice(0, VORSCHAU_GESCHWISTER);
+const geschwisterWeitere = geschwister.length - geschwisterVorschau.length;
+
+// Inhaltsverzeichnis fuer das rechte Verzeichnis: alle Abschnitte ausser den
+// ersten beiden (die den einleitenden "Einstieg" ohne eigene Ueberschrift bilden)
+// und ausser Zitaten/Angeboten, die kein eigenes Sprungziel brauchen.
+const tocEintraege = berechneAbschnitte(daten.bloecke)
+  .slice(2)
+  .filter((a) => a.block.type !== 'zitat' && a.block.type !== 'angebot');
 
 const eigeneHref = `/lexikon/${entry.id}/`;
 const wegeSlugs = (daten.wege ?? []).filter((s): s is string => typeof s === 'string');
@@ -119,53 +116,20 @@ if (faqEintraege.length > 0) {
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <div class="container lexikon-seite">
-    <div class="lexikon-eintrag-layout lexikon-eintrag-layout--kompakt">
-      <aside class="lexikon-sidebar" aria-label="Weitere Einträge aus diesem Fachgebiet">
-        {fachgebiet && geschwister.length > 0 && (
-          <>
-            <p class="lexikon-sidebar__label">{fachgebiet.data.title}</p>
-            {sidebarGruppen.map((gruppe) => (
-              <div class="lexikon-sidebar__gruppe">
-                {gruppe.name && <p class="lexikon-sidebar__gruppentitel">{gruppe.name}</p>}
-                <ul>
-                  {gruppe.sichtbar.map((g) => (
-                    <li>
-                      {g.id === entry.id ? (
-                        <span aria-current="page">{g.data.title ?? g.id}</span>
-                      ) : (
-                        <a href={`/lexikon/${g.id}/`}>{g.data.title ?? g.id}</a>
-                      )}
-                    </li>
-                  ))}
-                  {gruppe.weitere > 0 && (
-                    <li>
-                      {fachgebietOeffentlich ? (
-                        <a href={`/lexikon/fachgebiet/${fachgebiet.id}/#${gruppenAnker(gruppe.name)}`}>+ {gruppe.weitere} weitere</a>
-                      ) : (
-                        <span>+ {gruppe.weitere} weitere</span>
-                      )}
-                    </li>
-                  )}
-                </ul>
-              </div>
-            ))}
-          </>
-        )}
-      </aside>
+    <div data-pagefind-ignore><Brotkrumen items={brotkrumen} /></div>
 
-      <div class="lexikon-haupt lexikon-haupt--eintrag" data-pagefind-body data-pagefind-filter="Format:Lexikon">
-        <div data-pagefind-ignore><Brotkrumen items={brotkrumen} /></div>
+    <header class="lexikon-eintrag-kopf">
+      <h1>{daten.title}</h1>
+      {daten.lead && <p class="prosa lexikon-eintrag-lead" set:html={markdownInline(daten.lead)} />}
+      <p class="lexikon-meta">
+        <span>Lexikon{daten.art ? ` · ${daten.art}` : ''}</span>
+        {daten.lesezeit && <span>{daten.lesezeit} Min.</span>}
+        {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
+      </p>
+    </header>
 
-        <header class="lexikon-eintrag-kopf">
-          <h1>{daten.title}</h1>
-          {daten.lead && <p class="prosa lexikon-eintrag-lead" set:html={markdownInline(daten.lead)} />}
-          <p class="lexikon-meta">
-            <span>Lexikon{daten.art ? ` · ${daten.art}` : ''}</span>
-            {daten.lesezeit && <span>{daten.lesezeit} Min.</span>}
-            {geprueftAmText && <span>geprüft am {geprueftAmText}</span>}
-          </p>
-        </header>
-
+    <div class="lexikon-eintrag-layout" data-pagefind-body data-pagefind-filter="Format:Lexikon">
+      <div class="lexikon-haupt lexikon-haupt--eintrag">
         <div class="lexikon-einstieg">
           <BlockRenderer bloecke={daten.bloecke} bis={2} />
         </div>
@@ -201,7 +165,36 @@ if (faqEintraege.length > 0) {
             </ul>
           </section>
         )}
+
+        {fachgebiet && geschwisterVorschau.length > 0 && (
+          <section class="lexikon-mehr-gebiet">
+            <p class="lexikon-mehr-gebiet__label">Mehr aus {fachgebiet.data.title ?? fachgebiet.id}</p>
+            <ul>
+              {geschwisterVorschau.map((g) => (
+                <li><a href={`/lexikon/${g.id}/`}>{g.data.title ?? g.id}</a></li>
+              ))}
+            </ul>
+            {fachgebietHref && (
+              <a class="lexikon-mehr-gebiet__alle" href={fachgebietHref}>
+                {geschwisterWeitere > 0 ? `Alle ansehen (+ ${geschwisterWeitere} weitere)` : 'Zur Fachgebietsseite'}
+              </a>
+            )}
+          </section>
+        )}
       </div>
+
+      {tocEintraege.length > 0 && (
+        <details class="lexikon-toc" open>
+          <summary>Inhalt</summary>
+          <nav aria-label="Inhalt dieses Eintrags">
+            <ul>
+              {tocEintraege.map((a) => (
+                <li><a href={`#${a.id}`}>{a.titel}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </details>
+      )}
     </div>
   </div>
 </Base>

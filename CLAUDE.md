@@ -84,6 +84,12 @@ Regeln:
 - Vier Formatzeichen überall gleich: Punkt Lexikon, Weglinie Wege, Zeilen Essays, Regler Tools.
 - `prefers-reduced-motion` schaltet alle Animationen ab.
 
+## Rahmen und Raster
+- Äußerer Rahmen überall 1200px (`.container`), mittig. Hintergründe und Flächen dürfen die volle Fensterbreite nutzen, nur der Inhalt bleibt im Rahmen.
+- Übersichtsseiten (Lexikon, Fachgebiet, Essays, Wege, Bereiche) zeigen ihre Einträge als Kartenraster, nie als schmale einspaltige Liste.
+- Lesetext-Seiten (Essay, Wissensweg, Lexikon-Eintrag) haben einen Kopfbereich bis 820px und darunter ein Raster aus Textspalte (`minmax(0, 680px)`) und Verzeichnis (220px, sticky, Abstand mindestens 64px). Unter 900px eine Spalte, Verzeichnis wird zu einem einklappbaren „Inhalt“.
+- Zitate und Hinweisboxen auf Lesetext-Seiten dürfen mit der Klasse `.breit` bis 820px breit werden.
+
 ## Aufbau eines Wissenswegs
 Kurzantwort 40 bis 60 Wörter direkt unter der H1, Autor und „geprüft am“, Auf einen Blick, Warum es schwer ist, Ebenen (je: Was passiert, Woran du es merkst, Was konkret hilft, Beleg, Fazit, Darauf aufbauend), Selbsttest, Plan, Häufig gefragt, Hilfe und Werkzeuge, Grenzen und Quellen, Weitergehen.
 Verkauf höchstens 10 Prozent des Inhalts, erst nach etwa 70 Prozent der Seite, höchstens zwei Angebote plus eine Mail Abfrage, keine Popups. Affiliate Links immer mit „Anzeige“ direkt daneben. Keine Links zu Arzneimitteln.

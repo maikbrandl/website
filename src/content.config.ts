@@ -29,6 +29,13 @@ const quelle = z
   })
   .passthrough();
 
+const untergruppe = z
+  .object({
+    name: z.string().optional().catch(undefined),
+    einleitung: z.string().optional().catch(undefined),
+  })
+  .passthrough();
+
 const themen = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './content/themen' }),
   schema: z
@@ -39,6 +46,7 @@ const themen = defineCollection({
       gebiet: z.string().optional().catch(undefined),
       untergruppe: z.string().optional().catch(undefined),
       lead: z.string().optional().catch(undefined),
+      einstieg: z.boolean().optional().catch(undefined),
       lesezeit: z.number().optional().catch(undefined),
       vertiefzeit: z.number().optional().catch(undefined),
       bloecke: z.array(baustein).optional().catch([]),
@@ -67,6 +75,7 @@ const fachgebiete = defineCollection({
       visibility: z.string().optional().catch(undefined),
       seo_title: z.string().optional().catch(undefined),
       meta_description: z.string().optional().catch(undefined),
+      untergruppen: z.array(untergruppe).optional().catch(undefined),
       ...relaunchFelder,
     })
     .passthrough(),
@@ -80,7 +89,11 @@ const posts = defineCollection({
       date: z.coerce.date().optional().catch(undefined),
       category: z.string().optional().catch(undefined),
       excerpt: z.string().optional().catch(undefined),
+      beschreibung: z.string().optional().catch(undefined),
+      featured: z.boolean().optional().catch(undefined),
       cover: z.string().optional().catch(undefined),
+      cover_alt: z.string().optional().catch(undefined),
+      related_post_slug: z.string().optional().catch(undefined),
       ...relaunchFelder,
     })
     .passthrough(),

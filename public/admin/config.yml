@@ -26,7 +26,10 @@ collections:
       - { label: "Passender Weg", name: "verwandter_weg", widget: "relation", collection: "wissensfragen", search_fields: ["title"], value_field: "{{slug}}", display_fields: ["title"], required: false }
       - { label: "Geprüft am", name: "geprueft_am", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Datum der letzten inhaltlichen Prüfung." }
       - { label: "Teaser", name: "excerpt", widget: "text", required: false }
+      - { label: "Beschreibung (ca. 150 Zeichen, für Vorschaukarten und Meta Description)", name: "beschreibung", widget: "text", required: false }
+      - { label: "Hervorgehoben (oben auf /essays/)", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
+      - { label: "Cover Alt-Text", name: "cover_alt", widget: "string", required: false, hint: "Leer lassen, dann wird der Titel verwendet." }
       - { label: "Lesezeit (z.B. 5 Min.)", name: "readingTime", widget: "string", required: false, hint: "Leer lassen für automatische Berechnung" }
       - label: "Inhalt"
         name: "body"
@@ -79,6 +82,13 @@ collections:
         default: "hidden"
       - { label: "SEO-Titel", name: "seo_title", widget: "string", required: false }
       - { label: "Meta-Beschreibung", name: "meta_description", widget: "text", required: false }
+      - name: "untergruppen"
+        label: "Untergruppen (optional, Einleitungssatz je Untergruppe)"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Name (muss zum Feld Unterbereich der Themen passen)", name: "name", widget: "string" }
+          - { label: "Einleitungssatz", name: "einleitung", widget: "string", required: false }
 
   - name: "themen"
     label: "Lexikon"
@@ -104,6 +114,7 @@ collections:
         value_field: "slug"
         display_fields: ["title"]
       - { label: "Unterbereich (optional)", name: "untergruppe", widget: "string", required: false, hint: "Gruppiert Themen im Baum, z.B. Kognitive Verzerrungen. Themen mit gleichem Text landen in derselben Gruppe." }
+      - { label: "Guter Einstieg (erscheint auf /lexikon/ und der Fachgebietsseite)", name: "einstieg", widget: "boolean", default: false, required: false }
       - { label: "Lead-Satz", name: "lead", widget: "text", hint: "Erscheint grau unter der Überschrift. Markieren mit ==so== ist möglich." }
       - { label: "Kurz lesen (Minuten)", name: "lesezeit", widget: "number", required: false }
       - { label: "Vertiefen (Minuten)", name: "vertiefzeit", widget: "number", required: false }

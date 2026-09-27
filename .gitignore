@@ -10,6 +10,9 @@ dist/
 .astro/
 .wrangler/
 
+# Build-Zwischenordner fuer Bilder aus public/images/uploads, siehe scripts/copy-uploads-cache.mjs
+src/assets/uploads-cache/
+
 # Env
 .env
 .env.*

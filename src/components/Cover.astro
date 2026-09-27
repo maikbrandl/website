@@ -1,0 +1,43 @@
+---
+// Titelbild fuer Essays. Bilder liegen in public/images/uploads (Decap), werden
+// per scripts/copy-uploads-cache.mjs vor jedem Build/Dev-Start nach
+// src/assets/uploads-cache kopiert, damit astro:assets sie optimieren kann.
+// Ohne passendes Bild wird ein einfacher Platzhalter mit dem Titel gezeigt.
+import { Image } from 'astro:assets';
+
+const bilder = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/uploads-cache/*.{png,jpg,jpeg,webp,avif}',
+  { eager: true },
+);
+
+interface Props {
+  src?: string;
+  alt?: string;
+  titel?: string;
+  loading?: 'eager' | 'lazy';
+  sizes?: string;
+  class?: string;
+}
+
+const { src, alt, titel, loading = 'lazy', sizes = '(min-width: 900px) 680px, 100vw', class: klasse } = Astro.props;
+
+const dateiname = src?.split('/').pop();
+const eintrag = dateiname
+  ? Object.entries(bilder).find(([pfad]) => pfad.endsWith('/' + dateiname))
+  : undefined;
+const bild = eintrag?.[1]?.default;
+---
+
+{bild ? (
+  <Image
+    src={bild}
+    alt={alt || titel || ''}
+    loading={loading}
+    sizes={sizes}
+    class={klasse ?? 'essay-cover'}
+  />
+) : (
+  <div class:list={['essay-cover essay-cover--platzhalter', klasse]} aria-hidden={!titel}>
+    {titel && <strong>{titel}</strong>}
+  </div>
+)}

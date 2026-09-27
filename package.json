@@ -7,8 +7,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build && node scripts/generate-redirects.mjs && pagefind --site dist",
+    "dev": "node scripts/copy-uploads-cache.mjs && astro dev",
+    "build": "node scripts/copy-uploads-cache.mjs && astro build && node scripts/generate-redirects.mjs && pagefind --site dist",
     "preview": "astro preview",
     "check:redirects": "node scripts/check-redirects.mjs"
   },

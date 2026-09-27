@@ -1529,6 +1529,16 @@ main {
   margin: 0 0 var(--space-3);
 }
 
+.essay-featured .essay-cover {
+  margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-5);
+  width: calc(100% + var(--space-6) * 2);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.essay-featured .essay-cover--platzhalter {
+  aspect-ratio: 3 / 1;
+}
+
 .essay-featured:hover h2 {
   color: var(--petrol);
 }
@@ -2136,6 +2146,38 @@ main {
   font-size: 20px;
   color: var(--tinte);
   margin-bottom: var(--space-2);
+}
+
+.essay-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.essay-cover--platzhalter {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  background:
+    linear-gradient(var(--linie) 1px, transparent 1px),
+    linear-gradient(90deg, var(--linie) 1px, transparent 1px),
+    var(--papier);
+  background-size: 24px 24px;
+  color: var(--bleistift);
+}
+
+.essay-cover--platzhalter strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--tinte);
+}
+
+.essay-karte__cover {
+  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-4);
+  width: calc(100% + var(--space-5) * 2);
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .essay-karte__teaser {

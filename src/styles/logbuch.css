@@ -1341,9 +1341,20 @@ main {
   padding: var(--space-6) 0 var(--space-8);
 }
 
+.stack-mittel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-4) 0 var(--space-8);
+}
+
 .lexikon-kopf,
 .lexikon-eintrag-kopf {
   max-width: var(--lesebreite);
+}
+
+.lexikon-kopf--kompakt {
+  max-width: none;
 }
 
 .lexikon-kopf__label {
@@ -1471,6 +1482,25 @@ main {
   color: var(--bleistift);
   font-size: 14px;
   line-height: 1.5;
+}
+
+.lexikon-gruppe-einleitung {
+  margin-top: calc(var(--space-3) * -1);
+  margin-bottom: var(--space-4);
+  color: var(--bleistift);
+}
+
+.lexikon-einstieg-badge {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--marker-text);
+  background: rgba(245, 216, 19, 0.3);
+  border-radius: 999px;
+  padding: 2px 10px;
 }
 
 .lexikon-fachgebiete {
@@ -2008,16 +2038,27 @@ main {
   margin: 0;
   padding: 0;
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-4);
+}
+
+.essay-karte {
+  height: 100%;
 }
 
 .essay-karte a {
   display: block;
+  height: 100%;
   padding: var(--space-5);
   background: var(--blatt);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
   text-decoration: none;
+  transition: border-color var(--dauer) ease;
+}
+
+.essay-karte a:hover {
+  border-color: var(--petrol);
 }
 
 .essay-karte__meta {

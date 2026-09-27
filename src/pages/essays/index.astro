@@ -3,16 +3,31 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
-import { formatiereDatum } from '../../lib/datum';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { kuerzeAufSatz, lesezeit } from '../../lib/text';
 
-const bereicheNamen = new Map(
-  (await getCollection('bereiche')).map((b) => [b.id, b.data.title ?? b.id]),
-);
+const bereiche = (await getCollection('bereiche')).sort((a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99));
+const bereicheNamen = new Map(bereiche.map((b) => [b.id, b.data.title ?? b.id]));
 
-const essays = (await getCollection('posts'))
+const wege = await getCollection('wissensfragen');
+const wegeTitel = new Map(wege.map((w) => [w.id, w.data.title ?? w.id]));
+
+const alleEssays = (await getCollection('posts'))
   .filter((p) => p.data.url)
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+
+const featured = alleEssays.find((p) => p.data.featured) ?? null;
+const essays = featured ? alleEssays.filter((p) => p.id !== featured.id) : alleEssays;
+
+const bereicheMitEssays = bereiche.filter((b) => alleEssays.some((p) => p.data.bereich === b.id));
+
+function essayText(essay: (typeof alleEssays)[number]): string {
+  return essay.data.beschreibung ?? essay.data.excerpt ?? '';
+}
+
+function essayLesezeit(essay: (typeof alleEssays)[number]): number {
+  return lesezeit(essay.body ?? essay.data.excerpt ?? essay.data.beschreibung);
+}
 
 const canonical = new URL('/essays/', Astro.site).toString();
 const titel = 'Essays · Hybridlog';
@@ -31,27 +46,93 @@ const jsonLd = [
   <div class="container stack-gross">
     <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Essays' }]} />
 
-    <header class="lexikon-kopf">
+    <header class="lexikon-kopf lexikon-kopf--kompakt">
       <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> Essays</p>
       <h1>Essays</h1>
       <p class="prosa">
-        {essays.length} Essays, die ein Thema ausführlich und persönlich durchdenken.
+        {alleEssays.length} Essays, die ein Thema ausführlich und persönlich durchdenken.
       </p>
     </header>
 
+    {featured && (
+      <section class="essay-featured">
+        <a href={`/essays/${featured.data.url}/`}>
+          <p class="essay-featured__label">Empfohlener Essay</p>
+          <h2>{featured.data.title}</h2>
+          {essayText(featured) && (
+            <p class="prosa">{kuerzeAufSatz(essayText(featured), 200)}</p>
+          )}
+          <p class="essay-karte__meta">
+            {featured.data.bereich && <span>{bereicheNamen.get(featured.data.bereich) ?? featured.data.bereich}</span>}
+            <span>{essayLesezeit(featured)} Min. Lesezeit</span>
+          </p>
+        </a>
+      </section>
+    )}
+
+    {bereicheMitEssays.length > 1 && (
+      <div class="essay-filter" data-essay-filter role="group" aria-label="Essays nach Lebensbereich filtern">
+        <a href="/essays/" class="essay-filter__chip ist-aktiv" data-essay-filter-alle>Alle</a>
+        {bereicheMitEssays.map((b) => (
+          <a href={`/bereiche/${b.id}/`} class="essay-filter__chip" data-essay-filter-chip data-bereich={b.id}>
+            {b.data.title ?? b.id}
+          </a>
+        ))}
+      </div>
+    )}
+
     <ul class="essay-liste">
       {essays.map((essay) => (
-        <li class="essay-karte">
+        <li class="essay-karte" data-essay-karte data-bereich={essay.data.bereich ?? ''}>
           <a href={`/essays/${essay.data.url}/`}>
             <p class="essay-karte__meta">
               {essay.data.bereich && <span>{bereicheNamen.get(essay.data.bereich) ?? essay.data.bereich}</span>}
-              {essay.data.date && <span>{formatiereDatum(essay.data.date.toISOString())}</span>}
+              <span>{essayLesezeit(essay)} Min. Lesezeit</span>
             </p>
             <strong>{essay.data.title}</strong>
-            {essay.data.excerpt && <span class="essay-karte__teaser">{essay.data.excerpt}</span>}
+            {essayText(essay) && <span class="essay-karte__teaser">{kuerzeAufSatz(essayText(essay), 150)}</span>}
+            {essay.data.verwandter_weg && wegeTitel.has(essay.data.verwandter_weg) && (
+              <span class="lexikon-az__badge" title="Gehört zu einem Wissensweg">
+                Teil des Wegs
+              </span>
+            )}
           </a>
         </li>
       ))}
     </ul>
   </div>
+
+  <script is:inline>
+    (function () {
+      var filter = document.querySelector('[data-essay-filter]');
+      if (!filter) return;
+      var chips = Array.prototype.slice.call(filter.querySelectorAll('[data-essay-filter-chip]'));
+      var alleChip = filter.querySelector('[data-essay-filter-alle]');
+      var karten = Array.prototype.slice.call(document.querySelectorAll('[data-essay-karte]'));
+
+      function setzeAktiv(aktiv) {
+        chips.concat([alleChip]).forEach(function (c) {
+          if (c) c.classList.toggle('ist-aktiv', c === aktiv);
+        });
+      }
+
+      function filtere(bereich, ausloeser) {
+        karten.forEach(function (k) {
+          k.hidden = Boolean(bereich) && k.getAttribute('data-bereich') !== bereich;
+        });
+        setzeAktiv(ausloeser);
+      }
+
+      alleChip.addEventListener('click', function (e) {
+        e.preventDefault();
+        filtere('', alleChip);
+      });
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function (e) {
+          e.preventDefault();
+          filtere(chip.getAttribute('data-bereich'), chip);
+        });
+      });
+    })();
+  </script>
 </Base>

@@ -13,6 +13,7 @@ excerpt: Du sitzt stundenlang über deinen Unterlagen, liest alles dreimal durch
   das Gegenteil und gilt in der Lernforschung als eine der wirksamsten
   Techniken, die es gibt.
 beschreibung: "Wiederholtes Lesen fühlt sich produktiv an, bringt aber wenig. Active Recall gilt als eine der wirksamsten Lernmethoden, hier erfährst du warum."
+featured: true
 cover: /images/uploads/desktop-wallpaper-mockup.jpg
 ---
 Du sitzt stundenlang über deinen Unterlagen, liest alles dreimal durch, markierst die wichtigsten Stellen in Gelb und fühlst dich danach sicher. In der Prüfung ist das Wissen dann plötzlich weg. Das Problem ist nicht dein Gedächtnis. Es ist die Methode. Wiederholtes Lesen fühlt sich produktiv an, ist aber eine der schwächsten Lernformen überhaupt. Active Recall macht genau das Gegenteil und gilt in der Lernforschung als eine der wirksamsten Techniken, die es gibt.

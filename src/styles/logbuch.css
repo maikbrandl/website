@@ -1376,6 +1376,103 @@ main {
   margin-bottom: var(--space-4);
 }
 
+.lexikon-filter {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-2);
+  max-width: 480px;
+  margin-top: var(--space-4);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--blatt);
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4);
+  transition: border-color var(--dauer) ease;
+}
+
+.lexikon-filter:focus-within {
+  border-color: var(--petrol);
+}
+
+.lexikon-filter input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  border: none;
+  background: none;
+  color: var(--tinte);
+  padding: var(--space-2) 0;
+}
+
+.lexikon-filter input[type="search"]:focus {
+  outline: none;
+}
+
+.lexikon-filter input[type="search"]::placeholder {
+  color: var(--bleistift);
+}
+
+.lexikon-filter button {
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--tinte);
+  color: var(--papier);
+  padding: 0 var(--space-4);
+  cursor: pointer;
+  transition: background var(--dauer) ease;
+}
+
+.lexikon-filter button:hover {
+  background: var(--petrol);
+}
+
+.lexikon-filter__hinweis {
+  margin-top: var(--space-2);
+  color: var(--bleistift);
+  font-size: 14px;
+}
+
+.karten-raster {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.lexikon-einstieg-karte {
+  display: block;
+  height: 100%;
+  padding: var(--space-4);
+  background: var(--blatt);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color var(--dauer) ease;
+}
+
+.lexikon-einstieg-karte:hover {
+  border-color: var(--petrol);
+}
+
+.lexikon-einstieg-karte strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--tinte);
+  margin-bottom: var(--space-1);
+}
+
+.lexikon-einstieg-karte span {
+  display: block;
+  color: var(--bleistift);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .lexikon-fachgebiete {
   list-style: none;
   margin: 0;
@@ -1412,6 +1509,14 @@ main {
   border-color: var(--petrol);
 }
 
+.lexikon-fachgebiete a.ist-leer {
+  opacity: 0.55;
+}
+
+.lexikon-fachgebiete a.ist-leer:hover {
+  border-color: var(--linie);
+}
+
 .lexikon-fachgebiete a strong {
   display: block;
   font-family: var(--font-display);
@@ -1444,10 +1549,15 @@ main {
 }
 
 .lexikon-az-sprung {
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+  background: var(--papier);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-bottom: var(--space-5);
+  padding: var(--space-2) 0 var(--space-4);
+  margin-bottom: var(--space-1);
 }
 
 .lexikon-az-sprung a {
@@ -1473,6 +1583,24 @@ main {
 .lexikon-az {
   display: grid;
   gap: var(--space-6);
+}
+
+.lexikon-az__gruppe {
+  scroll-margin-top: 120px;
+}
+
+.lexikon-az__badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--petrol);
+  border: 1px solid var(--petrol);
+  border-radius: 999px;
+  padding: 1px 8px;
+  vertical-align: middle;
 }
 
 .lexikon-az__gruppe ul {

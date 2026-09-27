@@ -4,14 +4,19 @@ import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
+import { klartext } from '../../lib/markdown';
+import { grundBuchstabe, kuerzeAufSatz, sortierTitel } from '../../lib/text';
+import { wegBezuegeProLexikonEintrag } from '../../lib/wege';
 
-const alleThemen = (await getCollection('themen')).sort((a, b) =>
-  (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'),
+const alleThemen = await getCollection('themen');
+const alleWege = await getCollection('wissensfragen');
+const wegBezuege = wegBezuegeProLexikonEintrag(alleThemen, alleWege);
+
+const themenSortiert = [...alleThemen].sort((a, b) =>
+  sortierTitel(a.data.title ?? a.id).localeCompare(sortierTitel(b.data.title ?? b.id), 'de'),
 );
 
-const fachgebiete = (await getCollection('fachgebiete'))
-  .filter((f) => f.data.visibility === 'public')
-  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const guteEinstiege = themenSortiert.filter((t) => t.data.einstieg);
 
 const themenProGebiet = new Map<string, number>();
 for (const t of alleThemen) {
@@ -19,10 +24,18 @@ for (const t of alleThemen) {
   themenProGebiet.set(t.data.gebiet, (themenProGebiet.get(t.data.gebiet) ?? 0) + 1);
 }
 
-const gruppen = new Map<string, typeof alleThemen>();
-for (const eintrag of alleThemen) {
-  const titel = eintrag.data.title ?? eintrag.id;
-  const buchstabe = titel.charAt(0).toUpperCase();
+const fachgebiete = (await getCollection('fachgebiete'))
+  .filter((f) => f.data.visibility === 'public')
+  .sort((a, b) => {
+    const anzahlA = themenProGebiet.get(a.id) ?? 0;
+    const anzahlB = themenProGebiet.get(b.id) ?? 0;
+    if ((anzahlA === 0) !== (anzahlB === 0)) return anzahlA === 0 ? 1 : -1;
+    return (a.data.order ?? 99) - (b.data.order ?? 99);
+  });
+
+const gruppen = new Map<string, typeof themenSortiert>();
+for (const eintrag of themenSortiert) {
+  const buchstabe = grundBuchstabe(eintrag.data.title ?? eintrag.id);
   const liste = gruppen.get(buchstabe) ?? [];
   liste.push(eintrag);
   gruppen.set(buchstabe, liste);
@@ -53,21 +66,56 @@ const jsonLd = [
         {alleThemen.length} Begriffe aus Psychologie, Lernen und Philosophie, jeder für sich kurz
         erklärt und mit den passenden Wegen und Fachgebieten verknüpft.
       </p>
+      <form class="lexikon-filter" action="/suche/" method="get" role="search" data-lexikon-filter>
+        <label class="nur-sr" for="lexikon-filter-eingabe">Lexikon filtern</label>
+        <input
+          id="lexikon-filter-eingabe"
+          type="search"
+          name="q"
+          placeholder="Begriff finden, z.B. Confirmation Bias"
+          autocomplete="off"
+        />
+        <button type="submit">Suchen</button>
+      </form>
+      <p class="lexikon-filter__hinweis" data-lexikon-filter-hinweis hidden>
+        Kein Treffer im Lexikon. <a href="/suche/" data-lexikon-filter-suchlink>Ganze Seite durchsuchen</a>
+      </p>
     </header>
 
+    {guteEinstiege.length > 0 && (
+      <section class="lexikon-abschnitt">
+        <h2>Gute Einstiege</h2>
+        <p class="prosa">
+          Noch unsicher, wo du anfangen sollst? Diese Begriffe erklären Grundlegendes am
+          verständlichsten.
+        </p>
+        <ul class="karten-raster">
+          {guteEinstiege.map((eintrag) => (
+            <li>
+              <a class="lexikon-einstieg-karte" href={`/lexikon/${eintrag.id}/`}>
+                <strong>{eintrag.data.title ?? eintrag.id}</strong>
+                <span>{kuerzeAufSatz(klartext(eintrag.data.lead), 110)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <section class="lexikon-abschnitt">
-      <div class="start-abschnitt__kopf">
-        <h2>Nach Fachgebiet</h2>
-      </div>
+      <h2>Nach Fachgebiet</h2>
       <ul class="lexikon-fachgebiete">
         {fachgebiete.map((f) => {
           const anzahl = themenProGebiet.get(f.id) ?? 0;
+          const leer = anzahl === 0;
           return (
             <li>
-              <a href={`/lexikon/fachgebiet/${f.id}/`}>
+              <a href={`/lexikon/fachgebiet/${f.id}/`} class:list={{ 'ist-leer': leer }}>
                 <strong>{f.data.title}</strong>
                 {f.data.description && <span>{f.data.description}</span>}
-                <span class="lexikon-fachgebiete__anzahl">{anzahl} {anzahl === 1 ? 'Begriff' : 'Begriffe'}</span>
+                <span class="lexikon-fachgebiete__anzahl">
+                  {leer ? 'Bald verfügbar' : `${anzahl} ${anzahl === 1 ? 'Begriff' : 'Begriffe'}`}
+                </span>
               </a>
             </li>
           );
@@ -84,18 +132,61 @@ const jsonLd = [
       </nav>
       <div class="lexikon-az">
         {buchstaben.map((b) => (
-          <div class="lexikon-az__gruppe" id={`buchstabe-${b}`}>
+          <div class="lexikon-az__gruppe" id={`buchstabe-${b}`} data-lexikon-gruppe>
             <p class="lexikon-az__buchstabe">{b}</p>
             <ul>
-              {gruppen.get(b)!.map((eintrag) => (
-                <li>
-                  <a href={`/lexikon/${eintrag.id}/`}>{eintrag.data.title ?? eintrag.id}</a>
-                </li>
-              ))}
+              {gruppen.get(b)!.map((eintrag) => {
+                const eintragTitel = eintrag.data.title ?? eintrag.id;
+                const imWeg = wegBezuege.has(eintrag.id);
+                return (
+                  <li data-lexikon-eintrag data-titel={eintragTitel.toLowerCase()}>
+                    <a href={`/lexikon/${eintrag.id}/`}>{eintragTitel}</a>
+                    {imWeg && (
+                      <span class="lexikon-az__badge" title="Kommt in einem Wissensweg vor">
+                        Weg
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
       </div>
     </section>
   </div>
+
+  <script is:inline>
+    (function () {
+      var form = document.querySelector('[data-lexikon-filter]');
+      if (!form) return;
+      var eingabe = form.querySelector('input[name="q"]');
+      var elemente = Array.prototype.slice.call(document.querySelectorAll('[data-lexikon-eintrag]'));
+      var gruppen = Array.prototype.slice.call(document.querySelectorAll('[data-lexikon-gruppe]'));
+      var hinweis = document.querySelector('[data-lexikon-filter-hinweis]');
+      var suchlink = document.querySelector('[data-lexikon-filter-suchlink]');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+      });
+
+      eingabe.addEventListener('input', function () {
+        var wert = eingabe.value.trim().toLowerCase();
+        var treffer = 0;
+        elemente.forEach(function (el) {
+          var eintragTitel = el.getAttribute('data-titel') || '';
+          var passt = !wert || eintragTitel.indexOf(wert) !== -1;
+          el.hidden = !passt;
+          if (passt) treffer += 1;
+        });
+        gruppen.forEach(function (g) {
+          var sichtbar = g.querySelectorAll('[data-lexikon-eintrag]:not([hidden])').length > 0;
+          g.hidden = !sichtbar;
+        });
+        if (hinweis) hinweis.hidden = !wert || treffer > 0;
+        if (suchlink) suchlink.href = '/suche/?q=' + encodeURIComponent(eingabe.value.trim());
+      });
+    })();
+  </script>
 </Base>
+

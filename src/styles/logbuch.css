@@ -2050,8 +2050,14 @@ main {
 }
 
 .weg-toc {
-  display: none;
   font-size: 14px;
+}
+
+.weg-toc summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--tinte);
+  margin-bottom: var(--space-2);
 }
 
 .weg-toc ul {
@@ -2071,6 +2077,12 @@ main {
   color: var(--petrol);
 }
 
+@media (max-width: 899px) {
+  .weg-toc {
+    order: -1;
+  }
+}
+
 .weg-seite:not(:has(.ebenen-tabs__panel:target)) .weg-toc a[data-ebene="1"],
 .weg-seite:has(.ebenen-tabs__panel:nth-child(1):target) .weg-toc a[data-ebene="1"],
 .weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .weg-toc a[data-ebene="2"],
@@ -2084,18 +2096,29 @@ main {
   font-weight: 700;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 900px) {
   .weg-layout {
-    grid-template-columns: minmax(0, 680px) 200px;
-    justify-content: space-between;
+    grid-template-columns: minmax(0, 680px) 220px;
+    column-gap: 64px;
+    justify-content: center;
     align-items: start;
   }
 
   .weg-toc {
-    display: block;
     position: sticky;
     top: calc(var(--space-6) + 56px);
     padding-top: var(--space-6);
+  }
+
+  .weg-toc summary {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .weg-toc summary::-webkit-details-marker,
+  .weg-toc summary::marker {
+    display: none;
+    content: '';
   }
 }
 

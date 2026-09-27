@@ -3,8 +3,11 @@ import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
+import Cover from '../../components/Cover.astro';
 import { formatiereDatum } from '../../lib/datum';
-import { breadcrumbListJsonLd, articleJsonLd } from '../../lib/jsonld';
+import { lesezeit } from '../../lib/text';
+import { faqAusMarkdown } from '../../lib/faq';
+import { breadcrumbListJsonLd, articleJsonLd, faqPageJsonLd } from '../../lib/jsonld';
 
 export async function getStaticPaths() {
   const essays = (await getCollection('posts')).filter((p) => p.data.url);
@@ -16,20 +19,25 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const daten = entry.data;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const bereich = daten.bereich ? await getEntry('bereiche', daten.bereich) : undefined;
 const verwandtesThema = daten.verwandtes_thema ? await getEntry('themen', daten.verwandtes_thema) : undefined;
 const verwandterWeg = daten.verwandter_weg ? await getEntry('wissensfragen', daten.verwandter_weg) : undefined;
+const verwandterEssay = daten.related_post_slug ? await getEntry('posts', daten.related_post_slug) : undefined;
+
+const tocEintraege = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, titel: h.text }));
+const faqEintraege = faqAusMarkdown(entry.body);
 
 const geprueftAmText = formatiereDatum(daten.geprueft_am);
 const datumText = formatiereDatum(daten.date?.toISOString());
+const lesezeitMinuten = lesezeit(entry.body ?? daten.excerpt);
 
 const titel = daten.title ? `${daten.title} · Hybridlog` : 'Essay · Hybridlog';
-const beschreibung = daten.excerpt || daten.title || 'Ein Essay von Hybridlog.';
+const beschreibung = daten.beschreibung || daten.excerpt || daten.title || 'Ein Essay von Hybridlog.';
 const canonical = new URL(`/essays/${daten.url}/`, Astro.site).toString();
 
-const jsonLd = [
+const jsonLd: Record<string, unknown>[] = [
   articleJsonLd({
     headline: daten.title ?? daten.url ?? entry.id,
     description: beschreibung,
@@ -42,6 +50,9 @@ const jsonLd = [
     { name: daten.title ?? entry.id },
   ]),
 ];
+if (faqEintraege.length > 0) {
+  jsonLd.push(faqPageJsonLd(faqEintraege));
+}
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} bild={daten.cover} jsonLd={jsonLd}>
@@ -55,33 +66,107 @@ const jsonLd = [
     />
 
     <article class="essay-eintrag" data-pagefind-body data-pagefind-filter="Format:Essay">
-      <header class="lexikon-eintrag-kopf">
-        <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> Essay</p>
+      <header class="lexikon-eintrag-kopf essay-eintrag__kopf">
+        <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> {daten.category ?? 'Essay'}</p>
         <h1>{daten.title}</h1>
         <p class="lexikon-meta">
           {bereich && <span>{bereich.data.title ?? bereich.id}</span>}
+          <span>{lesezeitMinuten} Min. Lesezeit</span>
           {datumText && <span>{datumText}</span>}
           {geprueftAmText && <span>Geprüft am {geprueftAmText}</span>}
         </p>
       </header>
 
-      <div class="prosa essay-eintrag__text">
-        <Content />
+      {daten.cover && (
+        <Cover src={daten.cover} alt={daten.cover_alt} titel={daten.title} loading="eager" sizes="(min-width: 900px) 680px, 100vw" class="essay-eintrag__cover" />
+      )}
+
+      <div class="essay-layout">
+        <div class="essay-haupt prosa essay-eintrag__text" data-essay-faq>
+          <Content />
+        </div>
+
+        {tocEintraege.length > 0 && (
+          <details class="essay-toc" open>
+            <summary>Inhalt</summary>
+            <nav aria-label="Inhalt dieses Essays">
+              <ul>
+                {tocEintraege.map((eintrag) => (
+                  <li><a href={`#${eintrag.id}`}>{eintrag.titel}</a></li>
+                ))}
+              </ul>
+            </nav>
+          </details>
+        )}
       </div>
 
-      {(verwandtesThema || verwandterWeg) && (
+      {(verwandtesThema || verwandterWeg || verwandterEssay) && (
         <section class="lexikon-abschnitt essay-eintrag__weiter">
-          <h2>Weiterlesen</h2>
-          <ul class="lexikon-liste">
+          <h2>Passt zu diesem Essay</h2>
+          <ul class="essay-liste">
             {verwandterWeg && (
-              <li><a href={`/wege/${verwandterWeg.id}/`}>{verwandterWeg.data.title ?? verwandterWeg.id}</a></li>
+              <li class="essay-karte">
+                <a href={`/wege/${verwandterWeg.id}/`}>
+                  <p class="essay-karte__meta"><span><Formatzeichen typ="wege" /> Wissensweg</span></p>
+                  <strong>{verwandterWeg.data.title ?? verwandterWeg.id}</strong>
+                </a>
+              </li>
             )}
             {verwandtesThema && (
-              <li><a href={`/lexikon/${verwandtesThema.id}/`}>{verwandtesThema.data.title ?? verwandtesThema.id}</a></li>
+              <li class="essay-karte">
+                <a href={`/lexikon/${verwandtesThema.id}/`}>
+                  <p class="essay-karte__meta"><span><Formatzeichen typ="lexikon" /> Lexikon</span></p>
+                  <strong>{verwandtesThema.data.title ?? verwandtesThema.id}</strong>
+                </a>
+              </li>
+            )}
+            {verwandterEssay && verwandterEssay.data.url && (
+              <li class="essay-karte">
+                <a href={`/essays/${verwandterEssay.data.url}/`}>
+                  <p class="essay-karte__meta"><span><Formatzeichen typ="essays" /> Essay</span></p>
+                  <strong>{verwandterEssay.data.title ?? verwandterEssay.id}</strong>
+                </a>
+              </li>
             )}
           </ul>
         </section>
       )}
+
+      <p class="essay-eintrag__zurueck-zeile">
+        <a class="essay-eintrag__zurueck" href="/essays/">Alle Essays</a>
+      </p>
     </article>
   </div>
+
+  <script is:inline>
+    (function () {
+      var artikel = document.querySelector('[data-essay-faq]');
+      if (!artikel) return;
+      var ueberschriften = Array.prototype.slice.call(artikel.querySelectorAll('h2, h3'));
+      var faqUeberschrift = ueberschriften.find(function (h) {
+        return /faq|häufige fragen/i.test(h.textContent || '');
+      });
+      if (!faqUeberschrift) return;
+      var knoten = faqUeberschrift.nextElementSibling;
+      while (knoten && !/^H[1-3]$/.test(knoten.tagName)) {
+        var naechster = knoten.nextElementSibling;
+        var frageEl = knoten.tagName === 'P' ? knoten.querySelector(':scope > strong:first-child') : null;
+        if (frageEl) {
+          var details = document.createElement('details');
+          var summary = document.createElement('summary');
+          summary.textContent = frageEl.textContent;
+          var antwort = document.createElement('p');
+          Array.prototype.slice.call(knoten.childNodes).forEach(function (n) {
+            if (n === frageEl) return;
+            antwort.appendChild(n.cloneNode(true));
+          });
+          details.appendChild(summary);
+          details.appendChild(antwort);
+          knoten.replaceWith(details);
+        }
+        knoten = naechster;
+      }
+    })();
+  </script>
 </Base>
+

@@ -15,8 +15,6 @@ cover: /images/uploads/desktop-wallpaper-mockup-6-.png
 readingTime: 10 Minuten
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---
-# Warum du dich verloren fühlst: Was passiert wenn Freiheit zur Last wird
-
 Du sitzt abends da. Der Tag war voll, du warst beschäftigt, hast funktioniert. Und trotzdem ist da dieses Gefühl. Keine konkrete Ursache, kein benennbares Problem. Nur eine diffuse Leere, die sich breit macht sobald es still wird.
 
 Kein Zeichen von Schwäche. Kein Zeichen dass du undankbar bist. Es ist das Standardgefühl einer Generation, der man gesagt hat: Du kannst alles sein. Und die jetzt genau deswegen nicht weiß, was sie sein will.

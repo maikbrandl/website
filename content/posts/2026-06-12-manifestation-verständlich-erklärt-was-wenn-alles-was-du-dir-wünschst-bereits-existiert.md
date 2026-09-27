@@ -15,8 +15,6 @@ beschreibung: "Was hinter dem Manifestations-Trend wirklich steckt, und warum de
 cover: /images/uploads/desktop-wallpaper-mockup-5-.png
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---
-# Was wenn alles, was du dir wünschst, bereits existiert?
-
 *Eine Idee aus der Physik, die das Konzept der Manifestation endlich verständlich macht.*
 
 ## Der Moment, der alles in Frage stellt

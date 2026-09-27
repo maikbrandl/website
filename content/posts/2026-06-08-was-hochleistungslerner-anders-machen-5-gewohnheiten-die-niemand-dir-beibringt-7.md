@@ -9,8 +9,6 @@ category: Lernstrategien
 beschreibung: "Fünf Gewohnheiten, die Hochleistungslerner von allen anderen unterscheiden, und warum reines Lesen und Zusammenfassen kaum etwas bringt."
 cover: /images/uploads/desktop-wallpaper-mockup-1-.png
 ---
-# Was Hochleistungslerner anders machen: 5 Gewohnheiten, die niemand dir beibringt
-
 Du kennst das Gefühl. Stundenlang am Schreibtisch gesessen, Texte gelesen, Zusammenfassungen geschrieben, Karteikarten gemacht. Und trotzdem sitzt du eine Woche später vor dem gleichen Stoff und hast das Gefühl, ihn zum ersten Mal zu sehen. Das ist kein Zeichen von mangelnder Intelligenz. Es ist kein Zeichen von Faulheit. Es ist ein Zeichen dafür, dass du lernst, wie es dir beigebracht wurde. Und nicht so, wie es tatsächlich funktioniert.
 
 Hochleistungslerner unterscheiden sich nicht durch mehr Disziplin, mehr Zeit oder bessere Gene. Sie unterscheiden sich durch ein grundlegend anderes Verständnis davon, was Lernen überhaupt ist. Dieser Artikel zeigt dir fünf Gewohnheiten, die in keinem Schulbuch stehen, aber den Unterschied machen zwischen Stoff, der wieder verschwindet, und Wissen, das bleibt.

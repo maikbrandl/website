@@ -2271,6 +2271,109 @@ main {
   color: var(--tinte);
 }
 
+.essay-eintrag__text p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  margin-bottom: var(--space-5);
+}
+
+.essay-eintrag__text h2,
+.essay-eintrag__text h3 {
+  margin-top: var(--space-7);
+}
+
+.essay-eintrag__text h2 {
+  position: relative;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--linie);
+}
+
+.essay-eintrag__text h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 40px;
+  height: 2px;
+  background: var(--marker);
+  border-radius: 2px;
+}
+
+.essay-eintrag__text h3 {
+  color: var(--marker-text);
+}
+
+.essay-eintrag__text ul,
+.essay-eintrag__text ol {
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.essay-eintrag__text li {
+  position: relative;
+  padding-left: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.essay-eintrag__text ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--marker);
+}
+
+.essay-eintrag__text ol {
+  counter-reset: essay-li;
+}
+
+.essay-eintrag__text ol li {
+  counter-increment: essay-li;
+  padding-left: var(--space-6);
+}
+
+.essay-eintrag__text ol li::before {
+  content: counter(essay-li);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--marker-text);
+  background: var(--marker-flaeche);
+  border-radius: 999px;
+}
+
+.essay-eintrag__text blockquote {
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--marker);
+  background: var(--blatt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--tinte);
+}
+
+.essay-eintrag__text blockquote p {
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.essay-eintrag__text strong {
+  color: var(--tinte);
+}
+
 .essay-eintrag__text details {
   margin: var(--space-3) 0;
   padding: var(--space-3) var(--space-4);

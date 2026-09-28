@@ -62,10 +62,6 @@ const jsonLd = [
     <header class="lexikon-kopf">
       <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Lexikon</p>
       <h1>Kurz erklärt, von A bis Z</h1>
-      <p class="prosa">
-        {alleThemen.length} Begriffe aus Psychologie, Lernen und Philosophie, jeder für sich kurz
-        erklärt und mit den passenden Wegen und Fachgebieten verknüpft.
-      </p>
       <form class="lexikon-filter" action="/suche/" method="get" role="search" data-lexikon-filter>
         <label class="nur-sr" for="lexikon-filter-eingabe">Lexikon filtern</label>
         <input
@@ -77,6 +73,7 @@ const jsonLd = [
         />
         <button type="submit">Suchen</button>
       </form>
+      <p class="lexikon-kopf__unterzeile">Wissensinhalte aus Psychologie, Lernen, Philosophie und mehr</p>
       <p class="lexikon-filter__hinweis" data-lexikon-filter-hinweis hidden>
         Kein Treffer im Lexikon. <a href="/suche/" data-lexikon-filter-suchlink>Ganze Seite durchsuchen</a>
       </p>

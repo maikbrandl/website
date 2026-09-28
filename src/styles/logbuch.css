@@ -1370,6 +1370,19 @@ main {
   margin: 0 0 var(--space-2);
 }
 
+.lexikon-kopf__unterzeile {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  color: var(--bleistift);
+}
+
+@media (max-width: 599px) {
+  .lexikon-kopf h1 {
+    font-size: 26px;
+    white-space: nowrap;
+  }
+}
+
 .lexikon-eintrag-lead {
   color: var(--bleistift);
 }

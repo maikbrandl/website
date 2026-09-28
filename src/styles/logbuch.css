@@ -1545,6 +1545,7 @@ main {
 .essay-featured .essay-cover {
   margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-5);
   width: calc(100% + var(--space-6) * 2);
+  max-width: calc(100% + var(--space-6) * 2);
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
@@ -2225,6 +2226,7 @@ main {
 .essay-karte__cover {
   margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-4);
   width: calc(100% + var(--space-5) * 2);
+  max-width: calc(100% + var(--space-5) * 2);
   border-radius: var(--radius) var(--radius) 0 0;
 }
 

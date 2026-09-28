@@ -34,7 +34,7 @@ const bild = eintrag?.[1]?.default;
     alt={alt || titel || ''}
     loading={loading}
     sizes={sizes}
-    class={klasse ?? 'essay-cover'}
+    class:list={['essay-cover', klasse]}
   />
 ) : (
   <div class:list={['essay-cover essay-cover--platzhalter', klasse]} aria-hidden={!titel}>

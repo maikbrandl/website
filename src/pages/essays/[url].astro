@@ -19,14 +19,13 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const daten = entry.data;
-const { Content, headings } = await render(entry);
+const { Content } = await render(entry);
 
 const bereich = daten.bereich ? await getEntry('bereiche', daten.bereich) : undefined;
 const verwandtesThema = daten.verwandtes_thema ? await getEntry('themen', daten.verwandtes_thema) : undefined;
 const verwandterWeg = daten.verwandter_weg ? await getEntry('wissensfragen', daten.verwandter_weg) : undefined;
 const verwandterEssay = daten.related_post_slug ? await getEntry('posts', daten.related_post_slug) : undefined;
 
-const tocEintraege = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, titel: h.text }));
 const faqEintraege = faqAusMarkdown(entry.body);
 
 const geprueftAmText = formatiereDatum(daten.geprueft_am);
@@ -85,19 +84,6 @@ if (faqEintraege.length > 0) {
         <div class="essay-haupt prosa essay-eintrag__text" data-essay-faq>
           <Content />
         </div>
-
-        {tocEintraege.length > 0 && (
-          <details class="essay-toc" open>
-            <summary>Inhalt</summary>
-            <nav aria-label="Inhalt dieses Essays">
-              <ul>
-                {tocEintraege.map((eintrag) => (
-                  <li><a href={`#${eintrag.id}`}>{eintrag.titel}</a></li>
-                ))}
-              </ul>
-            </nav>
-          </details>
-        )}
       </div>
 
       {(verwandtesThema || verwandterWeg || verwandterEssay) && (

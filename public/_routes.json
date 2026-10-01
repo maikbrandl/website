@@ -9,7 +9,20 @@
     "/lernjournal.html",
     "/studienplaner.html",
     "/notizbuch.html",
-    "/workoutlogbuch.html"
+    "/workoutlogbuch.html",
+    "/plattform",
+    "/blog-artikel",
+    "/blog-artikel/",
+    "/blog",
+    "/blog/",
+    "/lernjournal",
+    "/lernjournal/",
+    "/studienplaner",
+    "/studienplaner/",
+    "/notizbuch",
+    "/notizbuch/",
+    "/workoutlogbuch",
+    "/workoutlogbuch/"
   ],
   "exclude": []
 }

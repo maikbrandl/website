@@ -56,7 +56,7 @@ Hybridlog ist eine deutschsprachige Wissensplattform über den Menschen. Kern si
 | `/lernjournal.html`, `/studienplaner.html`, `/notizbuch.html`, `/workoutlogbuch.html` | `/journale/<name>/` |
 | `/impressum.html`, `/datenschutz.html` | `/impressum/`, `/datenschutz/` |
 
-Unbekanntes X leitet auf die Übersicht des Typs, nie 404. `utm_` Parameter bleiben erhalten.
+Unbekanntes X leitet auf die Übersicht des Typs, nie 404. `utm_` Parameter bleiben erhalten. Jede alte Adresse gilt auch ohne `.html` und mit `/` am Ende, weil die alte Seite auf Cloudflare ohne Endung lief und Pinterest Pins diese Form nutzen. Neue Varianten immer auch in `public/_routes.json` und `legacy-urls.txt` eintragen.
 
 ## Technische Vorgaben
 - **Tolerante Schemas:** Zod stoppt sonst den Build. Jedes Objekt `.passthrough()`, jedes Feld `.optional().catch(undefined)`, Listen `.catch([])`. Probleme per `console.warn` mit Dateiname melden. Unbekannte Blocktypen überspringen und warnen.

@@ -23,6 +23,14 @@ Hybridlog ist eine deutschsprachige Wissensplattform über den Menschen. Kern si
 - Bestehende Tools (`tools/`, `human-map/`) und `images/` liegen unverändert unter `public/`. Ausnahme: `/tools/` Übersicht und `/tools/denkschule/` sind Astro Seiten.
 - `legacy/` enthält die alte Seite nur als Lesevorlage. Nichts daraus ausliefern oder importieren.
 
+## Hosting und Livegang
+- Zwei getrennte Cloudflare Pages Projekte am selben Repo `maikbrandl/website`:
+  - **Alte Seite:** baut `master` ohne Build Schritt und liefert das Repo direkt aus. Hängt bis zum Livegang an `hybridlog.de`.
+  - **`hybridlog-relaunch`:** Produktions-Branch `relaunch`, Build `npm run build`, Ausgabe `dist`, Variable `NODE_VERSION` = 22.
+- **Nie `relaunch` nach `master` mergen, solange die alte Seite noch `master` baut.** Sonst liefert das alte Projekt den Astro Quellcode statt einer fertigen Seite aus.
+- **Livegang per Domain Umzug, nicht per Merge:** `hybridlog.de` und `www.hybridlog.de` im alten Projekt unter Benutzerdefinierte Domänen entfernen und im Projekt `hybridlog-relaunch` hinzufügen. Danach `npm run check:redirects -- https://hybridlog.de`. Rückweg: Domains zurück ans alte Projekt hängen.
+- **Aufräumen nach dem Livegang (in Ruhe):** `relaunch` nach `master` mergen, in `hybridlog-relaunch` den Produktions-Branch auf `master` stellen, in `public/admin/config.yml` `backend.branch` auf `master`, altes Projekt löschen. Bis dahin bleibt Decap auf `relaunch`, weil genau dieser Branch live gebaut wird.
+
 ## Seitenstruktur und Adressen
 - `/` Startseite mit Frage Einstieg
 - `/wege/<slug>/` Wissenswege, `/bereiche/<bereich>/` Lebensbereiche
@@ -56,17 +64,17 @@ Unbekanntes X leitet auf die Übersicht des Typs, nie 404. `utm_` Parameter blei
 - **lastmod:** `geprueft_am`, sonst `date` aus dem Frontmatter, sonst Datum aus dem Dateinamen (Essays), sonst kein lastmod. Nie das Dateisystem Datum, das ist beim Cloudflare Build für alle Dateien gleich.
 - **Cloudflare saubere Adressen:** Pages leitet `/x.html` selbst mit 308 auf `/x` um. Prüfskripte akzeptieren 301 und 308 und folgen der Kette.
 - **Middleware:** Functions können keine Dateien lesen. Die Tabelle kommt per `env.ASSETS.fetch(new URL('/redirects.json', request.url))` und wird im Modulspeicher gehalten. Alles, was nicht passt, geht per `next()` durch.
-- **Decap Branch:** Auf `relaunch` steht `backend.branch: relaunch`. Beim Livegang zurück auf `master`. Nie auf `master` umstellen, solange der Relaunch nicht live ist.
+- **Decap Branch:** Auf `relaunch` steht `backend.branch: relaunch`. Erst beim Aufräumen nach dem Livegang auf `master` umstellen (siehe Hosting und Livegang), nie vorher.
 - **Formulare ohne JavaScript:** Das Suchfeld ist ein GET Formular auf `/suche/?q=`.
-- **Bekannte Lücke:** Tools und Human Map behalten vorerst ihr altes Aussehen, nur ihre Header Links zeigen auf die neue Seite.
+- **Bekannte Lücke:** Tools und Human Map behalten vorerst ihr altes Aussehen. Kopfzeile, Werkzeugzeile und mobile Leiste kommen aber wie auf der Hauptseite aus `public/tools/shared/site-chrome.css` und `site-chrome.js`, das Markup steht statisch in jeder Tool-Seite. Neue Tool-Seiten bekommen dieses Markup ebenfalls.
 
 ## Design: Logbuch
 Farben nur über Tokens, hell und dunkel. Dunkel gilt bei `prefers-color-scheme: dark` unter `:root:not([data-theme="light"])` und bei `:root[data-theme="dark"]`.
 
 | Token | Hell | Dunkel |
 |---|---|---|
-| --papier (Seitengrund) | #ECEBE3 | #14130F |
-| --blatt (Karten) | #F6F5EF | #1D1C17 |
+| --papier (Seitengrund) | #faf9f9 | #0E100F |
+| --blatt (Karten) | #ffffff | #1f1f1f |
 | --tinte (Text) | #16150F | #ECEAE2 |
 | --bleistift (Nebentext) | #5F5B50 | #A29E8F |
 | --linie | #D3D0C3 | #302E27 |

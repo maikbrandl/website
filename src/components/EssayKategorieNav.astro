@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  // Kategorie, die auf der aktuellen Seite hervorgehoben und aufgeklappt werden soll.
+  aktiveKategorie?: string;
+  // url des aktuell angezeigten Essays, fuer die Hervorhebung in der aufgeklappten Liste.
+  aktuellerEintrag?: string;
+}
+
+const { aktiveKategorie, aktuellerEintrag } = Astro.props as Props;
+
+const essaysProKategorie = new Map<string, Awaited<ReturnType<typeof getCollection<'posts'>>>>();
+for (const p of await getCollection('posts')) {
+  if (!p.data.url || !p.data.category) continue;
+  const liste = essaysProKategorie.get(p.data.category) ?? [];
+  liste.push(p);
+  essaysProKategorie.set(p.data.category, liste);
+}
+for (const liste of essaysProKategorie.values()) {
+  liste.sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'));
+}
+
+const kategorien = Array.from(essaysProKategorie.keys()).sort((a, b) => a.localeCompare(b, 'de'));
+---
+
+<nav class="seiten-nav" aria-label="Kategorien der Essays">
+  <p class="seiten-nav__label">Kategorie</p>
+  <ul class="seiten-nav__liste">
+    {kategorien.map((kategorie) => {
+      const eintraege = essaysProKategorie.get(kategorie) ?? [];
+      const istAktiv = aktiveKategorie === kategorie;
+      return (
+        <li>
+          <details class="seiten-nav__eintrag" open={istAktiv}>
+            <summary aria-current={istAktiv ? 'true' : undefined}>
+              <span>{kategorie}</span>
+              <span class="seiten-nav__anzahl">{eintraege.length}</span>
+            </summary>
+            <ul class="seiten-nav__unterliste">
+              {eintraege.map((p) => (
+                <li>
+                  <a href={`/essays/${p.data.url}/`} aria-current={p.data.url === aktuellerEintrag ? 'true' : undefined}>
+                    {p.data.title ?? p.id}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

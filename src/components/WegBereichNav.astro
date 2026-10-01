@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  // Id des Lebensbereichs, der auf der aktuellen Seite hervorgehoben und aufgeklappt werden soll.
+  aktiverBereich?: string;
+  // Id des aktuell angezeigten Wissenswegs, fuer die Hervorhebung in der aufgeklappten Liste.
+  aktuellerEintrag?: string;
+}
+
+const { aktiverBereich, aktuellerEintrag } = Astro.props as Props;
+
+const alleWege = await getCollection('wissensfragen');
+
+const wegeProBereich = new Map<string, typeof alleWege>();
+for (const w of alleWege) {
+  if (!w.data.bereich) continue;
+  const liste = wegeProBereich.get(w.data.bereich) ?? [];
+  liste.push(w);
+  wegeProBereich.set(w.data.bereich, liste);
+}
+for (const liste of wegeProBereich.values()) {
+  liste.sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'));
+}
+
+const bereiche = (await getCollection('bereiche')).sort(
+  (a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99),
+);
+const sichtbareBereiche = bereiche.filter((b) => (wegeProBereich.get(b.id)?.length ?? 0) > 0);
+---
+
+<nav class="seiten-nav" aria-label="Lebensbereiche der Wissenswege">
+  <p class="seiten-nav__label">Lebensbereich</p>
+  <ul class="seiten-nav__liste">
+    {sichtbareBereiche.map((b) => {
+      const eintraege = wegeProBereich.get(b.id) ?? [];
+      const istAktiv = aktiverBereich === b.id;
+      return (
+        <li>
+          <details class="seiten-nav__eintrag" open={istAktiv}>
+            <summary aria-current={istAktiv ? 'true' : undefined}>
+              <span>{b.data.title ?? b.id}</span>
+              <span class="seiten-nav__anzahl">{eintraege.length}</span>
+            </summary>
+            <ul class="seiten-nav__unterliste">
+              {eintraege.map((w) => (
+                <li>
+                  <a href={`/wege/${w.id}/`} aria-current={w.id === aktuellerEintrag ? 'true' : undefined}>
+                    {w.data.title ?? w.id}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="seiten-nav__alle" href={`/bereiche/${b.id}/`}>Zur Bereichsseite</a>
+          </details>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

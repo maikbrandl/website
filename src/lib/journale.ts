@@ -1,4 +1,4 @@
-// Die vier hybridlog Journale. Statisch, aus legacy/*.html uebernommen, kein CMS noetig.
+// Die vier Hybridlog Journale. Statisch, aus legacy/*.html uebernommen, kein CMS noetig.
 export interface JournalEintrag {
   slug: string;
   titel: string;
@@ -11,6 +11,7 @@ export interface JournalEintrag {
   asin?: string;
   amazonUrl: string;
   bild: string;
+  bilder?: string[];
   highlights: string[];
   faq: { frage: string; antwort: string }[];
 }
@@ -22,13 +23,19 @@ export const JOURNALE: JournalEintrag[] = [
     kicker: 'Lernjournal',
     h1: 'Lerne smarter. Nicht härter.',
     untertitel:
-      'Das hybridlog Lernjournal hilft dir, deinen Lernfortschritt systematisch zu tracken, Schwächen zu erkennen und deine Lernmethoden kontinuierlich zu verbessern.',
+      'Das Hybridlog Lernjournal hilft dir, deinen Lernfortschritt systematisch zu tracken, Schwächen zu erkennen und deine Lernmethoden kontinuierlich zu verbessern.',
     seiten: 190,
     format: 'A5',
     einband: 'Hardcover',
     asin: 'B0DJZ9GGYS',
     amazonUrl: 'https://link.amazon/B04iIGIRG',
     bild: '/images/Lernjournal%20Produktbilder/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png',
+    bilder: [
+      '/images/Lernjournal%20Produktbilder/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png',
+      '/images/Lernjournal%20Produktbilder/Neu/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el.png',
+      '/images/Lernjournal%20Produktbilder/Neu/copy-of-mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el.png',
+      '/images/Lernjournal%20Produktbilder/Neu/copy-of-copy-of-mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el.png',
+    ],
     highlights: [
       '190 Seiten für nachhaltiges Wissenstracking',
       'A5 Hardcover, kompakt und langlebig',
@@ -43,7 +50,7 @@ export const JOURNALE: JournalEintrag[] = [
           'Ein Lernjournal ist ein strukturiertes Notizbuch, das beim nachhaltigen Lernen hilft. Es kombiniert Wissenstracking, Reflexionsfragen und Lernfortschritts-Seiten in einem Buch.',
       },
       {
-        frage: 'Wie viele Seiten hat das hybridlog Lernjournal?',
+        frage: 'Wie viele Seiten hat das Hybridlog Lernjournal?',
         antwort: 'Das Lernjournal hat 190 Seiten im A5-Format mit Hardcover.',
       },
       {
@@ -59,13 +66,19 @@ export const JOURNALE: JournalEintrag[] = [
     kicker: 'Studienplaner',
     h1: 'Dein Semester. Dein System.',
     untertitel:
-      'Der hybridlog Studienplaner gibt dir die Werkzeuge an die Hand, um dein Semester von Anfang bis Ende strukturiert und effizient zu gestalten.',
+      'Der Hybridlog Studienplaner gibt dir die Werkzeuge an die Hand, um dein Semester von Anfang bis Ende strukturiert und effizient zu gestalten.',
     seiten: 311,
     format: 'A5',
     einband: 'Hardcover',
     asin: 'B0FRYTVJL1',
     amazonUrl: 'https://link.amazon/B00gkg4Et',
     bild: '/images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png',
+    bilder: [
+      '/images/Studentenplaner/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646(1).png',
+      '/images/Studentenplaner/Mockup/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(1).png',
+      '/images/Studentenplaner/Mockup/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(2).png',
+      '/images/Studentenplaner/Mockup/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(3).png',
+    ],
     highlights: [
       '311 Seiten mit klarer Struktur',
       'A5 Hardcover, robust und handlich',
@@ -75,8 +88,8 @@ export const JOURNALE: JournalEintrag[] = [
     ],
     faq: [
       {
-        frage: 'Wie viele Seiten hat der hybridlog Studienplaner?',
-        antwort: 'Der hybridlog Studienplaner hat 311 Seiten im A5-Format mit Hardcover.',
+        frage: 'Wie viele Seiten hat der Hybridlog Studienplaner?',
+        antwort: 'Der Hybridlog Studienplaner hat 311 Seiten im A5-Format mit Hardcover.',
       },
       {
         frage: 'Was ist im Studienplaner enthalten?',
@@ -96,13 +109,19 @@ export const JOURNALE: JournalEintrag[] = [
     kicker: 'Schul-Notizbuch',
     h1: 'Notizen, die hängen bleiben.',
     untertitel:
-      'Das hybridlog Schul-Notizbuch bringt die bewährte Cornell-Methode in ein hochwertiges A4-Format, für Notizen, die wirklich beim Lernen helfen.',
+      'Das Hybridlog Schul-Notizbuch bringt die bewährte Cornell-Methode in ein hochwertiges A4-Format, für Notizen, die wirklich beim Lernen helfen.',
     seiten: 125,
     format: 'A4',
     einband: 'Hardcover',
     asin: 'B0FRMHZBB8',
     amazonUrl: 'https://link.amazon/B0cXEUPWO',
     bild: '/images/Schul-Notizbuch/Mockups%20fertig/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646.png',
+    bilder: [
+      '/images/Schul-Notizbuch/Mockups%20fertig/mockup-of-a-hardcover-book-featuring-a-customizable-background-33646.png',
+      '/images/Schul-Notizbuch/Mockups%20fertig/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(1).png',
+      '/images/Schul-Notizbuch/Mockups%20fertig/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(2).png',
+      '/images/Schul-Notizbuch/Mockups%20fertig/mockup-featuring-an-open-book-lying-on-a-solid-color-surface-852-el(3).png',
+    ],
     highlights: [
       '125 Seiten im Cornell-Layout',
       'A4 Hardcover, viel Platz für Notizen',
@@ -117,7 +136,7 @@ export const JOURNALE: JournalEintrag[] = [
           'Die Cornell-Methode ist eine bewährte Notiztechnik, bei der das Blatt in drei Bereiche aufgeteilt wird: Notizen, Stichworte und Zusammenfassung. Das fördert aktives Lernen und einfache Wiederholung.',
       },
       {
-        frage: 'Wie viele Seiten hat das hybridlog Schul-Notizbuch?',
+        frage: 'Wie viele Seiten hat das Hybridlog Schul-Notizbuch?',
         antwort: 'Das Schul-Notizbuch hat 125 Seiten im A4-Format mit Hardcover.',
       },
       {
@@ -133,12 +152,18 @@ export const JOURNALE: JournalEintrag[] = [
     kicker: 'Workout Logbuch',
     h1: 'Maximiere deinen Fortschritt.',
     untertitel:
-      'Dokumentiere jedes Workout klar und effektiv. Das hybridlog Workout Logbuch gibt dir die Struktur, um dein Training messbar und nachhaltig erfolgreicher zu machen.',
+      'Dokumentiere jedes Workout klar und effektiv. Das Hybridlog Workout Logbuch gibt dir die Struktur, um dein Training messbar und nachhaltig erfolgreicher zu machen.',
     seiten: 206,
     format: 'A5',
     einband: 'Ringbuch',
     amazonUrl: 'https://link.amazon/B08vdkWlC',
     bild: '/images/Workoutlogbuch/1.png',
+    bilder: [
+      '/images/Workoutlogbuch/1.png',
+      '/images/Workoutlogbuch/4.png',
+      '/images/Workoutlogbuch/5.png',
+      '/images/Workoutlogbuch/7.png',
+    ],
     highlights: [
       'Maximaler Fortschritt, erkenne sofort, ob du stärker wirst',
       'Intensität festhalten: RPE/RIR, Pausenzeiten und Sätze',

@@ -1,8 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import Kurzantwort from '../../components/Kurzantwort.astro';
+import WegBereichNav from '../../components/WegBereichNav.astro';
 import BlockRenderer from '../../components/blocks/BlockRenderer.astro';
 import { berechneAbschnitte } from '../../lib/bausteine';
 import { formatiereDatum } from '../../lib/datum';
@@ -75,14 +75,10 @@ if (faqEintraege.length > 0) {
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <div class="container weg-seite">
-    <Brotkrumen
-      items={[
-        { label: 'Wege', href: '/wege/' },
-        ...(bereich ? [{ label: bereich.data.title ?? bereich.id, href: `/bereiche/${bereich.id}/` }] : []),
-      ]}
-    />
+    <div class="seiten-raster">
+      <WegBereichNav aktiverBereich={daten.bereich} aktuellerEintrag={entry.id} />
 
-    <div data-pagefind-body data-pagefind-filter="Format:Weg">
+      <div class="seiten-inhalt" data-pagefind-body data-pagefind-filter="Format:Weg">
     <header class="weg-kopf">
       <h1>{daten.title}</h1>
 
@@ -147,6 +143,7 @@ if (faqEintraege.length > 0) {
         </details>
       )}
     </div>
+      </div>
     </div>
   </div>
 </Base>

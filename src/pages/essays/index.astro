@@ -1,11 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import Cover from '../../components/Cover.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
-import { kuerzeAufSatz, lesezeit } from '../../lib/text';
+import { lesezeit } from '../../lib/text';
 
 const bereiche = (await getCollection('bereiche')).sort((a, b) => (a.data.reihenfolge ?? 99) - (b.data.reihenfolge ?? 99));
 const bereicheNamen = new Map(bereiche.map((b) => [b.id, b.data.title ?? b.id]));
@@ -17,14 +16,9 @@ const alleEssays = (await getCollection('posts'))
   .filter((p) => p.data.url)
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 
-const featured = alleEssays.find((p) => p.data.featured) ?? null;
-const essays = featured ? alleEssays.filter((p) => p.id !== featured.id) : alleEssays;
+const essays = alleEssays;
 
 const bereicheMitEssays = bereiche.filter((b) => alleEssays.some((p) => p.data.bereich === b.id));
-
-function essayText(essay: (typeof alleEssays)[number]): string {
-  return essay.data.beschreibung ?? essay.data.excerpt ?? '';
-}
 
 function essayLesezeit(essay: (typeof alleEssays)[number]): number {
   return lesezeit(essay.body ?? essay.data.excerpt ?? essay.data.beschreibung);
@@ -44,34 +38,19 @@ const jsonLd = [
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <section class="kopfband">
+    <div class="container kopfband__inner">
+      <header class="lexikon-kopf lexikon-kopf--kompakt">
+        <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> Essays</p>
+        <h1>Essays</h1>
+        <p class="prosa">
+          {alleEssays.length} Essays, die ein Thema ausführlich und persönlich durchdenken.
+        </p>
+      </header>
+    </div>
+  </section>
+
   <div class="container stack-gross">
-    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Essays' }]} />
-
-    <header class="lexikon-kopf lexikon-kopf--kompakt">
-      <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> Essays</p>
-      <h1>Essays</h1>
-      <p class="prosa">
-        {alleEssays.length} Essays, die ein Thema ausführlich und persönlich durchdenken.
-      </p>
-    </header>
-
-    {featured && (
-      <section class="essay-featured">
-        <a href={`/essays/${featured.data.url}/`}>
-          <Cover src={featured.data.cover} alt={featured.data.cover_alt} titel={featured.data.title} loading="eager" sizes="1200px" />
-          <p class="essay-featured__label">Empfohlener Essay</p>
-          <h2>{featured.data.title}</h2>
-          {essayText(featured) && (
-            <p class="prosa">{kuerzeAufSatz(essayText(featured), 200)}</p>
-          )}
-          <p class="essay-karte__meta">
-            {featured.data.bereich && <span>{bereicheNamen.get(featured.data.bereich) ?? featured.data.bereich}</span>}
-            <span>{essayLesezeit(featured)} Min. Lesezeit</span>
-          </p>
-        </a>
-      </section>
-    )}
-
     {bereicheMitEssays.length > 1 && (
       <div class="essay-filter" data-essay-filter role="group" aria-label="Essays nach Lebensbereich filtern">
         <a href="/essays/" class="essay-filter__chip ist-aktiv" data-essay-filter-alle>Alle</a>
@@ -83,7 +62,7 @@ const jsonLd = [
       </div>
     )}
 
-    <ul class="essay-liste">
+    <ul class="essay-liste essay-liste--kompakt">
       {essays.map((essay) => (
         <li class="essay-karte" data-essay-karte data-bereich={essay.data.bereich ?? ''}>
           <a href={`/essays/${essay.data.url}/`}>
@@ -93,7 +72,6 @@ const jsonLd = [
               <span>{essayLesezeit(essay)} Min. Lesezeit</span>
             </p>
             <strong>{essay.data.title}</strong>
-            {essayText(essay) && <span class="essay-karte__teaser">{kuerzeAufSatz(essayText(essay), 150)}</span>}
             {essay.data.verwandter_weg && wegeTitel.has(essay.data.verwandter_weg) && (
               <span class="lexikon-az__badge" title="Gehört zu einem Wissensweg">
                 Teil des Wegs

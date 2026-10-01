@@ -1,9 +1,9 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import Cover from '../../components/Cover.astro';
+import EssayKategorieNav from '../../components/EssayKategorieNav.astro';
 import { formatiereDatum } from '../../lib/datum';
 import { lesezeit } from '../../lib/text';
 import { faqAusMarkdown } from '../../lib/faq';
@@ -55,16 +55,11 @@ if (faqEintraege.length > 0) {
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} bild={daten.cover} jsonLd={jsonLd}>
-  <div class="container">
-    <Brotkrumen
-      items={[
-        { label: 'Start', href: '/' },
-        { label: 'Essays', href: '/essays/' },
-        { label: daten.title ?? entry.id },
-      ]}
-    />
+  <div class="container essay-seite">
+    <div class="seiten-raster">
+      <EssayKategorieNav aktiveKategorie={daten.category} aktuellerEintrag={daten.url} />
 
-    <article class="essay-eintrag" data-pagefind-body data-pagefind-filter="Format:Essay">
+      <article class="seiten-inhalt essay-eintrag" data-pagefind-body data-pagefind-filter="Format:Essay">
       <header class="lexikon-eintrag-kopf essay-eintrag__kopf">
         <p class="lexikon-kopf__label"><Formatzeichen typ="essays" /> {daten.category ?? 'Essay'}</p>
         <h1>{daten.title}</h1>
@@ -121,7 +116,8 @@ if (faqEintraege.length > 0) {
       <p class="essay-eintrag__zurueck-zeile">
         <a class="essay-eintrag__zurueck" href="/essays/">Alle Essays</a>
       </p>
-    </article>
+      </article>
+    </div>
   </div>
 
   <script is:inline>

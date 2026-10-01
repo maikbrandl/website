@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import { breadcrumbListJsonLd, faqPageJsonLd, productJsonLd } from '../../lib/jsonld';
 import { JOURNALE } from '../../lib/journale';
 
@@ -12,14 +11,15 @@ export async function getStaticPaths() {
 }
 
 const { journal } = Astro.props;
-const titel = `${journal.titel} · hybridlog | ${journal.seiten} Seiten`;
+const titel = `${journal.titel} · Hybridlog | ${journal.seiten} Seiten`;
 const beschreibung = journal.untertitel;
 const canonical = new URL(`/journale/${journal.slug}/`, Astro.site).toString();
 const bildUrl = new URL(journal.bild, Astro.site).toString();
+const galerie = journal.bilder && journal.bilder.length > 0 ? journal.bilder : [journal.bild];
 
 const jsonLd: Record<string, unknown>[] = [
   productJsonLd({
-    name: `hybridlog ${journal.titel}`,
+    name: `Hybridlog ${journal.titel}`,
     description: journal.untertitel,
     bild: bildUrl,
     amazonUrl: journal.amazonUrl,
@@ -38,18 +38,34 @@ if (journal.faq.length > 0) {
 
 <Base title={titel} description={beschreibung} canonical={canonical} bild={journal.bild} jsonLd={jsonLd}>
   <div class="container stack-gross">
-    <Brotkrumen
-      items={[
-        { label: 'Start', href: '/' },
-        { label: 'Journale', href: '/journale/' },
-        { label: journal.titel },
-      ]}
-    />
-
     <div class="journal-hero">
-      <div class="journal-hero__bild">
-        <img src={journal.bild} alt={`hybridlog ${journal.titel}`} loading="eager" decoding="async" />
+      <div class="journal-galerie">
+        <button type="button" class="journal-galerie__gross" data-journal-lightbox-oeffnen aria-label="Bild groß ansehen">
+          <img
+            src={galerie[0]}
+            alt={`Hybridlog ${journal.titel}`}
+            loading="eager"
+            decoding="async"
+            data-journal-bild
+          />
+        </button>
+        {galerie.length > 1 && (
+          <div class="journal-galerie__miniaturen">
+            {galerie.map((bild, i) => (
+              <button
+                type="button"
+                class="journal-galerie__miniatur"
+                aria-current={i === 0 ? 'true' : undefined}
+                data-journal-miniatur
+                data-bild={bild}
+              >
+                <img src={bild} alt="" loading="lazy" decoding="async" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
+
       <div class="journal-hero__inhalt">
         <p class="tool-kopf__label">{journal.kicker}</p>
         <h1>{journal.h1}</h1>
@@ -60,10 +76,6 @@ if (journal.faq.length > 0) {
             <li>{h}</li>
           ))}
         </ul>
-
-        <p class="journal-meta">
-          {journal.seiten} Seiten · {journal.format} · {journal.einband}
-        </p>
 
         <a
           href={journal.amazonUrl}
@@ -80,17 +92,59 @@ if (journal.faq.length > 0) {
     </div>
 
     {journal.faq.length > 0 && (
-      <section class="prosa stack">
-        <h2>Häufig gefragt</h2>
-        <dl class="journal-faq">
-          {journal.faq.map((f) => (
+      <section class="journal-faq-abschnitt">
+        <p class="journal-faq-abschnitt__eyebrow">Häufig gefragt</p>
+        <h2>Alles, was du wissen musst</h2>
+        <div class="journal-faq">
+          {journal.faq.map((f, i) => (
             <div class="journal-faq__eintrag">
-              <dt>{f.frage}</dt>
-              <dd>{f.antwort}</dd>
+              <span class="journal-faq__nummer">{i + 1}</span>
+              <p class="journal-faq__frage">{f.frage}</p>
+              <p class="journal-faq__antwort">{f.antwort}</p>
             </div>
           ))}
-        </dl>
+        </div>
       </section>
     )}
   </div>
+
+  <dialog class="journal-lightbox" data-journal-lightbox>
+    <button type="button" class="journal-lightbox__schliessen" data-journal-lightbox-schliessen aria-label="Schließen">
+      ×
+    </button>
+    <img data-journal-lightbox-bild alt="" />
+  </dialog>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-journal-miniatur]').forEach((knopf) => {
+      knopf.addEventListener('click', () => {
+        const grossesBild = document.querySelector<HTMLImageElement>('[data-journal-bild]');
+        const neuesBild = knopf.getAttribute('data-bild');
+        if (!grossesBild || !neuesBild) return;
+        grossesBild.src = neuesBild;
+        document.querySelectorAll<HTMLButtonElement>('[data-journal-miniatur]').forEach((k) => {
+          k.removeAttribute('aria-current');
+        });
+        knopf.setAttribute('aria-current', 'true');
+      });
+    });
+
+    const lightbox = document.querySelector<HTMLDialogElement>('[data-journal-lightbox]');
+    const lightboxBild = document.querySelector<HTMLImageElement>('[data-journal-lightbox-bild]');
+    const oeffnenKnopf = document.querySelector<HTMLButtonElement>('[data-journal-lightbox-oeffnen]');
+    const schliessenKnopf = document.querySelector<HTMLButtonElement>('[data-journal-lightbox-schliessen]');
+
+    oeffnenKnopf?.addEventListener('click', () => {
+      const hauptbild = document.querySelector<HTMLImageElement>('[data-journal-bild]');
+      if (!hauptbild || !lightboxBild || !lightbox) return;
+      lightboxBild.src = hauptbild.src;
+      lightboxBild.alt = hauptbild.alt;
+      lightbox.showModal();
+    });
+
+    schliessenKnopf?.addEventListener('click', () => lightbox?.close());
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+  </script>
 </Base>

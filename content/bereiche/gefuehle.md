@@ -1,5 +1,6 @@
 ---
 title: "Gefühle"
-beschreibung: "Stress, Angst, Gelassenheit. Grundlage ist das Fachgebiet Emotion und Energie."
+beschreibung: "Was Gefühle sind, woher sie kommen und wie du mit ihnen umgehen kannst. Hier geht es um Stress, Angst und innere Ruhe im Alltag."
+nav_kurztext: "Stress, Angst und Gelassenheit verstehen."
 reihenfolge: 3
 ---

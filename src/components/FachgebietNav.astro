@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  // Id des Fachgebiets, das auf der aktuellen Seite hervorgehoben und aufgeklappt werden soll.
+  aktivesGebiet?: string;
+  // Id des aktuell angezeigten Lexikon-Eintrags, fuer die Hervorhebung in der aufgeklappten Liste.
+  aktuellerEintrag?: string;
+}
+
+const { aktivesGebiet, aktuellerEintrag } = Astro.props as Props;
+
+const alleThemen = await getCollection('themen');
+
+const themenProGebiet = new Map<string, typeof alleThemen>();
+for (const t of alleThemen) {
+  if (!t.data.gebiet) continue;
+  const liste = themenProGebiet.get(t.data.gebiet) ?? [];
+  liste.push(t);
+  themenProGebiet.set(t.data.gebiet, liste);
+}
+for (const liste of themenProGebiet.values()) {
+  liste.sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'));
+}
+
+const fachgebiete = (await getCollection('fachgebiete'))
+  .filter((f) => f.data.visibility === 'public')
+  .sort((a, b) => {
+    const anzahlA = themenProGebiet.get(a.id)?.length ?? 0;
+    const anzahlB = themenProGebiet.get(b.id)?.length ?? 0;
+    if ((anzahlA === 0) !== (anzahlB === 0)) return anzahlA === 0 ? 1 : -1;
+    return (a.data.order ?? 99) - (b.data.order ?? 99);
+  });
+
+const sichtbareFachgebiete = fachgebiete.filter((f) => (themenProGebiet.get(f.id)?.length ?? 0) > 0);
+---
+
+<nav class="seiten-nav" aria-label="Fachgebiete im Lexikon">
+  <p class="seiten-nav__label">Fachgebiet</p>
+  <ul class="seiten-nav__liste">
+    {sichtbareFachgebiete.map((f) => {
+      const eintraege = themenProGebiet.get(f.id) ?? [];
+      const istAktiv = aktivesGebiet === f.id;
+      return (
+        <li>
+          <details class="seiten-nav__eintrag" open={istAktiv}>
+            <summary aria-current={istAktiv ? 'true' : undefined}>
+              <span>{f.data.title ?? f.id}</span>
+              <span class="seiten-nav__anzahl">{eintraege.length}</span>
+            </summary>
+            <ul class="seiten-nav__unterliste">
+              {eintraege.map((t) => (
+                <li>
+                  <a href={`/lexikon/${t.id}/`} aria-current={t.id === aktuellerEintrag ? 'true' : undefined}>
+                    {t.data.title ?? t.id}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="seiten-nav__alle" href={`/lexikon/fachgebiet/${f.id}/`}>Zur Fachgebietsseite</a>
+          </details>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

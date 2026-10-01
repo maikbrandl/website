@@ -2,44 +2,7 @@
    Das Blockuniversum – Tool-specific styles
    ============================================================ */
 
-/* ── Sticky Header ── */
-.tool-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: 56px;
-    background: rgba(10, 10, 10, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-}
-
-.tool-header__inner {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-}
-
-.tool-header__back {
-    font-size: 14px;
-    color: var(--text-secondary);
-    transition: color var(--duration);
-    flex-shrink: 0;
-}
-.tool-header__back:hover { color: var(--gold); }
-
-.tool-header__title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    flex: 1;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
+/* ── Abschnitts-Punkte in der Werkzeugzeile ── */
 .tool-header__dots {
     display: flex;
     align-items: center;
@@ -62,13 +25,6 @@
     transform: scale(1.3);
 }
 .dot:hover:not(.dot--active) { background: var(--text-secondary); }
-
-/* Global site nav only shown on wide desktop viewports — the sticky
-   56px header is already tight with back-link + centered title + dots. */
-.tool-header .global-nav--wide { display: none; flex-shrink: 0; }
-@media (min-width: 1280px) {
-    .tool-header .global-nav--wide { display: flex; }
-}
 
 /* ── Hero ── */
 .tool-hero {
@@ -484,6 +440,7 @@
 }
 .tool-footer__inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: var(--space-4);
@@ -506,7 +463,6 @@
 }
 
 @media (max-width: 600px) {
-    .tool-header__title { display: none; }
     .tool-hero__title { font-size: 28px; }
     .breath-timer { flex-direction: column; }
     .protocol-step { padding-left: var(--space-4); }

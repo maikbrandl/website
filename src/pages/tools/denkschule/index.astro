@@ -1,6 +1,5 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import Brotkrumen from '../../../components/Brotkrumen.astro';
 import Formatzeichen from '../../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, softwareApplicationJsonLd } from '../../../lib/jsonld';
 
@@ -25,10 +24,6 @@ const jsonLd = [
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <div class="container stack-gross">
-    <Brotkrumen
-      items={[{ label: 'Start', href: '/' }, { label: 'Tools', href: '/tools/' }, { label: 'Denkschule' }]}
-    />
-
     <header class="tool-kopf">
       <p class="tool-kopf__label"><Formatzeichen typ="tools" /> Tool · Philosophie</p>
       <h1>Welche Denkschule bist du?</h1>

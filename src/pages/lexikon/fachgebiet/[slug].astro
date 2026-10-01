@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import Brotkrumen from '../../../components/Brotkrumen.astro';
 import Formatzeichen from '../../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../../lib/jsonld';
 import { gruppenAnker } from '../../../lib/bausteine';
@@ -63,14 +62,6 @@ const jsonLd = [
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <div class="container stack-mittel">
-    <Brotkrumen
-      items={[
-        { label: 'Start', href: '/' },
-        { label: 'Lexikon', href: '/lexikon/' },
-        { label: fachgebiet.data.title ?? fachgebiet.id },
-      ]}
-    />
-
     <header class="lexikon-kopf lexikon-kopf--kompakt">
       <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Fachgebiet</p>
       <h1>{fachgebiet.data.title}</h1>

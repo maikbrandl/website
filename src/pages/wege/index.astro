@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
 import { klartext } from '../../lib/markdown';
@@ -28,17 +27,19 @@ const jsonLd = [
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
+  <section class="kopfband">
+    <div class="container kopfband__inner">
+      <header class="lexikon-kopf">
+        <p class="lexikon-kopf__label"><Formatzeichen typ="wege" /> Wissenswege</p>
+        <h1>Wissenswege</h1>
+        <p class="prosa">
+          {wege.length} Wissensweg{wege.length === 1 ? '' : 'e'}, jede Frage gründlich über mehrere Ebenen beantwortet.
+        </p>
+      </header>
+    </div>
+  </section>
+
   <div class="container stack-gross">
-    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Wege' }]} />
-
-    <header class="lexikon-kopf">
-      <p class="lexikon-kopf__label"><Formatzeichen typ="wege" /> Wissenswege</p>
-      <h1>Wissenswege</h1>
-      <p class="prosa">
-        {wege.length} Wissensweg{wege.length === 1 ? '' : 'e'}, jede Frage gründlich über mehrere Ebenen beantwortet.
-      </p>
-    </header>
-
     {wege.length === 0 ? (
       <p class="prosa lexikon-leer">Hier entstehen gerade die ersten Wissenswege.</p>
     ) : (

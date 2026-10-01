@@ -18,7 +18,7 @@ const { fakten = [] } = Astro.props as Props;
   {fakten.map((f) => (
     <div class="baustein-fakt">
       <span class="baustein-fakt__icon" aria-hidden="true" set:html={iconSvg(f.icon)} />
-      <span>
+      <span class="baustein-fakt__text">
         {f.label && <strong class="baustein-fakt__label">{f.label}</strong>}
         {f.text}
       </span>

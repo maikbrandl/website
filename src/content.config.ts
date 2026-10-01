@@ -123,6 +123,7 @@ const bereiche = defineCollection({
     .object({
       title: z.string().optional().catch(undefined),
       beschreibung: z.string().optional().catch(undefined),
+      nav_kurztext: z.string().optional().catch(undefined),
       reihenfolge: z.number().optional().catch(undefined),
       ...relaunchFelder,
     })

@@ -7,32 +7,64 @@
     <meta name="description" content="Warum existiert deine Zukunft bereits? Eine interaktive Reise durch das Blockuniversum.">
     <link rel="stylesheet" href="../shared/base.css">
     <link rel="stylesheet" href="style.css">
-    <script>window.TOOLS_BASE = '../';</script>
     <script id="usercentrics-cmp" async data-eu-mode="true" data-settings-id="1v_AzfjqkkRSWa" src="https://app.eu.usercentrics.eu/browser-ui/latest/loader.js"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="3bde1038-791c-439b-add6-c17949c3d315" data-domains="hybridlog.de"></script>
     <script defer src="/js/track.js"></script>
+    <link rel="stylesheet" href="/tools/shared/site-chrome.css">
 </head>
 <body>
 
     <!-- ── Sticky Header ── -->
-    <header class="tool-header" id="toolHeader">
-        <div class="tool-header__inner container">
-            <a href="../" class="tool-header__back">← Alle Tools</a>
-            <span class="tool-header__title">Das Blockuniversum</span>
-            <nav class="tool-header__dots" aria-label="Abschnitte">
+    <header class="site-kopfleiste">
+        <div class="site-container site-kopfleiste__inner">
+            <a href="/" class="site-logo">hybrid<span class="site-marker">log</span></a>
+
+            <nav class="site-hauptnav" aria-label="Hauptnavigation">
+                <ul class="site-hauptnav__liste">
+                    <li class="site-wege-nav">
+                        <button type="button" class="site-wege-toggle" data-site-wege-trigger aria-expanded="false" aria-controls="site-wege-panel">
+                            Wege
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                        </button>
+                        <div id="site-wege-panel" class="site-wege-panel" data-site-wege-panel hidden>
+                            <ul>
+                                <li><a href="/bereiche/gewohnheiten/"><strong>Gewohnheiten</strong></a></li>
+                                <li><a href="/bereiche/lernen/"><strong>Lernen</strong></a></li>
+                                <li><a href="/bereiche/gefuehle/"><strong>Gefühle</strong></a></li>
+                                <li><a href="/bereiche/denken/"><strong>Denken</strong></a></li>
+                                <li><a href="/bereiche/ich-selbst/"><strong>Ich selbst</strong></a></li>
+                                <li><a href="/bereiche/sinn/"><strong>Sinn</strong></a></li>
+                                <li><a class="site-wege-panel__alle" href="/wege/">Alle Wissenswege ansehen</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/lexikon/">Lexikon</a></li>
+                    <li class="site-hauptnav__neben"><a href="/essays/">Essays</a></li>
+                    <li class="site-hauptnav__neben"><a href="/tools/" aria-current="true">Tools</a></li>
+                    <li class="site-hauptnav__neben"><a href="/journale/">Journale</a></li>
+                </ul>
+            </nav>
+
+            <form class="site-suchformular" action="/suche/" method="get" role="search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+                <label class="nur-sr" for="site-suche-eingabe">Suche</label>
+                <input id="site-suche-eingabe" type="search" name="q" placeholder="Frage oder Begriff suchen" />
+                <button type="submit" class="nur-sr">Suchen</button>
+            </form>
+        </div>
+    </header>
+    <div class="tool-unterleiste">
+        <div class="site-container tool-unterleiste__inner">
+            <a href="/tools/" class="tool-unterleiste__zurueck">← Alle Tools</a>
+            <span class="tool-unterleiste__titel">Das Blockuniversum</span>
+            <nav class="tool-header__dots tool-unterleiste__nav" aria-label="Abschnitte">
                 <button class="dot dot--active" data-section="section-1" aria-label="Abschnitt 1"></button>
                 <button class="dot" data-section="section-2" aria-label="Abschnitt 2"></button>
                 <button class="dot" data-section="section-3" aria-label="Abschnitt 3"></button>
                 <button class="dot" data-section="section-4" aria-label="Abschnitt 4"></button>
             </nav>
-            <nav class="global-nav global-nav--wide" aria-label="Hauptnavigation">
-                <a href="../../index.html">Home</a>
-                <a href="../../index.html#produkte">Produkte</a>
-                <a href="/" class="active">Wissensraum</a>
-                <a href="../../index.html#story">Über uns</a>
-            </nav>
         </div>
-    </header>
+    </div>
 
     <!-- ── Hero ── -->
     <section class="tool-hero">
@@ -298,8 +330,48 @@
     </footer>
 
     <script src="../shared/nav.js"></script>
-    <script src="../shared/bottom-nav.js"></script>
     <script>window.scrollTo(0, 0);</script>
     <script src="app.js?v=2"></script>
+    <nav class="site-tableiste" aria-label="Mobile Navigation">
+        <a href="/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7" /><path d="M6 10v10h12V10" /></svg>
+            Start
+        </a>
+        <a href="/bereiche/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5" /><rect x="13" y="4" width="7" height="7" rx="1.5" /><rect x="4" y="13" width="7" height="7" rx="1.5" /><rect x="13" y="13" width="7" height="7" rx="1.5" /></svg>
+            Bereiche
+        </a>
+        <a href="/lexikon/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-8l-5 4v-4H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" /></svg>
+            Lexikon
+        </a>
+        <a href="/suche/" data-site-suche-tab aria-controls="site-mobil-suche" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+            Suche
+        </a>
+        <details class="site-mehr" data-site-mehr data-aktiv="true">
+            <summary>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.2" /><circle cx="12" cy="12" r="1.2" /><circle cx="19" cy="12" r="1.2" /></svg>
+                Mehr
+            </summary>
+            <div class="site-blatt">
+                <ul class="site-mehr__liste">
+                    <li><a href="/wege/">Wissenswege</a></li>
+                    <li><a href="/essays/">Essays</a></li>
+                    <li><a href="/tools/" aria-current="true">Tools</a></li>
+                    <li><a href="/journale/">Journale</a></li>
+                </ul>
+            </div>
+        </details>
+        <div id="site-mobil-suche" class="site-blatt" hidden>
+            <form class="site-suchformular-mobil" action="/suche/" method="get" role="search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+                <label class="nur-sr" for="site-suche-eingabe-mobil">Suche</label>
+                <input id="site-suche-eingabe-mobil" type="search" name="q" placeholder="Frage oder Begriff suchen" enterkeyhint="search" autocomplete="off" />
+                <button type="submit" class="nur-sr">Suchen</button>
+            </form>
+        </div>
+    </nav>
+    <script src="/tools/shared/site-chrome.js" defer></script>
 </body>
 </html>

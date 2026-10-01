@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import Formatzeichen from '../../components/Formatzeichen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
 import { klartext } from '../../lib/markdown';
@@ -32,6 +31,8 @@ const fachgebiete = (await getCollection('fachgebiete'))
     if ((anzahlA === 0) !== (anzahlB === 0)) return anzahlA === 0 ? 1 : -1;
     return (a.data.order ?? 99) - (b.data.order ?? 99);
   });
+const sichtbareFachgebiete = fachgebiete.filter((f) => (themenProGebiet.get(f.id) ?? 0) > 0);
+const fachgebietTitel = new Map(fachgebiete.map((f) => [f.id, f.data.title ?? f.id]));
 
 const gruppen = new Map<string, typeof themenSortiert>();
 for (const eintrag of themenSortiert) {
@@ -56,134 +57,93 @@ const jsonLd = [
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
-  <div class="container stack-gross">
-    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Lexikon' }]} />
-
-    <header class="lexikon-kopf">
-      <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Lexikon</p>
-      <h1>Kurz erklärt, von A bis Z</h1>
-      <form class="lexikon-filter" action="/suche/" method="get" role="search" data-lexikon-filter>
-        <label class="nur-sr" for="lexikon-filter-eingabe">Lexikon filtern</label>
-        <input
-          id="lexikon-filter-eingabe"
-          type="search"
-          name="q"
-          placeholder="Begriff finden, z.B. Confirmation Bias"
-          autocomplete="off"
-        />
-        <button type="submit">Suchen</button>
-      </form>
-      <p class="lexikon-kopf__unterzeile">Wissensinhalte aus Psychologie, Lernen, Philosophie und mehr</p>
-      <p class="lexikon-filter__hinweis" data-lexikon-filter-hinweis hidden>
-        Kein Treffer im Lexikon. <a href="/suche/" data-lexikon-filter-suchlink>Ganze Seite durchsuchen</a>
-      </p>
-    </header>
-
-    {guteEinstiege.length > 0 && (
-      <section class="lexikon-abschnitt">
-        <h2>Gute Einstiege</h2>
-        <p class="prosa">
-          Noch unsicher, wo du anfangen sollst? Diese Begriffe erklären Grundlegendes am
-          verständlichsten.
-        </p>
-        <ul class="karten-raster">
-          {guteEinstiege.map((eintrag) => (
+  <div class="container lexikon-index-seite">
+    <div class="seiten-raster">
+      <nav class="seiten-nav seiten-nav--filter" aria-label="Lexikon nach Fachgebiet">
+        <p class="seiten-nav__label">Fachgebiet</p>
+        <ul class="seiten-nav__link-liste">
+          <li>
+            <a href="/lexikon/" aria-current="true">
+              <span>Alle Begriffe</span>
+              <span class="seiten-nav__anzahl">{alleThemen.length}</span>
+            </a>
+          </li>
+          {sichtbareFachgebiete.map((f) => (
             <li>
-              <a class="lexikon-einstieg-karte" href={`/lexikon/${eintrag.id}/`}>
-                <strong>{eintrag.data.title ?? eintrag.id}</strong>
-                <span>{kuerzeAufSatz(klartext(eintrag.data.lead), 110)}</span>
+              <a href={`/lexikon/fachgebiet/${f.id}/`}>
+                <span>{f.data.title ?? f.id}</span>
+                <span class="seiten-nav__anzahl">{themenProGebiet.get(f.id) ?? 0}</span>
               </a>
             </li>
           ))}
         </ul>
-      </section>
-    )}
 
-    <section class="lexikon-abschnitt">
-      <h2>Nach Fachgebiet</h2>
-      <ul class="lexikon-fachgebiete">
-        {fachgebiete.map((f) => {
-          const anzahl = themenProGebiet.get(f.id) ?? 0;
-          const leer = anzahl === 0;
-          return (
-            <li>
-              <a href={`/lexikon/fachgebiet/${f.id}/`} class:list={{ 'ist-leer': leer }}>
-                <strong>{f.data.title}</strong>
-                {f.data.description && <span>{f.data.description}</span>}
-                <span class="lexikon-fachgebiete__anzahl">
-                  {leer ? 'Bald verfügbar' : `${anzahl} ${anzahl === 1 ? 'Begriff' : 'Begriffe'}`}
-                </span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
-
-    <section class="lexikon-abschnitt">
-      <h2>Von A bis Z</h2>
-      <nav class="lexikon-az-sprung" aria-label="Zu Buchstabe springen">
-        {buchstaben.map((b) => (
-          <a href={`#buchstabe-${b}`}>{b}</a>
-        ))}
+        <p class="seiten-nav__label">Springe zu</p>
+        <nav class="seiten-nav__springezu" aria-label="Zu Buchstabe springen">
+          {buchstaben.map((b) => (
+            <a href={`#buchstabe-${b}`}>{b}</a>
+          ))}
+        </nav>
       </nav>
-      <div class="lexikon-az">
-        {buchstaben.map((b) => (
-          <div class="lexikon-az__gruppe" id={`buchstabe-${b}`} data-lexikon-gruppe>
-            <p class="lexikon-az__buchstabe">{b}</p>
-            <ul>
-              {gruppen.get(b)!.map((eintrag) => {
-                const eintragTitel = eintrag.data.title ?? eintrag.id;
-                const imWeg = wegBezuege.has(eintrag.id);
-                return (
-                  <li data-lexikon-eintrag data-titel={eintragTitel.toLowerCase()}>
-                    <a href={`/lexikon/${eintrag.id}/`}>{eintragTitel}</a>
-                    {imWeg && (
-                      <span class="lexikon-az__badge" title="Kommt in einem Wissensweg vor">
-                        Weg
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+
+      <div class="seiten-inhalt">
+        <header class="lexikon-kopf">
+          <p class="lexikon-kopf__label"><Formatzeichen typ="lexikon" /> Lexikon</p>
+          <h1>Kurz erklärt, von A bis Z</h1>
+          <p class="lexikon-kopf__unterzeile">
+            {alleThemen.length} Begriffe aus Psychologie, Lernen und Philosophie. Jeder Eintrag beantwortet
+            eine Frage in einer Minute und führt dich zum passenden Weg.
+          </p>
+        </header>
+
+        {guteEinstiege.length > 0 && (
+          <div class="lexikon-einstiege-zeile">
+            <span class="lexikon-einstiege-zeile__label">Gute Einstiege:</span>
+            <div class="lexikon-einstiege-zeile__chips">
+              {guteEinstiege.map((eintrag) => (
+                <a href={`/lexikon/${eintrag.id}/`}>{eintrag.data.title ?? eintrag.id}</a>
+              ))}
+            </div>
           </div>
-        ))}
+        )}
+
+        <p class="lexikon-zusammenfassung">
+          <span>{alleThemen.length} Begriffe</span>
+          <span>Sortiert A bis Z</span>
+        </p>
+
+        <div class="lexikon-az">
+          {buchstaben.map((b) => (
+            <div class="lexikon-az__gruppe" id={`buchstabe-${b}`}>
+              <p class="lexikon-az__buchstabe">{b}</p>
+              <ul>
+                {gruppen.get(b)!.map((eintrag) => {
+                  const eintragTitel = eintrag.data.title ?? eintrag.id;
+                  const imWeg = wegBezuege.has(eintrag.id);
+                  return (
+                    <li>
+                      <a href={`/lexikon/${eintrag.id}/`}>
+                        {eintragTitel}
+                        {imWeg && (
+                          <span class="lexikon-az__badge" title="Kommt in einem Wissensweg vor">
+                            Weg
+                          </span>
+                        )}
+                      </a>
+                      {eintrag.data.lead && (
+                        <span class="lexikon-az__lead">{kuerzeAufSatz(klartext(eintrag.data.lead), 100)}</span>
+                      )}
+                      {eintrag.data.gebiet && (
+                        <span class="lexikon-az__gebiet">{fachgebietTitel.get(eintrag.data.gebiet) ?? ''}</span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   </div>
-
-  <script is:inline>
-    (function () {
-      var form = document.querySelector('[data-lexikon-filter]');
-      if (!form) return;
-      var eingabe = form.querySelector('input[name="q"]');
-      var elemente = Array.prototype.slice.call(document.querySelectorAll('[data-lexikon-eintrag]'));
-      var gruppen = Array.prototype.slice.call(document.querySelectorAll('[data-lexikon-gruppe]'));
-      var hinweis = document.querySelector('[data-lexikon-filter-hinweis]');
-      var suchlink = document.querySelector('[data-lexikon-filter-suchlink]');
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-      });
-
-      eingabe.addEventListener('input', function () {
-        var wert = eingabe.value.trim().toLowerCase();
-        var treffer = 0;
-        elemente.forEach(function (el) {
-          var eintragTitel = el.getAttribute('data-titel') || '';
-          var passt = !wert || eintragTitel.indexOf(wert) !== -1;
-          el.hidden = !passt;
-          if (passt) treffer += 1;
-        });
-        gruppen.forEach(function (g) {
-          var sichtbar = g.querySelectorAll('[data-lexikon-eintrag]:not([hidden])').length > 0;
-          g.hidden = !sichtbar;
-        });
-        if (hinweis) hinweis.hidden = !wert || treffer > 0;
-        if (suchlink) suchlink.href = '/suche/?q=' + encodeURIComponent(eingabe.value.trim());
-      });
-    })();
-  </script>
 </Base>
-

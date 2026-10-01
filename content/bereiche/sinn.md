@@ -1,5 +1,6 @@
 ---
 title: "Sinn"
-beschreibung: "Gutes Leben, Philosophie, Zukunft und KI. Dazu gehören die 21 Philosophie Einträge, der Atlas der Philosophie und das Blockuniversum."
+beschreibung: "Was ein gutes Leben ausmacht und welche großen Fragen Menschen seit jeher beschäftigen. Hier geht es um Philosophie, Werte und den Blick nach vorn."
+nav_kurztext: "Sinn, gutes Leben und Philosophie entdecken."
 reihenfolge: 6
 ---

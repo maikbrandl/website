@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 
 const titel = 'Suche · Hybridlog';
 const beschreibung = 'Durchsuche Lexikon, Wissenswege und Essays von Hybridlog.';
@@ -9,11 +8,9 @@ const canonical = new URL('/suche/', Astro.site).toString();
 
 <Base title={titel} description={beschreibung} canonical={canonical} noindex={true}>
   <div class="container stack-gross">
-    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Suche' }]} />
-
     <header class="tool-kopf">
       <h1>Suche</h1>
-      <form class="suchformular start-hero__suche" action="/suche/" method="get" role="search">
+      <form class="suchformular start-hero__suche suche-seite__formular" action="/suche/" method="get" role="search">
         <label class="nur-sr" for="suche-eingabe-seite">Suche</label>
         <input id="suche-eingabe-seite" type="search" name="q" placeholder="Wonach suchst du?" />
         <button type="submit">Suchen</button>

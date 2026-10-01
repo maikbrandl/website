@@ -62,6 +62,10 @@ export default defineConfig({
   site: 'https://hybridlog.de',
   trailingSlash: 'always',
 
+  devToolbar: {
+    enabled: false
+  },
+
   build: {
     format: 'directory'
   },

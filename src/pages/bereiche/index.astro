@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
 
 const bereiche = (await getCollection('bereiche')).sort(
@@ -23,8 +22,6 @@ const jsonLd = [
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
   <div class="container stack-gross">
-    <Brotkrumen items={[{ label: 'Start', href: '/' }, { label: 'Bereiche' }]} />
-
     <header class="lexikon-kopf">
       <h1>Lebensbereiche</h1>
       <p class="prosa">

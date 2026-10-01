@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Brotkrumen from '../../components/Brotkrumen.astro';
+import Formatzeichen from '../../components/Formatzeichen.astro';
+import WegBereichNav from '../../components/WegBereichNav.astro';
 import { breadcrumbListJsonLd, collectionPageJsonLd } from '../../lib/jsonld';
 import { klartext } from '../../lib/markdown';
 
@@ -24,6 +25,27 @@ const essays = (await getCollection('posts'))
   .filter((p) => p.data.bereich === entry.id && p.data.url)
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 
+// Lexikon-Eintraege, die in einem der Wege dieses Bereichs vorkommen. Gleiche
+// Rueckwaerts-Verknuepfung wie "Kommt vor in diesen Wegen" auf der Lexikon-Seite,
+// hier ueber alle Wege des Bereichs statt nur einen Eintrag.
+const wegIds = wege.map((w) => w.id);
+const lexikonEintraege = wege.length
+  ? (await getCollection('themen'))
+      .filter((t) => {
+        const eigeneHref = `/lexikon/${t.id}/`;
+        const inWegeFeld = (t.data.wege ?? []).some((w) => wegIds.includes(w));
+        const inDaraufAufbauend = wege.some((w) =>
+          (w.data.bloecke ?? [])
+            .filter((b) => b.type === 'ebene')
+            .some((b) =>
+              ((b.darauf_aufbauend as { href?: string }[] | undefined) ?? []).some((d) => d?.href === eigeneHref),
+            ),
+        );
+        return inWegeFeld || inDaraufAufbauend;
+      })
+      .sort((a, b) => (a.data.title ?? a.id).localeCompare(b.data.title ?? b.id, 'de'))
+  : [];
+
 const titel = `${daten.title} · Lebensbereich · Hybridlog`;
 const beschreibung = daten.beschreibung || `Wissenswege und Essays aus dem Bereich ${daten.title}.`;
 const canonical = new URL(`/bereiche/${entry.id}/`, Astro.site).toString();
@@ -36,53 +58,85 @@ const jsonLd = [
     { name: daten.title ?? entry.id },
   ]),
 ];
+
+const gesamtAnzahl = wege.length + essays.length + lexikonEintraege.length;
 ---
 
 <Base title={titel} description={beschreibung} canonical={canonical} jsonLd={jsonLd}>
-  <div class="container stack-gross">
-    <Brotkrumen
-      items={[
-        { label: 'Start', href: '/' },
-        { label: 'Bereiche', href: '/bereiche/' },
-        { label: daten.title ?? entry.id },
-      ]}
-    />
+  <div class="container bereich-seite">
+    <div class="seiten-raster">
+      <WegBereichNav aktiverBereich={entry.id} />
 
-    <header class="lexikon-kopf">
-      <h1>{daten.title}</h1>
-      {daten.beschreibung && <p class="prosa">{daten.beschreibung}</p>}
-    </header>
+      <div class="seiten-inhalt">
+        <header class="lexikon-kopf">
+          <h1>{daten.title}</h1>
+          {daten.beschreibung && <p class="prosa">{daten.beschreibung}</p>}
+        </header>
 
-    <section class="lexikon-abschnitt">
-      <h2>Wege in diesem Bereich</h2>
-      {wege.length === 0 ? (
-        <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Wissenswege.</p>
-      ) : (
-        <ul class="lexikon-liste">
-          {wege.map((w) => (
-            <li>
-              <a href={`/wege/${w.id}/`}>{w.data.title ?? w.id}</a>
-              {w.data.lead && <span>{klartext(w.data.lead)}</span>}
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+        <nav class="bereich-tabs" aria-label="Abschnitte auf dieser Seite">
+          <span class="bereich-tabs__alles">Alles <span class="bereich-tabs__anzahl">{gesamtAnzahl}</span></span>
+          <a href="#wege">Wege <span class="bereich-tabs__anzahl">{wege.length}</span></a>
+          <a href="#essays">Essays <span class="bereich-tabs__anzahl">{essays.length}</span></a>
+          <a href="#lexikon">Lexikon <span class="bereich-tabs__anzahl">{lexikonEintraege.length}</span></a>
+        </nav>
 
-    <section class="lexikon-abschnitt">
-      <h2>Essays in diesem Bereich</h2>
-      {essays.length === 0 ? (
-        <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Essays.</p>
-      ) : (
-        <ul class="lexikon-liste">
-          {essays.map((e) => (
-            <li>
-              <a href={`/essays/${e.data.url}/`}>{e.data.title ?? e.id}</a>
-              {e.data.excerpt && <span>{e.data.excerpt}</span>}
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+        <section class="bereich-abschnitt" id="wege">
+          {wege.length === 0 ? (
+            <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Wissenswege.</p>
+          ) : (
+            <ul class="bereich-weg-liste">
+              {wege.map((w) => {
+                const gesamtzeit = (w.data.kurzlesezeit ?? 0) + (w.data.vertiefzeit ?? 0);
+                const ebenen = (w.data.bloecke ?? []).filter((b) => b.type === 'perspektive' || b.type === 'ebene').length;
+                return (
+                  <li class="bereich-weg-karte">
+                    <span class="bereich-weg-karte__icon"><Formatzeichen typ="wege" /></span>
+                    <div class="bereich-weg-karte__text">
+                      <p class="bereich-weg-karte__meta">
+                        Wissensweg{ebenen > 0 && ` · ${ebenen} Ebenen`}{gesamtzeit > 0 && ` · ${gesamtzeit} Min.`}
+                      </p>
+                      <a href={`/wege/${w.id}/`}><strong>{w.data.title ?? w.id}</strong></a>
+                      {(w.data.kurzantwort || w.data.lead) && <span>{klartext(w.data.kurzantwort || w.data.lead)}</span>}
+                    </div>
+                    <a class="journal-cta bereich-weg-karte__cta" href={`/wege/${w.id}/`}>Weg starten</a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+
+        <section class="bereich-abschnitt" id="essays">
+          <h2>Essays</h2>
+          {essays.length === 0 ? (
+            <p class="prosa lexikon-leer">Für diesen Bereich entstehen gerade die ersten Essays.</p>
+          ) : (
+            <ul class="bereich-liste">
+              {essays.map((e) => (
+                <li>
+                  <a href={`/essays/${e.data.url}/`}>{e.data.title ?? e.id}</a>
+                  {e.data.excerpt && <span>{e.data.excerpt}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section class="bereich-abschnitt" id="lexikon">
+          <h2>Lexikon</h2>
+          {lexikonEintraege.length === 0 ? (
+            <p class="prosa lexikon-leer">Für diesen Bereich sind noch keine Lexikon-Einträge verknüpft.</p>
+          ) : (
+            <ul class="bereich-liste bereich-liste--zweispaltig">
+              {lexikonEintraege.map((t) => (
+                <li>
+                  <a href={`/lexikon/${t.id}/`}>{t.data.title ?? t.id}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
+    </div>
   </div>
 </Base>

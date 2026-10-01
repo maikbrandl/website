@@ -91,6 +91,8 @@
     --kopfleiste-glas: rgba(14, 16, 15, 0.55);
     --kopfleiste-rand: rgba(116, 184, 168, 0.10);
     --pill-glas: rgba(230, 245, 240, 0.05);
+    --sucheimkopf-glas: rgba(230, 245, 240, 0.06);
+    --sucheimkopf-rand: rgba(230, 245, 240, 0.22);
     --pill-rand: rgba(230, 245, 240, 0.14);
     --fusszeile-glas: rgba(8, 10, 9, 0.6);
     --fusszeile-rand: rgba(116, 184, 168, 0.10);
@@ -176,6 +178,8 @@
   --kopfleiste-glas: rgba(14, 16, 15, 0.55);
   --kopfleiste-rand: rgba(116, 184, 168, 0.10);
   --pill-glas: rgba(230, 245, 240, 0.05);
+  --sucheimkopf-glas: rgba(230, 245, 240, 0.06);
+  --sucheimkopf-rand: rgba(230, 245, 240, 0.22);
   --pill-rand: rgba(230, 245, 240, 0.14);
   --fusszeile-glas: rgba(8, 10, 9, 0.6);
   --fusszeile-rand: rgba(116, 184, 168, 0.10);
@@ -3668,6 +3672,18 @@ main {
   font-size: 1rem;
 }
 
+.suche-seite__formular button[type="submit"] {
+  flex: none;
+  padding: var(--space-1) var(--space-4);
+  border: none;
+  border-radius: 999px;
+  background: var(--marker);
+  color: #16150F;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .start-hero__beispiele {
   display: flex;
   flex-wrap: wrap;
@@ -4091,6 +4107,10 @@ main {
 
   .lexikon-eintrag-layout {
     margin-top: var(--space-4);
+  }
+
+  .bereich-weg-karte__icon {
+    display: none;
   }
 
   .lexikon-einstieg > .stack > .baustein-sektion:first-child {

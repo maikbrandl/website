@@ -178,8 +178,6 @@ quellen:
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338092/"
   - titel: "Kross und andere (2014), Journal of Personality and Social Psychology · Selbstgespräch mit eigenem Namen"
     url: "https://www.researchgate.net/publication/259953877_Self-Talk_as_a_Regulatory_Mechanism_How_You_Do_It_Matters"
-  - titel: "Moser und andere (2017), Scientific Reports · Selbstgespräch in der dritten Person"
-    url: "https://www.nature.com/articles/s41598-017-04047-3"
   - titel: "Forgas und andere (2009), Journal of Experimental Social Psychology · gedrückte Stimmung und Gedächtnis"
     url: "https://www.sciencedirect.com/science/article/abs/pii/S0022103108001649"
   - titel: "Jordan und andere (2011), Personality and Social Psychology Bulletin · Unterschätzung fremder negativer Gefühle"

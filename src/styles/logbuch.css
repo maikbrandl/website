@@ -2407,6 +2407,10 @@ main {
   border-bottom: none;
 }
 
+.lexikon-einstieg .baustein-sektion + .baustein-sektion {
+  padding-top: var(--space-6);
+}
+
 .lexikon-einstieg .baustein-sektion__label {
   display: none;
 }

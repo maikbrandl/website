@@ -1,187 +1,373 @@
 ---
-title: "Bin ich normal?"
-bereich: "ich-selbst"
+title: Bin ich normal?
 welten:
   - mind
-lead: "Fast jeder stellt sich diese Frage irgendwann leise. Meist steckt dahinter keine Störung, sondern ein Vergleich mit einem Bild von anderen, das so nicht stimmt. Hier gehen wir die vier häufigsten Zweifel einzeln durch."
-kurzantwort: "Sehr wahrscheinlich ja. „Normal“ ist kein fester Zustand, sondern eine breite Spanne. Selbstgespräche, Traurigkeit ohne klaren Anlass und das Gefühl, anders zu sein, kennen die meisten Menschen. Wir schauen uns vier Ebenen an: den Begriff, das innere Sprechen, die Traurigkeit und den Vergleich mit anderen."
-autor: "Maik"
-geprueft_am: "2026-10-02"
+lead: Fast jeder stellt sich diese Frage irgendwann leise. Meist steckt dahinter
+  keine Störung, sondern ein Vergleich mit einem Bild von anderen, das so nicht
+  stimmt. Hier gehen wir die vier häufigsten Zweifel einzeln durch.
+kurzantwort: "Sehr wahrscheinlich ja. „Normal“ ist kein fester Zustand, sondern
+  eine breite Spanne. Selbstgespräche, Traurigkeit ohne klaren Anlass und das
+  Gefühl, anders zu sein, kennen die meisten Menschen. Wir schauen uns vier
+  Ebenen an: den Begriff, das innere Sprechen, die Traurigkeit und den Vergleich
+  mit anderen."
+autor: Maik
+geprueft_am: 2026-10-02
+bereich: ich-selbst
 kurzlesezeit: 4
 vertiefzeit: 14
-seo_title: "Bin ich normal? 4 Zweifel ehrlich erklärt · Hybridlog"
-seo_description: "Bin ich normal? Was normal wirklich heißt, warum Selbstgespräche, grundlose Traurigkeit und das Gefühl, anders zu sein, fast alle kennen, und wann Hilfe hilft."
 bloecke:
   - type: icon_fakten
-    titel_override: "Auf einen Blick"
+    titel_override: Auf einen Blick
     fakten:
       - icon: search
-        text: "Gut jeder vierte Erwachsene in Deutschland erfüllt innerhalb eines Jahres die Kriterien einer psychischen Störung. Psychische Schwierigkeiten sind also nicht die Ausnahme, sondern Teil des normalen Lebens."
+        text: Gut jeder vierte Erwachsene in Deutschland erfüllt innerhalb eines Jahres
+          die Kriterien einer psychischen Störung. Psychische Schwierigkeiten
+          sind also nicht die Ausnahme, sondern Teil des normalen Lebens.
       - icon: check
-        text: "Inneres Sprechen taucht in etwa jedem vierten zufällig erfassten Alltagsmoment auf. Mit dir selbst zu reden, ob still oder laut, ist eine Grundfunktion des Denkens."
+        text: Inneres Sprechen taucht in etwa jedem vierten zufällig erfassten
+          Alltagsmoment auf. Mit dir selbst zu reden, ob still oder laut, ist
+          eine Grundfunktion des Denkens.
       - icon: shield
-        text: "Menschen unterschätzen regelmäßig, wie oft andere traurig, unsicher oder einsam sind. Genau daraus entsteht das Gefühl, als Einziger nicht mitzukommen."
+        text: Menschen unterschätzen regelmäßig, wie oft andere traurig, unsicher oder
+          einsam sind. Genau daraus entsteht das Gefühl, als Einziger nicht
+          mitzukommen.
   - type: textabschnitt
-    titel_override: "Warum es schwer ist"
-    text: "Die Frage „Bin ich normal?“ ist schwer zu beantworten, weil du zwei Dinge vergleichst, die nicht vergleichbar sind. Von dir selbst kennst du alles: die wirren Gedanken, die schlechten Tage, die Selbstgespräche auf dem Heimweg. Von anderen siehst du fast nur die Oberfläche.\n\nWir nennen das bei Hybridlog die ==Innen gegen Außen Falle==. Du legst dein komplettes Innenleben neben die aufgeräumte Außenseite der anderen. Dieser Vergleich geht immer schlecht für dich aus, egal wie es dir tatsächlich geht. Die anderen machen übrigens denselben Fehler, nur mit dir als Fassade.\n\nDazu kommt, dass „normal“ drei verschiedene Dinge meinen kann. Es kann heißen: so wie die meisten. Es kann heißen: so wie es sein sollte. Oder es kann heißen: so, dass es dir und anderen nicht schadet. Wer diese Bedeutungen vermischt, findet an sich immer etwas, das „nicht normal“ ist. Nur die dritte Bedeutung sagt etwas darüber, ob du Unterstützung brauchst. Die ersten beiden sagen nur, wie sehr du dich an anderen misst.\n\nDeshalb gehen wir die Frage in vier Ebenen durch. Zuerst klären wir den Begriff. Danach prüfen wir drei typische Zweifel einzeln, jeweils mit dem, was die Forschung dazu weiß, und mit einer klaren Grenze, ab wann es sich lohnt, genauer hinzuschauen."
-  - type: ebene
-    label: "Normbegriff"
-    titel: "Was bedeutet normal eigentlich?"
-    kernsatz: "Normal heißt nicht „wie alle“, sondern: Es funktioniert für dich, ohne dir zu schaden."
-    was_passiert: "Im Alltag benutzen wir „normal“ meist statistisch. Normal ist, was die Mehrheit tut. Nach dieser Logik wäre aber auch jedes besondere Talent unnormal. Eine zweite Bedeutung ist die Idealnorm: so, wie man sein sollte. Diese Norm erfüllt fast niemand, weil sie ein Wunschbild ist. Die Psychologie arbeitet deshalb mit einer dritten Sicht. Sie fragt, ob etwas deine Funktion im Leben beeinträchtigt und ob daraus echter Leidensdruck entsteht. Eigenarten, Vorlieben und seltene Gewohnheiten fallen damit aus dem Raster. Sie sind ungewöhnlich, aber nicht krank. Und was als normal gilt, ändert sich mit Zeit und Kultur. Linkshändigkeit galt lange als Fehler, der umerzogen werden musste. Heute denkt darüber kaum jemand nach."
-    woran_merkst: "Du merkst, dass du mit der statistischen oder idealen Norm misst, wenn deine Zweifel mit „Andere machen das nicht“ oder „Ich sollte eigentlich“ beginnen. Dann geht es um Vergleich, nicht um Gesundheit. Fragst du dagegen „Hindert mich das an meinem Leben?“, bist du bei der hilfreichen Frage."
-    was_hilft: "Stell dir bei jedem Zweifel drei Prüffragen. Erstens: Leide ich darunter, oder stört es nur mein Bild davon, wie ich sein sollte? Zweitens: Hält es mich von Arbeit, Schule, Beziehungen oder Schlaf ab? Drittens: Schade ich damit mir oder anderen? Lautet die Antwort dreimal nein, ist es eine Eigenart. Schreib die Antworten kurz auf, statt sie nur zu denken. Auf Papier wird sichtbar, ob ein Problem wirklich groß ist oder nur laut. Oft schrumpft ein Zweifel schon beim Aufschreiben."
-    beleg: "Der Psychologe Jerome Wakefield (1992) beschreibt eine Störung als Kombination aus zwei Dingen: Ein psychischer Mechanismus erfüllt seine Funktion nicht, und daraus entsteht ein Schaden. Schaden allein reicht nicht. Trauer etwa schmerzt, ist aber keine Störung."
-    fazit: "Ungewöhnlich und krank sind zwei verschiedene Dinge, und meistens bist du einfach ungewöhnlich."
+    titel_override: Warum es schwer ist
+    text: >-
+      Die Frage „Bin ich normal?“ ist schwer zu beantworten, weil du zwei Dinge
+      vergleichst, die nicht vergleichbar sind. Von dir selbst kennst du alles:
+      die wirren Gedanken, die schlechten Tage, die Selbstgespräche auf dem
+      Heimweg. Von anderen siehst du fast nur die Oberfläche.
+
+
+      Wir nennen das bei Hybridlog die ==Innen gegen Außen Falle==. Du legst dein komplettes Innenleben neben die aufgeräumte Außenseite der anderen. Dieser Vergleich geht immer schlecht für dich aus, egal wie es dir tatsächlich geht. Die anderen machen übrigens denselben Fehler, nur mit dir als Fassade.
+
+
+      Dazu kommt, dass „normal“ drei verschiedene Dinge meinen kann. Es kann heißen: so wie die meisten. Es kann heißen: so wie es sein sollte. Oder es kann heißen: so, dass es dir und anderen nicht schadet. Wer diese Bedeutungen vermischt, findet an sich immer etwas, das „nicht normal“ ist. Nur die dritte Bedeutung sagt etwas darüber, ob du Unterstützung brauchst. Die ersten beiden sagen nur, wie sehr du dich an anderen misst.
+
+
+      Deshalb gehen wir die Frage in vier Ebenen durch. Zuerst klären wir den Begriff. Danach prüfen wir drei typische Zweifel einzeln, jeweils mit dem, was die Forschung dazu weiß, und mit einer klaren Grenze, ab wann es sich lohnt, genauer hinzuschauen.
+  - was_hilft: "Stell dir bei jedem Zweifel drei Prüffragen. Erstens: Leide ich
+      darunter, oder stört es nur mein Bild davon, wie ich sein sollte?
+      Zweitens: Hält es mich von Arbeit, Schule, Beziehungen oder Schlaf ab?
+      Drittens: Schade ich damit mir oder anderen? Lautet die Antwort dreimal
+      nein, ist es eine Eigenart. Schreib die Antworten kurz auf, statt sie nur
+      zu denken. Auf Papier wird sichtbar, ob ein Problem wirklich groß ist oder
+      nur laut. Oft schrumpft ein Zweifel schon beim Aufschreiben."
+    was_passiert: "Im Alltag benutzen wir „normal“ meist statistisch. Normal ist,
+      was die Mehrheit tut. Nach dieser Logik wäre aber auch jedes besondere
+      Talent unnormal. Eine zweite Bedeutung ist die Idealnorm: so, wie man sein
+      sollte. Diese Norm erfüllt fast niemand, weil sie ein Wunschbild ist. Die
+      Psychologie arbeitet deshalb mit einer dritten Sicht. Sie fragt, ob etwas
+      deine Funktion im Leben beeinträchtigt und ob daraus echter Leidensdruck
+      entsteht. Eigenarten, Vorlieben und seltene Gewohnheiten fallen damit aus
+      dem Raster. Sie sind ungewöhnlich, aber nicht krank. Und was als normal
+      gilt, ändert sich mit Zeit und Kultur. Linkshändigkeit galt lange als
+      Fehler, der umerzogen werden musste. Heute denkt darüber kaum jemand
+      nach."
+    titel: Was bedeutet normal eigentlich?
+    fazit: Ungewöhnlich und krank sind zwei verschiedene Dinge, und meistens bist du
+      einfach ungewöhnlich.
+    woran_merkst: Du merkst, dass du mit der statistischen oder idealen Norm misst,
+      wenn deine Zweifel mit „Andere machen das nicht“ oder „Ich sollte
+      eigentlich“ beginnen. Dann geht es um Vergleich, nicht um Gesundheit.
+      Fragst du dagegen „Hindert mich das an meinem Leben?“, bist du bei der
+      hilfreichen Frage.
+    kernsatz: "Normal heißt nicht „wie alle“, sondern: Es funktioniert für dich,
+      ohne dir zu schaden."
+    beleg: "Der Psychologe Jerome Wakefield (1992) beschreibt eine Störung als
+      Kombination aus zwei Dingen: Ein psychischer Mechanismus erfüllt seine
+      Funktion nicht, und daraus entsteht ein Schaden. Schaden allein reicht
+      nicht. Trauer etwa schmerzt, ist aber keine Störung."
+    label: Normbegriff
     darauf_aufbauend:
-      - titel: "OCEAN Modell der Persönlichkeit"
-        href: "/lexikon/ocean-modell/"
-        typ: "lexikon"
-      - titel: "MBTI und Persönlichkeitstypen kritisch betrachtet"
-        href: "/essays/mbti-persoenlichkeitstypen/"
-        typ: "essay"
-  - type: ebene
-    label: "Selbstgespräche"
-    titel: "Ist es normal, mit sich selbst zu reden?"
-    kernsatz: "Mit dir selbst zu reden ist kein Warnsignal, sondern ein Werkzeug deines Denkens."
-    was_passiert: "Fast alle Menschen haben eine innere Stimme. Sie plant den Einkauf, kommentiert Fehler oder probt Gespräche. Manche sprechen dabei auch laut, etwa beim Suchen, Lernen oder Sortieren. Das ist dieselbe Funktion, nur hörbar. Kinder lernen das Denken sogar über lautes Sprechen, das später nach innen wandert. Ob du viel oder wenig mit dir redest, ist von Mensch zu Mensch sehr verschieden. Manche Menschen denken fast nur in Bildern oder Gefühlen und hören kaum eine innere Stimme. Auch das ist eine normale Variante. Wichtig ist nicht, ob du es tust, sondern wie: unterstützend und sachlich oder hart und abwertend."
-    woran_merkst: "Hilfreiches Selbstgespräch klingt wie ein ruhiger Kollege: „Okay, erst das, dann das.“ Schädlich wird es, wenn die Stimme dich ständig beschimpft oder du gedanklich im Kreis läufst. Ein klarer Unterschied: Du weißt immer, dass es deine eigene Stimme ist."
-    was_hilft: "Nutze dein Selbstgespräch bewusst. Sprich in schwierigen Momenten mit deinem Namen statt mit „ich“, zum Beispiel: „Jonas, was ist jetzt der nächste Schritt?“ Das schafft Abstand, als würdest du einen Freund beraten. Fang harte Sätze ab und formuliere sie neu: aus „Ich bin so dumm“ wird „Das hat nicht geklappt, was lerne ich daraus?“ Laut zu reden hilft beim Lernen und Ordnen. Wenn es dich in der Bahn stört, verleg es nach Hause oder aufs Papier."
-    beleg: "In Studien, bei denen Menschen im Alltag zu zufälligen Zeitpunkten notierten, was in ihnen vorging, zeigte sich inneres Sprechen in etwa 26 Prozent der Momente (Heavey und Hurlburt 2008). Kross und Kollegen (2014) fanden: Wer sich mit eigenem Namen anspricht, behält unter Stress mehr Kontrolle über Gedanken und Gefühle."
-    fazit: "Rede ruhig mit dir, aber rede so, wie du mit einem guten Freund reden würdest."
+      - titel: OCEAN Modell der Persönlichkeit
+        href: /lexikon/ocean-modell/
+        typ: lexikon
+      - titel: MBTI und Persönlichkeitstypen kritisch betrachtet
+        href: /essays/mbti-persoenlichkeitstypen/
+        typ: essay
+    type: ebene
+  - was_hilft: "Nutze dein Selbstgespräch bewusst. Sprich in schwierigen Momenten
+      mit deinem Namen statt mit „ich“, zum Beispiel: „Jonas, was ist jetzt der
+      nächste Schritt?“ Das schafft Abstand, als würdest du einen Freund
+      beraten. Fang harte Sätze ab und formuliere sie neu: aus „Ich bin so dumm“
+      wird „Das hat nicht geklappt, was lerne ich daraus?“ Laut zu reden hilft
+      beim Lernen und Ordnen. Wenn es dich in der Bahn stört, verleg es nach
+      Hause oder aufs Papier."
+    was_passiert: "Fast alle Menschen haben eine innere Stimme. Sie plant den
+      Einkauf, kommentiert Fehler oder probt Gespräche. Manche sprechen dabei
+      auch laut, etwa beim Suchen, Lernen oder Sortieren. Das ist dieselbe
+      Funktion, nur hörbar. Kinder lernen das Denken sogar über lautes Sprechen,
+      das später nach innen wandert. Ob du viel oder wenig mit dir redest, ist
+      von Mensch zu Mensch sehr verschieden. Manche Menschen denken fast nur in
+      Bildern oder Gefühlen und hören kaum eine innere Stimme. Auch das ist eine
+      normale Variante. Wichtig ist nicht, ob du es tust, sondern wie:
+      unterstützend und sachlich oder hart und abwertend."
+    titel: Ist es normal, mit sich selbst zu reden?
+    fazit: Rede ruhig mit dir, aber rede so, wie du mit einem guten Freund reden
+      würdest.
+    woran_merkst: "Hilfreiches Selbstgespräch klingt wie ein ruhiger Kollege: „Okay,
+      erst das, dann das.“ Schädlich wird es, wenn die Stimme dich ständig
+      beschimpft oder du gedanklich im Kreis läufst. Ein klarer Unterschied: Du
+      weißt immer, dass es deine eigene Stimme ist."
+    kernsatz: Mit dir selbst zu reden ist kein Warnsignal, sondern ein Werkzeug
+      deines Denkens.
+    beleg: "In Studien, bei denen Menschen im Alltag zu zufälligen Zeitpunkten
+      notierten, was in ihnen vorging, zeigte sich inneres Sprechen in etwa 26
+      Prozent der Momente (Heavey und Hurlburt 2008). Kross und Kollegen (2014)
+      fanden: Wer sich mit eigenem Namen anspricht, behält unter Stress mehr
+      Kontrolle über Gedanken und Gefühle."
+    label: Selbstgespräche
     darauf_aufbauend:
-      - titel: "Emotionsregulation"
-        href: "/lexikon/emotionsregulation/"
-        typ: "lexikon"
-      - titel: "Kognitive Umdeutung"
-        href: "/lexikon/kognitive-umdeutung/"
-        typ: "lexikon"
+      - titel: Emotionsregulation
+        href: /lexikon/emotionsregulation/
+        typ: lexikon
+      - titel: Kognitive Umdeutung
+        href: /lexikon/kognitive-umdeutung/
+        typ: lexikon
       - titel: "Metakognition: Denken über das Denken"
-        href: "/essays/metakognition/"
-        typ: "essay"
-  - type: ebene
-    label: "Traurigkeit"
-    titel: "Ist es normal, manchmal ohne Grund traurig zu sein?"
-    kernsatz: "Kurze Phasen von Traurigkeit ohne erkennbaren Anlass gehören zum normalen Gefühlsleben."
-    was_passiert: "Stimmungen schwanken ständig, auch ohne dass etwas Bestimmtes passiert ist. Schlaf, Hormone, Wetter, Erschöpfung oder eine Erinnerung, die nur halb bewusst auftaucht, können die Stimmung kippen lassen. Oft gibt es also einen Grund, du siehst ihn nur nicht. Traurigkeit hat zudem eine Funktion. Sie bremst, macht nachdenklicher und lenkt den Blick auf Details. Problematisch wird sie erst, wenn sie bleibt, alles überdeckt und dir die Kraft für den Alltag nimmt. Dann spricht man nicht mehr von einer Stimmung, sondern möglicherweise von einer Depression. Das ist eine ernsthafte, aber gut behandelbare Erkrankung, kein persönliches Versagen."
-    woran_merkst: "Normale Traurigkeit kommt in Wellen und lässt dich zwischendurch lachen, essen und schlafen. Hält eine gedrückte Stimmung mindestens zwei Wochen fast täglich an, mit Antriebslosigkeit oder Interessenverlust, ist das ein Zeichen, ärztlichen Rat einzuholen. Dasselbe gilt, wenn Schlaf, Appetit und Konzentration über längere Zeit deutlich nachlassen."
-    was_hilft: "Gib dem Gefühl erst einmal Raum, statt es sofort wegzudrücken. Frag dich dann: Wie habe ich geschlafen, gegessen, wie viel war ich draußen? Oft liegt dort die Ursache. Bewegung, Tageslicht und ein Gespräch mit einem vertrauten Menschen tun vielen in solchen Momenten gut. Notiere zwei Wochen lang jeden Abend einen Stimmungswert von eins bis zehn. So siehst du, ob es Wellen sind oder ein dauerhaftes Tief, und hast etwas Konkretes für ein Arztgespräch."
-    beleg: "Laut Robert Koch-Institut haben 8,1 Prozent der Erwachsenen in Deutschland aktuell eine ausgeprägte depressive Symptomatik, am häufigsten 18 bis 29 Jährige (Busch und andere 2013). Forgas und Kollegen (2009) zeigten, dass leicht gedrückte Stimmung an Regentagen das Gedächtnis für Details sogar verbesserte."
-    fazit: "Traurige Tage sind normal, ein Tief über Wochen verdient Aufmerksamkeit und Unterstützung."
+        href: /essays/metakognition/
+        typ: essay
+    type: ebene
+  - was_hilft: "Gib dem Gefühl erst einmal Raum, statt es sofort wegzudrücken. Frag
+      dich dann: Wie habe ich geschlafen, gegessen, wie viel war ich draußen?
+      Oft liegt dort die Ursache. Bewegung, Tageslicht und ein Gespräch mit
+      einem vertrauten Menschen tun vielen in solchen Momenten gut. Notiere zwei
+      Wochen lang jeden Abend einen Stimmungswert von eins bis zehn. So siehst
+      du, ob es Wellen sind oder ein dauerhaftes Tief, und hast etwas Konkretes
+      für ein Arztgespräch."
+    was_passiert: Stimmungen schwanken ständig, auch ohne dass etwas Bestimmtes
+      passiert ist. Schlaf, Hormone, Wetter, Erschöpfung oder eine Erinnerung,
+      die nur halb bewusst auftaucht, können die Stimmung kippen lassen. Oft
+      gibt es also einen Grund, du siehst ihn nur nicht. Traurigkeit hat zudem
+      eine Funktion. Sie bremst, macht nachdenklicher und lenkt den Blick auf
+      Details. Problematisch wird sie erst, wenn sie bleibt, alles überdeckt und
+      dir die Kraft für den Alltag nimmt. Dann spricht man nicht mehr von einer
+      Stimmung, sondern möglicherweise von einer Depression. Das ist eine
+      ernsthafte, aber gut behandelbare Erkrankung, kein persönliches Versagen.
+    titel: Ist es normal, manchmal ohne Grund traurig zu sein?
+    fazit: Traurige Tage sind normal, ein Tief über Wochen verdient Aufmerksamkeit
+      und Unterstützung.
+    woran_merkst: Normale Traurigkeit kommt in Wellen und lässt dich zwischendurch
+      lachen, essen und schlafen. Hält eine gedrückte Stimmung mindestens zwei
+      Wochen fast täglich an, mit Antriebslosigkeit oder Interessenverlust, ist
+      das ein Zeichen, ärztlichen Rat einzuholen. Dasselbe gilt, wenn Schlaf,
+      Appetit und Konzentration über längere Zeit deutlich nachlassen.
+    kernsatz: Kurze Phasen von Traurigkeit ohne erkennbaren Anlass gehören zum
+      normalen Gefühlsleben.
+    beleg: Laut Robert Koch-Institut haben 8,1 Prozent der Erwachsenen in
+      Deutschland aktuell eine ausgeprägte depressive Symptomatik, am häufigsten
+      18 bis 29 Jährige (Busch und andere 2013). Forgas und Kollegen (2009)
+      zeigten, dass leicht gedrückte Stimmung an Regentagen das Gedächtnis für
+      Details sogar verbesserte.
+    label: Traurigkeit
     darauf_aufbauend:
-      - titel: "Die Funktion negativer Emotionen"
-        href: "/lexikon/funktion-negativer-emotionen/"
-        typ: "lexikon"
+      - titel: Die Funktion negativer Emotionen
+        href: /lexikon/funktion-negativer-emotionen/
+        typ: lexikon
       - titel: "Emotion, Gefühl, Stimmung: der Unterschied"
-        href: "/lexikon/emotion-gefuehl-stimmung-unterschied/"
-        typ: "lexikon"
-  - type: ebene
-    label: "Anderssein"
-    titel: "Warum habe ich das Gefühl, anders als die anderen zu sein?"
-    kernsatz: "Du fühlst dich anders, weil du nur dein Inneres kennst und bei anderen nur die Fassade."
-    was_passiert: "Die meisten Menschen zeigen nach außen eine geordnete Version von sich. Zweifel, Einsamkeit und seltsame Gedanken bleiben privat. Dadurch entsteht ein verzerrtes Bild: Alle anderen scheinen stabil, nur du nicht. Hinzu kommt, dass wir uns selbst viel stärker beobachtet fühlen, als wir es sind. Jede Unsicherheit wirkt dadurch auffällig. Für introvertierte oder sehr nachdenkliche Menschen verstärkt sich das, weil sie ihr Innenleben besonders genau wahrnehmen. Das Gefühl ist echt, das Bild dahinter oft falsch. Manchmal steckt hinter dem Gefühl auch eine echte Besonderheit, etwa eine Hochsensibilität oder eine andere Art zu denken. Auch dann gilt: Anders heißt nicht falsch, sondern nur seltener."
-    woran_merkst: "Du sitzt in einer Gruppe und glaubst, alle merken, dass du nicht dazugehörst. Du vergleichst dich mit Feeds und Fassaden. Gleichzeitig hast du kaum mit jemandem ehrlich darüber gesprochen, wie es ihm wirklich geht."
-    was_hilft: "Prüf das Bild in deinem Kopf an der Wirklichkeit. Erzähl einer Person, der du vertraust, von einem deiner Zweifel. Sehr oft kommt ein „Kenn ich“ zurück. Reduziere Vergleiche mit sozialen Medien, denn dort siehst du nur ausgewählte Ausschnitte. Und betrachte dein Anderssein auch als Eigenschaft: Was an dir anders ist, ist oft genau das, was andere an dir schätzen. Frag dich nicht nur, wo du nicht reinpasst, sondern wo du gebraucht wirst."
-    beleg: "Jordan und Kollegen (2011) zeigten, dass Menschen unterschätzen, wie oft andere negative Gefühle haben. Wer das stärker tat, fühlte sich einsamer und grübelte mehr. Im T-Shirt Versuch von Gilovich (2000) schätzten Teilnehmer, die Hälfte habe ihr peinliches Shirt bemerkt. Tatsächlich war es etwa jeder Fünfte."
-    fazit: "Anders fühlen sich fast alle, du hörst es nur selten, weil kaum jemand darüber spricht."
+        href: /lexikon/emotion-gefuehl-stimmung-unterschied/
+        typ: lexikon
+    type: ebene
+  - was_hilft: "Prüf das Bild in deinem Kopf an der Wirklichkeit. Erzähl einer
+      Person, der du vertraust, von einem deiner Zweifel. Sehr oft kommt ein
+      „Kenn ich“ zurück. Reduziere Vergleiche mit sozialen Medien, denn dort
+      siehst du nur ausgewählte Ausschnitte. Und betrachte dein Anderssein auch
+      als Eigenschaft: Was an dir anders ist, ist oft genau das, was andere an
+      dir schätzen. Frag dich nicht nur, wo du nicht reinpasst, sondern wo du
+      gebraucht wirst."
+    was_passiert: "Die meisten Menschen zeigen nach außen eine geordnete Version von
+      sich. Zweifel, Einsamkeit und seltsame Gedanken bleiben privat. Dadurch
+      entsteht ein verzerrtes Bild: Alle anderen scheinen stabil, nur du nicht.
+      Hinzu kommt, dass wir uns selbst viel stärker beobachtet fühlen, als wir
+      es sind. Jede Unsicherheit wirkt dadurch auffällig. Für introvertierte
+      oder sehr nachdenkliche Menschen verstärkt sich das, weil sie ihr
+      Innenleben besonders genau wahrnehmen. Das Gefühl ist echt, das Bild
+      dahinter oft falsch. Manchmal steckt hinter dem Gefühl auch eine echte
+      Besonderheit, etwa eine Hochsensibilität oder eine andere Art zu denken.
+      Auch dann gilt: Anders heißt nicht falsch, sondern nur seltener."
+    titel: Warum habe ich das Gefühl, anders als die anderen zu sein?
+    fazit: Anders fühlen sich fast alle, du hörst es nur selten, weil kaum jemand
+      darüber spricht.
+    woran_merkst: Du sitzt in einer Gruppe und glaubst, alle merken, dass du nicht
+      dazugehörst. Du vergleichst dich mit Feeds und Fassaden. Gleichzeitig hast
+      du kaum mit jemandem ehrlich darüber gesprochen, wie es ihm wirklich geht.
+    kernsatz: Du fühlst dich anders, weil du nur dein Inneres kennst und bei anderen
+      nur die Fassade.
+    beleg: Jordan und Kollegen (2011) zeigten, dass Menschen unterschätzen, wie oft
+      andere negative Gefühle haben. Wer das stärker tat, fühlte sich einsamer
+      und grübelte mehr. Im T-Shirt Versuch von Gilovich (2000) schätzten
+      Teilnehmer, die Hälfte habe ihr peinliches Shirt bemerkt. Tatsächlich war
+      es etwa jeder Fünfte.
+    label: Anderssein
     darauf_aufbauend:
-      - titel: "Verfügbarkeitsheuristik"
-        href: "/lexikon/availability-heuristic/"
-        typ: "lexikon"
-      - titel: "Carl Jung und der Schatten"
-        href: "/essays/carl-jung-schatten/"
-        typ: "essay"
+      - titel: Verfügbarkeitsheuristik
+        href: /lexikon/availability-heuristic/
+        typ: lexikon
+      - titel: Carl Jung und der Schatten
+        href: /essays/carl-jung-schatten/
+        typ: essay
+    type: ebene
   - type: selbsttest
     fragen:
-      - frage: "Leide ich wirklich unter dem, was ich an mir „unnormal“ finde, oder stört es nur mein Bild davon, wie ich sein sollte?"
-        hinweis: "Wenn es nur das Bild stört, ist es eine Eigenart und kein Problem."
-      - frage: "Klingt meine innere Stimme meistens unterstützend oder meistens abwertend?"
-        hinweis: "Abwertend ist veränderbar. Übe den Abstand mit deinem eigenen Namen."
-      - frage: "Ist meine Traurigkeit eher eine Welle oder hält sie seit mindestens zwei Wochen fast täglich an?"
-        hinweis: "Bei zwei Wochen und mehr lohnt sich ein Gespräch mit Hausarzt oder Hausärztin."
-      - frage: "Mit wie vielen Menschen habe ich ehrlich darüber gesprochen, wie es ihnen innen wirklich geht?"
-        hinweis: "Wenn mit kaum jemandem, beruht dein Vergleich vermutlich auf Fassaden."
-      - frage: "Hält mich das, was ich an mir seltsam finde, konkret von etwas ab, das mir wichtig ist?"
-        hinweis: "Wenn ja, lohnt sich ein gezielter Schritt. Wenn nein, darfst du es einfach als Teil von dir stehen lassen."
+      - frage: Leide ich wirklich unter dem, was ich an mir „unnormal“ finde, oder stört
+          es nur mein Bild davon, wie ich sein sollte?
+        hinweis: Wenn es nur das Bild stört, ist es eine Eigenart und kein Problem.
+      - frage: Klingt meine innere Stimme meistens unterstützend oder meistens
+          abwertend?
+        hinweis: Abwertend ist veränderbar. Übe den Abstand mit deinem eigenen Namen.
+      - frage: Ist meine Traurigkeit eher eine Welle oder hält sie seit mindestens zwei
+          Wochen fast täglich an?
+        hinweis: Bei zwei Wochen und mehr lohnt sich ein Gespräch mit Hausarzt oder
+          Hausärztin.
+      - frage: Mit wie vielen Menschen habe ich ehrlich darüber gesprochen, wie es ihnen
+          innen wirklich geht?
+        hinweis: Wenn mit kaum jemandem, beruht dein Vergleich vermutlich auf Fassaden.
+      - frage: Hält mich das, was ich an mir seltsam finde, konkret von etwas ab, das
+          mir wichtig ist?
+        hinweis: Wenn ja, lohnt sich ein gezielter Schritt. Wenn nein, darfst du es
+          einfach als Teil von dir stehen lassen.
   - type: plan
     schritte:
-      - titel: "Vor dem Start"
-        dauer: "1 Abend"
-        text: "Schreib alle Punkte auf, bei denen du dich fragst, ob du normal bist. Ordne jeden Punkt einer der vier Ebenen zu: Begriff, Selbstgespräche, Traurigkeit oder Anderssein. Prüf jeden mit den drei Fragen aus Ebene eins: Leidest du darunter, behindert es deinen Alltag, schadet es dir oder anderen? Streich alles, was dreimal nein bekommt, und markiere den Rest."
-      - titel: "Die ersten zwei Wochen"
-        dauer: "14 Tage"
-        text: "Notiere jeden Abend eine Stimmungszahl von eins bis zehn und einen Satz, wie deine innere Stimme heute klang. Übe in einer schwierigen Situation pro Tag das Selbstgespräch mit deinem Namen. Führe in dieser Zeit mindestens ein ehrliches Gespräch, in dem du einen deiner Zweifel teilst. Achte darauf, wie die andere Person reagiert. Lass dazu die Vergleiche mit sozialen Medien möglichst ruhen, zum Beispiel indem du die Apps abends vom Startbildschirm nimmst. So vergleichst du dich zwei Wochen lang nur mit echten Menschen."
-      - titel: "Auswerten"
-        dauer: "1 Abend"
-        text: "Schau dir deine Notizen an. Sind die Tiefs Wellen mit guten Tagen dazwischen, ist das ein normaler Verlauf. Ist die Stimmung fast durchgehend niedrig, vereinbare einen Termin bei deiner Hausarztpraxis und nimm die Notizen mit. Hat das Gespräch dir gezeigt, dass andere ähnlich empfinden, merk dir das für den nächsten Zweifel."
-      - titel: "Wenn du rückfällig wirst"
-        text: "Die Frage „Bin ich normal?“ kommt wieder, besonders in Stressphasen oder nach Vergleichen. Das ist kein Rückschritt. Nimm die Liste vom Anfang und prüf den neuen Zweifel genauso. Wird die innere Stimme wieder hart, starte mit dem Namen Trick. Wird es schwer, ruf jemanden an, auch nachts."
+      - titel: Vor dem Start
+        dauer: 1 Abend
+        text: "Schreib alle Punkte auf, bei denen du dich fragst, ob du normal bist.
+          Ordne jeden Punkt einer der vier Ebenen zu: Begriff, Selbstgespräche,
+          Traurigkeit oder Anderssein. Prüf jeden mit den drei Fragen aus Ebene
+          eins: Leidest du darunter, behindert es deinen Alltag, schadet es dir
+          oder anderen? Streich alles, was dreimal nein bekommt, und markiere
+          den Rest."
+      - titel: Die ersten zwei Wochen
+        dauer: 14 Tage
+        text: Notiere jeden Abend eine Stimmungszahl von eins bis zehn und einen Satz,
+          wie deine innere Stimme heute klang. Übe in einer schwierigen
+          Situation pro Tag das Selbstgespräch mit deinem Namen. Führe in dieser
+          Zeit mindestens ein ehrliches Gespräch, in dem du einen deiner Zweifel
+          teilst. Achte darauf, wie die andere Person reagiert. Lass dazu die
+          Vergleiche mit sozialen Medien möglichst ruhen, zum Beispiel indem du
+          die Apps abends vom Startbildschirm nimmst. So vergleichst du dich
+          zwei Wochen lang nur mit echten Menschen.
+      - titel: Auswerten
+        dauer: 1 Abend
+        text: Schau dir deine Notizen an. Sind die Tiefs Wellen mit guten Tagen
+          dazwischen, ist das ein normaler Verlauf. Ist die Stimmung fast
+          durchgehend niedrig, vereinbare einen Termin bei deiner Hausarztpraxis
+          und nimm die Notizen mit. Hat das Gespräch dir gezeigt, dass andere
+          ähnlich empfinden, merk dir das für den nächsten Zweifel.
+      - titel: Wenn du rückfällig wirst
+        text: Die Frage „Bin ich normal?“ kommt wieder, besonders in Stressphasen oder
+          nach Vergleichen. Das ist kein Rückschritt. Nimm die Liste vom Anfang
+          und prüf den neuen Zweifel genauso. Wird die innere Stimme wieder
+          hart, starte mit dem Namen Trick. Wird es schwer, ruf jemanden an,
+          auch nachts.
   - type: faq
-    titel_override: "Häufig gefragt"
+    titel_override: Häufig gefragt
     eintraege:
-      - frage: "Ist es normal, laut mit sich selbst zu reden?"
-        antwort: "Ja. Lautes Selbstgespräch ist die hörbare Form des inneren Sprechens. Es hilft beim Planen, Suchen und Lernen. Bedenklich wäre es nur, wenn du Stimmen hörst, die du nicht als deine eigenen erkennst. Das ist etwas völlig anderes und sollte ärztlich abgeklärt werden."
-      - frage: "Bin ich verrückt, wenn ich seltsame Gedanken habe?"
-        antwort: "Nein. Fast alle Menschen haben gelegentlich absurde, unangenehme oder sogar erschreckende Gedanken, die einfach auftauchen. Entscheidend ist, wie du damit umgehst. Ein Gedanke ist kein Wunsch und keine Handlung. Belastend wird es erst, wenn dich solche Gedanken ständig quälen und du viel Zeit damit verbringst."
-      - frage: "Ist es normal, keine Freunde zu haben?"
-        antwort: "Viele Menschen haben Phasen mit wenigen oder keinen engen Freunden, etwa nach einem Umzug oder Jobwechsel. Weniger Kontakte zu wollen ist ebenfalls normal, besonders für introvertierte Menschen. Wenn du dich allerdings dauerhaft einsam fühlst, lohnt es sich, aktiv kleine Schritte auf andere zuzugehen."
-      - frage: "Ist es normal, sich nicht zu verlieben?"
-        antwort: "Ja. Menschen verlieben sich unterschiedlich oft und unterschiedlich stark, manche lange gar nicht. Es gibt kein Alter und keine Häufigkeit, die vorgeschrieben ist. Wichtig ist nur, ob du selbst darunter leidest. Wenn nicht, gibt es nichts zu reparieren."
-      - frage: "Ab wann sollte ich mir Hilfe holen?"
-        antwort: "Wenn du über mindestens zwei Wochen fast täglich niedergeschlagen bist, kaum Freude empfindest, schlecht schläfst oder dein Alltag leidet. Ebenso, wenn du an Selbstverletzung oder Suizid denkst. Dann ist sofortige Hilfe wichtig, etwa über die Telefonseelsorge oder den Notruf 112."
-      - frage: "Ist es normal, sich im eigenen Leben fremd zu fühlen?"
-        antwort: "Kurze Momente, in denen alles unwirklich oder fern wirkt, kennen viele Menschen, besonders bei Stress und Schlafmangel. Sie vergehen meist von selbst. Hält dieses Gefühl lange an oder macht es dir Angst, sprich mit deiner Hausarztpraxis darüber."
-      - frage: "Sind introvertierte Menschen weniger normal?"
-        antwort: "Nein. Introversion ist eine ganz gewöhnliche Persönlichkeitseigenschaft, die in jeder Bevölkerung breit verteilt ist. Introvertierte tanken eher allein auf und mögen tiefe Gespräche lieber als große Runden. In einer lauten Umgebung fühlen sie sich manchmal anders. Das sagt etwas über die Umgebung, nicht über ihren Wert."
-      - frage: "Warum denke ich so viel über mich nach?"
-        antwort: "Nachdenken über sich selbst ist menschlich und oft nützlich. Es kippt in Grübeln, wenn du dieselben Fragen immer wieder wälzt, ohne zu einer Antwort zu kommen. Dann hilft es, Gedanken aufzuschreiben, ihnen eine feste Zeit zu geben und danach bewusst etwas anderes zu tun."
+      - frage: Ist es normal, laut mit sich selbst zu reden?
+        antwort: Ja. Lautes Selbstgespräch ist die hörbare Form des inneren Sprechens.
+          Es hilft beim Planen, Suchen und Lernen. Bedenklich wäre es nur, wenn
+          du Stimmen hörst, die du nicht als deine eigenen erkennst. Das ist
+          etwas völlig anderes und sollte ärztlich abgeklärt werden.
+      - frage: Bin ich verrückt, wenn ich seltsame Gedanken habe?
+        antwort: Nein. Fast alle Menschen haben gelegentlich absurde, unangenehme oder
+          sogar erschreckende Gedanken, die einfach auftauchen. Entscheidend
+          ist, wie du damit umgehst. Ein Gedanke ist kein Wunsch und keine
+          Handlung. Belastend wird es erst, wenn dich solche Gedanken ständig
+          quälen und du viel Zeit damit verbringst.
+      - frage: Ist es normal, keine Freunde zu haben?
+        antwort: Viele Menschen haben Phasen mit wenigen oder keinen engen Freunden,
+          etwa nach einem Umzug oder Jobwechsel. Weniger Kontakte zu wollen ist
+          ebenfalls normal, besonders für introvertierte Menschen. Wenn du dich
+          allerdings dauerhaft einsam fühlst, lohnt es sich, aktiv kleine
+          Schritte auf andere zuzugehen.
+      - frage: Ist es normal, sich nicht zu verlieben?
+        antwort: Ja. Menschen verlieben sich unterschiedlich oft und unterschiedlich
+          stark, manche lange gar nicht. Es gibt kein Alter und keine
+          Häufigkeit, die vorgeschrieben ist. Wichtig ist nur, ob du selbst
+          darunter leidest. Wenn nicht, gibt es nichts zu reparieren.
+      - frage: Ab wann sollte ich mir Hilfe holen?
+        antwort: Wenn du über mindestens zwei Wochen fast täglich niedergeschlagen bist,
+          kaum Freude empfindest, schlecht schläfst oder dein Alltag leidet.
+          Ebenso, wenn du an Selbstverletzung oder Suizid denkst. Dann ist
+          sofortige Hilfe wichtig, etwa über die Telefonseelsorge oder den
+          Notruf 112.
+      - frage: Ist es normal, sich im eigenen Leben fremd zu fühlen?
+        antwort: Kurze Momente, in denen alles unwirklich oder fern wirkt, kennen viele
+          Menschen, besonders bei Stress und Schlafmangel. Sie vergehen meist
+          von selbst. Hält dieses Gefühl lange an oder macht es dir Angst,
+          sprich mit deiner Hausarztpraxis darüber.
+      - frage: Sind introvertierte Menschen weniger normal?
+        antwort: Nein. Introversion ist eine ganz gewöhnliche
+          Persönlichkeitseigenschaft, die in jeder Bevölkerung breit verteilt
+          ist. Introvertierte tanken eher allein auf und mögen tiefe Gespräche
+          lieber als große Runden. In einer lauten Umgebung fühlen sie sich
+          manchmal anders. Das sagt etwas über die Umgebung, nicht über ihren
+          Wert.
+      - frage: Warum denke ich so viel über mich nach?
+        antwort: Nachdenken über sich selbst ist menschlich und oft nützlich. Es kippt
+          in Grübeln, wenn du dieselben Fragen immer wieder wälzt, ohne zu einer
+          Antwort zu kommen. Dann hilft es, Gedanken aufzuschreiben, ihnen eine
+          feste Zeit zu geben und danach bewusst etwas anderes zu tun.
   - type: hilfe
     eintraege:
-      - titel: "TelefonSeelsorge"
-        beschreibung: "Rund um die Uhr, kostenlos und anonym: 0800 111 0 111, 0800 111 0 222 oder 116 123. Auch per Chat und Mail."
-        url: "https://www.telefonseelsorge.de/"
-      - titel: "Info Telefon Depression"
-        beschreibung: "Kostenlose Information der Stiftung Deutsche Depressionshilfe unter 0800 33 44 533, zu festen Sprechzeiten."
-        url: "https://www.deutsche-depressionshilfe.de/"
-      - titel: "Hausarztpraxis"
-        beschreibung: "Der einfachste erste Schritt. Dort wird geklärt, ob körperliche Ursachen hinter deiner Stimmung stecken könnten, und du bekommst bei Bedarf eine Überweisung. Sie kann dir auch dabei helfen, den Weg zu einer psychotherapeutischen Sprechstunde in deiner Nähe zu finden."
+      - titel: TelefonSeelsorge
+        beschreibung: "Rund um die Uhr, kostenlos und anonym: 0800 111 0 111, 0800 111 0
+          222 oder 116 123. Auch per Chat und Mail."
+        url: https://www.telefonseelsorge.de/
+      - titel: Info Telefon Depression
+        beschreibung: Kostenlose Information der Stiftung Deutsche Depressionshilfe
+          unter 0800 33 44 533, zu festen Sprechzeiten.
+        url: https://www.deutsche-depressionshilfe.de/
+      - titel: Hausarztpraxis
+        beschreibung: Der einfachste erste Schritt. Dort wird geklärt, ob körperliche
+          Ursachen hinter deiner Stimmung stecken könnten, und du bekommst bei
+          Bedarf eine Überweisung. Sie kann dir auch dabei helfen, den Weg zu
+          einer psychotherapeutischen Sprechstunde in deiner Nähe zu finden.
         url: ""
-      - titel: "Notfall"
-        beschreibung: "Bei akuter Gefahr für dich oder andere wähle sofort den Notruf 112."
-        url: ""
-  - type: angebot
-    label: "Von Hybridlog"
-    kennzeichnung: ""
-    hervorheben: true
-    titel: "Das Hybridlog Notizbuch"
-    text: "Für den Zwei Wochen Plan reicht jedes Papier. Wer lieber ein festes Buch nutzt, findet im Hybridlog Notizbuch Platz für Stimmungswerte, Gedanken und die Antworten auf die drei Prüffragen."
-    url: "/journale/notizbuch/"
-    cta_label: "Zum Notizbuch"
   - type: evidenz
-    titel_override: "Grenzen und Evidenz"
-    text: "Die Zahlen zu psychischen Störungen stammen aus großen, repräsentativen Studien in Deutschland, sind aber über zehn Jahre alt. Die Daten zum inneren Sprechen beruhen auf kleinen Stichproben mit aufwendiger Methode. Die Studien zu Selbstgesprächen und zum Unterschätzen fremder Gefühle wurden überwiegend mit Studierenden durchgeführt. Diese Seite ersetzt keine Diagnose. Sie hilft dir einzuordnen, ob ein Zweifel eine Eigenart ist oder ob ein Gespräch mit Fachleuten sinnvoll wäre."
+    titel_override: Grenzen und Evidenz
+    text: Die Zahlen zu psychischen Störungen stammen aus großen, repräsentativen
+      Studien in Deutschland, sind aber über zehn Jahre alt. Die Daten zum
+      inneren Sprechen beruhen auf kleinen Stichproben mit aufwendiger Methode.
+      Die Studien zu Selbstgesprächen und zum Unterschätzen fremder Gefühle
+      wurden überwiegend mit Studierenden durchgeführt. Diese Seite ersetzt
+      keine Diagnose. Sie hilft dir einzuordnen, ob ein Zweifel eine Eigenart
+      ist oder ob ein Gespräch mit Fachleuten sinnvoll wäre.
   - type: verknuepfungen
-    titel_override: "Weitergehen"
+    titel_override: Weitergehen
     eintraege:
-      - titel: "Die Funktion negativer Emotionen"
-        href: "/lexikon/funktion-negativer-emotionen/"
-      - titel: "Carl Jung und der Schatten"
-        href: "/essays/carl-jung-schatten/"
+      - titel: Die Funktion negativer Emotionen
+        href: /lexikon/funktion-negativer-emotionen/
+      - titel: Carl Jung und der Schatten
+        href: /essays/carl-jung-schatten/
 quellen:
-  - titel: "Wakefield (1992), American Psychologist · Störung als schädliche Dysfunktion"
-    url: "https://www.psy.miami.edu/_assets/pdf/rpo-articles/wakefield-1992.pdf"
-  - titel: "Jacobi und andere (2014), Der Nervenarzt · 27,7 Prozent 12 Monats Prävalenz psychischer Störungen"
-    url: "https://psychologische-hochschule.de/forschungsprojekte/psychische-stoerungen-in-der-allgemeinbevoelkerung-studie-zur-gesundheit-erwachsener-in-deutschland-und-ihr-zusatzmodul-psychische-gesundheit-degs1-mh/"
-  - titel: "Busch und andere (2013), Robert Koch-Institut · depressive Symptomatik in Deutschland"
-    url: "https://edoc.rki.de/handle/176904/1501"
-  - titel: "Heavey und andere (2019), Frontiers in Psychology · Häufigkeit inneren Sprechens"
-    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6338092/"
-  - titel: "Kross und andere (2014), Journal of Personality and Social Psychology · Selbstgespräch mit eigenem Namen"
-    url: "https://www.researchgate.net/publication/259953877_Self-Talk_as_a_Regulatory_Mechanism_How_You_Do_It_Matters"
-  - titel: "Forgas und andere (2009), Journal of Experimental Social Psychology · gedrückte Stimmung und Gedächtnis"
-    url: "https://www.sciencedirect.com/science/article/abs/pii/S0022103108001649"
-  - titel: "Jordan und andere (2011), Personality and Social Psychology Bulletin · Unterschätzung fremder negativer Gefühle"
-    url: "https://www.bps.org.uk/research-digest/other-people-may-experience-more-misery-you-realise"
-  - titel: "Gilovich und andere (2000), Journal of Personality and Social Psychology · Spotlight Effekt"
-    url: "https://en.wikipedia.org/wiki/Thomas_Gilovich"
+  - titel: Wakefield (1992), American Psychologist · Störung als schädliche
+      Dysfunktion
+    url: https://www.psy.miami.edu/_assets/pdf/rpo-articles/wakefield-1992.pdf
+  - titel: Jacobi und andere (2014), Der Nervenarzt · 27,7 Prozent 12 Monats
+      Prävalenz psychischer Störungen
+    url: https://psychologische-hochschule.de/forschungsprojekte/psychische-stoerungen-in-der-allgemeinbevoelkerung-studie-zur-gesundheit-erwachsener-in-deutschland-und-ihr-zusatzmodul-psychische-gesundheit-degs1-mh/
+  - titel: Busch und andere (2013), Robert Koch-Institut · depressive Symptomatik in
+      Deutschland
+    url: https://edoc.rki.de/handle/176904/1501
+  - titel: Heavey und andere (2019), Frontiers in Psychology · Häufigkeit inneren
+      Sprechens
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC6338092/
+  - titel: Kross und andere (2014), Journal of Personality and Social Psychology ·
+      Selbstgespräch mit eigenem Namen
+    url: https://www.researchgate.net/publication/259953877_Self-Talk_as_a_Regulatory_Mechanism_How_You_Do_It_Matters
+  - titel: Forgas und andere (2009), Journal of Experimental Social Psychology ·
+      gedrückte Stimmung und Gedächtnis
+    url: https://www.sciencedirect.com/science/article/abs/pii/S0022103108001649
+  - titel: Jordan und andere (2011), Personality and Social Psychology Bulletin ·
+      Unterschätzung fremder negativer Gefühle
+    url: https://www.bps.org.uk/research-digest/other-people-may-experience-more-misery-you-realise
+  - titel: Gilovich und andere (2000), Journal of Personality and Social Psychology
+      · Spotlight Effekt
+    url: https://en.wikipedia.org/wiki/Thomas_Gilovich
+seo_title: Bin ich normal? 4 Zweifel ehrlich erklärt · Hybridlog
+seo_description: Bin ich normal? Was normal wirklich heißt, warum
+  Selbstgespräche, grundlose Traurigkeit und das Gefühl, anders zu sein, fast
+  alle kennen, und wann Hilfe hilft.
 ---

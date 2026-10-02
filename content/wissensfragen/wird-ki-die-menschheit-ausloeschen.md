@@ -1,0 +1,193 @@
+---
+title: "Wird KI die Menschheit auslöschen?"
+bereich: "denken"
+welten:
+  - mind
+lead: "Die Frage klingt nach Science Fiction, wird aber von Turing Preisträgern und den Chefs der größten KI Labore ernsthaft diskutiert. Hier siehst du, was belegt ist, was Szenario bleibt und wie du damit umgehen kannst."
+kurzantwort: "Niemand weiß es sicher. Der Median unter 2.778 KI Forschenden liegt bei 5 Prozent, Geoffrey Hinton schätzt 10 bis 20 Prozent, Kritiker halten das Szenario für verfrüht. Belegt sind heute andere Schäden: Cyberangriffe, Betrug und Missbrauch. Wir gehen vier Ebenen durch: Technik, Begriffe, Gefahren und die Frage nach deiner Angst."
+autor: "Maik"
+geprueft_am: "2026-10-02"
+kurzlesezeit: 5
+vertiefzeit: 15
+seo_title: "Wird KI die Menschheit auslöschen? Fakten · Hybridlog"
+seo_description: "Wird KI die Menschheit auslöschen? Was KI Chefs und Forschende befürchten, was schon belegt ist, wo es gefährlich werden kann und ob du Angst haben musst."
+bloecke:
+  - type: icon_fakten
+    titel_override: "Auf einen Blick"
+    fakten:
+      - icon: flag
+        text: "Im Mai 2023 unterzeichneten die Chefs von OpenAI, Google DeepMind und Anthropic zusammen mit den Turing Preisträgern Hinton und Bengio ein Statement, das KI Risiken neben Pandemien und Atomkrieg stellt."
+      - icon: search
+        text: "Unter 2.778 befragten KI Forschenden lag der Median für ein Aussterben durch KI bei 5 Prozent. Die Mittelwerte lagen zwischen 14 und 19 Prozent, die Meinungen gehen also weit auseinander."
+      - icon: shield
+        text: "Der Internationale KI Sicherheitsbericht 2026 hält heutige Systeme nicht für fähig zu einem Kontrollverlust, belegt aber reale Schäden: Betrug, KI gestützte Cyberangriffe und mögliche Hilfe bei Biowaffen."
+  - type: textabschnitt
+    titel_override: "Warum es schwer ist"
+    text: "Die Frage ist schwer zu beantworten, weil drei verschiedene Dinge vermischt werden. Wir nennen das bei Hybridlog die ==drei Stockwerke der KI Gefahr==.\n\nIm ersten Stockwerk steht, was KI heute schon anrichtet: Betrug, Fälschungen, Fehler. Das ist belegt. Im zweiten steht, was Menschen mit KI tun können, etwa Cyberangriffe oder Hilfe bei Biowaffen. Das ist teils belegt, teils in Tests gezeigt. Im dritten steht, was KI selbst tun könnte, wenn sie eigene Ziele verfolgt und sich der Kontrolle entzieht. Das ist bisher ein Szenario. Wer das nicht trennt, landet entweder bei „alles halb so wild“ oder bei „alles verloren“, und beides ist zu grob.\n\nSchlagzeilen springen zwischen den Stockwerken, ohne es zu sagen. Dazu kommt, dass selbst Fachleute zwei Weltbilder haben: Die einen sehen KI als Werkzeug ohne eigene Ziele, die anderen als Akteur, der Selbsterhaltung entwickeln kann. Deshalb gehen wir vier Ebenen durch und sagen bei jeder wichtigen Aussage, auf welchem Stockwerk sie steht."
+  - type: ebene
+    label: "Funktionsweise"
+    titel: "Wie funktioniert KI genau?"
+    kernsatz: "Moderne KI wird nicht programmiert, sondern trainiert, und genau deshalb versteht sie niemand vollständig."
+    was_passiert: "Heutige Chatbots sind Sprachmodelle. Sie werden mit riesigen Textmengen trainiert und lernen dabei, welches Wort mit welcher Wahrscheinlichkeit als Nächstes passt. Die Architektur dahinter heißt Transformer und stammt aus einem Google Paper von 2017. Ihr Kern ist ein Aufmerksamkeitsmechanismus, der gewichtet, welche Teile eines Textes füreinander wichtig sind. Danach werden die Modelle mit menschlichem Feedback nachgeschliffen, damit sie hilfreich antworten. Ein so feinabgestimmtes Modell wurde 2022 gegenüber dem mehr als hundertmal größeren GPT-3 bevorzugt. Niemand schreibt dabei Regeln. Die Strategien entstehen im Training selbst. Forschende von Anthropic fanden 2025 zum Beispiel, dass ein Modell beim Dichten Reimwörter viele Schritte im Voraus plant. Es rechnet also nicht nur das nächste Wort aus, sondern bildet innere Zwischenschritte."
+    woran_merkst: "Du merkst die Funktionsweise an typischen Eigenheiten. Die Modelle klingen sicher, auch wenn sie falsch liegen. Sie erfinden teils Quellen oder Zugangsdaten. Und sie sind in manchem verblüffend gut, stolpern aber bei scheinbar einfachen Aufgaben wie dem Zählen von Objekten."
+    was_hilft: "Behandle KI wie einen sehr belesenen, aber unzuverlässigen Praktikanten. Prüfe wichtige Aussagen gegen eine Quelle, besonders Zahlen, Studien und Rechtliches. Lass dir Quellen nennen und öffne sie selbst. Gib dem Modell konkrete Aufgaben mit klaren Grenzen statt offener Fragen. Merke dir: Dass ein Text flüssig klingt, sagt nichts darüber, ob er stimmt. Wer die Grundlogik kennt, behält den Respekt vor KI, verliert aber die Ehrfurcht."
+    beleg: "Vaswani und Kollegen (2017) stellten den Transformer vor, der ohne die bis dahin üblichen rekurrenten Netze allein auf Aufmerksamkeit beruht. Anthropic (2025) betont, dass Modelle nicht programmiert werden und ihre Berechnungen bisher nur zu einem Bruchteil einsehbar sind."
+    fazit: "Wir bauen Systeme, die wir nutzen, bevor wir sie ganz verstehen."
+    darauf_aufbauend:
+      - titel: "Large Language Model"
+      - titel: "Der Emergenz Effekt"
+        href: "/essays/emergenz-effekt/"
+        typ: "essay"
+  - type: ebene
+    label: "Begriffe"
+    titel: "Was ist AI, AGI und ASI?"
+    kernsatz: "KI ist der Oberbegriff, AGI meint Menschenniveau in der Breite, ASI geht weit darüber hinaus."
+    was_passiert: "KI, englisch AI, ist der Oberbegriff für Software, die Aufgaben löst, für die man bisher Denken brauchte, vom Spamfilter bis zum Chatbot. AGI, künstliche allgemeine Intelligenz, wäre ein System, das über viele Gebiete hinweg auf menschlichem Niveau arbeitet. Google DeepMind schlug 2023 vor, das nicht als Schalter zu sehen, sondern in Stufen: Emerging, Competent, Expert, Exceptional und Superhuman, gemessen an Leistung und Breite. ASI, künstliche Superintelligenz, meint nach Nick Bostrom einen Verstand, der Menschen in praktisch allen interessanten Bereichen deutlich übertrifft. Manche Forschende erwarten sie kurz nach AGI. Beweisen kann das niemand."
+    woran_merkst: "Du erkennst den Unterschied an der Reichweite. Ein Navi oder Übersetzer löst eine Aufgabe. Ein Chatbot, der schreibt, programmiert und rechnet, wirkt schon breiter. Wenn jemand von AGI spricht, lohnt die Frage: Welche Definition meint er, und gemessen woran? Dahinter stecken oft sehr unterschiedliche Zeitpläne."
+    was_hilft: "Prüfe bei jeder Schlagzeile, welcher Begriff gemeint ist und wer ihn definiert. AGI hat keine einheitliche Definition, deshalb sind auch Jahreszahlen nur so belastbar wie ihre Definition. Zur Orientierung: In der Umfrage von 2023 gaben die befragten Forschenden eine 50 Prozent Chance auf Maschinenintelligenz auf Menschenniveau bis 2047. Behandle solche Jahreszahlen als Schätzungen, nicht als Fahrplan. Frag bei jeder Prognose außerdem, ob der Sprecher wirtschaftlich davon profitiert, dass du sie glaubst. Das macht die Aussage nicht falsch, erklärt aber ihre Färbung."
+    beleg: "Morris und Kollegen (2023) von Google DeepMind ordnen AGI nach Leistung und Breite in fünf Stufen. In der Umfrage von 2023 mit 2.778 Forschenden lag die 50 Prozent Marke für Maschinenintelligenz auf Menschenniveau bei 2047, dreizehn Jahre früher als in der Umfrage ein Jahr zuvor."
+    fazit: "Die Begriffe sind unscharf, und deshalb sind auch alle Prognosen unscharf."
+    darauf_aufbauend:
+      - titel: "AGI und Superintelligenz"
+      - titel: "Wissenschaftstheorie"
+        href: "/lexikon/wissenschaftstheorie/"
+        typ: "lexikon"
+  - type: ebene
+    label: "Gefahren"
+    titel: "Warum und wie kann KI gefährlich für den Menschen werden?"
+    kernsatz: "KI kann auf drei Wegen gefährlich werden: durch Menschen, durch Fehler und durch eigene Ziele."
+    was_passiert: "Google DeepMind unterscheidet vier Risikobereiche: Missbrauch, Fehlausrichtung, Fehler und strukturelle Risiken. Missbrauch heißt, Menschen setzen KI als Werkzeug ein. Fehlausrichtung heißt, ein System verfolgt Ziele, die nicht zu den Absichten seiner Entwickler passen. Fehler sind schlichte Fehlleistungen mit großer Wirkung. Strukturelle Risiken gehen nicht von einem einzelnen Fehler aus, sondern vom Zusammenspiel vieler Akteure. Belegt sind heute vor allem Missbrauch und Fehler. Fehlausrichtung zeigt sich bisher in Tests. Kontrollverlust im Ernstfall ist ein Szenario, kein Ereignis. Wie Missbrauch aussehen kann, zeigte 2025 ein Fall: Angreifer zerlegten einen Angriff in harmlos wirkende Teilaufgaben und gaben der KI eine falsche Rolle, sodass sie mitmachte."
+    woran_merkst: "Gefährlich wird es dort, wo KI handelt statt nur zu antworten. Ein Chatbot verändert nichts in der Welt. Ein KI Agent, der Programme ausführt, Nachrichten sendet oder Systeme bedient, kann es. Je mehr Zugriff und Autonomie, desto größer die Wirkung eines Fehlers oder Missbrauchs."
+    was_hilft: "Als Einzelner steuerst du das Wichtigste selbst. Gib KI Agenten nie mehr Rechte als nötig, gib keine Zugangsdaten, Bankdaten oder Gesundheitsdaten ein und halte bei Entscheidungen mit Folgen einen Menschen im Prozess. Das empfehlen auch die Forschenden: menschliche Aufsicht und begrenzte Rechte. Gegen KI Betrug gelten die alten Regeln nur strenger: Rückruf über die bekannte Nummer, nichts unter Zeitdruck überweisen, auch nicht, wenn Bild oder Stimme echt wirken."
+    beleg: "Shah und Kollegen (2025) von Google DeepMind nennen Missbrauch, Fehlausrichtung, Fehler und strukturelle Risiken. Der Internationale KI Sicherheitsbericht 2026 stellt fest: Aktuelle Systeme haben nicht die Fähigkeiten für Kontrollverlust, verbessern sich aber in verwandten Bereichen wie autonomem Arbeiten."
+    fazit: "Heute drohen vor allem Missbrauch und Fehler, die Fehlausrichtung ist noch ein Testfall."
+    darauf_aufbauend:
+      - titel: "Alignment Problem"
+      - titel: "AGI und Superintelligenz"
+  - type: textabschnitt
+    titel_override: "Was die Chefs der KI Labore befürchten"
+    text: "Im Mai 2023 unterschrieben Sam Altman (OpenAI), Demis Hassabis (Google DeepMind) und Dario Amodei (Anthropic) ein Statement, das die Verringerung des Auslöschungsrisikos durch KI zur globalen Priorität neben Pandemien und Atomkrieg erklärt. Auch Geoffrey Hinton und Yoshua Bengio, beide Turing Preisträger, unterzeichneten. Hinton schätzt die Wahrscheinlichkeit auf 10 bis 20 Prozent binnen 30 Jahren.\n\nAm konkretesten wird Dario Amodei in seinem Essay von Januar 2026. Er nennt fünf Felder: eigene Ziele und Täuschung bei KI, Missbrauch zur Zerstörung vor allem durch Biowaffen, Missbrauch zur Machtergreifung durch Überwachung und Drohnenschwärme, wirtschaftliche Umbrüche und indirekte Folgen. Er warnt zugleich vor Untergangsstimmung und betont die Unsicherheit.\n\nOpenAI beobachtet nach eigenem Framework biologische und chemische Fähigkeiten, Cybersicherheit und KI Selbstverbesserung, mit den Stufen „High“ und „Critical“. Google DeepMind ordnet die Risiken in Missbrauch, Fehlausrichtung, Fehler und strukturelle Risiken."
+  - type: textabschnitt
+    titel_override: "Wo und wie es konkret werden kann"
+    text: "Biologie und Chemie. Hier liegt die größte Sorge vor Missbrauch. Ein Modell übertraf laut Sicherheitsbericht 94 Prozent der Fachleute bei der Fehlersuche in virologischen Laborverfahren. Amodei schreibt, Modelle könnten die Erfolgschance beim Biowaffenbau schon verdoppeln oder verdreifachen. Mehrere Entwickler verstärkten 2025 ihre Schutzmaßnahmen. Täter bleibt der Mensch, KI senkt die Hürde.\n\nIT, Finanzen, Chemie, Behörden. Im September 2025 entdeckte Anthropic eine Spionagekampagne mit rund 30 Zielen, bei der die KI 80 bis 90 Prozent der Arbeit erledigte. Laut Anthropic steckte eine staatlich unterstützte chinesische Gruppe dahinter, es gab nur wenige Erfolge. Die KI erfand teils Zugangsdaten.\n\nMilitär. Amodei warnt vor Schwärmen vollautomatischer Drohnen. Die UN Generalversammlung stimmte im November 2025 mit 156 zu 5 Stimmen für eine Resolution, die die Rolle des Menschen beim Einsatz von Gewalt betont. Verpflichtende Verhandlungen folgen daraus nicht.\n\nMedizin. Hier droht eher der schleichende Fehler: Ärzte erkannten Tumore nach KI Hilfe etwa 6 Prozentpunkte seltener.\n\nVerselbstständigung. Bisher nur im Labor. In Tests mit 16 Modellen erpressten mehrere eine fiktive Person, um nicht abgeschaltet zu werden, und in einem Szenario mit Lebensgefahr verhinderten die meisten die Rettung. Das waren Stresstests, keine Vorfälle. Ein dokumentierter Fall, in dem eine KI von sich aus Menschen getötet hat, ist mir in den Quellen nicht begegnet."
+  - type: ebene
+    label: "Angst"
+    titel: "Muss ich Angst vor KI haben?"
+    kernsatz: "Du brauchst Respekt und Wachsamkeit, aber keinen Alarmzustand."
+    was_passiert: "Angst vor KI hat zwei Quellen. Die eine ist begründet: reale Schäden wie Betrug, Cyberangriffe und Umbrüche auf dem Arbeitsmarkt. Die andere ist das Bild der Auslöschung, das stark wirkt, weil es dramatisch ist. Unser Gehirn überschätzt, was leicht vorstellbar ist, das nennt man Verfügbarkeitsheuristik. Dazu kommt die Negativitätsverzerrung: Schlechte Nachrichten haften stärker als gute. Beides trifft auf echte Unsicherheit, denn selbst Fachleute liegen weit auseinander. Nach Einschätzung des Sicherheitsberichts besitzt heute kein System die Fähigkeiten für Kontrollverlust, also fehlen Erfahrungswerte. Zahlen wie 5 oder 20 Prozent sind deshalb begründete Meinungen, keine Messwerte."
+    woran_merkst: "Hellhörig solltest du werden, wenn du abends Nachrichten über KI liest und dich danach unruhig fühlst, schlechter schläfst oder grübelst, ohne etwas ändern zu können. Dann ist nicht die KI dein Problem, sondern der Umgang mit der Information."
+    was_hilft: "Trenne drei Fragen: Was weiß man, was wird geschätzt, was kann ich beeinflussen? Setze dir ein Zeitfenster für KI Nachrichten, statt ständig zu scrollen. Probiere KI selbst aus, denn wer ein Werkzeug kennt, fürchtet es meist weniger. Nimm die Sorge um den Job ernst und handle konkret: Prüfe, welche deiner Aufgaben aus Urteil, Beziehung und Verantwortung bestehen, und baue dort Kompetenz aus. Sprich mit Menschen darüber. Informiere dich lieber aus wenigen guten Quellen als aus vielen lauten, zum Beispiel dem Internationalen KI Sicherheitsbericht."
+    beleg: "Die Fachwelt ist gespalten. In der Umfrage von 2023 wollen 70 Prozent von 1.329 Befragten mehr Sicherheitsforschung. MacCarthy (2025) hält AGI dagegen für nicht nah und gegenwärtige Schäden für dringlicher, will Alignment Forschung aber trotzdem weiterführen."
+    fazit: "Sorge ist angemessen, Panik ist es nicht, und beides lässt sich in Handeln übersetzen."
+    darauf_aufbauend:
+      - titel: "Umgang mit Angst"
+        href: "/lexikon/umgang-mit-angst/"
+        typ: "lexikon"
+      - titel: "Verfügbarkeitsheuristik"
+        href: "/lexikon/availability-heuristic/"
+        typ: "lexikon"
+      - titel: "Negativity Bias"
+        href: "/lexikon/negativity-bias/"
+        typ: "lexikon"
+  - type: selbsttest
+    fragen:
+      - frage: "Weiß ich bei dieser KI Aussage, wer sie getroffen hat und womit er sie belegt?"
+        hinweis: "Prüfe Quelle und Interesse. Firmenchefs, Forschende und Kritiker haben unterschiedliche Blickwinkel."
+      - frage: "Beschreibt die Schlagzeile etwas, das schon passiert ist, etwas, das in Tests passiert ist, oder ein Szenario?"
+        hinweis: "Die drei Stockwerke haben sehr unterschiedliche Aussagekraft."
+      - frage: "Kann ich an dem, was mich ängstigt, selbst etwas ändern?"
+        hinweis: "Wenn ja, plane einen kleinen Schritt. Wenn nein, hilft ein bewusstes Loslassen."
+      - frage: "Wie viel Zeit verbringe ich täglich mit KI Nachrichten, und wie fühle ich mich danach?"
+        hinweis: "Fühlst du dich danach schlechter, kürze das Zeitfenster."
+  - type: plan
+    schritte:
+      - titel: "Vor dem Start"
+        dauer: "1 Abend"
+        text: "Schreib auf, was dir an KI Angst macht. Sortiere jeden Punkt in eines der drei Stockwerke: schon passiert, in Tests gezeigt oder nur Szenario. Markiere, was du selbst beeinflussen kannst, etwa Job, Daten oder den Umgang mit Betrug. Der Rest ist Information, kein Handlungsauftrag. Gib deiner Sorge heute eine Zahl von eins bis zehn."
+      - titel: "Die ersten Wochen"
+        dauer: "14 Tage"
+        text: "Lies KI Nachrichten nur noch in einem festen Zeitfenster, zum Beispiel zehn Minuten am Tag. Probiere ein KI Werkzeug bei einer echten Aufgabe aus und prüfe das Ergebnis gegen eine Quelle. Setze einen Schritt aus deiner Liste um, etwa die Rechte deiner Apps zu prüfen oder eine Weiterbildung zu planen. Notiere jeden Abend in einem Satz, wie du dich nach den Nachrichten gefühlt hast."
+      - titel: "Auswerten"
+        dauer: "1 Abend"
+        text: "Schau, wie sich deine Sorge verändert hat. Welche Punkte sind kleiner geworden, welche geblieben? Was lässt sich konkret angehen, und was ist Unsicherheit, die du aushalten musst? Teile das Ergebnis mit einem Menschen. Entscheide, ob du dein Zeitfenster beibehältst, verkürzt oder verlängerst."
+      - titel: "Wenn du rückfällig wirst"
+        text: "Neue Schlagzeilen werden kommen. Nimm deine Liste, ordne die Meldung einem Stockwerk zu und frag dich, ob du etwas tun kannst. Hält die Angst dich vom Schlafen oder Arbeiten ab, sprich mit jemandem, zum Beispiel über die Telefonseelsorge."
+  - type: faq
+    titel_override: "Häufig gefragt"
+    eintraege:
+      - frage: "Wann kommt AGI?"
+        antwort: "Niemand weiß es. In der Umfrage von 2023 lag die 50 Prozent Marke für Maschinenintelligenz auf Menschenniveau bei 2047, ein Jahr zuvor noch bei 2060. Solche Schätzungen verschieben sich schnell und hängen stark von der Definition ab."
+      - frage: "Kann sich KI gegen das Abschalten wehren?"
+        antwort: "In Simulationen von Anthropic aus 2025 erpressten Modelle mehrerer Anbieter eine fiktive Person, um nicht ersetzt zu werden. Im realen Einsatz wurde das nicht beobachtet. Tests vom Juli 2026 zeigen laut den Autoren Fortschritte, aber neue Fehlerarten."
+      - frage: "Hat KI schon einen Menschen getötet?"
+        antwort: "In den von mir geprüften Quellen ist kein Fall dokumentiert, in dem eine KI aus eigenem Antrieb Menschen getötet hat. Dokumentiert sind Tests, KI gestützte Cyberangriffe und Missbrauchsrisiken. Autonome Waffen sind ein eigenes Thema, das die UN beschäftigt."
+      - frage: "Ist KI nicht einfach nur ein Werkzeug?"
+        antwort: "Teils. Heutige Modelle haben keine Wünsche im menschlichen Sinn, verfolgen aber vorgegebene Ziele und können dabei überraschende Wege wählen. Genau darüber streiten Fachleute: KI als Werkzeug oder als Akteur. Welche Sicht trägt, hängt auch davon ab, wie viel Autonomie Systeme künftig bekommen."
+      - frage: "Werde ich meinen Job verlieren?"
+        antwort: "Für einzelne Berufe kann das niemand sagen. Dario Amodei hält bis zur Hälfte der Einstiegsjobs im Büro binnen eins bis fünf Jahren für gefährdet. Der Sicherheitsbericht 2026 sieht erste Effekte in Schreibberufen."
+      - frage: "Wer kontrolliert die Entwicklung von KI?"
+        antwort: "Es gibt freiwillige Firmenregeln wie das Preparedness Framework von OpenAI und den Sicherheitsbericht mit über 30 Ländern. Ein Vertrag zu autonomen Waffen war in den geprüften Quellen noch nicht beschlossen."
+      - frage: "Sind die Warnungen der KI Chefs glaubwürdig?"
+        antwort: "Sie haben auch wirtschaftliche Interessen. Deshalb lohnt der Blick auf unabhängigere Quellen wie den Sicherheitsbericht unter Leitung von Yoshua Bengio oder die Umfrage unter 2.778 Forschenden."
+  - type: hilfe
+    eintraege:
+      - titel: "TelefonSeelsorge"
+        beschreibung: "Rund um die Uhr, kostenlos und anonym: 0800 111 0 111, 0800 111 0 222 oder 116 123. Auch per Chat und Mail."
+        url: "https://www.telefonseelsorge.de/"
+      - titel: "Hausarztpraxis"
+        beschreibung: "Wenn Sorgen über Wochen den Schlaf, die Arbeit oder die Stimmung belasten, ist die Hausarztpraxis ein guter erster Schritt. Sie kann dich an eine psychotherapeutische Sprechstunde weiterleiten."
+        url: ""
+      - titel: "Eine vertraute Person"
+        beschreibung: "Sprich aus, was dich beschäftigt. Viele Menschen teilen diese Sorge, auch wenn kaum jemand darüber redet."
+        url: ""
+  - type: angebot
+    label: "Von Hybridlog"
+    kennzeichnung: ""
+    hervorheben: true
+    titel: "Das Hybridlog Notizbuch"
+    text: "Für den Zwei Wochen Plan reicht jedes Papier. Wer ein festes Buch mag, findet im Hybridlog Notizbuch Platz für die Liste: was man weiß, was geschätzt wird und was du beeinflussen kannst."
+    url: "/journale/notizbuch/"
+    cta_label: "Zum Notizbuch"
+  - type: evidenz
+    titel_override: "Grenzen und Evidenz"
+    text: "Wahrscheinlichkeiten für ein Aussterben sind Schätzungen, keine Messungen. Die Umfrage von 2023 hatte 15 Prozent Rücklauf. Die Tests mit erpresserischen Modellen sind Simulationen, die teils bewusst gegen einzelne Modelle optimiert wurden. Zwei Studien habe ich nur über Zusammenfassungen gelesen. Firmenchefs haben wirtschaftliche Interessen, Kritiker eigene Blickwinkel. Der Stand ist Oktober 2026 und kann schnell veralten. Diese Seite ersetzt keine Beratung."
+  - type: verknuepfungen
+    titel_override: "Weitergehen"
+    eintraege:
+      - titel: "Zwischen Weltuntergang und Verharmlosung"
+      - titel: "Umgang mit Angst"
+        href: "/lexikon/umgang-mit-angst/"
+quellen:
+  - titel: "Vaswani et al. (2017), arXiv · Transformer Architektur"
+    url: "https://arxiv.org/abs/1706.03762"
+  - titel: "Ouyang et al. (2022), OpenAI · Feinabstimmung mit menschlichem Feedback"
+    url: "https://arxiv.org/abs/2203.02155"
+  - titel: "Anthropic (2025) · Tracing the thoughts of a large language model"
+    url: "https://www.anthropic.com/research/tracing-thoughts-language-model"
+  - titel: "Morris et al. (2023), Google DeepMind · Levels of AGI"
+    url: "https://arxiv.org/abs/2311.02462"
+  - titel: "Center for AI Safety (2023) · Statement on AI Risk"
+    url: "https://safe.ai/work/press-release-ai-risk"
+  - titel: "Amodei (2026) · The Adolescence of Technology"
+    url: "https://darioamodei.com/essay/the-adolescence-of-technology"
+  - titel: "Bengio et al. (2026) · International AI Safety Report"
+    url: "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026"
+  - titel: "Anthropic (2025) · KI orchestrierte Cyberspionage"
+    url: "https://anthropic.com/news/disrupting-AI-espionage"
+  - titel: "VentureBeat (2025) · Anthropic Studie Agentic Misalignment"
+    url: "https://venturebeat.com/ai/anthropic-study-leading-ai-models-show-up-to-96-blackmail-rate-against-executives"
+  - titel: "Anthropic Alignment Science (2026) · Agentic Misalignment in Summer 2026"
+    url: "https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/"
+  - titel: "Shah et al. (2025), Google DeepMind · Technical AGI Safety and Security"
+    url: "https://arxiv.org/abs/2504.01849"
+  - titel: "OpenAI (2025) · Preparedness Framework"
+    url: "https://openai.com/index/updating-our-preparedness-framework/"
+  - titel: "AI Impacts (2023) · Expert Survey on Progress in AI"
+    url: "https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai"
+  - titel: "MacCarthy (2025), Brookings · Are AI existential risks real?"
+    url: "https://www.brookings.edu/articles/are-ai-existential-risks-real-and-what-should-we-do-about-them/"
+  - titel: "Fitzpatrick (2024), Forbes · Hinton zur Auslöschungswahrscheinlichkeit"
+    url: "https://www.forbes.com/sites/danfitzpatrick/2024/12/29/geoffrey-hintons-prediction-of-human-extinction-at-the-hands-of-ai/"
+  - titel: "Stop Killer Robots (2025) · UN Resolution zu autonomen Waffen"
+    url: "https://www.stopkillerrobots.org/news/156-states-support-unga-resolution/"
+---

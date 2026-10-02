@@ -12,56 +12,56 @@ vertiefzeit: 10
 geprueft_am: "2026-10-02"
 bloecke:
   - type: kurz_erklaert
-    text: "Artificial General Intelligence, kurz AGI, bezeichnet ein System, das sich in viele neue Aufgaben einarbeiten kann, ähnlich breit wie ein Mensch. Superintelligenz geht einen Schritt weiter und wäre in nahezu allen Bereichen besser als die klügsten Menschen. Beides ist bisher Hypothese. Eine allgemein anerkannte Definition gibt es für keinen der beiden Begriffe."
+    text: "Artificial General Intelligence, kurz AGI, meint ein System, das sich in viele fremde Aufgaben einarbeitet, ungefähr so breit wie ein Mensch das kann. Superintelligenz geht weiter: besser als die klügsten Menschen, in fast jedem Bereich gleichzeitig. Beides existiert bisher nur auf dem Papier. Und selbst auf dem Papier ist die Definition umstritten, zwei Forschende meinen damit oft nicht dasselbe."
   - type: icon_fakten
     titel_override: "Auf einen Blick"
     fakten:
       - icon: flag
         label: "Idee"
-        text: "Der Statistiker I. J. Good beschrieb 1965 eine sich selbst verbessernde Maschine."
+        text: "Der Statistiker I. J. Good beschrieb schon 1965 eine Maschine, die sich selbst immer weiter verbessert."
       - icon: search
         label: "Prognose"
-        text: "Befragte KI Forscher sahen 2023 im Mittel 50 Prozent Chance bis 2047."
+        text: "Befragte KI Forschende sahen 2023 im Mittel eine 50 Prozent Chance auf menschengleiche Maschinenintelligenz bis 2047, mit riesiger Streuung in den Einzelantworten."
       - icon: eye
         label: "Stufen"
-        text: "Google DeepMind schlug 2023 Stufen von aufkommend bis übermenschlich vor."
+        text: "Google DeepMind schlug 2023 ein Stufenmodell vor, von aufkommend bis übermenschlich."
   - type: prozess
     titel_override: "Der gedachte Weg"
     schritte:
       - titel: "Spezialisierte KI"
-        untertitel: "Systeme glänzen in einer Aufgabe wie Schach oder Übersetzung"
+        untertitel: "Ein System glänzt in genau einer Aufgabe, Schach etwa, und versagt meist außerhalb davon"
         icon: lightbulb
       - titel: "Allgemeine KI"
-        untertitel: "Ein System lernt fremde Aufgaben ohne eigenes Training dafür"
+        untertitel: "Fremde Aufgaben gelingen ohne eigens dafür gebautes Training"
         icon: search
       - titel: "Superintelligenz"
-        untertitel: "Es verbessert sich womöglich schneller, als Menschen folgen können"
+        untertitel: "Verbessert sich vielleicht schneller, als Menschen überhaupt folgen können"
         icon: flag
   - type: textabschnitt
     titel_override: "Anwendung"
-    text: "Nützlich ist der Begriff vor allem beim Lesen von Nachrichten. Kündigt ein Unternehmen AGI für die nächsten Jahre an, lohnt die Frage, welche Definition gemeint ist. Manche meinen Tests, auf denen Menschen gut abschneiden, andere den Anteil bezahlter Arbeit, den eine Maschine übernehmen könnte. Wer an KI verdient, hat zudem ein Interesse an großen Erwartungen. Das macht eine Aussage nicht falsch, verlangt aber einen zweiten Blick."
+    text: "Nützlich ist der Begriff vor allem beim Lesen von Schlagzeilen. Kündigt ein Unternehmen AGI für die nächsten paar Jahre an, lohnt sich eine Frage: welche Definition ist überhaupt gemeint? Manche denken an Tests, auf denen Menschen gut abschneiden, andere an den Anteil bezahlter Arbeit, den eine Maschine übernehmen könnte. Dazu kommt: Wer an KI verdient, hat ein offensichtliches Interesse an großen Erwartungen. Das macht eine Aussage nicht automatisch falsch, aber einen zweiten Blick wert."
   - type: beispiel
-    text: "In derselben Woche erscheinen zwei Schlagzeilen. Die eine meldet, AGI komme in zwei Jahren. Die andere zitiert eine Forscherin, die mit Jahrzehnten rechnet. Beim Nachlesen zeigt sich, dass beide etwas anderes unter AGI verstehen."
-    ergebnis: "Der Streit ging weniger um Technik als um ein Wort."
+    text: "In derselben Woche erscheinen zwei Schlagzeilen. Die eine verspricht AGI in zwei Jahren. Die andere zitiert eine Forscherin, die eher mit Jahrzehnten rechnet. Beim genauen Nachlesen zeigt sich: Beide meinen mit AGI etwas anderes."
+    ergebnis: "Der Streit drehte sich weniger um Technik als um ein einzelnes Wort."
   - type: liste
     titel_override: "Was du tun kannst"
     punkte:
-      - "Bei jeder Prognose nachfragen, welche Definition dahintersteht."
-      - "Zeitangaben als Spannbreite lesen, nicht als Termin."
-      - "Prüfen, ob der Sprecher an der Erwartung verdient."
-      - "Zwischen dem, was ein System kann, und dem, was es bewirkt, unterscheiden."
+      - "Bei jeder Prognose nachfragen, welche Definition eigentlich dahintersteckt."
+      - "Zeitangaben als grobe Spanne lesen, nicht als Termin im Kalender."
+      - "Checken, ob der Sprecher an der eigenen Erwartung finanziell beteiligt ist."
+      - "Trennen, was ein System kann, von dem, was es tatsächlich verändert."
   - type: evidenz
-    text: "Grace und Kollegen befragten 2023 rund 2.778 KI Forschende. Die mittlere Schätzung für Maschinen, die jede Aufgabe besser als Menschen erledigen, lag 13 Jahre früher als ein Jahr zuvor. Die Streuung der Antworten war riesig, und Langfristprognosen von Fachleuten haben keine gute Trefferbilanz."
+    text: "Grace und Kollegen befragten 2023 rund 2.778 KI Forschende. Die mittlere Schätzung für Maschinen, die jede Aufgabe besser lösen als Menschen, lag plötzlich 13 Jahre früher als noch ein Jahr zuvor. Die Streuung der Einzelantworten war riesig, und Langfristprognosen von Fachleuten haben insgesamt keine gute Trefferbilanz."
     link_label: "Grace et al. (2024), Thousands of AI Authors on the Future of AI"
     link_url: "https://arxiv.org/abs/2401.02843"
   - type: faq
     eintraege:
       - frage: "Gibt es AGI schon?"
-        antwort: "Nach den meisten Definitionen nicht. Heutige Sprachmodelle lösen erstaunlich viele Aufgaben, scheitern aber an anderen, die Menschen leicht fallen, etwa am verlässlichen Planen über viele Schritte. Einige Fachleute sehen erste Vorstufen, andere halten den Abstand für groß."
+        antwort: "Nach den meisten Definitionen nein. Heutige Sprachmodelle lösen erstaunlich viele Aufgaben auf einen Schlag, scheitern aber oft an Dingen, die Menschen leichtfallen, etwa verlässliches Planen über viele Schritte hinweg. Manche Fachleute sehen darin schon erste Vorstufen, andere halten den Abstand nach wie vor für groß."
       - frage: "Warum warnen manche vor Superintelligenz?"
-        antwort: "Ein System, das klüger ist als wir, ließe sich schwer kontrollieren, falls seine Ziele von unseren abweichen. Der Philosoph Nick Bostrom hat dieses Szenario 2014 ausführlich beschrieben. Kritiker halten es für spekulativ und verweisen auf heutige, greifbare Schäden durch KI."
+        antwort: "Weil sich ein System, das klüger ist als wir, schwer kontrollieren lässt, sobald seine Ziele von unseren abweichen. Der Philosoph Nick Bostrom hat dieses Szenario 2014 ausführlich durchgespielt. Kritiker nennen es spekulativ und verweisen lieber auf heutige, greifbare Schäden durch KI."
       - frage: "Ist Superintelligenz zwangsläufig gefährlich?"
-        antwort: "Nein. Die Sorge hängt daran, ob sich ihre Ziele verlässlich an menschliche Werte binden lassen. Genau das untersucht die Forschung zum Alignment Problem."
+        antwort: "Nein. Die Sorge hängt einzig daran, ob sich ihre Ziele verlässlich an menschliche Werte binden lassen, und genau das untersucht die Forschung zum Alignment Problem."
 wege: []
 verwandte_themen:
   - "large-language-model"

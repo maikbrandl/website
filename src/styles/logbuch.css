@@ -1284,20 +1284,15 @@ main {
   color: var(--petrol);
 }
 
+/* Alle Ebenen stehen untereinander, kein Verstecken per :target mehr. */
 .ebenen-tabs__panel {
-  display: none;
-}
-
-.ebenen-tabs__panel:first-of-type {
   display: block;
 }
 
-.ebenen-tabs__panel:target {
-  display: block;
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:target) .ebenen-tabs__panel:first-of-type:not(:target) {
-  display: none;
+.ebenen-tabs__panel + .ebenen-tabs__panel {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--linie);
 }
 
 .ebenen-tabs__eyebrow {
@@ -1316,36 +1311,7 @@ main {
   margin: 0 0 var(--space-4);
 }
 
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(1):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(1),
-.ebenen-tabs__panels:not(:has(.ebenen-tabs__panel:target)) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(1) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(2):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(2) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(3):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(3) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(4):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(4) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(5):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(5) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
-
-.ebenen-tabs__panels:has(.ebenen-tabs__panel:nth-of-type(6):target) ~ .ebenen-tabs__leiste .ebenen-tabs__tab:nth-of-type(6) {
-  color: var(--tinte);
-  border-bottom-color: var(--petrol);
-}
+/* Keine Tab-Hervorhebung mehr noetig, die Leiste dient nur noch als Sprungmarken-Liste. */
 
 .baustein-selbsttest {
   display: grid;
@@ -2653,29 +2619,7 @@ main {
   color: var(--petrol);
 }
 
-/* Aktive Ebene per :target, ohne Auswahl gilt Ebene 1. */
-.weg-seite:not(:has(.ebenen-tabs__panel:target)) .ebenen-leiste__tab:first-child,
-.weg-seite:has(.ebenen-tabs__panel:nth-child(1):target) .ebenen-leiste__tab:nth-child(1),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .ebenen-leiste__tab:nth-child(2),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .ebenen-leiste__tab:nth-child(3),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .ebenen-leiste__tab:nth-child(4),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .ebenen-leiste__tab:nth-child(5),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .ebenen-leiste__tab:nth-child(6),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .ebenen-leiste__tab:nth-child(7),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .ebenen-leiste__tab:nth-child(8) {
-  border-top-color: var(--petrol);
-  color: var(--tinte);
-}
-
-.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .ebenen-leiste__tab:nth-child(-n + 1),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .ebenen-leiste__tab:nth-child(-n + 2),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .ebenen-leiste__tab:nth-child(-n + 3),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .ebenen-leiste__tab:nth-child(-n + 4),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .ebenen-leiste__tab:nth-child(-n + 5),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .ebenen-leiste__tab:nth-child(-n + 6),
-.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .ebenen-leiste__tab:nth-child(-n + 7) {
-  border-top-color: color-mix(in srgb, var(--petrol) 45%, transparent);
-}
+/* Reine Sprungmarken, kein aktiver Zustand mehr: alle Ebenen stehen bereits sichtbar untereinander. */
 
 .weg-layout {
   display: grid;
@@ -2742,19 +2686,6 @@ main {
   .weg-toc {
     order: -1;
   }
-}
-
-.weg-seite:not(:has(.ebenen-tabs__panel:target)) .weg-toc a[data-ebene="1"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(1):target) .weg-toc a[data-ebene="1"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(2):target) .weg-toc a[data-ebene="2"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(3):target) .weg-toc a[data-ebene="3"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(4):target) .weg-toc a[data-ebene="4"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(5):target) .weg-toc a[data-ebene="5"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(6):target) .weg-toc a[data-ebene="6"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(7):target) .weg-toc a[data-ebene="7"],
-.weg-seite:has(.ebenen-tabs__panel:nth-child(8):target) .weg-toc a[data-ebene="8"] {
-  color: var(--tinte);
-  font-weight: 700;
 }
 
 @media (min-width: 900px) {
@@ -4012,17 +3943,7 @@ main {
     display: none;
   }
 
-  /* Ohne Ebenen-Leiste alle Ebenen untereinander zeigen, sonst waeren Ebene 2 bis n mobil unerreichbar.
-     !important, weil die :target/:has Regeln der Tabs sehr spezifisch sind. */
-  .ebenen-tabs__panel {
-    display: block !important;
-  }
-
-  .ebenen-tabs__panel + .ebenen-tabs__panel {
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--linie);
-  }
+  /* Ebenen stehen jetzt auf allen Breiten immer untereinander, keine mobile Sonderregel mehr noetig. */
 
   .seiten-nav--filter .seiten-nav__link-liste a {
     padding: 6px 14px;

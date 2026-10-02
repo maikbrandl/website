@@ -2682,6 +2682,12 @@ main {
   color: var(--petrol);
 }
 
+/* Scrollspy: wird per IntersectionObserver auf dem aktuell gelesenen Abschnitt gesetzt. */
+.weg-toc a.aktiv {
+  color: var(--tinte);
+  font-weight: 700;
+}
+
 @media (max-width: 899px) {
   .weg-toc {
     order: -1;

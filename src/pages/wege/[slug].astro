@@ -146,4 +146,29 @@ if (faqEintraege.length > 0) {
       </div>
     </div>
   </div>
+
+  <script>
+    // Scrollspy fuers Inhaltsverzeichnis: markiert den Abschnitt, der gerade gelesen wird.
+    const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.weg-toc a[href^="#"]'));
+    const abschnitte = tocLinks
+      .map((link) => ({ link, ziel: document.getElementById(link.getAttribute('href')!.slice(1)) }))
+      .filter((e): e is { link: HTMLAnchorElement; ziel: HTMLElement } => Boolean(e.ziel));
+
+    if (abschnitte.length > 0 && 'IntersectionObserver' in window) {
+      function aktivSetzen(ziel: Element) {
+        for (const a of abschnitte) a.link.classList.toggle('aktiv', a.ziel === ziel);
+      }
+      aktivSetzen(abschnitte[0].ziel);
+
+      const beobachter = new IntersectionObserver(
+        (eintraege) => {
+          for (const eintrag of eintraege) {
+            if (eintrag.isIntersecting) aktivSetzen(eintrag.target);
+          }
+        },
+        { rootMargin: '-96px 0px -60% 0px', threshold: 0 }
+      );
+      for (const a of abschnitte) beobachter.observe(a.ziel);
+    }
+  </script>
 </Base>

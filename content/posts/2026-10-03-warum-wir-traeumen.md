@@ -1,15 +1,21 @@
 ---
 title: "Träume deuten: Warum wir träumen und was es heißt"
-date: "2026-10-03T10:00:00.000+02:00"
-url: "warum-wir-traeumen"
-bereich: "denken"
-verwandter_weg: "wie-lerne-ich-luzides-traeumen"
-excerpt: "Fallende Zähne, verpasste Prüfungen, Verfolger im Treppenhaus. Traumlexika versprechen für jedes Bild eine Bedeutung. Die Forschung sagt etwas anderes, und etwas Interessanteres. Ein Essay über Schlafphasen, Freud, Hirnstamm und die Frage, was ein Traum über den Tag davor verrät."
-beschreibung: "Träume deuten ohne Traumlexikon: warum wir träumen, was Freud, Hobson und Revonsuo dazu sagen und was ein Traum wirklich über den Tag davor verrät."
-cover: ""
-cover_alt: ""
-geprueft_am: "2026-10-03"
+date: 2026-10-03T10:00:00.000+02:00
+category: Persönliche Entwicklung
+url: warum-wir-traeumen
+bereich: denken
+verwandter_weg: wie-lerne-ich-luzides-traeumen
+geprueft_am: 2026-10-03
+excerpt: Fallende Zähne, verpasste Prüfungen, Verfolger im Treppenhaus.
+  Traumlexika versprechen für jedes Bild eine Bedeutung. Die Forschung sagt
+  etwas anderes, und etwas Interessanteres. Ein Essay über Schlafphasen, Freud,
+  Hirnstamm und die Frage, was ein Traum über den Tag davor verrät.
+beschreibung: "Träume deuten ohne Traumlexikon: warum wir träumen, was Freud,
+  Hobson und Revonsuo dazu sagen und was ein Traum wirklich über den Tag davor
+  verrät."
 featured: false
+cover: /images/uploads/kopie-von-desktop-wallpaper-mockup-9-.png
+cover_alt: ""
 ---
 Vor ein paar Wochen saß ich im Traum wieder in einer Mathematikprüfung. Ich kannte keine einzige Aufgabe, der Stift schrieb nicht, und die Aufsicht war, aus Gründen, die nur Träume kennen, mein früherer Fußballtrainer. Schule ist lange her. Trotzdem bin ich mit Herzklopfen aufgewacht und habe, noch bevor der Kaffee lief, im Netz nachgesehen, was ein Prüfungstraum bedeutet.
 

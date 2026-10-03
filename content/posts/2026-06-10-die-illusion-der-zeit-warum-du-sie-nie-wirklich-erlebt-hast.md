@@ -1,17 +1,20 @@
 ---
 title: "Die Illusion der Zeit: Warum du sie nie wirklich erlebt hast"
 date: 2026-06-10T18:31:00.000+02:00
-url: "illusion-der-zeit"
-bereich: "sinn"
-verwandtes_thema: "phaenomenologie"
 category: Philosophie
+url: illusion-der-zeit
+bereich: sinn
+verwandtes_thema: phaenomenologie
+verwandter_weg: wie-lerne-ich-luzides-traeumen
 excerpt: '"Zeit" ist das Etikett, das der Verstand auf den Vergleich zwischen
   diesem Jetzt und einem erinnerten Jetzt klebt. Die Vergangenheit ist ein
   Gedanke, der jetzt entsteht. Die Zukunft ist ein Gedanke, der jetzt entsteht.
   Das Einzige, das real ist, ist das Erleben selbst, und das hat keine Einheit,
   keinen Anfang, kein Ende.'
-beschreibung: "Zeit ist kein Fluss, den du erlebst, sondern ein Gedanke, der jetzt entsteht. Warum du die Vergangenheit und Zukunft nie wirklich erlebt hast."
-cover: /images/uploads/desktop-wallpaper-mockup-3-.png
+beschreibung: Zeit ist kein Fluss, den du erlebst, sondern ein Gedanke, der
+  jetzt entsteht. Warum du die Vergangenheit und Zukunft nie wirklich erlebt
+  hast.
+cover: /images/uploads/4.png
 related_post_slug: 2026-06-09-deep-work-was-hat-es-denn-mit-dem-flow-zustand-auf-sich-und-wie-aktiviert-man-ihn
 ---
 Es gibt dieses Gefühl. Du weißt welches.

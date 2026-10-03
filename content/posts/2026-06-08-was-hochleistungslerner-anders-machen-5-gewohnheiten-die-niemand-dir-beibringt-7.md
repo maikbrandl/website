@@ -2,12 +2,14 @@
 title: "Was Hochleistungslerner anders machen: 5 Gewohnheiten, die niemand dir
   beibringt"
 date: 2026-06-08T20:58:00.000+02:00
-url: "hochleistungslerner-gewohnheiten"
-bereich: "lernen"
-verwandtes_thema: "spaced-repetition"
 category: Lernstrategien
-beschreibung: "Fünf Gewohnheiten, die Hochleistungslerner von allen anderen unterscheiden, und warum reines Lesen und Zusammenfassen kaum etwas bringt."
-cover: /images/uploads/desktop-wallpaper-mockup-1-.png
+url: hochleistungslerner-gewohnheiten
+bereich: lernen
+verwandtes_thema: spaced-repetition
+verwandter_weg: warum-komfortzone-verlassen
+beschreibung: Fünf Gewohnheiten, die Hochleistungslerner von allen anderen
+  unterscheiden, und warum reines Lesen und Zusammenfassen kaum etwas bringt.
+cover: /images/uploads/2.png
 ---
 Du kennst das Gefühl. Stundenlang am Schreibtisch gesessen, Texte gelesen, Zusammenfassungen geschrieben, Karteikarten gemacht. Und trotzdem sitzt du eine Woche später vor dem gleichen Stoff und hast das Gefühl, ihn zum ersten Mal zu sehen. Das ist kein Zeichen von mangelnder Intelligenz. Es ist kein Zeichen von Faulheit. Es ist ein Zeichen dafür, dass du lernst, wie es dir beigebracht wurde. Und nicht so, wie es tatsächlich funktioniert.
 

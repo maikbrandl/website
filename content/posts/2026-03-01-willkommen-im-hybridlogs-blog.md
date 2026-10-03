@@ -1,17 +1,19 @@
 ---
 title: "Metakognition: Gedanken beobachten statt von ihnen kontrolliert werden"
 date: 2026-06-11T21:48:00.000+02:00
-url: "metakognition"
-bereich: "denken"
-verwandtes_thema: "selbsterklaerung"
 category: Psychologie
+url: metakognition
+bereich: denken
+verwandtes_thema: selbsterklaerung
 excerpt: Du kennst den Moment. Jemand sagt etwas und plötzlich ist da dieses
   Gefühl. Wut, Scham, Angst, Kränkung. Und bevor du überhaupt gemerkt hast was
   passiert, hast du schon reagiert. Eine Antwort geschickt die du bereust. Ein
   Gespräch abgebrochen. Eine Entscheidung getroffen aus dem Bauch heraus, die
   sich einen Tag später falsch anfühlt.
-beschreibung: "Warum du oft reagierst statt zu antworten, und wie Metakognition dir hilft, eigene Gedanken zu beobachten statt von ihnen kontrolliert zu werden."
-cover: /images/uploads/desktop-wallpaper-mockup-4-.png
+beschreibung: Warum du oft reagierst statt zu antworten, und wie Metakognition
+  dir hilft, eigene Gedanken zu beobachten statt von ihnen kontrolliert zu
+  werden.
+cover: /images/uploads/5.png
 related_post_slug: 2026-06-10-die-illusion-der-zeit-warum-du-sie-nie-wirklich-erlebt-hast
 ---
 Du kennst den Moment. Jemand sagt etwas und plötzlich ist da dieses Gefühl. Wut, Scham, Angst, Kränkung. Und bevor du überhaupt gemerkt hast was passiert, hast du schon reagiert. Eine Antwort geschickt die du bereust. Ein Gespräch abgebrochen. Eine Entscheidung getroffen aus dem Bauch heraus, die sich einen Tag später falsch anfühlt.

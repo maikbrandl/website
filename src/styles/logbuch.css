@@ -1213,6 +1213,12 @@ main {
   gap: var(--space-2);
 }
 
+.baustein-ebene__aufbauend li {
+  /* Ohne min-width: 0 verweigert sich das Grid-Element dem Schrumpfen und
+     wird von langen, nicht umbrechbaren Woertern aus der Spur gedrueckt. */
+  min-width: 0;
+}
+
 .baustein-ebene__aufbauend li > a,
 .baustein-ebene__aufbauend li > span {
   display: flex;
@@ -1226,6 +1232,7 @@ main {
   text-decoration: none;
   color: inherit;
   transition: border-color var(--dauer) ease;
+  min-width: 0;
 }
 
 .baustein-ebene__aufbauend li > a:hover {
@@ -1250,6 +1257,8 @@ main {
   font-weight: 700;
   line-height: 1.35;
   color: var(--tinte);
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* ---------- Ebenen als Karteireiter (CSS-only, ohne JavaScript) ---------- */
@@ -2372,6 +2381,12 @@ main {
   .bereich-liste--zweispaltig {
     grid-template-columns: repeat(2, 1fr);
     column-gap: var(--space-5);
+  }
+
+  /* Bei zwei Spalten liegt das erste Element der zweiten Spalte auf gleicher
+     Hoehe wie :first-child, braucht also ebenfalls kein oberes Padding. */
+  .bereich-liste--zweispaltig li:nth-child(-n + 2) {
+    padding-top: 0;
   }
 }
 

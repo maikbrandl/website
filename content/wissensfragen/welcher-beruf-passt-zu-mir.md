@@ -16,9 +16,9 @@ bloecke:
     titel_override: "Auf einen Blick"
     fakten:
       - icon: search
-        text: "Wer zur eigenen Tätigkeit passt, ist deutlich zufriedener. In einer Metaanalyse über 172 Studien lag der Zusammenhang bei ρ = .56, mit der Leistung nur bei .20."
+        text: "Wer zur eigenen Tätigkeit passt, ist deutlich zufriedener damit. Das zeigt eine Auswertung von 172 Studien. Mit der tatsächlichen Leistung hängt die Passung dagegen nur schwach zusammen."
       - icon: check
-        text: "Interessen allein erklären wenig. Die Passung von Interessen und Beruf hängt mit Arbeitszufriedenheit nur mit ρ = .19 zusammen, mit der Zufriedenheit über die Berufswahl immerhin mit .34."
+        text: "Interessen allein erklären wenig. Ob deine Interessen zum Beruf passen, hängt nur schwach mit der täglichen Arbeitszufriedenheit zusammen, stärker aber damit, wie zufrieden du im Rückblick mit deiner Berufswahl bist."
       - icon: shield
         text: "2022 arbeiteten 38 Prozent der Beschäftigten in Deutschland in Berufen, in denen Technik mindestens 70 Prozent der Tätigkeiten übernehmen könnte. 2019 waren es 34 Prozent."
   - type: textabschnitt

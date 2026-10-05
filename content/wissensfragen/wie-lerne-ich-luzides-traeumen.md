@@ -1,194 +1,382 @@
 ---
-title: "Wie lerne ich luzides Träumen?"
-bereich: "lernen"
+title: Wie lerne ich luzides Träumen?
 welten:
   - mind
-lead: "Im Traum zu wissen, dass man träumt, klingt nach Esoterik und ist seit den 1970er Jahren im Schlaflabor messbar. Dieser Weg erklärt, was ein Klartraum ist, welche Techniken laut Studien funktionieren und wo die Risiken liegen."
-kurzantwort: "Luzides Träumen lernst du am ehesten mit einem Traumtagebuch und der MILD Technik, kombiniert mit kurzem Wachsein in der zweiten Nachthälfte. In einer Studie mit 355 Personen stieg der Klartraumanteil so in einer Woche von etwa 5 auf 17 Prozent. Fünf Ebenen erklären Begriff, Technik, Nutzen, Nachteile und andere Traumarten."
-autor: "Maik"
-geprueft_am: "2026-10-03"
+lead: Im Traum zu wissen, dass man träumt, klingt nach Esoterik und ist seit den
+  1970er Jahren im Schlaflabor messbar. Dieser Weg erklärt, was ein Klartraum
+  ist, welche Techniken laut Studien funktionieren und wo die Risiken liegen.
+kurzantwort: Luzides Träumen lernst du am ehesten mit einem Traumtagebuch und
+  der MILD Technik, kombiniert mit kurzem Wachsein in der zweiten Nachthälfte.
+  In einer Studie mit 355 Personen stieg der Klartraumanteil so in einer Woche
+  von etwa 5 auf 17 Prozent. Fünf Ebenen erklären Begriff, Technik, Nutzen,
+  Nachteile und andere Traumarten.
+autor: Maik
+geprueft_am: 2026-10-03
+bereich: lernen
 kurzlesezeit: 4
 vertiefzeit: 15
-seo_title: "Wie lerne ich luzides Träumen? · Hybridlog"
-seo_description: "Luzides Träumen lernen: was ein Klartraum ist, welche Techniken wie MILD laut Studien wirken, wofür Klarträume gut sind und welche Nachteile sie haben."
 bloecke:
   - type: icon_fakten
-    titel_override: "Auf einen Blick"
+    titel_override: Auf einen Blick
     fakten:
       - icon: search
-        text: "Klarträume sind verbreiteter als gedacht. Eine Metaanalyse von 34 Studien mit 24.282 Personen fand, dass 55 Prozent mindestens einmal einen hatten und 23 Prozent einen pro Monat."
+        text: Klarträume sind verbreiteter als gedacht. Eine Metaanalyse von 34 Studien
+          mit 24.282 Personen fand, dass 55 Prozent mindestens einmal einen
+          hatten und 23 Prozent einen pro Monat.
       - icon: check
-        text: "Die Methode MILD, verbunden mit nächtlichem Kurzwachsein, hob in der International Lucid Dream Induction Study den Anteil an Klarträumen innerhalb einer Woche auf etwa das Dreifache."
+        text: Die Methode MILD, verbunden mit nächtlichem Kurzwachsein, hob in der
+          International Lucid Dream Induction Study den Anteil an Klarträumen
+          innerhalb einer Woche auf etwa das Dreifache.
       - icon: shield
-        text: "Wer dafür regelmäßig nachts den Wecker stellt, zerstückelt seinen Schlaf. Schlechte Schlafqualität hängt laut einer Übersicht von 2025 mit Induktionsversuchen zusammen, nicht mit spontanen Klarträumen."
+        text: Wer dafür regelmäßig nachts den Wecker stellt, zerstückelt seinen Schlaf.
+          Schlechte Schlafqualität hängt laut einer Übersicht von 2025 mit
+          Induktionsversuchen zusammen, nicht mit spontanen Klarträumen.
   - type: textabschnitt
-    titel_override: "Warum es so schwer ist"
-    text: "Vergessen. Im Schnitt erinnert man sich an etwa einen Traum pro Woche, sagt der Mannheimer Schlafforscher Michael Schredl. Wer seine Träume nicht erinnert, kann auch einen Klartraum nicht bemerken, oder er hatte einen und weiß es am Morgen nicht mehr.\n\nDazu kommt eine Eigenheit des träumenden Gehirns. Im Traum wirken die absurdesten Dinge selbstverständlich, die tote Großmutter am Küchentisch, das Klassenzimmer im Flugzeug. Die Instanz, die tagsüber stutzt und fragt, ob das stimmen kann, arbeitet nachts nur eingeschränkt.\n\nHybridlog beschreibt das Lernen deshalb als Dreischritt aus Erinnern, Erkennen und Halten. Erst kommt die Traumerinnerung, dann der Moment, in dem man im Traum bemerkt, dass etwas nicht stimmt, und zuletzt die Fähigkeit, dabei nicht sofort aufzuwachen. Die meisten Anfänger scheitern am ersten Schritt. Viele Ratgeber beginnen beim dritten."
-  - type: ebene
-    label: "Klartraum"
-    titel: "Was ist ein Klartraum?"
-    kernsatz: "Ein Klartraum ist ein Traum, in dem du weißt, dass du träumst, Kontrolle über die Handlung ist dafür nicht nötig."
-    was_passiert: "1913 gab der niederländische Psychiater Frederik van Eeden dem Phänomen den Namen „lucid dream“, klarer Traum. Lange blieb es eine Sache von Erfahrungsberichten, denn wie sollte jemand von außen prüfen, ob ein Schlafender wirklich bewusst träumt? Die Lösung kam 1975 von Keith Hearne. Er verabredete mit dem Klarträumer Alan Worsley ein Muster von Augenbewegungen, das dieser im Traum ausführen sollte, und die Messgeräte zeichneten es auf. Der Trick war simpel. Im REM Schlaf bewegen sich die Augen, der Rest des Körpers ist gelähmt. Stephen LaBerge baute die Methode in Stanford aus. 2021 gingen vier Labore noch weiter und stellten Träumenden einfache Rechenaufgaben, die per Augen und Gesichtsmuskeln beantwortet wurden."
-    woran_merkst: "Typisch ist ein Moment des Stutzens im Traum. Die Uhr zeigt bei jedem Blick eine andere Zeit, ein Text verändert sich beim Wiederlesen, und plötzlich ist der Gedanke da, dass das ein Traum sein muss. Manche wachen dann sofort auf. Andere träumen klar weiter. Oft nur Sekunden."
-    was_hilft: "Unterscheide zwei Dinge, die oft vermischt werden. Klarheit heißt Wissen um den Traum. Kontrolle heißt, Handlung oder Ort bewusst zu verändern. Vallat und Ruby betonen 2019, dass nur das Erste zur Definition gehört.\n\nFür den Einstieg reicht deshalb ein bescheideneres Ziel als Fliegen. Wenn du im Traum einmal denkst „Ich träume“ und dich danach umsiehst, hast du einen Klartraum gehabt. Schreib ihn morgens auf, auch wenn er nur ein paar Sekunden dauerte. Mit dem Gefühl, das Phänomen zu kennen, fällt die nächste Episode leichter auf."
-    beleg: "Eine Metaanalyse von Saunders und Kollegen (2016, Consciousness and Cognition) fasst 50 Jahre Forschung zusammen. 55 Prozent der 24.282 Befragten hatten mindestens einen Klartraum, 23 Prozent erleben monatlich einen. Das Phänomen ist also keine Ausnahme."
-    fazit: "Ein einziger Gedanke „Ich träume“ im Traum genügt als erster Erfolg, Fliegen kann warten."
+    titel_override: Warum es so schwer ist
+    text: >-
+      Vergessen. Im Schnitt erinnert man sich an etwa einen Traum pro Woche,
+      sagt der Mannheimer Schlafforscher Michael Schredl. Wer seine Träume nicht
+      erinnert, kann auch einen Klartraum nicht bemerken, oder er hatte einen
+      und weiß es am Morgen nicht mehr.
+
+
+      Dazu kommt eine Eigenheit des träumenden Gehirns. Im Traum wirken die absurdesten Dinge selbstverständlich, die tote Großmutter am Küchentisch, das Klassenzimmer im Flugzeug. Die Instanz, die tagsüber stutzt und fragt, ob das stimmen kann, arbeitet nachts nur eingeschränkt.
+
+
+      Hybridlog beschreibt das Lernen deshalb als Dreischritt aus Erinnern, Erkennen und Halten. Erst kommt die Traumerinnerung, dann der Moment, in dem man im Traum bemerkt, dass etwas nicht stimmt, und zuletzt die Fähigkeit, dabei nicht sofort aufzuwachen. Die meisten Anfänger scheitern am ersten Schritt. Viele Ratgeber beginnen beim dritten.
+  - was_hilft: >-
+      Unterscheide zwei Dinge, die oft vermischt werden. Klarheit heißt Wissen
+      um den Traum. Kontrolle heißt, Handlung oder Ort bewusst zu verändern.
+      Vallat und Ruby betonen 2019, dass nur das Erste zur Definition gehört.
+
+
+      Für den Einstieg reicht deshalb ein bescheideneres Ziel als Fliegen. Wenn du im Traum einmal denkst „Ich träume“ und dich danach umsiehst, hast du einen Klartraum gehabt. Schreib ihn morgens auf, auch wenn er nur ein paar Sekunden dauerte. Mit dem Gefühl, das Phänomen zu kennen, fällt die nächste Episode leichter auf.
+    was_passiert: 1913 gab der niederländische Psychiater Frederik van Eeden dem
+      Phänomen den Namen „lucid dream“, klarer Traum. Lange blieb es eine Sache
+      von Erfahrungsberichten, denn wie sollte jemand von außen prüfen, ob ein
+      Schlafender wirklich bewusst träumt? Die Lösung kam 1975 von Keith Hearne.
+      Er verabredete mit dem Klarträumer Alan Worsley ein Muster von
+      Augenbewegungen, das dieser im Traum ausführen sollte, und die Messgeräte
+      zeichneten es auf. Der Trick war simpel. Im REM Schlaf bewegen sich die
+      Augen, der Rest des Körpers ist gelähmt. Stephen LaBerge baute die Methode
+      in Stanford aus. 2021 gingen vier Labore noch weiter und stellten
+      Träumenden einfache Rechenaufgaben, die per Augen und Gesichtsmuskeln
+      beantwortet wurden.
+    titel: Was ist ein Klartraum?
+    fazit: Ein einziger Gedanke „Ich träume“ im Traum genügt als erster Erfolg,
+      Fliegen kann warten.
+    woran_merkst: Typisch ist ein Moment des Stutzens im Traum. Die Uhr zeigt bei
+      jedem Blick eine andere Zeit, ein Text verändert sich beim Wiederlesen,
+      und plötzlich ist der Gedanke da, dass das ein Traum sein muss. Manche
+      wachen dann sofort auf. Andere träumen klar weiter. Oft nur Sekunden.
+    kernsatz: Ein Klartraum ist ein Traum, in dem du weißt, dass du träumst,
+      Kontrolle über die Handlung ist dafür nicht nötig.
+    beleg: Eine Metaanalyse von Saunders und Kollegen (2016, Consciousness and
+      Cognition) fasst 50 Jahre Forschung zusammen. 55 Prozent der 24.282
+      Befragten hatten mindestens einen Klartraum, 23 Prozent erleben monatlich
+      einen. Das Phänomen ist also keine Ausnahme.
+    label: Klartraum
     darauf_aufbauend:
-      - titel: "Metakognition"
-        href: "/lexikon/metakognition/"
-        typ: "lexikon"
-      - titel: "Schlafphasen"
-        href: "/lexikon/schlafphasen/"
-        typ: "lexikon"
-  - type: ebene
-    label: "Techniken"
-    titel: "Welche Techniken helfen beim Klarträumen?"
-    kernsatz: "MILD oder SSILD nach kurzem nächtlichem Wachsein wirken in Studien besser als tägliche Realitätschecks."
-    was_passiert: "Die bisher größte systematische Prüfung ist die International Lucid Dream Induction Study von Denholm Aspy aus dem Jahr 2020. 355 Personen protokollierten eine Woche lang ihre Träume, in der zweiten übten sie eine von mehreren Technikkombinationen. Grundlage war immer Wake Back to Bed, also in der zweiten Nachthälfte kurz aufwachen und wieder einschlafen, weil gegen Morgen die langen REM Phasen kommen. Dazu kam MILD, bei der man sich den letzten Traum vorstellt und sich vornimmt, beim nächsten Traum zu bemerken, dass man träumt. Oder SSILD, bei der man reihum auf Sehen, Hören und Körpergefühl achtet. Beide wirkten ähnlich gut, und eine Mischung aus beiden brachte keinen zusätzlichen Vorteil, was für Anfänger eine gute Nachricht ist, weil eine einzige Technik genügt."
-    woran_merkst: "Ob eine Technik bei dir greift, zeigt das Traumtagebuch. Werden die Einträge länger und detaillierter, wächst die Traumerinnerung. Tauchen Notizen wie „kurz gemerkt, dass es ein Traum war“ auf, bist du nah dran."
-    was_hilft: "Beginne mit zwei Wochen Traumtagebuch, ohne irgendeine Technik. Leg Stift und Heft neben das Bett und schreib direkt nach dem Aufwachen, bevor du aufs Handy schaust. Danach kommt Wake Back to Bed dazu, an zwei bis drei Nächten pro Woche, nicht jede Nacht. Stell den Wecker in die zweite Nachthälfte, etwa sechs Stunden nach dem Einschlafen, bleib einige Minuten wach und übe MILD, also den Vorsatz „Beim nächsten Traum merke ich, dass ich träume“, während du dir den letzten Traum vorstellst.\n\nEin Detail aus der Studie ist bemerkenswert. Wer nach der Übung binnen zehn Minuten wieder einschlief, hatte deutlich häufiger Erfolg. Tempo zählt. Lange Wachphasen schaden eher."
-    beleg: "In der ILDIS stieg der Klartraumanteil von etwa 5 Prozent in der Basiswoche auf 16 bis 17 Prozent mit MILD oder SSILD. Bei schnellem Wiedereinschlafen waren es 18,3 gegen 11,1 Prozent. Tägliche Realitätschecks allein zeigten keinen Effekt. Die Teilnehmenden waren Freiwillige mit Interesse am Thema."
-    fazit: "Zwei Wochen Tagebuch, danach Wake Back to Bed mit MILD an höchstens drei Nächten pro Woche."
+      - titel: Metakognition
+        href: /lexikon/metakognition/
+        typ: lexikon
+      - titel: Schlafphasen
+        href: /lexikon/schlafphasen/
+        typ: lexikon
+    type: ebene
+  - was_hilft: >-
+      Beginne mit zwei Wochen Traumtagebuch, ohne irgendeine Technik. Leg Stift
+      und Heft neben das Bett und schreib direkt nach dem Aufwachen, bevor du
+      aufs Handy schaust. Danach kommt Wake Back to Bed dazu, an zwei bis drei
+      Nächten pro Woche, nicht jede Nacht. Stell den Wecker in die zweite
+      Nachthälfte, etwa sechs Stunden nach dem Einschlafen, bleib einige Minuten
+      wach und übe MILD, also den Vorsatz „Beim nächsten Traum merke ich, dass
+      ich träume“, während du dir den letzten Traum vorstellst.
+
+
+      Ein Detail aus der Studie ist bemerkenswert. Wer nach der Übung binnen zehn Minuten wieder einschlief, hatte deutlich häufiger Erfolg. Tempo zählt. Lange Wachphasen schaden eher.
+    was_passiert: Die bisher größte systematische Prüfung ist die International
+      Lucid Dream Induction Study von Denholm Aspy aus dem Jahr 2020. 355
+      Personen protokollierten eine Woche lang ihre Träume, in der zweiten übten
+      sie eine von mehreren Technikkombinationen. Grundlage war immer Wake Back
+      to Bed, also in der zweiten Nachthälfte kurz aufwachen und wieder
+      einschlafen, weil gegen Morgen die langen REM Phasen kommen. Dazu kam
+      MILD, bei der man sich den letzten Traum vorstellt und sich vornimmt, beim
+      nächsten Traum zu bemerken, dass man träumt. Oder SSILD, bei der man
+      reihum auf Sehen, Hören und Körpergefühl achtet. Beide wirkten ähnlich
+      gut, und eine Mischung aus beiden brachte keinen zusätzlichen Vorteil, was
+      für Anfänger eine gute Nachricht ist, weil eine einzige Technik genügt.
+    titel: Welche Techniken helfen beim Klarträumen?
+    fazit: Zwei Wochen Tagebuch, danach Wake Back to Bed mit MILD an höchstens drei
+      Nächten pro Woche.
+    woran_merkst: Ob eine Technik bei dir greift, zeigt das Traumtagebuch. Werden
+      die Einträge länger und detaillierter, wächst die Traumerinnerung. Tauchen
+      Notizen wie „kurz gemerkt, dass es ein Traum war“ auf, bist du nah dran.
+    kernsatz: MILD oder SSILD nach kurzem nächtlichem Wachsein wirken in Studien
+      besser als tägliche Realitätschecks.
+    beleg: In der ILDIS stieg der Klartraumanteil von etwa 5 Prozent in der
+      Basiswoche auf 16 bis 17 Prozent mit MILD oder SSILD. Bei schnellem
+      Wiedereinschlafen waren es 18,3 gegen 11,1 Prozent. Tägliche
+      Realitätschecks allein zeigten keinen Effekt. Die Teilnehmenden waren
+      Freiwillige mit Interesse am Thema.
+    label: Techniken
     darauf_aufbauend:
-      - titel: "Schlafphasen"
-        href: "/lexikon/schlafphasen/"
-        typ: "lexikon"
-      - titel: "Gewohnheitsschleife"
-        href: "/lexikon/gewohnheitsschleife/"
-        typ: "lexikon"
-  - type: ebene
-    label: "Nutzen"
-    titel: "Wofür ist luzides Träumen gut?"
-    kernsatz: "Am besten belegt ist der Einsatz gegen wiederkehrende Albträume, alle anderen Anwendungen sind kaum über Pilotstudien hinaus."
-    was_passiert: "Wer im Albtraum merkt, dass er träumt, kann sich umdrehen, mit dem Verfolger sprechen oder den Traum beenden. Auf dieser Idee beruht die Klartraumtherapie. Eine systematische Übersicht von Ouchene und Kollegen aus dem Jahr 2023 fand elf Studien dazu, zehn davon mit positivem Ergebnis, teils mit bis zu 50 Prozent weniger Albträumen. Bemerkenswert ist, dass die Häufigkeit auch sank, wenn die Teilnehmenden gar nicht voll luzide wurden.\n\nDaneben gibt es das Üben im Traum. Erlacher und Schredl ließen 2010 zwanzig Freiwillige versuchen, im Klartraum Münzen in eine Tasse zu werfen, und nur sieben von ihnen schafften es überhaupt, im Traum luzide zu werden und die Übung auszuführen. Diese sieben trafen am Morgen öfter. Die übrigen nicht."
-    woran_merkst: "Ob sich der Aufwand für dich lohnt, hängt vom Motiv ab. Plagen dich wiederkehrende Albträume, ist die Lage anders als bei reiner Neugier. Wer vor allem Abenteuer sucht, sollte die Nachteile in der nächsten Ebene genauso ernst nehmen."
-    was_hilft: "Nutze den Klartraum zuerst für etwas Einfaches. Ein einfacher Anfang ist der Versuch, im Traum auf die eigenen Hände zu schauen oder eine Person anzusprechen und zu fragen, was sie hier will. Das trainiert die Stabilität, ohne den Traum zu sprengen.\n\nBei Albträumen lohnt der Blick auf die etablierte Imagery Rehearsal Therapy, bei der man tagsüber ein neues Ende des Albtraums ausdenkt und einübt. Sie gilt als psychologische Hauptbehandlung bei Albträumen und braucht keine Luzidität. Bei Albträumen nach traumatischen Erlebnissen gehört beides in therapeutische Begleitung."
-    beleg: "Ouchene u. a. (2023, L'Encéphale) werten die Studienlage als ermutigend, aber vorläufig: wenige randomisierte Studien, hohe Abbruchraten. Beim Münzwurf von Erlacher und Schredl stiegen die Treffer der sieben Klarträumer von 3,7 auf 5,3 von 20. Körperliches Üben brachte mehr."
-    fazit: "Für Albträume ist Klarträumen eine Option unter mehreren, für Sport bleibt echtes Training wirksamer."
+      - titel: Schlafphasen
+        href: /lexikon/schlafphasen/
+        typ: lexikon
+      - titel: Gewohnheitsschleife
+        href: /lexikon/gewohnheitsschleife/
+        typ: lexikon
+    type: ebene
+  - was_hilft: >-
+      Nutze den Klartraum zuerst für etwas Einfaches. Ein einfacher Anfang ist
+      der Versuch, im Traum auf die eigenen Hände zu schauen oder eine Person
+      anzusprechen und zu fragen, was sie hier will. Das trainiert die
+      Stabilität, ohne den Traum zu sprengen.
+
+
+      Bei Albträumen lohnt der Blick auf die etablierte Imagery Rehearsal Therapy, bei der man tagsüber ein neues Ende des Albtraums ausdenkt und einübt. Sie gilt als psychologische Hauptbehandlung bei Albträumen und braucht keine Luzidität. Bei Albträumen nach traumatischen Erlebnissen gehört beides in therapeutische Begleitung.
+    was_passiert: >-
+      Wer im Albtraum merkt, dass er träumt, kann sich umdrehen, mit dem
+      Verfolger sprechen oder den Traum beenden. Auf dieser Idee beruht die
+      Klartraumtherapie. Eine systematische Übersicht von Ouchene und Kollegen
+      aus dem Jahr 2023 fand elf Studien dazu, zehn davon mit positivem
+      Ergebnis, teils mit bis zu 50 Prozent weniger Albträumen. Bemerkenswert
+      ist, dass die Häufigkeit auch sank, wenn die Teilnehmenden gar nicht voll
+      luzide wurden.
+
+
+      Daneben gibt es das Üben im Traum. Erlacher und Schredl ließen 2010 zwanzig Freiwillige versuchen, im Klartraum Münzen in eine Tasse zu werfen, und nur sieben von ihnen schafften es überhaupt, im Traum luzide zu werden und die Übung auszuführen. Diese sieben trafen am Morgen öfter. Die übrigen nicht.
+    titel: Wofür ist luzides Träumen gut?
+    fazit: Für Albträume ist Klarträumen eine Option unter mehreren, für Sport
+      bleibt echtes Training wirksamer.
+    woran_merkst: Ob sich der Aufwand für dich lohnt, hängt vom Motiv ab. Plagen
+      dich wiederkehrende Albträume, ist die Lage anders als bei reiner Neugier.
+      Wer vor allem Abenteuer sucht, sollte die Nachteile in der nächsten Ebene
+      genauso ernst nehmen.
+    kernsatz: Am besten belegt ist der Einsatz gegen wiederkehrende Albträume, alle
+      anderen Anwendungen sind kaum über Pilotstudien hinaus.
+    beleg: "Ouchene u. a. (2023, L'Encéphale) werten die Studienlage als ermutigend,
+      aber vorläufig: wenige randomisierte Studien, hohe Abbruchraten. Beim
+      Münzwurf von Erlacher und Schredl stiegen die Treffer der sieben
+      Klarträumer von 3,7 auf 5,3 von 20. Körperliches Üben brachte mehr."
+    label: Nutzen
     darauf_aufbauend:
-      - titel: "Umgang mit Angst"
-        href: "/lexikon/umgang-mit-angst/"
-        typ: "lexikon"
-      - titel: "Kognitive Umdeutung"
-        href: "/lexikon/kognitive-umdeutung/"
-        typ: "lexikon"
-  - type: ebene
-    label: "Nachteile"
-    titel: "Welche Nachteile hat luzides Träumen?"
-    kernsatz: "Das Hauptrisiko ist zerstückelter Schlaf durch nächtliches Wecken, nicht der Klartraum selbst."
-    was_passiert: "Die französischen Forscher Raphael Vallat und Perrine Ruby stellten 2019 eine unbequeme Frage, ob es überhaupt eine gute Idee ist, Klarträume zu kultivieren. Ihr Hauptargument betrifft die Methode. Viele Techniken verlangen, mitten in der Nacht 30 bis 120 Minuten wach zu bleiben, und das stört die Schlafarchitektur. Eine Übersicht von 2025 stützt das. Spontane Klarträume gehen nicht mit schlechterem Schlaf einher, gezielte Induktionsversuche schon.\n\nZweiter Punkt sind luzide Albträume. Bei 7 bis 16 Prozent der Klarträumer kommt es vor, dass sie wissen, dass sie träumen, den bedrohlichen Traum aber trotzdem nicht ändern können. Und dann ist da die Grenze zwischen Traum und Wirklichkeit."
-    woran_merkst: "Warnzeichen sind Tagesmüdigkeit, Einschlafprobleme nach dem nächtlichen Wecken oder das Gefühl, tagsüber öfter zu prüfen, ob man wach ist. Verschwimmt die Grenze zwischen Traum und Alltag? Dann sofort pausieren."
-    was_hilft: "Begrenze Wake Back to Bed auf wenige Nächte pro Woche und halte die Wachphase kurz, ein paar Minuten reichen. In der ILDIS von 2020 schadete erfolgreiches Üben der Schlafqualität nicht, allerdings über einen Zeitraum von nur einer Woche.\n\nBei Psychosen, Schizophrenie oder starker Dissoziation in der Vorgeschichte ist Vorsicht angebracht. Vallat und Ruby verweisen auf eine Studie, nach der Klartraumpraxis Wahn und Halluzinationen bei psychotischen Patienten verstärken kann. In diesem Fall gehört das Thema vor dem ersten Versuch in ein Gespräch mit Ärztin oder Therapeut."
-    beleg: "Vallat und Ruby (2019, Frontiers in Psychology) zitieren eine Befragung von 1.824 Personen, in der häufigere Klarträume mit schlechterer Schlafqualität zusammenhingen. Ursache und Wirkung sind dabei nicht geklärt. Tzioridou und Kollegen (2025) nennen 7 bis 16 Prozent für luzide Albträume."
-    fazit: "Kurze Wachphasen, wenige Nächte pro Woche und sofortige Pause bei Tagesmüdigkeit halten das Risiko klein."
+      - titel: Umgang mit Angst
+        href: /lexikon/umgang-mit-angst/
+        typ: lexikon
+      - titel: Kognitive Umdeutung
+        href: /lexikon/kognitive-umdeutung/
+        typ: lexikon
+    type: ebene
+  - was_hilft: >-
+      Begrenze Wake Back to Bed auf wenige Nächte pro Woche und halte die
+      Wachphase kurz, ein paar Minuten reichen. In der ILDIS von 2020 schadete
+      erfolgreiches Üben der Schlafqualität nicht, allerdings über einen
+      Zeitraum von nur einer Woche.
+
+
+      Bei Psychosen, Schizophrenie oder starker Dissoziation in der Vorgeschichte ist Vorsicht angebracht. Vallat und Ruby verweisen auf eine Studie, nach der Klartraumpraxis Wahn und Halluzinationen bei psychotischen Patienten verstärken kann. In diesem Fall gehört das Thema vor dem ersten Versuch in ein Gespräch mit Ärztin oder Therapeut.
+    was_passiert: >-
+      Die französischen Forscher Raphael Vallat und Perrine Ruby stellten 2019
+      eine unbequeme Frage, ob es überhaupt eine gute Idee ist, Klarträume zu
+      kultivieren. Ihr Hauptargument betrifft die Methode. Viele Techniken
+      verlangen, mitten in der Nacht 30 bis 120 Minuten wach zu bleiben, und das
+      stört die Schlafarchitektur. Eine Übersicht von 2025 stützt das. Spontane
+      Klarträume gehen nicht mit schlechterem Schlaf einher, gezielte
+      Induktionsversuche schon.
+
+
+      Zweiter Punkt sind luzide Albträume. Bei 7 bis 16 Prozent der Klarträumer kommt es vor, dass sie wissen, dass sie träumen, den bedrohlichen Traum aber trotzdem nicht ändern können. Und dann ist da die Grenze zwischen Traum und Wirklichkeit.
+    titel: Welche Nachteile hat luzides Träumen?
+    fazit: Kurze Wachphasen, wenige Nächte pro Woche und sofortige Pause bei
+      Tagesmüdigkeit halten das Risiko klein.
+    woran_merkst: Warnzeichen sind Tagesmüdigkeit, Einschlafprobleme nach dem
+      nächtlichen Wecken oder das Gefühl, tagsüber öfter zu prüfen, ob man wach
+      ist. Verschwimmt die Grenze zwischen Traum und Alltag? Dann sofort
+      pausieren.
+    kernsatz: Das Hauptrisiko ist zerstückelter Schlaf durch nächtliches Wecken,
+      nicht der Klartraum selbst.
+    beleg: Vallat und Ruby (2019, Frontiers in Psychology) zitieren eine Befragung
+      von 1.824 Personen, in der häufigere Klarträume mit schlechterer
+      Schlafqualität zusammenhingen. Ursache und Wirkung sind dabei nicht
+      geklärt. Tzioridou und Kollegen (2025) nennen 7 bis 16 Prozent für luzide
+      Albträume.
+    label: Nachteile
     darauf_aufbauend:
-      - titel: "Akuter und chronischer Stress"
-        href: "/lexikon/akuter-vs-chronischer-stress/"
-        typ: "lexikon"
-      - titel: "Stresssystem"
-        href: "/lexikon/stresssystem/"
-        typ: "lexikon"
-  - type: ebene
-    label: "Traumarten"
-    titel: "Gibt es noch andere Arten von Träumen?"
-    kernsatz: "Neben dem Klartraum gibt es Albträume, falsches Erwachen, Schlafparalyse und wiederkehrende Träume, und geträumt wird nicht nur im REM Schlaf."
-    was_passiert: "Der häufigste Sonderfall ist der Albtraum, ein Traum mit starker Angst, aus dem man oft aufwacht. Je nach Studie berichten 8 bis 30 Prozent der Erwachsenen davon. Verwandt mit dem Klartraum ist das falsche Erwachen. Man glaubt aufzuwachen, steht auf, putzt die Zähne und liegt in Wahrheit noch im Bett. Die Psychologin Celia Green beschrieb schon 1968 die Nähe zum Klartraum.\n\nDie Schlafparalyse ist streng genommen kein Traum. Man ist wach, kann sich aber nicht bewegen, weil die Lähmung des REM Schlafs kurz anhält, oft mit beängstigenden Bildern oder dem Gefühl einer Gestalt im Raum. Wiederkehrende Träume wiederholen ein Thema über Monate. Und lange galt REM als einzige Traumphase, bis Siclari und Kollegen 2017 Träume auch im NREM Schlaf nachwiesen."
-    woran_merkst: "Ein falsches Erwachen erkennst du oft erst hinterher. Schlafparalyse fühlt sich anders an als ein Traum, das Zimmer ist das echte Zimmer, nur der Körper gehorcht nicht."
-    was_hilft: "Notiere im Traumtagebuch nicht nur den Inhalt, sondern auch die Art. Ein Kürzel wie A für Albtraum, F für falsches Erwachen oder K für Klartraum reicht. Nach einigen Wochen wird sichtbar, welche Arten bei dir häufig sind.\n\nFalsches Erwachen ist für Klartraum Übende eine gute Gelegenheit, denn wer nach dem vermeintlichen Aufwachen kurz prüft, ob der Lichtschalter funktioniert, kann den Traum erkennen."
-    beleg: "Sharpless und Barber schätzten 2011 die Lebenszeithäufigkeit von Schlafparalyse auf etwa 7,6 Prozent, während eine britische Stichprobe von 862 jungen Erwachsenen zwischen 22 und 32 Jahren mit 29,7 Prozent fast viermal so hoch lag. Die Zahlen schwanken stark je nach Erhebung."
-    fazit: "Ein Kürzel pro Traumart im Tagebuch zeigt nach wenigen Wochen dein persönliches Traumprofil."
+      - titel: Akuter und chronischer Stress
+        href: /lexikon/akuter-vs-chronischer-stress/
+        typ: lexikon
+      - titel: Stresssystem
+        href: /lexikon/stresssystem/
+        typ: lexikon
+    type: ebene
+  - was_hilft: >-
+      Notiere im Traumtagebuch nicht nur den Inhalt, sondern auch die Art. Ein
+      Kürzel wie A für Albtraum, F für falsches Erwachen oder K für Klartraum
+      reicht. Nach einigen Wochen wird sichtbar, welche Arten bei dir häufig
+      sind.
+
+
+      Falsches Erwachen ist für Klartraum Übende eine gute Gelegenheit, denn wer nach dem vermeintlichen Aufwachen kurz prüft, ob der Lichtschalter funktioniert, kann den Traum erkennen.
+    was_passiert: >-
+      Der häufigste Sonderfall ist der Albtraum, ein Traum mit starker Angst,
+      aus dem man oft aufwacht. Je nach Studie berichten 8 bis 30 Prozent der
+      Erwachsenen davon. Verwandt mit dem Klartraum ist das falsche Erwachen.
+      Man glaubt aufzuwachen, steht auf, putzt die Zähne und liegt in Wahrheit
+      noch im Bett. Die Psychologin Celia Green beschrieb schon 1968 die Nähe
+      zum Klartraum.
+
+
+      Die Schlafparalyse ist streng genommen kein Traum. Man ist wach, kann sich aber nicht bewegen, weil die Lähmung des REM Schlafs kurz anhält, oft mit beängstigenden Bildern oder dem Gefühl einer Gestalt im Raum. Wiederkehrende Träume wiederholen ein Thema über Monate. Und lange galt REM als einzige Traumphase, bis Siclari und Kollegen 2017 Träume auch im NREM Schlaf nachwiesen.
+    titel: Gibt es noch andere Arten von Träumen?
+    fazit: Ein Kürzel pro Traumart im Tagebuch zeigt nach wenigen Wochen dein
+      persönliches Traumprofil.
+    woran_merkst: Ein falsches Erwachen erkennst du oft erst hinterher.
+      Schlafparalyse fühlt sich anders an als ein Traum, das Zimmer ist das
+      echte Zimmer, nur der Körper gehorcht nicht.
+    kernsatz: Neben dem Klartraum gibt es Albträume, falsches Erwachen,
+      Schlafparalyse und wiederkehrende Träume, und geträumt wird nicht nur im
+      REM Schlaf.
+    beleg: Sharpless und Barber schätzten 2011 die Lebenszeithäufigkeit von
+      Schlafparalyse auf etwa 7,6 Prozent, während eine britische Stichprobe von
+      862 jungen Erwachsenen zwischen 22 und 32 Jahren mit 29,7 Prozent fast
+      viermal so hoch lag. Die Zahlen schwanken stark je nach Erhebung.
+    label: Traumarten
     darauf_aufbauend:
       - titel: "Essay: Warum wir träumen"
-        href: "/essays/warum-wir-traeumen/"
-        typ: "essay"
-      - titel: "Schlafphasen"
-        href: "/lexikon/schlafphasen/"
-        typ: "lexikon"
+        href: /essays/warum-wir-traeumen/
+        typ: essay
+      - titel: Schlafphasen
+        href: /lexikon/schlafphasen/
+        typ: lexikon
+    type: ebene
   - type: selbsttest
     fragen:
-      - frage: "An wie viele Träume pro Woche erinnerst du dich?"
-        hinweis: "Unter einem pro Woche lohnt es sich, zuerst nur an der Traumerinnerung zu arbeiten."
-      - frage: "Hattest du schon einmal das Gefühl, im Traum zu wissen, dass du träumst?"
-        hinweis: "Dann gehörst du zu den 55 Prozent mit Klartraumerfahrung und kennst den Zustand bereits."
-      - frage: "Schläfst du nach nächtlichem Aufwachen innerhalb von zehn Minuten wieder ein?"
-        hinweis: "Falls nicht, ist Wake Back to Bed für dich riskanter, weil du damit Schlaf verlierst."
-      - frage: "Hattest du schon einmal Phasen, in denen Traum und Wirklichkeit schwer zu trennen waren?"
-        hinweis: "Wenn ja, sprich vor dem Üben mit einer Ärztin oder einem Therapeuten."
+      - frage: An wie viele Träume pro Woche erinnerst du dich?
+        hinweis: Unter einem pro Woche lohnt es sich, zuerst nur an der Traumerinnerung
+          zu arbeiten.
+      - frage: Hattest du schon einmal das Gefühl, im Traum zu wissen, dass du träumst?
+        hinweis: Dann gehörst du zu den 55 Prozent mit Klartraumerfahrung und kennst den
+          Zustand bereits.
+      - frage: Schläfst du nach nächtlichem Aufwachen innerhalb von zehn Minuten wieder
+          ein?
+        hinweis: Falls nicht, ist Wake Back to Bed für dich riskanter, weil du damit
+          Schlaf verlierst.
+      - frage: Hattest du schon einmal Phasen, in denen Traum und Wirklichkeit schwer zu
+          trennen waren?
+        hinweis: Wenn ja, sprich vor dem Üben mit einer Ärztin oder einem Therapeuten.
   - type: plan
     schritte:
-      - titel: "Vor dem Start"
-        dauer: "1 Abend"
-        text: "Heft und Stift neben das Bett. Nicht das Handy. Notiere, wie viele Stunden du normalerweise schläfst, damit du später den Wecker für Wake Back to Bed richtig stellen kannst. Entscheide dich für eine Technik, MILD oder SSILD, nicht für beide."
-      - titel: "Woche 1 und 2"
-        dauer: "jede Nacht"
-        text: "Nur Traumtagebuch. Direkt nach jedem Aufwachen schreibst du auf, was du noch weißt, auch einzelne Bilder oder Gefühle. Vor dem Einschlafen nimmst du dir vor, dich an Träume zu erinnern. Mehr nicht, keine Technik, kein Wecker, auch wenn es verlockend ist, gleich in der ersten Nacht mit allem gleichzeitig anzufangen. Ziel ist mindestens ein erinnerter Traum pro Nacht oder zumindest deutlich mehr als vorher."
-      - titel: "Woche 3 und 4"
-        dauer: "zwei bis drei Nächte pro Woche"
-        text: "Jetzt kommt Wake Back to Bed dazu. Wecker auf etwa sechs Stunden nach dem Einschlafen, wenige Minuten wach bleiben, Traum notieren und mit MILD wieder einschlafen, also mit dem Vorsatz, beim nächsten Traum zu merken, dass du träumst. Die übrigen Nächte bleiben ungestört."
-      - titel: "Wenn der Schlaf leidet"
-        text: "Bist du tagsüber müde oder liegst nach dem Wecken lange wach, setze Wake Back to Bed eine Woche aus und bleib beim Tagebuch. Wer seine Traumnotizen langfristig sammeln will, findet weiter unten ein Notizbuch von Hybridlog."
+      - titel: Vor dem Start
+        dauer: 1 Abend
+        text: Heft und Stift neben das Bett. Nicht das Handy. Notiere, wie viele Stunden
+          du normalerweise schläfst, damit du später den Wecker für Wake Back to
+          Bed richtig stellen kannst. Entscheide dich für eine Technik, MILD
+          oder SSILD, nicht für beide.
+      - titel: Woche 1 und 2
+        dauer: jede Nacht
+        text: Nur Traumtagebuch. Direkt nach jedem Aufwachen schreibst du auf, was du
+          noch weißt, auch einzelne Bilder oder Gefühle. Vor dem Einschlafen
+          nimmst du dir vor, dich an Träume zu erinnern. Mehr nicht, keine
+          Technik, kein Wecker, auch wenn es verlockend ist, gleich in der
+          ersten Nacht mit allem gleichzeitig anzufangen. Ziel ist mindestens
+          ein erinnerter Traum pro Nacht oder zumindest deutlich mehr als
+          vorher.
+      - titel: Woche 3 und 4
+        dauer: zwei bis drei Nächte pro Woche
+        text: Jetzt kommt Wake Back to Bed dazu. Wecker auf etwa sechs Stunden nach dem
+          Einschlafen, wenige Minuten wach bleiben, Traum notieren und mit MILD
+          wieder einschlafen, also mit dem Vorsatz, beim nächsten Traum zu
+          merken, dass du träumst. Die übrigen Nächte bleiben ungestört.
+      - titel: Wenn der Schlaf leidet
+        text: Bist du tagsüber müde oder liegst nach dem Wecken lange wach, setze Wake
+          Back to Bed eine Woche aus und bleib beim Tagebuch. Wer seine
+          Traumnotizen langfristig sammeln will, findet weiter unten ein
+          Notizbuch von Hybridlog.
   - type: faq
-    titel_override: "Häufig gefragt"
+    titel_override: Häufig gefragt
     eintraege:
-      - frage: "Kann jeder luzides Träumen lernen?"
-        antwort: "Die meisten können es zumindest gelegentlich, denn 55 Prozent hatten laut Metaanalyse schon einmal einen Klartraum. Wie leicht es fällt, ist sehr unterschiedlich. Eine Garantie gibt keine Studie, auch die ILDIS zeigt nur Durchschnittswerte über viele Personen."
-      - frage: "Wie lange dauert es, bis man den ersten Klartraum hat?"
-        antwort: "Eine allgemeine Zahl fand sich in den geprüften Quellen nicht. In der ILDIS stieg der Anteil schon in der ersten Übungswoche, allerdings bei Freiwilligen mit Interesse am Thema. Realistisch ist, mit einigen Wochen Traumtagebuch zu rechnen, bevor die Technik greift."
-      - frage: "Ist luzides Träumen gefährlich?"
-        antwort: "Für Gesunde kaum. Das Hauptrisiko ist schlechter Schlaf durch häufiges nächtliches Wecken. Bei Psychosen oder starker Dissoziation in der Vorgeschichte raten Forschende zur Vorsicht, weil Klartraumpraxis Halluzinationen verstärken kann. Dann vorher mit einer Ärztin sprechen."
-      - frage: "Kann man in einem Klartraum stecken bleiben?"
-        antwort: "Dafür gibt es keinen Beleg. Jede REM Phase endet nach höchstens etwa einer Stunde, danach geht der Schlafzyklus weiter oder man wacht auf. Eine eigene Studie zu dieser Sorge fand sich in den geprüften Quellen allerdings nicht."
-      - frage: "Was ist der Unterschied zwischen Klartraum und Schlafparalyse?"
-        antwort: "Im Klartraum schläfst du und weißt, dass du träumst. Bei der Schlafparalyse bist du wach, siehst dein echtes Zimmer, kannst dich aber nicht bewegen, weil die Muskellähmung des REM Schlafs noch kurz anhält. Beides kann ineinander übergehen."
-      - frage: "Träumt man nur im REM Schlaf?"
-        antwort: "Nein. Siclari und Kollegen zeigten 2017 mit hochauflösendem EEG, dass Menschen auch im NREM Schlaf träumen. Die lebhaftesten und am besten erinnerten Träume stammen allerdings meist aus den langen REM Phasen am Morgen."
-      - frage: "Helfen Apps oder Klartraummasken?"
-        antwort: "Die Wirksamkeit kommerzieller Apps und Masken wurde für diesen Weg nicht geprüft. Die gut untersuchten Methoden brauchen kein Gerät, sondern ein Heft, einen Wecker und etwas Geduld. Wer ein Gerät ausprobiert, sollte auf die eigene Schlafqualität achten."
-  - type: hilfe
-    eintraege:
-      - titel: "Schlaflabore der DGSM"
-        beschreibung: "Die Deutsche Gesellschaft für Schlafforschung und Schlafmedizin listet über 300 zertifizierte Schlaflabore. Der Weg dorthin führt meist über die Hausärztin, etwa bei häufigen Albträumen, wiederholter Schlafparalyse oder anhaltend schlechtem Schlaf."
-        url: "https://www.dgsm.de/gesellschaft/fuer-patienten/schlaflabore"
-      - titel: "TelefonSeelsorge"
-        beschreibung: "Kostenlos und rund um die Uhr unter 0800 111 0 111, 0800 111 0 222 oder 116 123. Für Nächte, in denen Albträume oder Angst zu viel werden."
-        url: "https://www.telefonseelsorge.de/"
-  - type: angebot
-    label: "Von Hybridlog"
-    kennzeichnung: ""
-    hervorheben: true
-    titel: "Das Hybridlog Notizbuch als Traumtagebuch"
-    text: "Ein Heft nur für Träume, das neben dem Bett liegt, mit Platz für Kürzel und Datum. Jedes andere leere Heft erfüllt denselben Zweck."
-    url: "/journale/notizbuch/"
-    cta_label: "Zum Notizbuch"
+      - frage: Kann jeder luzides Träumen lernen?
+        antwort: Die meisten können es zumindest gelegentlich, denn 55 Prozent hatten
+          laut Metaanalyse schon einmal einen Klartraum. Wie leicht es fällt,
+          ist sehr unterschiedlich. Eine Garantie gibt keine Studie, auch die
+          ILDIS zeigt nur Durchschnittswerte über viele Personen.
+      - frage: Wie lange dauert es, bis man den ersten Klartraum hat?
+        antwort: Eine allgemeine Zahl fand sich in den geprüften Quellen nicht. In der
+          ILDIS stieg der Anteil schon in der ersten Übungswoche, allerdings bei
+          Freiwilligen mit Interesse am Thema. Realistisch ist, mit einigen
+          Wochen Traumtagebuch zu rechnen, bevor die Technik greift.
+      - frage: Ist luzides Träumen gefährlich?
+        antwort: Für Gesunde kaum. Das Hauptrisiko ist schlechter Schlaf durch häufiges
+          nächtliches Wecken. Bei Psychosen oder starker Dissoziation in der
+          Vorgeschichte raten Forschende zur Vorsicht, weil Klartraumpraxis
+          Halluzinationen verstärken kann. Dann vorher mit einer Ärztin
+          sprechen.
+      - frage: Kann man in einem Klartraum stecken bleiben?
+        antwort: Dafür gibt es keinen Beleg. Jede REM Phase endet nach höchstens etwa
+          einer Stunde, danach geht der Schlafzyklus weiter oder man wacht auf.
+          Eine eigene Studie zu dieser Sorge fand sich in den geprüften Quellen
+          allerdings nicht.
+      - frage: Was ist der Unterschied zwischen Klartraum und Schlafparalyse?
+        antwort: Im Klartraum schläfst du und weißt, dass du träumst. Bei der
+          Schlafparalyse bist du wach, siehst dein echtes Zimmer, kannst dich
+          aber nicht bewegen, weil die Muskellähmung des REM Schlafs noch kurz
+          anhält. Beides kann ineinander übergehen.
+      - frage: Träumt man nur im REM Schlaf?
+        antwort: Nein. Siclari und Kollegen zeigten 2017 mit hochauflösendem EEG, dass
+          Menschen auch im NREM Schlaf träumen. Die lebhaftesten und am besten
+          erinnerten Träume stammen allerdings meist aus den langen REM Phasen
+          am Morgen.
+      - frage: Helfen Apps oder Klartraummasken?
+        antwort: Die Wirksamkeit kommerzieller Apps und Masken wurde für diesen Weg
+          nicht geprüft. Die gut untersuchten Methoden brauchen kein Gerät,
+          sondern ein Heft, einen Wecker und etwas Geduld. Wer ein Gerät
+          ausprobiert, sollte auf die eigene Schlafqualität achten.
   - type: evidenz
-    titel_override: "Grenzen und Evidenz"
-    text: "Jung und klein. So lässt sich die Forschung zu Klarträumen beschreiben. Selbst die beste Studie zu Techniken, die ILDIS, beruht auf Freiwilligen mit Interesse am Thema und auf nur einer Woche Übung, was über langfristige Wirkungen und Nebenwirkungen wenig aussagt. Bei den Studien zu Albträumen haben wenige randomisierte Vergleiche und viele Abbrüche. Das Münzwurf Experiment stützt sich auf sieben erfolgreiche Klarträumer. Sicher belegt ist, dass Klarträume messbar existieren und häufig sind, und dass nächtliches Wecken den Schlaf stört."
+    titel_override: Grenzen und Evidenz
+    text: Jung und klein. So lässt sich die Forschung zu Klarträumen beschreiben.
+      Selbst die beste Studie zu Techniken, die ILDIS, beruht auf Freiwilligen
+      mit Interesse am Thema und auf nur einer Woche Übung, was über
+      langfristige Wirkungen und Nebenwirkungen wenig aussagt. Bei den Studien
+      zu Albträumen haben wenige randomisierte Vergleiche und viele Abbrüche.
+      Das Münzwurf Experiment stützt sich auf sieben erfolgreiche Klarträumer.
+      Sicher belegt ist, dass Klarträume messbar existieren und häufig sind, und
+      dass nächtliches Wecken den Schlaf stört.
   - type: verknuepfungen
-    titel_override: "Weitergehen"
+    titel_override: Weitergehen
     eintraege:
       - titel: "Essay: Warum wir träumen"
-        href: "/essays/warum-wir-traeumen/"
+        href: /essays/warum-wir-traeumen/
       - titel: "Essay: Metakognition"
-        href: "/essays/metakognition/"
+        href: /essays/metakognition/
 quellen:
-  - titel: "Saunders, Roe, Smith, Clegg (2016), Consciousness and Cognition · Häufigkeit von Klarträumen"
-    url: "https://nectar.northampton.ac.uk/id/eprint/8705/7/Saunders_etal_ELS_2016_Lucid_dreaming_incidence_A_quality_effects_meta_analysis_of_50_years_of_research.pdf"
-  - titel: "Aspy (2020), Frontiers in Psychology · International Lucid Dream Induction Study"
-    url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01746/full"
-  - titel: "Vallat, Ruby (2019), Frontiers in Psychology · Risiken des Klartraumtrainings"
-    url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.02585/full"
-  - titel: "Tzioridou u. a. (2025), Neuroscience and Biobehavioral Reviews · Klinische Neurowissenschaft des Klartraums"
-    url: "https://www.sciencedirect.com/science/article/pii/S0149763425000119"
-  - titel: "Ouchene u. a. (2023), L'Encéphale · Klartraumtherapie bei Albträumen"
-    url: "https://www.sciencedirect.com/science/article/abs/pii/S0013700623000210"
-  - titel: "Erlacher, Schredl (2010) · Motorisches Üben im Klartraum"
-    url: "https://www.researchgate.net/publication/279764203_Practicing_a_Motor_Task_in_a_Lucid_Dream_Enhances_Subsequent_Performance_A_Pilot_Study"
-  - titel: "Konkoly u. a. (2021), Current Biology · Dialog mit Träumenden"
-    url: "https://www.sciencedaily.com/releases/2021/02/210218114018.htm"
-  - titel: "Siclari u. a. (2017), Nature Neuroscience · Träume in REM und NREM"
-    url: "https://www.biorxiv.org/content/10.1101/012443v2.full"
-  - titel: "Denis u. a. (2015), Journal of Sleep Research · Schlafparalyse"
-    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4950339/"
-  - titel: "Apotheken Umschau (2025) mit Michael Schredl · Traumerinnerung"
-    url: "https://www.apotheken-umschau.de/gesund-bleiben/schlaf/traeume-wie-wir-uns-besser-an-sie-erinnern-koennen-1427011.html"
+  - titel: Saunders, Roe, Smith, Clegg (2016), Consciousness and Cognition ·
+      Häufigkeit von Klarträumen
+    url: https://nectar.northampton.ac.uk/id/eprint/8705/7/Saunders_etal_ELS_2016_Lucid_dreaming_incidence_A_quality_effects_meta_analysis_of_50_years_of_research.pdf
+  - titel: Aspy (2020), Frontiers in Psychology · International Lucid Dream
+      Induction Study
+    url: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.01746/full
+  - titel: Vallat, Ruby (2019), Frontiers in Psychology · Risiken des
+      Klartraumtrainings
+    url: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.02585/full
+  - titel: Tzioridou u. a. (2025), Neuroscience and Biobehavioral Reviews ·
+      Klinische Neurowissenschaft des Klartraums
+    url: https://www.sciencedirect.com/science/article/pii/S0149763425000119
+  - titel: Ouchene u. a. (2023), L'Encéphale · Klartraumtherapie bei Albträumen
+    url: https://www.sciencedirect.com/science/article/abs/pii/S0013700623000210
+  - titel: Erlacher, Schredl (2010) · Motorisches Üben im Klartraum
+    url: https://www.researchgate.net/publication/279764203_Practicing_a_Motor_Task_in_a_Lucid_Dream_Enhances_Subsequent_Performance_A_Pilot_Study
+  - titel: Konkoly u. a. (2021), Current Biology · Dialog mit Träumenden
+    url: https://www.sciencedaily.com/releases/2021/02/210218114018.htm
+  - titel: Siclari u. a. (2017), Nature Neuroscience · Träume in REM und NREM
+    url: https://www.biorxiv.org/content/10.1101/012443v2.full
+  - titel: Denis u. a. (2015), Journal of Sleep Research · Schlafparalyse
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC4950339/
+  - titel: Apotheken Umschau (2025) mit Michael Schredl · Traumerinnerung
+    url: https://www.apotheken-umschau.de/gesund-bleiben/schlaf/traeume-wie-wir-uns-besser-an-sie-erinnern-koennen-1427011.html
+seo_title: Wie lerne ich luzides Träumen? · Hybridlog
+seo_description: "Luzides Träumen lernen: was ein Klartraum ist, welche
+  Techniken wie MILD laut Studien wirken, wofür Klarträume gut sind und welche
+  Nachteile sie haben."
 ---

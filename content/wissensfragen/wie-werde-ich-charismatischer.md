@@ -25,7 +25,7 @@ bloecke:
     titel_override: "Warum es schwer ist"
     text: "Charisma entsteht im Kopf der anderen. Du selbst siehst davon wenig, und ehrliche Rückmeldung bekommt kaum jemand. Wer nach einem Treffen fragt, wie er gewirkt hat, hört „gut“ und erfährt nichts.\n\nDazu kommt ein zweites Problem, das man Spiegelfehler nennen könnte. Menschen arbeiten meist an der Seite, die sie ohnehin gut können. Der Freundliche wird noch freundlicher, der Durchsetzungsstarke feilt an seiner Rhetorik. Die Forschung beschreibt Charisma aber als Kombination aus zwei Achsen, Einfluss und Wärme, und ==sichtbar wird es erst, wenn beide gleichzeitig da sind==.\n\nUnd dann ist da der Mythos der Gabe. Max Weber sprach 1922 von einer „außeralltäglichen“ Qualität, und das Wort Charisma bedeutet ungefähr Gnadengabe. Wer daran glaubt, übt nicht. Dabei zeigen Trainingsstudien, dass ein Teil der Wirkung aus erkennbaren Techniken besteht, die sich aufschreiben lassen. Schwer ist also weniger das Lernen als das Erkennen, was genau man lernen muss."
   - type: ebene
-    label: "Ebene 1 von 4 · Bedeutung"
+    label: "Bedeutung"
     titel: "Was bedeutet es, wenn jemand Charisma hat?"
     kernsatz: "Charisma ist ein Urteil anderer Menschen, das sich aus Einfluss und Freundlichkeit zusammensetzt."
     was_passiert: "Max Weber, der den Begriff 1922 in die Soziologie holte, nannte Charisma eine „außeralltäglich geltende“ Qualität einer Persönlichkeit. Das wichtige Wort ist „geltende“. Ob jemand die Gabe wirklich besaß, war Weber gleichgültig, es zählte allein, wie die Anhänger ihn bewerteten. Die heutige Psychologie arbeitet mit Fragebögen statt mit Herrschaftstypen und landet trotzdem an einem ähnlichen Punkt. Konstantin Tskhay und sein Team in Toronto befragten knapp 1.000 Menschen und fanden zwei Faktoren, nämlich Einfluss, also Präsenz im Raum und die Fähigkeit, eine Gruppe zu führen, und Freundlichkeit, also das Talent, dass sich andere in deiner Nähe wohl und sicher fühlen. ==Charismatisch wirkt, wer beides gleichzeitig zeigt.=="
@@ -41,7 +41,7 @@ bloecke:
         href: "/lexikon/ocean-modell/"
         typ: "lexikon"
   - type: ebene
-    label: "Ebene 2 von 4 · Abgrenzung"
+    label: "Abgrenzung"
     titel: "Was ist der Unterschied zwischen Charisma und charmant?"
     kernsatz: "Charme wirkt im Zweiergespräch über Wärme, Charisma braucht zusätzlich Einfluss auf eine Gruppe."
     was_passiert: "Beide Wörter klingen nach Magie. Charme kommt über das Französische vom lateinischen carmen, was Lied oder Zauberformel heißt, und der Duden beschreibt ihn als Anziehungskraft, die von einem gewinnenden Wesen ausgeht. Charisma stammt aus dem Griechischen und bedeutet ungefähr Gnadengabe. Gemeint ist trotzdem Verschiedenes. Legt man die zwei Achsen aus der Charisma Forschung daneben, liegt Charme fast ganz auf der Seite der Freundlichkeit. Ein charmanter Mensch macht dir ein Kompliment, merkt sich den Namen deines Hundes und lacht über deinen schwachen Witz. Ob er eine Abteilung durch eine Krise führen könnte, verrät das alles nicht. Charisma verlangt diese zweite Achse."
@@ -57,7 +57,7 @@ bloecke:
         href: "/lexikon/emotionale-intelligenz-kritisch-betrachtet/"
         typ: "lexikon"
   - type: ebene
-    label: "Ebene 3 von 4 · Vorbilder"
+    label: "Vorbilder"
     titel: "Welche charismatischen Menschen gibt es, und was macht sie so charismatisch?"
     kernsatz: "Bekannte charismatische Redner nutzen wiederkehrende Techniken, die sich benennen und üben lassen."
     was_passiert: "16 Minuten dauerte Martin Luther Kings Rede „I Have a Dream“ am Lincoln Memorial in Washington. Eine Analyse der American Bar Association zählt darin acht Ketten von Wiederholungen am Satzanfang, darunter „Now is the time“ und den Satz, der der Rede ihren Namen gab. Dazu kommt ein Bild, das sofort sitzt. Amerika habe den Schwarzen einen ungedeckten Scheck ausgestellt. Diese Mittel stehen fast wörtlich auf der Liste der zwölf charismatischen Führungstaktiken, die John Antonakis in Lausanne zusammengestellt hat. Metapher, Kontrast, moralische Überzeugung, ein hohes Ziel. Das verändert den Blick auf Vorbilder. Was nach angeborener Ausstrahlung aussieht, ist bei näherem Hinsehen oft Handwerk, eingeübt über viele Reden."
@@ -76,7 +76,7 @@ bloecke:
         href: "/lexikon/halo-effect/"
         typ: "lexikon"
   - type: ebene
-    label: "Ebene 4 von 4 · Praxis"
+    label: "Praxis"
     titel: "Was kann man selbst tun, um charismatischer zu werden?"
     kernsatz: "Gezieltes Training steigert die Wirkung auf andere messbar, der Effekt ist mittelgroß und braucht Monate."
     was_passiert: "Die bekannteste Abkürzung funktioniert nicht. 2015 ließ Eva Ranehill in Zürich 200 Menschen sogenannte Power Posen einnehmen, breitbeinig, die Hände in den Hüften. Hormone und Risikobereitschaft blieben unverändert, nur das Gefühl von Selbstsicherheit stieg, was für den Moment angenehm sein mag, an der Wirkung auf andere aber nichts Messbares ändert. Was dagegen wirkt, ist langsamer. In der Trainingsstudie von Antonakis lernten Manager die zwölf Taktiken, übten sie im Alltag und wurden drei Monate später von Kollegen erneut bewertet. Ihre Charisma Werte stiegen im Vergleich zu einer Kontrollgruppe. Ein zweiter Befund kommt aus Australien. William von Hippel fand, dass Menschen, die einfache Wissensfragen schnell beantworten, von Freunden als charismatischer eingeschätzt werden."

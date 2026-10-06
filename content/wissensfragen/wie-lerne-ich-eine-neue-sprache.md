@@ -25,7 +25,7 @@ bloecke:
     titel_override: "Warum es schwer ist"
     text: "Sprachenlernen ist zuerst eine Mengenaufgabe. Hilfreich ist ein einfaches Modell aus drei Lücken, die sich nacheinander schließen.\n\nDie Wortlücke ist die größte. Damit im Gespräch 98 Prozent der Wörter bekannt sind, also nur noch eines von fünfzig fremd bleibt, braucht es laut dem Linguisten Paul Nation 6.000 bis 7.000 Wortfamilien. Dahinter wartet die Ohrlücke. Gesprochene Sprache kommt schnell, Wörter fließen ineinander, und zurückblättern geht nicht. Am längsten offen bleibt die Mundlücke, denn viel zu verstehen heißt noch lange nicht, unter Zeitdruck die passenden Wörter abzurufen und zu einem Satz zusammenzusetzen.\n\nDann die Zeit. Das Foreign Service Institute der USA rechnet selbst für nahe Sprachen mit 600 bis 750 Unterrichtsstunden bis zu einem soliden Berufsniveau. Bei 30 Minuten am Tag sind das gut drei Jahre. Die vier Ebenen unten gehen die Lücken einzeln an und rechnen die Stunden in Minuten pro Tag um."
   - type: ebene
-    label: "Ebene 1 von 4 · Einstieg"
+    label: "Einstieg"
     titel: "Was lernt man als Erstes bei einer neuen Sprache?"
     kernsatz: "Im Englischen decken die häufigsten 1.000 Wortfamilien über 80 Prozent gesprochener Sprache ab, sie kommen zuerst."
     was_passiert: "81 bis 84 Prozent. So viel gesprochenes Englisch decken laut Paul Nation die tausend häufigsten Wortfamilien ab, also Wörter wie be, have, go oder today samt allen ihren Formen. Die nächsten tausend bringen nur noch sechs bis acht Prozentpunkte dazu. Die Kurve flacht schnell ab. Deshalb lohnt der Anfang mit einer Häufigkeitsliste mehr als mit Themenvokabular wie Obstsorten oder Möbeln, die in einem normalen Gespräch kaum vorkommen. Gleichzeitig muss das Ohr die Laute erst auseinanderhalten lernen. Stephen Krashen beschrieb Spracherwerb 1982 als Verstehen von Sprache, die knapp über dem eigenen Niveau liegt, und ohne solchen Input bleiben Vokabeln eine Liste, die nie in einem echten Satz auftaucht."
@@ -44,7 +44,7 @@ bloecke:
         href: "/lexikon/mnemotechniken-eselsbruecken/"
         typ: "lexikon"
   - type: ebene
-    label: "Ebene 2 von 4 · Zeit"
+    label: "Zeit"
     titel: "Wie viel Zeit sollte man sich fürs Lernen einer Sprache nehmen?"
     kernsatz: "Bis B1 rechnet Cambridge English mit 350 bis 400 Lernstunden, am besten verteilt auf viele kurze Einheiten."
     was_passiert: "Ein Sonntag mit drei Stunden Grammatik fühlt sich produktiv an. Eine Woche später ist das meiste weg. Verteiltes Üben wirkt beim Fremdsprachenlernen stärker als geballtes, das zeigt eine Meta Analyse von Su Kyung Kim und Stuart Webb, die 48 Experimente zusammenfasst und dabei auch die Länge der Pausen zwischen den Wiederholungen vergleicht. Kurze Abstände halfen im Soforttest genauso gut wie lange. Später lagen die langen vorn. Für die Gesamtmenge gibt es Richtwerte. Cambridge English nennt 180 bis 200 angeleitete Stunden für A2, 350 bis 400 für B1 und 500 bis 600 für B2, das Foreign Service Institute für englische Muttersprachler je nach Sprache 600 bis 2.200 Unterrichtsstunden bis zum Berufsniveau."
@@ -63,7 +63,7 @@ bloecke:
         href: "/lexikon/kritische-periode/"
         typ: "lexikon"
   - type: ebene
-    label: "Ebene 3 von 4 · Auswahl"
+    label: "Auswahl"
     titel: "Welche Sprachen lohnen sich am meisten zu lernen?"
     kernsatz: "In Deutschland bringt fließendes Englisch im Beruf etwa 10 Prozent mehr Lohn, andere Sprachen nur in Nischen."
     was_passiert: "Mandarin sprechen laut Ethnologue 2026 rund 1,18 Milliarden Menschen, mehr als jede andere Sprache außer Englisch. Das Foreign Service Institute veranschlagt dafür allerdings 2.200 Unterrichtsstunden, rund dreimal so viel wie für Spanisch. Beide Zahlen gehören in eine Rechnung. Wirtschaftlich ist die Lage klarer. Der Ökonom Tobias Stöhr fand 2015 für Deutschland eine Lohnprämie von etwa 10 Prozent für die berufliche Nutzung von fließendem Englisch, während sich für andere Fremdsprachen höchstens in wenigen spezialisierten Berufen ein Effekt zeigte. Englisch hat 1,49 Milliarden Sprecherinnen und Sprecher. 1,12 Milliarden davon sprechen es als Zweitsprache, mehr als bei jeder anderen Sprache auf der Liste von Ethnologue."
@@ -79,7 +79,7 @@ bloecke:
         href: "/wege/welcher-beruf-passt-zu-mir/"
         typ: "weg"
   - type: ebene
-    label: "Ebene 4 von 4 · KI"
+    label: "KI"
     titel: "Lohnt sich das Lernen von Sprachen in Zeiten von KI noch?"
     kernsatz: "In einer JAMA Studie enthielten 8 Prozent der chinesischen Übersetzungen Fehler mit Schadenspotenzial."
     was_passiert: "Entlassungsanweisungen aus der Notaufnahme, maschinell übersetzt. Elaine Khoong und ihr Team an der University of California in San Francisco prüften 2019 solche Anweisungen, insgesamt 647 Sätze aus Google Translate, auf Spanisch und Chinesisch. 92 Prozent der spanischen und 81 Prozent der chinesischen Sätze stimmten, bei 2 beziehungsweise 8 Prozent bestand Potenzial für erheblichen Schaden. Aktuelle Sprachmodelle dürften besser abschneiden. Gemessen ist das in den hier geprüften Quellen nicht. Und auch eine fehlerfreie Übersetzung lässt etwas weg, weil sie Inhalt liefert, aber wenig Gespür für Ton, Witz und das, was jemand bewusst nicht sagt, während jede Rückfrage einen Umweg über das Gerät nimmt."

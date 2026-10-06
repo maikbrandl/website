@@ -12,21 +12,37 @@
             name: 'Stoizismus',
             line: 'Du richtest deine Kraft auf das, was in deiner Macht steht, und lässt den Rest ruhen.',
             text: 'Wie die Stoiker suchst du Gelassenheit über die klare Trennung zwischen dem Beeinflussbaren und dem Unabänderlichen. Handeln ja, aber ohne dich an Ergebnissen festzuklammern.',
+            empfehlung: [
+                { name: 'Mark Aurel', note: 'Römischer Kaiser, dessen private Notizen „Selbstbetrachtungen" bis heute die zugänglichste Einführung in die stoische Gelassenheit sind.', href: '/tools/philosophie/#stoa' },
+                { name: 'Epiktet', note: 'Ehemaliger Sklave, dessen Lehre von dem, was in unserer Macht steht, noch heute in der kognitiven Verhaltenstherapie nachwirkt.', href: '/tools/philosophie/#stoa' },
+            ],
         },
         existenz: {
             name: 'Existenzialismus',
             line: 'Du glaubst, dass Sinn nicht gefunden, sondern gemacht wird, durch deine eigenen Entscheidungen.',
             text: 'Freiheit ist für dich Verantwortung. Kein fertiges Drehbuch, sondern die Aufgabe, dich in jeder Wahl selbst zu entwerfen, auch wenn das unbequem ist.',
+            empfehlung: [
+                { name: 'Søren Kierkegaard', note: 'Gilt als Vater des Existenzialismus und schrieb darüber, wie Angst und Verzweiflung zur eigenen Entscheidung zwingen.', href: '/tools/philosophie/#kierkegaard' },
+                { name: 'Jean-Paul Sartre', note: '„Die Existenz geht der Essenz voraus": der Mensch hat keine vorgegebene Bestimmung und muss sich selbst entwerfen.', href: '/tools/philosophie/#sartre' },
+            ],
         },
         empirie: {
             name: 'Empirismus und Pragmatismus',
             line: 'Du vertraust der Erfahrung und fragst zuerst, was in der Praxis wirklich funktioniert.',
             text: 'Ideen zählen für dich, wenn sie sich bewähren. Du prüfst, beobachtest und korrigierst, statt an Prinzipien festzuhalten, die der Wirklichkeit nicht standhalten.',
+            empfehlung: [
+                { name: 'David Hume', note: 'Radikaler Empirist, der sogar die Kausalität selbst infrage stellte und nur auf das vertraute, was sich beobachten lässt.', href: '/tools/philosophie/#hume' },
+                { name: 'Charles S. Peirce & William James', note: 'Begründer des Pragmatismus: Wahr ist, was sich im Leben bewährt.', href: '/tools/philosophie/#peirce' },
+            ],
         },
         rationalismus: {
             name: 'Rationalismus',
             line: 'Du suchst nach klaren Prinzipien und baust dein Denken von der Vernunft her auf.',
             text: 'Wie die Rationalisten traust du dem folgerichtigen Argument. Aus wenigen sicheren Grundsätzen leitest du ab, was stimmig ist, unabhängig von der Stimmung des Augenblicks.',
+            empfehlung: [
+                { name: 'René Descartes', note: '„Ich denke, also bin ich": suchte ein Fundament des Wissens, das keinem Zweifel mehr standhält.', href: '/tools/philosophie/#descartes' },
+                { name: 'Baruch de Spinoza', note: 'Leitete seine Ethik streng geometrisch aus wenigen Vernunftprinzipien ab, Schritt für Schritt wie einen Beweis.', href: '/tools/philosophie/#spinoza' },
+            ],
         },
     };
 
@@ -277,12 +293,17 @@
                         '<span class="dt__bar-pct">' + p + '&nbsp;%</span></div>';
                 }).join('');
 
+            const empfehlung = (s.empfehlung || []).map((e) =>
+                '<li><a href="' + esc(e.href) + '"><strong>' + esc(e.name) + '</strong><span>' + esc(e.note) + '</span></a></li>'
+            ).join('');
+
             root.innerHTML =
                 '<div class="dt dt--result">' +
                 '<p class="dt__step">Deine Denkschule</p>' +
                 '<h3 class="dt__result-name">' + esc(s.name) + '</h3>' +
                 '<p class="dt__result-line">' + esc(s.line) + '</p>' +
                 '<p class="dt__result-text">' + esc(s.text) + '</p>' +
+                (empfehlung ? '<p class="dt__empfehlung-label">Hier anfangen</p><ul class="dt__empfehlung">' + empfehlung + '</ul>' : '') +
                 '<p class="dt__bars-label">Deine Übereinstimmung je Denkschule</p>' +
                 '<div class="dt__bars">' + bars + '</div>' +
                 '<div class="dt__nav">' +

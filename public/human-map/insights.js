@@ -137,6 +137,9 @@ const InsightsV2 = (() => {
             origin: 'Du willst frei entscheiden, hast aber früh gelernt, dass du dir Wert durch Geben und Gefallen verdienst.',
             cost:   'So richtest du dich still nach den Erwartungen anderer und verlierst genau die Selbstbestimmung, die dir am wichtigsten ist.',
             break:  'Sage diese Woche einmal freundlich Nein zu etwas, das du sonst aus Pflichtgefühl übernommen hättest.',
+            trigger: 'Jemand bittet dich um einen Gefallen oder eine Entscheidung.', // ENTWURF
+            behavior: 'Du sagst Ja, bevor du wirklich geprüft hast, ob du es willst.', // ENTWURF
+            gain: 'Kurzfristig bleibt die Beziehung glatt, und du erntest Anerkennung.', // ENTWURF
         },
         {
             id: 'verbundenheit_vs_abgetrenntheit', type: 'schleife',
@@ -147,6 +150,9 @@ const InsightsV2 = (() => {
             origin: 'Du sehnst dich nach echter Nähe und hast zugleich gelernt, dass Sichzeigen unsicher ist.',
             cost:   'Der Schutz, der dich vor Verletzung bewahren soll, hält auch die Nähe draußen, nach der du dich sehnst.',
             break:  'Zeige einer vertrauten Person eine kleine, echte Verletzlichkeit und beobachte, was wirklich passiert.',
+            trigger: 'Eine Situation wird emotional eng oder verletzlich.', // ENTWURF
+            behavior: 'Du hältst einen Teil von dir zurück oder ziehst dich leicht zurück.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig sicherer und ungefährdeter.', // ENTWURF
         },
         {
             id: 'kompetenz_vs_selbstzweifel', type: 'schleife',
@@ -157,6 +163,9 @@ const InsightsV2 = (() => {
             origin: 'Du willst dich wirksam und fähig fühlen, trägst aber die alte Überzeugung, allein nicht zu genügen.',
             cost:   'Du wartest auf Rückversicherung und übersiehst, wie viel du längst allein trägst. Der Zweifel bestätigt sich selbst.',
             break:  'Bring diese Woche eine kleine Sache bewusst allein zu Ende, ohne dir Bestätigung zu holen.',
+            trigger: 'Eine Aufgabe verlangt, dass du allein eine Entscheidung triffst.', // ENTWURF
+            behavior: 'Du holst dir Rückversicherung, bevor du weitermachst.', // ENTWURF
+            gain: 'Der Zweifel wird kurz leiser, du fühlst dich abgesichert.', // ENTWURF
         },
         {
             id: 'leistung_vs_perfektionismus', type: 'schleife',
@@ -167,6 +176,9 @@ const InsightsV2 = (() => {
             origin: 'Leistung ist dir wichtig, und du hast gelernt, dass nur Perfektion und Stärke zählen.',
             cost:   'Der Maßstab wird nie erreicht: Jeder Erfolg fühlt sich zu klein an, jede Pause wie ein Versäumnis.',
             break:  'Lass bewusst eine Sache „nur gut genug“ und spüre, dass nichts Schlimmes passiert.',
+            trigger: 'Eine Aufgabe ist fertig, aber noch nicht perfekt.', // ENTWURF
+            behavior: 'Du überarbeitest sie weiter oder schiebst die Abgabe hinaus.', // ENTWURF
+            gain: 'Du vermeidest kurzfristig das Risiko, kritisiert zu werden.', // ENTWURF
         },
         {
             id: 'ueberforderung_durch_geben', type: 'schleife',
@@ -177,6 +189,9 @@ const InsightsV2 = (() => {
             origin: 'Du gibst viel und gern, weil dein Wert sich lange daran bemessen hat, gebraucht zu werden.',
             cost:   'Du sorgst für alle und verlierst die Verbindung zu dem, was du selbst brauchst, bis du leerläufst.',
             break:  'Plane diese Woche eine kleine Sache fest ein, die nur dir gilt, und halte sie ein.',
+            trigger: 'Jemand in deinem Umfeld braucht Unterstützung.', // ENTWURF
+            behavior: 'Du übernimmst es, auch wenn deine eigenen Kapazitäten knapp sind.', // ENTWURF
+            gain: 'Du fühlst dich kurz gebraucht und wertvoll.', // ENTWURF
         },
         {
             id: 'antrieb_ohne_richtung', type: 'luecke',
@@ -187,6 +202,10 @@ const InsightsV2 = (() => {
             origin: 'Du hast Energie und Anspruch, aber gerade keine Richtung, die sich wirklich lohnt.',
             cost:   'Ohne ein klares Wozu verpufft dein Antrieb in Betriebsamkeit, statt dich irgendwohin zu tragen.',
             break:  'Schreib einen Satz auf, wofür sich dein Einsatz gerade lohnen soll, und richte eine Handlung daran aus.',
+            trigger: 'Du hast freie Zeit oder eine offene Entscheidung vor dir.', // ENTWURF
+            thought: 'Ich sollte etwas tun, Hauptsache vorwärts.', // ENTWURF
+            behavior: 'Du stürzt dich in die nächste Aufgabe, ohne zu prüfen, ob sie zu deiner Richtung passt.', // ENTWURF
+            gain: 'Die Unruhe, nichts zu tun, verschwindet kurzfristig.', // ENTWURF
         },
         {
             id: 'nicht_bedeutsam', type: 'luecke',
@@ -197,6 +216,9 @@ const InsightsV2 = (() => {
             origin: 'Du willst spüren, dass dein Dasein zählt, hältst aber innerlich Abstand, um nicht enttäuscht zu werden.',
             cost:   'Weil du dich zurücknimmst, bekommst du selten zurückgespiegelt, dass du wirklich einen Unterschied machst.',
             break:  'Teile einer Person mit, was sie dir bedeutet, und bleib da, um ihre Reaktion aufzunehmen.',
+            trigger: 'Du leistest etwas, ohne dass jemand es bemerkt oder zurückspiegelt.', // ENTWURF
+            behavior: 'Du ziehst dich innerlich etwas zurück, statt es anzusprechen.', // ENTWURF
+            gain: 'Du vermeidest kurzfristig die Verletzlichkeit, danach zu fragen.', // ENTWURF
         },
         {
             id: 'genuss_vs_haerte', type: 'luecke',
@@ -207,6 +229,9 @@ const InsightsV2 = (() => {
             origin: 'Du möchtest das Leben genießen, hast aber gelernt, dass Leichtigkeit sich wie Nachlässigkeit anfühlt.',
             cost:   'So verschiebst du das Genießen auf „wenn alles erledigt ist“, und dieser Moment kommt nie.',
             break:  'Gönn dir diese Woche bewusst eine kleine Freude, ohne sie dir vorher verdient haben zu müssen.',
+            trigger: 'Eine Gelegenheit zur Freude oder Pause taucht auf.', // ENTWURF
+            behavior: 'Du schiebst sie auf, bis „alles erledigt ist“.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig produktiv und pflichtbewusst.', // ENTWURF
         },
         {
             id: 'freiheit_vs_sicherheit', type: 'luecke',
@@ -217,6 +242,10 @@ const InsightsV2 = (() => {
             origin: 'Zwei starke Werte in dir wollen Gegensätzliches: Weite und Halt zugleich.',
             cost:   'Jede Entscheidung fühlt sich nach Verrat am anderen Teil an, also bleibst du oft in der Schwebe.',
             break:  'Triff eine anstehende Entscheidung bewusst zugunsten eines der beiden Werte, und benenne, was du bewusst loslässt.',
+            trigger: 'Eine Entscheidung verlangt, dich zwischen Freiheit und Absicherung festzulegen.', // ENTWURF
+            thought: 'Wenn ich mich festlege, verliere ich die andere Option für immer.', // ENTWURF
+            behavior: 'Du schiebst die Entscheidung auf oder hältst dir beide Optionen offen.', // ENTWURF
+            gain: 'Du vermeidest kurzfristig das Gefühl, etwas Falsches zu wählen.', // ENTWURF
         },
         {
             id: 'neugier_vs_kontrolle', type: 'luecke',
@@ -227,6 +256,10 @@ const InsightsV2 = (() => {
             origin: 'Ein Teil von dir sucht Abwechslung, ein anderer hält fest an Plan und Ordnung.',
             cost:   'Das Bedürfnis nach Kontrolle erstickt oft die Spontaneität, bevor sie überhaupt entstehen kann.',
             break:  'Lass diese Woche eine kleine Sache bewusst ungeplant und schau, was passiert.',
+            trigger: 'Etwas Ungeplantes oder Spontanes bietet sich an.', // ENTWURF
+            thought: 'Das lässt sich nicht kontrollieren, also ist es riskant.', // ENTWURF
+            behavior: 'Du legst doch wieder einen Plan oder eine Struktur darüber.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig sicherer und im Griff.', // ENTWURF
         },
         {
             id: 'rueckzug_trotz_sehnsucht', type: 'schleife',
@@ -237,6 +270,10 @@ const InsightsV2 = (() => {
             origin: 'Du sehnst dich nach Verbindung, ziehst dich aber zurück, wenn Kontakt anstrengend wird.',
             cost:   'Der Rückzug schützt kurz und verstärkt langfristig genau die Einsamkeit, die du loswerden willst.',
             break:  'Mach den ersten kleinen Schritt: Melde dich aktiv bei einer Person, statt zu warten.',
+            trigger: 'Kontakt zu einer Person würde Energie oder Verletzlichkeit kosten.', // ENTWURF
+            thought: 'Gerade ist es zu anstrengend, ich melde mich später.', // ENTWURF
+            behavior: 'Du ziehst dich zurück und wartest, statt den ersten Schritt zu machen.', // ENTWURF
+            gain: 'Du sparst dir kurzfristig den Aufwand und das Risiko der Kontaktaufnahme.', // ENTWURF
         },
         {
             id: 'ziel_vs_vermeidung', type: 'schleife',
@@ -247,6 +284,9 @@ const InsightsV2 = (() => {
             origin: 'Du hast Ziele, aber einen tiefen Reflex, Unbequemes und Frust zu umgehen.',
             cost:   'Jedes Ausweichen verschafft kurz Erleichterung und schiebt genau die Dinge weg, die dich weiterbrächten.',
             break:  'Halte einmal bewusst eine unbequeme Aufgabe bis zum Ende aus, statt ihr auszuweichen.',
+            trigger: 'Eine Aufgabe auf dem Weg zum Ziel wird unangenehm oder mühsam.', // ENTWURF
+            behavior: 'Du wendest dich einer angenehmeren Ablenkung zu.', // ENTWURF
+            gain: 'Der Frust verschwindet kurzfristig, du fühlst dich erleichtert.', // ENTWURF
         },
         {
             id: 'anpassung_vs_freiheit', type: 'luecke',
@@ -257,6 +297,10 @@ const InsightsV2 = (() => {
             origin: 'Du willst deinen eigenen Weg gehen und gleichzeitig dazugehören und nicht anecken.',
             cost:   'Aus Angst anzuecken passt du dich an, und fühlst dich dann fremdbestimmt in deinem eigenen Leben.',
             break:  'Vertritt in einer kleinen Sache offen deine eigene Meinung, auch wenn sie abweicht.',
+            trigger: 'Deine Meinung weicht von der der Gruppe ab.', // ENTWURF
+            thought: 'Wenn ich abweiche, falle ich unangenehm auf.', // ENTWURF
+            behavior: 'Du schließt dich der Mehrheitsmeinung an, statt deine eigene zu äußern.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig zugehörig und sicher.', // ENTWURF
         },
         {
             id: 'unruhe_schleife', type: 'schleife',
@@ -267,6 +311,9 @@ const InsightsV2 = (() => {
             origin: 'Du hältst nach außen die Fassung und darfst dir innerlich keine Schwäche erlauben.',
             cost:   'Weil du nie abschalten darfst, staut sich die Anspannung, die du eigentlich loswerden willst.',
             break:  'Erlaube dir bewusst einen unperfekten, ruhigen Moment und teile ihn niemandem als Leistung mit.',
+            trigger: 'Du spürst innere Anspannung oder Erschöpfung.', // ENTWURF
+            behavior: 'Du hältst nach außen die Fassade aufrecht und machst weiter wie immer.', // ENTWURF
+            gain: 'Niemand bemerkt, dass es dir gerade schwerfällt.', // ENTWURF
         },
         {
             id: 'einfluss_vs_fremdbezogenheit', type: 'luecke',
@@ -277,6 +324,9 @@ const InsightsV2 = (() => {
             origin: 'Du willst gestalten und Einfluss nehmen, hast aber gelernt, dass du dir Wert nur durch Gefallen verdienst.',
             cost:   'Aus Sorge, jemanden zu enttäuschen, hältst du dich zurück und überlässt anderen das Feld, das eigentlich deines wäre.',
             break:  'Sprich diese Woche einmal offen aus, was du gestalten willst, bevor du dich zurücknimmst.',
+            trigger: 'Eine Entscheidung liegt bei dir, die andere betrifft.', // ENTWURF
+            behavior: 'Du hältst deinen Vorschlag zurück oder fragst vorher alle um Erlaubnis.', // ENTWURF
+            gain: 'Du vermeidest kurzfristig, jemanden vor den Kopf zu stoßen.', // ENTWURF
         },
         {
             id: 'klartext_vs_fremdbezogenheit', type: 'schleife',
@@ -287,6 +337,9 @@ const InsightsV2 = (() => {
             origin: 'Du sagst klar, was ist, und machst dich danach klein, damit niemand enttäuscht ist.',
             cost:   'Der klare Satz ist kaum draußen, da nimmst du ihn innerlich schon wieder zurück und entschuldigst dich dafür.',
             break:  'Lass deinen nächsten klaren Satz diese Woche einmal unentschuldigt stehen.',
+            trigger: 'Du hast gerade deutlich gesagt, was du denkst.', // ENTWURF
+            behavior: 'Du relativierst deine Aussage sofort wieder oder entschuldigst dich dafür.', // ENTWURF
+            gain: 'Die Spannung danach fühlt sich kurz kleiner an.', // ENTWURF
         },
         {
             id: 'einfluss_vs_selbstzweifel', type: 'schleife',
@@ -297,6 +350,9 @@ const InsightsV2 = (() => {
             origin: 'Du willst Einfluss und Gestaltung, trägst aber die alte Überzeugung, dass du allein nicht genügst.',
             cost:   'Du wartest auf eine Erlaubnis, die nie laut genug kommt, und lässt Gelegenheiten für Einfluss ungenutzt.',
             break:  'Triff diese Woche eine gestaltende Entscheidung, ohne dir vorher Rückversicherung zu holen.',
+            trigger: 'Eine Gelegenheit zu gestalten oder zu entscheiden taucht auf.', // ENTWURF
+            behavior: 'Du wartest auf ein Signal oder eine Erlaubnis, bevor du handelst.', // ENTWURF
+            gain: 'Du vermeidest kurzfristig das Risiko, falsch zu liegen.', // ENTWURF
         },
         {
             id: 'naehe_vs_staerke', type: 'schleife',
@@ -307,6 +363,9 @@ const InsightsV2 = (() => {
             origin: 'Du sehnst dich nach Nähe, hast aber gelernt, dass du dafür stark und ohne Makel sein musst.',
             cost:   'Weil du keine Schwäche zeigen darfst, bleibt die Nähe oberflächlich, genau da, wo echte Verbindung entstehen könnte.',
             break:  'Zeige einer vertrauten Person diese Woche einmal, womit du gerade wirklich kämpfst.',
+            trigger: 'Ein Gespräch könnte zeigen, dass dich etwas belastet.', // ENTWURF
+            behavior: 'Du lenkst ab oder zeigst dich stärker, als dir gerade zumute ist.', // ENTWURF
+            gain: 'Du bleibst kurzfristig unangreifbar und kontrolliert.', // ENTWURF
         },
     ];
 
@@ -363,12 +422,16 @@ const InsightsV2 = (() => {
             const heavy = f.belief === 'abgetrenntheit' || f.belief === 'autonomie';
             const vorsicht = severity * (heavy ? 0.2 : 0.08);
             const leverage = Math.max(0, Math.round((W * B * Z * Vv - vorsicht) * 100));
+            // thought: for belief-based frictions it's the belief sentence itself (§7/§8);
+            // frictions without a belief carry their own authored thought.
+            const thought = f.thought || (f.belief ? ContentV2.SCHEMA_BELIEFS[f.belief].text : '');
             return {
                 id: f.id, type: f.type, label: f.label,
                 value: f.value || null, need: f.need || null, belief: f.belief || null,
                 transform: f.transform || f.belief || null,
                 changeable: f.changeable,
                 origin: f.origin, cost: f.cost, break: f.break,
+                trigger: f.trigger, thought, behavior: f.behavior, gain: f.gain,
                 leverage,
                 components: { W: +W.toFixed(2), B: +B.toFixed(2), Z: +Z.toFixed(2), V: Vv, vorsicht: +vorsicht.toFixed(2) },
             };

@@ -1,7 +1,11 @@
 /**
- * HUMAN MAP v2 — Result renderer (§9)
- * Turns a computed profile into the result card DOM. Deterministic, no user
- * free-text is injected as HTML, but esc() guards anyway.
+ * HUMAN MAP v2 — Result renderer (§9, neu geordnet nach Prompt 3)
+ * Turns a computed profile (+ RulesV2 output) into the result card DOM.
+ * Deterministic, no user free-text is injected as HTML, esc() guards anyway.
+ *
+ * Reihenfolge: Landschaft+Legende → Paradox → Stärken → Muster → Bedürfnisse →
+ * Reibungen (Reiter) → Dein Weg → Situationen → Bewegung → Weiterlesen →
+ * Die Zahlen (eingeklappt) → Sicherheitshinweis.
  *
  * Public API: ResultV2.render(container, profile)
  *   - profile must already have applyFocus() run on it.
@@ -11,6 +15,16 @@ const ResultV2 = (() => {
     const esc = (s) => String(s == null ? '' : s)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+    const FEEDBACK_KEY = 'humanmap_v2_feedback';
+    const WEG_KEY = 'humanmap_v2_weg';
+
+    function readLS(key) {
+        try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : {}; } catch (e) { return {}; }
+    }
+    function writeLS(key, obj) {
+        try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {}
+    }
+
     const PANEL_COLOR = {
         terrain: 'var(--area-denken)',
         antrieb: 'var(--area-antrieb)',
@@ -19,6 +33,8 @@ const ResultV2 = (() => {
     };
 
     // ── layer popup: general explanation + a few personalized sentences ──
+    // Migrated from the old four-panel view: now opened from small info buttons
+    // at the relevant new section headings instead of their own panels.
     const LAYER_EXPLAINER = {
         terrain:  'Deine Persönlichkeit nach den Big Five: fünf stabile Grundzüge, die beschreiben, wie du grundsätzlich tickst. Kein Typ, sondern eine Ausprägung auf einem Spektrum.',
         antrieb:  'Deine wichtigsten Werte und deine drei psychologischen Grundbedürfnisse, Autonomie, Kompetenz und Verbundenheit. Sie zeigen, was dich antreibt und woran es dir gerade genug oder zu wenig gibt.',
@@ -81,64 +97,142 @@ const ResultV2 = (() => {
         modal.classList.add('is-open');
     }
 
+    /** Small (i) info button at a section heading, opens the layer modal. */
+    function infoBtn(kind, title) {
+        return `<button type="button" class="rv-info-btn" data-layer-open="${esc(kind)}" data-layer-title="${esc(title)}"
+            aria-haspopup="dialog" aria-label="Mehr erfahren über ${esc(title)}">i</button>`;
+    }
+
     function bar(score, color) {
         const w = Math.max(0, Math.min(100, Math.round(score)));
         return `<div class="rv-bar"><div class="rv-bar__fill" style="width:${w}%;background:${color}"></div></div>`;
     }
 
+    /** Label + band word (never a raw number) + bar, optionally a plain-language read. */
     function row(label, score, read, color) {
         return `<div class="rv-row">
-            <div class="rv-row__label"><span>${esc(label)}</span><span class="rv-row__val">${Math.round(score)}</span></div>
+            <div class="rv-row__label"><span>${esc(label)}</span><span class="rv-row__val">${esc(RulesV2.band(score))}</span></div>
             ${bar(score, color)}
             ${read ? `<div class="rv-row__read">${esc(read)}</div>` : ''}
         </div>`;
     }
 
-    function panelShell(kind, title, inner) {
-        const color = PANEL_COLOR[kind];
-        return `<div class="rv-panel">
-            <button type="button" class="rv-panel__head" data-layer-open="${kind}" data-layer-title="${esc(title)}" aria-haspopup="dialog">
-                <span class="rv-panel__dot" style="background:${color}"></span>
-                <p class="rv-panel__title">${esc(title)}</p>
-                <span class="rv-panel__info" aria-hidden="true">i</span>
-            </button>
-            ${inner}
+    // ═══════════════════════════════════════════════════════════════
+    //  0. Landschaft + Legende + Sprungmarken
+    // ═══════════════════════════════════════════════════════════════
+    function sceneSectionHtml(profile, hasLinks) {
+        const svg = (typeof SceneV2 !== 'undefined') ? SceneV2.svg(profile) : '';
+        const legend = ContentV2.SCENE_LEGEND.map(l =>
+            `<span class="rv-legend__item"><strong>${esc(l.mark)}</strong> = ${esc(l.text)}</span>`).join('');
+        const jumpTargets = [
+            ['paradox', 'Paradox'], ['staerken', 'Stärken'], ['muster', 'Muster'], ['beduerfnisse', 'Bedürfnisse'],
+            ['reibungen', 'Reibungen'], ['weg', 'Weg'], ['situationen', 'Situationen'],
+        ];
+        if (hasLinks) jumpTargets.push(['weiterlesen', 'Weiterlesen']);
+        const jump = jumpTargets.map(([id, label]) => `<a href="#${id}" class="rv-jump__link">${esc(label)}</a>`).join('');
+        return `<section class="rv-scene">${svg}</section>
+            <div class="rv-legend">
+                <p class="rv-legend__title">So liest du deine Karte</p>
+                <div class="rv-legend__items">${legend}</div>
+            </div>
+            <nav class="rv-jump" aria-label="Sprung zu Abschnitten">${jump}</nav>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  1. Dein Paradox
+    // ═══════════════════════════════════════════════════════════════
+    function paradoxHtml(paradox) {
+        return `<section class="rv-section" id="paradox">
+            <h2 class="rv-section__title">Dein Paradox ${infoBtn('sinn', 'Sinn')}</h2>
+            <p class="rv-paradox__text">${esc(paradox.text)}</p>
+            ${paradox.explain ? `<p class="rv-paradox__explain">${esc(paradox.explain)}</p>` : ''}
+        </section>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  2. Was dich trägt
+    // ═══════════════════════════════════════════════════════════════
+    function strengthsHtml(strengths) {
+        const cards = strengths.map(s => `<div class="rv-strength">
+            <h3 class="rv-strength__title">${esc(s.title)}</h3>
+            <p class="rv-strength__text">${esc(s.text)}</p>
+            <p class="rv-strength__use">${esc(s.use)}</p>
+        </div>`).join('');
+        return `<section class="rv-section" id="staerken">
+            <h2 class="rv-section__title">Was dich trägt</h2>
+            <div class="rv-strengths">${cards}</div>
+        </section>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  3. Deine Muster (Konstellationen)
+    // ═══════════════════════════════════════════════════════════════
+    function constellationCardHtml(c, idx) {
+        const chips = c.layers.map(l => `<span class="rv-chip-sm">${esc(l)}</span>`).join('');
+        const whyId = `rv-why-${idx}`;
+        const whyList = c.why.map(w => `<li>${esc(w)}</li>`).join('');
+        return `<div class="rv-pattern" data-pattern-id="${esc(c.id)}">
+            <div class="rv-pattern__layers">${chips}</div>
+            <h3 class="rv-pattern__title">${esc(c.title)}</h3>
+            <p class="rv-pattern__text">${esc(c.text)}</p>
+            <button type="button" class="rv-pattern__why-btn" aria-expanded="false" aria-controls="${whyId}">Warum sagen wir das?</button>
+            <ul id="${whyId}" class="rv-pattern__why" hidden>${whyList}</ul>
+            <div class="rv-pattern__feedback" role="group" aria-label="Trifft das auf dich zu: ${esc(c.title)}?">
+                <button type="button" class="rv-fb-btn" data-fb="trifft_zu">Trifft zu</button>
+                <button type="button" class="rv-fb-btn" data-fb="teils">Teils</button>
+                <button type="button" class="rv-fb-btn" data-fb="gar_nicht">Gar nicht</button>
+            </div>
         </div>`;
     }
 
-    // ── panels ──
-    function terrainHtml(picture) {
-        const color = PANEL_COLOR.terrain;
-        const rows = picture.terrain.map(t => row(t.label, t.score, t.read, color)).join('');
-        return panelShell('terrain', 'Terrain', rows);
+    function musterHtml(constellations) {
+        const headingIcons = infoBtn('terrain', 'Terrain') + infoBtn('praegung', 'Prägung');
+        if (!constellations.items.length) {
+            return `<section class="rv-section" id="muster">
+                <h2 class="rv-section__title">Deine Muster ${headingIcons}</h2>
+                <p class="rv-section__sub">${esc(constellations.fallback)}</p>
+            </section>`;
+        }
+        const cards = constellations.items.map((c, i) => constellationCardHtml(c, i)).join('');
+        return `<section class="rv-section" id="muster">
+            <h2 class="rv-section__title">Deine Muster ${headingIcons}</h2>
+            <div class="rv-patterns">${cards}</div>
+        </section>`;
     }
 
-    function antriebHtml(picture) {
-        const color = PANEL_COLOR.antrieb;
-        const chips = picture.antrieb.topValues
-            .map(v => `<span class="rv-chip">${esc(v.label)}</span>`).join('');
-        const needs = picture.antrieb.needs.map(n => `
-            <div class="rv-need${n.flag ? ' rv-need--flag' : ''}">
-                <span class="rv-need__mark">${n.flag ? '!' : '✓'}</span>
-                <span>${esc(n.line)}</span>
-            </div>`).join('');
-        return panelShell('antrieb', 'Antrieb', `<div class="rv-chips">${chips}</div>${needs}`);
+    // ═══════════════════════════════════════════════════════════════
+    //  4. Deine Bedürfnisse
+    // ═══════════════════════════════════════════════════════════════
+    function needsHtml(profile) {
+        const entries = Object.keys(profile.needs).map(key => ({ key, ...profile.needs[key] }));
+        const maxEntry = entries.reduce((a, b) => (b.frustration > a.frustration ? b : a), entries[0]);
+        const strongest = maxEntry && maxEntry.frustration >= 65 ? maxEntry.key : null;
+
+        return entries.map(n => {
+            const c = ContentV2.NEED_TEXT[n.key];
+            const line = n.flag ? c.frust : (n.erfuellung >= 60 ? c.satHigh : c.satLow);
+            return `<div class="rv-needcard">
+                <div class="rv-needcard__head">
+                    <span class="rv-needcard__label">${esc(c.label)}</span>
+                    ${n.key === strongest ? '<span class="rv-needcard__flag">Stärkstes Signal</span>' : ''}
+                </div>
+                ${row('Erfüllt', n.erfuellung, null, 'var(--area-balance)')}
+                ${row('Frustriert', n.frustration, null, 'var(--area-beziehungen)')}
+                <p class="rv-needcard__line">${esc(line)}</p>
+            </div>`;
+        }).join('');
     }
 
-    function sinnHtml(picture) {
-        const color = PANEL_COLOR.sinn;
-        const rows = picture.sinn.map(s => row(s.label, s.score, s.read, color)).join('');
-        return panelShell('sinn', 'Sinn', rows);
+    function beduerfnisseHtml(profile) {
+        return `<section class="rv-section" id="beduerfnisse">
+            <h2 class="rv-section__title">Deine Bedürfnisse ${infoBtn('antrieb', 'Bedürfnisse')}</h2>
+            <div class="rv-needs">${needsHtml(profile)}</div>
+        </section>`;
     }
 
-    function praegungHtml(picture) {
-        const items = picture.praegung.length
-            ? picture.praegung.map(b => `<div class="rv-belief">${esc(b.text)}</div>`).join('')
-            : `<div class="rv-belief" style="color:var(--hm-text-dim)">Keine der geprüften Prägungen ist bei dir stark aktiv, ein gutes Zeichen für inneren Spielraum.</div>`;
-        return panelShell('praegung', 'Prägung', items);
-    }
-
-    // ── frictions ──
+    // ═══════════════════════════════════════════════════════════════
+    //  5. Wo es reibt (Reiter + Fünf-Kachel-Kreislauf)
+    // ═══════════════════════════════════════════════════════════════
     function componentBar(key, value) {
         const label = ContentV2.LEVERAGE_COMPONENT_LABELS[key];
         const pct = Math.round(Math.max(0, Math.min(1, value)) * 100);
@@ -148,24 +242,53 @@ const ResultV2 = (() => {
         </div>`;
     }
 
-    function frictionHtml(f, isFocus) {
-        const tag = f.type === 'schleife' ? 'Schleife' : 'Lücke';
+    function frictionPanelHtml(f, i, focus, transform) {
         const bandLabel = ContentV2.LEVERAGE_BAND[f.leverageBand] || ContentV2.LEVERAGE_BAND.mittel;
         const bars = ['W', 'B', 'V'].map(k => componentBar(k, f.components[k])).join('');
-        return `<div class="rv-friction">
-            <span class="rv-friction__tag">${esc(tag)}</span>
-            <div class="rv-friction__head">
-                <span class="rv-friction__label">${esc(f.label)}</span>
-                <span class="rv-friction__lever rv-friction__lever--${esc(f.leverageBand)}">${esc(bandLabel)}</span>
+        const tiles = [
+            { k: 'Auslöser', v: f.trigger },
+            { k: 'Gedanke', v: f.thought },
+            { k: 'Verhalten', v: f.behavior },
+            { k: 'Kurz gewonnen', v: f.gain },
+            { k: 'Lang bezahlt', v: f.cost },
+        ].map(t => `<div class="rv-tile"><span class="rv-tile__key">${esc(t.k)}</span><p class="rv-tile__val">${esc(t.v)}</p></div>`).join('');
+
+        // Keine Doppelung: break nicht zeigen, wenn derselbe Satz schon im Weg (WOOP) steht.
+        const dupWithWeg = focus && f.id === focus.id && transform && transform.steps.some(s =>
+            s.woop && (s.woop.plan === f.break || s.woop.wish === f.break));
+        const breakHtml = dupWithWeg ? '' : `<p class="rv-friction__break">${esc(f.break)}</p>`;
+
+        return `<div class="rv-tabpanel${i === 0 ? ' is-active' : ''}" id="rv-fr-${i}" role="tabpanel">
+            <div class="rv-friction">
+                <div class="rv-friction__head">
+                    <span class="rv-friction__tag">${esc(f.type === 'schleife' ? 'Schleife' : 'Lücke')}</span>
+                    <span class="rv-friction__lever rv-friction__lever--${esc(f.leverageBand)}">${esc(bandLabel)}</span>
+                </div>
+                <div class="rv-cycle">${tiles}</div>
+                ${breakHtml}
+                <div class="rv-lever-bars">${bars}</div>
             </div>
-            <p class="rv-friction__origin">${esc(f.origin)}</p>
-            <p class="rv-friction__cost">${esc(f.cost)}</p>
-            <p class="rv-friction__break">${esc(f.break)}</p>
-            <div class="rv-lever-bars">${bars}</div>
         </div>`;
     }
 
-    // ── transformation ──
+    function reibungenHtml(profile, transform) {
+        if (!profile.frictions || !profile.frictions.length) return '';
+        const top = profile.frictions.slice(0, 3);
+        const focus = profile.focus;
+        const tabs = top.map((f, i) => `<button type="button" class="rv-tab${i === 0 ? ' is-active' : ''}"
+            data-tab-target="rv-fr-${i}" role="tab" aria-selected="${i === 0}">${esc(f.label)}</button>`).join('');
+        const panels = top.map((f, i) => frictionPanelHtml(f, i, focus, transform)).join('');
+        return `<section class="rv-section" id="reibungen">
+            <h2 class="rv-section__title">Wo es reibt</h2>
+            <p class="rv-section__sub">Die Stellen, an denen dein Wollen und dein Gewordensein aneinandergeraten.</p>
+            <div class="rv-tabs" role="tablist">${tabs}</div>
+            <div class="rv-tabpanels">${panels}</div>
+        </section>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  6. Dein Weg (Transformationsweg, abhakbar)
+    // ═══════════════════════════════════════════════════════════════
     function stepBody(step) {
         if (step.key === 'finden') {
             const quote = step.beliefText ? `<blockquote class="rv-quote">„${esc(step.beliefText)}“</blockquote>` : '';
@@ -189,20 +312,65 @@ const ResultV2 = (() => {
         return `<div class="rv-step__body">${esc(step.prompt)}</div>`;
     }
 
-    function transformHtml(transform) {
-        const steps = transform.steps.map(s => `
-            <div class="rv-step">
-                <div class="rv-step__num">${s.n}</div>
+    function wegStepsHtml(transform, focus) {
+        const state = readLS(WEG_KEY);
+        const steps = transform.steps.map(s => {
+            const key = `${focus.id}:${s.key}`;
+            const checked = !!state[key];
+            return `<div class="rv-step${checked ? ' is-done' : ''}" data-weg-key="${esc(key)}">
+                <label class="rv-step__check" aria-label="Schritt ${s.n}, ${esc(s.title)}, als erledigt markieren">
+                    <input type="checkbox" ${checked ? 'checked' : ''}>
+                    <span class="rv-step__num">${s.n}</span>
+                </label>
                 <div>
                     <h4 class="rv-step__title">${esc(s.title)}</h4>
                     <p class="rv-step__lead">${esc(s.lead)}</p>
                     ${stepBody(s)}
                 </div>
-            </div>`).join('');
+            </div>`;
+        }).join('');
         return `<div class="rv-steps">${steps}</div>`;
     }
 
-    // ── movement over time (§11) ──
+    function wegHtml(transform, focus) {
+        if (!focus) {
+            return `<section class="rv-section" id="weg">
+                <h2 class="rv-section__title">Dein Weg</h2>
+                <p class="rv-section__sub">Gerade ist kein einzelner Reibungspunkt dominant. Dein Profil wirkt im Moment ausgeglichen. Nutze diesen Spielraum, um eine Sache zu vertiefen, die dir wichtig ist.</p>
+            </section>`;
+        }
+        if (!transform) {
+            return `<section class="rv-section" id="weg">
+                <h2 class="rv-section__title">Dein Weg</h2>
+                <p class="rv-focus__label">${esc(focus.label)}</p>
+                <p class="rv-step__body">${esc(focus.break)}</p>
+            </section>`;
+        }
+        return `<section class="rv-section" id="weg">
+            <h2 class="rv-section__title">Dein Weg</h2>
+            <div class="rv-focus">
+                <p class="rv-focus__label">${esc(focus.label)}</p>
+                ${wegStepsHtml(transform, focus)}
+                <button type="button" class="rv-cta" id="rv-cta-experiment">Experiment für diese Woche starten</button>
+            </div>
+        </section>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  7. So zeigst du dich (Situationen)
+    // ═══════════════════════════════════════════════════════════════
+    function situationenHtml(situations) {
+        const cards = situations.map(s => `<div class="rv-sit">
+            <h3 class="rv-sit__title">${esc(s.label)}</h3>
+            <p class="rv-sit__text">${esc(s.text)}</p>
+        </div>`).join('');
+        return `<section class="rv-section" id="situationen">
+            <h2 class="rv-section__title">So zeigst du dich</h2>
+            <div class="rv-situations">${cards}</div>
+        </section>`;
+    }
+
+    // ── movement over time (§11) — unverändert ──
     const NEED_LABEL = { autonomie: 'Autonomie', kompetenz: 'Kompetenz', verbundenheit: 'Verbundenheit' };
 
     function deltaChip(delta, goodWhenNegative) {
@@ -217,18 +385,15 @@ const ResultV2 = (() => {
         const prev = pair.previous, cur = pair.current;
         const rows = [];
 
-        // Sinn overall (average of three components; up is good).
         const avg = o => Math.round((o.kohaerenz + o.purpose + o.bedeutsamkeit) / 3);
         rows.push({ label: 'Sinn insgesamt', delta: avg(cur.meaning) - avg(prev.meaning), goodNeg: false });
 
-        // Need frustration per need (down is good).
         Object.keys(NEED_LABEL).forEach(k => {
             if (prev.needs[k] && cur.needs[k]) {
                 rows.push({ label: `${NEED_LABEL[k]}, Frustration`, delta: cur.needs[k].f - prev.needs[k].f, goodNeg: true });
             }
         });
 
-        // Strongest belief activation (down is good).
         const topAct = snap => (snap.beliefs && snap.beliefs[0]) ? snap.beliefs[0].activation : 0;
         rows.push({ label: 'Stärkste Prägung', delta: topAct(cur) - topAct(prev), goodNeg: true });
 
@@ -238,7 +403,6 @@ const ResultV2 = (() => {
                 ${deltaChip(r.delta, r.goodNeg)}
             </div>`).join('');
 
-        // Focus shift.
         let focusLine;
         const pf = prev.focus, cf = cur.focus;
         if (pf && cf && pf.id === cf.id) {
@@ -253,7 +417,7 @@ const ResultV2 = (() => {
 
         const since = new Date(prev.at).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 
-        return `<section class="rv-section">
+        return `<section class="rv-section" id="bewegung">
             <h2 class="rv-section__title">Deine Bewegung</h2>
             <p class="rv-section__sub">Veränderung seit deiner Messung vom ${esc(since)}. Nur die veränderbaren Ebenen, dein Terrain bleibt dein Terrain.</p>
             <div class="rv-move">
@@ -263,105 +427,105 @@ const ResultV2 = (() => {
         </section>`;
     }
 
-    // ── collapsed details (raw numbers) ──
-    function detailsHtml(profile) {        const trait = Object.keys(profile.traits)
-            .map(k => `<div>${esc(ModelV2.TRAITS[k].label)}: <b>${Math.round(profile.traits[k])}</b></div>`).join('');
-        const val = profile.values
-            .map(v => `<div>${esc(v.label)}: <b>${Math.round(v.score)}</b></div>`).join('');
-        const need = Object.keys(profile.needs)
-            .map(k => `<div>${esc(ContentV2.NEED_TEXT[k].label)}: Erfüllung <b>${Math.round(profile.needs[k].erfuellung)}</b> · Frustration <b>${Math.round(profile.needs[k].frustration)}</b></div>`).join('');
-        const mean = Object.keys(profile.meaning)
-            .map(k => `<div>${esc(ContentV2.MEANING_TEXT[k].label)}: <b>${Math.round(profile.meaning[k])}</b></div>`).join('');
-        return `<details class="rv-details">
-            <summary>Mehr Details, die Zahlen dahinter</summary>
+    // ═══════════════════════════════════════════════════════════════
+    //  9. Weiterlesen
+    // ═══════════════════════════════════════════════════════════════
+    function weiterlesenLinks(focus) {
+        if (!focus) return null;
+        return ContentV2.LINKS[focus.id] || ContentV2.LINKS[focus.belief] || null;
+    }
+
+    function weiterlesenHtml(focus) {
+        const links = weiterlesenLinks(focus);
+        if (!links || !links.length) return '';
+        const items = links.map(l => `<li class="rv-link">
+            <span class="rv-link__art">${esc(l.art)}</span>
+            <a href="${esc(l.url)}">${esc(l.titel)}</a>
+        </li>`).join('');
+        return `<section class="rv-section" id="weiterlesen">
+            <h2 class="rv-section__title">Weiterlesen</h2>
+            <ul class="rv-links">${items}</ul>
+        </section>`;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  10. Die Zahlen — eingeklappt, Bänder mit Spanne statt Einzelzahl
+    // ═══════════════════════════════════════════════════════════════
+    function spanRow(label, value, spread) {
+        const lo = Math.max(0, Math.round(value - spread));
+        const hi = Math.min(100, Math.round(value + spread));
+        return `<div class="rv-zrow">
+            <span class="rv-zrow__label">${esc(label)}</span>
+            <span class="rv-zrow__band">${esc(RulesV2.band(value))}</span>
+            <span class="rv-zrow__span">${lo}–${hi}</span>
+        </div>`;
+    }
+
+    function zahlenHtml(profile) {
+        const traitRows = Object.keys(profile.traits)
+            .map(k => spanRow(ModelV2.TRAITS[k].label, profile.traits[k], 12)).join('');
+        const valueRows = profile.values.map(v => spanRow(v.label, v.score, 18)).join('');
+        const needRows = Object.keys(profile.needs).map(k => {
+            const n = profile.needs[k];
+            const label = ContentV2.NEED_TEXT[k].label;
+            return spanRow(`${label}, Erfüllung`, n.erfuellung, 15) + spanRow(`${label}, Frustration`, n.frustration, 15);
+        }).join('');
+        const meaningRows = Object.keys(profile.meaning)
+            .map(k => spanRow(ContentV2.MEANING_TEXT[k].label, profile.meaning[k], 15)).join('');
+        const beliefRows = Object.keys(ModelV2.SCHEMA_DOMAINS).map(k => {
+            const b = profile.beliefs.find(x => x.domain === k);
+            return spanRow(ModelV2.SCHEMA_DOMAINS[k], b ? b.activation : 0, 15);
+        }).join('');
+
+        return `<details class="rv-details" id="zahlen">
+            <summary>Die Zahlen, eingeklappt</summary>
             <div class="rv-details__body">
-                <div class="rv-eyebrow rv__eyebrow">Terrain</div>${trait}
-                <div class="rv__eyebrow" style="margin-top:1rem">Werte</div>${val}
-                <div class="rv__eyebrow" style="margin-top:1rem">Bedürfnisse</div>${need}
-                <div class="rv__eyebrow" style="margin-top:1rem">Sinn</div>${mean}
+                <div class="rv__eyebrow">Terrain</div>${traitRows}
+                <div class="rv__eyebrow" style="margin-top:1rem">Werte</div>${valueRows}
+                <div class="rv__eyebrow" style="margin-top:1rem">Bedürfnisse</div>${needRows}
+                <div class="rv__eyebrow" style="margin-top:1rem">Sinn</div>${meaningRows}
+                <div class="rv__eyebrow" style="margin-top:1rem">Prägung</div>${beliefRows}
+                <p class="rv-zahlen__note">Wenige Fragen ergeben eine Spanne, keinen exakten Punkt.</p>
             </div>
         </details>`;
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    //  11. Sicherheitshinweis
+    // ═══════════════════════════════════════════════════════════════
+    function safetyHtml(safety) {
+        const concern = (safety && safety.concern) ? `<p>${esc(safety.message)}</p>` : '';
+        return `<div class="rv-safety" id="sicherheit">
+            ${concern}
+            <p class="rv-safety__hotline">${esc(ContentV2.SAFETY_HOTLINE)}</p>
+        </div>`;
+    }
+
     /** Render the full card into container from a focus-applied profile. */
     function render(container, profile) {
-        const picture   = InsightsV2.wholePicture(profile);
+        const rules     = RulesV2.build(profile);
+        const picture   = InsightsV2.wholePicture(profile); // feeds the (i) info modals
         const transform = InsightsV2.buildTransformation(profile);
-        const safety    = profile.safety;
         const focus     = profile.focus;
+        const links     = weiterlesenLinks(focus);
 
         const parts = [];
 
-        // 0. Personalized scene (§10.2) — rendered above everything as a hero.
         if (typeof SceneV2 !== 'undefined') {
-            parts.push(`<section class="rv-scene">${SceneV2.svg(profile)}</section>`);
+            parts.push(sceneSectionHtml(profile, !!(links && links.length)));
         }
 
-        // 1. Synthesis
-        parts.push(`<section class="rv-synthesis">
-            <div class="rv__eyebrow">Dein Gesamtbild</div>
-            <p class="rv-synthesis__text">${esc(picture.synthesis)}</p>
-        </section>`);
+        parts.push(paradoxHtml(rules.paradox));
+        parts.push(strengthsHtml(rules.strengths));
+        parts.push(musterHtml(rules.constellations));
+        parts.push(beduerfnisseHtml(profile));
+        parts.push(reibungenHtml(profile, transform));
+        parts.push(wegHtml(transform, focus));
+        parts.push(situationenHtml(rules.situations));
 
-        // 2. Four panels
-        parts.push(`<section class="rv-section">
-            <h2 class="rv-section__title">So bist du</h2>
-            <p class="rv-section__sub">Vier Ebenen, die zusammen dein Bild ergeben, vollständig im Verstehen.</p>
-            <div class="rv-panels">
-                ${terrainHtml(picture)}
-                ${antriebHtml(picture)}
-                ${sinnHtml(picture)}
-                ${praegungHtml(picture)}
-            </div>
-        </section>`);
-
-        // 3. Frictions
-        if (profile.frictions && profile.frictions.length) {
-            const list = profile.frictions.map(f => frictionHtml(f, focus && f.id === focus.id)).join('');
-            parts.push(`<section class="rv-section">
-                <h2 class="rv-section__title">Wo es reibt</h2>
-                <p class="rv-section__sub">Die Stellen, an denen dein Wollen und dein Gewordensein aneinandergeraten, sortiert nach Hebelwirkung.</p>
-                <div class="rv-frictions">${list}</div>
-            </section>`);
-        }
-
-        // 4. Focus + transformation
-        if (focus && transform) {
-            parts.push(`<section class="rv-section">
-                <div class="rv-focus">
-                    <div class="rv__eyebrow">Dein Fokus, Fokus im Verändern</div>
-                    <p class="rv-focus__label">${esc(focus.label)}</p>
-                    ${transformHtml(transform)}
-                </div>
-            </section>`);
-        } else if (focus) {
-            parts.push(`<section class="rv-section">
-                <div class="rv-focus">
-                    <div class="rv__eyebrow">Dein Fokus</div>
-                    <p class="rv-focus__label">${esc(focus.label)}</p>
-                    <p class="rv-step__body">${esc(focus.break)}</p>
-                </div>
-            </section>`);
-        } else {
-            parts.push(`<section class="rv-section">
-                <div class="rv-focus">
-                    <div class="rv__eyebrow">Dein Fokus</div>
-                    <p class="rv-focus__label">Gerade ist kein einzelner Reibungspunkt dominant.</p>
-                    <p class="rv-step__body">Dein Profil wirkt im Moment ausgeglichen. Nutze diesen Spielraum, um eine Sache zu vertiefen, die dir wichtig ist.</p>
-                </div>
-            </section>`);
-        }
-
-        // safety note
-        if (safety && safety.concern) {
-            parts.push(`<div class="rv-safety">${esc(safety.message)}</div>`);
-        }
-
-        // Movement over time (§11) — only when a prior measurement exists.
         const pair = (typeof StoreV2 !== 'undefined') ? StoreV2.latestPair() : null;
         if (pair) parts.push(movementHtml(pair));
 
-        // Re-measure CTA — offered once a baseline exists.
         const hasBaseline = (typeof StoreV2 !== 'undefined') && StoreV2.getHistory().length >= 1;
         if (hasBaseline) {
             parts.push(`<div class="rv-remeasure">
@@ -370,21 +534,84 @@ const ResultV2 = (() => {
             </div>`);
         }
 
-        // 5. Collapsed details
-        parts.push(detailsHtml(profile));
+        parts.push(weiterlesenHtml(focus));
+        parts.push(zahlenHtml(profile));
+        parts.push(safetyHtml(profile.safety));
 
-        // 6. Learn link
         parts.push(`<div class="rv-learn">
             <a href="learn.html">Worauf jede Ebene wissenschaftlich beruht →</a>
         </div>`);
 
         container.innerHTML = `<div class="rv">${parts.join('')}</div>`;
 
+        // ── wiring: layer info modals ──
         container.querySelectorAll('[data-layer-open]').forEach(btn => {
             btn.addEventListener('click', () => {
                 openLayerModal(btn.dataset.layerOpen, btn.dataset.layerTitle, picture);
             });
         });
+
+        // ── wiring: Muster "Warum sagen wir das?" + Feedback ──
+        container.querySelectorAll('.rv-pattern').forEach(card => {
+            const id = card.dataset.patternId;
+            const whyBtn = card.querySelector('.rv-pattern__why-btn');
+            const whyList = card.querySelector('.rv-pattern__why');
+            whyBtn.addEventListener('click', () => {
+                const open = whyBtn.getAttribute('aria-expanded') === 'true';
+                whyBtn.setAttribute('aria-expanded', String(!open));
+                whyList.hidden = open;
+            });
+            const fbBtns = card.querySelectorAll('.rv-fb-btn');
+            const paint = () => {
+                const stored = readLS(FEEDBACK_KEY);
+                fbBtns.forEach(b => b.classList.toggle('is-active', b.dataset.fb === stored[id]));
+            };
+            paint();
+            fbBtns.forEach(b => b.addEventListener('click', () => {
+                const stored = readLS(FEEDBACK_KEY);
+                stored[id] = b.dataset.fb;
+                writeLS(FEEDBACK_KEY, stored);
+                paint();
+                window.HLTrack && HLTrack('human-map-feedback', { id, wert: b.dataset.fb });
+            }));
+        });
+
+        // ── wiring: Reibungs-Reiter ──
+        container.querySelectorAll('.rv-tabs').forEach(tabbar => {
+            const tabs = tabbar.querySelectorAll('.rv-tab');
+            const panels = tabbar.nextElementSibling ? tabbar.nextElementSibling.querySelectorAll('.rv-tabpanel') : [];
+            tabs.forEach(tab => tab.addEventListener('click', () => {
+                tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+                tab.classList.add('is-active');
+                tab.setAttribute('aria-selected', 'true');
+                panels.forEach(p => p.classList.toggle('is-active', p.id === tab.dataset.tabTarget));
+            }));
+        });
+
+        // ── wiring: Weg abhaken ──
+        container.querySelectorAll('[data-weg-key]').forEach(el => {
+            const input = el.querySelector('input[type="checkbox"]');
+            input.addEventListener('change', () => {
+                const state = readLS(WEG_KEY);
+                state[el.dataset.wegKey] = input.checked;
+                writeLS(WEG_KEY, state);
+                el.classList.toggle('is-done', input.checked);
+            });
+        });
+
+        // ── wiring: die eine Hauptaktion ──
+        const cta = container.querySelector('#rv-cta-experiment');
+        if (cta) {
+            cta.addEventListener('click', () => {
+                const target = container.querySelector('[data-weg-key$=":widerlegen"]') || container.querySelector('#weg');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.classList.add('rv-step--pulse');
+                    setTimeout(() => target.classList.remove('rv-step--pulse'), 1600);
+                }
+                window.HLTrack && HLTrack('human-map-experiment-start', { focus: focus ? focus.id : null });
+            });
+        }
 
         if (!window.__hmGezaehlt) {
             window.__hmGezaehlt = true;
@@ -394,5 +621,3 @@ const ResultV2 = (() => {
 
     return { render };
 })();
-
-if (typeof module !== 'undefined' && module.exports) module.exports = ResultV2;

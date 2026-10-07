@@ -252,8 +252,61 @@ const ContentV2 = (() => {
         B: 'Wie stark es blockiert',
         V: 'Wie leicht es sich ändern lässt',
     };
+    // ── Weiterlesen: Links passend zum Fokus (friction id oder belief domain) ──
+    // Nur Adressen, die es unter /wege/, /lexikon/ oder /essays/ wirklich gibt (geprüft gegen content/).
+    const LINKS = {
+        antrieb_ohne_richtung: [
+            { art: 'Wissensweg', titel: 'Wie überwinde ich eine Sinnkrise?', url: '/wege/wie-ueberwinde-ich-eine-sinnkrise/' },
+            { art: 'Lexikon', titel: 'Selbstkonkordanz', url: '/lexikon/selbstkonkordanz/' },
+            { art: 'Essay', titel: 'Dein volles Potenzial entfalten: Flow, Ikigai und echtes Selbstwertgefühl', url: '/essays/volles-potenzial-entfalten/' },
+        ],
+        freiheit_vs_sicherheit: [
+            { art: 'Essay', titel: 'Warum mehr Optionen dich nicht weiterbringen', url: '/essays/mehr-optionen/' },
+            { art: 'Lexikon', titel: 'Komfortzonenmodell', url: '/lexikon/komfortzonenmodell/' },
+        ],
+        ziel_vs_vermeidung: [
+            { art: 'Wissensweg', titel: 'Warum sollte man seine Komfortzone verlassen?', url: '/wege/warum-komfortzone-verlassen/' },
+            { art: 'Lexikon', titel: 'Prokrastination', url: '/lexikon/prokrastination/' },
+        ],
+        genuss_vs_haerte: [
+            { art: 'Essay', titel: 'Warum du nur entspannen kannst, wenn du dazu gezwungen wirst', url: '/essays/erzwungene-entspannung/' },
+        ],
+        leistung_vs_perfektionismus: [
+            { art: 'Essay', titel: 'Disziplin ist kein Charakterzug: Warum sie ein System ist und wie du es aufbaust', url: '/essays/disziplin-als-system/' },
+            { art: 'Lexikon', titel: 'Intrinsische und extrinsische Motivation', url: '/lexikon/intrinsische-extrinsische-motivation/' },
+        ],
+        neugier_vs_kontrolle: [
+            { art: 'Lexikon', titel: 'Komfortzonenmodell', url: '/lexikon/komfortzonenmodell/' },
+        ],
+        unruhe_schleife: [
+            { art: 'Lexikon', titel: 'Resilienz', url: '/lexikon/resilienz/' },
+            { art: 'Lexikon', titel: 'Umgang mit Angst', url: '/lexikon/umgang-mit-angst/' },
+        ],
+        // Belief-Domain als Fallback, wenn kein friction-spezifischer Eintrag passt.
+        wachsamkeit: [
+            { art: 'Essay', titel: 'Warum du nur entspannen kannst, wenn du dazu gezwungen wirst', url: '/essays/erzwungene-entspannung/' },
+            { art: 'Lexikon', titel: 'Resilienz', url: '/lexikon/resilienz/' },
+        ],
+        grenzen: [
+            { art: 'Lexikon', titel: 'Prokrastination', url: '/lexikon/prokrastination/' },
+            { art: 'Wissensweg', titel: 'Warum sollte man seine Komfortzone verlassen?', url: '/wege/warum-komfortzone-verlassen/' },
+        ],
+    };
 
-    return { TRAIT_TEXT, VALUE_TEXT, NEED_TEXT, MEANING_TEXT, SCHEMA_BELIEFS, TRANSFORM, LEVERAGE_BAND, LEVERAGE_COMPONENT_LABELS };
+    // ── Sicherheitshinweis, immer am Ende des Ergebnisses (§12) ──
+    const SAFETY_HOTLINE = 'Wenn dich einer dieser Sätze stark belastet, sprich mit einem vertrauten Menschen oder ruf die TelefonSeelsorge an: 0800 111 0 111, kostenlos und rund um die Uhr.'; // ENTWURF
+
+    // ── Legende der Landschaft (§10.2) ──
+    const SCENE_LEGEND = [
+        { mark: 'Hügel', text: 'Persönlichkeit' }, // ENTWURF
+        { mark: 'Licht', text: 'Sinn, die Höhe zeigt deine Richtung' }, // ENTWURF
+        { mark: 'Sterne', text: 'dein roter Faden' }, // ENTWURF
+        { mark: 'Nebel', text: 'alte Überzeugungen' }, // ENTWURF
+        { mark: 'Pfad', text: 'dein aktueller Fokus' }, // ENTWURF
+    ];
+
+    return { TRAIT_TEXT, VALUE_TEXT, NEED_TEXT, MEANING_TEXT, SCHEMA_BELIEFS, TRANSFORM, LEVERAGE_BAND, LEVERAGE_COMPONENT_LABELS,
+             LINKS, SAFETY_HOTLINE, SCENE_LEGEND };
 })();
 
 if (typeof module !== 'undefined' && module.exports) module.exports = { ContentV2 };

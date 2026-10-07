@@ -1,8 +1,9 @@
 /* ===================================================================
-   HUMAN MAP v2 — Result card (§9)
+   HUMAN MAP v2 — Result card (§9, neu geordnet nach Prompt 3)
    Uses ONLY design tokens from ../css/variables.css.
-   Layout: synthesis → 4 panels → frictions → focus/transformation →
-           collapsed details. Mobile-first.
+   Layout: Landschaft+Legende → Paradox → Stärken → Muster → Bedürfnisse →
+           Reibungen (Reiter) → Weg → Situationen → Bewegung → Weiterlesen →
+           Zahlen (eingeklappt) → Sicherheitshinweis. Mobile-first.
    === */
 
 .rv {
@@ -37,16 +38,82 @@
     height: clamp(220px, 38vw, 340px);
 }
 
-/* ── 1. Synthesis ── */
-.rv-synthesis {
+/* ── Legende der Landschaft ── */
+.rv-legend {
+    margin-bottom: var(--hm-space-6);
+    padding: var(--hm-space-4) var(--hm-space-5);
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-md);
+}
+.rv-legend__title {
+    font-size: 0.8125rem;
+    color: var(--hm-text-dim);
+    margin: 0 0 var(--hm-space-2);
+}
+.rv-legend__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hm-space-2) var(--hm-space-5);
+    font-size: 0.8125rem;
+    color: var(--hm-text);
+}
+.rv-legend__items strong { color: var(--hm-gold-light); }
+
+/* ── Sprungmarken ── */
+.rv-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hm-space-2);
     margin-bottom: var(--hm-space-16);
-}.rv-synthesis__text {
+}
+.rv-jump__link {
+    font-size: 0.8125rem;
+    padding: var(--hm-space-1) var(--hm-space-3);
+    border-radius: var(--hm-radius-full);
+    border: 1px solid var(--hm-border-light);
+    color: var(--hm-text-dim);
+    transition: color var(--hm-dur) var(--hm-ease), border-color var(--hm-dur) var(--hm-ease);
+}
+.rv-jump__link:hover,
+.rv-jump__link:focus-visible { color: var(--hm-gold-light); border-color: var(--hm-gold-dark); }
+
+/* ── Dein Paradox ── */
+.rv-paradox__text {
     font-family: var(--hm-font-display);
     font-size: clamp(1.5rem, 4.5vw, 2.25rem);
     line-height: 1.35;
     color: var(--hm-white);
     font-weight: 500;
+    margin: 0 0 var(--hm-space-4);
 }
+.rv-paradox__explain {
+    font-size: 0.9375rem;
+    color: var(--hm-text-dim);
+    max-width: 56ch;
+}
+
+/* ── kleiner Info-Knopf an Abschnittsüberschriften ── */
+.rv-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--hm-border-light);
+    background: none;
+    color: var(--hm-text-muted);
+    font-size: 0.6875rem;
+    font-style: italic;
+    font-family: Georgia, serif;
+    vertical-align: middle;
+    margin-left: var(--hm-space-2);
+    cursor: pointer;
+    transition: color var(--hm-dur) var(--hm-ease), border-color var(--hm-dur) var(--hm-ease);
+}
+.rv-info-btn:hover,
+.rv-info-btn:focus-visible { color: var(--hm-gold); border-color: var(--hm-gold); }
 
 /* ── section scaffold ── */
 .rv-section {
@@ -63,65 +130,6 @@
     color: var(--hm-text-dim);
     margin: 0 0 var(--hm-space-8);
 }
-
-/* ── panels grid (Terrain/Antrieb/Sinn/Prägung) ── */
-.rv-panels {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--hm-space-4);
-}
-@media (max-width: 620px) {
-    .rv-panels { grid-template-columns: 1fr; }
-}
-.rv-panel {
-    background: var(--hm-bg-card);
-    border: 1px solid var(--hm-border);
-    border-radius: var(--hm-radius-lg);
-    padding: var(--hm-space-6);
-}
-.rv-panel__head {
-    display: flex;
-    align-items: center;
-    gap: var(--hm-space-2);
-    margin-bottom: var(--hm-space-4);
-    width: 100%;
-    border: none;
-    background: none;
-    padding: 0;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-}
-.rv-panel__dot {
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: var(--hm-radius-full);
-    flex: none;
-}
-.rv-panel__title {
-    font-size: 0.8125rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--hm-text-dim);
-    margin: 0;
-}
-.rv-panel__info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.125rem;
-    height: 1.125rem;
-    border-radius: 50%;
-    border: 1px solid var(--hm-border);
-    color: var(--hm-text-muted);
-    font-size: 0.6875rem;
-    font-style: italic;
-    font-family: Georgia, serif;
-    flex: none;
-    margin-left: auto;
-    transition: color 0.2s, border-color 0.2s;
-}
-.rv-panel__head:hover .rv-panel__info { color: var(--hm-gold); border-color: var(--hm-gold); }
 
 /* ── layer detail popup ── */
 .rv-modal {
@@ -234,54 +242,216 @@
     margin-top: var(--hm-space-2);
 }
 
-/* value chips */
-.rv-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--hm-space-2);
-    margin-bottom: var(--hm-space-4);
+/* ── Was dich trägt (Stärken) ── */
+.rv-strengths {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--hm-space-4);
 }
-.rv-chip {
-    font-size: 0.8125rem;
-    padding: var(--hm-space-1) var(--hm-space-3);
-    border-radius: var(--hm-radius-full);
-    background: var(--hm-gold-glow);
-    border: 1px solid rgba(255, 212, 38,0.25);
+@media (max-width: 760px) {
+    .rv-strengths { grid-template-columns: 1fr; }
+}
+.rv-strength {
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-6);
+}
+.rv-strength__title {
+    font-family: var(--hm-font-display);
+    font-size: 1.0625rem;
     color: var(--hm-gold-light);
+    margin: 0 0 var(--hm-space-2);
 }
-
-/* need lines */
-.rv-need {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--hm-space-2);
-    font-size: 0.8125rem;
-    margin-bottom: var(--hm-space-3);
-}
-.rv-need:last-child { margin-bottom: 0; }
-.rv-need__mark {
-    flex: none;
-    width: 1.1rem;
-    text-align: center;
-    color: var(--hm-gold);
-}
-.rv-need--flag .rv-need__mark { color: var(--area-beziehungen); }
-
-/* belief cards */
-.rv-belief {
-    padding: var(--hm-space-3) 0;
-    border-top: 1px solid var(--hm-border);
-    font-size: 0.875rem;
+.rv-strength__text {
+    font-size: 0.9375rem;
     color: var(--hm-text);
+    margin: 0 0 var(--hm-space-3);
 }
-.rv-belief:first-child { border-top: none; padding-top: 0; }
+.rv-strength__use {
+    font-size: 0.8125rem;
+    color: var(--hm-text-dim);
+    margin: 0;
+}
 
-/* ── frictions ── */
-.rv-frictions {
+/* ── Deine Muster (Konstellationen) ── */
+.rv-patterns {
     display: flex;
     flex-direction: column;
     gap: var(--hm-space-4);
 }
+.rv-pattern {
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-6);
+}
+.rv-pattern__layers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hm-space-2);
+    margin-bottom: var(--hm-space-3);
+}
+.rv-chip-sm {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px var(--hm-space-2);
+    border-radius: var(--hm-radius-full);
+    background: var(--hm-surface);
+    border: 1px solid var(--hm-border-light);
+    color: var(--hm-text-dim);
+}
+.rv-pattern__title {
+    font-family: var(--hm-font-display);
+    font-size: 1.0625rem;
+    color: var(--hm-white);
+    margin: 0 0 var(--hm-space-2);
+}
+.rv-pattern__text {
+    font-size: 0.9375rem;
+    color: var(--hm-text);
+    margin: 0 0 var(--hm-space-3);
+}
+.rv-pattern__why-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--hm-gold-light);
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+.rv-pattern__why-btn:hover,
+.rv-pattern__why-btn:focus-visible { color: var(--hm-gold); }
+.rv-pattern__why {
+    list-style: none;
+    margin: var(--hm-space-3) 0 0;
+    padding: var(--hm-space-3) var(--hm-space-4);
+    background: var(--hm-surface);
+    border-radius: var(--hm-radius-md);
+    font-size: 0.8125rem;
+    color: var(--hm-text-dim);
+}
+.rv-pattern__why li { margin-bottom: var(--hm-space-1); }
+.rv-pattern__why li:last-child { margin-bottom: 0; }
+.rv-pattern__feedback {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hm-space-2);
+    margin-top: var(--hm-space-4);
+}
+.rv-fb-btn {
+    font-size: 0.8125rem;
+    padding: var(--hm-space-1) var(--hm-space-3);
+    border-radius: var(--hm-radius-full);
+    border: 1px solid var(--hm-border-light);
+    background: none;
+    color: var(--hm-text-dim);
+    cursor: pointer;
+    transition: all var(--hm-dur) var(--hm-ease);
+}
+.rv-fb-btn:hover { border-color: var(--hm-gold-dark); color: var(--hm-text); }
+.rv-fb-btn.is-active {
+    background: var(--hm-gold-glow);
+    border-color: var(--hm-gold);
+    color: var(--hm-gold-light);
+}
+
+/* ── Deine Bedürfnisse ── */
+.rv-needs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--hm-space-4);
+}
+@media (max-width: 760px) {
+    .rv-needs { grid-template-columns: 1fr; }
+}
+.rv-needcard {
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-6);
+}
+.rv-needcard__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--hm-space-2);
+    margin-bottom: var(--hm-space-4);
+}
+.rv-needcard__label {
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hm-text-dim);
+}
+.rv-needcard__flag {
+    font-size: 0.6875rem;
+    padding: 2px var(--hm-space-2);
+    border-radius: var(--hm-radius-full);
+    background: var(--hm-gold-glow);
+    color: var(--hm-gold-light);
+    white-space: nowrap;
+}
+.rv-needcard__line {
+    font-size: 0.875rem;
+    color: var(--hm-text);
+    margin: var(--hm-space-3) 0 0;
+}
+
+/* ── Reibungen: Reiter + Fünf-Kachel-Kreislauf ── */
+.rv-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hm-space-2);
+    margin-bottom: var(--hm-space-6);
+}
+.rv-tab {
+    font: inherit;
+    font-size: 0.875rem;
+    padding: var(--hm-space-2) var(--hm-space-4);
+    border-radius: var(--hm-radius-full);
+    border: 1px solid var(--hm-border-light);
+    background: none;
+    color: var(--hm-text-dim);
+    cursor: pointer;
+    max-width: 100%;
+    transition: all var(--hm-dur) var(--hm-ease);
+}
+.rv-tab:hover { color: var(--hm-text); border-color: var(--hm-border-hover); }
+.rv-tab.is-active {
+    background: var(--hm-gold-glow);
+    border-color: var(--hm-gold);
+    color: var(--hm-gold-light);
+}
+.rv-tabpanel { display: none; }
+.rv-tabpanel.is-active { display: block; }
+.rv-cycle {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--hm-space-3);
+    margin-bottom: var(--hm-space-4);
+}
+.rv-tile {
+    background: var(--hm-surface);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-md);
+    padding: var(--hm-space-3) var(--hm-space-4);
+}
+.rv-tile__key {
+    display: block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hm-gold);
+    margin-bottom: var(--hm-space-1);
+}
+.rv-tile__val {
+    font-size: 0.8125rem;
+    color: var(--hm-text);
+    margin: 0;
+}
+
 .rv-friction {
     background: var(--hm-bg-card);
     border: 1px solid var(--hm-border);
@@ -294,11 +464,6 @@
     align-items: center;
     gap: var(--hm-space-4);
     margin-bottom: var(--hm-space-3);
-}
-.rv-friction__label {
-    font-size: 1.0625rem;
-    color: var(--hm-white);
-    font-weight: 500;
 }
 .rv-friction__lever {
     flex: none;
@@ -593,4 +758,155 @@
     font-size: 0.8125rem;
     color: var(--hm-text-muted);
     line-height: 1.6;
+}
+
+/* ── Weg: abhakbare Schritte ── */
+.rv-step__check {
+    position: relative;
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    cursor: pointer;
+}
+.rv-step__check input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.rv-step__check input:focus-visible + .rv-step__num {
+    outline: 2px solid var(--hm-gold);
+    outline-offset: 2px;
+}
+.rv-step.is-done .rv-step__num {
+    background: var(--hm-gold);
+    border-color: var(--hm-gold);
+    color: var(--hm-on-gold);
+}
+.rv-step.is-done .rv-step__title,
+.rv-step.is-done .rv-step__lead {
+    color: var(--hm-text-muted);
+}
+@keyframes rv-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--hm-gold-glow-strong); }
+    50%      { box-shadow: 0 0 0 10px rgba(255, 212, 38, 0); }
+}
+.rv-step--pulse { animation: rv-pulse 0.8s var(--hm-ease) 2; border-radius: var(--hm-radius-md); }
+
+/* ── die eine Hauptaktion ── */
+.rv-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hm-space-2);
+    margin-top: var(--hm-space-8);
+    padding: 0.875rem 2rem;
+    background: var(--hm-gold);
+    color: var(--hm-on-gold);
+    border: none;
+    border-radius: var(--hm-radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--hm-dur) var(--hm-ease);
+}
+.rv-cta:hover {
+    background: var(--hm-gold-light);
+    transform: translateY(-2px);
+    box-shadow: var(--hm-shadow-gold);
+}
+
+/* ── So zeigst du dich (Situationen) ── */
+.rv-situations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--hm-space-4);
+}
+@media (max-width: 620px) {
+    .rv-situations { grid-template-columns: 1fr; }
+}
+.rv-sit {
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-lg);
+    padding: var(--hm-space-5);
+}
+.rv-sit__title {
+    font-size: 0.9375rem;
+    color: var(--hm-gold-light);
+    margin: 0 0 var(--hm-space-2);
+}
+.rv-sit__text {
+    font-size: 0.875rem;
+    color: var(--hm-text);
+    margin: 0;
+}
+
+/* ── Weiterlesen ── */
+.rv-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--hm-space-3);
+}
+.rv-link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--hm-space-3);
+    padding: var(--hm-space-3) var(--hm-space-4);
+    background: var(--hm-bg-card);
+    border: 1px solid var(--hm-border);
+    border-radius: var(--hm-radius-md);
+}
+.rv-link__art {
+    flex: none;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hm-text-muted);
+}
+.rv-link a {
+    color: var(--hm-gold-light);
+    font-size: 0.9375rem;
+}
+.rv-link a:hover { color: var(--hm-gold-lighter); }
+
+/* ── Die Zahlen: Bänder mit Spanne ── */
+.rv-zrow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: var(--hm-space-3);
+    align-items: baseline;
+    padding: var(--hm-space-2) 0;
+    border-top: 1px solid var(--hm-border);
+    font-size: 0.8125rem;
+}
+.rv-zrow:first-of-type { border-top: none; }
+.rv-zrow__label { color: var(--hm-text); }
+.rv-zrow__band  { color: var(--hm-text-dim); }
+.rv-zrow__span  { color: var(--hm-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rv-zahlen__note {
+    margin-top: var(--hm-space-4);
+    font-size: 0.8125rem;
+    color: var(--hm-text-muted);
+    font-style: italic;
+}
+
+/* ── Sicherheitshinweis ── */
+.rv-safety p { margin: 0 0 var(--hm-space-3); }
+.rv-safety p:last-child { margin-bottom: 0; }
+.rv-safety__hotline { color: var(--hm-text-dim); }
+
+/* ── Fokusring, sichtbar bei Tastaturbedienung ── */
+.rv button:focus-visible,
+.rv a:focus-visible {
+    outline: 2px solid var(--hm-gold);
+    outline-offset: 2px;
+    border-radius: var(--hm-radius-sm);
 }

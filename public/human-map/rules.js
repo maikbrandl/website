@@ -771,30 +771,80 @@ const RulesV2 = (() => {
         return variant ? { id: variant.id, text: variant.text } : null;
     }
 
-    function buildSituations(profile) {
+    function buildSituations(profile, alltagOverrides) {
         return Object.keys(SITUATIONS).map(key => {
             const group = SITUATIONS[key];
             const chosen = pickSituation(group, profile);
-            return { key, label: group.label, text: chosen ? chosen.text : '' };
+            const overrideText = alltagOverrides && alltagOverrides.situationText[key];
+            return { key, label: group.label, text: overrideText || (chosen ? chosen.text : '') };
         });
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  E) ALLTAG — Szenario-Antworten (Prompt 4 Punkt 4)
+    // ═══════════════════════════════════════════════════════════════
+    // Jede Antwort ist einer konkreten, eigenen Formulierung des Nutzers so nah
+    // wie möglich. Sie ändert keinen Skalenwert, sondern liefert bei passenden
+    // Reibungen eine persönlichere Auslöser/Verhalten-Kachel und kann bei
+    // Situationen den generischen Text ersetzen. Fehlt eine Antwort oder passt
+    // keine Reibung/Situation, bleibt der ursprüngliche Text unverändert.
+    const ALLTAG_ANSWERS = {
+        a_friend: {
+            sorge_arbeit:   {},
+            selbstzweifel:  { frictions: ['kompetenz_vs_selbstzweifel', 'einfluss_vs_selbstzweifel'] },
+            aktiv:          {},
+            abwarten:       { frictions: ['rueckzug_trotz_sehnsucht'], situations: ['druck'] },
+        },
+        a_meeting: {
+            erleichtert:    {},
+            zu_hart:        { frictions: ['klartext_vs_fremdbezogenheit'] },
+            entschuldigen:  { frictions: ['klartext_vs_fremdbezogenheit'], situations: ['konflikt'] },
+            normal:         {},
+        },
+        a_decision: {
+            zuegig:         {},
+            meinung_holen:  { frictions: ['einfluss_vs_selbstzweifel', 'kompetenz_vs_selbstzweifel'] },
+            andere_wollen:  { frictions: ['einfluss_vs_fremdbezogenheit', 'selbstbestimmung_vs_fremdbezogenheit'] },
+            aufschieben:    { frictions: ['freiheit_vs_sicherheit', 'ziel_vs_vermeidung'], situations: ['arbeit'] },
+        },
+    };
+
+    /** Builds { frictionText: {id: {trigger,behavior}}, situationText: {key: text} } from profile.alltag. */
+    function buildAlltagOverrides(profile) {
+        const alltag = profile.alltag || {};
+        const frictionText = {};
+        const situationText = {};
+        Object.keys(alltag).forEach(qid => {
+            const q = ModelV2.ALLTAG_ITEMS.find(x => x.id === qid);
+            if (!q) return;
+            const choiceKey = alltag[qid];
+            const choice = q.choices.find(c => c.key === choiceKey);
+            const meta = ALLTAG_ANSWERS[qid] && ALLTAG_ANSWERS[qid][choiceKey];
+            if (!choice || !meta) return;
+            (meta.frictions || []).forEach(fid => { frictionText[fid] = { trigger: q.text, behavior: choice.label }; });
+            (meta.situations || []).forEach(key => { situationText[key] = choice.label; });
+        });
+        return { frictionText, situationText };
     }
 
     // ═══════════════════════════════════════════════════════════════
     //  Public API
     // ═══════════════════════════════════════════════════════════════
     function build(profile) {
+        const alltag = buildAlltagOverrides(profile);
         return {
             paradox:        buildParadox(profile),
             strengths:      buildStrengths(profile),
             constellations: buildConstellations(profile),
-            situations:     buildSituations(profile),
+            situations:     buildSituations(profile, alltag),
+            alltag,
         };
     }
 
     return {
         band, fill,
-        PARADOXES, STRENGTHS, CONSTELLATIONS, SITUATIONS,
-        buildParadox, buildStrengths, buildConstellations, buildSituations,
+        PARADOXES, STRENGTHS, CONSTELLATIONS, SITUATIONS, ALLTAG_ANSWERS,
+        buildParadox, buildStrengths, buildConstellations, buildSituations, buildAlltagOverrides,
         build,
     };
 })();

@@ -93,8 +93,16 @@ const ScoringV2 = (() => {
         });
 
         const total = ModelV2.CORE_ITEMS.length;
+
+        // ── Alltag: Szenario-Antworten unveraendert durchreichen (kein Scoring,
+        // nur Rohtext fuer RulesV2, siehe Prompt 4 Punkt 4) ──
+        const alltag = {};
+        ModelV2.ALLTAG_ITEMS.forEach(item => {
+            if (answers[item.id] != null && answers[item.id] !== '') alltag[item.id] = answers[item.id];
+        });
+
         return {
-            traits, values, needs, meaning, schema,
+            traits, values, needs, meaning, schema, alltag,
             meta: {
                 answered,
                 total,

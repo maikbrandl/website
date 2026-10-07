@@ -1,13 +1,14 @@
 /**
  * HUMAN MAP v2 — Assessment controller
- * Renders the 58-item CORE bank (all likert-7), section interstitials, saves
- * progress, and on finish stores the answers and redirects to result.html.
+ * Renders the 57-screen bank (Terrain likert, eine Werte-Sortieraufgabe,
+ * Bedürfnisse/Sinn/Prägung likert, drei Alltag-Szenarien), section
+ * interstitials with a short observation sentence, saves progress, and on
+ * finish stores the answers and redirects to result.html.
  * Answers are the single source of truth; result.html recomputes the pipeline.
  */
 const AssessmentV2 = (() => {
 
     const SESSION_KEY = 'humanmap_v2_session';
-    const ANSWERS_KEY = 'humanmap_v2_answers';
 
     let currentIndex = 0;
     let answers = {};
@@ -20,8 +21,8 @@ const AssessmentV2 = (() => {
     const mode = remeasure ? 'remeasure' : 'full';
 
     const items = remeasure
-        ? ModelV2.CORE_ITEMS.filter(it => it.section !== 'terrain')
-        : ModelV2.CORE_ITEMS;
+        ? ModelV2.SCREEN_ITEMS.filter(it => it.section !== 'terrain')
+        : ModelV2.SCREEN_ITEMS;
     const total = items.length;
 
     // Section id → interstitial accent (existing area tokens only).
@@ -31,14 +32,15 @@ const AssessmentV2 = (() => {
         beduerfnisse: 'var(--area-balance)',
         sinn:         'var(--area-wachstum)',
         praegung:     'var(--area-beziehungen)',
+        alltag:       'var(--area-antrieb)',
     };
     const SECTION_ICON = {
-        terrain: '◈', werte: '◉', beduerfnisse: '◇', sinn: '◆', praegung: '◎',
+        terrain: '◈', werte: '◉', beduerfnisse: '◇', sinn: '◆', praegung: '◎', alltag: '✦',
     };
     const sectionMeta = (id) => ModelV2.SECTIONS.find(s => s.id === id);
 
     let questionWrap, progressFill, progressLabel, progressPhase;
-    let interstitial, intIcon, intTitle, intSub, intPhaseLbl, intFill;
+    let interstitial, intIcon, intTitle, intSub, intObs, intPhaseLbl, intFill, intNext;
 
     function init() {
         questionWrap  = document.getElementById('hm-question-wrap');
@@ -49,8 +51,10 @@ const AssessmentV2 = (() => {
         intIcon       = document.getElementById('hm-int-icon');
         intTitle      = document.getElementById('hm-int-title');
         intSub        = document.getElementById('hm-int-sub');
+        intObs        = document.getElementById('hm-int-obs');
         intPhaseLbl   = document.getElementById('hm-int-phase');
         intFill       = document.getElementById('hm-int-progress-fill');
+        intNext       = document.getElementById('hm-int-next');
 
         const saved = loadSession();
         if (saved) {
@@ -72,11 +76,17 @@ const AssessmentV2 = (() => {
         try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
     }
 
+    /** Whether a screen (any type) already has a recorded answer. */
+    function isAnswered(q) {
+        if (q.type === 'value-sort') return q.values.every(v => answers[v.id] != null);
+        return answers[q.id] != null;
+    }
+
     function updateProgress() {
-        const answered = Object.keys(answers).length;
-        const pct = Math.round((answered / total) * 100);
+        const answeredCount = items.filter(isAnswered).length;
+        const pct = Math.round((answeredCount / total) * 100);
         if (progressFill)  progressFill.style.width = pct + '%';
-        if (progressLabel) progressLabel.textContent = `${answered}/${total}`;
+        if (progressLabel) progressLabel.textContent = `${answeredCount}/${total}`;
         const it = items[currentIndex];
         if (progressPhase && it) {
             const meta = sectionMeta(it.section);
@@ -89,7 +99,6 @@ const AssessmentV2 = (() => {
         if (!questionWrap) return;
         const q = items[index];
         if (!q) return;
-        const existingAnswer = answers[q.id];
 
         const backBtn = index > 0
             ? `<button type="button" class="hm-question__back" aria-label="Vorherige Frage">
@@ -97,13 +106,18 @@ const AssessmentV2 = (() => {
             </button>`
             : '';
 
+        let body;
+        if (q.type === 'value-sort')   body = renderValueSort();
+        else if (q.type === 'choice')  body = renderChoice(q, answers[q.id]);
+        else                           body = renderLikert(q, answers[q.id]);
+
         let html = `<div class="hm-question__card">
             <div class="hm-question__top">
                 ${backBtn}
-                <div class="hm-question__num">Frage ${index + 1} von ${total}</div>
+                <div class="hm-question__num">Schritt ${index + 1} von ${total}</div>
             </div>
             <div class="hm-question__text">${escHtml(q.text)}</div>
-            ${renderLikert(q, existingAnswer)}
+            ${body}
         </div>`;
 
         const div = document.createElement('div');
@@ -141,7 +155,34 @@ const AssessmentV2 = (() => {
             </div>`;
     }
 
+    function renderChoice(q, existingAnswer) {
+        const cards = q.choices.map(c => `<button type="button" class="hm-card-opt${existingAnswer === c.key ? ' is-selected' : ''}" data-choice="${c.key}">
+            <span class="hm-card-opt__label">${escHtml(c.label)}</span>
+        </button>`).join('');
+        return `<div class="hm-cards--4">${cards}</div>`;
+    }
+
+    /** Werte-Sortieraufgabe: Schritt a (drei wichtigste), Schritt b (zwei unwichtigste). */
+    function renderValueSort() {
+        const cards = ModelV2.VALUE_ITEMS.map(v => `<li>
+            <button type="button" class="hm-sort__card" data-key="${v.key}">
+                <span class="hm-sort__badge" aria-hidden="true"></span>
+                <span class="hm-sort__label">${escHtml(v.text)}</span>
+            </button>
+        </li>`).join('');
+        return `
+            <p class="hm-sort__instruction" data-sort-instruction>Wähle die drei, die dir am wichtigsten sind.</p>
+            <ul class="hm-sort__list">${cards}</ul>
+            <button type="button" class="hm-sort__next" data-sort-next hidden>Weiter</button>`;
+    }
+
     function attachEvents(container, q) {
+        if (q.type === 'value-sort') { attachValueSort(container, q); return; }
+        if (q.type === 'choice')     { attachChoice(container, q); return; }
+        attachLikert(container, q);
+    }
+
+    function attachLikert(container, q) {
         // Local lock (scoped to this render) blocks a double-click on the same
         // question from firing recordAnswer/advance twice, which previously
         // caused two questions to stack and one question to get skipped.
@@ -156,6 +197,93 @@ const AssessmentV2 = (() => {
                 setTimeout(() => advance(), 420);
             });
         });
+        const backBtn = container.querySelector('.hm-question__back');
+        if (backBtn) backBtn.addEventListener('click', () => { if (!isTransitioning) goBack(); });
+    }
+
+    function attachChoice(container, q) {
+        let locked = false;
+        container.querySelectorAll('.hm-card-opt').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (isTransitioning || locked) return;
+                locked = true;
+                recordAnswer(q.id, btn.dataset.choice);
+                container.querySelectorAll('.hm-card-opt').forEach(c => c.classList.remove('is-selected'));
+                btn.classList.add('is-selected');
+                setTimeout(() => advance(), 420);
+            });
+        });
+        const backBtn = container.querySelector('.hm-question__back');
+        if (backBtn) backBtn.addEventListener('click', () => { if (!isTransitioning) goBack(); });
+    }
+
+    function attachValueSort(container, q) {
+        const cards = Array.from(container.querySelectorAll('.hm-sort__card'));
+        const instrEl = container.querySelector('[data-sort-instruction]');
+        const nextBtn = container.querySelector('[data-sort-next]');
+
+        // Reconstruct a previously completed sort (back navigation) from the
+        // stored likert values: 7/6/5 = Top 1./2./3., 2/1 = unwichtigste 1./2.
+        let top = [], bottom = [];
+        if (q.values.every(v => answers[v.id] != null)) {
+            const byVal = {};
+            q.values.forEach(v => { byVal[answers[v.id]] = v.key; });
+            top = [byVal[7], byVal[6], byVal[5]].filter(Boolean);
+            bottom = [byVal[2], byVal[1]].filter(Boolean);
+        }
+
+        function paint() {
+            cards.forEach(btn => {
+                const key = btn.dataset.key;
+                const ti = top.indexOf(key), bi = bottom.indexOf(key);
+                const badge = btn.querySelector('.hm-sort__badge');
+                btn.classList.remove('is-top', 'is-bottom');
+                badge.textContent = '';
+                if (ti > -1) { btn.classList.add('is-top'); badge.textContent = String(ti + 1); }
+                else if (bi > -1) { btn.classList.add('is-bottom'); badge.textContent = String(bi + 1); }
+            });
+            if (top.length < 3) {
+                instrEl.textContent = 'Wähle die drei, die dir am wichtigsten sind.';
+            } else if (bottom.length < 2) {
+                instrEl.textContent = 'Wähle jetzt die zwei, die dir am wenigsten wichtig sind.';
+            } else {
+                instrEl.textContent = 'Danke. Prüfe deine Auswahl und klicke auf Weiter.';
+            }
+            if (nextBtn) nextBtn.hidden = !(top.length === 3 && bottom.length === 2);
+        }
+        paint();
+
+        cards.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.key;
+                const ti = top.indexOf(key), bi = bottom.indexOf(key);
+                if (ti > -1) { top.splice(ti, 1); paint(); return; }   // Auswahl rückgängig machen
+                if (bi > -1) { bottom.splice(bi, 1); paint(); return; }
+                if (top.length < 3) { top.push(key); paint(); }
+                else if (bottom.length < 2) { bottom.push(key); paint(); }
+            });
+        });
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (isTransitioning || top.length !== 3 || bottom.length !== 2) return;
+                const likertFor = (key) => {
+                    const ti = top.indexOf(key);
+                    if (ti === 0) return 7;
+                    if (ti === 1) return 6;
+                    if (ti === 2) return 5;
+                    const bi = bottom.indexOf(key);
+                    if (bi === 0) return 2;
+                    if (bi === 1) return 1;
+                    return 4;
+                };
+                q.values.forEach(v => { answers[v.id] = likertFor(v.key); });
+                updateProgress();
+                saveSession();
+                advance();
+            });
+        }
+
         const backBtn = container.querySelector('.hm-question__back');
         if (backBtn) backBtn.addEventListener('click', () => { if (!isTransitioning) goBack(); });
     }
@@ -183,7 +311,7 @@ const AssessmentV2 = (() => {
         const curSection = items[currentIndex].section;
         const nextSection = items[nextIndex].section;
         if (nextSection !== curSection) {
-            showInterstitial(nextSection, () => {
+            showInterstitial(curSection, nextSection, () => {
                 currentIndex = nextIndex;
                 renderQuestion(currentIndex);
                 updateProgress();
@@ -196,15 +324,53 @@ const AssessmentV2 = (() => {
         }
     }
 
-    function showInterstitial(sectionId, callback) {
-        isTransitioning = true;
-        const meta = sectionMeta(sectionId);
-        const color = SECTION_COLOR[sectionId] || 'var(--hm-gold)';
+    /** Ein Satz aus den gerade beantworteten Fragen des Abschnitts, der verlassen wird. */
+    function observationSentence(sectionId) {
+        let raw;
+        try { raw = ScoringV2.computeRaw(answers); } catch (e) { return ''; }
 
-        if (intIcon)     intIcon.textContent = SECTION_ICON[sectionId] || '●';
+        if (sectionId === 'terrain') {
+            const entries = Object.keys(ModelV2.TRAITS).map(k => ({ k, score: raw.traits[k] }));
+            const top = entries.reduce((a, b) => (Math.abs(b.score - 50) > Math.abs(a.score - 50) ? b : a));
+            const t = ContentV2.TRAIT_TEXT[top.k];
+            return top.score >= 50 ? t.readHigh : t.readLow;
+        }
+        if (sectionId === 'werte') {
+            const entries = Object.keys(ModelV2.VALUES).map(k => ({ k, score: raw.values[k] }));
+            const top = entries.reduce((a, b) => (b.score > a.score ? b : a));
+            return `Am wichtigsten ist dir gerade, ${ContentV2.VALUE_TEXT[top.k]}.`;
+        }
+        if (sectionId === 'beduerfnisse') {
+            const entries = Object.keys(ModelV2.NEEDS).map(k => ({ k, frust: raw.needs[k].frustration }));
+            const top = entries.reduce((a, b) => (b.frust > a.frust ? b : a));
+            const c = ContentV2.NEED_TEXT[top.k];
+            return top.frust >= 55 ? c.frust : c.satHigh;
+        }
+        if (sectionId === 'sinn') {
+            const entries = Object.keys(ModelV2.MEANING).map(k => ({ k, score: raw.meaning[k] }));
+            const top = entries.reduce((a, b) => (Math.abs(b.score - 50) > Math.abs(a.score - 50) ? b : a));
+            return ContentV2.MEANING_TEXT[top.k].read;
+        }
+        if (sectionId === 'praegung') {
+            const entries = Object.keys(ModelV2.SCHEMA_DOMAINS).map(k => ({ k, score: raw.schema[k] }));
+            const top = entries.reduce((a, b) => (b.score > a.score ? b : a));
+            return top.score >= 50
+                ? `Klingt bei dir an: „${ContentV2.SCHEMA_BELIEFS[top.k].text}“`
+                : 'Keine deiner geprüften Prägungen ist gerade stark aktiv.';
+        }
+        return '';
+    }
+
+    function showInterstitial(curSection, nextSection, callback) {
+        isTransitioning = true;
+        const meta = sectionMeta(nextSection);
+        const color = SECTION_COLOR[nextSection] || 'var(--hm-gold)';
+
+        if (intIcon)     intIcon.textContent = SECTION_ICON[nextSection] || '●';
         if (intPhaseLbl) intPhaseLbl.textContent = 'Nächster Abschnitt';
-        if (intTitle)    intTitle.textContent = meta ? meta.label : sectionId;
+        if (intTitle)    intTitle.textContent = meta ? meta.label : nextSection;
         if (intSub)      intSub.textContent = meta ? meta.sub : '';
+        if (intObs)      intObs.textContent = observationSentence(curSection);
         if (intFill)     intFill.style.width = '0%';
 
         interstitial.style.setProperty('--int-color', color);
@@ -216,10 +382,13 @@ const AssessmentV2 = (() => {
             if (intFill) intFill.style.width = '100%';
         }));
 
-        setTimeout(() => {
+        // Bleibt stehen, bis auf "Weiter" geklickt wird (kein Auto-Dismiss mehr).
+        const onNext = () => {
+            if (intNext) intNext.removeEventListener('click', onNext);
             interstitial.classList.remove('is-active');
-            setTimeout(() => { isTransitioning = false; callback(); }, 400);
-        }, 2200);
+            setTimeout(() => { isTransitioning = false; callback(); }, 300);
+        };
+        if (intNext) intNext.addEventListener('click', onNext);
     }
 
     // ── finish ──

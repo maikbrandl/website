@@ -87,6 +87,7 @@ const ModelV2 = (() => {
         { id: 'beduerfnisse', layer: 'C', label: 'Deine Bedürfnisse', sub: 'Woran es dir gerade genug gibt, und woran nicht.' },
         { id: 'sinn',         layer: 'D', label: 'Dein Sinn',         sub: 'Ob dein Leben sich stimmig und bedeutsam anfühlt.' },
         { id: 'praegung',     layer: 'B', label: 'Deine Prägung',     sub: 'Alte Grundüberzeugungen, die im Hintergrund mitlaufen.' },
+        { id: 'alltag',       layer: 'D', label: 'So reagierst du',   sub: 'Drei kurze Situationen aus deinem Alltag.' },
     ];
 
     const LIKERT_AGREE   = ['Trifft gar nicht zu', 'Trifft völlig zu'];
@@ -180,19 +181,70 @@ const ModelV2 = (() => {
         A('s_bed2', 'meaning', 'bedeutsamkeit', 'Mein Dasein ist von Bedeutung.',                                { section: 'sinn', layer: 'D' }),
     ];
 
-    // ── B · Prägung — Schema domain screen (10 items) ────────────────
+    // ── B · Prägung — Schema domain screen (15 items, drei pro Domain) ──
     const SCHEMA_ITEMS = [
         A('p_ab1', 'schema', 'abgetrenntheit',   'Im Grunde rechne ich damit, verlassen oder enttäuscht zu werden.', { section: 'praegung', layer: 'B' }),
         A('p_ab2', 'schema', 'abgetrenntheit',   'So, wie ich wirklich bin, bin ich nicht liebenswert.',            { section: 'praegung', layer: 'B' }),
+        A('p_ab3', 'schema', 'abgetrenntheit',   'Bei echter Nähe halte ich lieber einen Schritt Abstand.',         { section: 'praegung', layer: 'B' }),
         A('p_au1', 'schema', 'autonomie',        'Ich traue mir nicht zu, allein gut zurechtzukommen.',             { section: 'praegung', layer: 'B' }),
-        A('p_au2', 'schema', 'autonomie',        'Oft habe ich das Gefühl, zu versagen oder nicht zu genügen.',     { section: 'praegung', layer: 'B' }),
+        A('p_au2', 'schema', 'autonomie',        'Bevor ich mich entscheide, hole ich mir lieber die Meinung von jemand anderem ein.', { section: 'praegung', layer: 'B' }),
+        A('p_au3', 'schema', 'autonomie',        'Ohne Rückhalt von anderen fühle ich mich schnell verloren.',      { section: 'praegung', layer: 'B' }),
         A('p_gr1', 'schema', 'grenzen',          'Regeln, die für andere gelten, sollten für mich nicht so streng sein.', { section: 'praegung', layer: 'B' }),
         A('p_gr2', 'schema', 'grenzen',          'Mich zu disziplinieren oder Frust auszuhalten fällt mir schwer.', { section: 'praegung', layer: 'B' }),
+        A('p_gr3', 'schema', 'grenzen',          'Wenn etwas anstrengend wird, höre ich lieber vorzeitig auf.',     { section: 'praegung', layer: 'B' }),
         A('p_fr1', 'schema', 'fremdbezogenheit', 'Die Bedürfnisse anderer stelle ich fast immer über meine eigenen.',{ section: 'praegung', layer: 'B' }),
         A('p_fr2', 'schema', 'fremdbezogenheit', 'Ich tue viel, um Anerkennung zu bekommen und niemanden zu enttäuschen.', { section: 'praegung', layer: 'B' }),
+        A('p_fr3', 'schema', 'fremdbezogenheit', 'Nein zu sagen fällt mir deutlich schwerer als Ja.',               { section: 'praegung', layer: 'B' }),
         A('p_wa1', 'schema', 'wachsamkeit',      'Ich muss stark sein und darf keine Schwäche zeigen.',             { section: 'praegung', layer: 'B' }),
         A('p_wa2', 'schema', 'wachsamkeit',      'Ich erwarte von mir Perfektion und bin selten zufrieden.',       { section: 'praegung', layer: 'B' }),
+        A('p_wa3', 'schema', 'wachsamkeit',      'Auch nach einem Erfolg finde ich schnell, was ich noch besser hätte machen können.', { section: 'praegung', layer: 'B' }),
     ];
+
+    // ── D · Alltag — three choice scenarios (feed rules.js trigger/behavior/
+    // situation text, do NOT change any scale score). Each choice is a short
+    // first-person label that can double as a personalized tile text.
+    const ALLTAG_ITEMS = [
+        {
+            id: 'a_friend', type: 'choice', section: 'alltag', layer: 'D',
+            text: 'Jemand, der dir wichtig ist, meldet sich eine Woche nicht. Was denkst du zuerst?',
+            choices: [
+                { key: 'sorge_arbeit',  label: 'Er hat viel zu tun' },
+                { key: 'selbstzweifel', label: 'Ich habe etwas falsch gemacht' },
+                { key: 'aktiv',         label: 'Ich melde mich einfach' },
+                { key: 'abwarten',      label: 'Ich warte, bis er sich meldet' },
+            ],
+        },
+        {
+            id: 'a_meeting', type: 'choice', section: 'alltag', layer: 'D',
+            text: 'Du hast in einer Besprechung klar widersprochen. Wie geht es dir danach?',
+            choices: [
+                { key: 'erleichtert',   label: 'Erleichtert, ich stehe zu meiner Meinung' },
+                { key: 'zu_hart',       label: 'Ich frage mich, ob ich zu hart war' },
+                { key: 'entschuldigen', label: 'Ich entschuldige mich im Nachhinein dafür' },
+                { key: 'normal',        label: 'Ich merke es kaum noch, das ist für mich normal' },
+            ],
+        },
+        {
+            id: 'a_decision', type: 'choice', section: 'alltag', layer: 'D',
+            text: 'Eine Entscheidung liegt bei dir. Was machst du?',
+            choices: [
+                { key: 'zuegig',        label: 'Ich entscheide zügig selbst' },
+                { key: 'meinung_holen', label: 'Ich hole mir vorher die Meinung anderer ein' },
+                { key: 'andere_wollen', label: 'Ich richte mich danach, was die anderen wollen' },
+                { key: 'aufschieben',   label: 'Ich schiebe die Entscheidung erstmal auf' },
+            ],
+        },
+    ];
+
+    // ── C · Werte als eine Sortieraufgabe statt 10 Einzelfragen ──────
+    // Die 10 Einzel-Items bleiben Teil von CORE_ITEMS fürs Scoring (auch für
+    // alte gespeicherte v_-Antworten), zählen in der Bildschirm-Navigation
+    // aber als ein einziger Schritt (siehe SCREEN_ITEMS).
+    const VALUE_SORT_ITEM = {
+        id: 'v_sort', type: 'value-sort', section: 'werte', layer: 'C',
+        text: 'Wie wichtig sind dir diese zehn Dinge im Vergleich zueinander?',
+        values: VALUE_ITEMS,
+    };
 
     const CORE_ITEMS = [
         ...TERRAIN_ITEMS,
@@ -202,11 +254,24 @@ const ModelV2 = (() => {
         ...SCHEMA_ITEMS,
     ];
 
+    // ── Bildschirm-Liste für die Navigation (57 Schritte, 37 bei Wiedermessen) ──
+    // Anders als CORE_ITEMS (ein Eintrag pro Scoring-Item) fasst dies die zehn
+    // Werte-Items zu einem Sortier-Bildschirm zusammen und hängt die drei
+    // Alltag-Szenarien an, die nicht gescort werden.
+    const SCREEN_ITEMS = [
+        ...TERRAIN_ITEMS,
+        VALUE_SORT_ITEM,
+        ...NEED_ITEMS,
+        ...MEANING_ITEMS,
+        ...SCHEMA_ITEMS,
+        ...ALLTAG_ITEMS,
+    ];
+
     return {
         TRAITS, VALUES, NEEDS, MEANING, SCHEMA_DOMAINS,
         SECTIONS,
-        TERRAIN_ITEMS, VALUE_ITEMS, NEED_ITEMS, MEANING_ITEMS, SCHEMA_ITEMS,
-        CORE_ITEMS,
+        TERRAIN_ITEMS, VALUE_ITEMS, NEED_ITEMS, MEANING_ITEMS, SCHEMA_ITEMS, ALLTAG_ITEMS,
+        VALUE_SORT_ITEM, CORE_ITEMS, SCREEN_ITEMS,
     };
 })();
 

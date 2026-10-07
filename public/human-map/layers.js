@@ -22,7 +22,9 @@ const LayersV2 = (() => {
         const n = raw.needs;
         const boost = {
             abgetrenntheit:   0.5 * Math.max(0, n.verbundenheit.frustration - 50) + 0.3 * Math.max(0, 50 - t.stabilitaet),
-            autonomie:        0.5 * Math.max(0, n.kompetenz.frustration - 50)     + 0.3 * Math.max(0, 50 - t.stabilitaet),
+            // Boost aus Kompetenz-Frustration auf die Haelfte reduziert (Prompt 4 Punkt 3):
+            // Beduerfnis und Praegung massen sonst zirkulaer dasselbe.
+            autonomie:        0.25 * Math.max(0, n.kompetenz.frustration - 50)    + 0.3 * Math.max(0, 50 - t.stabilitaet),
             grenzen:          0.4 * Math.max(0, 50 - t.gewissenhaftigkeit),
             fremdbezogenheit: 0.4 * Math.max(0, t.vertraeglichkeit - 50)          + 0.3 * Math.max(0, n.autonomie.frustration - 50),
             wachsamkeit:      0.4 * Math.max(0, t.gewissenhaftigkeit - 50)        + 0.3 * Math.max(0, 50 - t.stabilitaet),
@@ -91,6 +93,7 @@ const LayersV2 = (() => {
             meaning: raw.meaning,
             focusValue,
             focusBelief,
+            alltag: raw.alltag || {},
             meta: raw.meta,
             history,
         };

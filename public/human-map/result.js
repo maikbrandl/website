@@ -242,13 +242,14 @@ const ResultV2 = (() => {
         </div>`;
     }
 
-    function frictionPanelHtml(f, i, focus, transform) {
+    function frictionPanelHtml(f, i, focus, transform, alltagOverride) {
         const bandLabel = ContentV2.LEVERAGE_BAND[f.leverageBand] || ContentV2.LEVERAGE_BAND.mittel;
         const bars = ['W', 'B', 'V'].map(k => componentBar(k, f.components[k])).join('');
+        const ov = alltagOverride || {};
         const tiles = [
-            { k: 'Auslöser', v: f.trigger },
+            { k: 'Auslöser', v: ov.trigger || f.trigger },
             { k: 'Gedanke', v: f.thought },
-            { k: 'Verhalten', v: f.behavior },
+            { k: 'Verhalten', v: ov.behavior || f.behavior },
             { k: 'Kurz gewonnen', v: f.gain },
             { k: 'Lang bezahlt', v: f.cost },
         ].map(t => `<div class="rv-tile"><span class="rv-tile__key">${esc(t.k)}</span><p class="rv-tile__val">${esc(t.v)}</p></div>`).join('');
@@ -271,13 +272,14 @@ const ResultV2 = (() => {
         </div>`;
     }
 
-    function reibungenHtml(profile, transform) {
+    function reibungenHtml(profile, transform, alltag) {
         if (!profile.frictions || !profile.frictions.length) return '';
         const top = profile.frictions.slice(0, 3);
         const focus = profile.focus;
+        const frictionText = (alltag && alltag.frictionText) || {};
         const tabs = top.map((f, i) => `<button type="button" class="rv-tab${i === 0 ? ' is-active' : ''}"
             data-tab-target="rv-fr-${i}" role="tab" aria-selected="${i === 0}">${esc(f.label)}</button>`).join('');
-        const panels = top.map((f, i) => frictionPanelHtml(f, i, focus, transform)).join('');
+        const panels = top.map((f, i) => frictionPanelHtml(f, i, focus, transform, frictionText[f.id])).join('');
         return `<section class="rv-section" id="reibungen">
             <h2 class="rv-section__title">Wo es reibt</h2>
             <p class="rv-section__sub">Die Stellen, an denen dein Wollen und dein Gewordensein aneinandergeraten.</p>
@@ -519,7 +521,7 @@ const ResultV2 = (() => {
         parts.push(strengthsHtml(rules.strengths));
         parts.push(musterHtml(rules.constellations));
         parts.push(beduerfnisseHtml(profile));
-        parts.push(reibungenHtml(profile, transform));
+        parts.push(reibungenHtml(profile, transform, rules.alltag));
         parts.push(wegHtml(transform, focus));
         parts.push(situationenHtml(rules.situations));
 

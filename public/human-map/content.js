@@ -180,9 +180,80 @@ const ContentV2 = (() => {
             obstacle:'Die innere Stimme, die jeden Makel sofort abstraft.',
             plan:    'Wenn ich etwas perfektionieren will, dann lasse ich es bewusst gut genug und höre auf.',
         },
+
+        // ── Transformationswege für Reibungen ohne zugrunde liegende Prägung.
+        // Hier gibt es keinen Glaubenssatz, der Schritt "Finden" nutzt stattdessen die origin
+        // der jeweiligen Reibung (siehe InsightsV2.buildTransformation).
+        antrieb_ohne_richtung: {
+            find: [
+                'Wofür genau setzt du gerade deine Energie ein?',
+                'Was würde sich lohnen müssen, damit sich der Einsatz richtig anfühlt?',
+            ],
+            counter: 'Ich darf mir eine Richtung suchen, auch wenn sie noch nicht feststeht.',
+            wish:    'Diese Woche einen Satz aufschreiben, wofür sich mein Einsatz gerade lohnen soll.',
+            outcome: 'Ein klarerer Kompass statt bloßer Betriebsamkeit.',
+            obstacle:'Der Sog, einfach weiterzumachen, ohne innezuhalten und zu fragen, wofür.',
+            plan:    'Wenn ich merke, dass ich nur beschäftigt bin, dann halte ich kurz inne und frage mich, wofür das gerade ist.',
+        },
+        freiheit_vs_sicherheit: {
+            find: [
+                'Welche Entscheidung schiebst du gerade vor dir her, weil beides zieht?',
+                'Was würdest du bewusst loslassen, wenn du dich für eine Seite entscheidest?',
+            ],
+            counter: 'Ich darf mich entscheiden, auch wenn ich dabei etwas aufgebe.',
+            wish:    'Eine anstehende Entscheidung diese Woche bewusst treffen, statt in der Schwebe zu bleiben.',
+            outcome: 'Die Erleichterung, nicht mehr zwischen zwei Seiten zu hängen.',
+            obstacle:'Das Gefühl, mit jeder Wahl den anderen Teil von mir zu verraten.',
+            plan:    'Wenn ich merke, dass ich wieder abwäge, dann benenne ich laut, was mir diesmal wichtiger ist, und entscheide danach.',
+        },
+        neugier_vs_kontrolle: {
+            find: [
+                'Was befürchtest du, passiert, wenn du etwas ungeplant lässt?',
+                'Wann hat dir Kontrolle zuletzt wirklich geholfen, und wann nur beruhigt?',
+            ],
+            counter: 'Ich darf auch mal ungeplant etwas zulassen, ohne dass etwas Schlimmes passiert.',
+            wish:    'Diese Woche eine kleine Sache bewusst ungeplant lassen.',
+            outcome: 'Die Erfahrung, dass Spontaneität tragfähig ist und nicht ins Chaos führt.',
+            obstacle:'Der Reflex, sofort wieder einen Plan oder eine Ordnung darüberzulegen.',
+            plan:    'Wenn ich den Drang spüre, etwas sofort zu planen, dann warte ich bewusst einen Moment ab.',
+        },
+        anpassung_vs_freiheit: {
+            find: [
+                'Wo genau passt du dich gerade an, obwohl du anders denkst?',
+                'Was befürchtest du, passiert, wenn du sichtbar abweichst?',
+            ],
+            counter: 'Ich darf anders sein und gehöre trotzdem dazu.',
+            wish:    'In einer kleinen Sache diese Woche offen meine eigene Meinung vertreten.',
+            outcome: 'Die Erfahrung, dass Abweichen nicht automatisch Ausschluss bedeutet.',
+            obstacle:'Die Sorge, mit einer eigenen Meinung anzuecken und nicht mehr dazuzugehören.',
+            plan:    'Wenn ich merke, dass ich mich nur anpasse, dann sage ich stattdessen einen Satz, der wirklich meiner ist.',
+        },
+        rueckzug_trotz_sehnsucht: {
+            find: [
+                'Was passiert kurz bevor du dich zurückziehst, obwohl du Nähe willst?',
+                'Was würde es kosten, stattdessen den ersten Schritt zu machen?',
+            ],
+            counter: 'Ich darf den ersten Schritt machen, auch wenn Kontakt gerade anstrengend wirkt.',
+            wish:    'Diese Woche aktiv eine Person ansprechen, statt zu warten, bis sie sich meldet.',
+            outcome: 'Ein Moment echter Verbindung statt des vertrauten Rückzugs.',
+            obstacle:'Die Erschöpfung, die Kontakt gerade anstrengend statt nährend erscheinen lässt.',
+            plan:    'Wenn ich den Impuls spüre, mich zurückzuziehen, dann schreibe ich stattdessen einer Person eine kurze Nachricht.',
+        },
     };
 
-    return { TRAIT_TEXT, VALUE_TEXT, NEED_TEXT, MEANING_TEXT, SCHEMA_BELIEFS, TRANSFORM };
+    // ── Hebel-Bänder statt roher Zahl, plus Labels für die drei Komponentenbalken ──
+    const LEVERAGE_BAND = {
+        hoch:    'Hoher Hebel',
+        mittel:  'Mittlerer Hebel',
+        niedrig: 'Niedriger Hebel',
+    };
+    const LEVERAGE_COMPONENT_LABELS = {
+        W: 'Wie wichtig es dir ist',
+        B: 'Wie stark es blockiert',
+        V: 'Wie leicht es sich ändern lässt',
+    };
+
+    return { TRAIT_TEXT, VALUE_TEXT, NEED_TEXT, MEANING_TEXT, SCHEMA_BELIEFS, TRANSFORM, LEVERAGE_BAND, LEVERAGE_COMPONENT_LABELS };
 })();
 
 if (typeof module !== 'undefined' && module.exports) module.exports = { ContentV2 };

@@ -131,7 +131,7 @@ const InsightsV2 = (() => {
         {
             id: 'selbstbestimmung_vs_fremdbezogenheit', type: 'luecke',
             label: 'Frei sein wollen, aber es allen recht machen',
-            value: 'selbstbestimmung', belief: 'fremdbezogenheit', changeable: 'belief',
+            value: 'selbstbestimmung', belief: 'fremdbezogenheit', changeable: 'belief', transform: 'fremdbezogenheit',
             when: p => valScore(p, 'selbstbestimmung') >= 60 && belAct(p, 'fremdbezogenheit') >= 50,
             blockade: p => (belAct(p, 'fremdbezogenheit') + needFrust(p, 'autonomie')) / 2,
             origin: 'Du willst frei entscheiden, hast aber früh gelernt, dass du dir Wert durch Geben und Gefallen verdienst.',
@@ -141,7 +141,7 @@ const InsightsV2 = (() => {
         {
             id: 'verbundenheit_vs_abgetrenntheit', type: 'schleife',
             label: 'Nähe suchen, aber den Schutz nicht loslassen',
-            need: 'verbundenheit', belief: 'abgetrenntheit', changeable: 'belief',
+            need: 'verbundenheit', belief: 'abgetrenntheit', changeable: 'belief', transform: 'abgetrenntheit',
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'abgetrenntheit') >= 50,
             blockade: p => (needFrust(p, 'verbundenheit') + belAct(p, 'abgetrenntheit')) / 2,
             origin: 'Du sehnst dich nach echter Nähe und hast zugleich gelernt, dass Sichzeigen unsicher ist.',
@@ -151,7 +151,7 @@ const InsightsV2 = (() => {
         {
             id: 'kompetenz_vs_selbstzweifel', type: 'schleife',
             label: 'Etwas können wollen, sich aber nichts zutrauen',
-            need: 'kompetenz', belief: 'autonomie', changeable: 'belief',
+            need: 'kompetenz', belief: 'autonomie', changeable: 'belief', transform: 'autonomie',
             when: p => needFrust(p, 'kompetenz') >= 55 && belAct(p, 'autonomie') >= 50,
             blockade: p => (needFrust(p, 'kompetenz') + belAct(p, 'autonomie')) / 2,
             origin: 'Du willst dich wirksam und fähig fühlen, trägst aber die alte Überzeugung, allein nicht zu genügen.',
@@ -161,7 +161,7 @@ const InsightsV2 = (() => {
         {
             id: 'leistung_vs_perfektionismus', type: 'schleife',
             label: 'Leisten wollen, aber nie genug sein dürfen',
-            value: 'leistung', belief: 'wachsamkeit', changeable: 'belief',
+            value: 'leistung', belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
             when: p => valScore(p, 'leistung') >= 60 && belAct(p, 'wachsamkeit') >= 50,
             blockade: p => (belAct(p, 'wachsamkeit') + needFrust(p, 'kompetenz')) / 2,
             origin: 'Leistung ist dir wichtig, und du hast gelernt, dass nur Perfektion und Stärke zählen.',
@@ -171,7 +171,7 @@ const InsightsV2 = (() => {
         {
             id: 'ueberforderung_durch_geben', type: 'schleife',
             label: 'Für alle sorgen, bis nichts mehr übrig ist',
-            need: 'autonomie', belief: 'fremdbezogenheit', changeable: 'behavior',
+            need: 'autonomie', belief: 'fremdbezogenheit', changeable: 'behavior', transform: 'fremdbezogenheit',
             when: p => belAct(p, 'fremdbezogenheit') >= 55 && needFrust(p, 'autonomie') >= 55,
             blockade: p => (belAct(p, 'fremdbezogenheit') + needFrust(p, 'autonomie')) / 2,
             origin: 'Du gibst viel und gern, weil dein Wert sich lange daran bemessen hat, gebraucht zu werden.',
@@ -181,7 +181,7 @@ const InsightsV2 = (() => {
         {
             id: 'antrieb_ohne_richtung', type: 'luecke',
             label: 'Viel wollen, aber keine klare Richtung spüren',
-            value: 'leistung', belief: null, changeable: 'behavior',
+            value: 'leistung', belief: null, changeable: 'behavior', transform: 'antrieb_ohne_richtung',
             when: p => (valScore(p, 'leistung') >= 60 || valScore(p, 'selbstbestimmung') >= 60) && p.meaning.purpose <= 45,
             blockade: p => (100 - p.meaning.purpose),
             origin: 'Du hast Energie und Anspruch, aber gerade keine Richtung, die sich wirklich lohnt.',
@@ -191,7 +191,7 @@ const InsightsV2 = (() => {
         {
             id: 'nicht_bedeutsam', type: 'luecke',
             label: 'Dazugehören wollen, sich aber unwichtig fühlen',
-            need: 'verbundenheit', belief: 'abgetrenntheit', changeable: 'belief',
+            need: 'verbundenheit', belief: 'abgetrenntheit', changeable: 'belief', transform: 'abgetrenntheit',
             when: p => p.meaning.bedeutsamkeit <= 45 && belAct(p, 'abgetrenntheit') >= 50,
             blockade: p => (100 - p.meaning.bedeutsamkeit + belAct(p, 'abgetrenntheit')) / 2,
             origin: 'Du willst spüren, dass dein Dasein zählt, hältst aber innerlich Abstand, um nicht enttäuscht zu werden.',
@@ -201,7 +201,7 @@ const InsightsV2 = (() => {
         {
             id: 'genuss_vs_haerte', type: 'luecke',
             label: 'Genießen wollen, sich aber keine Leichtigkeit erlauben',
-            value: 'hedonismus', belief: 'wachsamkeit', changeable: 'belief',
+            value: 'hedonismus', belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
             when: p => valScore(p, 'hedonismus') >= 55 && belAct(p, 'wachsamkeit') >= 55,
             blockade: p => belAct(p, 'wachsamkeit'),
             origin: 'Du möchtest das Leben genießen, hast aber gelernt, dass Leichtigkeit sich wie Nachlässigkeit anfühlt.',
@@ -211,7 +211,7 @@ const InsightsV2 = (() => {
         {
             id: 'freiheit_vs_sicherheit', type: 'luecke',
             label: 'Freiheit und Sicherheit ziehen dich auseinander',
-            value: 'selbstbestimmung', belief: null, changeable: 'value',
+            value: 'selbstbestimmung', belief: null, changeable: 'value', transform: 'freiheit_vs_sicherheit',
             when: p => valScore(p, 'selbstbestimmung') >= 60 && valScore(p, 'sicherheit') >= 60,
             blockade: p => Math.min(valScore(p, 'selbstbestimmung'), valScore(p, 'sicherheit')),
             origin: 'Zwei starke Werte in dir wollen Gegensätzliches: Weite und Halt zugleich.',
@@ -221,7 +221,7 @@ const InsightsV2 = (() => {
         {
             id: 'neugier_vs_kontrolle', type: 'luecke',
             label: 'Neues wollen, aber die Kontrolle nicht loslassen',
-            value: 'stimulation', belief: null, changeable: 'trait',
+            value: 'stimulation', belief: null, changeable: 'trait', transform: 'neugier_vs_kontrolle',
             when: p => valScore(p, 'stimulation') >= 60 && p.traits.gewissenhaftigkeit >= 65,
             blockade: p => Math.min(valScore(p, 'stimulation'), p.traits.gewissenhaftigkeit),
             origin: 'Ein Teil von dir sucht Abwechslung, ein anderer hält fest an Plan und Ordnung.',
@@ -231,7 +231,7 @@ const InsightsV2 = (() => {
         {
             id: 'rueckzug_trotz_sehnsucht', type: 'schleife',
             label: 'Nähe wollen, sich aber zurückziehen',
-            need: 'verbundenheit', belief: null, changeable: 'behavior',
+            need: 'verbundenheit', belief: null, changeable: 'behavior', transform: 'rueckzug_trotz_sehnsucht',
             when: p => needFrust(p, 'verbundenheit') >= 55 && p.traits.extraversion <= 40,
             blockade: p => (needFrust(p, 'verbundenheit') + (100 - p.traits.extraversion)) / 2,
             origin: 'Du sehnst dich nach Verbindung, ziehst dich aber zurück, wenn Kontakt anstrengend wird.',
@@ -241,7 +241,7 @@ const InsightsV2 = (() => {
         {
             id: 'ziel_vs_vermeidung', type: 'schleife',
             label: 'Ziele haben, aber dem Unbequemen ausweichen',
-            value: 'leistung', belief: 'grenzen', changeable: 'behavior',
+            value: 'leistung', belief: 'grenzen', changeable: 'behavior', transform: 'grenzen',
             when: p => valScore(p, 'leistung') >= 55 && belAct(p, 'grenzen') >= 50,
             blockade: p => belAct(p, 'grenzen'),
             origin: 'Du hast Ziele, aber einen tiefen Reflex, Unbequemes und Frust zu umgehen.',
@@ -251,7 +251,7 @@ const InsightsV2 = (() => {
         {
             id: 'anpassung_vs_freiheit', type: 'luecke',
             label: 'Dazugehören und frei sein zugleich wollen',
-            value: 'selbstbestimmung', belief: null, changeable: 'value',
+            value: 'selbstbestimmung', belief: null, changeable: 'value', transform: 'anpassung_vs_freiheit',
             when: p => valScore(p, 'selbstbestimmung') >= 60 && valScore(p, 'konformitaet') >= 55,
             blockade: p => Math.min(valScore(p, 'selbstbestimmung'), valScore(p, 'konformitaet')),
             origin: 'Du willst deinen eigenen Weg gehen und gleichzeitig dazugehören und nicht anecken.',
@@ -261,12 +261,52 @@ const InsightsV2 = (() => {
         {
             id: 'unruhe_schleife', type: 'schleife',
             label: 'Nach außen stark, nach innen in Aufruhr',
-            need: 'kompetenz', belief: 'wachsamkeit', changeable: 'belief',
+            need: 'kompetenz', belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
             when: p => p.traits.stabilitaet <= 40 && belAct(p, 'wachsamkeit') >= 50,
             blockade: p => ((100 - p.traits.stabilitaet) + belAct(p, 'wachsamkeit')) / 2,
             origin: 'Du hältst nach außen die Fassung und darfst dir innerlich keine Schwäche erlauben.',
             cost:   'Weil du nie abschalten darfst, staut sich die Anspannung, die du eigentlich loswerden willst.',
             break:  'Erlaube dir bewusst einen unperfekten, ruhigen Moment und teile ihn niemandem als Leistung mit.',
+        },
+        {
+            id: 'einfluss_vs_fremdbezogenheit', type: 'luecke',
+            label: 'Gestalten wollen, aber niemanden enttäuschen dürfen',
+            value: 'macht', belief: 'fremdbezogenheit', changeable: 'belief', transform: 'fremdbezogenheit',
+            when: p => valScore(p, 'macht') >= 60 && belAct(p, 'fremdbezogenheit') >= 50,
+            blockade: p => (belAct(p, 'fremdbezogenheit') + needFrust(p, 'autonomie')) / 2,
+            origin: 'Du willst gestalten und Einfluss nehmen, hast aber gelernt, dass du dir Wert nur durch Gefallen verdienst.',
+            cost:   'Aus Sorge, jemanden zu enttäuschen, hältst du dich zurück und überlässt anderen das Feld, das eigentlich deines wäre.',
+            break:  'Sprich diese Woche einmal offen aus, was du gestalten willst, bevor du dich zurücknimmst.',
+        },
+        {
+            id: 'klartext_vs_fremdbezogenheit', type: 'schleife',
+            label: 'Klartext reden, danach kleiner werden',
+            belief: 'fremdbezogenheit', changeable: 'behavior', transform: 'fremdbezogenheit',
+            when: p => p.traits.vertraeglichkeit <= 40 && belAct(p, 'fremdbezogenheit') >= 50,
+            blockade: p => belAct(p, 'fremdbezogenheit'),
+            origin: 'Du sagst klar, was ist, und machst dich danach klein, damit niemand enttäuscht ist.',
+            cost:   'Der klare Satz ist kaum draußen, da nimmst du ihn innerlich schon wieder zurück und entschuldigst dich dafür.',
+            break:  'Lass deinen nächsten klaren Satz diese Woche einmal unentschuldigt stehen.',
+        },
+        {
+            id: 'einfluss_vs_selbstzweifel', type: 'schleife',
+            label: 'Einfluss wollen, aber auf Erlaubnis warten',
+            value: 'macht', belief: 'autonomie', changeable: 'belief', transform: 'autonomie',
+            when: p => valScore(p, 'macht') >= 60 && belAct(p, 'autonomie') >= 50,
+            blockade: p => belAct(p, 'autonomie'),
+            origin: 'Du willst Einfluss und Gestaltung, trägst aber die alte Überzeugung, dass du allein nicht genügst.',
+            cost:   'Du wartest auf eine Erlaubnis, die nie laut genug kommt, und lässt Gelegenheiten für Einfluss ungenutzt.',
+            break:  'Triff diese Woche eine gestaltende Entscheidung, ohne dir vorher Rückversicherung zu holen.',
+        },
+        {
+            id: 'naehe_vs_staerke', type: 'schleife',
+            label: 'Nähe wollen, aber keine Schwäche zeigen dürfen',
+            need: 'verbundenheit', belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
+            when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'wachsamkeit') >= 50,
+            blockade: p => (needFrust(p, 'verbundenheit') + belAct(p, 'wachsamkeit')) / 2,
+            origin: 'Du sehnst dich nach Nähe, hast aber gelernt, dass du dafür stark und ohne Makel sein musst.',
+            cost:   'Weil du keine Schwäche zeigen darfst, bleibt die Nähe oberflächlich, genau da, wo echte Verbindung entstehen könnte.',
+            break:  'Zeige einer vertrauten Person diese Woche einmal, womit du gerade wirklich kämpfst.',
         },
     ];
 
@@ -315,7 +355,9 @@ const InsightsV2 = (() => {
         const scored = active.map(f => {
             const W = f.value ? clamp01(valScore(profile, f.value) / 100) : 0.8; // needs are universal
             const B = clamp01(f.blockade(profile) / 100);
-            const Z = f.belief ? domainCounts[f.belief] / maxShare : 0.5;
+            // Reibungen ohne Prägung teilen ihre Ursache mit niemandem, daher Z mindestens 0.6
+            // statt pauschal 0.5, sonst landen sie systematisch unten im Hebel.
+            const Z = f.belief ? domainCounts[f.belief] / maxShare : Math.max(0.6, 1 / maxShare);
             const Vv = V_WEIGHT[f.changeable] || 0.5;
             // Vorsicht: dampen belief-heavy, clinically sensitive frictions when distress stacks.
             const heavy = f.belief === 'abgetrenntheit' || f.belief === 'autonomie';
@@ -324,12 +366,23 @@ const InsightsV2 = (() => {
             return {
                 id: f.id, type: f.type, label: f.label,
                 value: f.value || null, need: f.need || null, belief: f.belief || null,
+                transform: f.transform || f.belief || null,
                 changeable: f.changeable,
                 origin: f.origin, cost: f.cost, break: f.break,
                 leverage,
                 components: { W: +W.toFixed(2), B: +B.toFixed(2), Z: +Z.toFixed(2), V: Vv, vorsicht: +vorsicht.toFixed(2) },
             };
         }).sort((a, b) => b.leverage - a.leverage);
+
+        // Hebel als Band statt roher Zahl: oberstes Drittel nach Rang oder leverage >= 35 -> hoch,
+        // unterstes Drittel -> niedrig, Rest -> mittel.
+        const total = scored.length;
+        const thirds = Math.max(1, Math.ceil(total / 3));
+        scored.forEach((f, rank) => {
+            if (rank < thirds || f.leverage >= 35) f.leverageBand = 'hoch';
+            else if (rank >= total - thirds) f.leverageBand = 'niedrig';
+            else f.leverageBand = 'mittel';
+        });
 
         return { active: scored, focus: scored[0] || null, safety: safetyCheck(profile) };
     }
@@ -363,28 +416,29 @@ const InsightsV2 = (() => {
     //  §8  Transformation engine — the guided change path
     // ═══════════════════════════════════════════════════════════════
     /**
-     * Build the 5-step transformation path for the profile's focus belief:
+     * Build the 5-step transformation path for the profile's focus (belief-based or not):
      * finden → formulieren → widerlegen (WOOP) → verankern → wiederholen.
-     * Returns null for a balanced profile (no active belief-based focus).
+     * Returns null when there is no active focus at all (balanced profile).
      */
     function buildTransformation(profile) {
         const focus = profile.focus;
-        const domain = focus && focus.belief;
-        const t = domain && ContentV2.TRANSFORM[domain];
+        const key = focus && focus.transform;
+        const t = key && ContentV2.TRANSFORM[key];
         if (!t) return null;
 
-        const belief = ContentV2.SCHEMA_BELIEFS[domain];
+        const domain = focus.belief;
+        const belief = domain ? ContentV2.SCHEMA_BELIEFS[domain] : null;
         const topValue = profile.values[0];
 
         return {
-            belief:    belief.text,
+            belief:    belief ? belief.text : null,
             domain,
             steps: [
                 {
                     key: 'finden', n: 1, title: 'Finden',
-                    lead: 'Der Glaubenssatz hinter deinem Fokus:',
-                    beliefText: belief.text,
-                    origin: belief.origin,
+                    lead: belief ? 'Der Glaubenssatz hinter deinem Fokus:' : 'Was hinter deinem Fokus steckt:',
+                    beliefText: belief ? belief.text : null,
+                    origin: belief ? belief.origin : focus.origin,
                     questions: t.find,
                 },
                 {

@@ -109,15 +109,28 @@
         }
 
         // Same synthetic persona as test.html — fallback when no real answers exist yet.
+        // ?persona=2 switches to the second test profile used while building the insights engine.
         function syntheticAnswers() {
-            const targets = {
-                bigfive: { O:80, C:50, E:45, A:75, N:65 },
-                values: { selbstbestimmung:90, benevolenz:80, stimulation:70, universalismus:65,
-                          hedonismus:55, sicherheit:50, leistung:55, konformitaet:45, tradition:35, macht:40 },
-                needs:  { autonomie:{sat:45,frust:60}, kompetenz:{sat:55,frust:50}, verbundenheit:{sat:40,frust:65} },
-                meaning:{ kohaerenz:45, purpose:50, bedeutsamkeit:40 },
-                schema: { abgetrenntheit:60, autonomie:45, grenzen:35, fremdbezogenheit:72, wachsamkeit:50 },
+            const PERSONAS = {
+                1: {
+                    bigfive: { O:80, C:50, E:45, A:75, N:65 },
+                    values: { selbstbestimmung:90, benevolenz:80, stimulation:70, universalismus:65,
+                              hedonismus:55, sicherheit:50, leistung:55, konformitaet:45, tradition:35, macht:40 },
+                    needs:  { autonomie:{sat:45,frust:60}, kompetenz:{sat:55,frust:50}, verbundenheit:{sat:40,frust:65} },
+                    meaning:{ kohaerenz:45, purpose:50, bedeutsamkeit:40 },
+                    schema: { abgetrenntheit:60, autonomie:45, grenzen:35, fremdbezogenheit:72, wachsamkeit:50 },
+                },
+                2: {
+                    bigfive: { O:42, C:25, E:29, A:21, N:42 },
+                    values: { macht:100, sicherheit:83, stimulation:67, konformitaet:67, benevolenz:67,
+                              hedonismus:50, universalismus:50, leistung:33, tradition:33, selbstbestimmung:17 },
+                    needs:  { autonomie:{sat:17,frust:42}, kompetenz:{sat:42,frust:33}, verbundenheit:{sat:42,frust:75} },
+                    meaning:{ kohaerenz:33, purpose:83, bedeutsamkeit:42 },
+                    schema: { abgetrenntheit:55, autonomie:60, grenzen:45, fremdbezogenheit:70, wachsamkeit:58 },
+                },
             };
+            const params = new URLSearchParams(window.location.search);
+            const targets = PERSONAS[params.get('persona')] || PERSONAS[1];
             function targetFor(item) {
                 switch (item.scale) {
                     case 'bigfive': return targets.bigfive[item.key];

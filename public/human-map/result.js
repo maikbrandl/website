@@ -139,27 +139,37 @@ const ResultV2 = (() => {
     }
 
     // ── frictions ──
+    function componentBar(key, value) {
+        const label = ContentV2.LEVERAGE_COMPONENT_LABELS[key];
+        const pct = Math.round(Math.max(0, Math.min(1, value)) * 100);
+        return `<div class="rv-lever-bar">
+            <span class="rv-lever-bar__label">${esc(label)}</span>
+            <span class="rv-lever-bar__track"><span class="rv-lever-bar__fill" style="width:${pct}%"></span></span>
+        </div>`;
+    }
+
     function frictionHtml(f, isFocus) {
         const tag = f.type === 'schleife' ? 'Schleife' : 'Lücke';
+        const bandLabel = ContentV2.LEVERAGE_BAND[f.leverageBand] || ContentV2.LEVERAGE_BAND.mittel;
+        const bars = ['W', 'B', 'V'].map(k => componentBar(k, f.components[k])).join('');
         return `<div class="rv-friction">
             <span class="rv-friction__tag">${esc(tag)}</span>
             <div class="rv-friction__head">
                 <span class="rv-friction__label">${esc(f.label)}</span>
-                <span class="rv-friction__lever">
-                    <span class="rv-friction__lever-num">${f.leverage}</span>
-                    <span class="rv-friction__lever-cap">Hebel</span>
-                </span>
+                <span class="rv-friction__lever rv-friction__lever--${esc(f.leverageBand)}">${esc(bandLabel)}</span>
             </div>
             <p class="rv-friction__origin">${esc(f.origin)}</p>
             <p class="rv-friction__cost">${esc(f.cost)}</p>
             <p class="rv-friction__break">${esc(f.break)}</p>
+            <div class="rv-lever-bars">${bars}</div>
         </div>`;
     }
 
     // ── transformation ──
     function stepBody(step) {
         if (step.key === 'finden') {
-            return `<blockquote class="rv-quote">„${esc(step.beliefText)}“</blockquote>
+            const quote = step.beliefText ? `<blockquote class="rv-quote">„${esc(step.beliefText)}“</blockquote>` : '';
+            return `${quote}
                 <div class="rv-step__body">${esc(step.origin)}</div>
                 <ul class="rv-qlist">${step.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>`;
         }

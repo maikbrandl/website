@@ -152,7 +152,7 @@ const InsightsV2 = (() => {
             break:  'Zeige einer vertrauten Person eine kleine, echte Verletzlichkeit und beobachte, was wirklich passiert.',
             trigger: 'Eine Situation wird emotional eng oder verletzlich.', // ENTWURF
             behavior: 'Du hältst einen Teil von dir zurück oder ziehst dich leicht zurück.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig sicherer und ungefährdeter.', // ENTWURF
+            gain: 'Der Abstand gibt dir kurzfristig ein Gefühl von Sicherheit.', // ENTWURF
         },
         {
             id: 'kompetenz_vs_selbstzweifel', type: 'schleife',
@@ -231,7 +231,7 @@ const InsightsV2 = (() => {
             break:  'Gönn dir diese Woche bewusst eine kleine Freude, ohne sie dir vorher verdient haben zu müssen.',
             trigger: 'Eine Gelegenheit zur Freude oder Pause taucht auf.', // ENTWURF
             behavior: 'Du schiebst sie auf, bis „alles erledigt ist“.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig produktiv und pflichtbewusst.', // ENTWURF
+            gain: 'Das Aufschieben fühlt sich kurzfristig produktiv und pflichtbewusst an.', // ENTWURF
         },
         {
             id: 'freiheit_vs_sicherheit', type: 'luecke',
@@ -259,7 +259,7 @@ const InsightsV2 = (() => {
             trigger: 'Etwas Ungeplantes oder Spontanes bietet sich an.', // ENTWURF
             thought: 'Das lässt sich nicht kontrollieren, also ist es riskant.', // ENTWURF
             behavior: 'Du legst doch wieder einen Plan oder eine Struktur darüber.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig sicherer und im Griff.', // ENTWURF
+            gain: 'Die Kontrolle gibt dir kurzfristig ein sicheres Gefühl.', // ENTWURF
         },
         {
             id: 'rueckzug_trotz_sehnsucht', type: 'schleife',
@@ -300,7 +300,7 @@ const InsightsV2 = (() => {
             trigger: 'Deine Meinung weicht von der der Gruppe ab.', // ENTWURF
             thought: 'Wenn ich abweiche, falle ich unangenehm auf.', // ENTWURF
             behavior: 'Du schließt dich der Mehrheitsmeinung an, statt deine eigene zu äußern.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig zugehörig und sicher.', // ENTWURF
+            gain: 'Die Zustimmung fühlt sich kurzfristig zugehörig und sicher an.', // ENTWURF
         },
         {
             id: 'unruhe_schleife', type: 'schleife',
@@ -377,7 +377,7 @@ const InsightsV2 = (() => {
             belief: 'grenzen', changeable: 'behavior', transform: 'grenzen',
             when: p => belAct(p, 'grenzen') >= 50,
             blockade: p => belAct(p, 'grenzen'),
-            origin: 'Ein Teil von dir will vorankommen, und ein Reflex lässt dich vor Unbequemem und Frust lieber ausweichen.', // ENTWURF
+            origin: 'Du willst eigentlich vorankommen, und ein Reflex lässt dich vor Unbequemem und Frust lieber ausweichen.', // ENTWURF
             cost:   'Das Ausweichen verschafft kurz Erleichterung und hält dich langfristig von dem ab, was dir eigentlich wichtig wäre.', // ENTWURF
             break:  'Halte heute einmal bewusst eine unbequeme Sache zu Ende aus, statt ihr auszuweichen.', // ENTWURF
             trigger: 'Eine Aufgabe wird anstrengend oder unbequem.', // ENTWURF
@@ -393,7 +393,7 @@ const InsightsV2 = (() => {
             belief: 'autonomie', changeable: 'belief', transform: 'autonomie',
             when: p => belAct(p, 'autonomie') >= 50,
             blockade: p => belAct(p, 'autonomie'),
-            origin: 'Ein Teil von dir will einfach weitermachen, und ein alter Satz sagt dir dabei immer wieder, dass du allein nicht genügst.', // ENTWURF
+            origin: 'Weitermachen willst du eigentlich einfach, und ein alter Satz sagt dir dabei immer wieder, dass du allein nicht genügst.', // ENTWURF
             cost:   'Der Zweifel bremst dich genau in den Momenten, in denen du dir eigentlich vertrauen könntest.', // ENTWURF
             break:  'Bring heute eine kleine Sache bewusst allein zu Ende, ohne dir vorher Rückversicherung zu holen.', // ENTWURF
             trigger: 'Eine Aufgabe liegt allein bei dir.', // ENTWURF
@@ -409,12 +409,12 @@ const InsightsV2 = (() => {
             belief: 'abgetrenntheit', changeable: 'belief', transform: 'abgetrenntheit',
             when: p => belAct(p, 'abgetrenntheit') >= 50,
             blockade: p => belAct(p, 'abgetrenntheit'),
-            origin: 'Ein Teil von dir würde sich gern zeigen, und ein alter Satz warnt dich davor, dass genau das dich verletzlich macht.', // ENTWURF
+            origin: 'Du würdest dich gern zeigen, und ein alter Satz warnt dich davor, dass genau das dich verletzlich macht.', // ENTWURF
             cost:   'Der Schutzabstand hält dich sicher und gleichzeitig auf Distanz zu dem, was du dir insgeheim wünschst.', // ENTWURF
             break:  'Zeige einer vertrauten Person heute eine kleine, echte Verletzlichkeit.', // ENTWURF
             trigger: 'Eine Situation lädt dazu ein, dich wirklich zu zeigen.', // ENTWURF
             behavior: 'Du hältst einen Teil von dir zurück oder machst eine Bemerkung, die Nähe abwehrt.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig sicherer und unverletzlich.', // ENTWURF
+            gain: 'Der Rückzug lässt dich kurzfristig sicherer und unverletzlich fühlen.', // ENTWURF
         },
         {
             // Abdeckungs-Check zeigte die Luecke auch bei fremdbezogenheit: alle fuenf
@@ -425,12 +425,12 @@ const InsightsV2 = (() => {
             belief: 'fremdbezogenheit', changeable: 'belief', transform: 'fremdbezogenheit',
             when: p => belAct(p, 'fremdbezogenheit') >= 50,
             blockade: p => belAct(p, 'fremdbezogenheit'),
-            origin: 'Ein Teil von dir hat eigene Wünsche, und ein alter Satz sagt dir, dass du dir Wert erst durch Geben verdienst.', // ENTWURF
+            origin: 'Eigene Wünsche hast du natürlich auch, und ein alter Satz sagt dir, dass du dir Wert erst durch Geben verdienst.', // ENTWURF
             cost:   'Du stellst die eigenen Wünsche so oft zurück, dass du selbst irgendwann nicht mehr genau weißt, was du eigentlich willst.', // ENTWURF
             break:  'Sprich heute einen eigenen Wunsch laut aus, bevor du fragst, was die anderen brauchen.', // ENTWURF
             trigger: 'Du merkst einen eigenen Wunsch, während jemand anderes etwas von dir braucht.', // ENTWURF
             behavior: 'Du schiebst den eigenen Wunsch beiseite und kümmerst dich zuerst um den anderen.', // ENTWURF
-            gain: 'Du fühlst dich kurzfristig gebraucht und im Recht.', // ENTWURF
+            gain: 'Das Kümmern fühlt sich kurzfristig gebraucht und richtig an.', // ENTWURF
         },
         {
             // Gleiche Luecke bei wachsamkeit: alle bestehenden Reibungen verlangen
@@ -441,7 +441,7 @@ const InsightsV2 = (() => {
             belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
             when: p => belAct(p, 'wachsamkeit') >= 50,
             blockade: p => belAct(p, 'wachsamkeit'),
-            origin: 'Ein Teil von dir würde gern einfach abschalten, und ein strenger innerer Maßstab lässt kaum eine ruhige Minute zu.', // ENTWURF
+            origin: 'Am liebsten würdest du einfach abschalten, und ein strenger innerer Maßstab lässt kaum eine ruhige Minute zu.', // ENTWURF
             cost:   'Die ständige Wachsamkeit kostet Kraft, die dir an anderer Stelle fehlt, auch wenn gerade nichts Konkretes ansteht.', // ENTWURF
             break:  'Leg dir heute bewusst zehn Minuten ohne Aufgabe ein und bleib dabei, auch wenn es sich falsch anfühlt.', // ENTWURF
             trigger: 'Ein Moment ohne Aufgabe oder Ablenkung entsteht.', // ENTWURF

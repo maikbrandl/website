@@ -460,7 +460,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'abgetrenntheit') >= 50,
             strength: p => (needFrust(p, 'verbundenheit') + belAct(p, 'abgetrenntheit')) / 2,
             title: 'Nähe suchen, Distanz halten', // ENTWURF
-            text: 'Du sehnst dich nach echter Nähe, und ein alter Satz warnt dich gleichzeitig davor, dich wirklich zu zeigen.', // ENTWURF
+            text: 'Echte Nähe zieht dich an, und ein alter Satz warnt dich gleichzeitig davor, dich wirklich zu zeigen.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseBelief(p, 'abgetrenntheit')],
             excludes: ['ko_verbundenheit_extraversion_abgetrenntheit'],
         },
@@ -469,7 +469,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'autonomie') >= 50,
             strength: p => (needFrust(p, 'verbundenheit') + belAct(p, 'autonomie')) / 2,
             title: 'Nähe suchen, sich zu wenig zutrauen', // ENTWURF
-            text: 'Du sehnst dich nach Verbindung, und gleichzeitig zweifelst du, ob du genug zu bieten hast, um sie zu halten.', // ENTWURF
+            text: 'Verbindung ist dir wichtig, und gleichzeitig zweifelst du, ob du genug zu bieten hast, um sie zu halten.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseBelief(p, 'autonomie')],
         },
         {
@@ -477,7 +477,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'grenzen') >= 50,
             strength: p => (needFrust(p, 'verbundenheit') + belAct(p, 'grenzen')) / 2,
             title: 'Nähe suchen, Reibung meiden', // ENTWURF
-            text: 'Du sehnst dich nach Nähe, und ein Reflex lässt dich unangenehme Gespräche eher meiden, die echte Nähe oft erst möglich machen.', // ENTWURF
+            text: 'Nähe bedeutet dir viel, und ein Reflex lässt dich unangenehme Gespräche eher meiden, die echte Nähe oft erst möglich machen.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseBelief(p, 'grenzen')],
         },
         {
@@ -485,7 +485,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'fremdbezogenheit') >= 50,
             strength: p => (needFrust(p, 'verbundenheit') + belAct(p, 'fremdbezogenheit')) / 2,
             title: 'Nähe über Nützlichkeit suchen', // ENTWURF
-            text: 'Du sehnst dich nach Nähe, und du hast gelernt, dir Zuwendung eher durch Geben und Funktionieren zu verdienen.', // ENTWURF
+            text: 'Die Sehnsucht nach Nähe ist bei dir groß, und du hast gelernt, dir Zuwendung eher durch Geben und Funktionieren zu verdienen.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseBelief(p, 'fremdbezogenheit')],
         },
         {
@@ -493,7 +493,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && belAct(p, 'wachsamkeit') >= 50,
             strength: p => (needFrust(p, 'verbundenheit') + belAct(p, 'wachsamkeit')) / 2,
             title: 'Nähe suchen, keine Schwäche zeigen', // ENTWURF
-            text: 'Du sehnst dich nach echter Nähe, und ein strenger Maßstab lässt dich dabei kaum eine Schwäche zeigen, aus der Nähe oft erst entsteht.', // ENTWURF
+            text: 'Nähe ist dir wichtig, und ein strenger Maßstab lässt dich dabei kaum eine Schwäche zeigen, aus der Nähe oft erst entsteht.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseBelief(p, 'wachsamkeit')],
         },
 
@@ -560,7 +560,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && trait(p, 'vertraeglichkeit') >= 65,
             strength: p => (needFrust(p, 'verbundenheit') + trait(p, 'vertraeglichkeit')) / 2,
             title: 'Nähe suchen durch Anpassung', // ENTWURF
-            text: 'Du sehnst dich nach echter Nähe, und du passt dich dafür oft so an, dass von dir selbst wenig sichtbar bleibt.', // ENTWURF
+            text: 'Du wünschst dir echte Nähe, und passt dich dafür oft so an, dass von dir selbst wenig sichtbar bleibt.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseTrait(p, 'vertraeglichkeit')],
         },
         {
@@ -568,7 +568,7 @@ const RulesV2 = (() => {
             when: p => needFrust(p, 'verbundenheit') >= 55 && trait(p, 'vertraeglichkeit') <= 35,
             strength: p => (needFrust(p, 'verbundenheit') + (100 - trait(p, 'vertraeglichkeit'))) / 2,
             title: 'Nähe suchen trotz Klartext', // ENTWURF
-            text: 'Du sehnst dich nach Nähe, und deine direkte Art hält manche Menschen auf eine Distanz, die du eigentlich nicht willst.', // ENTWURF
+            text: 'Verbindung fehlt dir manchmal, und deine direkte Art hält Menschen auf eine Distanz, die du eigentlich nicht willst.', // ENTWURF
             why: p => [clauseNeed(p, 'verbundenheit', 'frust'), clauseTrait(p, 'vertraeglichkeit')],
         },
         {

@@ -10,7 +10,8 @@
     "dev": "node scripts/copy-uploads-cache.mjs && astro dev",
     "build": "node scripts/copy-uploads-cache.mjs && astro build && node scripts/generate-redirects.mjs && pagefind --site dist",
     "preview": "astro preview",
-    "check:redirects": "node scripts/check-redirects.mjs"
+    "check:redirects": "node scripts/check-redirects.mjs",
+    "check:humanmap": "node scripts/check-humanmap.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

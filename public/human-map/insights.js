@@ -367,6 +367,87 @@ const InsightsV2 = (() => {
             behavior: 'Du lenkst ab oder zeigst dich stärker, als dir gerade zumute ist.', // ENTWURF
             gain: 'Du bleibst kurzfristig unangreifbar und kontrolliert.', // ENTWURF
         },
+        {
+            // Abdeckungs-Check (Prompt 5) zeigte: grenzen war bei ueber 50% der Profile
+            // die staerkste Praegung, erzeugte aber keine Reibung, weil ziel_vs_vermeidung
+            // zusaetzlich leistung >= 55 verlangt. Diese Reibung greift schon bei der
+            // Praegung allein, analog zu den Nachbesserungen aus Prompt 1.
+            id: 'komfort_vs_grenzen', type: 'schleife',
+            label: 'Vorankommen wollen, aber dem Unbequemen ausweichen',
+            belief: 'grenzen', changeable: 'behavior', transform: 'grenzen',
+            when: p => belAct(p, 'grenzen') >= 50,
+            blockade: p => belAct(p, 'grenzen'),
+            origin: 'Ein Teil von dir will vorankommen, und ein Reflex lässt dich vor Unbequemem und Frust lieber ausweichen.', // ENTWURF
+            cost:   'Das Ausweichen verschafft kurz Erleichterung und hält dich langfristig von dem ab, was dir eigentlich wichtig wäre.', // ENTWURF
+            break:  'Halte heute einmal bewusst eine unbequeme Sache zu Ende aus, statt ihr auszuweichen.', // ENTWURF
+            trigger: 'Eine Aufgabe wird anstrengend oder unbequem.', // ENTWURF
+            behavior: 'Du wendest dich ab oder schiebst sie auf, sobald es unangenehm wird.', // ENTWURF
+            gain: 'Die Anstrengung verschwindet kurzfristig, und du fühlst dich erleichtert.', // ENTWURF
+        },
+        {
+            // Gleiche Luecke bei autonomie: kompetenz_vs_selbstzweifel und
+            // einfluss_vs_selbstzweifel verlangen zusaetzlich hohe Kompetenz-Frustration
+            // oder hohen Einfluss-Wert. Diese Reibung greift schon beim Glaubenssatz allein.
+            id: 'rueckhalt_vs_autonomiebelief', type: 'schleife',
+            label: 'Weitermachen wollen, aber sich allein nicht genug zutrauen',
+            belief: 'autonomie', changeable: 'belief', transform: 'autonomie',
+            when: p => belAct(p, 'autonomie') >= 50,
+            blockade: p => belAct(p, 'autonomie'),
+            origin: 'Ein Teil von dir will einfach weitermachen, und ein alter Satz sagt dir dabei immer wieder, dass du allein nicht genügst.', // ENTWURF
+            cost:   'Der Zweifel bremst dich genau in den Momenten, in denen du dir eigentlich vertrauen könntest.', // ENTWURF
+            break:  'Bring heute eine kleine Sache bewusst allein zu Ende, ohne dir vorher Rückversicherung zu holen.', // ENTWURF
+            trigger: 'Eine Aufgabe liegt allein bei dir.', // ENTWURF
+            behavior: 'Du zögerst oder holst dir Rückversicherung, bevor du weitermachst.', // ENTWURF
+            gain: 'Der Zweifel wird kurz leiser, du fühlst dich abgesichert.', // ENTWURF
+        },
+        {
+            // Abdeckungs-Check zeigte dieselbe Luecke bei abgetrenntheit:
+            // verbundenheit_vs_abgetrenntheit und nicht_bedeutsam verlangen zusaetzlich
+            // hohe Verbundenheit-Frustration oder niedrige Bedeutsamkeit.
+            id: 'zeigen_vs_abgetrenntheit', type: 'schleife',
+            label: 'Sich zeigen wollen, aber lieber auf Abstand bleiben',
+            belief: 'abgetrenntheit', changeable: 'belief', transform: 'abgetrenntheit',
+            when: p => belAct(p, 'abgetrenntheit') >= 50,
+            blockade: p => belAct(p, 'abgetrenntheit'),
+            origin: 'Ein Teil von dir würde sich gern zeigen, und ein alter Satz warnt dich davor, dass genau das dich verletzlich macht.', // ENTWURF
+            cost:   'Der Schutzabstand hält dich sicher und gleichzeitig auf Distanz zu dem, was du dir insgeheim wünschst.', // ENTWURF
+            break:  'Zeige einer vertrauten Person heute eine kleine, echte Verletzlichkeit.', // ENTWURF
+            trigger: 'Eine Situation lädt dazu ein, dich wirklich zu zeigen.', // ENTWURF
+            behavior: 'Du hältst einen Teil von dir zurück oder machst eine Bemerkung, die Nähe abwehrt.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig sicherer und unverletzlich.', // ENTWURF
+        },
+        {
+            // Abdeckungs-Check zeigte die Luecke auch bei fremdbezogenheit: alle fuenf
+            // bestehenden Reibungen verlangen zusaetzlich einen hohen Wert, ein
+            // frustriertes Beduerfnis oder einen Terrain-Ausschlag.
+            id: 'anerkennung_vs_fremdbezogenheit', type: 'schleife',
+            label: 'Eigene Wünsche äußern wollen, aber sich zurücknehmen',
+            belief: 'fremdbezogenheit', changeable: 'belief', transform: 'fremdbezogenheit',
+            when: p => belAct(p, 'fremdbezogenheit') >= 50,
+            blockade: p => belAct(p, 'fremdbezogenheit'),
+            origin: 'Ein Teil von dir hat eigene Wünsche, und ein alter Satz sagt dir, dass du dir Wert erst durch Geben verdienst.', // ENTWURF
+            cost:   'Du stellst die eigenen Wünsche so oft zurück, dass du selbst irgendwann nicht mehr genau weißt, was du eigentlich willst.', // ENTWURF
+            break:  'Sprich heute einen eigenen Wunsch laut aus, bevor du fragst, was die anderen brauchen.', // ENTWURF
+            trigger: 'Du merkst einen eigenen Wunsch, während jemand anderes etwas von dir braucht.', // ENTWURF
+            behavior: 'Du schiebst den eigenen Wunsch beiseite und kümmerst dich zuerst um den anderen.', // ENTWURF
+            gain: 'Du fühlst dich kurzfristig gebraucht und im Recht.', // ENTWURF
+        },
+        {
+            // Gleiche Luecke bei wachsamkeit: alle bestehenden Reibungen verlangen
+            // zusaetzlich einen hohen Wert, ein frustriertes Beduerfnis oder einen
+            // Terrain-Ausschlag.
+            id: 'ruhe_vs_wachsamkeit', type: 'schleife',
+            label: 'Zur Ruhe kommen wollen, aber wachsam bleiben müssen',
+            belief: 'wachsamkeit', changeable: 'belief', transform: 'wachsamkeit',
+            when: p => belAct(p, 'wachsamkeit') >= 50,
+            blockade: p => belAct(p, 'wachsamkeit'),
+            origin: 'Ein Teil von dir würde gern einfach abschalten, und ein strenger innerer Maßstab lässt kaum eine ruhige Minute zu.', // ENTWURF
+            cost:   'Die ständige Wachsamkeit kostet Kraft, die dir an anderer Stelle fehlt, auch wenn gerade nichts Konkretes ansteht.', // ENTWURF
+            break:  'Leg dir heute bewusst zehn Minuten ohne Aufgabe ein und bleib dabei, auch wenn es sich falsch anfühlt.', // ENTWURF
+            trigger: 'Ein Moment ohne Aufgabe oder Ablenkung entsteht.', // ENTWURF
+            behavior: 'Du suchst dir sofort etwas zu tun oder zu optimieren, statt die Ruhe auszuhalten.', // ENTWURF
+            gain: 'Die Unruhe, nichts zu leisten, verschwindet kurzfristig.', // ENTWURF
+        },
     ];
 
     /** Overall distress severity 0-1 for the Vorsicht damping and safety note (§12). */
